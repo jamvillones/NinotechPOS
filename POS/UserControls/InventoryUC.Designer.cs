@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.stockinBtn = new System.Windows.Forms.Button();
             this.sellBtn = new System.Windows.Forms.Button();
             this.inventoryTable = new System.Windows.Forms.DataGridView();
@@ -45,14 +45,15 @@
             this.addVariationsBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
             this.itemsTable = new System.Windows.Forms.DataGridView();
-            this.addItemBtn = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addItemBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.refreshBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.inventoryPage.SuspendLayout();
@@ -114,24 +115,24 @@
             this.Column3,
             this.Column5,
             this.Column4});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle17;
             this.inventoryTable.EnableHeadersVisualStyles = false;
             this.inventoryTable.GridColor = System.Drawing.Color.White;
-            this.inventoryTable.Location = new System.Drawing.Point(8, 71);
+            this.inventoryTable.Location = new System.Drawing.Point(8, 94);
             this.inventoryTable.MultiSelect = false;
             this.inventoryTable.Name = "inventoryTable";
             this.inventoryTable.ReadOnly = true;
             this.inventoryTable.RowHeadersVisible = false;
             this.inventoryTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.inventoryTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.inventoryTable.Size = new System.Drawing.Size(729, 385);
+            this.inventoryTable.Size = new System.Drawing.Size(729, 362);
             this.inventoryTable.StandardTab = true;
             this.inventoryTable.TabIndex = 0;
             this.inventoryTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseDoubleClick);
@@ -274,14 +275,14 @@
             this.Column6,
             this.Column8,
             this.Column7});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle18;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.Location = new System.Drawing.Point(8, 71);
             this.itemsTable.MultiSelect = false;
@@ -294,36 +295,6 @@
             this.itemsTable.TabIndex = 6;
             this.itemsTable.TabStop = false;
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
-            // 
-            // addItemBtn
-            // 
-            this.addItemBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.addItemBtn.FlatAppearance.BorderSize = 0;
-            this.addItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addItemBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("addItemBtn.Image")));
-            this.addItemBtn.Location = new System.Drawing.Point(8, 8);
-            this.addItemBtn.Margin = new System.Windows.Forms.Padding(5);
-            this.addItemBtn.Name = "addItemBtn";
-            this.addItemBtn.Size = new System.Drawing.Size(91, 47);
-            this.addItemBtn.TabIndex = 1;
-            this.addItemBtn.Text = "ADD ITEM";
-            this.addItemBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.addItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.addItemBtn.UseVisualStyleBackColor = false;
-            this.addItemBtn.Click += new System.EventHandler(this.addItemBtn_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(358, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 15);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "PRODUCTS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -372,10 +343,56 @@
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
             // 
+            // addItemBtn
+            // 
+            this.addItemBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.addItemBtn.FlatAppearance.BorderSize = 0;
+            this.addItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addItemBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("addItemBtn.Image")));
+            this.addItemBtn.Location = new System.Drawing.Point(8, 8);
+            this.addItemBtn.Margin = new System.Windows.Forms.Padding(5);
+            this.addItemBtn.Name = "addItemBtn";
+            this.addItemBtn.Size = new System.Drawing.Size(91, 47);
+            this.addItemBtn.TabIndex = 1;
+            this.addItemBtn.Text = "ADD ITEM";
+            this.addItemBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.addItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.addItemBtn.UseVisualStyleBackColor = false;
+            this.addItemBtn.Click += new System.EventHandler(this.addItemBtn_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(358, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 15);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "PRODUCTS";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // refreshBtn
+            // 
+            this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.refreshBtn.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.refreshBtn.FlatAppearance.BorderSize = 0;
+            this.refreshBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.refreshBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshBtn.Image")));
+            this.refreshBtn.Location = new System.Drawing.Point(739, 27);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(26, 23);
+            this.refreshBtn.TabIndex = 3;
+            this.refreshBtn.TabStop = false;
+            this.refreshBtn.UseVisualStyleBackColor = false;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
             this.Name = "InventoryUC";
@@ -414,5 +431,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.Button refreshBtn;
     }
 }

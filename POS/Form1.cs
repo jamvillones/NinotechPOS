@@ -102,8 +102,18 @@ namespace POS
                 changepass.ShowDialog();
                 ///change password
             }
+            else if(e.KeyCode == Keys.F5)
+            {
+                RefreshData();
+            }
         }
-
+        void RefreshData()
+        {
+            foreach(var i in uControls)
+            {
+                i.RefreshData();
+            }
+        }
         private void userButton_Click(object sender, EventArgs e)
         {
             userContextMenuStrip.Show(Cursor.Position.X, Cursor.Position.Y);

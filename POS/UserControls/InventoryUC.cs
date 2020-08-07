@@ -20,6 +20,11 @@ namespace POS.UserControls
         }
 
         #region Tab functions
+        public virtual void RefreshData()
+        {
+            initInventoryTable();
+            initItemsTable();
+        }
         public virtual Button EnterButton()
         {
             return null;
@@ -183,6 +188,12 @@ namespace POS.UserControls
             }
             var variation = new AddProductForm();
             variation.ShowDialog();
+        }
+
+        private void refreshBtn_Click(object sender, EventArgs e)
+        {
+            initInventoryTable();
+            initItemsTable();
         }
     }
 }

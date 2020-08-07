@@ -21,6 +21,11 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 var item = p.Items.FirstOrDefault(x => x.Barcode == barcode);
+                if (item == null)
+                {
+                    MessageBox.Show("Not found.");
+                    return;
+                }
                 barcodeField.Text = item.Barcode;
                 itemName.Text = item.Name;
                 sellingPrice.Text = string.Format("₱ {0:n}", item.SellingPrice);

@@ -26,6 +26,11 @@ namespace POS.UserControls
             InitializeComponent();
         }
 
+        public void RefreshData()
+        {
+
+        }
+
         public Control FirstControl()
         {
             return null;

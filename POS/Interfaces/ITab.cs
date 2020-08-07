@@ -12,5 +12,6 @@ namespace POS.Interfaces
         void Initialize();
         Button EnterButton();
         Control FirstControl();
+        void RefreshData();
     }
 }
