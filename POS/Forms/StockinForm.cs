@@ -137,8 +137,9 @@ namespace POS.Forms
                     stockinHist.Cost = it.Product.Cost;
                     stockinHist.Supplier = it.Product.Supplier.Name;
                     stockinHist.Date = DateTime.Now;
-                    stockinHist.Quantity = it.Quantity;
+                    stockinHist.Quantity = q;
                     stockinHist.SerialNumber = it.SerialNumber;
+                    stockinHist.LoginUsername = p.Logins.FirstOrDefault(x => x.Username == UserManager.instance.currentLogin.Username).Username;
 
                     p.StockinHistories.Add(stockinHist);
                 }
