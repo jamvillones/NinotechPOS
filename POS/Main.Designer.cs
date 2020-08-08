@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panel1 = new System.Windows.Forms.Panel();
             this.button7 = new System.Windows.Forms.Button();
@@ -43,11 +42,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.reportTab = new POS.UserControls.ReportUC();
-            this.userContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addNewUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventoryTab = new POS.UserControls.InventoryUC();
+            this.reportTab = new POS.UserControls.ReportUC();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -56,11 +52,12 @@
             this.addNewLoginToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.loginPrivilegesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.userContextMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -196,7 +193,7 @@
             this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.userButton.Location = new System.Drawing.Point(673, 4);
             this.userButton.Name = "userButton";
-            this.userButton.Size = new System.Drawing.Size(156, 23);
+            this.userButton.Size = new System.Drawing.Size(156, 27);
             this.userButton.TabIndex = 5;
             this.userButton.TabStop = false;
             this.userButton.Text = "Username";
@@ -270,37 +267,6 @@
             this.panel3.Size = new System.Drawing.Size(920, 588);
             this.panel3.TabIndex = 2;
             // 
-            // reportTab
-            // 
-            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportTab.Location = new System.Drawing.Point(0, 0);
-            this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(920, 588);
-            this.reportTab.TabIndex = 1;
-            this.reportTab.TabStop = false;
-            // 
-            // userContextMenuStrip
-            // 
-            this.userContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewUserToolStripMenuItem,
-            this.changePasswordToolStripMenuItem});
-            this.userContextMenuStrip.Name = "userContextMenuStrip";
-            this.userContextMenuStrip.Size = new System.Drawing.Size(169, 48);
-            // 
-            // addNewUserToolStripMenuItem
-            // 
-            this.addNewUserToolStripMenuItem.Name = "addNewUserToolStripMenuItem";
-            this.addNewUserToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.addNewUserToolStripMenuItem.Text = "Add new user";
-            this.addNewUserToolStripMenuItem.Click += new System.EventHandler(this.addNewUserToolStripMenuItem_Click);
-            // 
-            // changePasswordToolStripMenuItem
-            // 
-            this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
-            this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.changePasswordToolStripMenuItem.Text = "Change Password";
-            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
-            // 
             // inventoryTab
             // 
             this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -310,13 +276,24 @@
             this.inventoryTab.Size = new System.Drawing.Size(920, 588);
             this.inventoryTab.TabIndex = 0;
             // 
+            // reportTab
+            // 
+            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportTab.Location = new System.Drawing.Point(0, 0);
+            this.reportTab.Name = "reportTab";
+            this.reportTab.Size = new System.Drawing.Size(920, 588);
+            this.reportTab.TabIndex = 1;
+            this.reportTab.TabStop = false;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.toolStripButton2,
+            this.toolStripSeparator1,
             this.toolStripButton3,
+            this.toolStripSeparator2,
             this.toolStripDropDownButton1});
             this.toolStrip1.Location = new System.Drawing.Point(80, 34);
             this.toolStrip1.Name = "toolStrip1";
@@ -353,6 +330,7 @@
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton3.Text = "Stockin history";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripDropDownButton1
             // 
@@ -371,22 +349,32 @@
             // addNewLoginToolStripMenuItem1
             // 
             this.addNewLoginToolStripMenuItem1.Name = "addNewLoginToolStripMenuItem1";
-            this.addNewLoginToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.addNewLoginToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
             this.addNewLoginToolStripMenuItem1.Text = "Add New Login";
             this.addNewLoginToolStripMenuItem1.Click += new System.EventHandler(this.addNewLoginToolStripMenuItem1_Click);
             // 
             // changePasswordToolStripMenuItem2
             // 
             this.changePasswordToolStripMenuItem2.Name = "changePasswordToolStripMenuItem2";
-            this.changePasswordToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.changePasswordToolStripMenuItem2.Size = new System.Drawing.Size(168, 22);
             this.changePasswordToolStripMenuItem2.Text = "Change Password";
             this.changePasswordToolStripMenuItem2.Click += new System.EventHandler(this.changePasswordToolStripMenuItem2_Click);
             // 
             // loginPrivilegesToolStripMenuItem1
             // 
             this.loginPrivilegesToolStripMenuItem1.Name = "loginPrivilegesToolStripMenuItem1";
-            this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
             this.loginPrivilegesToolStripMenuItem1.Text = "Login Privileges";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // Main
             // 
@@ -413,7 +401,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.userContextMenuStrip.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -437,9 +424,6 @@
         private System.Windows.Forms.Button statBtn;
         private UserControls.ReportUC reportTab;
         private System.Windows.Forms.Button userButton;
-        private System.Windows.Forms.ContextMenuStrip userContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem addNewUserToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         private UserControls.InventoryUC inventoryTab;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
@@ -449,6 +433,8 @@
         private System.Windows.Forms.ToolStripMenuItem addNewLoginToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem loginPrivilegesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

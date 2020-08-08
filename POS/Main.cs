@@ -114,7 +114,7 @@ namespace POS
         }
         private void userButton_Click(object sender, EventArgs e)
         {
-            userContextMenuStrip.Show(Cursor.Position.X, Cursor.Position.Y);
+            //userContextMenuStrip.Show(Cursor.Position.X, Cursor.Position.Y);
         }
 
         private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,6 +159,12 @@ namespace POS
         {
             var customer = new CreateCustomerProfile();
             customer.ShowDialog();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            StockinLog log = new StockinLog();
+            log.ShowDialog();
         }
     }
 }
