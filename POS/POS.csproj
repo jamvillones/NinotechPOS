@@ -95,11 +95,11 @@
     <Compile Include="Customer.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AddItemForm.cs">
       <SubType>Form</SubType>
@@ -249,8 +249,8 @@
     <Compile Include="UserControls\ReportUC.designer.cs">
       <DependentUpon>ReportUC.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddItemForm.resx">
       <DependentUpon>AddItemForm.cs</DependentUpon>

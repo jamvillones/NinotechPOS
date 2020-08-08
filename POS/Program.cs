@@ -22,7 +22,7 @@ namespace POS
 
             if (login.LoginSuccessful)
             {
-                Application.Run(new Form1());
+                Application.Run(new Main());
             }
         }
     }

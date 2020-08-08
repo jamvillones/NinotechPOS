@@ -48,11 +48,6 @@ namespace POS.Forms
 
         private void StockinForm_Load(object sender, EventArgs e)
         {
-            //saleType.Items.Clear();
-            //for(int i =0; i < (int)SaleType.Count; i++)            
-            //    saleType.Items.Add((SaleType)i);
-
-            //saleType.SelectedIndex = 0;
             filter.SelectedIndex = 0;
             itemsTable.Rows.Clear();
             using (var p = new POSEntities())
@@ -63,9 +58,11 @@ namespace POS.Forms
 
                 soldTo.Items.Clear();
                 foreach (var i in p.Customers)
+                {
+                    soldTo.AutoCompleteCustomSource.Add(i.Name);
                     soldTo.Items.Add(i.Name);
+                }
             }
-            itemsTable.Sort(itemsTable.Columns[0], ListSortDirection.Descending);
         }
 
         bool alreadyInTable(out int index)
@@ -88,7 +85,7 @@ namespace POS.Forms
             addItem();
         }
 
-        private void stockinBtn_Click(object sender, EventArgs e)
+        private void sell_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(soldTo.Text))
             {
@@ -122,7 +119,7 @@ namespace POS.Forms
 
                     var cartColumns = cartTable.Rows[i].Cells;
                     var itemId = cartColumns[0].Value.ToString();
-                    var itemSupp = cartColumns[6].Value.ToString();
+                    var itemSupp = cartColumns[7].Value.ToString();
                     var serial = cartColumns[1].Value?.ToString();
 
                     s.Discount = Convert.ToDecimal(cartColumns[5].Value);
@@ -135,9 +132,9 @@ namespace POS.Forms
                     s.SaleId = newSale.Id;
 
                     var inventoryItem = p.InventoryItems.FirstOrDefault(x => x.Product.ItemId == itemId && x.Product.Supplier.Name == itemSupp && x.SerialNumber == serial);
-                    if (inventoryItem != null)
+                    if (inventoryItem != null && inventoryItem.Product.Item.Type == ItemType.Hardware.ToString())
                     {
-                        Console.WriteLine("found");
+
                         inventoryItem.Quantity -= s.Quantity;
 
                         if (inventoryItem.Quantity == 0)

@@ -122,7 +122,7 @@ namespace POS.UserControls
                 ids = filteredSales.Select(x => x.Id).ToArray();
 
                 foreach (var x in filteredSales)
-                    saleTable.Rows.Add(x.Date.Value.ToString("MMMM, dd, yyyy hh:mm: tt"),x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice));
+                    saleTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"),x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice));
             }
         }
 
@@ -147,15 +147,26 @@ namespace POS.UserControls
 
         void searchChargeByName()
         {
+            //for(int i =0;i< chargedTable.RowCount; i++)
+            //{
+            //    //// need to lower the case because string.contains is case sensitive :(
+            //    string name = chargedTable.Rows[i].Cells[2].Value.ToString().ToLower();
+            //    if (name.Contains(chargedSaleSearch.Text.ToLower()))
+            //    {
+            //        chargedTable.Rows[i].Selected = true;
+            //        chargedTable.FirstDisplayedScrollingRowIndex = i;
+            //        break;
+            //    }
+            //}       
             chargedTable.Rows.Clear();
             using (var p = new POSEntities())
             {
-                IQueryable<Sale> cp = p.Sales.AsQueryable();
-                cp = p.Sales.Where(x => x.Customer.Name.Contains(chargedSaleSearch.Text) && x.SaleType == SaleType.Charged.ToString());
-                ids = cp.Select(x => x.Id).ToArray();
-                foreach (var x in cp)
-                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.TotalPrice ? "Not Paid" : "Paid");
+                var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString() && x.Customer.Name.Contains(chargedSaleSearch.Text)).OrderBy(x => x.Date);
+                ids = sales.Select(x => x.Id).ToArray();
+                foreach (var x in sales)
+                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.TotalPrice ? false : true);
             }
+
         }
 
         private void chargedSearchBtn_Click(object sender, EventArgs e)
@@ -167,6 +178,18 @@ namespace POS.UserControls
         {
             if (chargedSaleSearch.Text == string.Empty)
                 setCharegedTable();
+        }
+
+        private void chargedSaleSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                searchChargeByName();
+        }
+
+        private void month_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                setRegularTableByDate();
         }
     }
 }

@@ -106,11 +106,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="date" />
-          <Property Name="ItemBarcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="50" />
           <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Supplier" Type="nvarchar" MaxLength="50" />
           <Property Name="Quantity" Type="int" />
+          <Property Name="SerialNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -214,20 +215,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StockinHistory_Item">
-          <End Role="Item" Type="Self.Item" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="StockinHistory" Type="Self.StockinHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="Barcode" />
-            </Principal>
-            <Dependent Role="StockinHistory">
-              <PropertyRef Name="ItemBarcode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="POSModelStoreContainer">
           <EntitySet Name="ChargedPayRecord" EntityType="Self.ChargedPayRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -266,10 +253,6 @@
           <AssociationSet Name="FK_SoldItem_Sale" Association="Self.FK_SoldItem_Sale">
             <End Role="Sale" EntitySet="Sale" />
             <End Role="SoldItem" EntitySet="SoldItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StockinHistory_Item" Association="Self.FK_StockinHistory_Item">
-            <End Role="Item" EntitySet="Item" />
-            <End Role="StockinHistory" EntitySet="StockinHistory" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -318,7 +301,6 @@
           <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="SampleImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Item_Product" FromRole="Item" ToRole="Product" />
-          <NavigationProperty Name="StockinHistories" Relationship="Self.FK_StockinHistory_Item" FromRole="Item" ToRole="StockinHistory" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Login">
@@ -386,18 +368,6 @@
           <NavigationProperty Name="Sale" Relationship="Self.FK_SoldItem_Sale" FromRole="SoldItem" ToRole="Sale" />
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
-        <EntityType Name="StockinHistory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="ItemBarcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Int32" />
-          <NavigationProperty Name="Item" Relationship="Self.FK_StockinHistory_Item" FromRole="StockinHistory" ToRole="Item" />
-        </EntityType>
         <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="Id" />
@@ -455,18 +425,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StockinHistory_Item">
-          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
-          <End Role="StockinHistory" Type="Self.StockinHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="Barcode" />
-            </Principal>
-            <Dependent Role="StockinHistory">
-              <PropertyRef Name="ItemBarcode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Sale_Login">
           <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
           <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
@@ -512,7 +470,6 @@
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Sales" EntityType="Self.Sale" />
           <EntitySet Name="SoldItems" EntityType="Self.SoldItem" />
-          <EntitySet Name="StockinHistories" EntityType="Self.StockinHistory" />
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
           <AssociationSet Name="FK_ChargedPayRecord_ChargedPayRecord" Association="Self.FK_ChargedPayRecord_ChargedPayRecord">
             <End Role="Sale" EntitySet="Sales" />
@@ -530,10 +487,6 @@
             <End Role="Item" EntitySet="Items" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK_StockinHistory_Item" Association="Self.FK_StockinHistory_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="StockinHistory" EntitySet="StockinHistories" />
-          </AssociationSet>
           <AssociationSet Name="FK_Sale_Login" Association="Self.FK_Sale_Login">
             <End Role="Login" EntitySet="Logins" />
             <End Role="Sale" EntitySet="Sales" />
@@ -546,7 +499,20 @@
             <End Role="Sale" EntitySet="Sales" />
             <End Role="SoldItem" EntitySet="SoldItems" />
           </AssociationSet>
+          <EntitySet Name="StockinHistories" EntityType="POSModel.StockinHistory" />
         </EntityContainer>
+        <EntityType Name="StockinHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -657,24 +623,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StockinHistories">
-            <EntityTypeMapping TypeName="POSModel.StockinHistory">
-              <MappingFragment StoreEntitySet="StockinHistory">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="ItemBarcode" ColumnName="ItemBarcode" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Suppliers">
             <EntityTypeMapping TypeName="POSModel.Supplier">
               <MappingFragment StoreEntitySet="Supplier">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ContactDetails" ColumnName="ContactDetails" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockinHistories">
+            <EntityTypeMapping TypeName="POSModel.StockinHistory">
+              <MappingFragment StoreEntitySet="StockinHistory">
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

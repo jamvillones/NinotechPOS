@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using VS2017POS.EntitiyFolder;
 
 namespace POS.Forms
 {
@@ -25,6 +24,7 @@ namespace POS.Forms
         {
             base.Init();
             itemType.Enabled = false;
+
             Item item;
             using(var p = new POSEntities())
             {
@@ -32,9 +32,7 @@ namespace POS.Forms
                 ImageBox.Image = POS.Misc.ImageDatabaseConverter.byteArrayToImage(item.SampleImage);
             }
             name.Text = item.Name;
-            //cost.Value = item.Cost;
             sellingPrice.Value = item.SellingPrice;
-           //itemType.Text = item.Type;
             itemDepartment.Text = item.Department;
             details.Text = item.Details;
         }

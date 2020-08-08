@@ -18,7 +18,6 @@ namespace POS
         public Item()
         {
             this.Products = new HashSet<Product>();
-            this.StockinHistories = new HashSet<StockinHistory>();
         }
     
         public string Barcode { get; set; }
@@ -31,7 +30,5 @@ namespace POS
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockinHistory> StockinHistories { get; set; }
     }
 }

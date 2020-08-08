@@ -23,7 +23,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
 
-                foreach (var x in p.Items)
+                foreach (var x in p.Items.Where(x=>x.Type == Misc.ItemType.Hardware.ToString()))
                     itemsTable.Rows.Add(x.Barcode, x.Name);
             }
         }

@@ -16,11 +16,10 @@ namespace POS
     {
         public int Id { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public string ItemBarcode { get; set; }
+        public string ItemName { get; set; }
         public Nullable<decimal> Cost { get; set; }
         public string Supplier { get; set; }
         public Nullable<int> Quantity { get; set; }
-    
-        public virtual Item Item { get; set; }
+        public string SerialNumber { get; set; }
     }
 }

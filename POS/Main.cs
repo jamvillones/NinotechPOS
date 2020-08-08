@@ -13,12 +13,11 @@ using POS.Misc;
 
 namespace POS
 {
-
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         List<ITab> uControls = new List<ITab>();
         
-        public Form1()
+        public Main()
         {
             InitializeComponent();
 
@@ -32,6 +31,7 @@ namespace POS
 
             userButton.Text = UserManager.instance.currentLogin.Username;
         }
+
         void setChangingColorsBtn(params Button[] buttons)
         {
             foreach (var i in buttons)
@@ -56,11 +56,9 @@ namespace POS
                 prevButton.BackColor = selectedButtonColor;
             }
 
-            prevButton.BackColor = normalButtonColor;
-            // prevButton.ForeColor = Color.White;
+            prevButton.BackColor = normalButtonColor;           
             var b = (Button)sender;
-            b.BackColor = selectedButtonColor;
-            //b.ForeColor = Color.Black;
+            b.BackColor = selectedButtonColor;           
             prevButton = b;
         }
         Button prevButton;
@@ -97,10 +95,10 @@ namespace POS
             }
             else if(e.KeyCode == Keys.F2)
             {
+                ///change password
                 var changepass = new ChangePass();
                 changepass.SetUser(UserManager.instance.currentLogin.Username);
                 changepass.ShowDialog();
-                ///change password
             }
             else if(e.KeyCode == Keys.F5)
             {
@@ -136,6 +134,31 @@ namespace POS
             var changepass = new ChangePass();
             changepass.SetUser(UserManager.instance.currentLogin.Username);
             changepass.ShowDialog();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            var supplier = new SupplierForm();
+            supplier.ShowDialog();
+        }
+
+        private void addNewLoginToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var login = new CreateLogin();
+            login.ShowDialog();
+        }
+
+        private void changePasswordToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            var changePass = new ChangePass();
+            changePass.SetUser(UserManager.instance.currentLogin.Username);
+            changePass.ShowDialog();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var customer = new CreateCustomerProfile();
+            customer.ShowDialog();
         }
     }
 }

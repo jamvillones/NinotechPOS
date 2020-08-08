@@ -41,13 +41,19 @@ namespace POS.Forms
                 var soldItems = sale.SoldItems;
                 foreach (var x in soldItems)
                 {
-                    itemsTable.Rows.Add(x.ItemName, x.SerialNumber, x.Quantity, string.Format("₱ {0:n}", x.ItemPrice),x.Discount, string.Format("₱ {0:n}", (x.Quantity * x.ItemPrice)*((100-x.Discount)/100)), x.ItemSupplier);
+                    itemsTable.Rows.Add(x.ItemName,
+                                        x.SerialNumber,
+                                        x.Quantity,
+                                        string.Format("₱ {0:n}", x.ItemPrice),
+                                        x.Discount,
+                                        string.Format("₱ {0:n}", (x.Quantity * x.ItemPrice) * ((100 - x.Discount) / 100)),
+                                        x.ItemSupplier);
                 }
                 total.Text = string.Format("₱ {0:n}", sale.TotalPrice);
                 amountRecieved.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
+                recHistBtn.Visible = p.ChargedPayRecords.FirstOrDefault(x=>x.Sale.Id == sale.Id)!=null? true : false;
             }
 
-            button1.Visible = saleType.Text == "Charged" ? true : false;
 
             if (saleType.Text == "Chareged" || string.IsNullOrEmpty(saleType.Text) || sale.AmountRecieved >= sale.TotalPrice)
             {
@@ -69,7 +75,10 @@ namespace POS.Forms
             {
                 var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
                 s.AmountRecieved += addPayment.Value;
-
+                //if(s.AmountRecieved >= s.TotalPrice)
+                //{
+                //    s.SaleType = Misc.SaleType.Regular.ToString();
+                //}
                 if (s.AmountRecieved >= s.TotalPrice)
                 {
 

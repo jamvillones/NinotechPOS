@@ -517,6 +517,7 @@
             this.KeyPreview = true;
             this.MinimizeBox = false;
             this.Name = "StockinForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stockin";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

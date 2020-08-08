@@ -107,6 +107,7 @@ namespace POS.Forms
                     var serialNum = inventoryTable.Rows[i].Cells[1].Value.ToString();
                     var q = Convert.ToInt32((inventoryTable.Rows[i].Cells[3].Value.ToString()));
                     product = p.Products.FirstOrDefault(x => x.ItemId == itemId && x.Supplier.Name == suppName);
+
                    
                     if (string.IsNullOrEmpty(serialNum))
                     {
@@ -131,6 +132,15 @@ namespace POS.Forms
                         it.SerialNumber = serialNum;
                         p.InventoryItems.Add(it);
                     }
+                    var stockinHist = new StockinHistory();
+                    stockinHist.ItemName = it.Product.Item.Name;
+                    stockinHist.Cost = it.Product.Cost;
+                    stockinHist.Supplier = it.Product.Supplier.Name;
+                    stockinHist.Date = DateTime.Now;
+                    stockinHist.Quantity = it.Quantity;
+                    stockinHist.SerialNumber = it.SerialNumber;
+
+                    p.StockinHistories.Add(stockinHist);
                 }
                 p.SaveChanges();
                 OnSave?.Invoke(this, null);
