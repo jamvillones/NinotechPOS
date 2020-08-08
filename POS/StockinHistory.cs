@@ -21,5 +21,6 @@ namespace POS
         public string Supplier { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string SerialNumber { get; set; }
+        public string LoginUsername { get; set; }
     }
 }

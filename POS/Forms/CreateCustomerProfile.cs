@@ -20,17 +20,17 @@ namespace POS.Forms
         }
         bool canSave()
         {
-            if (string.IsNullOrEmpty(Id.Text) || string.IsNullOrEmpty(address.Text) || string.IsNullOrEmpty(contact.Text))
+            if (string.IsNullOrEmpty(name.Text) || string.IsNullOrEmpty(address.Text) || string.IsNullOrEmpty(contact.Text))
             {
                 MessageBox.Show("Fields cannot be empty.");
                 return false;
             }
-            using(var p = new POSEntities())
+            using (var p = new POSEntities())
             {
-                var c = p.Customers.FirstOrDefault(x => x.Id == Id.Text);
-                if(c!=null)
+                var c = p.Customers.FirstOrDefault(x => x.Name == name.Text);
+                if (c != null)
                 {
-                    MessageBox.Show("Id already taken.");
+                    MessageBox.Show("Name already taken.");
                     return false;
                 }
             }
@@ -43,7 +43,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 Customer c = new Customer();
-                c.Id = Id.Text;
+                //c.Id = Id.Text;
                 c.Name = name.Text;
                 c.Address = address.Text;
                 c.ContactDetails = contact.Text;
@@ -53,6 +53,31 @@ namespace POS.Forms
                 OnSave?.Invoke(this, null);
             }
             this.Close();
+
+        }
+
+        private void CreateCustomerProfile_Load(object sender, EventArgs e)
+        {
+            customerTable.Rows.Clear();
+            using (var p = new POSEntities())
+            {
+                foreach (var i in p.Customers)
+                    customerTable.Rows.Add(i.Name, i.Address, i.ContactDetails);
+            }
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
 
         }
     }

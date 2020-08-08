@@ -23,7 +23,7 @@ namespace POS
     
         public int Id { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public string CustomerId { get; set; }
+        public Nullable<int> CustomerId { get; set; }
         public Nullable<decimal> AmountRecieved { get; set; }
         public Nullable<decimal> TotalPrice { get; set; }
         public string SaleType { get; set; }
