@@ -115,9 +115,9 @@ namespace POS.Forms
                 supplierTable.Rows.Add(newSupplier.Name, newSupplier.ContactDetails);
 
                 suppliers.Add(newSupplier);
-                OnSave?.Invoke(this, null);
                 p.SaveChanges();
             }
+            OnSave?.Invoke(this, null);
             supplierName.ResetText();
             contactDetails.ResetText();
         }

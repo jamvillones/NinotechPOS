@@ -20,7 +20,7 @@ namespace POS.Forms
                 return Misc.UserManager.instance.currentLogin;
             }
         }
-
+        public event EventHandler OnSave;
         Sale sale;
         public SaleDetails()
         {
@@ -95,6 +95,7 @@ namespace POS.Forms
                 transaction.AmountPayed = addPayment.Value;
                 p.ChargedPayRecords.Add(transaction);
                 p.SaveChanges();
+                OnSave?.Invoke(this, null);
                 MessageBox.Show(s.AmountRecieved < s.TotalPrice ? "Payment added." : "Amount fully Paid.");
             }
         }

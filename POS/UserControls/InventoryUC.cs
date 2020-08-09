@@ -46,7 +46,7 @@ namespace POS.UserControls
                 stockinBtn.Enabled = currlog.CanStockIn ?? false;
                 addVariationsBtn.Enabled = currlog.CanAddProduct ?? false;
                 addItemBtn.Enabled = currlog.CanAddItem ?? false;
-                editBtn.Enabled = currlog.CanEditItem ?? false;
+                editItemBtn.Enabled = currlog.CanEditItem ?? false;
                 //var itemGroup = p.InventoryItems.GroupBy(x => x.Product.Item.Barcode);
                 //foreach (var i in itemGroup)
                 //{

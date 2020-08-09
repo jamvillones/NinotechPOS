@@ -23,7 +23,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
 
-                foreach (var x in p.Items.Where(x=>x.Type == Misc.ItemType.Hardware.ToString()))
+                foreach (var x in p.Items.Where(x => x.Type == Misc.ItemType.Hardware.ToString()))
                     itemsTable.Rows.Add(x.Barcode, x.Name);
             }
         }
@@ -59,6 +59,7 @@ namespace POS.Forms
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
         {
             var id = TableCurrentValueAt(0).ToString();
+
             using (var p = new POSEntities())
             {
                 selectedItem = p.Items.FirstOrDefault(x => x.Barcode == id);
@@ -98,19 +99,16 @@ namespace POS.Forms
 
         private void Supplier_OnSave(object sender, EventArgs e)
         {
-            var id = TableCurrentValueAt(0).ToString();
+            // var id = TableCurrentValueAt(0).ToString();
             using (var p = new POSEntities())
             {
-                selectedItem = p.Items.FirstOrDefault(x => x.Barcode == id);
-                barcode.Text = selectedItem.Barcode;
-                itemName.Text = selectedItem.Name;
-
                 supplier.Items.Clear();
-                //foreach (var x in p.Suppliers.Where(x => x.Products.Where(y => y.ItemId == id).Count() == 0))
-                foreach (var x in p.Suppliers.Where(x => x.Products.FirstOrDefault(y => y.ItemId == id) == null))
+
+                foreach (var x in p.Suppliers.Where(x => x.Products.FirstOrDefault(y => y.ItemId == selectedItem.Barcode) == null))
                     supplier.Items.Add(x.Name);
 
             }
+            Console.WriteLine(selectedItem.Barcode);
         }
     }
 }

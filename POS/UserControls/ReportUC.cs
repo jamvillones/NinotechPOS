@@ -85,6 +85,7 @@ namespace POS.UserControls
 
             var saleDetails = new SaleDetails();
             saleDetails.SetId(ids[index]);
+            saleDetails.OnSave += (a, b) => { setCharegedTable(); };
             saleDetails.ShowDialog();
         }
 
@@ -122,7 +123,7 @@ namespace POS.UserControls
                 ids = filteredSales.Select(x => x.Id).ToArray();
 
                 foreach (var x in filteredSales)
-                    saleTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"),x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice));
+                    saleTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice));
             }
         }
 
@@ -134,7 +135,7 @@ namespace POS.UserControls
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderBy(x => x.Date);
                 ids = sales.Select(x => x.Id).ToArray();
                 foreach (var x in sales)
-                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.TotalPrice ? false : true);
+                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.TotalPrice ? false : true);
             }
         }
 
