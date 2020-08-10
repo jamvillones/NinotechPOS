@@ -16,7 +16,7 @@ namespace POS
     public partial class Main : Form
     {
         List<ITab> uControls = new List<ITab>();
-        
+
         public Main()
         {
             InitializeComponent();
@@ -56,9 +56,9 @@ namespace POS
                 prevButton.BackColor = selectedButtonColor;
             }
 
-            prevButton.BackColor = normalButtonColor;           
+            prevButton.BackColor = normalButtonColor;
             var b = (Button)sender;
-            b.BackColor = selectedButtonColor;           
+            b.BackColor = selectedButtonColor;
             prevButton = b;
         }
         Button prevButton;
@@ -82,36 +82,39 @@ namespace POS
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.F1)
+            if (e.KeyCode == Keys.F1)
             {
-                if(!UserManager.instance.currentLogin.CanAddUser??false)
+                if (!UserManager.instance.currentLogin.CanAddUser ?? false)
                 {
                     MessageBox.Show("Cannot perform this action!");
                     return;
                 }
                 ///add new login
-                var newlogin = new CreateLogin();
-                newlogin.ShowDialog();
+                using (var newlogin = new CreateLogin())
+                    newlogin.ShowDialog();
             }
-            else if(e.KeyCode == Keys.F2)
+            else if (e.KeyCode == Keys.F2)
             {
                 ///change password
-                var changepass = new ChangePass();
-                changepass.SetUser(UserManager.instance.currentLogin.Username);
-                changepass.ShowDialog();
+                using (var changepass = new ChangePass())
+                {
+                    changepass.SetUser(UserManager.instance.currentLogin.Username);
+                    changepass.ShowDialog();
+                }
             }
-            else if(e.KeyCode == Keys.F5)
+            else if (e.KeyCode == Keys.F5)
             {
                 RefreshData();
             }
         }
         void RefreshData()
         {
-            foreach(var i in uControls)
+            foreach (var i in uControls)
             {
                 i.RefreshData();
             }
         }
+
         private void userButton_Click(object sender, EventArgs e)
         {
             //userContextMenuStrip.Show(Cursor.Position.X, Cursor.Position.Y);
@@ -125,46 +128,51 @@ namespace POS
                 return;
             }
             ///add new login
-            var newlogin = new CreateLogin();
-            newlogin.ShowDialog();
+            using (var newlogin = new CreateLogin())
+                newlogin.ShowDialog();
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var changepass = new ChangePass();
-            changepass.SetUser(UserManager.instance.currentLogin.Username);
-            changepass.ShowDialog();
+            using (var changepass = new ChangePass())
+            {
+                changepass.SetUser(UserManager.instance.currentLogin.Username);
+                changepass.ShowDialog();
+            }
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            var supplier = new SupplierForm();
-            supplier.ShowDialog();
+            using (var supplier = new SupplierForm())
+                supplier.ShowDialog();
         }
 
         private void addNewLoginToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            var login = new CreateLogin();
-            login.ShowDialog();
+            using (var login = new CreateLogin())
+                login.ShowDialog();
         }
 
         private void changePasswordToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            var changePass = new ChangePass();
-            changePass.SetUser(UserManager.instance.currentLogin.Username);
-            changePass.ShowDialog();
+
+            using (var changePass = new ChangePass())
+            {
+                changePass.SetUser(UserManager.instance.currentLogin.Username);
+                changePass.ShowDialog();
+            }
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            var customer = new CreateCustomerProfile();
-            customer.ShowDialog();
+            using (var customer = new CreateCustomerProfile())
+                customer.ShowDialog();
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            StockinLog log = new StockinLog();
-            log.ShowDialog();
+            using (StockinLog log = new StockinLog())
+                log.ShowDialog();
         }
     }
 }

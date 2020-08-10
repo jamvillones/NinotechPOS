@@ -83,10 +83,12 @@ namespace POS.UserControls
             var table = (DataGridView)sender;
             int index = table.CurrentCell.RowIndex;
 
-            var saleDetails = new SaleDetails();
-            saleDetails.SetId(ids[index]);
-            saleDetails.OnSave += (a, b) => { setCharegedTable(); };
-            saleDetails.ShowDialog();
+            using (var saleDetails = new SaleDetails())
+            {
+                saleDetails.SetId(ids[index]);
+                saleDetails.OnSave += (a, b) => { setCharegedTable(); };
+                saleDetails.ShowDialog();
+            }
         }
 
         private void month_SelectedIndexChanged(object sender, EventArgs e)
