@@ -101,6 +101,15 @@
     <Compile Include="Forms\StockinLog.Designer.cs">
       <DependentUpon>StockinLog.cs</DependentUpon>
     </Compile>
+    <Compile Include="InventoryItem.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,15 +207,6 @@
       <DependentUpon>ViewItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ITab.cs" />
-    <Compile Include="InventoryItem.cs">
-      <DependentUpon>POSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Item.cs">
-      <DependentUpon>POSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Login.cs">
-      <DependentUpon>POSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Misc\Enums.cs" />
     <Compile Include="Misc\Helper.cs" />
     <Compile Include="Misc\ImageDatabaseConverter.cs" />
