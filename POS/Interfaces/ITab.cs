@@ -13,5 +13,6 @@ namespace POS.Interfaces
         Button EnterButton();
         Control FirstControl();
         void RefreshData();
+        void Refresh_Callback(object sender, EventArgs e);
     }
 }

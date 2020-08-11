@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sellBtn = new System.Windows.Forms.Button();
             this.inventoryTable = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,7 +40,11 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.inventoryPage = new System.Windows.Forms.TabPage();
+            this.stockinBtn = new System.Windows.Forms.Button();
             this.itemsPage = new System.Windows.Forms.TabPage();
+            this.addVariationsBtn = new System.Windows.Forms.Button();
+            this.editItemBtn = new System.Windows.Forms.Button();
+            this.addItemBtn = new System.Windows.Forms.Button();
             this.itemsTable = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,11 +53,6 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
-            this.refreshBtn = new System.Windows.Forms.Button();
-            this.stockinBtn = new System.Windows.Forms.Button();
-            this.addItemBtn = new System.Windows.Forms.Button();
-            this.editItemBtn = new System.Windows.Forms.Button();
-            this.addVariationsBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.inventoryPage.SuspendLayout();
@@ -98,14 +97,14 @@
             this.Column3,
             this.Column5,
             this.Column4});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle1;
             this.inventoryTable.EnableHeadersVisualStyles = false;
             this.inventoryTable.GridColor = System.Drawing.Color.White;
             this.inventoryTable.Location = new System.Drawing.Point(8, 63);
@@ -187,6 +186,25 @@
             this.inventoryPage.Text = "INVENTORY";
             this.inventoryPage.UseVisualStyleBackColor = true;
             // 
+            // stockinBtn
+            // 
+            this.stockinBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.stockinBtn.FlatAppearance.BorderSize = 0;
+            this.stockinBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.stockinBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockinBtn.Image = ((System.Drawing.Image)(resources.GetObject("stockinBtn.Image")));
+            this.stockinBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.stockinBtn.Location = new System.Drawing.Point(113, 8);
+            this.stockinBtn.Margin = new System.Windows.Forms.Padding(5);
+            this.stockinBtn.Name = "stockinBtn";
+            this.stockinBtn.Size = new System.Drawing.Size(95, 33);
+            this.stockinBtn.TabIndex = 3;
+            this.stockinBtn.Text = "STOCK IN";
+            this.stockinBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.stockinBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.stockinBtn.UseVisualStyleBackColor = false;
+            this.stockinBtn.Click += new System.EventHandler(this.secondBtn_Click);
+            // 
             // itemsPage
             // 
             this.itemsPage.Controls.Add(this.addVariationsBtn);
@@ -200,6 +218,64 @@
             this.itemsPage.TabIndex = 1;
             this.itemsPage.Text = "ITEMS";
             this.itemsPage.UseVisualStyleBackColor = true;
+            // 
+            // addVariationsBtn
+            // 
+            this.addVariationsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.addVariationsBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.addVariationsBtn.FlatAppearance.BorderSize = 0;
+            this.addVariationsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addVariationsBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addVariationsBtn.Image = ((System.Drawing.Image)(resources.GetObject("addVariationsBtn.Image")));
+            this.addVariationsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.addVariationsBtn.Location = new System.Drawing.Point(585, 8);
+            this.addVariationsBtn.Margin = new System.Windows.Forms.Padding(5);
+            this.addVariationsBtn.Name = "addVariationsBtn";
+            this.addVariationsBtn.Size = new System.Drawing.Size(150, 33);
+            this.addVariationsBtn.TabIndex = 9;
+            this.addVariationsBtn.Text = "ADD ITEM VARIATION";
+            this.addVariationsBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.addVariationsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.addVariationsBtn.UseVisualStyleBackColor = false;
+            this.addVariationsBtn.Click += new System.EventHandler(this.addVariationsBtn_Click);
+            // 
+            // editItemBtn
+            // 
+            this.editItemBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.editItemBtn.FlatAppearance.BorderSize = 0;
+            this.editItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.editItemBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("editItemBtn.Image")));
+            this.editItemBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.editItemBtn.Location = new System.Drawing.Point(127, 8);
+            this.editItemBtn.Margin = new System.Windows.Forms.Padding(5);
+            this.editItemBtn.Name = "editItemBtn";
+            this.editItemBtn.Size = new System.Drawing.Size(109, 33);
+            this.editItemBtn.TabIndex = 8;
+            this.editItemBtn.Text = "EDIT ITEM";
+            this.editItemBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.editItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.editItemBtn.UseVisualStyleBackColor = false;
+            this.editItemBtn.Click += new System.EventHandler(this.editBtn_Click);
+            // 
+            // addItemBtn
+            // 
+            this.addItemBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.addItemBtn.FlatAppearance.BorderSize = 0;
+            this.addItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addItemBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("addItemBtn.Image")));
+            this.addItemBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.addItemBtn.Location = new System.Drawing.Point(8, 8);
+            this.addItemBtn.Margin = new System.Windows.Forms.Padding(5);
+            this.addItemBtn.Name = "addItemBtn";
+            this.addItemBtn.Size = new System.Drawing.Size(109, 33);
+            this.addItemBtn.TabIndex = 7;
+            this.addItemBtn.Text = "CREATE ITEM";
+            this.addItemBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.addItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.addItemBtn.UseVisualStyleBackColor = false;
+            this.addItemBtn.Click += new System.EventHandler(this.addItemBtn_Click);
             // 
             // itemsTable
             // 
@@ -221,14 +297,14 @@
             this.Column6,
             this.Column8,
             this.Column7});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.Location = new System.Drawing.Point(8, 63);
             this.itemsTable.MultiSelect = false;
@@ -301,102 +377,10 @@
             this.label1.Text = "PRODUCTS";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // refreshBtn
-            // 
-            this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.refreshBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.refreshBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.refreshBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshBtn.Image")));
-            this.refreshBtn.Location = new System.Drawing.Point(730, 27);
-            this.refreshBtn.Name = "refreshBtn";
-            this.refreshBtn.Size = new System.Drawing.Size(35, 23);
-            this.refreshBtn.TabIndex = 3;
-            this.refreshBtn.TabStop = false;
-            this.refreshBtn.UseVisualStyleBackColor = false;
-            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
-            // 
-            // stockinBtn
-            // 
-            this.stockinBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.stockinBtn.FlatAppearance.BorderSize = 0;
-            this.stockinBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.stockinBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stockinBtn.Image = ((System.Drawing.Image)(resources.GetObject("stockinBtn.Image")));
-            this.stockinBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.stockinBtn.Location = new System.Drawing.Point(113, 8);
-            this.stockinBtn.Margin = new System.Windows.Forms.Padding(5);
-            this.stockinBtn.Name = "stockinBtn";
-            this.stockinBtn.Size = new System.Drawing.Size(95, 33);
-            this.stockinBtn.TabIndex = 3;
-            this.stockinBtn.Text = "STOCK IN";
-            this.stockinBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.stockinBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.stockinBtn.UseVisualStyleBackColor = false;
-            this.stockinBtn.Click += new System.EventHandler(this.secondBtn_Click);
-            // 
-            // addItemBtn
-            // 
-            this.addItemBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.addItemBtn.FlatAppearance.BorderSize = 0;
-            this.addItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addItemBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("addItemBtn.Image")));
-            this.addItemBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.addItemBtn.Location = new System.Drawing.Point(8, 8);
-            this.addItemBtn.Margin = new System.Windows.Forms.Padding(5);
-            this.addItemBtn.Name = "addItemBtn";
-            this.addItemBtn.Size = new System.Drawing.Size(109, 33);
-            this.addItemBtn.TabIndex = 7;
-            this.addItemBtn.Text = "CREATE ITEM";
-            this.addItemBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.addItemBtn.UseVisualStyleBackColor = false;
-            this.addItemBtn.Click += new System.EventHandler(this.addItemBtn_Click);
-            // 
-            // editItemBtn
-            // 
-            this.editItemBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.editItemBtn.FlatAppearance.BorderSize = 0;
-            this.editItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.editItemBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("editItemBtn.Image")));
-            this.editItemBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.editItemBtn.Location = new System.Drawing.Point(127, 8);
-            this.editItemBtn.Margin = new System.Windows.Forms.Padding(5);
-            this.editItemBtn.Name = "editItemBtn";
-            this.editItemBtn.Size = new System.Drawing.Size(109, 33);
-            this.editItemBtn.TabIndex = 8;
-            this.editItemBtn.Text = "EDIT ITEM";
-            this.editItemBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.editItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.editItemBtn.UseVisualStyleBackColor = false;
-            this.editItemBtn.Click += new System.EventHandler(this.editBtn_Click);
-            // 
-            // addVariationsBtn
-            // 
-            this.addVariationsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addVariationsBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.addVariationsBtn.FlatAppearance.BorderSize = 0;
-            this.addVariationsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addVariationsBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addVariationsBtn.Image = ((System.Drawing.Image)(resources.GetObject("addVariationsBtn.Image")));
-            this.addVariationsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.addVariationsBtn.Location = new System.Drawing.Point(585, 8);
-            this.addVariationsBtn.Margin = new System.Windows.Forms.Padding(5);
-            this.addVariationsBtn.Name = "addVariationsBtn";
-            this.addVariationsBtn.Size = new System.Drawing.Size(150, 33);
-            this.addVariationsBtn.TabIndex = 9;
-            this.addVariationsBtn.Text = "ADD ITEM VARIATION";
-            this.addVariationsBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addVariationsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.addVariationsBtn.UseVisualStyleBackColor = false;
-            this.addVariationsBtn.Click += new System.EventHandler(this.addVariationsBtn_Click);
-            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
             this.Name = "InventoryUC";
@@ -431,7 +415,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.Button refreshBtn;
         protected System.Windows.Forms.Button stockinBtn;
         protected System.Windows.Forms.Button addItemBtn;
         protected System.Windows.Forms.Button editItemBtn;

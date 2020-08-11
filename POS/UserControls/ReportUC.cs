@@ -194,5 +194,11 @@ namespace POS.UserControls
             if (e.KeyCode == Keys.Enter)
                 setRegularTableByDate();
         }
+
+        public void Refresh_Callback(object sender, EventArgs e)
+        {
+            setRegularTableByDate();
+            setCharegedTable();
+        }
     }
 }

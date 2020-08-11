@@ -30,6 +30,8 @@ namespace POS
                 i.Initialize();
 
             userButton.Text = UserManager.instance.currentLogin.Username;
+            foreach (var i in uControls)
+                refreshToolStripBtn.Click += i.Refresh_Callback;
         }
 
         void setChangingColorsBtn(params Button[] buttons)
@@ -109,10 +111,7 @@ namespace POS
         }
         void RefreshData()
         {
-            foreach (var i in uControls)
-            {
-                i.RefreshData();
-            }
+            refreshToolStripBtn.PerformClick();
         }
 
         private void userButton_Click(object sender, EventArgs e)
@@ -174,5 +173,11 @@ namespace POS
             using (StockinLog log = new StockinLog())
                 log.ShowDialog();
         }
+
+        //private void toolStripButton4_Click(object sender, EventArgs e)
+        //{
+        //    //foreach(var i in uControls)
+        //    //    i.re
+        //}
     }
 }

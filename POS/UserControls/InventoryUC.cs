@@ -182,7 +182,13 @@ namespace POS.UserControls
                 variation.ShowDialog();
         }
 
-        private void refreshBtn_Click(object sender, EventArgs e)
+        //private void refreshBtn_Click(object sender, EventArgs e)
+        //{
+        //    initInventoryTable();
+        //    initItemsTable();
+        //}
+
+        public void Refresh_Callback(object sender, EventArgs e)
         {
             initInventoryTable();
             initItemsTable();
