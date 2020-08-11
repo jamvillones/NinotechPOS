@@ -49,12 +49,13 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.refreshToolStripBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.addNewLoginToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.loginPrivilegesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshToolStripBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -296,7 +297,8 @@
             this.toolStripButton3,
             this.refreshToolStripBtn,
             this.toolStripSeparator2,
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownButton1,
+            this.toolStripButton4});
             this.toolStrip1.Location = new System.Drawing.Point(80, 34);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
@@ -339,6 +341,15 @@
             this.toolStripButton3.Text = "Stockin history";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
+            // refreshToolStripBtn
+            // 
+            this.refreshToolStripBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.refreshToolStripBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshToolStripBtn.Image")));
+            this.refreshToolStripBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.refreshToolStripBtn.Name = "refreshToolStripBtn";
+            this.refreshToolStripBtn.Size = new System.Drawing.Size(23, 22);
+            this.refreshToolStripBtn.Text = "Refresh(F5)";
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -378,14 +389,14 @@
             this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
             this.loginPrivilegesToolStripMenuItem1.Text = "Login Privileges";
             // 
-            // refreshToolStripBtn
+            // toolStripButton4
             // 
-            this.refreshToolStripBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.refreshToolStripBtn.Image = ((System.Drawing.Image)(resources.GetObject("refreshToolStripBtn.Image")));
-            this.refreshToolStripBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.refreshToolStripBtn.Name = "refreshToolStripBtn";
-            this.refreshToolStripBtn.Size = new System.Drawing.Size(23, 22);
-            this.refreshToolStripBtn.Text = "Refresh(F5)";
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Text = "Sell items(Console type)";
             // 
             // Main
             // 
@@ -447,6 +458,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton refreshToolStripBtn;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
     }
 }
 

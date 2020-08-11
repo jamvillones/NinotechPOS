@@ -28,6 +28,11 @@ namespace POS.Forms
                 itemType.Items.Add((ItemType)i).ToString();
             }
             itemType.SelectedIndex = 0;
+            using (var p = new POSEntities())
+            {
+                foreach (var i in p.Suppliers)
+                    supplierOption.Items.Add(i.Name);
+            }
         }
         private void barcode_Leave(object sender, EventArgs e)
         {
@@ -74,7 +79,7 @@ namespace POS.Forms
             item.SellingPrice = sellingPrice.Value;
             //item.Cost = cost.Value;
 
-            item.Department = itemDepartment.Text;
+            item.Department = string.IsNullOrEmpty(itemDepartment.Text) ? null : itemDepartment.Text;
             // item.Type = itemType.Text;
             item.Type = itemType.Text;
             item.Details = details.Text;
@@ -88,7 +93,7 @@ namespace POS.Forms
                 using (var p = new POSEntities())
                 {
                     p.Items.Add(item);
-                    if(item.Type == ItemType.Service.ToString() || item.Type == ItemType.Software.ToString())
+                    if (item.Type == ItemType.Service.ToString() || item.Type == ItemType.Software.ToString())
                     {
                         MessageBox.Show("Items of type Service or Software will automatically create an item variation and be added to Inventory.");
 
@@ -103,6 +108,19 @@ namespace POS.Forms
                         inventory.SerialNumber = null;
                         p.InventoryItems.Add(inventory);
                     }
+                    else
+                    {
+                        foreach (DataGridViewRow i in variationTable.Rows)
+                        {
+                            var prod = new Product();
+                            prod.ItemId = item.Barcode;
+                            string s = i.Cells[0].Value.ToString();
+                            prod.Supplier = p.Suppliers.FirstOrDefault(x => x.Name == s);
+                            prod.Cost = Convert.ToDecimal(i.Cells[1].Value);
+
+                            p.Products.Add(prod);
+                        }
+                    }
 
                     p.SaveChanges();
                     MessageBox.Show("Item Added");
@@ -115,7 +133,53 @@ namespace POS.Forms
             {
                 MessageBox.Show(except.Message);
             }
+        }
+        protected override void clearFields()
+        {
+            base.clearFields();
+            variationTable.Rows.Clear();
+        }
+        private void itemType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            VariationGroup.Enabled = itemType.Text == ItemType.Hardware.ToString();
+            if (itemType.Text != ItemType.Hardware.ToString())
+                variationTable.Rows.Clear();
+        }
 
+        private void comboBox1_Validated(object sender, EventArgs e)
+        {
+            if (supplierOption.Text == string.Empty)
+                return;
+            using (var p = new POSEntities())
+            {
+                if (p.Suppliers.FirstOrDefault(x => x.Name == supplierOption.Text) == null)
+                {
+                    MessageBox.Show("Supplier not found.");
+                    using (var supplier = new SupplierForm())
+                    {
+                        supplier.OnSave += Supplier_OnSave;
+                        supplier.ShowDialog();
+                    }
+                    this.ActiveControl = supplierOption;
+                }
+            }
+        }
+
+        private void Supplier_OnSave(object sender, EventArgs e)
+        {
+            supplierOption.Items.Clear();
+            using (var p = new POSEntities())
+            {
+                foreach (var i in p.Suppliers)
+                    supplierOption.Items.Add(i.Name);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (supplierOption.Text == string.Empty) return;
+            variationTable.Rows.Add(supplierOption.Text, cost.Value);
+            supplierOption.Items.RemoveAt(supplierOption.SelectedIndex);
         }
     }
 }

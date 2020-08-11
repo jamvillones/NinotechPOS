@@ -190,6 +190,7 @@ namespace POS.UserControls
 
         public void Refresh_Callback(object sender, EventArgs e)
         {
+            Console.WriteLine("Refreshed: " + this.Name);
             initInventoryTable();
             initItemsTable();
         }

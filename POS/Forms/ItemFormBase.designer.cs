@@ -201,7 +201,7 @@
             this.groupBox8.Location = new System.Drawing.Point(480, 104);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(157, 40);
-            this.groupBox8.TabIndex = 6;
+            this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Item Department";
             // 
@@ -254,7 +254,7 @@
             this.groupBox4.Location = new System.Drawing.Point(643, 104);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(151, 40);
-            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Item Type";
             // 
@@ -317,7 +317,6 @@
         private System.Windows.Forms.Panel imageHolder;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.Button saveBtn;
         protected System.Windows.Forms.TextBox barcode;
@@ -330,5 +329,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.GroupBox groupBox4;
         protected System.Windows.Forms.ComboBox itemType;
+        protected System.Windows.Forms.GroupBox groupBox6;
     }
 }

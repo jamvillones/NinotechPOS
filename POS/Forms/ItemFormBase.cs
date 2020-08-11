@@ -24,7 +24,7 @@ namespace POS.Forms
         {
             InitializeComponent();
         }
-        protected void clearFields()
+        protected virtual void clearFields()
         {
             ImageBox.Image = null;
             var texts = this.GetContainedControls<TextBox>();
@@ -36,6 +36,8 @@ namespace POS.Forms
             var nums = this.GetContainedControls<NumericUpDown>();
             foreach (var n in nums)
                 n.ResetText();
+
+
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
