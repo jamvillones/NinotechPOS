@@ -109,6 +109,11 @@
             this.cost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cost.Location = new System.Drawing.Point(7, 14);
+            this.cost.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.cost.Name = "cost";
             this.cost.Size = new System.Drawing.Size(55, 20);
             this.cost.TabIndex = 0;

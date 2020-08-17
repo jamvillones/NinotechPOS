@@ -12,34 +12,34 @@ using POS.Misc;
 
 namespace POS.Forms
 {
+
+    struct ItemInfoHolder
+    {
+        public string Barcode { get; set; }
+        public string Name { get; set; }
+        public string Serial { get; set; }
+        public string Supplier { get; set; }
+        public decimal SellingPrice { get; set; }
+        public decimal discount { get; set; }
+        private int q;
+        public int Quantity
+        {
+            get
+            {
+                return Serial == null ? q : 1;
+            }
+            set { q = value; }
+        }
+        public decimal TotalPrice { get { return (Quantity * SellingPrice) * ((100 - discount) / 100); } }
+    }
+
     public partial class MakeSale : Form
     {
         SaleType currentSaleType = SaleType.Regular;
-        // decimal totalToPay;
-        struct TempItem
-        {
-            public string Barcode { get; set; }
-            public string Name { get; set; }
-            public string Serial { get; set; }
-            public string Supplier { get; set; }
-            public decimal SellingPrice { get; set; }
-            public decimal discount { get; set; }
-            private int q;
-            public int Quantity
-            {
-                get
-                {
-                    return Serial == null ? q : 1;
-                }
-                set { q = value; }
-            }
-            public decimal TotalPrice { get { return (Quantity * SellingPrice) * ((100 - discount) / 100); } }
-        }
-
 
         decimal cartTotalValue;
 
-        TempItem tempItem;
+        ItemInfoHolder tempItem;
         public event EventHandler OnSave;
         public MakeSale()
         {

@@ -255,12 +255,21 @@
     <Compile Include="UserControls\InventoryUC.Designer.cs">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Keypad.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Keypad.Designer.cs">
+      <DependentUpon>Keypad.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ReportUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UserControls\ReportUC.designer.cs">
       <DependentUpon>ReportUC.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\SellForm.resx">
+      <DependentUpon>SellForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockinLog.resx">
       <DependentUpon>StockinLog.cs</DependentUpon>
     </EmbeddedResource>
@@ -324,6 +333,9 @@
     </Compile>
     <EmbeddedResource Include="UserControls\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Keypad.resx">
+      <DependentUpon>Keypad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ReportUC.resx">
       <DependentUpon>ReportUC.cs</DependentUpon>

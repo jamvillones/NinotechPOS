@@ -72,6 +72,16 @@ namespace POS.Forms
                 return;
             }
 
+            switch (MessageBox.Show(this, "Are you sure you want to create this item?", "Please double check.", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                //Stay on this form
+                case DialogResult.No:
+                    return;
+
+                default:
+                    break;
+            }
+
             var item = new Item();
             item.Barcode = barcode.Text;
             item.Name = name.Text;

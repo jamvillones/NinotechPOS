@@ -174,6 +174,14 @@ namespace POS
                 log.ShowDialog();
         }
 
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            using(var sellForm = new SellForm())
+            {
+                sellForm.ShowDialog();
+            }
+        }
+
         //private void toolStripButton4_Click(object sender, EventArgs e)
         //{
         //    //foreach(var i in uControls)
