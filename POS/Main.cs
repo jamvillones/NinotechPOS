@@ -182,6 +182,11 @@ namespace POS
             }
         }
 
+        private void refreshToolStripBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //private void toolStripButton4_Click(object sender, EventArgs e)
         //{
         //    //foreach(var i in uControls)

@@ -18,6 +18,7 @@ namespace POS.UserControls
 
     public partial class ReportUC : UserControl, ITab
     {
+        SaleType saleType = SaleType.Regular;
         Button defButton = new Button();
         int[] ids;
 
@@ -198,8 +199,20 @@ namespace POS.UserControls
         public void Refresh_Callback(object sender, EventArgs e)
         {
             Console.WriteLine("Refreshed: " + this.Name);
-            setRegularTableByDate();
-            setCharegedTable();
+            if (saleType == SaleType.Regular)
+                setRegularTableByDate();
+            else
+                setCharegedTable();
+        }
+
+        private void regularSalesTab_Click(object sender, EventArgs e)
+        {
+            saleType = SaleType.Regular;
+        }
+
+        private void chargedPage_Click(object sender, EventArgs e)
+        {
+            saleType = SaleType.Charged;
         }
     }
 }

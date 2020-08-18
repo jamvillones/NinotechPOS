@@ -108,7 +108,7 @@
             // 
             // backspace
             // 
-            this.backspace.BackColor = System.Drawing.Color.Firebrick;
+            this.backspace.BackColor = System.Drawing.Color.LightCoral;
             this.backspace.CausesValidation = false;
             this.backspace.Dock = System.Windows.Forms.DockStyle.Fill;
             this.backspace.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

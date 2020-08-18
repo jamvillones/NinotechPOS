@@ -349,6 +349,7 @@
             this.refreshToolStripBtn.Name = "refreshToolStripBtn";
             this.refreshToolStripBtn.Size = new System.Drawing.Size(23, 22);
             this.refreshToolStripBtn.Text = "Refresh(F5)";
+            this.refreshToolStripBtn.Click += new System.EventHandler(this.refreshToolStripBtn_Click);
             // 
             // toolStripSeparator2
             // 
@@ -372,21 +373,22 @@
             // addNewLoginToolStripMenuItem1
             // 
             this.addNewLoginToolStripMenuItem1.Name = "addNewLoginToolStripMenuItem1";
-            this.addNewLoginToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
+            this.addNewLoginToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.addNewLoginToolStripMenuItem1.Text = "Add New Login";
             this.addNewLoginToolStripMenuItem1.Click += new System.EventHandler(this.addNewLoginToolStripMenuItem1_Click);
             // 
             // changePasswordToolStripMenuItem2
             // 
             this.changePasswordToolStripMenuItem2.Name = "changePasswordToolStripMenuItem2";
-            this.changePasswordToolStripMenuItem2.Size = new System.Drawing.Size(168, 22);
+            this.changePasswordToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
             this.changePasswordToolStripMenuItem2.Text = "Change Password";
             this.changePasswordToolStripMenuItem2.Click += new System.EventHandler(this.changePasswordToolStripMenuItem2_Click);
             // 
             // loginPrivilegesToolStripMenuItem1
             // 
+            this.loginPrivilegesToolStripMenuItem1.Enabled = false;
             this.loginPrivilegesToolStripMenuItem1.Name = "loginPrivilegesToolStripMenuItem1";
-            this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
+            this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.loginPrivilegesToolStripMenuItem1.Text = "Login Privileges";
             // 
             // toolStripButton4
