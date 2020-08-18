@@ -332,7 +332,10 @@ namespace POS.Forms
 
             for (int i = 0; i < itemsTable.RowCount; i++)
             {
-                if (string.Equals(searchText.Text, itemsTable.Rows[i].Cells[filter.SelectedIndex].Value?.ToString(), StringComparison.OrdinalIgnoreCase))
+                var barcodeInLower = itemsTable.Rows[i].Cells[filter.SelectedIndex].Value?.ToString().ToLower();
+                var searchInLower = searchText.Text.ToLower();
+
+                if (barcodeInLower.Contains(searchInLower))
                 {
                     index = i;
                     break;
