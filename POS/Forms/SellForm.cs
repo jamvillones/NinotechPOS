@@ -120,21 +120,21 @@ namespace POS.Forms
                 return;
             }
 
-            using (var p = new POSEntities())
-            {
-                var item = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == searchedItemInfo.Barcode && x.Product.Supplier.Name == searchedItemInfo.Supplier && x.SerialNumber == searchedItemInfo.Serial);
-                if (item.Quantity > 0)
-                {
-                    var newQuantity = searchedItemInfo.Quantity - (int)quantity.Value;
+            ////using (var p = new POSEntities())
+            ////{
+            ////    var item = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == searchedItemInfo.Barcode && x.Product.Supplier.Name == searchedItemInfo.Supplier && x.SerialNumber == searchedItemInfo.Serial);
+            ////    if (item.Quantity > 0)
+            ////    {
+            ////        var newQuantity = searchedItemInfo.Quantity - (int)quantity.Value;
 
-                    if (newQuantity <= 0)
-                        p.InventoryItems.Remove(item);
-                    else
-                        item.Quantity = newQuantity;
+            ////        if (newQuantity <= 0)
+            ////            p.InventoryItems.Remove(item);
+            ////        else
+            ////            item.Quantity = newQuantity;
 
-                    p.SaveChanges();
-                }
-            }
+            ////        p.SaveChanges();
+            ////    }
+            ////}
 
             int index;
             if (alreadyCart(out index))
@@ -161,9 +161,7 @@ namespace POS.Forms
         private void searchText_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
                 seachBtn.PerformClick();
-            }
         }
 
         private void SellForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -183,30 +181,9 @@ namespace POS.Forms
                         e.Cancel = true;
                         break;
                     default:
-                        voidAll();
                         break;
                 }
             }
-        }
-
-        private void voidAllBtn_Click(object sender, EventArgs e)
-        {
-            switch (MessageBox.Show(this, "Are you sure you wish to continue?", "All items will be returned to inventory.", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-            {
-                //Stay on this form
-                case DialogResult.No:
-
-                    break;
-                default:
-                    voidAll();
-                    break;
-            }
-            voidAll();
-        }
-        void voidAll()
-        {
-            Console.WriteLine("All items voided");
-            cartTable.Rows.Clear();
         }
     }
 }
