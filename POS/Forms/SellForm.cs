@@ -21,6 +21,7 @@ namespace POS.Forms
         bool checkedOut = false;
         private void SellForm_Load(object sender, EventArgs e)
         {
+            searchFilter.SelectedIndex = 0;
             //keypad1.SetTarget(textBox1);
             using (var p = new POSEntities())
             {
@@ -55,9 +56,14 @@ namespace POS.Forms
             {
                 return;
             }
+            InventoryItem i = new InventoryItem();
             using (var p = new POSEntities())
             {
-                var i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == searchText.Text);
+                if (searchFilter.Text == "BARCODE")
+                    i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == searchText.Text);
+                else
+                    i = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == searchText.Text);
+
                 if (i == null)
                 {
                     searchText.SelectAll();
@@ -284,7 +290,7 @@ namespace POS.Forms
 
         private void addCustomerBtn_Click(object sender, EventArgs e)
         {
-            using(CreateCustomerProfile c = new CreateCustomerProfile())
+            using (CreateCustomerProfile c = new CreateCustomerProfile())
             {
                 c.OnSave += C_OnSave;
                 c.ShowDialog();

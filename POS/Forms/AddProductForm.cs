@@ -32,6 +32,11 @@ namespace POS.Forms
         {
             //try
             //{
+            if (string.IsNullOrEmpty(supplier.Text))
+            {
+                MessageBox.Show("Supplier can never be empty");
+                return;
+            }
             using (var p = new POSEntities())
             {
                 var newProduct = new Product();

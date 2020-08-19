@@ -44,7 +44,6 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.seachBtn = new System.Windows.Forms.Button();
             this.searchText = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -79,6 +78,7 @@
             this.cartTotal = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.soldTo = new System.Windows.Forms.ComboBox();
+            this.searchFilter = new System.Windows.Forms.ComboBox();
             this.keypad1 = new POS.UserControls.Keypad();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -281,7 +281,7 @@
             // 
             // groupBox11
             // 
-            this.groupBox11.Controls.Add(this.button4);
+            this.groupBox11.Controls.Add(this.searchFilter);
             this.groupBox11.Controls.Add(this.seachBtn);
             this.groupBox11.Controls.Add(this.searchText);
             this.groupBox11.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -292,26 +292,12 @@
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "SEARCH";
             // 
-            // button4
-            // 
-            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(511, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(155, 35);
-            this.button4.TabIndex = 13;
-            this.button4.TabStop = false;
-            this.button4.Text = "FIND SPECIFIC PRODUCT";
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.toolTip.SetToolTip(this.button4, "Search");
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // seachBtn
             // 
             this.seachBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.seachBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.seachBtn.Image = ((System.Drawing.Image)(resources.GetObject("seachBtn.Image")));
-            this.seachBtn.Location = new System.Drawing.Point(469, 19);
+            this.seachBtn.Location = new System.Drawing.Point(401, 19);
             this.seachBtn.Name = "seachBtn";
             this.seachBtn.Size = new System.Drawing.Size(36, 35);
             this.seachBtn.TabIndex = 12;
@@ -324,9 +310,9 @@
             // 
             this.searchText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.searchText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchText.Location = new System.Drawing.Point(7, 20);
+            this.searchText.Location = new System.Drawing.Point(7, 19);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(456, 35);
+            this.searchText.Size = new System.Drawing.Size(388, 35);
             this.searchText.TabIndex = 0;
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
             // 
@@ -648,8 +634,7 @@
             // 
             // change
             // 
-            this.change.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.change.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.change.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.change.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.change.Location = new System.Drawing.Point(6, 28);
@@ -740,6 +725,21 @@
             this.soldTo.Name = "soldTo";
             this.soldTo.Size = new System.Drawing.Size(226, 37);
             this.soldTo.TabIndex = 12;
+            // 
+            // searchFilter
+            // 
+            this.searchFilter.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.searchFilter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.searchFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.searchFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchFilter.FormattingEnabled = true;
+            this.searchFilter.Items.AddRange(new object[] {
+            "BARCODE",
+            "SERIAL NUMBER"});
+            this.searchFilter.Location = new System.Drawing.Point(443, 18);
+            this.searchFilter.Name = "searchFilter";
+            this.searchFilter.Size = new System.Drawing.Size(223, 37);
+            this.searchFilter.TabIndex = 13;
             // 
             // keypad1
             // 
@@ -846,8 +846,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button exactAmountBtn;
+        private System.Windows.Forms.ComboBox searchFilter;
     }
 }

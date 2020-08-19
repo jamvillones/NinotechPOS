@@ -26,7 +26,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 foreach (var i in p.Products.Where(x=>x.Item.Type == ItemType.Hardware.ToString()))
-                    itemsTable.Rows.Add(i.Item.Barcode, i.Item.Name, i.Cost, i.Supplier.Name);
+                    itemsTable.Rows.Add(i.Item?.Barcode, i.Item?.Name, i.Cost, i.Supplier?.Name);
             }
             itemsTable.Sort(itemsTable.Columns[0], ListSortDirection.Ascending);
         }
