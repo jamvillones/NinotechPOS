@@ -16,7 +16,7 @@ namespace POS.Forms
         public SellForm()
         {
             InitializeComponent();
-            keypad1.SetTarget(searchText);
+            keypad.SetTarget(searchText);
         }
         bool checkedOut = false;
         private void SellForm_Load(object sender, EventArgs e)

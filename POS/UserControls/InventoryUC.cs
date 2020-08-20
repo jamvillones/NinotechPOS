@@ -16,7 +16,7 @@ namespace POS.UserControls
     {
         public InventoryUC()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
 
         #region Tab functions
@@ -193,6 +193,36 @@ namespace POS.UserControls
             Console.WriteLine("Refreshed: " + this.Name);
             initInventoryTable();
             initItemsTable();
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(search.Text))
+            {
+                return;
+            }
+
+            for (int i = 0; i < inventoryTable.RowCount; i++)
+            {
+                var barc = inventoryTable.Rows[i].Cells[0].Value.ToString().ToLower();
+
+                if (barc.Contains(search.Text.ToLower()))
+                {
+                    inventoryTable.Rows[i].Selected = true;
+                    inventoryTable.FirstDisplayedScrollingRowIndex = i;
+                    return;
+                }
+            }
+            MessageBox.Show("Sorry, Product not found.");
+
+        }
+
+        private void search_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                searchBtn.PerformClick();
+            }
         }
     }
 }

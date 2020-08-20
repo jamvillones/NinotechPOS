@@ -44,6 +44,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.searchFilter = new System.Windows.Forms.ComboBox();
             this.seachBtn = new System.Windows.Forms.Button();
             this.searchText = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -68,6 +69,7 @@
             this.addCustomerBtn = new System.Windows.Forms.Button();
             this.exactAmountBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.keypad = new POS.UserControls.Keypad();
             this.panel4 = new System.Windows.Forms.Panel();
             this.checkoutBtn = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -78,8 +80,6 @@
             this.cartTotal = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.soldTo = new System.Windows.Forms.ComboBox();
-            this.searchFilter = new System.Windows.Forms.ComboBox();
-            this.keypad1 = new POS.UserControls.Keypad();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -291,6 +291,21 @@
             this.groupBox11.TabIndex = 6;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "SEARCH";
+            // 
+            // searchFilter
+            // 
+            this.searchFilter.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.searchFilter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.searchFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.searchFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchFilter.FormattingEnabled = true;
+            this.searchFilter.Items.AddRange(new object[] {
+            "BARCODE",
+            "SERIAL NUMBER"});
+            this.searchFilter.Location = new System.Drawing.Point(443, 18);
+            this.searchFilter.Name = "searchFilter";
+            this.searchFilter.Size = new System.Drawing.Size(223, 37);
+            this.searchFilter.TabIndex = 13;
             // 
             // seachBtn
             // 
@@ -579,7 +594,7 @@
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel2.Controls.Add(this.keypad1, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.keypad, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel4, 1, 1);
@@ -591,6 +606,16 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(984, 561);
             this.tableLayoutPanel2.TabIndex = 17;
+            // 
+            // keypad
+            // 
+            this.keypad.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.keypad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.keypad.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keypad.Location = new System.Drawing.Point(691, 3);
+            this.keypad.Name = "keypad";
+            this.keypad.Size = new System.Drawing.Size(290, 274);
+            this.keypad.TabIndex = 1;
             // 
             // panel4
             // 
@@ -726,31 +751,6 @@
             this.soldTo.Size = new System.Drawing.Size(226, 37);
             this.soldTo.TabIndex = 12;
             // 
-            // searchFilter
-            // 
-            this.searchFilter.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.searchFilter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.searchFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchFilter.FormattingEnabled = true;
-            this.searchFilter.Items.AddRange(new object[] {
-            "BARCODE",
-            "SERIAL NUMBER"});
-            this.searchFilter.Location = new System.Drawing.Point(443, 18);
-            this.searchFilter.Name = "searchFilter";
-            this.searchFilter.Size = new System.Drawing.Size(223, 37);
-            this.searchFilter.TabIndex = 13;
-            // 
-            // keypad1
-            // 
-            this.keypad1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.keypad1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.keypad1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.keypad1.Location = new System.Drawing.Point(691, 3);
-            this.keypad1.Name = "keypad1";
-            this.keypad1.Size = new System.Drawing.Size(290, 274);
-            this.keypad1.TabIndex = 1;
-            // 
             // SellForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -818,7 +818,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button addToCartBtn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private UserControls.Keypad keypad1;
+        private UserControls.Keypad keypad;
         private System.Windows.Forms.NumericUpDown quantity;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox groupBox8;
