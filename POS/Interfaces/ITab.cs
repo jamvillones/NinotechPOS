@@ -9,9 +9,10 @@ namespace POS.Interfaces
 {
     interface ITab
     {
-        void Initialize();
         Button EnterButton();
         Control FirstControl();
+
+        void Initialize();
         void RefreshData();
         void Refresh_Callback(object sender, EventArgs e);
     }
