@@ -30,8 +30,6 @@ namespace POS.Forms
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            //try
-            //{
             if (string.IsNullOrEmpty(supplier.Text))
             {
                 MessageBox.Show("Supplier can never be empty");
@@ -50,17 +48,14 @@ namespace POS.Forms
                 MessageBox.Show("Product added");
                 this.Close();
             }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Failed to save.");
-            //}
         }
+
         object TableCurrentValueAt(int index)
         {
             return itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex].Cells[index].Value;
 
         }
+
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
         {
             var id = TableCurrentValueAt(0).ToString();
@@ -72,12 +67,12 @@ namespace POS.Forms
                 itemName.Text = selectedItem.Name;
 
                 supplier.Items.Clear();
-                //foreach (var x in p.Suppliers.Where(x => x.Products.Where(y => y.ItemId == id).Count() == 0))
+
                 foreach (var x in p.Suppliers.Where(x => x.Products.FirstOrDefault(y => y.ItemId == id) == null))
                     supplier.Items.Add(x.Name);
-
             }
         }
+
         Item selectedItem;
 
         private void barcode_KeyDown(object sender, KeyEventArgs e)
@@ -104,16 +99,13 @@ namespace POS.Forms
 
         private void Supplier_OnSave(object sender, EventArgs e)
         {
-            // var id = TableCurrentValueAt(0).ToString();
             using (var p = new POSEntities())
             {
                 supplier.Items.Clear();
 
                 foreach (var x in p.Suppliers.Where(x => x.Products.FirstOrDefault(y => y.ItemId == selectedItem.Barcode) == null))
                     supplier.Items.Add(x.Name);
-
             }
-            Console.WriteLine(selectedItem.Barcode);
         }
     }
 }
