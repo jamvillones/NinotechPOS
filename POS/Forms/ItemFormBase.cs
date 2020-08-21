@@ -35,7 +35,7 @@ namespace POS.Forms
                 c.ResetText();
             var nums = this.GetContainedControls<NumericUpDown>();
             foreach (var n in nums)
-                n.ResetText();
+                n.Value = 0;
 
 
         }
