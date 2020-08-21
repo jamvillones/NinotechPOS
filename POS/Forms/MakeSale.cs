@@ -332,20 +332,26 @@ namespace POS.Forms
 
             for (int i = 0; i < itemsTable.RowCount; i++)
             {
-                var barcodeInLower = itemsTable.Rows[i].Cells[filter.SelectedIndex].Value?.ToString().ToLower();
-                var searchInLower = searchText.Text.ToLower();
+                var cellInLower = itemsTable.Rows[i].Cells[filter.SelectedIndex].Value?.ToString().ToLower();
 
-                if (barcodeInLower.Contains(searchInLower))
+                if (cellInLower != null)
                 {
-                    index = i;
-                    break;
+                    var searchInLower = searchText.Text.ToLower();
+
+                    if (cellInLower.Contains(searchInLower))
+                    {
+                        index = i;
+                        break;
+                    }
                 }
             }
+
             if (index == -1)
             {
                 MessageBox.Show("Item not found.");
                 return;
             }
+
             itemsTable.FirstDisplayedScrollingRowIndex = index;
             itemsTable.Rows[index].Selected = true;
 
