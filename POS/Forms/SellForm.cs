@@ -36,7 +36,6 @@ namespace POS.Forms
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            //var price = Convert.ToDecimal(priceTxt.ValueText);
             totalPrice.Text = (quantity.Value * price.Value * ((100 - discount.Value) / 100)).ToString();
         }
         private void amountChangedCallback(object sender, EventArgs e)
@@ -49,42 +48,59 @@ namespace POS.Forms
 
             change.Text = string.Format("₱ {0:n}", (amountRec - cartTotalValue));
         }
-
+        List<InventoryItem> searchedItems = new List<InventoryItem>();
         private void seachBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(searchText.Text))
             {
                 return;
             }
-            InventoryItem i = new InventoryItem();
+
+           
+
             using (var p = new POSEntities())
             {
+                ///search inventoryitems with given barcode
+                searchedItems = p.InventoryItems.Where(x => x.Product.ItemId == searchText.Text).ToList();
 
-                i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == searchText.Text);
-
-                if (i == null)
+                if (searchedItems.Count == 0)
                 {
-                    searchText.SelectAll();
-                    MessageBox.Show("Item not found");
+                    MessageBox.Show("Item not found.");
                     return;
                 }
+                ///get the item reference of the first element for assignment
+                var item = searchedItems[0].Product.Item;
 
-                searchedItemInfo.Barcode = i.Product.Item.Barcode;
-                searchedItemInfo.Name = i.Product.Item.Name;
-                searchedItemInfo.Serial = i.SerialNumber;
-                searchedItemInfo.Supplier = i.Product.Supplier.Name;
-                searchedItemInfo.Quantity = i.Quantity;
+                ///actual assignment of item values
+                itemName.Text = item.Name;
+                price.Value = item.SellingPrice;
 
-               // serialNumber.Items.Add(searchedItemInfo.Serial);
+                ///reset the serial number option
+                serialNumber.Items.Clear();
+                /// to reset the height after clear
+                serialNumber.IntegralHeight = false;
+                /// to prep the height just in case there are items to be added
+                serialNumber.IntegralHeight = true;
+                ///add serials in serial number options
+                foreach (var i in searchedItems.Where(x => !string.IsNullOrEmpty(x.SerialNumber)))
+                {
+                    serialNumber.Items.Add(i.SerialNumber);
+                }
+               
+                ///if there are serial, select the first element of the serials
+                if (serialNumber.Items.Count > 0)
+                {
+                    serialNumber.SelectedIndex = 0;
+                }
+                ///if no serial then set maximum quantity to the sum of searched items
+                quantity.Maximum = serialNumber.Items.Count == 0?(searchedItems.Sum(x=>x.Quantity) == 0?9999999:searchedItems.Sum(x=>x.Quantity)):1;
+                maxQuant.Text =quantity.Maximum >= 9999999?"": "/" + quantity.Maximum;
+                ///if there are serials then disable the quantity value
+                quantity.Enabled = serialNumber.Items.Count == 0 ?true:false;
 
-                quantity.Maximum = i.Product.Item.Type != ItemType.Hardware.ToString() ? 999999999999 : i.Quantity;
-                quantity.Enabled = string.IsNullOrEmpty(searchedItemInfo.Serial);
-                itemName.Text = searchedItemInfo.Name;
-                price.Value = i.Product.Item.SellingPrice;
             }
         }
 
-        ItemInfoHolder searchedItemInfo;
         void Clear()
         {
             searchText.Clear();
@@ -97,22 +113,6 @@ namespace POS.Forms
         }
         bool alreadyCart(out int index)
         {
-            if (!string.IsNullOrEmpty(searchedItemInfo.Serial))
-            {
-                index = -1;
-                return false;
-            }
-
-            for (int i = 0; i < cartTable.RowCount; i++)
-            {
-                var currentSelectedRow = cartTable.Rows[i].Cells;
-                ////compare barcode and supplier
-                if (searchedItemInfo.Barcode == currentSelectedRow[0].Value.ToString() && searchedItemInfo.Supplier == currentSelectedRow[7].Value.ToString())
-                {
-                    index = i;
-                    return true;
-                }
-            }
             index = -1;
             return false;
         }
@@ -123,22 +123,6 @@ namespace POS.Forms
             {
                 return;
             }
-
-            ////using (var p = new POSEntities())
-            ////{
-            ////    var item = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == searchedItemInfo.Barcode && x.Product.Supplier.Name == searchedItemInfo.Supplier && x.SerialNumber == searchedItemInfo.Serial);
-            ////    if (item.Quantity > 0)
-            ////    {
-            ////        var newQuantity = searchedItemInfo.Quantity - (int)quantity.Value;
-
-            ////        if (newQuantity <= 0)
-            ////            p.InventoryItems.Remove(item);
-            ////        else
-            ////            item.Quantity = newQuantity;
-
-            ////        p.SaveChanges();
-            ////    }
-            ////}
 
             int index;
             if (alreadyCart(out index))
@@ -154,8 +138,8 @@ namespace POS.Forms
 
             }
             else
-                cartTable.Rows.Add(searchedItemInfo.Barcode, searchedItemInfo.Serial, searchedItemInfo.Name, quantity.Value, price.Value, discount.Value, (quantity.Value * price.Value * ((100 - discount.Value) / 100)), searchedItemInfo.Supplier,"Edit","Delete");
-            calculateTotal();
+                //cartTable.Rows.Add(searchedItemInfo.Barcode, searchedItemInfo.Serial, searchedItemInfo.Name, quantity.Value, price.Value, discount.Value, (quantity.Value * price.Value * ((100 - discount.Value) / 100)), searchedItemInfo.Supplier,"Edit","Delete");
+                calculateTotal();
             Clear();
         }
         decimal getTotalPrice(int quantity, decimal price, decimal discount)
@@ -348,11 +332,11 @@ namespace POS.Forms
         {
             var adv = (AdvancedSearchForm)sender;
 
-            for(int i = 0; i< cartTable.RowCount; i++)
+            for (int i = 0; i < cartTable.RowCount; i++)
             {
-                if(cartTable.Rows[i].Cells[1].Value != null)
+                if (cartTable.Rows[i].Cells[1].Value != null)
                 {
-                    if(e.Serial == cartTable.Rows[i].Cells[1].Value.ToString())
+                    if (e.Serial == cartTable.Rows[i].Cells[1].Value.ToString())
                     {
                         MessageBox.Show("Already in cart");
                         return;
