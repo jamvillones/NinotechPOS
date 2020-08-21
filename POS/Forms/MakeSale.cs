@@ -13,7 +13,7 @@ using POS.Misc;
 namespace POS.Forms
 {
 
-    struct ItemInfoHolder
+    public struct ItemInfoHolder
     {
         public string Barcode { get; set; }
         public string Name { get; set; }

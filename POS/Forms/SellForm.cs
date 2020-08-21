@@ -21,7 +21,7 @@ namespace POS.Forms
         bool checkedOut = false;
         private void SellForm_Load(object sender, EventArgs e)
         {
-            searchFilter.SelectedIndex = 0;
+            //searchFilter.SelectedIndex = 0;
             //keypad1.SetTarget(textBox1);
             using (var p = new POSEntities())
             {
@@ -59,10 +59,8 @@ namespace POS.Forms
             InventoryItem i = new InventoryItem();
             using (var p = new POSEntities())
             {
-                if (searchFilter.Text == "BARCODE")
-                    i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == searchText.Text);
-                else
-                    i = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == searchText.Text);
+
+                i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == searchText.Text);
 
                 if (i == null)
                 {
@@ -76,7 +74,8 @@ namespace POS.Forms
                 searchedItemInfo.Serial = i.SerialNumber;
                 searchedItemInfo.Supplier = i.Product.Supplier.Name;
                 searchedItemInfo.Quantity = i.Quantity;
-                serialNumber.Text = searchedItemInfo.Serial;
+
+               // serialNumber.Items.Add(searchedItemInfo.Serial);
 
                 quantity.Maximum = i.Product.Item.Type != ItemType.Hardware.ToString() ? 999999999999 : i.Quantity;
                 quantity.Enabled = string.IsNullOrEmpty(searchedItemInfo.Serial);
@@ -90,7 +89,7 @@ namespace POS.Forms
         {
             searchText.Clear();
             itemName.Clear();
-            serialNumber.Clear();
+            serialNumber.Items.Clear();
             quantity.Value = 1;
             price.Value = 0;
             discount.Value = 0;
@@ -155,7 +154,7 @@ namespace POS.Forms
 
             }
             else
-                cartTable.Rows.Add(searchedItemInfo.Barcode, searchedItemInfo.Serial, searchedItemInfo.Name, quantity.Value, price.Value, discount.Value, (quantity.Value * price.Value * ((100 - discount.Value) / 100)), searchedItemInfo.Supplier);
+                cartTable.Rows.Add(searchedItemInfo.Barcode, searchedItemInfo.Serial, searchedItemInfo.Name, quantity.Value, price.Value, discount.Value, (quantity.Value * price.Value * ((100 - discount.Value) / 100)), searchedItemInfo.Supplier,"Edit","Delete");
             calculateTotal();
             Clear();
         }
@@ -166,7 +165,7 @@ namespace POS.Forms
         private void searchText_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                seachBtn.PerformClick();
+                searchBtn.PerformClick();
         }
 
         private void SellForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -307,6 +306,68 @@ namespace POS.Forms
                     soldTo.AutoCompleteCustomSource.Add(i.Name);
                     soldTo.Items.Add(i.Name);
                 }
+            }
+        }
+
+        private void soldTo_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(soldTo.Text))
+            {
+                return;
+            }
+
+            using (var p = new POSEntities())
+            {
+                var customer = p.Customers.FirstOrDefault(x => x.Name == soldTo.Text);
+                if (customer == null)
+                {
+                    switch (MessageBox.Show("Would you like to add Customer?", "Customer is not found in the registry.", MessageBoxButtons.YesNo))
+                    {
+                        case DialogResult.Yes:
+
+                            ActiveControl = soldTo;
+                            addCustomerBtn.PerformClick();
+                            break;
+                        default:
+                            soldTo.Text = string.Empty;
+                            break;
+
+                    }
+                }
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            var advance = new AdvancedSearchForm();
+            advance.ItemSelected += Advance_ItemSelected;
+            advance.Show();
+        }
+
+        private void Advance_ItemSelected(object sender, ItemInfoHolder e)
+        {
+            var adv = (AdvancedSearchForm)sender;
+
+            for(int i = 0; i< cartTable.RowCount; i++)
+            {
+                if(cartTable.Rows[i].Cells[1].Value != null)
+                {
+                    if(e.Serial == cartTable.Rows[i].Cells[1].Value.ToString())
+                    {
+                        MessageBox.Show("Already in cart");
+                        return;
+                    }
+                }
+            }
+            cartTable.Rows.Add(e.Barcode, e.Serial, e.Name, e.Quantity, e.SellingPrice, e.discount, e.TotalPrice, e.Supplier);
+            adv.Close();
+        }
+
+        private void SellForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                advSearchBtn.PerformClick();
             }
         }
     }
