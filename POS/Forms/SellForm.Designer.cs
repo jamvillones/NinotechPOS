@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SellForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -42,6 +42,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.price = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.maxQuant = new System.Windows.Forms.TextBox();
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.advSearchBtn = new System.Windows.Forms.Button();
@@ -81,7 +82,7 @@
             this.cartTotal = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.soldTo = new System.Windows.Forms.ComboBox();
-            this.maxQuant = new System.Windows.Forms.TextBox();
+            this.stockinBtn = new System.Windows.Forms.Button();
             this.keypad = new POS.UserControls.Keypad();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -253,6 +254,20 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "QUANTITY";
             // 
+            // maxQuant
+            // 
+            this.maxQuant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.maxQuant.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.maxQuant.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maxQuant.Location = new System.Drawing.Point(109, 15);
+            this.maxQuant.Name = "maxQuant";
+            this.maxQuant.ReadOnly = true;
+            this.maxQuant.Size = new System.Drawing.Size(82, 28);
+            this.maxQuant.TabIndex = 2;
+            this.maxQuant.TabStop = false;
+            this.maxQuant.Text = "/1";
+            this.maxQuant.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // quantity
             // 
             this.quantity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -377,9 +392,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.itemName);
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Location = new System.Drawing.Point(7, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(325, 55);
+            this.groupBox3.Size = new System.Drawing.Size(321, 55);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "ITEM NAME";
@@ -393,12 +408,13 @@
             this.itemName.Location = new System.Drawing.Point(7, 19);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(312, 28);
+            this.itemName.Size = new System.Drawing.Size(308, 28);
             this.itemName.TabIndex = 0;
             this.itemName.TabStop = false;
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.stockinBtn);
             this.panel6.Controls.Add(this.addToCartBtn);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 204);
@@ -408,18 +424,21 @@
             // 
             // addToCartBtn
             // 
-            this.addToCartBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addToCartBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.addToCartBtn.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.addToCartBtn.Enabled = false;
             this.addToCartBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addToCartBtn.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addToCartBtn.Location = new System.Drawing.Point(196, 6);
             this.addToCartBtn.Name = "addToCartBtn";
-            this.addToCartBtn.Size = new System.Drawing.Size(280, 51);
+            this.addToCartBtn.Size = new System.Drawing.Size(467, 51);
             this.addToCartBtn.TabIndex = 16;
             this.addToCartBtn.Text = "ADD TO CART";
             this.addToCartBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.addToCartBtn.UseVisualStyleBackColor = false;
-            this.addToCartBtn.Click += new System.EventHandler(this.button2_Click);
+            this.addToCartBtn.Click += new System.EventHandler(this.addToCartBtn_Click);
             // 
             // button1
             // 
@@ -456,14 +475,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cartTable.BackgroundColor = System.Drawing.Color.White;
             this.cartTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.cartTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cartTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -476,14 +495,14 @@
             this.Column9,
             this.Column1,
             this.Column2});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cartTable.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cartTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.cartTable.EnableHeadersVisualStyles = false;
             this.cartTable.GridColor = System.Drawing.Color.White;
             this.cartTable.Location = new System.Drawing.Point(3, 3);
@@ -765,19 +784,21 @@
             this.soldTo.TabIndex = 12;
             this.soldTo.Leave += new System.EventHandler(this.soldTo_Leave);
             // 
-            // maxQuant
+            // stockinBtn
             // 
-            this.maxQuant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.maxQuant.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.maxQuant.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maxQuant.Location = new System.Drawing.Point(109, 15);
-            this.maxQuant.Name = "maxQuant";
-            this.maxQuant.ReadOnly = true;
-            this.maxQuant.Size = new System.Drawing.Size(82, 28);
-            this.maxQuant.TabIndex = 2;
-            this.maxQuant.TabStop = false;
-            this.maxQuant.Text = "/1";
-            this.maxQuant.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.stockinBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.stockinBtn.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.stockinBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stockinBtn.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockinBtn.Location = new System.Drawing.Point(10, 6);
+            this.stockinBtn.Name = "stockinBtn";
+            this.stockinBtn.Size = new System.Drawing.Size(180, 51);
+            this.stockinBtn.TabIndex = 17;
+            this.stockinBtn.Text = "STOCKIN";
+            this.stockinBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.stockinBtn.UseVisualStyleBackColor = false;
+            this.stockinBtn.Click += new System.EventHandler(this.stockinBtn_Click);
             // 
             // keypad
             // 
@@ -892,5 +913,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn Column2;
         private System.Windows.Forms.ComboBox serialNumber;
         private System.Windows.Forms.TextBox maxQuant;
+        private System.Windows.Forms.Button stockinBtn;
     }
 }

@@ -263,5 +263,19 @@ namespace POS.Forms
             if (e.KeyCode == Keys.F3)
                 this.ActiveControl = quantity;
         }
+
+        private void createItemBtn_Click(object sender, EventArgs e)
+        {
+            using(var additem =new AddItemForm())
+            {
+                additem.OnSave += Additem_OnSave;
+                additem.ShowDialog();
+            }
+        }
+
+        private void Additem_OnSave(object sender, EventArgs e)
+        {
+            SetTable();
+        }
     }
 }

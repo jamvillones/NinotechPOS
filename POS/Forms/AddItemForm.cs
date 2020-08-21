@@ -19,6 +19,11 @@ namespace POS.Forms
         {
             InitializeComponent();
         }
+        public AddItemForm(string initialBarcode)
+        {
+            InitializeComponent();
+            barcode.Text = initialBarcode;
+        }
         //bool barcodeTaken = false;
         public override void Init()
         {

@@ -66,6 +66,7 @@
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.addBtn = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.createItemBtn = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -262,6 +263,7 @@
             // 
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox8.Controls.Add(this.createItemBtn);
             this.groupBox8.Controls.Add(this.barcode);
             this.groupBox8.Location = new System.Drawing.Point(9, 19);
             this.groupBox8.Name = "groupBox8";
@@ -276,7 +278,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.barcode.Location = new System.Drawing.Point(7, 20);
             this.barcode.Name = "barcode";
-            this.barcode.Size = new System.Drawing.Size(546, 20);
+            this.barcode.Size = new System.Drawing.Size(504, 20);
             this.barcode.TabIndex = 0;
             this.barcode.TabStop = false;
             this.barcode.TextChanged += new System.EventHandler(this.barcode_TextChanged);
@@ -507,6 +509,19 @@
             this.toolTip.ReshowDelay = 100;
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
+            // createItemBtn
+            // 
+            this.createItemBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.createItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("createItemBtn.Image")));
+            this.createItemBtn.Location = new System.Drawing.Point(517, 11);
+            this.createItemBtn.Name = "createItemBtn";
+            this.createItemBtn.Size = new System.Drawing.Size(36, 30);
+            this.createItemBtn.TabIndex = 8;
+            this.toolTip.SetToolTip(this.createItemBtn, "Create Item");
+            this.createItemBtn.UseVisualStyleBackColor = true;
+            this.createItemBtn.Click += new System.EventHandler(this.createItemBtn_Click);
+            // 
             // StockinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -577,5 +592,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.Button createItemBtn;
     }
 }
