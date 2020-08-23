@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SellForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -72,6 +72,7 @@
             this.addCustomerBtn = new System.Windows.Forms.Button();
             this.exactAmountBtn = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.keypad = new POS.UserControls.Keypad();
             this.panel4 = new System.Windows.Forms.Panel();
             this.checkoutBtn = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -83,7 +84,6 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.soldTo = new System.Windows.Forms.ComboBox();
             this.stockinBtn = new System.Windows.Forms.Button();
-            this.keypad = new POS.UserControls.Keypad();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -300,6 +300,7 @@
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.stockinBtn);
             this.groupBox11.Controls.Add(this.advSearchBtn);
             this.groupBox11.Controls.Add(this.searchBtn);
             this.groupBox11.Controls.Add(this.searchText);
@@ -316,7 +317,7 @@
             this.advSearchBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.advSearchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.advSearchBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.advSearchBtn.Location = new System.Drawing.Point(546, 19);
+            this.advSearchBtn.Location = new System.Drawing.Point(417, 18);
             this.advSearchBtn.Name = "advSearchBtn";
             this.advSearchBtn.Size = new System.Drawing.Size(120, 35);
             this.advSearchBtn.TabIndex = 13;
@@ -330,7 +331,7 @@
             this.searchBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
-            this.searchBtn.Location = new System.Drawing.Point(504, 19);
+            this.searchBtn.Location = new System.Drawing.Point(375, 18);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(36, 35);
             this.searchBtn.TabIndex = 12;
@@ -343,9 +344,9 @@
             // 
             this.searchText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.searchText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchText.Location = new System.Drawing.Point(7, 19);
+            this.searchText.Location = new System.Drawing.Point(7, 18);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(491, 35);
+            this.searchText.Size = new System.Drawing.Size(368, 35);
             this.searchText.TabIndex = 0;
             this.toolTip.SetToolTip(this.searchText, "Search via barcode only");
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
@@ -414,7 +415,6 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.stockinBtn);
             this.panel6.Controls.Add(this.addToCartBtn);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(3, 204);
@@ -424,16 +424,14 @@
             // 
             // addToCartBtn
             // 
-            this.addToCartBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.addToCartBtn.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.addToCartBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.addToCartBtn.Enabled = false;
             this.addToCartBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addToCartBtn.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addToCartBtn.Location = new System.Drawing.Point(196, 6);
+            this.addToCartBtn.Location = new System.Drawing.Point(0, 0);
             this.addToCartBtn.Name = "addToCartBtn";
-            this.addToCartBtn.Size = new System.Drawing.Size(467, 51);
+            this.addToCartBtn.Size = new System.Drawing.Size(672, 63);
             this.addToCartBtn.TabIndex = 16;
             this.addToCartBtn.Text = "ADD TO CART";
             this.addToCartBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -475,14 +473,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cartTable.BackgroundColor = System.Drawing.Color.White;
             this.cartTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.cartTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cartTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -495,14 +493,14 @@
             this.Column9,
             this.Column1,
             this.Column2});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cartTable.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cartTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.cartTable.EnableHeadersVisualStyles = false;
             this.cartTable.GridColor = System.Drawing.Color.White;
             this.cartTable.Location = new System.Drawing.Point(3, 3);
@@ -646,8 +644,19 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(984, 561);
             this.tableLayoutPanel2.TabIndex = 17;
+            // 
+            // keypad
+            // 
+            this.keypad.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.keypad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.keypad.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.keypad.Location = new System.Drawing.Point(691, 3);
+            this.keypad.Name = "keypad";
+            this.keypad.Size = new System.Drawing.Size(290, 274);
+            this.keypad.TabIndex = 1;
             // 
             // panel4
             // 
@@ -786,29 +795,17 @@
             // 
             // stockinBtn
             // 
-            this.stockinBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.stockinBtn.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.stockinBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.stockinBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stockinBtn.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stockinBtn.Location = new System.Drawing.Point(10, 6);
+            this.stockinBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockinBtn.Location = new System.Drawing.Point(543, 18);
             this.stockinBtn.Name = "stockinBtn";
-            this.stockinBtn.Size = new System.Drawing.Size(180, 51);
-            this.stockinBtn.TabIndex = 17;
-            this.stockinBtn.Text = "STOCKIN";
-            this.stockinBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.stockinBtn.UseVisualStyleBackColor = false;
+            this.stockinBtn.Size = new System.Drawing.Size(120, 35);
+            this.stockinBtn.TabIndex = 14;
+            this.stockinBtn.Text = "(F2) STOCKIN";
+            this.toolTip.SetToolTip(this.stockinBtn, "For picking specific item");
+            this.stockinBtn.UseVisualStyleBackColor = true;
             this.stockinBtn.Click += new System.EventHandler(this.stockinBtn_Click);
-            // 
-            // keypad
-            // 
-            this.keypad.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.keypad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.keypad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.keypad.Location = new System.Drawing.Point(691, 3);
-            this.keypad.Name = "keypad";
-            this.keypad.Size = new System.Drawing.Size(290, 274);
-            this.keypad.TabIndex = 1;
             // 
             // SellForm
             // 

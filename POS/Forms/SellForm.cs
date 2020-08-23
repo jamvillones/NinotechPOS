@@ -372,7 +372,7 @@ namespace POS.Forms
                     }
                 }
             }
-            cartTable.Rows.Add(e.Barcode, e.Serial, e.Name, e.Quantity, e.SellingPrice, e.discount, e.TotalPrice, e.Supplier);
+            cartTable.Rows.Add(e.Barcode, e.Serial, e.Name, e.Quantity, e.SellingPrice, e.discount, e.TotalPrice, e.Supplier, "Edit", "Delete");
             adv.Close();
         }
 
@@ -381,6 +381,10 @@ namespace POS.Forms
             if (e.KeyCode == Keys.F1)
             {
                 advSearchBtn.PerformClick();
+            }
+            if(e.KeyCode == Keys.F2)
+            {
+                stockinBtn.PerformClick();
             }
         }
 

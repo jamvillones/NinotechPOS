@@ -182,12 +182,6 @@ namespace POS.UserControls
                 variation.ShowDialog();
         }
 
-        //private void refreshBtn_Click(object sender, EventArgs e)
-        //{
-        //    initInventoryTable();
-        //    initItemsTable();
-        //}
-
         public void Refresh_Callback(object sender, EventArgs e)
         {
             Console.WriteLine("Refreshed: " + this.Name);
@@ -202,24 +196,46 @@ namespace POS.UserControls
                 return;
             }
 
-            for (int i = 0; i < inventoryTable.RowCount; i++)
-            {
-                var barc = inventoryTable.Rows[i].Cells[0].Value.ToString().ToLower();
+            if (tabControl.SelectedIndex == 0)
+                searchDataGridView(inventoryTable);
+            else
+                searchDataGridView(itemsTable);
+        }
 
-                if (barc.Contains(search.Text.ToLower()))
+        void searchDataGridView(DataGridView target)
+        {
+            ///barcode
+            for (int i = 0; i < target.RowCount; i++)
+            {
+                var barc = target.Rows[i].Cells[0].Value.ToString().ToLower();
+
+                if (string.Equals(barc, search.Text.ToLower()))
                 {
-                    inventoryTable.Rows[i].Selected = true;
-                    inventoryTable.FirstDisplayedScrollingRowIndex = i;
+                    target.Rows[i].Selected = true;
+                    target.FirstDisplayedScrollingRowIndex = i;
                     return;
                 }
             }
-            MessageBox.Show("Sorry, Product not found.");
+            ///name
+            for (int i = 0; i < target.RowCount; i++)
+            {
+                var barc = target.Rows[i].Cells[1].Value.ToString().ToLower();
 
+                if (barc.Contains(search.Text.ToLower()))
+                {
+                    target.Rows[i].Selected = true;
+                    target.FirstDisplayedScrollingRowIndex = i;
+                    return;
+                }
+            }
+
+            MessageBox.Show("Sorry, Product not found.");
         }
+
 
         private void search_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 searchBtn.PerformClick();
             }
