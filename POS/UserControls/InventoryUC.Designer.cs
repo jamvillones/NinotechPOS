@@ -282,7 +282,6 @@
             // itemsTable
             // 
             this.itemsTable.AllowUserToAddRows = false;
-            this.itemsTable.AllowUserToDeleteRows = false;
             this.itemsTable.AllowUserToResizeColumns = false;
             this.itemsTable.AllowUserToResizeRows = false;
             this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -319,6 +318,7 @@
             this.itemsTable.TabIndex = 6;
             this.itemsTable.TabStop = false;
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
+            this.itemsTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.itemsTable_UserDeletingRow);
             // 
             // dataGridViewTextBoxColumn1
             // 
