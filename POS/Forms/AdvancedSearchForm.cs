@@ -22,6 +22,7 @@ namespace POS.Forms
         private void searchBtn_Click(object sender, EventArgs e)
         {
             itemTables.Rows.Clear();
+
             using (var p = new POSEntities())
             {
                 var searchedItems = p.InventoryItems.Where(x => x.Product.Item.Barcode == search.Text);
@@ -52,18 +53,22 @@ namespace POS.Forms
             if (itemTables.SelectedCells.Count == 0)
                 return;
 
+            var barc = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[1].Value?.ToString();
             var serialNumber = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[2].Value?.ToString();
-            quantity.Enabled = string.IsNullOrEmpty(serialNumber) ? true : false;
+            var supplier = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[4].Value.ToString();
+            
 
             using (var p = new POSEntities())
             {
-                var i = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == serialNumber);
+                var i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == barc && x.Product.Supplier.Name == supplier);
 
                 infoHolder.Barcode = i.Product.Item.Barcode;
                 infoHolder.Name = i.Product.Item.Name;
                 infoHolder.Supplier = i.Product.Supplier.Name;
                 infoHolder.SellingPrice = i.Product.Item.SellingPrice;
                 infoHolder.Quantity = 1;
+
+                quantity.Enabled = string.IsNullOrEmpty(serialNumber) ? true : false;
 
                 quantity.Value = 1;
                 discount.Value = 0;
