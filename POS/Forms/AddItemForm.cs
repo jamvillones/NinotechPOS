@@ -117,6 +117,7 @@ namespace POS.Forms
                         prod.Cost = 0;
                         prod.Supplier = p.Suppliers.FirstOrDefault(x => x.Name == "None");
                         p.Products.Add(prod);
+
                         var inventory = new InventoryItem();
                         inventory.Product = prod;
                         inventory.Quantity = 0;
