@@ -37,7 +37,21 @@ namespace POS.Forms
     {
         SaleType currentSaleType = SaleType.Regular;
 
-        decimal cartTotalValue;
+        decimal cartTotalValue
+        {
+            get
+            {
+                decimal temp = new decimal();
+                for (int i = 0; i < cartTable.RowCount; i++)
+                {
+                    decimal v = Convert.ToDecimal(cartTable.Rows[i].Cells[6].Value);
+                    temp += v;
+                }
+                return temp;
+
+                //return cartTable.Rows.Cast<DataGridViewRow>().Sum(t => Convert.ToInt32(t.Cells[6].Value));
+            }
+        }
 
         ItemInfoHolder tempItem;
         public event EventHandler OnSave;
@@ -166,12 +180,15 @@ namespace POS.Forms
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
         {
+            if (leftCurrentRow == null)
+                return;
 
             quantity.Maximum = currentSelectedQuantity == 0 ? 999999999 : currentSelectedQuantity;
             ///revert to 1 after selection changed
             quantity.Value = 1;
 
             var cRows = leftCurrentRow;
+
             if (cRows == null)
                 return;
 
@@ -197,8 +214,10 @@ namespace POS.Forms
         {
             get
             {
-                if (itemsTable.SelectedCells.Count <= 0)
+                if (itemsTable.SelectedCells.Count == 0)
+                {
                     return null;
+                }
 
                 return itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex];
             }
@@ -208,8 +227,9 @@ namespace POS.Forms
         {
             get
             {
-                if (leftCurrentRow.Cells[3].Value.ToString() == "Infinite")
+                if (leftCurrentRow?.Cells[3].Value.ToString() == "Infinite")
                     return 0;
+
                 return Convert.ToInt32(leftCurrentRow.Cells[3].Value);
             }
         }
@@ -217,9 +237,14 @@ namespace POS.Forms
         void ProcessLeftTable()
         {
             ///infinity
+            if (itemsTable.SelectedCells.Count == 0)
+                return;
+
             if (currentSelectedQuantity == 0)
                 return;
+
             int newQuant = currentSelectedQuantity - (int)quantity.Value;
+
             if (newQuant <= 0)
             {
                 itemsTable.Rows.RemoveAt(itemsTable.SelectedCells[0].RowIndex);
@@ -252,6 +277,9 @@ namespace POS.Forms
         {
             if (itemsTable.SelectedCells.Count == 0)
                 return;
+
+            Console.WriteLine(leftCurrentRow);
+
             ProcessRightTable();
             ProcessLeftTable();
             calculateTotal();
@@ -273,21 +301,15 @@ namespace POS.Forms
             cartTable.Rows.RemoveAt(index);
         }
 
-
         void calculateTotal()
         {
-            cartTotalValue = 0;
+            //cartTotalValue = 0;
             for (int i = 0; i < cartTable.RowCount; i++)
             {
                 decimal v = Convert.ToDecimal(cartTable.Rows[i].Cells[6].Value);
-                cartTotalValue += v;
+                //cartTotalValue += v;
             }
             cartTotal.Text = string.Format("₱ {0:n}", cartTotalValue);
-        }
-
-        private void inventoryTable_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
-            //calculateTotal();
         }
 
         private void amountChangedCallback(object sender, EventArgs e)
@@ -300,6 +322,7 @@ namespace POS.Forms
 
             change.Text = string.Format("₱ {0:n}", (amountRec - cartTotalValue));
         }
+
         void SetSoldTo()
         {
             using (var p = new POSEntities())
@@ -309,19 +332,6 @@ namespace POS.Forms
                     soldTo.Items.Add(i.Name);
             }
         }
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    CreateCustomerProfile cm = new CreateCustomerProfile();
-        //    this.Enabled = false;
-        //    cm.FormClosing += (a, b) => { this.Enabled = true; };
-        //    cm.OnSave += (a, b) =>
-        //    {
-        //        SetSoldTo();
-        //    };
-
-        //    cm.Show();
-        //}
 
         private void barcode_KeyDown(object sender, KeyEventArgs e)
         {
@@ -338,10 +348,21 @@ namespace POS.Forms
                 {
                     var searchInLower = searchText.Text.ToLower();
 
-                    if (cellInLower.Contains(searchInLower))
+                    if (filter.SelectedIndex == 0 || filter.SelectedIndex == 1)
                     {
-                        index = i;
-                        break;
+                        if (string.Equals(cellInLower, searchInLower))
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (cellInLower.Contains(searchInLower))
+                        {
+                            index = i;
+                            break;
+                        }
                     }
                 }
             }
