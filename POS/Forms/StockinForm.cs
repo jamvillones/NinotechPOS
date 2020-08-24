@@ -92,10 +92,15 @@ namespace POS.Forms
         private void addBtn_Click(object sender, EventArgs e)
         {
             addItem();
+            ActiveControl = barcode;
         }
 
         private void stockinBtn_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to stock these items?","", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk)== DialogResult.Cancel)
+            {
+                return;
+            }
             using (var p = new POSEntities())
             {
                 Product product;
