@@ -205,17 +205,20 @@ namespace POS.UserControls
         void searchDataGridView(DataGridView target)
         {
             ///barcode
-            for (int i = 0; i < target.RowCount; i++)
-            {
-                var barc = target.Rows[i].Cells[0].Value.ToString().ToLower();
+            //var searchedElem
+       
+            //for (int i = 0; i < target.RowCount; i++)
+            //{
+            //    var barc = target.Rows[i].Cells[0].Value.ToString().ToLower();
 
-                if (string.Equals(barc, search.Text.ToLower()))
-                {
-                    target.Rows[i].Selected = true;
-                    target.FirstDisplayedScrollingRowIndex = i;
-                    return;
-                }
-            }
+            //    if (string.Equals(barc, search.Text.ToLower()))
+            //    {
+            //        target.Rows[i].Selected = true;
+            //        target.FirstDisplayedScrollingRowIndex = i;
+            //        return;
+            //    }
+            //}
+
             ///name
             for (int i = 0; i < target.RowCount; i++)
             {

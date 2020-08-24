@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockinForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockinForm));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.removeBtn = new System.Windows.Forms.Button();
             this.stockinBtn = new System.Windows.Forms.Button();
@@ -48,6 +48,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.createItemBtn = new System.Windows.Forms.Button();
             this.barcode = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.serialNumber = new System.Windows.Forms.TextBox();
@@ -66,7 +67,6 @@
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.addBtn = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.createItemBtn = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -89,7 +89,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(583, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(574, 486);
+            this.groupBox2.Size = new System.Drawing.Size(574, 506);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "To stockin";
@@ -100,7 +100,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.removeBtn.Location = new System.Drawing.Point(6, 19);
             this.removeBtn.Name = "removeBtn";
-            this.removeBtn.Size = new System.Drawing.Size(559, 23);
+            this.removeBtn.Size = new System.Drawing.Size(562, 23);
             this.removeBtn.TabIndex = 8;
             this.removeBtn.TabStop = false;
             this.removeBtn.Text = "Remove";
@@ -110,7 +110,7 @@
             // stockinBtn
             // 
             this.stockinBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.stockinBtn.Location = new System.Drawing.Point(250, 454);
+            this.stockinBtn.Location = new System.Drawing.Point(250, 474);
             this.stockinBtn.Name = "stockinBtn";
             this.stockinBtn.Size = new System.Drawing.Size(75, 23);
             this.stockinBtn.TabIndex = 4;
@@ -162,7 +162,7 @@
             this.inventoryTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.inventoryTable.RowHeadersVisible = false;
             this.inventoryTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.inventoryTable.Size = new System.Drawing.Size(562, 400);
+            this.inventoryTable.Size = new System.Drawing.Size(562, 420);
             this.inventoryTable.StandardTab = true;
             this.inventoryTable.TabIndex = 4;
             this.inventoryTable.TabStop = false;
@@ -235,9 +235,8 @@
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1160, 512);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
@@ -254,7 +253,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(574, 486);
+            this.groupBox1.Size = new System.Drawing.Size(574, 506);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Items";
@@ -271,6 +270,19 @@
             this.groupBox8.TabIndex = 7;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Barcode";
+            // 
+            // createItemBtn
+            // 
+            this.createItemBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.createItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("createItemBtn.Image")));
+            this.createItemBtn.Location = new System.Drawing.Point(517, 11);
+            this.createItemBtn.Name = "createItemBtn";
+            this.createItemBtn.Size = new System.Drawing.Size(36, 30);
+            this.createItemBtn.TabIndex = 8;
+            this.toolTip.SetToolTip(this.createItemBtn, "Create Item");
+            this.createItemBtn.UseVisualStyleBackColor = true;
+            this.createItemBtn.Click += new System.EventHandler(this.createItemBtn_Click);
             // 
             // barcode
             // 
@@ -372,7 +384,7 @@
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(562, 217);
+            this.itemsTable.Size = new System.Drawing.Size(562, 237);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 6;
             this.itemsTable.TabStop = false;
@@ -493,7 +505,7 @@
             // addBtn
             // 
             this.addBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.addBtn.Location = new System.Drawing.Point(229, 454);
+            this.addBtn.Location = new System.Drawing.Point(229, 474);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(75, 23);
             this.addBtn.TabIndex = 3;
@@ -508,19 +520,6 @@
             this.toolTip.InitialDelay = 300;
             this.toolTip.ReshowDelay = 100;
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
-            // createItemBtn
-            // 
-            this.createItemBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("createItemBtn.Image")));
-            this.createItemBtn.Location = new System.Drawing.Point(517, 11);
-            this.createItemBtn.Name = "createItemBtn";
-            this.createItemBtn.Size = new System.Drawing.Size(36, 30);
-            this.createItemBtn.TabIndex = 8;
-            this.toolTip.SetToolTip(this.createItemBtn, "Create Item");
-            this.createItemBtn.UseVisualStyleBackColor = true;
-            this.createItemBtn.Click += new System.EventHandler(this.createItemBtn_Click);
             // 
             // StockinForm
             // 
