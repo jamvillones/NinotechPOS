@@ -197,42 +197,68 @@ namespace POS.UserControls
             }
 
             if (tabControl.SelectedIndex == 0)
-                searchDataGridView(inventoryTable);
+                SearchInventory(inventoryTable);
             else
-                searchDataGridView(itemsTable);
+                searchItem(itemsTable);
         }
 
-        void searchDataGridView(DataGridView target)
+        void searchItem(DataGridView target)
         {
+            IQueryable<Item> searchElements;
             ///barcode
-            //var searchedElem
-       
-            //for (int i = 0; i < target.RowCount; i++)
-            //{
-            //    var barc = target.Rows[i].Cells[0].Value.ToString().ToLower();
-
-            //    if (string.Equals(barc, search.Text.ToLower()))
-            //    {
-            //        target.Rows[i].Selected = true;
-            //        target.FirstDisplayedScrollingRowIndex = i;
-            //        return;
-            //    }
-            //}
-
-            ///name
-            for (int i = 0; i < target.RowCount; i++)
+            using (var p = new POSEntities())
             {
-                var barc = target.Rows[i].Cells[1].Value.ToString().ToLower();
-
-                if (barc.Contains(search.Text.ToLower()))
+                searchElements = p.Items.Where(x => x.Barcode == search.Text);
+                if (searchElements.Count() == 0)
                 {
-                    target.Rows[i].Selected = true;
-                    target.FirstDisplayedScrollingRowIndex = i;
+                    ///name
+                    searchElements = p.Items.Where(x => x.Name.Contains(search.Text));
+                }
+                if (searchElements.Count() == 0)
+                {
+                    MessageBox.Show("Sorry, Product not found.");
                     return;
                 }
+                target.Rows.Clear();
+                foreach (var i in searchElements)
+                {
+                    target.Rows.Add(i.Barcode, i.Name, i.SellingPrice, i.Department, i.Type, i.Details);
+                }
             }
+        }
 
-            MessageBox.Show("Sorry, Product not found.");
+        void SearchInventory(DataGridView target)
+        {
+            target.Rows.Clear();
+
+            using (var p = new POSEntities())
+            {
+                var itemGroup = p.InventoryItems.GroupBy(x => x.Product.Item.Barcode).Where(x => x.Key == search.Text);
+                if (itemGroup.Count() != 0)
+                {
+                    foreach (var i in itemGroup)
+                    {
+                        var item = p.Items.FirstOrDefault(x => x.Barcode == i.Key);
+                        int totalQuantity = p.InventoryItems.Where(x => x.Product.Item.Barcode == i.Key).Sum(x => x.Quantity);
+
+                        target.Rows.Add(item.Barcode, item.Name, string.Format("₱ {0:n}", item.SellingPrice), (totalQuantity == 0 ? "Infinite" : totalQuantity.ToString()), (totalQuantity == 0 ? "----" : string.Format("₱ {0:n}", totalQuantity * item.SellingPrice)));
+                    }
+                }
+                else
+                {
+                    var nameGroup = p.InventoryItems.GroupBy(x => x.Product.Item.Name).Where(x => x.Key.Contains(search.Text));
+                    if (nameGroup.Count() != 0)
+                    {
+                        foreach (var i in nameGroup)
+                        {
+                            var item = p.Items.FirstOrDefault(x => x.Name == i.Key);
+                            int totalQuantity = p.InventoryItems.Where(x => x.Product.Item.Name == i.Key).Sum(x => x.Quantity);
+
+                            target.Rows.Add(item.Barcode, item.Name, string.Format("₱ {0:n}", item.SellingPrice), (totalQuantity == 0 ? "Infinite" : totalQuantity.ToString()), (totalQuantity == 0 ? "----" : string.Format("₱ {0:n}", totalQuantity * item.SellingPrice)));
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -241,6 +267,21 @@ namespace POS.UserControls
             if (e.KeyCode == Keys.Enter)
             {
                 searchBtn.PerformClick();
+            }
+        }
+
+        private void search_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(search.Text))
+            {
+                if (tabControl.SelectedIndex == 0)
+                {
+                    initInventoryTable();
+                }
+                else
+                {
+                    initItemsTable();
+                }
             }
         }
     }
