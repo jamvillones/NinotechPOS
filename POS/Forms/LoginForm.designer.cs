@@ -62,6 +62,8 @@
             // 
             this.username.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.username.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.username.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.username.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.username.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.username.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

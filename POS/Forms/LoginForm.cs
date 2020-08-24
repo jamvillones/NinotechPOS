@@ -45,6 +45,10 @@ namespace POS.Forms
                 Misc.UserManager.instance = new Misc.UserManager();
                 u = UserManager.instance;
             }
+            using(var p = new POSEntities())
+            {
+                username.AutoCompleteCustomSource.AddRange(p.Logins.Select(x => x.Username).ToArray());
+            }
         }
 
         private void hide_Click(object sender, EventArgs e)
