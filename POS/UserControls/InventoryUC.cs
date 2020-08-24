@@ -284,5 +284,23 @@ namespace POS.UserControls
                 }
             }
         }
+
+        private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you want to delete the selected item?","This will also delete items in inventory.", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            using(var p = new POSEntities())
+            {
+                var selected = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex].Cells[0].Value.ToString();
+                var i = p.Items.FirstOrDefault(x => x.Barcode == selected);
+                p.Items.Remove(i);
+                p.SaveChanges();
+            }
+            initItemsTable();
+        }
     }
 }
