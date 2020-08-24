@@ -62,22 +62,22 @@ namespace POS.Forms
 
         private void StockinForm_Load(object sender, EventArgs e)
         {
-            filter.SelectedIndex = 0;
             itemsTable.Rows.Clear();
             using (var p = new POSEntities())
             {
-
-                foreach (var i in p.InventoryItems)
-                    itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
-
                 soldTo.Items.Clear();
-                foreach (var i in p.Customers)
-                {
-                    soldTo.AutoCompleteCustomSource.Add(i.Name);
-                    soldTo.Items.Add(i.Name);
-                }
+                var soldtoItems = p.Customers.Select(x => x.Name).ToArray();
+                soldTo.Items.AddRange(soldtoItems);
+                soldTo.AutoCompleteCustomSource.AddRange(soldtoItems);
+
+                var inventoryItems = p.InventoryItems.Select(x => x.Product.Item.Name).ToArray();
+                searchText.AutoCompleteCustomSource.AddRange(inventoryItems);
             }
         }
+        //void SetTable(IQueryable<InventoryItem> items)
+        //{
+
+        //}
 
         bool alreadyInTable(out int index)
         {
@@ -101,14 +101,15 @@ namespace POS.Forms
 
         private void sell_Click(object sender, EventArgs e)
         {
+            if (cartTable.RowCount == 0)
+                return;
             if (string.IsNullOrEmpty(soldTo.Text))
             {
                 MessageBox.Show("Customer cannot be empty");
                 return;
             }
-            if (cartTable.RowCount == 0)
+            if (MessageBox.Show("Are you sure you want to continue?","Sale is about to be made.", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.No)
                 return;
-
             using (var p = new POSEntities())
             {
                 Sale newSale = new Sale();
@@ -266,22 +267,34 @@ namespace POS.Forms
                     int newQuant = currQuant + (int)quantity.Value;
                     decimal disc = Convert.ToDecimal(cartTable.Rows[index].Cells[5].Value);
                     cartTable.Rows[index].Cells[3].Value = newQuant;
-                    cartTable.Rows[index].Cells[6].Value = newQuant * Convert.ToDecimal(price.Text) * ((100 - disc) / 100);
+                    cartTable.Rows[index].Cells[6].Value = newQuant * price.Value * ((100 - disc) / 100);
                     return;
                 }
             }
             cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice.ToString(), tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);
         }
 
+
+        //string getSerias()
+        //{
+         
+        //}
         void addItem()
         {
             if (itemsTable.SelectedCells.Count == 0)
                 return;
-
-            Console.WriteLine(leftCurrentRow);
+            if (!string.IsNullOrEmpty(tempItem.Serial))
+            {
+                var i = cartTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(x => x.Cells[1].Value?.ToString() == tempItem.Serial);
+                if (i != null)
+                {
+                    MessageBox.Show("already in cart");
+                    return;
+                }
+            }
 
             ProcessRightTable();
-            ProcessLeftTable();
+            //ProcessLeftTable();
             calculateTotal();
         }
 
@@ -335,56 +348,15 @@ namespace POS.Forms
 
         private void barcode_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Enter)
-                return;
-
-            int index = -1;
-
-            for (int i = 0; i < itemsTable.RowCount; i++)
-            {
-                var cellInLower = itemsTable.Rows[i].Cells[filter.SelectedIndex].Value?.ToString().ToLower();
-
-                if (cellInLower != null)
-                {
-                    var searchInLower = searchText.Text.ToLower();
-
-                    if (filter.SelectedIndex == 0 || filter.SelectedIndex == 1)
-                    {
-                        if (string.Equals(cellInLower, searchInLower))
-                        {
-                            index = i;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (cellInLower.Contains(searchInLower))
-                        {
-                            index = i;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (index == -1)
-            {
-                MessageBox.Show("Item not found.");
-                return;
-            }
-
-            itemsTable.FirstDisplayedScrollingRowIndex = index;
-            itemsTable.Rows[index].Selected = true;
-
-            if (autoAdd.Checked)
-                addItem();
-            searchText.SelectAll();
+            if (e.KeyCode == Keys.Enter)
+                searchBtn.PerformClick();
         }
 
-        private void quantity_ValueChanged(object sender, EventArgs e)
+        private void numerice_ValueChanged(object sender, EventArgs e)
         {
             tempItem.Quantity = (int)quantity.Value;
             tempItem.discount = discount.Value;
+            tempItem.SellingPrice = price.Value;
             totalPrice.Text = tempItem.TotalPrice.ToString();
         }
 
@@ -402,6 +374,32 @@ namespace POS.Forms
             {
                 foreach (var i in p.Customers)
                     soldTo.Items.Add(i.Name);
+            }
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            itemsTable.Rows.Clear();
+            using (var p = new POSEntities())
+            {
+                var items = p.InventoryItems.Where(x => x.Product.Item.Barcode == searchText.Text);
+
+                if (items.Count() == 0)
+                {
+                    items = p.InventoryItems.Where(x => x.SerialNumber == searchText.Text);
+                    if (items.Count() == 0)
+                    {
+                        items = p.InventoryItems.Where(x => x.Product.Item.Name.Contains(searchText.Text));
+                    }
+                }
+                if (items.Count() == 0)
+                {
+                    MessageBox.Show("Item not found.");
+                    return;
+                }
+
+                foreach (var i in items)
+                    itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
             }
         }
     }
