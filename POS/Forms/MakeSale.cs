@@ -409,7 +409,7 @@ namespace POS.Forms
                         items = p.InventoryItems.Where(x => x.Product.Item.Name.Contains(searchText.Text));
                     }
                 }
-                var filtered = items.ToArray().Where(x => !inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name && y.Quantity > x.Quantity));
+                var filtered = items.ToArray().Where(x => !inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name && y.Quantity >= x.Quantity));
 
                 if (filtered.Count() == 0)
                 {
@@ -446,6 +446,19 @@ namespace POS.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             amountRecieved.Value = cartTotalValue;
+        }
+
+        private void cartTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you want to remove this in cart?","", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)== DialogResult.Cancel)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            var i = inCart.FirstOrDefault(x => x.Barcode == e.Row.Cells[0].Value.ToString() && x.Serial == e.Row.Cells[1].Value?.ToString() && x.Supplier == e.Row.Cells[7].Value.ToString());
+            inCart.Remove(i);
+            itemsTable.Rows.Clear();
         }
     }
 }
