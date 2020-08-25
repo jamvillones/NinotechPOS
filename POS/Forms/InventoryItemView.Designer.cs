@@ -159,7 +159,6 @@
             // invTable
             // 
             this.invTable.AllowUserToAddRows = false;
-            this.invTable.AllowUserToDeleteRows = false;
             this.invTable.AllowUserToResizeColumns = false;
             this.invTable.AllowUserToResizeRows = false;
             this.invTable.BackgroundColor = System.Drawing.SystemColors.Control;
@@ -199,6 +198,7 @@
             this.invTable.TabIndex = 4;
             this.invTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.invTable_CellBeginEdit);
             this.invTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.invTable_CellEndEdit);
+            this.invTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.invTable_UserDeletingRow);
             // 
             // Column3
             // 

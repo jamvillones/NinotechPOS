@@ -77,7 +77,7 @@ namespace POS.Forms
         private void invTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var dgt = sender as DataGridView;
-            if(dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == target.SerialNumber)
+            if (dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == target.SerialNumber)
             {
                 return;
             }
@@ -96,13 +96,12 @@ namespace POS.Forms
                     MessageBox.Show("Serial successfully updated");
                 }
             }
-           
-        }
 
-        private void removeBtn_Click(object sender, EventArgs e)
+        }
+        bool RemoveInventoryItem()
         {
-            if (invTable.RowCount == 0) return;
-            if(MessageBox.Show("Are you sure you want to remove this from inventory? This action cannot be undone.","", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)== DialogResult.Yes)
+            if (invTable.RowCount == 0) return false;
+            if (MessageBox.Show("Are you sure you want to remove this from inventory? This action cannot be undone.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 var cells = invTable.Rows[invTable.SelectedCells[0].RowIndex].Cells;
                 string b = barcodeField.Text;
@@ -112,15 +111,26 @@ namespace POS.Forms
 
                     var i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == b && x.Product.Supplier.Name == s);
                     p.InventoryItems.Remove(i);
-                
-                    p.SaveChanges();
-                    
-                }
 
-                invTable.Rows.RemoveAt(invTable.SelectedCells[0].RowIndex);
+                    p.SaveChanges();
+
+                }
                 OnSave.Invoke(this, null);
                 MessageBox.Show("Successfully removed from inventory");
+                return true;
             }
+            return false;
+        }
+        private void removeBtn_Click(object sender, EventArgs e)
+        {
+            if (RemoveInventoryItem())
+                invTable.Rows.RemoveAt(invTable.SelectedCells[0].RowIndex);
+        }
+
+        private void invTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if (RemoveInventoryItem() == false)
+                e.Cancel = true;
         }
     }
 }
