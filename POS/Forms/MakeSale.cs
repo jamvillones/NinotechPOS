@@ -30,12 +30,28 @@ namespace POS.Forms
             }
             set { q = value; }
         }
-        public decimal TotalPrice { get { return (Quantity * SellingPrice) * ((100 - discount) / 100); } }
+        public decimal TotalPrice { get { return (Quantity * (SellingPrice - discount)); } }
     }
 
     public partial class MakeSale : Form
     {
-        SaleType currentSaleType = SaleType.Regular;
+        class ItemInCart
+        {
+            public ItemInCart(string barcode,string serial, int quantity, string supplier)
+            {
+                this.Barcode = barcode;
+                this.Serial = serial;
+                this.Quantity = quantity;
+                this.Supplier = supplier;
+            }
+            public string Barcode { get; set; }
+            public string Serial { get; set; }
+            public int Quantity { get; set; }
+            public string Supplier { get; set; }
+        }
+        List<ItemInCart> inCart = new List<ItemInCart>();
+
+       // SaleType currentSaleType = SaleType.Regular;
 
         decimal cartTotalValue
         {
@@ -123,8 +139,9 @@ namespace POS.Forms
                 newSale.AmountRecieved = amountRecieved.Value;
                 newSale.TotalPrice = cartTotalValue;
 
-                currentSaleType = cartTotalValue - amountRecieved.Value > 0 ? SaleType.Charged : SaleType.Regular;
-                newSale.SaleType = currentSaleType.ToString();
+                //currentSaleType = cartTotalValue - amountRecieved.Value > 0 ? SaleType.Charged : SaleType.Regular;
+                //newSale.SaleType = currentSaleType.ToString();
+                newSale.SaleType = saleType.Text;
 
                 p.Sales.Add(newSale);
 
@@ -253,6 +270,7 @@ namespace POS.Forms
             else
             {
                 leftCurrentRow.Cells[3].Value = newQuant.ToString();
+                quantity.Maximum = newQuant;
             }
         }
 
@@ -267,11 +285,12 @@ namespace POS.Forms
                     int newQuant = currQuant + (int)quantity.Value;
                     decimal disc = Convert.ToDecimal(cartTable.Rows[index].Cells[5].Value);
                     cartTable.Rows[index].Cells[3].Value = newQuant;
-                    cartTable.Rows[index].Cells[6].Value = newQuant * price.Value * ((100 - disc) / 100);
+                    cartTable.Rows[index].Cells[6].Value = newQuant * (price.Value - discount.Value);
                     return;
                 }
             }
             cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice.ToString(), tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);
+            inCart.Add(new ItemInCart(tempItem.Barcode,tempItem.Serial,tempItem.Quantity,tempItem.Supplier));
         }
 
 
@@ -294,7 +313,7 @@ namespace POS.Forms
             }
 
             ProcessRightTable();
-            //ProcessLeftTable();
+            ProcessLeftTable();
             calculateTotal();
         }
 
@@ -316,13 +335,8 @@ namespace POS.Forms
 
         void calculateTotal()
         {
-            //cartTotalValue = 0;
-            for (int i = 0; i < cartTable.RowCount; i++)
-            {
-                decimal v = Convert.ToDecimal(cartTable.Rows[i].Cells[6].Value);
-                //cartTotalValue += v;
-            }
             cartTotal.Text = string.Format("₱ {0:n}", cartTotalValue);
+            saleType.SelectedIndex = cartTotalValue - amountRecieved.Value > 0 ? 1 : 0;
         }
 
         private void amountChangedCallback(object sender, EventArgs e)
@@ -334,6 +348,7 @@ namespace POS.Forms
             ///decimal Tobepayed = tota;
 
             change.Text = string.Format("₱ {0:n}", (amountRec - cartTotalValue));
+            calculateTotal();
         }
 
         void SetSoldTo()
@@ -355,6 +370,7 @@ namespace POS.Forms
         private void numerice_ValueChanged(object sender, EventArgs e)
         {
             tempItem.Quantity = (int)quantity.Value;
+            discount.Maximum = price.Value;
             tempItem.discount = discount.Value;
             tempItem.SellingPrice = price.Value;
             totalPrice.Text = tempItem.TotalPrice.ToString();
@@ -380,6 +396,7 @@ namespace POS.Forms
         private void searchBtn_Click(object sender, EventArgs e)
         {
             itemsTable.Rows.Clear();
+
             using (var p = new POSEntities())
             {
                 var items = p.InventoryItems.Where(x => x.Product.Item.Barcode == searchText.Text);
@@ -392,15 +409,43 @@ namespace POS.Forms
                         items = p.InventoryItems.Where(x => x.Product.Item.Name.Contains(searchText.Text));
                     }
                 }
-                if (items.Count() == 0)
+                var filtered = items.ToArray().Where(x => !inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name && y.Quantity > x.Quantity));
+
+                if (filtered.Count() == 0)
                 {
                     MessageBox.Show("Item not found.");
                     return;
                 }
 
-                foreach (var i in items)
-                    itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
+                foreach (var i in filtered)
+                {
+                    // int newQuant  = filtered.FirstOrDefault(x=> inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name)).
+                    var j = inCart.FirstOrDefault(x => inCart.Any(y => y.Barcode == i.Product.Item.Barcode && y.Serial == i.SerialNumber && y.Supplier == i.Product.Supplier.Name));
+                    int newQuant = i.Quantity - (j == null?0:j.Quantity);
+                   
+                    itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
+                }
             }
+        }
+
+        private void MakeSale_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Control && e.KeyCode == Keys.F)
+            {
+                this.ActiveControl = searchText;
+                e.SuppressKeyPress = true;
+            }
+            if (e.Shift && e.KeyCode == Keys.Enter)    
+            {
+                // Do what you want here
+                addBtn.PerformClick();
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            amountRecieved.Value = cartTotalValue;
         }
     }
 }
