@@ -19,12 +19,7 @@ namespace POS.Forms
         {
             InitializeComponent();
         }
-        public AddItemForm(string initialBarcode)
-        {
-            InitializeComponent();
-            barcode.Text = initialBarcode;
-        }
-        //bool barcodeTaken = false;
+       
         public override void Init()
         {
             base.Init();
@@ -87,26 +82,27 @@ namespace POS.Forms
                     break;
             }
 
-            var item = new Item();
-            item.Barcode = barcode.Text;
-            item.Name = name.Text;
 
-            item.SellingPrice = sellingPrice.Value;
-            //item.Cost = cost.Value;
-
-            item.Department = string.IsNullOrEmpty(itemDepartment.Text) ? null : itemDepartment.Text;
-            // item.Type = itemType.Text;
-            item.Type = itemType.Text;
-            item.Details = details.Text;
-            if (ImageBox.Image != null)
-            {
-                item.SampleImage = ImageDatabaseConverter.imageToByteArray(ImageBox.Image);
-            }
 
             try
             {
                 using (var p = new POSEntities())
                 {
+                    var item = new Item();
+                    item.Barcode = barcode.Text;
+                    item.Name = name.Text;
+
+                    item.SellingPrice = sellingPrice.Value;
+                    //item.Cost = cost.Value;
+
+                    item.Department = string.IsNullOrEmpty(itemDepartment.Text) ? null : itemDepartment.Text;
+                    // item.Type = itemType.Text;
+                    item.Type = itemType.Text;
+                    item.Details = details.Text;
+                    if (ImageBox.Image != null)
+                    {
+                        item.SampleImage = ImageDatabaseConverter.imageToByteArray(ImageBox.Image);
+                    }
                     p.Items.Add(item);
                     if (item.Type == ItemType.Service.ToString() || item.Type == ItemType.Software.ToString())
                     {
@@ -196,6 +192,11 @@ namespace POS.Forms
             if (supplierOption.Text == string.Empty) return;
             variationTable.Rows.Add(supplierOption.Text, cost.Value);
             supplierOption.Items.RemoveAt(supplierOption.SelectedIndex);
+        }
+
+        private void AddItemForm_Load(object sender, EventArgs e)
+        {
+            Init();
         }
     }
 }

@@ -69,5 +69,10 @@ namespace POS.Forms
 
             }
         }
+
+        private void EditItemForm_Load(object sender, EventArgs e)
+        {
+            Init();
+        }
     }
 }

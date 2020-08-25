@@ -23,6 +23,7 @@ namespace POS.Forms
         public ItemFormBase()
         {
             InitializeComponent();
+          
         }
         protected virtual void clearFields()
         {
@@ -31,8 +32,8 @@ namespace POS.Forms
             foreach (var t in texts)
                 t.Clear();
             var combos = this.GetContainedControls<ComboBox>();
-            foreach (var c in combos)
-                c.ResetText();
+            //foreach (var c in combos)
+            //    c.ResetText();
             var nums = this.GetContainedControls<NumericUpDown>();
             foreach (var n in nums)
                 n.Value = 0;
@@ -101,20 +102,20 @@ namespace POS.Forms
             {
                 using (var p = new POSEntities())
                 {
-
-                    //var itemTypeGroup = p.Items.GroupBy(x => x.Type);
-                    //foreach (var i in itemTypeGroup)
-                    //{
-                    //    itemType.AutoCompleteCustomSource.Add(i.Key);
-                    //    itemType.Items.Add(i.Key);
-                    //}
+                    itemDepartment.Items.Clear();
+                    itemDepartment.AutoCompleteCustomSource.Clear();
                     var itemDeptGroup = p.Items.GroupBy(x => x.Department);
+
                     foreach (var i in itemDeptGroup)
                     {
-                        itemDepartment.AutoCompleteCustomSource.Add(i.Key);
-                        itemDepartment.Items.Add(i.Key);
+                        //Console.WriteLine("add");
+                        if (i.Key != null)
+                        {
+                            itemDepartment.Items.Add(i.Key);
+                            itemDepartment.AutoCompleteCustomSource.Add(i.Key);
+                        }
                     }
-                   
+
                 }
                 var textboxes = this.GetContainedControls<TextBox>();
                 foreach (var i in textboxes)

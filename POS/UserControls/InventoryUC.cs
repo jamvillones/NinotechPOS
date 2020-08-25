@@ -300,7 +300,7 @@ namespace POS.UserControls
                 p.Items.Remove(i);
                 p.SaveChanges();
             }
-            initItemsTable();
+            ///initItemsTable();
         }
     }
 }

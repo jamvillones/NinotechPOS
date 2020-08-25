@@ -204,6 +204,7 @@
             this.Controls.Add(this.VariationGroup);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddItemForm";
+            this.Load += new System.EventHandler(this.AddItemForm_Load);
             this.Controls.SetChildIndex(this.VariationGroup, 0);
             this.Controls.SetChildIndex(this.groupBox6, 0);
             this.Controls.SetChildIndex(this.takePhotoBtn, 0);
