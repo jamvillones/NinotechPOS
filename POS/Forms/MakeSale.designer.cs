@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MakeSale));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.saleType = new System.Windows.Forms.ComboBox();
@@ -80,6 +80,8 @@
             this.itemName = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.cartTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -99,17 +101,16 @@
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.tableLayoutPanel2);
             this.groupBox2.Controls.Add(this.saleType);
-            this.groupBox2.Controls.Add(this.groupBox10);
-            this.groupBox2.Controls.Add(this.groupBox9);
             this.groupBox2.Controls.Add(this.groupBox8);
             this.groupBox2.Controls.Add(this.stockinBtn);
-            this.groupBox2.Controls.Add(this.groupBox6);
             this.groupBox2.Controls.Add(this.cartTable);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(495, 3);
@@ -121,13 +122,12 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(414, 72);
+            this.button1.Location = new System.Drawing.Point(357, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(66, 47);
+            this.button1.Size = new System.Drawing.Size(114, 42);
             this.button1.TabIndex = 12;
             this.button1.TabStop = false;
             this.cartTooltip.SetToolTip(this.button1, "Exact amount");
@@ -143,56 +143,56 @@
             this.saleType.Items.AddRange(new object[] {
             "Regular",
             "Charged"});
-            this.saleType.Location = new System.Drawing.Point(6, 126);
+            this.saleType.Location = new System.Drawing.Point(9, 126);
             this.saleType.Name = "saleType";
-            this.saleType.Size = new System.Drawing.Size(474, 21);
+            this.saleType.Size = new System.Drawing.Size(468, 21);
             this.saleType.TabIndex = 11;
             // 
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.change);
-            this.groupBox10.Location = new System.Drawing.Point(142, 72);
+            this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox10.Location = new System.Drawing.Point(121, 3);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(130, 47);
+            this.groupBox10.Size = new System.Drawing.Size(112, 42);
             this.groupBox10.TabIndex = 10;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Change";
             // 
             // change
             // 
-            this.change.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.change.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.change.Location = new System.Drawing.Point(6, 21);
+            this.change.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.change.Location = new System.Drawing.Point(3, 16);
             this.change.Name = "change";
             this.change.ReadOnly = true;
-            this.change.Size = new System.Drawing.Size(118, 13);
+            this.change.Size = new System.Drawing.Size(106, 13);
             this.change.TabIndex = 0;
             this.change.TabStop = false;
             // 
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.amountRecieved);
-            this.groupBox9.Location = new System.Drawing.Point(278, 72);
+            this.groupBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox9.Location = new System.Drawing.Point(239, 3);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(130, 47);
+            this.groupBox9.Size = new System.Drawing.Size(112, 42);
             this.groupBox9.TabIndex = 6;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Tendered";
             // 
             // amountRecieved
             // 
-            this.amountRecieved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.amountRecieved.DecimalPlaces = 2;
-            this.amountRecieved.Location = new System.Drawing.Point(6, 21);
+            this.amountRecieved.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.amountRecieved.Location = new System.Drawing.Point(3, 16);
             this.amountRecieved.Maximum = new decimal(new int[] {
             1215752191,
             23,
             0,
             0});
             this.amountRecieved.Name = "amountRecieved";
-            this.amountRecieved.Size = new System.Drawing.Size(118, 20);
+            this.amountRecieved.Size = new System.Drawing.Size(106, 20);
             this.amountRecieved.TabIndex = 3;
             this.amountRecieved.ThousandsSeparator = true;
             this.amountRecieved.ValueChanged += new System.EventHandler(this.amountChangedCallback);
@@ -203,9 +203,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox8.Controls.Add(this.soldTo);
             this.groupBox8.Controls.Add(this.addCustomerBtn);
-            this.groupBox8.Location = new System.Drawing.Point(6, 19);
+            this.groupBox8.Location = new System.Drawing.Point(9, 19);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(474, 47);
+            this.groupBox8.Size = new System.Drawing.Size(468, 47);
             this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Sold to";
@@ -220,17 +220,17 @@
             this.soldTo.Items.AddRange(new object[] {
             "Regular Sale",
             "Charged Sale"});
-            this.soldTo.Location = new System.Drawing.Point(6, 17);
+            this.soldTo.Location = new System.Drawing.Point(6, 21);
             this.soldTo.Name = "soldTo";
-            this.soldTo.Size = new System.Drawing.Size(368, 21);
+            this.soldTo.Size = new System.Drawing.Size(359, 21);
             this.soldTo.TabIndex = 12;
             // 
             // addCustomerBtn
             // 
             this.addCustomerBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addCustomerBtn.Location = new System.Drawing.Point(380, 13);
+            this.addCustomerBtn.Location = new System.Drawing.Point(371, 20);
             this.addCustomerBtn.Name = "addCustomerBtn";
-            this.addCustomerBtn.Size = new System.Drawing.Size(88, 27);
+            this.addCustomerBtn.Size = new System.Drawing.Size(91, 23);
             this.addCustomerBtn.TabIndex = 11;
             this.addCustomerBtn.TabStop = false;
             this.addCustomerBtn.Text = "Add Customer";
@@ -256,22 +256,22 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.cartTotal);
-            this.groupBox6.Location = new System.Drawing.Point(6, 72);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox6.Location = new System.Drawing.Point(3, 3);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(130, 47);
+            this.groupBox6.Size = new System.Drawing.Size(112, 42);
             this.groupBox6.TabIndex = 9;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Total";
             // 
             // cartTotal
             // 
-            this.cartTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cartTotal.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.cartTotal.Location = new System.Drawing.Point(6, 21);
+            this.cartTotal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cartTotal.Location = new System.Drawing.Point(3, 16);
             this.cartTotal.Name = "cartTotal";
             this.cartTotal.ReadOnly = true;
-            this.cartTotal.Size = new System.Drawing.Size(118, 13);
+            this.cartTotal.Size = new System.Drawing.Size(106, 13);
             this.cartTotal.TabIndex = 0;
             this.cartTotal.TabStop = false;
             this.cartTotal.TextChanged += new System.EventHandler(this.amountChangedCallback);
@@ -286,14 +286,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cartTable.BackgroundColor = System.Drawing.Color.White;
             this.cartTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle29.BackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle29;
             this.cartTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cartTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -304,14 +304,14 @@
             this.Column11,
             this.Column5,
             this.Column9});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cartTable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cartTable.DefaultCellStyle = dataGridViewCellStyle30;
             this.cartTable.EnableHeadersVisualStyles = false;
             this.cartTable.GridColor = System.Drawing.Color.White;
             this.cartTable.Location = new System.Drawing.Point(6, 178);
@@ -409,14 +409,11 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Controls.Add(this.groupBox7);
-            this.groupBox1.Controls.Add(this.groupBox12);
-            this.groupBox1.Controls.Add(this.groupBox5);
+            this.groupBox1.Controls.Add(this.tableLayoutPanel3);
             this.groupBox1.Controls.Add(this.groupBox11);
-            this.groupBox1.Controls.Add(this.itemsTable);
-            this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.addBtn);
+            this.groupBox1.Controls.Add(this.itemsTable);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -428,25 +425,25 @@
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.discount);
-            this.groupBox7.Location = new System.Drawing.Point(183, 125);
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox7.Location = new System.Drawing.Point(239, 3);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(72, 47);
+            this.groupBox7.Size = new System.Drawing.Size(112, 40);
             this.groupBox7.TabIndex = 7;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Discount";
             // 
             // discount
             // 
-            this.discount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.discount.Location = new System.Drawing.Point(6, 19);
+            this.discount.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.discount.Location = new System.Drawing.Point(3, 16);
             this.discount.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(60, 20);
+            this.discount.Size = new System.Drawing.Size(106, 20);
             this.discount.TabIndex = 0;
             this.discount.ThousandsSeparator = true;
             this.discount.ValueChanged += new System.EventHandler(this.numerice_ValueChanged);
@@ -454,41 +451,41 @@
             // groupBox12
             // 
             this.groupBox12.Controls.Add(this.totalPrice);
-            this.groupBox12.Location = new System.Drawing.Point(261, 125);
+            this.groupBox12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox12.Location = new System.Drawing.Point(357, 3);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(219, 47);
+            this.groupBox12.Size = new System.Drawing.Size(114, 40);
             this.groupBox12.TabIndex = 6;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Total";
             // 
             // totalPrice
             // 
-            this.totalPrice.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.totalPrice.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.totalPrice.Location = new System.Drawing.Point(7, 20);
+            this.totalPrice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.totalPrice.Location = new System.Drawing.Point(3, 16);
             this.totalPrice.Name = "totalPrice";
             this.totalPrice.ReadOnly = true;
-            this.totalPrice.Size = new System.Drawing.Size(206, 13);
+            this.totalPrice.Size = new System.Drawing.Size(108, 13);
             this.totalPrice.TabIndex = 0;
             this.totalPrice.TabStop = false;
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.price);
-            this.groupBox5.Location = new System.Drawing.Point(77, 125);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox5.Location = new System.Drawing.Point(121, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(100, 47);
+            this.groupBox5.Size = new System.Drawing.Size(112, 40);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Item Price";
             // 
             // price
             // 
-            this.price.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.price.DecimalPlaces = 2;
-            this.price.Location = new System.Drawing.Point(6, 21);
+            this.price.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.price.Location = new System.Drawing.Point(3, 16);
             this.price.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -500,7 +497,7 @@
             0,
             0});
             this.price.Name = "price";
-            this.price.Size = new System.Drawing.Size(88, 20);
+            this.price.Size = new System.Drawing.Size(106, 20);
             this.price.TabIndex = 1;
             this.price.ThousandsSeparator = true;
             this.price.Value = new decimal(new int[] {
@@ -516,9 +513,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox11.Controls.Add(this.searchBtn);
             this.groupBox11.Controls.Add(this.searchText);
-            this.groupBox11.Location = new System.Drawing.Point(6, 19);
+            this.groupBox11.Location = new System.Drawing.Point(9, 19);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(474, 47);
+            this.groupBox11.Size = new System.Drawing.Size(468, 47);
             this.groupBox11.TabIndex = 5;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Search";
@@ -528,7 +525,7 @@
             this.searchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
-            this.searchBtn.Location = new System.Drawing.Point(422, 20);
+            this.searchBtn.Location = new System.Drawing.Point(416, 20);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(46, 20);
             this.searchBtn.TabIndex = 8;
@@ -544,7 +541,7 @@
             this.searchText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchText.Location = new System.Drawing.Point(7, 20);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(418, 20);
+            this.searchText.Size = new System.Drawing.Size(412, 20);
             this.searchText.TabIndex = 0;
             this.cartTooltip.SetToolTip(this.searchText, "(ctrl+F) to search");
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.barcode_KeyDown);
@@ -560,14 +557,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemsTable.BackgroundColor = System.Drawing.Color.White;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -576,14 +573,14 @@
             this.Column6,
             this.Column10,
             this.Column4});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle32;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.Location = new System.Drawing.Point(6, 178);
             this.itemsTable.MultiSelect = false;
@@ -649,18 +646,18 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.quantity);
-            this.groupBox4.Location = new System.Drawing.Point(6, 125);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(65, 47);
+            this.groupBox4.Size = new System.Drawing.Size(112, 40);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Quantity";
             // 
             // quantity
             // 
-            this.quantity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.quantity.Location = new System.Drawing.Point(7, 21);
+            this.quantity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.quantity.Location = new System.Drawing.Point(3, 16);
             this.quantity.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -672,7 +669,7 @@
             0,
             0});
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(52, 20);
+            this.quantity.Size = new System.Drawing.Size(106, 20);
             this.quantity.TabIndex = 0;
             this.quantity.ThousandsSeparator = true;
             this.quantity.Value = new decimal(new int[] {
@@ -687,9 +684,9 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.itemName);
-            this.groupBox3.Location = new System.Drawing.Point(6, 72);
+            this.groupBox3.Location = new System.Drawing.Point(9, 75);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(474, 47);
+            this.groupBox3.Size = new System.Drawing.Size(468, 42);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Item Name";
@@ -702,7 +699,7 @@
             this.itemName.Location = new System.Drawing.Point(7, 20);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(461, 13);
+            this.itemName.Size = new System.Drawing.Size(455, 13);
             this.itemName.TabIndex = 0;
             this.itemName.TabStop = false;
             // 
@@ -726,6 +723,46 @@
             // 
             this.cartTooltip.ShowAlways = true;
             this.cartTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.Controls.Add(this.button1, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox6, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox10, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox9, 2, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 72);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(474, 48);
+            this.tableLayoutPanel2.TabIndex = 8;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel3.ColumnCount = 4;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.Controls.Add(this.groupBox7, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox12, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox4, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox5, 1, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(6, 126);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(474, 46);
+            this.tableLayoutPanel3.TabIndex = 7;
             // 
             // MakeSale
             // 
@@ -767,6 +804,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -818,5 +857,7 @@
         private System.Windows.Forms.NumericUpDown price;
         private System.Windows.Forms.ComboBox saleType;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }
