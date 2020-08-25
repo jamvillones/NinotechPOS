@@ -43,19 +43,19 @@ namespace POS.Forms
 
         private void invTable_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            
+
         }
 
         InventoryItem target;
         private void invTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             if (e.ColumnIndex != 1)
-            {               
+            {
                 return;
-            }  
+            }
             var dgt = sender as DataGridView;
             var serial = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-            if(serial == "NONE") 
+            if (serial == "NONE")
             {
                 MessageBox.Show("Thes serial cannot be edited");
                 e.Cancel = true;
@@ -64,20 +64,29 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 target = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == serial);
-               
+
             }
         }
 
         private void invTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var dgt = sender as DataGridView;
+
             using (var p = new POSEntities())
             {
-                var t = p.InventoryItems.FirstOrDefault(x=>x.SerialNumber == target.SerialNumber);
-                t.SerialNumber = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                p.SaveChanges();
+                if (MessageBox.Show("", "Are you sure you want to save new Serial?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                {
+                    dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.SerialNumber;
+                }
+                else
+                {
+                    var t = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == target.SerialNumber);
+                    t.SerialNumber = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    p.SaveChanges();
+                    MessageBox.Show("Serial successfully updated");
+                }
             }
-            MessageBox.Show("Serial successfully updated");
+           
         }
     }
 }
