@@ -12,6 +12,7 @@ namespace POS.Forms
 {
     public partial class InventoryItemView : Form
     {
+        public event EventHandler OnSave;
         public InventoryItemView()
         {
             InitializeComponent();
@@ -41,10 +42,15 @@ namespace POS.Forms
             }
         }
 
-        private void invTable_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
+        //private void invTable_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        //{
+        //    //e.Control.TextChanged -= Control_TextChanged;
+        //}
 
-        }
+        //////private void Control_TextChanged(object sender, EventArgs e)
+        //////{
+        //////   // throw new NotImplementedException();
+        //////}
 
         InventoryItem target;
         private void invTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -71,7 +77,10 @@ namespace POS.Forms
         private void invTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var dgt = sender as DataGridView;
-
+            if(dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == target.SerialNumber)
+            {
+                return;
+            }
             using (var p = new POSEntities())
             {
                 if (MessageBox.Show("", "Are you sure you want to save new Serial?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
@@ -83,10 +92,35 @@ namespace POS.Forms
                     var t = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == target.SerialNumber);
                     t.SerialNumber = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                     p.SaveChanges();
+                    OnSave?.Invoke(this, null);
                     MessageBox.Show("Serial successfully updated");
                 }
             }
            
+        }
+
+        private void removeBtn_Click(object sender, EventArgs e)
+        {
+            if (invTable.RowCount == 0) return;
+            if(MessageBox.Show("Are you sure you want to remove this from inventory? This action cannot be undone.","", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)== DialogResult.Yes)
+            {
+                var cells = invTable.Rows[invTable.SelectedCells[0].RowIndex].Cells;
+                string b = barcodeField.Text;
+                string s = cells[3].Value.ToString();
+                using (var p = new POSEntities())
+                {
+
+                    var i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == b && x.Product.Supplier.Name == s);
+                    p.InventoryItems.Remove(i);
+                
+                    p.SaveChanges();
+                    
+                }
+
+                invTable.Rows.RemoveAt(invTable.SelectedCells[0].RowIndex);
+                OnSave.Invoke(this, null);
+                MessageBox.Show("Successfully removed from inventory");
+            }
         }
     }
 }

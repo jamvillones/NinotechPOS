@@ -62,9 +62,16 @@ namespace POS.UserControls
 
             using (var inView = new InventoryItemView())
             {
+                inView.OnSave += InView_OnSave;
                 inView.SetItemId(dgt.Rows[e.RowIndex].Cells[0].Value.ToString());
                 inView.ShowDialog();
             }
+        }
+
+        private void InView_OnSave(object sender, EventArgs e)
+        {
+            initInventoryTable();
+            //throw new NotImplementedException();
         }
 
         protected virtual void firstBtn_Click(object sender, EventArgs e)
