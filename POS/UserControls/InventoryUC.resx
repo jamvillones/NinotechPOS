@@ -142,16 +142,6 @@
   <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAO1JREFUOE+d
-        0zFqAkEYhuEpYy/E2gMEQS/gBSxsc4g0ATF3sVCJgoVNIFgExE5EBZsgiKSOhdilUNT3W3fCyM4s4gcP
-        OzszfzGz/xonJfzgFHDEGk9IpIsG8im03kQiH3i9DIOpo38ZXueu4gyqWGCGdop5TPsfYAbwXVDILn5+
-        whzil1u8Q1lir4FvU8gfRlCh3v8XNvjFdwqti62JPr4GE+i2syh6aF63PYb2qy66Pbf4GVsPzbvFU5gc
-        3jCEitV+NUcFNir+gvY/asLGNkkZPccLbIId1oF613deqwVvbxewgs4Tou8b/1XGnAEPZnvVOX2YFwAA
-        AABJRU5ErkJggg==
-</value>
-  </data>
   <data name="stockinBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAS5JREFUOE+N

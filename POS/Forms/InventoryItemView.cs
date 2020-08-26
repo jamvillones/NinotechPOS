@@ -59,13 +59,19 @@ namespace POS.Forms
         InventoryItem target;
         private void invTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+            if(!UserManager.instance.currentLogin.CanEditProduct??false)
+            {
+                e.Cancel = true;
+                return;
+            }
             if (e.ColumnIndex != 1)
             {
                 return;
             }
             var dgt = sender as DataGridView;
             var serial = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-            if (serial == "NONE")
+            var quantity = Convert.ToInt32(dgt.Rows[e.RowIndex].Cells[2].Value.ToString());
+            if (serial == "NONE" && quantity>1)
             {
                 MessageBox.Show("Thes serial cannot be edited");
                 e.Cancel = true;
@@ -104,7 +110,7 @@ namespace POS.Forms
         }
         bool RemoveInventoryItem()
         {
-            if (invTable.RowCount == 0 || (currlogin.CanDeleteProduct??false)==false) return false;
+            if (invTable.RowCount == 0 || !(currlogin.CanDeleteProduct??false)) return false;
             if (MessageBox.Show("Are you sure you want to remove this from inventory? This action cannot be undone.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 var cells = invTable.Rows[invTable.SelectedCells[0].RowIndex].Cells;

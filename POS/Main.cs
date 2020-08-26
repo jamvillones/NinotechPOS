@@ -108,6 +108,11 @@ namespace POS
             {
                 RefreshData();
             }
+
+            if(e.Control && e.KeyCode == Keys.P)
+            {
+                toolStripButton5.PerformClick();
+            }
         }
         void RefreshData()
         {
@@ -185,6 +190,14 @@ namespace POS
         private void refreshToolStripBtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            using (var print = new PrintInventory())
+            {
+                print.ShowDialog();
+            }
         }
 
         //private void toolStripButton4_Click(object sender, EventArgs e)

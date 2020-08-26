@@ -40,7 +40,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.inventoryPage = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.stockinBtn = new System.Windows.Forms.Button();
             this.itemsPage = new System.Windows.Forms.TabPage();
             this.addVariationsBtn = new System.Windows.Forms.Button();
@@ -178,7 +177,6 @@
             // 
             // inventoryPage
             // 
-            this.inventoryPage.Controls.Add(this.button1);
             this.inventoryPage.Controls.Add(this.stockinBtn);
             this.inventoryPage.Controls.Add(this.inventoryTable);
             this.inventoryPage.Controls.Add(this.sellBtn);
@@ -189,26 +187,6 @@
             this.inventoryPage.TabIndex = 0;
             this.inventoryPage.Text = "INVENTORY";
             this.inventoryPage.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(627, 8);
-            this.button1.Margin = new System.Windows.Forms.Padding(5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 33);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Print Inventory";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // stockinBtn
             // 
@@ -471,6 +449,5 @@
         protected System.Windows.Forms.Button addVariationsBtn;
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.TextBox search;
-        protected System.Windows.Forms.Button button1;
     }
 }
