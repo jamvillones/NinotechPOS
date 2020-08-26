@@ -19,7 +19,7 @@ namespace POS.Forms
         {
             InitializeComponent();
             currlogin = UserManager.instance.currentLogin;
-            Column1.ReadOnly = currlogin.CanEditProduct ?? false;
+            Column1.ReadOnly = !(currlogin.CanEditProduct ?? false);
         }
         public void SetItemId(string barcode)
         {
@@ -41,7 +41,7 @@ namespace POS.Forms
                 foreach (var i in invItem)
                 {
                     counter++;
-                    invTable.Rows.Add(counter, i.SerialNumber ?? "NONE", i.Quantity, i.Product.Supplier.Name);
+                    invTable.Rows.Add(counter, i.SerialNumber, i.Quantity, i.Product.Supplier.Name);
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace POS.Forms
         InventoryItem target;
         private void invTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            if(!UserManager.instance.currentLogin.CanEditProduct??false)
+            if (!UserManager.instance.currentLogin.CanEditProduct ?? false)
             {
                 e.Cancel = true;
                 return;
@@ -69,14 +69,15 @@ namespace POS.Forms
                 return;
             }
             var dgt = sender as DataGridView;
-            var serial = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            var serial = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
             var quantity = Convert.ToInt32(dgt.Rows[e.RowIndex].Cells[2].Value.ToString());
-            if (serial == "NONE" && quantity>1)
+            if (string.IsNullOrEmpty(serial) && quantity > 1)
             {
                 MessageBox.Show("Thes serial cannot be edited");
                 e.Cancel = true;
                 return;
             }
+
             using (var p = new POSEntities())
             {
                 target = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == serial);
@@ -87,20 +88,20 @@ namespace POS.Forms
         private void invTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var dgt = sender as DataGridView;
-            if (dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == target.SerialNumber)
+            if (dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() == target.SerialNumber)
             {
                 return;
             }
             using (var p = new POSEntities())
             {
-                if (MessageBox.Show("", "Are you sure you want to save new Serial?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                if (MessageBox.Show("Are you sure you want to save new Serial?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 {
                     dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.SerialNumber;
                 }
                 else
                 {
                     var t = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == target.SerialNumber);
-                    t.SerialNumber = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    t.SerialNumber = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
                     p.SaveChanges();
                     OnSave?.Invoke(this, null);
                     MessageBox.Show("Serial successfully updated");
@@ -110,7 +111,7 @@ namespace POS.Forms
         }
         bool RemoveInventoryItem()
         {
-            if (invTable.RowCount == 0 || !(currlogin.CanDeleteProduct??false)) return false;
+            if (invTable.RowCount == 0 || !(currlogin.CanDeleteProduct ?? false)) return false;
             if (MessageBox.Show("Are you sure you want to remove this from inventory? This action cannot be undone.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 var cells = invTable.Rows[invTable.SelectedCells[0].RowIndex].Cells;
