@@ -309,5 +309,13 @@ namespace POS.UserControls
             }
             ///initItemsTable();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var print = new PrintInventory())
+            {
+                print.ShowDialog();
+            }
+        }
     }
 }

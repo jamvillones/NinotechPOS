@@ -107,6 +107,12 @@
     <Compile Include="Forms\AdvancedSearchForm.Designer.cs">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PrintInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PrintInventory.Designer.cs">
+      <DependentUpon>PrintInventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SellForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +231,7 @@
       <DependentUpon>ViewItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ITab.cs" />
+    <Compile Include="Misc\DGVPrinter.cs" />
     <Compile Include="Misc\Enums.cs" />
     <Compile Include="Misc\Helper.cs" />
     <Compile Include="Misc\ImageDatabaseConverter.cs" />
@@ -284,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdvancedSearchForm.resx">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PrintInventory.resx">
+      <DependentUpon>PrintInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SellForm.resx">
       <DependentUpon>SellForm.cs</DependentUpon>
