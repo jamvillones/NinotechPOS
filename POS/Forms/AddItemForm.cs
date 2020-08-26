@@ -30,8 +30,10 @@ namespace POS.Forms
             itemType.SelectedIndex = 0;
             using (var p = new POSEntities())
             {
-                foreach (var i in p.Suppliers)
-                    supplierOption.Items.Add(i.Name);
+                //foreach (var i in p.Suppliers)
+                //    supplierOption.Items.Add(i.Name);
+                supplierOption.Items.AddRange(p.Suppliers.OrderBy(x => x.Name).Select(y => y.Name).ToArray());
+                supplierOption.AutoCompleteCustomSource.AddRange(p.Suppliers.OrderBy(x => x.Name).Select(y => y.Name).ToArray());
             }
         }
         private void barcode_Leave(object sender, EventArgs e)

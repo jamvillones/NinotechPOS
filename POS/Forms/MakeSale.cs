@@ -82,7 +82,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 soldTo.Items.Clear();
-                var soldtoItems = p.Customers.Select(x => x.Name).ToArray();
+                var soldtoItems = p.Customers.OrderBy(x=>x.Name).Select(x => x.Name).ToArray();
                 soldTo.Items.AddRange(soldtoItems);
                 soldTo.AutoCompleteCustomSource.AddRange(soldtoItems);
 

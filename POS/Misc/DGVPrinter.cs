@@ -237,6 +237,7 @@ namespace DGVPrinterHelper //AllocationRequest
     /// </summary>
     public class DGVPrinter
     {
+        public event EventHandler OnSuccessfulPrint;
         public enum Alignment { NotSet, Left, Right, Center }
         public enum Location { Header, Footer, Absolute }
         public enum SizeType { CellSize, StringSize, Porportional }
@@ -1800,6 +1801,8 @@ namespace DGVPrinterHelper //AllocationRequest
             // setup and do printing
             SetupPrint();
             printDoc.Print();
+            //MessageBox.Show("Document Printed.");
+            //OnSuccessfulPrint?.Invoke(this, null);
         }
 
         /// <summary>

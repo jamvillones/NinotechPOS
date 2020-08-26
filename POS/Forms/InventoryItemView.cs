@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,13 @@ namespace POS.Forms
 {
     public partial class InventoryItemView : Form
     {
+        Login currlogin;
         public event EventHandler OnSave;
         public InventoryItemView()
         {
             InitializeComponent();
+            currlogin = UserManager.instance.currentLogin;
+            Column1.ReadOnly = currlogin.CanEditProduct ?? false;
         }
         public void SetItemId(string barcode)
         {
@@ -100,7 +104,7 @@ namespace POS.Forms
         }
         bool RemoveInventoryItem()
         {
-            if (invTable.RowCount == 0) return false;
+            if (invTable.RowCount == 0 || (currlogin.CanDeleteProduct??false)==false) return false;
             if (MessageBox.Show("Are you sure you want to remove this from inventory? This action cannot be undone.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 var cells = invTable.Rows[invTable.SelectedCells[0].RowIndex].Cells;

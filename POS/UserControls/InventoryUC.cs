@@ -14,9 +14,11 @@ namespace POS.UserControls
 {
     public partial class InventoryUC : UserControl, Interfaces.ITab
     {
+        Login currLogin;
         public InventoryUC()
         {
             InitializeComponent();
+            //currLogin = UserManager.instance.currentLogin;
         }
 
         #region Tab functions
@@ -293,7 +295,12 @@ namespace POS.UserControls
         }
 
         private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-        {
+        {         
+            if(currLogin.CanDeleteItem??false == false)
+            {
+                e.Cancel = true;
+                return;
+            }
             if(MessageBox.Show("Are you sure you want to delete the selected item?","This will also delete items in inventory.", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 e.Cancel = true;
@@ -316,6 +323,11 @@ namespace POS.UserControls
             {
                 print.ShowDialog();
             }
+        }
+
+        private void InventoryUC_Load(object sender, EventArgs e)
+        {
+            //currLogin = UserManager.instance.currentLogin;
         }
     }
 }

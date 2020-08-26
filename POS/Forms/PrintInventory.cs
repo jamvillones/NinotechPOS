@@ -57,12 +57,18 @@ namespace POS.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             DGVPrinterHelper.DGVPrinter printer = new DGVPrinterHelper.DGVPrinter();
+            printer.OnSuccessfulPrint += Printer_OnSuccessfulPrint;
             printer.PageNumbers = true;
-            printer.PrintMargins = new System.Drawing.Printing.Margins(5, 5, 5, 5);
+            printer.PrintMargins = new System.Drawing.Printing.Margins(10, 10, 10, 30);
             printer.TableAlignment = DGVPrinterHelper.DGVPrinter.Alignment.Center;
             printer.PorportionalColumns = true;
             printer.SubTitle = string.Format(" Date: {0} By: {1}", DateTime.Now, UserManager.instance.currentLogin.Username);
-            printer.PrintDataGridView(table);
+            printer.PrintDataGridView(table);            
+        }
+
+        private void Printer_OnSuccessfulPrint(object sender, EventArgs e)
+        {
+            //this.Close();
         }
 
         private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -70,6 +76,14 @@ namespace POS.Forms
             Bitmap bm = new Bitmap(this.table.Width, this.table.Height);
             table.DrawToBitmap(bm, new Rectangle(0, 0, this.table.Width, this.table.Height));
             e.Graphics.DrawImage(bm, 0, 0);
+        }
+
+        private void PrintInventory_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Control && e.KeyCode == Keys.P)
+            {
+                button1.PerformClick();
+            }
         }
     }
 }
