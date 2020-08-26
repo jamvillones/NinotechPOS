@@ -33,12 +33,12 @@
             this.table = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.printDocument = new System.Drawing.Printing.PrintDocument();
-            this.printDialog = new System.Windows.Forms.PrintDialog();
             ((System.ComponentModel.ISupportInitialize)(this.table)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +69,7 @@
             this.table.Location = new System.Drawing.Point(13, 13);
             this.table.Name = "table";
             this.table.RowHeadersVisible = false;
-            this.table.Size = new System.Drawing.Size(559, 496);
+            this.table.Size = new System.Drawing.Size(980, 496);
             this.table.TabIndex = 0;
             this.table.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.table_EditingControlShowing);
             // 
@@ -82,12 +82,20 @@
             this.button1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(12, 526);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(560, 23);
+            this.button1.Size = new System.Drawing.Size(981, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Print";
             this.toolTip.SetToolTip(this.button1, "(ctrl+P) to Print");
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // printDialog
+            // 
+            this.printDialog.UseEXDialog = true;
             // 
             // Column1
             // 
@@ -115,27 +123,21 @@
             // 
             // Column4
             // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column4.HeaderText = "On-hand";
             this.Column4.Name = "Column4";
-            // 
-            // printDocument
-            // 
-            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
-            // 
-            // printDialog
-            // 
-            this.printDialog.UseEXDialog = true;
+            this.Column4.Width = 73;
             // 
             // PrintInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 561);
+            this.ClientSize = new System.Drawing.Size(1005, 561);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.table);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PrintInventory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PrintInventory";
@@ -150,11 +152,11 @@
         private System.Windows.Forms.DataGridView table;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.PrintDialog printDialog;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Drawing.Printing.PrintDocument printDocument;
-        private System.Windows.Forms.PrintDialog printDialog;
     }
 }
