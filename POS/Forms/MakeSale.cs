@@ -64,8 +64,6 @@ namespace POS.Forms
                     temp += v;
                 }
                 return temp;
-
-                //return cartTable.Rows.Cast<DataGridViewRow>().Sum(t => Convert.ToInt32(t.Cells[6].Value));
             }
         }
 
@@ -78,7 +76,6 @@ namespace POS.Forms
 
         private void StockinForm_Load(object sender, EventArgs e)
         {
-            itemsTable.Rows.Clear();
             using (var p = new POSEntities())
             {
                 soldTo.Items.Clear();
@@ -90,11 +87,7 @@ namespace POS.Forms
                 searchText.AutoCompleteCustomSource.AddRange(inventoryItems);
             }
         }
-        //void SetTable(IQueryable<InventoryItem> items)
-        //{
-
-        //}
-
+       
         bool alreadyInTable(out int index)
         {
             for (int i = 0; i < cartTable.RowCount; i++)
