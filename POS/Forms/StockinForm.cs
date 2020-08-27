@@ -30,9 +30,18 @@ namespace POS.Forms
             }
             itemsTable.Sort(itemsTable.Columns[0], ListSortDirection.Ascending);
         }
+        void setAutoComplete()
+        {
+            searchBar.AutoCompleteCustomSource.Clear();
+            using (var p = new POSEntities())
+            {
+                searchBar.AutoCompleteCustomSource.AddRange(p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()).Select(x => x.Item.Name).ToArray());
+            }
+        }
         private void StockinForm_Load(object sender, EventArgs e)
         {
             SetTable();
+            setAutoComplete();
             toolTip.SetToolTip(barcode, "Press f1 to set focus on barcode");
             toolTip.SetToolTip(serialNumber, "Press f2 to set focus on serial number");
             toolTip.SetToolTip(quantity, "Press f3 to set focus on quantity");
@@ -239,28 +248,21 @@ namespace POS.Forms
 
             if (e.KeyCode == Keys.Enter)
             {
-                itemsTable.Rows.Clear();
-                using (var p = new POSEntities())
-                {
-                    var products = p.Products.Where(x => x.ItemId == barcode.Text);
-                    foreach (var i in products)
-                    {
-                        itemsTable.Rows.Add(i.ItemId, i.Item.Name, i.Cost, i.Supplier.Name);
-                    }
-                }
+                searchBtn.PerformClick();
             }
         }
 
         private void barcode_TextChanged(object sender, EventArgs e)
         {
-            if (barcode.TextLength <= 0)
+            var s = sender as TextBox;
+            if (s.TextLength <= 0)
                 SetTable();
         }
 
         private void StockinForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1)
-                this.ActiveControl = barcode;
+                this.ActiveControl = searchBar;
 
             if (e.KeyCode == Keys.F2)
                 this.ActiveControl = serialNumber;
@@ -281,6 +283,33 @@ namespace POS.Forms
         private void Additem_OnSave(object sender, EventArgs e)
         {
             SetTable();
+            setAutoComplete();
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            itemsTable.Rows.Clear();
+            using (var p = new POSEntities())
+            {
+                var products = p.Products.Where(x => x.Item.Barcode == searchBar.Text && x.Item.Type == ItemType.Hardware.ToString());
+                if(products.Count() == 0)
+                {
+                    products = p.Products.Where(x => x.Item.Name.Contains(searchBar.Text) && x.Item.Type == ItemType.Hardware.ToString());
+                }
+                if(products.Count() == 0)
+                {
+                    if(MessageBox.Show("Would you like to create an item?","Item not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult.Yes)
+                    {
+                        createItemBtn.PerformClick();
+                        return;
+                    }
+                }
+                
+                foreach (var i in products)
+                {
+                    itemsTable.Rows.Add(i.ItemId, i.Item.Name, i.Cost, i.Supplier.Name);
+                }
+            }
         }
     }
 }

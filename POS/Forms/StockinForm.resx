@@ -138,21 +138,6 @@
   <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="createItemBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAATdJREFUSEvt
-        1D8vBEEch/ERKiovRCsKRKfQEQoKnbfgLdCIRqGWICFEiEbCW/ACFNQSkej8fx6ZkXG5WbuXnMZ9k8/N
-        Zmb2N7uzext6aZpzPHTRGcLHH/j6ufegC7Fub5Ha+eeL9GM4tnVSe5E+zOMKr3C+7SXm4HgptRYZwgmc
-        U3KMQbTLj0WesBItIOUQecFrbMc2799HyjJSLes6Hl7iQWIRM4O8X+swtq1j0zA7yPufEZawlhmB8cOZ
-        T1bVIqcwY8jrLaKYR3iyW7MaTcHYpr60dX5xG2UA6Qp37aiI4857R91X+ztemSffwOekWRjb1Oe486r+
-        BsUcId1NUvVMDtA442gtVFrErRpFR3E78mK3uIht3r+FjuMLsAmvNC+a2L+Bxg+8XSaxhzu8wTvxrZrA
-        LwnhE5C20Oe+rr1dAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -165,6 +150,23 @@
   <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="searchBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAERSURBVDhPldK9SwJhAMfxKxXCBueGJBwiQmhwE4miqampoC0oaayhSZckW0JoKegvaCgagqBa
+        A4fAIVsknUyEBsPmFvv+7oW79E64L3zweR547vFeDE8R7OARTbzhAgsY2wxeUcUmMsiihD4O4FsU2ljB
+        pBaGmkcbuuhIu3jBhDnzbxldxMyZp2dsY9acBfeOFWvo1sISTjGlhYCusWcN3erIoYx9LQT0AP3Df13h
+        BGl8Yx3DTeMHc+bM0yJ6SGEDX3hCHnGoc9xZw9EO8QnngSTsX514iV+cYRW+baGDGm5wD93GLXTywFaE
+        b/pgdLrevR5OEkrv2dksBYTqGN4LHCFU+tadzR9aCJvuuWEYxtofLn021smEmHUAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>52</value>
   </metadata>
