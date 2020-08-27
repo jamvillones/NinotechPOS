@@ -22,10 +22,11 @@ namespace POS.Forms
 
         void SetTable()
         {
+            Console.WriteLine("setTable");
             itemsTable.Rows.Clear();
             using (var p = new POSEntities())
             {
-                foreach (var i in p.Products.Where(x=>x.Item.Type == ItemType.Hardware.ToString()))
+                foreach (var i in p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()))
                     itemsTable.Rows.Add(i.Item?.Barcode, i.Item?.Name, i.Cost, i.Supplier?.Name);
             }
             itemsTable.Sort(itemsTable.Columns[0], ListSortDirection.Ascending);
@@ -106,7 +107,7 @@ namespace POS.Forms
 
         private void stockinBtn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to stock these items?","", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk)== DialogResult.Cancel)
+            if (MessageBox.Show("Are you sure you want to stock these items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.Cancel)
             {
                 return;
             }
@@ -122,7 +123,7 @@ namespace POS.Forms
                     var q = Convert.ToInt32((inventoryTable.Rows[i].Cells[3].Value.ToString()));
                     product = p.Products.FirstOrDefault(x => x.ItemId == itemId && x.Supplier.Name == suppName);
 
-                   
+
                     if (string.IsNullOrEmpty(serialNum))
                     {
                         it = p.InventoryItems.FirstOrDefault(x => x.Product.ItemId == itemId && x.Product.Supplier.Name == suppName);
@@ -243,7 +244,7 @@ namespace POS.Forms
 
         private void barcode_KeyDown(object sender, KeyEventArgs e)
         {
-            if (barcode.Text == string.Empty)
+            if (searchBar.Text == string.Empty)
                 return;
 
             if (e.KeyCode == Keys.Enter)
@@ -255,8 +256,11 @@ namespace POS.Forms
         private void barcode_TextChanged(object sender, EventArgs e)
         {
             var s = sender as TextBox;
-            if (s.TextLength <= 0)
+            if (s.TextLength <= 0 && searchMade)
+            {
                 SetTable();
+                searchMade = false;
+            }
         }
 
         private void StockinForm_KeyDown(object sender, KeyEventArgs e)
@@ -273,7 +277,7 @@ namespace POS.Forms
 
         private void createItemBtn_Click(object sender, EventArgs e)
         {
-            using(var additem =new AddItemForm())
+            using (var additem = new AddItemForm())
             {
                 additem.OnSave += Additem_OnSave;
                 additem.ShowDialog();
@@ -285,31 +289,39 @@ namespace POS.Forms
             SetTable();
             setAutoComplete();
         }
-
+        bool searchMade = false;
         private void searchBtn_Click(object sender, EventArgs e)
         {
-            itemsTable.Rows.Clear();
+
             using (var p = new POSEntities())
             {
                 var products = p.Products.Where(x => x.Item.Barcode == searchBar.Text && x.Item.Type == ItemType.Hardware.ToString());
-                if(products.Count() == 0)
+                if (products.Count() == 0)
                 {
                     products = p.Products.Where(x => x.Item.Name.Contains(searchBar.Text) && x.Item.Type == ItemType.Hardware.ToString());
-                }
-                if(products.Count() == 0)
-                {
-                    if(MessageBox.Show("Would you like to create an item?","Item not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult.Yes)
+                    if (products.Count() == 0)
                     {
-                        createItemBtn.PerformClick();
+                        if (MessageBox.Show("Would you like to create an item?", "Item not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            createItemBtn.PerformClick();
+                        }
+
                         return;
                     }
                 }
-                
+                Console.WriteLine("hey");
+                itemsTable.Rows.Clear();
                 foreach (var i in products)
                 {
                     itemsTable.Rows.Add(i.ItemId, i.Item.Name, i.Cost, i.Supplier.Name);
                 }
+                searchMade = true;
             }
+        }
+
+        private void itemsTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+
         }
     }
 }
