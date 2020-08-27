@@ -37,7 +37,7 @@ namespace POS.Forms
     {
         class ItemInCart
         {
-            public ItemInCart(string barcode,string serial, int quantity, string supplier)
+            public ItemInCart(string barcode, string serial, int quantity, string supplier)
             {
                 this.Barcode = barcode;
                 this.Serial = serial;
@@ -51,7 +51,7 @@ namespace POS.Forms
         }
         List<ItemInCart> inCart = new List<ItemInCart>();
 
-       // SaleType currentSaleType = SaleType.Regular;
+        // SaleType currentSaleType = SaleType.Regular;
 
         decimal cartTotalValue
         {
@@ -82,7 +82,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 soldTo.Items.Clear();
-                var soldtoItems = p.Customers.OrderBy(x=>x.Name).Select(x => x.Name).ToArray();
+                var soldtoItems = p.Customers.OrderBy(x => x.Name).Select(x => x.Name).ToArray();
                 soldTo.Items.AddRange(soldtoItems);
                 soldTo.AutoCompleteCustomSource.AddRange(soldtoItems);
 
@@ -124,7 +124,7 @@ namespace POS.Forms
                 MessageBox.Show("Customer cannot be empty");
                 return;
             }
-            if (MessageBox.Show("Are you sure you want to continue?","Sale is about to be made.", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.No)
+            if (MessageBox.Show("Are you sure you want to continue?", "Sale is about to be made.", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.No)
                 return;
             using (var p = new POSEntities())
             {
@@ -290,13 +290,13 @@ namespace POS.Forms
                 }
             }
             cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice.ToString(), tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);
-            inCart.Add(new ItemInCart(tempItem.Barcode,tempItem.Serial,tempItem.Quantity,tempItem.Supplier));
+            inCart.Add(new ItemInCart(tempItem.Barcode, tempItem.Serial, tempItem.Quantity, tempItem.Supplier));
         }
 
 
         //string getSerias()
         //{
-         
+
         //}
         void addItem()
         {
@@ -386,10 +386,12 @@ namespace POS.Forms
         private void CreateCustomer_OnSave(object sender, EventArgs e)
         {
             soldTo.Items.Clear();
+            soldTo.AutoCompleteCustomSource.Clear();
+
             using (var p = new POSEntities())
             {
-                foreach (var i in p.Customers)
-                    soldTo.Items.Add(i.Name);
+                soldTo.Items.AddRange(p.Customers.Select(x => x.Name).ToArray());
+                soldTo.AutoCompleteCustomSource.AddRange(p.Customers.Select(x => x.Name).ToArray());
             }
         }
 
@@ -421,8 +423,8 @@ namespace POS.Forms
                 {
                     // int newQuant  = filtered.FirstOrDefault(x=> inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name)).
                     var j = inCart.FirstOrDefault(x => inCart.Any(y => y.Barcode == i.Product.Item.Barcode && y.Serial == i.SerialNumber && y.Supplier == i.Product.Supplier.Name));
-                    int newQuant = i.Quantity - (j == null?0:j.Quantity);
-                   
+                    int newQuant = i.Quantity - (j == null ? 0 : j.Quantity);
+
                     itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
                 }
             }
@@ -430,12 +432,12 @@ namespace POS.Forms
 
         private void MakeSale_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Control && e.KeyCode == Keys.F)
+            if (e.Control && e.KeyCode == Keys.F)
             {
                 this.ActiveControl = searchText;
                 e.SuppressKeyPress = true;
             }
-            if (e.Shift && e.KeyCode == Keys.Enter)    
+            if (e.Shift && e.KeyCode == Keys.Enter)
             {
                 // Do what you want here
                 addBtn.PerformClick();
@@ -450,7 +452,7 @@ namespace POS.Forms
 
         private void cartTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            if(MessageBox.Show("Are you sure you want to remove this in cart?","", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)== DialogResult.Cancel)
+            if (MessageBox.Show("Are you sure you want to remove this in cart?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
