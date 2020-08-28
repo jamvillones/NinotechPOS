@@ -66,6 +66,7 @@
             this.recHistBtn = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.soldBy = new System.Windows.Forms.TextBox();
+            this.voidBtn = new System.Windows.Forms.Button();
             this.itemsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -137,7 +138,7 @@
             this.Column5});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
@@ -446,11 +447,11 @@
             this.remaining.TabStop = false;
             this.remaining.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // button1
+            // recHistBtn
             // 
             this.recHistBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.recHistBtn.Location = new System.Drawing.Point(12, 420);
-            this.recHistBtn.Name = "button1";
+            this.recHistBtn.Name = "recHistBtn";
             this.recHistBtn.Size = new System.Drawing.Size(714, 23);
             this.recHistBtn.TabIndex = 16;
             this.recHistBtn.Text = "Show Payment History";
@@ -481,11 +482,26 @@
             this.soldBy.TabIndex = 0;
             this.soldBy.TabStop = false;
             // 
+            // voidBtn
+            // 
+            this.voidBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.voidBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.voidBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.voidBtn.ForeColor = System.Drawing.Color.Black;
+            this.voidBtn.Location = new System.Drawing.Point(12, 449);
+            this.voidBtn.Name = "voidBtn";
+            this.voidBtn.Size = new System.Drawing.Size(714, 23);
+            this.voidBtn.TabIndex = 17;
+            this.voidBtn.Text = "Void Sale";
+            this.voidBtn.UseVisualStyleBackColor = false;
+            this.voidBtn.Click += new System.EventHandler(this.voidBtn_Click);
+            // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 542);
+            this.Controls.Add(this.voidBtn);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.recHistBtn);
             this.Controls.Add(this.remainGroup);
@@ -566,5 +582,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.Button voidBtn;
     }
 }
