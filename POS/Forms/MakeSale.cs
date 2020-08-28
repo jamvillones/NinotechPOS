@@ -130,7 +130,7 @@ namespace POS.Forms
 
                 newSale.Date = DateTime.Now;
                 newSale.AmountRecieved = amountRecieved.Value;
-                newSale.TotalPrice = cartTotalValue;
+                //newSale.TotalPrice = cartTotalValue;
 
                 //currentSaleType = cartTotalValue - amountRecieved.Value > 0 ? SaleType.Charged : SaleType.Regular;
                 //newSale.SaleType = currentSaleType.ToString();
@@ -149,10 +149,12 @@ namespace POS.Forms
 
                     s.Discount = Convert.ToDecimal(cartColumns[5].Value);
                     s.SerialNumber = serial;
-                    s.ItemName = cartColumns[2].Value.ToString();
                     s.Quantity = Convert.ToInt32(cartColumns[3].Value);
                     s.ItemPrice = Convert.ToDecimal(cartColumns[4].Value);
-                    s.ItemSupplier = itemSupp;
+
+                    s.Product = p.Products.FirstOrDefault(x => x.Item.Barcode == itemId && x.Supplier.Name == itemSupp);
+                    //s.ItemName = cartColumns[2].Value.ToString();
+                    //s.ItemSupplier = itemSupp;
 
                     s.SaleId = newSale.Id;
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using POS.Misc;
 
 
 namespace POS.Forms
@@ -41,27 +42,27 @@ namespace POS.Forms
                 var soldItems = sale.SoldItems;
                 foreach (var x in soldItems)
                 {
-                    itemsTable.Rows.Add(x.ItemName,
+                    itemsTable.Rows.Add(x.Product.Item.Name,
                                         x.SerialNumber,
                                         x.Quantity,
                                         string.Format("₱ {0:n}", x.ItemPrice),
                                         x.Discount,
                                         string.Format("₱ {0:n}", (x.Quantity * x.ItemPrice) * ((100 - x.Discount) / 100)),
-                                        x.ItemSupplier);
+                                        x.Product.Supplier.Name);
                 }
-                total.Text = string.Format("₱ {0:n}", sale.TotalPrice);
+                total.Text = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
                 amountRecieved.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
                 recHistBtn.Visible = p.ChargedPayRecords.FirstOrDefault(x => x.Sale.Id == sale.Id) != null ? true : false;
             }
 
 
-            if (saleType.Text == "Chareged" || string.IsNullOrEmpty(saleType.Text) || sale.AmountRecieved >= sale.TotalPrice)
+            if (saleType.Text == "Chareged" || string.IsNullOrEmpty(saleType.Text) || sale.AmountRecieved >= sale.GetSaleTotalPrice())
             {
                 remainGroup.Visible = false;
                 addPaymentGroup.Visible = false;
                 return;
             }
-            remaining.Text = string.Format("₱ {0:n}", (sale.TotalPrice - sale.AmountRecieved));
+            remaining.Text = string.Format("₱ {0:n}", (sale.GetSaleTotalPrice() - sale.AmountRecieved));
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -79,14 +80,14 @@ namespace POS.Forms
                 //{
                 //    s.SaleType = Misc.SaleType.Regular.ToString();
                 //}
-                if (s.AmountRecieved >= s.TotalPrice)
+                if (s.AmountRecieved >= s.GetSaleTotalPrice())
                 {
 
-                    s.AmountRecieved = s.TotalPrice;
+                    s.AmountRecieved = s.GetSaleTotalPrice();
                 }
 
                 amountRecieved.Text = string.Format("₱ {0:n}", s.AmountRecieved);
-                remaining.Text = string.Format("₱ {0:n}", (s.TotalPrice - s.AmountRecieved));
+                remaining.Text = string.Format("₱ {0:n}", (s.GetSaleTotalPrice() - s.AmountRecieved));
 
                 var transaction = new ChargedPayRecord();
                 transaction.Sale = s;
@@ -96,7 +97,7 @@ namespace POS.Forms
                 p.ChargedPayRecords.Add(transaction);
                 p.SaveChanges();
                 OnSave?.Invoke(this, null);
-                MessageBox.Show(s.AmountRecieved < s.TotalPrice ? "Payment added." : "Amount fully Paid.");
+                MessageBox.Show(s.AmountRecieved < s.GetSaleTotalPrice() ? "Payment added." : "Amount fully Paid.");
             }
         }
 
@@ -134,8 +135,34 @@ namespace POS.Forms
                 foreach(var i in id)
                 {
                     var soldItem = p.SoldItems.FirstOrDefault(x => x.Id == i);
-                    var Product = p.Products.FirstOrDefault(x => x.Item.Name == soldItem.ItemName && x.Supplier.Name == soldItem.ItemSupplier);
+
+                    if(!string.IsNullOrEmpty(soldItem.SerialNumber))
+                    {
+                        var inv = new InventoryItem();
+                        inv.Product = soldItem.Product;
+                        inv.Quantity = 1;
+                        inv.SerialNumber = soldItem.SerialNumber;
+                        p.InventoryItems.Add(inv);
+                    }
+                    else
+                    {
+                        var inv = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == null && x.Product.Id == soldItem.ProductId);
+                        if(inv!= null)
+                        {
+                            inv.Quantity += soldItem.Quantity;
+                        }
+                        else
+                        {
+                            var temp = new InventoryItem();
+                            temp.Product = soldItem.Product;
+                            temp.Quantity = soldItem.Quantity;                            
+                            p.InventoryItems.Add(temp);
+                        }
+                    }
                 }
+                p.SaveChanges();
+                MessageBox.Show("Void Successful");
+                this.Close();
             }
 
         }

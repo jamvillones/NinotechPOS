@@ -121,12 +121,12 @@ namespace POS.UserControls
                 if (!string.IsNullOrEmpty(day.Text))
                     filteredSales = filteredSales.Where(x => x.Date.Value.Day == (int)day.Value);
 
-                totalSale.Text = string.Format("₱ {0:n}", filteredSales.Sum(x => x.TotalPrice));
+                totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.GetSaleTotalPrice()));
 
                 ids = filteredSales.Select(x => x.Id).ToArray();
 
                 foreach (var x in filteredSales)
-                    saleTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice));
+                    saleTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()));
             }
         }
 
@@ -138,7 +138,7 @@ namespace POS.UserControls
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderBy(x => x.Date);
                 ids = sales.Select(x => x.Id).ToArray();
                 foreach (var x in sales)
-                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.TotalPrice ? false : true);
+                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
         }
 
@@ -168,7 +168,7 @@ namespace POS.UserControls
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString() && x.Customer.Name.Contains(chargedSaleSearch.Text)).OrderBy(x => x.Date);
                 ids = sales.Select(x => x.Id).ToArray();
                 foreach (var x in sales)
-                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.TotalPrice), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.TotalPrice ? false : true);
+                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
 
         }

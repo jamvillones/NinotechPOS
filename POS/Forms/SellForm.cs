@@ -66,10 +66,10 @@ namespace POS.Forms
                 if (searchedItems.Count == 0)
                 {
                     //MessageBox.Show("Item not found.");
-                    switch (MessageBox.Show("Would you like to add item?","Item not found.",MessageBoxButtons.YesNo))
+                    switch (MessageBox.Show("Would you like to add item?", "Item not found.", MessageBoxButtons.YesNo))
                     {
                         case DialogResult.Yes:
-                            using(var additem = new StockinForm())
+                            using (var additem = new StockinForm())
                             {
                                 additem.ShowDialog();
                             }
@@ -247,7 +247,7 @@ namespace POS.Forms
 
                 newSale.Date = DateTime.Now;
                 newSale.AmountRecieved = amountRecieved.Value;
-                newSale.TotalPrice = cartTotalValue;
+                //newSale.TotalPrice = cartTotalValue;
 
                 currentSaleType = cartTotalValue - amountRecieved.Value > 0 ? SaleType.Charged : SaleType.Regular;
                 newSale.SaleType = currentSaleType.ToString();
@@ -265,10 +265,10 @@ namespace POS.Forms
 
                     s.Discount = Convert.ToDecimal(cartColumns[5].Value);
                     s.SerialNumber = serial;
-                    s.ItemName = cartColumns[2].Value.ToString();
                     s.Quantity = Convert.ToInt32(cartColumns[3].Value);
                     s.ItemPrice = Convert.ToDecimal(cartColumns[4].Value);
-                    s.ItemSupplier = itemSupp;
+                   
+                    s.Product = p.Products.FirstOrDefault(x => x.Item.Barcode == itemId && x.Supplier.Name == itemSupp);                   
 
                     s.SaleId = newSale.Id;
 
@@ -382,7 +382,7 @@ namespace POS.Forms
             {
                 advSearchBtn.PerformClick();
             }
-            if(e.KeyCode == Keys.F2)
+            if (e.KeyCode == Keys.F2)
             {
                 stockinBtn.PerformClick();
             }

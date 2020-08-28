@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using POS.Misc;
 namespace POS.Forms
 {
     public partial class TransactionHistoryForm : Form
@@ -19,7 +19,7 @@ namespace POS.Forms
             {
                 currentSale = p.Sales.FirstOrDefault(x => x.Id == id);
                 custName.Text = currentSale.Customer.Name;
-                total.Text = string.Format("₱ {0:n}", currentSale.TotalPrice);
+                total.Text = string.Format("₱ {0:n}", currentSale.GetSaleTotalPrice());
 
                 table.Rows.Clear();
                 var ts = p.ChargedPayRecords.Where(x => x.SaleId == currentSale.Id);

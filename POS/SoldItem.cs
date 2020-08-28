@@ -17,12 +17,12 @@ namespace POS
         public int Id { get; set; }
         public int Quantity { get; set; }
         public int SaleId { get; set; }
-        public string ItemName { get; set; }
+        public int ProductId { get; set; }
         public decimal ItemPrice { get; set; }
-        public string ItemSupplier { get; set; }
         public string SerialNumber { get; set; }
         public Nullable<decimal> Discount { get; set; }
     
+        public virtual Product Product { get; set; }
         public virtual Sale Sale { get; set; }
     }
 }
