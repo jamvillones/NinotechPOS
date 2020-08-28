@@ -51,7 +51,7 @@ namespace POS.Forms
                 }
                 total.Text = string.Format("₱ {0:n}", sale.TotalPrice);
                 amountRecieved.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
-                recHistBtn.Visible = p.ChargedPayRecords.FirstOrDefault(x=>x.Sale.Id == sale.Id)!=null? true : false;
+                recHistBtn.Visible = p.ChargedPayRecords.FirstOrDefault(x => x.Sale.Id == sale.Id) != null ? true : false;
             }
 
 
@@ -105,6 +105,39 @@ namespace POS.Forms
             var ts = new TransactionHistoryForm();
             ts.SetId(sale.Id);
             ts.ShowDialog();
+        }
+
+        private void voidBtn_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to void this sale?", "All sold items that is associated with this sale will be stocked and this sale will be removed", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                return;
+
+            }
+            using (var p = new POSEntities())
+            {
+                //get the reference of the sale
+                var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
+                //get the solditems of this sale and restock them
+
+                addBackToInventory(p.SoldItems.Select(x => x.Id).ToArray());
+                //p.SoldItems.RemoveRange(s.SoldItems);
+
+                p.Sales.Remove(s);
+                p.SaveChanges();
+            }
+        }
+        void addBackToInventory(params int[] id)
+        {
+            using (var p = new POSEntities())
+            {
+                foreach(var i in id)
+                {
+                    var soldItem = p.SoldItems.FirstOrDefault(x => x.Id == i);
+                    var Product = p.Products.FirstOrDefault(x => x.Item.Name == soldItem.ItemName && x.Supplier.Name == soldItem.ItemSupplier);
+                }
+            }
+
         }
     }
 }
