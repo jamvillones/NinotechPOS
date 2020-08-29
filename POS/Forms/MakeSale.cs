@@ -74,6 +74,15 @@ namespace POS.Forms
             InitializeComponent();
         }
 
+        public MakeSale(string barcode)
+        {
+            InitializeComponent();
+            searchText.Text = barcode;
+            // searchBtn.PerformClick();
+            doSearch();
+            //quantity.Value = quantity.Maximum;
+        }
+
         private void StockinForm_Load(object sender, EventArgs e)
         {
             using (var p = new POSEntities())
@@ -389,8 +398,7 @@ namespace POS.Forms
                 soldTo.AutoCompleteCustomSource.AddRange(p.Customers.Select(x => x.Name).ToArray());
             }
         }
-
-        private void searchBtn_Click(object sender, EventArgs e)
+        void doSearch()
         {
             itemsTable.Rows.Clear();
 
@@ -423,6 +431,10 @@ namespace POS.Forms
                     itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
                 }
             }
+        }
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+            doSearch();
         }
 
         private void MakeSale_KeyDown(object sender, KeyEventArgs e)

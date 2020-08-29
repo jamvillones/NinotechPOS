@@ -45,7 +45,7 @@ namespace POS.UserControls
                 initItemsTable();
 
                 var currlog = UserManager.instance.currentLogin;
-                stockinBtn.Enabled = currlog.CanStockIn ?? false;
+               // stockinBtn.Enabled = currlog.CanStockIn ?? false;
                 addVariationsBtn.Enabled = currlog.CanAddProduct ?? false;
                 addItemBtn.Enabled = currlog.CanAddItem ?? false;
                 editItemBtn.Enabled = currlog.CanEditItem ?? false;
@@ -78,22 +78,26 @@ namespace POS.UserControls
 
         protected virtual void firstBtn_Click(object sender, EventArgs e)
         {
-            using (var sell = new MakeSale())
+            if(inventoryTable.SelectedCells.Count == 0)
+            {
+                return;
+            }
+            using (var sell = new MakeSale(inventoryTable.SelectedCells[0].Value.ToString()))
             {
                 sell.OnSave += OnInventoryChangedCallback;
                 sell.ShowDialog();
             }
         }
 
-        protected virtual void secondBtn_Click(object sender, EventArgs e)
-        {
-            using (var stockin = new StockinForm())
-            {
-                stockin.OnSave += OnInventoryChangedCallback;
-                stockin.ShowDialog();
-            }
+        //protected virtual void secondBtn_Click(object sender, EventArgs e)
+        //{
+        //    using (var stockin = new StockinForm())
+        //    {
+        //        stockin.OnSave += OnInventoryChangedCallback;
+        //        stockin.ShowDialog();
+        //    }
 
-        }
+        //}
 
         private void OnInventoryChangedCallback(object sender, EventArgs e)
         {

@@ -200,6 +200,28 @@ namespace POS
             }
         }
 
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            using (var stockin = new StockinForm())
+            {
+                stockin.OnSave += Stockin_OnSave; ;
+                stockin.ShowDialog();
+            }
+        }
+
+        private void Stockin_OnSave(object sender, EventArgs e)
+        {
+            inventoryTab.RefreshData();
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            using (var sellForm = new MakeSale())
+            {
+                sellForm.ShowDialog();
+            }
+        }
+
         //private void toolStripButton4_Click(object sender, EventArgs e)
         //{
         //    //foreach(var i in uControls)

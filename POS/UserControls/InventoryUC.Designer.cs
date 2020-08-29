@@ -28,19 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sellBtn = new System.Windows.Forms.Button();
             this.inventoryTable = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.inventoryPage = new System.Windows.Forms.TabPage();
-            this.stockinBtn = new System.Windows.Forms.Button();
             this.itemsPage = new System.Windows.Forms.TabPage();
             this.addVariationsBtn = new System.Windows.Forms.Button();
             this.editItemBtn = new System.Windows.Forms.Button();
@@ -55,11 +50,19 @@
             this.searchBtn = new System.Windows.Forms.Button();
             this.search = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sellThisItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.tabControl.SuspendLayout();
             this.inventoryPage.SuspendLayout();
             this.itemsPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // sellBtn
@@ -73,9 +76,9 @@
             this.sellBtn.Location = new System.Drawing.Point(8, 8);
             this.sellBtn.Margin = new System.Windows.Forms.Padding(5);
             this.sellBtn.Name = "sellBtn";
-            this.sellBtn.Size = new System.Drawing.Size(95, 33);
+            this.sellBtn.Size = new System.Drawing.Size(174, 33);
             this.sellBtn.TabIndex = 1;
-            this.sellBtn.Text = "SELL ITEMS";
+            this.sellBtn.Text = "SELL SELECTED ITEMS";
             this.sellBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.sellBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.sellBtn.UseVisualStyleBackColor = false;
@@ -99,6 +102,7 @@
             this.Column3,
             this.Column5,
             this.Column4});
+            this.inventoryTable.ContextMenuStrip = this.contextMenuStrip;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -121,45 +125,6 @@
             this.inventoryTable.TabIndex = 0;
             this.inventoryTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseDoubleClick);
             // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column1.HeaderText = "BARCODE";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 84;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "NAME";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column3.HeaderText = "SELLING PRICE";
-            this.Column3.MinimumWidth = 150;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 150;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "QUANTITY";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column4.HeaderText = "TOTAL PRICE";
-            this.Column4.MinimumWidth = 150;
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 150;
-            // 
             // tabControl
             // 
             this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -177,7 +142,6 @@
             // 
             // inventoryPage
             // 
-            this.inventoryPage.Controls.Add(this.stockinBtn);
             this.inventoryPage.Controls.Add(this.inventoryTable);
             this.inventoryPage.Controls.Add(this.sellBtn);
             this.inventoryPage.Location = new System.Drawing.Point(4, 23);
@@ -187,25 +151,6 @@
             this.inventoryPage.TabIndex = 0;
             this.inventoryPage.Text = "INVENTORY";
             this.inventoryPage.UseVisualStyleBackColor = true;
-            // 
-            // stockinBtn
-            // 
-            this.stockinBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.stockinBtn.FlatAppearance.BorderSize = 0;
-            this.stockinBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.stockinBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stockinBtn.Image = ((System.Drawing.Image)(resources.GetObject("stockinBtn.Image")));
-            this.stockinBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.stockinBtn.Location = new System.Drawing.Point(113, 8);
-            this.stockinBtn.Margin = new System.Windows.Forms.Padding(5);
-            this.stockinBtn.Name = "stockinBtn";
-            this.stockinBtn.Size = new System.Drawing.Size(95, 33);
-            this.stockinBtn.TabIndex = 3;
-            this.stockinBtn.Text = "STOCK IN";
-            this.stockinBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.stockinBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.stockinBtn.UseVisualStyleBackColor = false;
-            this.stockinBtn.Click += new System.EventHandler(this.secondBtn_Click);
             // 
             // itemsPage
             // 
@@ -402,6 +347,58 @@
             this.label1.Text = "PRODUCTS";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sellThisItemToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(232, 26);
+            // 
+            // sellThisItemToolStripMenuItem
+            // 
+            this.sellThisItemToolStripMenuItem.Name = "sellThisItemToolStripMenuItem";
+            this.sellThisItemToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.sellThisItemToolStripMenuItem.Text = "Sell selected Item in Inventory";
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column1.HeaderText = "BARCODE";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 84;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "NAME";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column3.HeaderText = "SELLING PRICE";
+            this.Column3.MinimumWidth = 150;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 150;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "QUANTITY";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column4.HeaderText = "TOTAL PRICE";
+            this.Column4.MinimumWidth = 150;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 150;
+            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -419,6 +416,7 @@
             this.inventoryPage.ResumeLayout(false);
             this.itemsPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,22 +430,23 @@
         private System.Windows.Forms.TabPage itemsPage;
         protected System.Windows.Forms.DataGridView itemsTable;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        protected System.Windows.Forms.Button stockinBtn;
         protected System.Windows.Forms.Button addItemBtn;
         protected System.Windows.Forms.Button editItemBtn;
         protected System.Windows.Forms.Button addVariationsBtn;
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.TextBox search;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem sellThisItemToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }
