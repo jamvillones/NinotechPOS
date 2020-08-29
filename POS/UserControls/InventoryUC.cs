@@ -191,7 +191,7 @@ namespace POS.UserControls
                 MessageBox.Show("You do not have an item.");
                 return;
             }
-            using (var variation = new AddProductForm())
+            using (var variation = new AddProductForm(itemsTable.SelectedCells[0].Value.ToString()))
                 variation.ShowDialog();
         }
 

@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.itemsTable = new System.Windows.Forms.DataGridView();
+            this.varTable = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -43,7 +43,8 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cost = new System.Windows.Forms.NumericUpDown();
             this.addBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
+            this.panel1 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.varTable)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -51,27 +52,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.cost)).BeginInit();
             this.SuspendLayout();
             // 
-            // itemsTable
+            // varTable
             // 
-            this.itemsTable.AllowUserToAddRows = false;
-            this.itemsTable.AllowUserToDeleteRows = false;
-            this.itemsTable.AllowUserToResizeColumns = false;
-            this.itemsTable.AllowUserToResizeRows = false;
-            this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.varTable.AllowUserToAddRows = false;
+            this.varTable.AllowUserToResizeColumns = false;
+            this.varTable.AllowUserToResizeRows = false;
+            this.varTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.itemsTable.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.varTable.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.varTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SlateGray;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.varTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.varTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.varTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -81,33 +81,34 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle2;
-            this.itemsTable.EnableHeadersVisualStyles = false;
-            this.itemsTable.Location = new System.Drawing.Point(12, 200);
-            this.itemsTable.MultiSelect = false;
-            this.itemsTable.Name = "itemsTable";
-            this.itemsTable.ReadOnly = true;
-            this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.itemsTable.RowHeadersVisible = false;
-            this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(547, 257);
-            this.itemsTable.StandardTab = true;
-            this.itemsTable.TabIndex = 7;
-            this.itemsTable.TabStop = false;
-            this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
+            this.varTable.DefaultCellStyle = dataGridViewCellStyle2;
+            this.varTable.EnableHeadersVisualStyles = false;
+            this.varTable.Location = new System.Drawing.Point(12, 208);
+            this.varTable.MultiSelect = false;
+            this.varTable.Name = "varTable";
+            this.varTable.ReadOnly = true;
+            this.varTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.varTable.RowHeadersVisible = false;
+            this.varTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.varTable.Size = new System.Drawing.Size(547, 249);
+            this.varTable.StandardTab = true;
+            this.varTable.TabIndex = 7;
+            this.varTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.itemsTable_UserDeletingRow);
             // 
             // Column1
             // 
-            this.Column1.HeaderText = "Barcode";
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.HeaderText = "Supplier";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Item Name";
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column2.HeaderText = "Cost";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
+            this.Column2.Width = 57;
             // 
             // groupBox1
             // 
@@ -160,9 +161,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.barcode.Location = new System.Drawing.Point(7, 20);
             this.barcode.Name = "barcode";
+            this.barcode.ReadOnly = true;
             this.barcode.Size = new System.Drawing.Size(534, 20);
             this.barcode.TabIndex = 0;
-            this.barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.barcode_KeyDown);
             // 
             // groupBox3
             // 
@@ -223,17 +224,26 @@
             this.addBtn.UseVisualStyleBackColor = true;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Location = new System.Drawing.Point(12, 201);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(547, 1);
+            this.panel1.TabIndex = 13;
+            // 
             // AddProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(571, 469);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.itemsTable);
+            this.Controls.Add(this.varTable);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -241,9 +251,9 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add Product";
+            this.Text = "Item Variations";
             this.Load += new System.EventHandler(this.AddProductForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.varTable)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -257,7 +267,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView itemsTable;
+        private System.Windows.Forms.DataGridView varTable;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox supplier;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -267,8 +277,9 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.NumericUpDown cost;
         private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

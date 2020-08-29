@@ -101,6 +101,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AddProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddProductForm.designer.cs">
+      <DependentUpon>AddProductForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AdvancedSearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,12 +151,6 @@
     </Compile>
     <Compile Include="Forms\AddItemForm.designer.cs">
       <DependentUpon>AddItemForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AddProductForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AddProductForm.designer.cs">
-      <DependentUpon>AddProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ChangePass.cs">
       <SubType>Form</SubType>
@@ -236,6 +236,7 @@
     <Compile Include="Misc\Enums.cs" />
     <Compile Include="Misc\Helper.cs" />
     <Compile Include="Misc\ImageDatabaseConverter.cs" />
+    <Compile Include="Misc\SearchEventArgs.cs" />
     <Compile Include="Misc\UserManager.cs" />
     <Compile Include="POSModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -287,8 +288,17 @@
     <Compile Include="UserControls\ReportUC.designer.cs">
       <DependentUpon>ReportUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchControl.designer.cs">
+      <DependentUpon>SearchControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddProductForm.resx">
+      <DependentUpon>AddProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdvancedSearchForm.resx">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
@@ -307,9 +317,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddItemForm.resx">
       <DependentUpon>AddItemForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddProductForm.resx">
-      <DependentUpon>AddProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChangePass.resx">
       <DependentUpon>ChangePass.cs</DependentUpon>
@@ -368,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ReportUC.resx">
       <DependentUpon>ReportUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\SearchControl.resx">
+      <DependentUpon>SearchControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <EntityDeploy Include="POSModel.edmx">
