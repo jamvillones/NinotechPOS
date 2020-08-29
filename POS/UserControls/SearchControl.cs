@@ -13,6 +13,13 @@ namespace POS.UserControls
 {
     public partial class SearchControl : UserControl
     {
+        public Control firsControl
+        {
+            get
+            {
+                return searchText;
+            }
+        }
         public bool SearchDone = false;
         /// <summary>
         /// triggers upon hitting enter or pressing search Button;

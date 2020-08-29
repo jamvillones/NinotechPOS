@@ -22,7 +22,7 @@ namespace POS.Forms
 
         void SetTable()
         {
-            Console.WriteLine("setTable");
+            //Console.WriteLine("setTable");
             itemsTable.Rows.Clear();
             using (var p = new POSEntities())
             {
@@ -33,19 +33,19 @@ namespace POS.Forms
         }
         void setAutoComplete()
         {
-            searchBar.AutoCompleteCustomSource.Clear();
+            //searchBar.AutoCompleteCustomSource.Clear();
             using (var p = new POSEntities())
             {
-                searchBar.AutoCompleteCustomSource.AddRange(p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()).Select(x => x.Item.Name).ToArray());
+                searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()).Select(x => x.Item.Name).ToArray());
             }
         }
         private void StockinForm_Load(object sender, EventArgs e)
         {
             SetTable();
             setAutoComplete();
-            toolTip.SetToolTip(barcode, "Press f1 to set focus on barcode");
-            toolTip.SetToolTip(serialNumber, "Press f2 to set focus on serial number");
-            toolTip.SetToolTip(quantity, "Press f3 to set focus on quantity");
+            //toolTip.SetToolTip(barcode, "Press f1 to set focus on barcode");
+            //toolTip.SetToolTip(serialNumber, "Press f2 to set focus on serial number");
+            //toolTip.SetToolTip(quantity, "Press f3 to set focus on quantity");
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace POS.Forms
                 barcode.Text = selectedProduct.ItemId;
             }
             serialNumber.Text = string.Empty;
-            this.ActiveControl = serialNumber;
+            //this.ActiveControl = serialNumber;
         }
 
         private void quantity_ValueChanged(object sender, EventArgs e)
@@ -102,7 +102,8 @@ namespace POS.Forms
         private void addBtn_Click(object sender, EventArgs e)
         {
             addItem();
-            ActiveControl = barcode;
+            this.ActiveControl = searchControl.firsControl;
+            //Console.WriteLine(ActiveControl.Name);
         }
 
         private void stockinBtn_Click(object sender, EventArgs e)
@@ -242,37 +243,17 @@ namespace POS.Forms
             quantity.Enabled = true;
         }
 
-        private void barcode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (searchBar.Text == string.Empty)
-                return;
-
-            if (e.KeyCode == Keys.Enter)
-            {
-                searchBtn.PerformClick();
-            }
-        }
-
-        private void barcode_TextChanged(object sender, EventArgs e)
-        {
-            var s = sender as TextBox;
-            if (s.TextLength <= 0 && searchMade)
-            {
-                SetTable();
-                searchMade = false;
-            }
-        }
-
         private void StockinForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1)
-                this.ActiveControl = searchBar;
+            if (e.Control && e.KeyCode == Keys.F)
+                this.ActiveControl = searchControl.firsControl;
 
             if (e.KeyCode == Keys.F2)
                 this.ActiveControl = serialNumber;
 
             if (e.KeyCode == Keys.F3)
                 this.ActiveControl = quantity;
+            Console.WriteLine(ActiveControl.Name);
         }
 
         private void createItemBtn_Click(object sender, EventArgs e)
@@ -289,16 +270,15 @@ namespace POS.Forms
             SetTable();
             setAutoComplete();
         }
-        bool searchMade = false;
-        private void searchBtn_Click(object sender, EventArgs e)
-        {
 
+        private void searchControl1_OnSearch(object sender, SearchEventArgs e)
+        {
             using (var p = new POSEntities())
             {
-                var products = p.Products.Where(x => x.Item.Barcode == searchBar.Text && x.Item.Type == ItemType.Hardware.ToString());
+                var products = p.Products.Where(x => x.Item.Barcode == e.Text && x.Item.Type == ItemType.Hardware.ToString());
                 if (products.Count() == 0)
                 {
-                    products = p.Products.Where(x => x.Item.Name.Contains(searchBar.Text) && x.Item.Type == ItemType.Hardware.ToString());
+                    products = p.Products.Where(x => x.Item.Name.Contains(e.Text) && x.Item.Type == ItemType.Hardware.ToString());
                     if (products.Count() == 0)
                     {
                         if (MessageBox.Show("Would you like to create an item?", "Item not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -309,19 +289,19 @@ namespace POS.Forms
                         return;
                     }
                 }
-                Console.WriteLine("hey");
+
                 itemsTable.Rows.Clear();
+                e.SearchFound = true;
                 foreach (var i in products)
                 {
                     itemsTable.Rows.Add(i.ItemId, i.Item.Name, i.Cost, i.Supplier.Name);
                 }
-                searchMade = true;
             }
         }
 
-        private void itemsTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        private void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
-
+            SetTable();
         }
     }
 }
