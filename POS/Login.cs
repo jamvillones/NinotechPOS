@@ -23,20 +23,22 @@ namespace POS
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public Nullable<bool> CanAddItem { get; set; }
-        public Nullable<bool> CanEditItem { get; set; }
-        public Nullable<bool> CanDeleteItem { get; set; }
-        public Nullable<bool> CanAddProduct { get; set; }
-        public Nullable<bool> CanEditProduct { get; set; }
-        public Nullable<bool> CanDeleteProduct { get; set; }
-        public Nullable<bool> CanAddSupplier { get; set; }
-        public Nullable<bool> CanEditSupplier { get; set; }
-        public Nullable<bool> CanDeleteSupplier { get; set; }
-        public Nullable<bool> CanAddCustomer { get; set; }
-        public Nullable<bool> CanStockIn { get; set; }
-        public Nullable<bool> CanSellItem { get; set; }
-        public Nullable<bool> CanAddUser { get; set; }
-        public Nullable<bool> CanDeleteUser { get; set; }
+        public bool CanAddItem { get; set; }
+        public bool CanEditItem { get; set; }
+        public bool CanDeleteItem { get; set; }
+        public bool CanAddProduct { get; set; }
+        public bool CanEditProduct { get; set; }
+        public bool CanDeleteProduct { get; set; }
+        public bool CanAddSupplier { get; set; }
+        public bool CanEditSupplier { get; set; }
+        public bool CanDeleteSupplier { get; set; }
+        public bool CanAddCustomer { get; set; }
+        public bool CanStockIn { get; set; }
+        public bool CanSellItem { get; set; }
+        public bool CanAddUser { get; set; }
+        public bool CanDeleteUser { get; set; }
+        public bool CanVoidSale { get; set; }
+        public bool CanEditInventory { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }

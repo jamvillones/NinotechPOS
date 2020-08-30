@@ -166,5 +166,10 @@ namespace POS.Forms
             }
 
         }
+
+        private void SaleDetails_Load(object sender, EventArgs e)
+        {
+            voidBtn.Enabled = currentLogin.CanVoidSale;
+        }
     }
 }

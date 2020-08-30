@@ -81,19 +81,22 @@ namespace POS
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
+        void AddNewLogin()
+        {
+            if (!UserManager.instance.currentLogin.CanAddUser)
+            {
+                MessageBox.Show("Cannot perform this action!");
+                return;
+            }
+            ///add new login
+            using (var newlogin = new CreateLogin())
+                newlogin.ShowDialog();
+        }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1)
             {
-                if (!UserManager.instance.currentLogin.CanAddUser ?? false)
-                {
-                    MessageBox.Show("Cannot perform this action!");
-                    return;
-                }
-                ///add new login
-                using (var newlogin = new CreateLogin())
-                    newlogin.ShowDialog();
+                AddNewLogin();
             }
             else if (e.KeyCode == Keys.F2)
             {
@@ -126,7 +129,7 @@ namespace POS
 
         private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!UserManager.instance.currentLogin.CanAddUser ?? false)
+            if (!UserManager.instance.currentLogin.CanAddUser)
             {
                 MessageBox.Show("Cannot perform this action!");
                 return;
@@ -220,6 +223,18 @@ namespace POS
             {
                 sellForm.ShowDialog();
             }
+        }
+        Login currLogin 
+        {
+            get
+            {
+                return UserManager.instance.currentLogin;
+            }
+        }
+        private void Main_Load(object sender, EventArgs e)
+        {
+            addNewLoginToolStripMenuItem1.Enabled = currLogin.CanAddUser;
+            stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
         }
 
         //private void toolStripButton4_Click(object sender, EventArgs e)

@@ -35,6 +35,7 @@
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.cost = new System.Windows.Forms.NumericUpDown();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.addSupplierBtn = new System.Windows.Forms.Button();
             this.supplierOption = new System.Windows.Forms.ComboBox();
             this.variationTable = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -83,9 +84,9 @@
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button1.Location = new System.Drawing.Point(243, 31);
+            this.button1.Location = new System.Drawing.Point(6, 66);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 23);
+            this.button1.Size = new System.Drawing.Size(376, 23);
             this.button1.TabIndex = 9;
             this.button1.TabStop = false;
             this.button1.Text = "Add";
@@ -97,7 +98,7 @@
             this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox10.Controls.Add(this.cost);
-            this.groupBox10.Location = new System.Drawing.Point(169, 20);
+            this.groupBox10.Location = new System.Drawing.Point(314, 20);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(68, 40);
             this.groupBox10.TabIndex = 8;
@@ -122,13 +123,26 @@
             // 
             this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox9.Controls.Add(this.addSupplierBtn);
             this.groupBox9.Controls.Add(this.supplierOption);
             this.groupBox9.Location = new System.Drawing.Point(6, 20);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(157, 40);
+            this.groupBox9.Size = new System.Drawing.Size(302, 40);
             this.groupBox9.TabIndex = 7;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Supplier";
+            // 
+            // addSupplierBtn
+            // 
+            this.addSupplierBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.addSupplierBtn.Location = new System.Drawing.Point(186, 12);
+            this.addSupplierBtn.Name = "addSupplierBtn";
+            this.addSupplierBtn.Size = new System.Drawing.Size(110, 23);
+            this.addSupplierBtn.TabIndex = 10;
+            this.addSupplierBtn.TabStop = false;
+            this.addSupplierBtn.Text = "Add Supplier";
+            this.addSupplierBtn.UseVisualStyleBackColor = true;
+            this.addSupplierBtn.Click += new System.EventHandler(this.button2_Click);
             // 
             // supplierOption
             // 
@@ -141,14 +155,13 @@
             this.supplierOption.Location = new System.Drawing.Point(6, 13);
             this.supplierOption.MaxLength = 50;
             this.supplierOption.Name = "supplierOption";
-            this.supplierOption.Size = new System.Drawing.Size(145, 21);
+            this.supplierOption.Size = new System.Drawing.Size(174, 21);
             this.supplierOption.TabIndex = 0;
             this.supplierOption.Validated += new System.EventHandler(this.comboBox1_Validated);
             // 
             // variationTable
             // 
             this.variationTable.AllowUserToAddRows = false;
-            this.variationTable.AllowUserToDeleteRows = false;
             this.variationTable.AllowUserToResizeColumns = false;
             this.variationTable.AllowUserToResizeRows = false;
             this.variationTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -170,14 +183,14 @@
             this.variationTable.DefaultCellStyle = dataGridViewCellStyle1;
             this.variationTable.EnableHeadersVisualStyles = false;
             this.variationTable.GridColor = System.Drawing.Color.White;
-            this.variationTable.Location = new System.Drawing.Point(6, 66);
+            this.variationTable.Location = new System.Drawing.Point(6, 95);
             this.variationTable.MultiSelect = false;
             this.variationTable.Name = "variationTable";
             this.variationTable.ReadOnly = true;
             this.variationTable.RowHeadersVisible = false;
             this.variationTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.variationTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.variationTable.Size = new System.Drawing.Size(376, 170);
+            this.variationTable.Size = new System.Drawing.Size(376, 141);
             this.variationTable.StandardTab = true;
             this.variationTable.TabIndex = 1;
             this.variationTable.TabStop = false;
@@ -232,5 +245,6 @@
         protected System.Windows.Forms.ComboBox supplierOption;
         private System.Windows.Forms.NumericUpDown cost;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button addSupplierBtn;
     }
 }

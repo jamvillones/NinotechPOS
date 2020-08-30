@@ -19,7 +19,7 @@ namespace POS.Forms
         {
             InitializeComponent();
         }
-       
+
         public override void Init()
         {
             base.Init();
@@ -188,17 +188,51 @@ namespace POS.Forms
                     supplierOption.Items.Add(i.Name);
             }
         }
+        bool supplierPresent(string s)
+        {
+            for (int i = 0; i < variationTable.RowCount; i++)
+            {
+                if (variationTable.Rows[i].Cells[0].Value.ToString() == s)
+                    return true;
+            }
 
+            return false;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             if (supplierOption.Text == string.Empty) return;
+            if(supplierPresent(supplierOption.Text))
+            {
+                MessageBox.Show("Supplier already present.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
             variationTable.Rows.Add(supplierOption.Text, cost.Value);
-            supplierOption.Items.RemoveAt(supplierOption.SelectedIndex);
+            //supplierOption.Items.RemoveAt(supplierOption.SelectedIndex);
         }
 
         private void AddItemForm_Load(object sender, EventArgs e)
         {
             Init();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (var supp = new SupplierForm())
+            {
+                supp.OnSave += Supp_OnSave;
+                supp.ShowDialog();
+            }
+        }
+
+        private void Supp_OnSave(object sender, EventArgs e)
+        {
+            supplierOption.Items.Clear();
+            supplierOption.AutoCompleteCustomSource.Clear();
+            using (var p = new POSEntities())
+            {               
+                supplierOption.Items.AddRange(p.Suppliers.OrderBy(x => x.Name).Select(y => y.Name).ToArray());
+                supplierOption.AutoCompleteCustomSource.AddRange(p.Suppliers.OrderBy(x => x.Name).Select(y => y.Name).ToArray());
+            }
         }
     }
 }

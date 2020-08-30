@@ -36,7 +36,13 @@ namespace POS.UserControls
         {
             return null;
         }
-
+        Login currLogin
+        {
+            get
+            {
+                return UserManager.instance.currentLogin;
+            }
+        }
         public virtual void Initialize()
         {
             using (var p = new POSEntities())
@@ -44,11 +50,11 @@ namespace POS.UserControls
                 initInventoryTable();
                 initItemsTable();
 
-                var currlog = UserManager.instance.currentLogin;
-               // stockinBtn.Enabled = currlog.CanStockIn ?? false;
-                addVariationsBtn.Enabled = currlog.CanAddProduct ?? false;
-                addItemBtn.Enabled = currlog.CanAddItem ?? false;
-                editItemBtn.Enabled = currlog.CanEditItem ?? false;
+                //var currlog = UserManager.instance.currentLogin;
+                // stockinBtn.Enabled = currlog.CanStockIn ?? false;
+                addVariationsBtn.Enabled = currLogin.CanAddProduct;
+                addItemBtn.Enabled = currLogin.CanAddItem;
+                editItemBtn.Enabled = currLogin.CanEditItem;
             }
 
         }
@@ -78,7 +84,7 @@ namespace POS.UserControls
 
         protected virtual void firstBtn_Click(object sender, EventArgs e)
         {
-            if(inventoryTable.SelectedCells.Count == 0)
+            if (inventoryTable.SelectedCells.Count == 0)
             {
                 return;
             }
@@ -191,7 +197,7 @@ namespace POS.UserControls
                 MessageBox.Show("You do not have an item.");
                 return;
             }
-            using (var variation = new AddProductForm(itemsTable.SelectedCells[0].Value.ToString()))
+            using (var variation = new ItemVariationsForm(itemsTable.SelectedCells[0].Value.ToString()))
                 variation.ShowDialog();
         }
 
@@ -300,19 +306,18 @@ namespace POS.UserControls
 
         private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            if (!UserManager.instance.currentLogin.CanDeleteItem??false)
+            if (!UserManager.instance.currentLogin.CanDeleteItem)
             {
-                Console.WriteLine("hey");
                 e.Cancel = true;
                 return;
             }
-            if (MessageBox.Show("Are you sure you want to delete the selected item?","This will also delete items in inventory.", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBox.Show("Are you sure you want to delete the selected item?", "This will also delete items in inventory.", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
             {
                 e.Cancel = true;
                 return;
             }
 
-            using(var p = new POSEntities())
+            using (var p = new POSEntities())
             {
                 var selected = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex].Cells[0].Value.ToString();
                 var i = p.Items.FirstOrDefault(x => x.Barcode == selected);
@@ -330,6 +335,17 @@ namespace POS.UserControls
         private void InventoryUC_Load(object sender, EventArgs e)
         {
             //currLogin = UserManager.instance.currentLogin;
+        }
+
+        private void itemsTable_SelectionChanged(object sender, EventArgs e)
+        {
+            if (itemsTable.SelectedCells.Count == 0)
+                return;
+            if (!currLogin.CanAddProduct)
+                return;
+
+            var type = itemsTable.SelectedCells[4].Value.ToString();
+            addVariationsBtn.Enabled = type != ItemType.Hardware.ToString() ? false : true;
         }
     }
 }

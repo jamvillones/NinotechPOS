@@ -521,6 +521,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sale Details";
+            this.Load += new System.EventHandler(this.SaleDetails_Load);
             this.itemsPanel.ResumeLayout(false);
             this.itemsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();

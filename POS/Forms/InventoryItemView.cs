@@ -19,7 +19,7 @@ namespace POS.Forms
         {
             InitializeComponent();
             currlogin = UserManager.instance.currentLogin;
-            Column1.ReadOnly = !(currlogin.CanEditProduct ?? false);
+            Column1.ReadOnly = !(currlogin.CanEditInventory);
         }
         public void SetItemId(string barcode)
         {
@@ -59,7 +59,7 @@ namespace POS.Forms
         InventoryItem target;
         private void invTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            if (!UserManager.instance.currentLogin.CanEditProduct ?? false)
+            if (!UserManager.instance.currentLogin.CanEditProduct)
             {
                 e.Cancel = true;
                 return;
@@ -111,7 +111,7 @@ namespace POS.Forms
         }
         bool RemoveInventoryItem()
         {
-            if (invTable.RowCount == 0 || !(currlogin.CanDeleteProduct ?? false)) return false;
+            if (invTable.RowCount == 0 || !currlogin.CanEditInventory) return false;
             if (MessageBox.Show("Are you sure you want to remove this from inventory? This action cannot be undone.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 var cells = invTable.Rows[invTable.SelectedCells[0].RowIndex].Cells;
@@ -140,7 +140,7 @@ namespace POS.Forms
 
         private void invTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            if (RemoveInventoryItem() == false)
+            if (RemoveInventoryItem() == false )
                 e.Cancel = true;
         }
     }

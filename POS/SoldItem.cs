@@ -22,7 +22,7 @@ namespace POS
         public string SerialNumber { get; set; }
         public Nullable<decimal> Discount { get; set; }
     
-        public virtual Product Product { get; set; }
         public virtual Sale Sale { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

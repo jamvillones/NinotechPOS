@@ -101,11 +101,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddProductForm.cs">
+    <Compile Include="Forms\ItemVariationsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddProductForm.designer.cs">
-      <DependentUpon>AddProductForm.cs</DependentUpon>
+    <Compile Include="Forms\ItemVariationsForm.designer.cs">
+      <DependentUpon>ItemVariationsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AdvancedSearchForm.cs">
       <SubType>Form</SubType>
@@ -130,6 +130,18 @@
     </Compile>
     <Compile Include="Forms\StockinLog.Designer.cs">
       <DependentUpon>StockinLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubstituteProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubstituteProduct.Designer.cs">
+      <DependentUpon>SubstituteProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\VariationReferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VariationReferences.Designer.cs">
+      <DependentUpon>VariationReferences.cs</DependentUpon>
     </Compile>
     <Compile Include="InventoryItem.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
@@ -297,8 +309,8 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddProductForm.resx">
-      <DependentUpon>AddProductForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ItemVariationsForm.resx">
+      <DependentUpon>ItemVariationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdvancedSearchForm.resx">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
@@ -311,6 +323,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockinLog.resx">
       <DependentUpon>StockinLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubstituteProduct.resx">
+      <DependentUpon>SubstituteProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VariationReferences.resx">
+      <DependentUpon>VariationReferences.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

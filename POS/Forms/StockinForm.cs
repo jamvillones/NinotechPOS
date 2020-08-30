@@ -15,6 +15,13 @@ namespace POS.Forms
     {
         List<Product> productsToImport = new List<Product>();
         public event EventHandler OnSave;
+        Login currLogin
+        {
+            get
+            {
+                return UserManager.instance.currentLogin;
+            }
+        }
         public StockinForm()
         {
             InitializeComponent();
@@ -43,6 +50,7 @@ namespace POS.Forms
         {
             SetTable();
             setAutoComplete();
+            createItemBtn.Enabled = currLogin.CanAddItem;
             //toolTip.SetToolTip(barcode, "Press f1 to set focus on barcode");
             //toolTip.SetToolTip(serialNumber, "Press f2 to set focus on serial number");
             //toolTip.SetToolTip(quantity, "Press f3 to set focus on quantity");
@@ -155,7 +163,7 @@ namespace POS.Forms
                     stockinHist.Date = DateTime.Now;
                     stockinHist.Quantity = q;
                     stockinHist.SerialNumber = it.SerialNumber;
-                    stockinHist.LoginUsername = p.Logins.FirstOrDefault(x => x.Username == UserManager.instance.currentLogin.Username).Username;
+                    stockinHist.LoginUsername = p.Logins.FirstOrDefault(x => x.Username == currLogin.Username).Username;
 
                     p.StockinHistories.Add(stockinHist);
                 }
