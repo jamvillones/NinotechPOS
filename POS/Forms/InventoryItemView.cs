@@ -37,11 +37,11 @@ namespace POS.Forms
 
                 var invItem = p.InventoryItems.Where(x => x.Product.Item.Barcode == item.Barcode);
                 quantity.Text = invItem.Sum(x => x.Quantity).ToString();
-                int counter = 0;
+                //int counter = 0;
                 foreach (var i in invItem)
                 {
-                    counter++;
-                    invTable.Rows.Add(counter, i.SerialNumber, i.Quantity, i.Product.Supplier.Name);
+                    //counter++;
+                    invTable.Rows.Add(i.Id, i.SerialNumber, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Supplier.Name);
                 }
             }
         }
@@ -64,47 +64,99 @@ namespace POS.Forms
                 e.Cancel = true;
                 return;
             }
-            if (e.ColumnIndex != 1)
-            {
-                return;
-            }
             var dgt = sender as DataGridView;
-            var serial = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
-            var quantity = Convert.ToInt32(dgt.Rows[e.RowIndex].Cells[2].Value.ToString());
-            if (string.IsNullOrEmpty(serial) && quantity > 1)
+            int quantity = 0;
+            int id = (int)(dgt.Rows[e.RowIndex].Cells[0].Value);
+
+            if (int.TryParse(dgt.Rows[e.RowIndex].Cells[2].Value.ToString(), out quantity))
             {
-                MessageBox.Show("Thes serial cannot be edited");
+                ///if serial
+                var serial = dgt.Rows[e.RowIndex].Cells[1].Value?.ToString();
+                /////items without serial
+                bool con1 =  e.ColumnIndex == 1 && serial != null && quantity == 1;
+                bool con2 =  e.ColumnIndex == 2 && serial == null;
+                //if (serial == null && quantity != 1)
+                //{
+                if (con1 || con2)
+                { 
+                    using (var p = new POSEntities())
+                    {
+                        target = p.InventoryItems.FirstOrDefault(x => x.Id == id);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(!con1?"Changing quantity of item with serial number is not allowed.":"Serial cannot be set if item quantity is more than one." ,"Edit prohibited", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Item with infinite quantity cannot be edited");
                 e.Cancel = true;
-                return;
             }
 
-            using (var p = new POSEntities())
-            {
-                target = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == serial);
-
-            }
         }
 
         private void invTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var dgt = sender as DataGridView;
-            if (dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() == target.SerialNumber)
+            if (e.ColumnIndex == 1)
             {
-                return;
-            }
-            using (var p = new POSEntities())
-            {
-                if (MessageBox.Show("Are you sure you want to save new Serial?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                if (dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() == target.SerialNumber)
                 {
-                    dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.SerialNumber;
+                    return;
+                }
+                using (var p = new POSEntities())
+                {
+                    if (MessageBox.Show("Are you sure you want to save new Serial?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                    {
+                        dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.SerialNumber;
+                    }
+                    else
+                    {
+                        var t = p.InventoryItems.FirstOrDefault(x => x.Id == target.Id);
+                        t.SerialNumber = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
+                        p.SaveChanges();
+                        OnSave?.Invoke(this, null);
+                        MessageBox.Show("Serial successfully updated");
+                    }
+                }
+            }
+            else if (e.ColumnIndex == 2)
+            {
+
+                int newQuantity = 0;
+                if (int.TryParse(dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out newQuantity))
+                {
+                    if (newQuantity == target.Quantity)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        using (var p = new POSEntities())
+                        {
+                            if (MessageBox.Show("Are you sure you want to save new Quantity?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                            {
+                                dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.Quantity;
+                            }
+                            else
+                            {
+                                var t = p.InventoryItems.FirstOrDefault(x => x.Id == target.Id);
+                                t.Quantity = newQuantity;
+                                p.SaveChanges();
+                                OnSave?.Invoke(this, null);
+                                MessageBox.Show("Quantity successfully updated");
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    var t = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == target.SerialNumber);
-                    t.SerialNumber = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
-                    p.SaveChanges();
-                    OnSave?.Invoke(this, null);
-                    MessageBox.Show("Serial successfully updated");
+                    dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.Quantity;
+                    MessageBox.Show("Invalid Input.");
                 }
             }
 
@@ -140,7 +192,7 @@ namespace POS.Forms
 
         private void invTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            if (RemoveInventoryItem() == false )
+            if (RemoveInventoryItem() == false)
                 e.Cancel = true;
         }
     }
