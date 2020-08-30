@@ -261,7 +261,6 @@ namespace POS.Forms
 
             if (e.KeyCode == Keys.F3)
                 this.ActiveControl = quantity;
-            Console.WriteLine(ActiveControl.Name);
         }
 
         private void createItemBtn_Click(object sender, EventArgs e)

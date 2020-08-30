@@ -38,7 +38,7 @@ namespace POS.Forms
         {
             Onsave?.Invoke(this, null);
         }
-       
+
         private void AddProductForm_Load(object sender, EventArgs e)
         {
             barcode.Text = target.Barcode;
@@ -170,28 +170,40 @@ namespace POS.Forms
                 var solditemwiththisproduct = p.SoldItems.Where(x => x.Product.Id == variation.Id);
                 var inv = p.InventoryItems.Where(x => x.Product.Id == variation.Id);
                 bool condition = solditemwiththisproduct.Count() != 0 || inv.Count() != 0;
-                DialogResult dialog = MessageBox.Show("Are you sure you want to remove item variation of this item with supplier " + s + (condition ? "?\n\nThis will also remove record of sold items with this product or Item in inventory with this kind of Product.\n\nWould you like to choose a substitute item instead?" : ""), condition ? "Not safe to delete" : "Safe to delete", MessageBoxButtons.YesNoCancel, condition ? MessageBoxIcon.Stop : MessageBoxIcon.Asterisk);
+                DialogResult dialog = MessageBox.Show("Are you sure you want to remove item variation of this item with supplier " + s + (condition ? "?\n\nThis will also remove record of sold items with this product or Item in inventory with this kind of Product.\n\n(Click show references to see dependencies)\n\nWould you like to choose a substitute item instead?\n\nYES - choose a replacement\nNO - proceed with removal\nCANCEL - cancel removal" : ""),
+                                                 condition ? "Not safe to delete" : "Safe to delete",
+                                                 condition ? MessageBoxButtons.YesNoCancel : MessageBoxButtons.OKCancel,
+                                                 condition ? MessageBoxIcon.Stop : MessageBoxIcon.Asterisk);
                 if (dialog == DialogResult.Yes)
                 {
+                    bool godelete = true;
                     ///prompt user to provide substitute to product
+
                     using (var subs = new SubstituteProduct(variation.Id))
                     {
+                        //subs.OnChoose += Subs_OnChoose;
                         subs.OnChoose += (a, b) =>
                         {
-                            foreach(var i in solditemwiththisproduct)
+                            if (b == null)
+                            {
+                                godelete = false;
+                                return;
+                            }
+                            foreach (var i in solditemwiththisproduct)
                             {
                                 i.ProductId = b.Id;
                             }
-                            foreach(var i in inv)
+                            foreach (var i in inv)
                             {
                                 i.ProductId = b.Id;
                             }
                         };
-                        subs.ShowDialog();                        
+                        subs.ShowDialog();
                     }
-                    //return;
+                    if (!godelete)
+                        return;
                 }
-                else if (dialog == DialogResult.No)
+                else if (dialog == DialogResult.No || dialog == DialogResult.OK)
                 {
 
                 }
@@ -208,6 +220,21 @@ namespace POS.Forms
             }
             t.Rows.RemoveAt(e.RowIndex);
         }
+
+        //private void Subs_OnChoose(object sender, Product e)
+        //{
+        //    using (var p = new POSEntities())
+        //    {
+        //        foreach (var i in solditemwiththisproduct)
+        //        {
+        //            i.ProductId = b.Id;
+        //        }
+        //        foreach (var i in inv)
+        //        {
+        //            i.ProductId = b.Id;
+        //        }
+        //    }
+        //}
 
         decimal currentCost;
         private void varTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)

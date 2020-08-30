@@ -43,7 +43,7 @@ namespace POS.Forms
                 //var inv = p.InventoryItems.Where(x => x.Product.Id == variation.Id);
             }
         }
-
+        bool havechosen;
         private void chooseBtn_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to choose this item?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -53,9 +53,16 @@ namespace POS.Forms
                     var controlnum = varTable.SelectedCells[0].Value;
                     var prod = p.Products.FirstOrDefault(x => x.Id == (int)controlnum);
                     OnChoose?.Invoke(this, prod);
+                    havechosen = true;
                 }
                 this.Close();
             }
+        }
+
+        private void SubstituteProduct_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!havechosen)
+                OnChoose?.Invoke(this, null);
         }
     }
 }

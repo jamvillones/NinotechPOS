@@ -294,7 +294,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SubstituteProduct";
-            this.Text = "SubstituteProduct";
+            this.Text = "Substitute Product";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SubstituteProduct_FormClosing);
             this.Load += new System.EventHandler(this.SubstituteProduct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.varTable)).EndInit();
             this.groupBox1.ResumeLayout(false);

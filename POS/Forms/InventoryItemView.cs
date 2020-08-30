@@ -44,17 +44,7 @@ namespace POS.Forms
                     invTable.Rows.Add(i.Id, i.SerialNumber, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Supplier.Name);
                 }
             }
-        }
-
-        //private void invTable_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        //{
-        //    //e.Control.TextChanged -= Control_TextChanged;
-        //}
-
-        //////private void Control_TextChanged(object sender, EventArgs e)
-        //////{
-        //////   // throw new NotImplementedException();
-        //////}
+        }             
 
         InventoryItem target;
         private void invTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -73,8 +63,9 @@ namespace POS.Forms
                 ///if serial
                 var serial = dgt.Rows[e.RowIndex].Cells[1].Value?.ToString();
                 /////items without serial
-                bool con1 =  e.ColumnIndex == 1 && serial != null && quantity == 1;
+                bool con1 =  e.ColumnIndex == 1 && quantity == 1;
                 bool con2 =  e.ColumnIndex == 2 && serial == null;
+                //bool con3 = e.ColumnIndex == 1 && string.IsNullOrEmpty(serial) && quantity == 1;
                 //if (serial == null && quantity != 1)
                 //{
                 if (con1 || con2)
@@ -117,7 +108,8 @@ namespace POS.Forms
                     else
                     {
                         var t = p.InventoryItems.FirstOrDefault(x => x.Id == target.Id);
-                        t.SerialNumber = dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
+                        string s = string.IsNullOrEmpty(dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString()) ? null : dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
+                        t.SerialNumber = s;
                         p.SaveChanges();
                         OnSave?.Invoke(this, null);
                         MessageBox.Show("Serial successfully updated");
