@@ -18,9 +18,8 @@ namespace POS.UserControls
 
     public partial class ReportUC : UserControl, ITab
     {
-        SaleType saleType = SaleType.Regular;
         Button defButton = new Button();
-        int[] ids;
+        //int[] ids;
 
         public ReportUC()
         {
@@ -81,12 +80,14 @@ namespace POS.UserControls
 
         private void saleTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e.RowIndex == -1)
+                return;
             var table = (DataGridView)sender;
-            int index = table.CurrentCell.RowIndex;
+            int index = (int)(table.SelectedCells[0].Value);
 
             using (var saleDetails = new SaleDetails())
             {
-                saleDetails.SetId(ids[index]);
+                saleDetails.SetId(index);
                 saleDetails.OnSave += (a, b) => { setCharegedTable(); };
                 saleDetails.ShowDialog();
             }
@@ -123,10 +124,10 @@ namespace POS.UserControls
 
                 totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.GetSaleTotalPrice()));
 
-                ids = filteredSales.Select(x => x.Id).ToArray();
+                //ids = filteredSales.Select(x => x.Id).ToArray();
 
                 foreach (var x in filteredSales)
-                    saleTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()));
+                    saleTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()));
             }
         }
 
@@ -136,9 +137,9 @@ namespace POS.UserControls
             using (var p = new POSEntities())
             {
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderBy(x => x.Date);
-                ids = sales.Select(x => x.Id).ToArray();
+                //ids = sales.Select(x => x.Id).ToArray();
                 foreach (var x in sales)
-                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
+                    chargedTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
         }
 
@@ -166,9 +167,9 @@ namespace POS.UserControls
             using (var p = new POSEntities())
             {
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString() && x.Customer.Name.Contains(chargedSaleSearch.Text)).OrderBy(x => x.Date);
-                ids = sales.Select(x => x.Id).ToArray();
+                //ids = sales.Select(x => x.Id).ToArray();
                 foreach (var x in sales)
-                    chargedTable.Rows.Add(x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
+                    chargedTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
 
         }
@@ -198,21 +199,18 @@ namespace POS.UserControls
 
         public void Refresh_Callback(object sender, EventArgs e)
         {
-            Console.WriteLine("Refreshed: " + this.Name);
-            if (saleType == SaleType.Regular)
-                setRegularTableByDate();
-            else
-                setCharegedTable();
+            setRegularTableByDate();
+            setCharegedTable();
         }
 
         private void regularSalesTab_Click(object sender, EventArgs e)
         {
-            saleType = SaleType.Regular;
+           
         }
 
         private void chargedPage_Click(object sender, EventArgs e)
         {
-            saleType = SaleType.Charged;
+            
         }
     }
 }

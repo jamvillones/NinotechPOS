@@ -67,6 +67,10 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.soldBy = new System.Windows.Forms.TextBox();
             this.voidBtn = new System.Windows.Forms.Button();
+            this.editItemsBtn = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.SaleId = new System.Windows.Forms.TextBox();
             this.itemsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -80,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.addPayment)).BeginInit();
             this.remainGroup.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // itemsPanel
@@ -91,9 +96,9 @@
             this.itemsPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.itemsPanel.Controls.Add(this.label1);
             this.itemsPanel.Controls.Add(this.itemsTable);
-            this.itemsPanel.Location = new System.Drawing.Point(12, 171);
+            this.itemsPanel.Location = new System.Drawing.Point(12, 229);
             this.itemsPanel.Name = "itemsPanel";
-            this.itemsPanel.Size = new System.Drawing.Size(714, 242);
+            this.itemsPanel.Size = new System.Drawing.Size(714, 166);
             this.itemsPanel.TabIndex = 2;
             // 
             // label1
@@ -116,7 +121,7 @@
             this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.itemsTable.BackgroundColor = System.Drawing.Color.White;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -146,14 +151,14 @@
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle5;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.DarkGray;
-            this.itemsTable.Location = new System.Drawing.Point(-2, 21);
+            this.itemsTable.Location = new System.Drawing.Point(3, 21);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(714, 219);
+            this.itemsTable.Size = new System.Drawing.Size(704, 138);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
             // 
@@ -221,7 +226,7 @@
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox8.Controls.Add(this.soldTo);
-            this.groupBox8.Location = new System.Drawing.Point(399, 12);
+            this.groupBox8.Location = new System.Drawing.Point(399, 65);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(327, 47);
             this.groupBox8.TabIndex = 11;
@@ -245,7 +250,7 @@
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.Controls.Add(this.Datetext);
-            this.groupBox7.Location = new System.Drawing.Point(12, 118);
+            this.groupBox7.Location = new System.Drawing.Point(12, 171);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(381, 47);
             this.groupBox7.TabIndex = 13;
@@ -268,7 +273,7 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.total);
-            this.groupBox2.Location = new System.Drawing.Point(580, 483);
+            this.groupBox2.Location = new System.Drawing.Point(579, 401);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(146, 47);
             this.groupBox2.TabIndex = 13;
@@ -292,7 +297,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.amountRecieved);
-            this.groupBox1.Location = new System.Drawing.Point(428, 483);
+            this.groupBox1.Location = new System.Drawing.Point(427, 401);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(146, 47);
             this.groupBox1.TabIndex = 14;
@@ -315,7 +320,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.address);
-            this.groupBox3.Location = new System.Drawing.Point(12, 65);
+            this.groupBox3.Location = new System.Drawing.Point(12, 118);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(381, 47);
             this.groupBox3.TabIndex = 12;
@@ -339,7 +344,7 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.contact);
-            this.groupBox4.Location = new System.Drawing.Point(399, 65);
+            this.groupBox4.Location = new System.Drawing.Point(399, 118);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(327, 47);
             this.groupBox4.TabIndex = 13;
@@ -363,7 +368,7 @@
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.saleType);
-            this.groupBox5.Location = new System.Drawing.Point(399, 118);
+            this.groupBox5.Location = new System.Drawing.Point(399, 171);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(327, 47);
             this.groupBox5.TabIndex = 14;
@@ -387,7 +392,7 @@
             this.addPaymentGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.addPaymentGroup.Controls.Add(this.addPayment);
             this.addPaymentGroup.Controls.Add(this.addPaymentButton);
-            this.addPaymentGroup.Location = new System.Drawing.Point(13, 483);
+            this.addPaymentGroup.Location = new System.Drawing.Point(12, 401);
             this.addPaymentGroup.Name = "addPaymentGroup";
             this.addPaymentGroup.Size = new System.Drawing.Size(257, 47);
             this.addPaymentGroup.TabIndex = 14;
@@ -427,7 +432,7 @@
             // 
             this.remainGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.remainGroup.Controls.Add(this.remaining);
-            this.remainGroup.Location = new System.Drawing.Point(276, 483);
+            this.remainGroup.Location = new System.Drawing.Point(275, 401);
             this.remainGroup.Name = "remainGroup";
             this.remainGroup.Size = new System.Drawing.Size(146, 47);
             this.remainGroup.TabIndex = 15;
@@ -449,13 +454,15 @@
             // 
             // recHistBtn
             // 
-            this.recHistBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.recHistBtn.Location = new System.Drawing.Point(12, 420);
+            this.recHistBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.recHistBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.recHistBtn.Location = new System.Drawing.Point(12, 461);
             this.recHistBtn.Name = "recHistBtn";
-            this.recHistBtn.Size = new System.Drawing.Size(714, 23);
+            this.recHistBtn.Size = new System.Drawing.Size(146, 23);
             this.recHistBtn.TabIndex = 16;
             this.recHistBtn.Text = "Show Payment History";
-            this.recHistBtn.UseVisualStyleBackColor = true;
+            this.recHistBtn.UseVisualStyleBackColor = false;
             this.recHistBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox6
@@ -463,7 +470,7 @@
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.soldBy);
-            this.groupBox6.Location = new System.Drawing.Point(13, 12);
+            this.groupBox6.Location = new System.Drawing.Point(13, 65);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(380, 47);
             this.groupBox6.TabIndex = 12;
@@ -484,26 +491,76 @@
             // 
             // voidBtn
             // 
-            this.voidBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.voidBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.voidBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.voidBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.voidBtn.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.voidBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.voidBtn.ForeColor = System.Drawing.Color.Black;
-            this.voidBtn.Location = new System.Drawing.Point(12, 449);
+            this.voidBtn.Location = new System.Drawing.Point(579, 461);
             this.voidBtn.Name = "voidBtn";
-            this.voidBtn.Size = new System.Drawing.Size(714, 23);
+            this.voidBtn.Size = new System.Drawing.Size(147, 23);
             this.voidBtn.TabIndex = 17;
             this.voidBtn.Text = "Void Sale";
             this.voidBtn.UseVisualStyleBackColor = false;
             this.voidBtn.Click += new System.EventHandler(this.voidBtn_Click);
             // 
+            // editItemsBtn
+            // 
+            this.editItemsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.editItemsBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.editItemsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.editItemsBtn.Location = new System.Drawing.Point(427, 461);
+            this.editItemsBtn.Name = "editItemsBtn";
+            this.editItemsBtn.Size = new System.Drawing.Size(146, 23);
+            this.editItemsBtn.TabIndex = 17;
+            this.editItemsBtn.Text = "Edit Items";
+            this.editItemsBtn.UseVisualStyleBackColor = false;
+            this.editItemsBtn.Click += new System.EventHandler(this.editItemsBtn_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Location = new System.Drawing.Point(12, 454);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(714, 1);
+            this.panel1.TabIndex = 18;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox9.Controls.Add(this.SaleId);
+            this.groupBox9.Location = new System.Drawing.Point(13, 12);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(713, 47);
+            this.groupBox9.TabIndex = 19;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Sale Id";
+            // 
+            // SaleId
+            // 
+            this.SaleId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaleId.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.SaleId.Location = new System.Drawing.Point(7, 28);
+            this.SaleId.Name = "SaleId";
+            this.SaleId.ReadOnly = true;
+            this.SaleId.Size = new System.Drawing.Size(700, 13);
+            this.SaleId.TabIndex = 0;
+            this.SaleId.TabStop = false;
+            // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 542);
+            this.ClientSize = new System.Drawing.Size(738, 496);
+            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.voidBtn);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.recHistBtn);
+            this.Controls.Add(this.editItemsBtn);
             this.Controls.Add(this.remainGroup);
             this.Controls.Add(this.addPaymentGroup);
             this.Controls.Add(this.groupBox5);
@@ -545,6 +602,8 @@
             this.remainGroup.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -584,5 +643,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Button voidBtn;
+        private System.Windows.Forms.Button editItemsBtn;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.TextBox SaleId;
     }
 }

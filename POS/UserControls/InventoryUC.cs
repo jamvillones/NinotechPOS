@@ -67,11 +67,22 @@ namespace POS.UserControls
                 return;
 
             var dgt = (DataGridView)sender;
+            var barcode = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
+            using (var p = new POSEntities())
+            {
+                var inventoryItem = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == barcode);
+                if (inventoryItem == null)
+                {
+                    MessageBox.Show("Not found. Try refreshing(F5)");
+                    dgt.Rows.RemoveAt(e.RowIndex);
+                    return;
+                }
+            }
 
             using (var inView = new InventoryItemView())
             {
                 inView.OnSave += InView_OnSave;
-                inView.SetItemId(dgt.Rows[e.RowIndex].Cells[0].Value.ToString());
+                inView.SetItemId(barcode);
                 inView.ShowDialog();
             }
         }

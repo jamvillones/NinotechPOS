@@ -95,7 +95,7 @@ namespace POS.Forms
 
         private void selectBtn_Click(object sender, EventArgs e)
         {
-            switch (MessageBox.Show("Are you sure you want to continue?", "The item " + infoHolder.Name + " is about to be added to cart", MessageBoxButtons.YesNo))
+            switch (MessageBox.Show("The item " + infoHolder.Name + " is about to be added.\n\nAre you sure you want to continue?", "", MessageBoxButtons.YesNo))
             {
                 case DialogResult.Yes:
                     addToCart();

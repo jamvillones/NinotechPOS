@@ -32,6 +32,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 sale = p.Sales.FirstOrDefault(x => x.Id == id);
+                SaleId.Text = sale.Id.ToString();
                 soldBy.Text = sale.Login?.Username;
                 soldTo.Text = sale.Customer.Name;
                 address.Text = sale.Customer.Address;
@@ -132,11 +133,11 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                foreach(var i in id)
+                foreach (var i in id)
                 {
                     var soldItem = p.SoldItems.FirstOrDefault(x => x.Id == i);
 
-                    if(!string.IsNullOrEmpty(soldItem.SerialNumber))
+                    if (!string.IsNullOrEmpty(soldItem.SerialNumber))
                     {
                         var inv = new InventoryItem();
                         inv.Product = soldItem.Product;
@@ -147,15 +148,16 @@ namespace POS.Forms
                     else
                     {
                         var inv = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == null && x.Product.Id == soldItem.ProductId);
-                        if(inv!= null)
+                        if (inv != null)
                         {
-                            inv.Quantity += soldItem.Quantity;
+                            if (inv.Quantity != 0)
+                                inv.Quantity += soldItem.Quantity;
                         }
                         else
                         {
                             var temp = new InventoryItem();
                             temp.Product = soldItem.Product;
-                            temp.Quantity = soldItem.Quantity;                            
+                            temp.Quantity = soldItem.Quantity;
                             p.InventoryItems.Add(temp);
                         }
                     }
@@ -170,6 +172,16 @@ namespace POS.Forms
         private void SaleDetails_Load(object sender, EventArgs e)
         {
             voidBtn.Enabled = currentLogin.CanVoidSale;
+            editItemsBtn.Enabled = currentLogin.CanVoidSale;
+
+        }
+
+        private void editItemsBtn_Click(object sender, EventArgs e)
+        {
+            using (var editsolditems = new EditSale(sale.Id))
+            {
+                editsolditems.ShowDialog();
+            }
         }
     }
 }

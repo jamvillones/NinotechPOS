@@ -25,17 +25,14 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
+                var invItem = p.InventoryItems.Where(x => x.Product.Item.Barcode == barcode);
+               
                 var item = p.Items.FirstOrDefault(x => x.Barcode == barcode);
-                if (item == null)
-                {
-                    MessageBox.Show("Not found.");
-                    return;
-                }
                 barcodeField.Text = item.Barcode;
                 itemName.Text = item.Name;
                 sellingPrice.Text = string.Format("₱ {0:n}", item.SellingPrice);
 
-                var invItem = p.InventoryItems.Where(x => x.Product.Item.Barcode == item.Barcode);
+                //var invItem = p.InventoryItems.Where(x => x.Product.Item.Barcode == item.Barcode);
                 quantity.Text = invItem.Sum(x => x.Quantity).ToString();
                 //int counter = 0;
                 foreach (var i in invItem)
@@ -44,7 +41,7 @@ namespace POS.Forms
                     invTable.Rows.Add(i.Id, i.SerialNumber, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Supplier.Name);
                 }
             }
-        }             
+        }
 
         InventoryItem target;
         private void invTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -63,13 +60,13 @@ namespace POS.Forms
                 ///if serial
                 var serial = dgt.Rows[e.RowIndex].Cells[1].Value?.ToString();
                 /////items without serial
-                bool con1 =  e.ColumnIndex == 1 && quantity == 1;
-                bool con2 =  e.ColumnIndex == 2 && serial == null;
+                bool con1 = e.ColumnIndex == 1 && quantity == 1;
+                bool con2 = e.ColumnIndex == 2 && serial == null;
                 //bool con3 = e.ColumnIndex == 1 && string.IsNullOrEmpty(serial) && quantity == 1;
                 //if (serial == null && quantity != 1)
                 //{
                 if (con1 || con2)
-                { 
+                {
                     using (var p = new POSEntities())
                     {
                         target = p.InventoryItems.FirstOrDefault(x => x.Id == id);
@@ -77,7 +74,7 @@ namespace POS.Forms
                 }
                 else
                 {
-                    MessageBox.Show(!con1?"Changing quantity of item with serial number is not allowed.":"Serial cannot be set if item quantity is more than one." ,"Edit prohibited", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show(!con1 ? "Changing quantity of item with serial number is not allowed." : "Serial cannot be set if item quantity is more than one.", "Edit prohibited", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     e.Cancel = true;
                     return;
                 }
