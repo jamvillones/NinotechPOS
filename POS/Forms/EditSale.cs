@@ -40,8 +40,8 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 sale = p.Sales.FirstOrDefault(x => x.Id == id);
-
                 var soldItems = sale.SoldItems;
+                SaleId.Text = sale.Id.ToString();
                 foreach (var x in soldItems)
                 {
                     itemsTable.Rows.Add(x.Id, x.Product.Item.Name,
