@@ -42,10 +42,12 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.inventoryTab = new POS.UserControls.InventoryUC();
+            this.reportTab = new POS.UserControls.ReportUC();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.addNewLoginToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewLoginToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loginPrivilegesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -58,8 +60,6 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.refreshToolStripBtn = new System.Windows.Forms.ToolStripButton();
-            this.inventoryTab = new POS.UserControls.InventoryUC();
-            this.reportTab = new POS.UserControls.ReportUC();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -273,16 +273,34 @@
             this.panel3.Size = new System.Drawing.Size(920, 588);
             this.panel3.TabIndex = 2;
             // 
+            // inventoryTab
+            // 
+            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
+            this.inventoryTab.Name = "inventoryTab";
+            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
+            this.inventoryTab.Size = new System.Drawing.Size(920, 588);
+            this.inventoryTab.TabIndex = 0;
+            // 
+            // reportTab
+            // 
+            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportTab.Location = new System.Drawing.Point(0, 0);
+            this.reportTab.Name = "reportTab";
+            this.reportTab.Size = new System.Drawing.Size(920, 588);
+            this.reportTab.TabIndex = 1;
+            this.reportTab.TabStop = false;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1,
-            this.toolStripButton1,
             this.toolStripSeparator1,
+            this.toolStripButton1,
             this.toolStripButton2,
-            this.toolStripButton3,
             this.toolStripSeparator2,
+            this.toolStripButton3,
             this.stockinToolStrpBtn,
             this.toolStripButton7,
             this.toolStripButton4,
@@ -310,25 +328,25 @@
             this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.ToolTipText = "Logins";
             // 
-            // addNewLoginToolStripMenuItem1
-            // 
-            this.addNewLoginToolStripMenuItem1.Name = "addNewLoginToolStripMenuItem1";
-            this.addNewLoginToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.addNewLoginToolStripMenuItem1.Text = "Add New Login";
-            this.addNewLoginToolStripMenuItem1.Click += new System.EventHandler(this.addNewLoginToolStripMenuItem1_Click);
-            // 
             // changePasswordToolStripMenuItem2
             // 
             this.changePasswordToolStripMenuItem2.Name = "changePasswordToolStripMenuItem2";
-            this.changePasswordToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.changePasswordToolStripMenuItem2.Size = new System.Drawing.Size(168, 22);
             this.changePasswordToolStripMenuItem2.Text = "Change Password";
             this.changePasswordToolStripMenuItem2.Click += new System.EventHandler(this.changePasswordToolStripMenuItem2_Click);
+            // 
+            // addNewLoginToolStripMenuItem1
+            // 
+            this.addNewLoginToolStripMenuItem1.Name = "addNewLoginToolStripMenuItem1";
+            this.addNewLoginToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
+            this.addNewLoginToolStripMenuItem1.Text = "Add New Login";
+            this.addNewLoginToolStripMenuItem1.Click += new System.EventHandler(this.addNewLoginToolStripMenuItem1_Click);
             // 
             // loginPrivilegesToolStripMenuItem1
             // 
             this.loginPrivilegesToolStripMenuItem1.Enabled = false;
             this.loginPrivilegesToolStripMenuItem1.Name = "loginPrivilegesToolStripMenuItem1";
-            this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
             this.loginPrivilegesToolStripMenuItem1.Text = "Login Privileges";
             // 
             // toolStripButton1
@@ -426,24 +444,6 @@
             this.refreshToolStripBtn.Size = new System.Drawing.Size(23, 22);
             this.refreshToolStripBtn.Text = "Refresh(F5)";
             this.refreshToolStripBtn.Click += new System.EventHandler(this.refreshToolStripBtn_Click);
-            // 
-            // inventoryTab
-            // 
-            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
-            this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
-            this.inventoryTab.Size = new System.Drawing.Size(920, 588);
-            this.inventoryTab.TabIndex = 0;
-            // 
-            // reportTab
-            // 
-            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportTab.Location = new System.Drawing.Point(0, 0);
-            this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(920, 588);
-            this.reportTab.TabIndex = 1;
-            this.reportTab.TabStop = false;
             // 
             // Main
             // 

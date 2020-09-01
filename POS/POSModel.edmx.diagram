@@ -23,6 +23,7 @@
         <AssociationConnector Association="POSModel.FK_Product_Item" />
         <AssociationConnector Association="POSModel.FK_Product_Supplier" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Product" />
+        <AssociationConnector Association="POSModel.FK_StockinHistory_InventoryItem" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

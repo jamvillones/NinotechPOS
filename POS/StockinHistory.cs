@@ -22,5 +22,8 @@ namespace POS
         public Nullable<int> Quantity { get; set; }
         public string SerialNumber { get; set; }
         public string LoginUsername { get; set; }
+        public Nullable<int> InventoryReference { get; set; }
+    
+        public virtual InventoryItem InventoryItem { get; set; }
     }
 }

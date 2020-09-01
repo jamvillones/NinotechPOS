@@ -50,10 +50,7 @@ namespace POS.Forms
         {
             SetTable();
             setAutoComplete();
-            createItemBtn.Enabled = currLogin.CanAddItem;
-            //toolTip.SetToolTip(barcode, "Press f1 to set focus on barcode");
-            //toolTip.SetToolTip(serialNumber, "Press f2 to set focus on serial number");
-            //toolTip.SetToolTip(quantity, "Press f3 to set focus on quantity");
+            createItemBtn.Enabled = currLogin.CanAddItem;           
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
@@ -125,7 +122,7 @@ namespace POS.Forms
                 Product product;
                 for (int i = 0; i < inventoryTable.RowCount; i++)
                 {
-                    var it = new InventoryItem();
+                    InventoryItem it = null;
                     var itemId = inventoryTable.Rows[i].Cells[0].Value.ToString();
                     var suppName = inventoryTable.Rows[i].Cells[6].Value.ToString();
                     var serialNum = inventoryTable.Rows[i].Cells[1].Value.ToString();
@@ -157,6 +154,7 @@ namespace POS.Forms
                         p.InventoryItems.Add(it);
                     }
                     var stockinHist = new StockinHistory();
+                    stockinHist.InventoryReference = it.Id;
                     stockinHist.ItemName = it.Product.Item.Name;
                     stockinHist.Cost = it.Product.Cost;
                     stockinHist.Supplier = it.Product.Supplier.Name;
