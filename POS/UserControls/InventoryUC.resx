@@ -147,10 +147,10 @@
   </metadata>
   <data name="addVariationsBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAB1SURBVDhPY6AWmA7ER6F4K0iAVADS+B+K34AEgKAEiLvw4CwghgNsBkwD4o14cAcQwwHI2SCN
-        IHwTJEB3sAyIQTaD8AmQAKkAFAargXgyEL8FCQBBKxDPw4MrgRgOKDaAYi9QDCiORooTEsVJmeLMRCZg
-        YAAA9gpHJ9BWtsgAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAHVJREFUOE9j
+        oBaYDsRHoXgrSIBUANL4H4rfgASAoASIu/DgLCCGA2wGTAPijXhwBxDDAcjZII0gfBMkQHewDIhBNoPw
+        CZAAqQAUBquBeDIQvwUJAEErEM/DgyuBGA4oNoBiL1AMKI5GihMSxUmZ4sxEJmBgAAD2Ckcn0Fa2yAAA
+        AABJRU5ErkJggg==
 </value>
   </data>
   <data name="editItemBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -188,6 +188,9 @@
     <value>True</value>
   </metadata>
   <metadata name="Column7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DeleteColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="searchBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

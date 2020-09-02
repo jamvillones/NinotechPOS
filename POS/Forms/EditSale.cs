@@ -29,13 +29,13 @@ namespace POS.Forms
         public EditSale(int id)
         {
             InitializeComponent();
-            SetId(id);
+            Initialize(id);
         }
         /// <summary>
         /// initializes the values
         /// </summary>
         /// <param name="id"></param>
-        private void SetId(int id)
+        private void Initialize(int id)
         {
             using (var p = new POSEntities())
             {
@@ -55,6 +55,14 @@ namespace POS.Forms
                 }
                 total.Text = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
                 amountRecieved.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
+
+                soldTo.Text = sale.Customer.Name;
+
+                var items = p.Customers.Select(x => x.Name).ToArray();
+                soldTo.Items.AddRange(items);
+                soldTo.AutoCompleteCustomSource.AddRange(items);
+
+                dateOfPurchase.Value = sale.Date.Value;
 
             }
             remaining.Text = string.Format("₱ {0:n}", (sale.GetSaleTotalPrice() - sale.AmountRecieved));
@@ -194,5 +202,68 @@ namespace POS.Forms
             table.Rows.RemoveAt(e.RowIndex);
             MessageBox.Show("Entry Removed");
         }
+
+        Customer validateNewCustomer(string newCustomer)
+        {
+            using (var p = new POSEntities())
+            {
+                return p.Customers.FirstOrDefault(x => x.Name == newCustomer);
+            }
+
+        }
+        private void soldTo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            var newCustomer = validateNewCustomer(soldTo.Text);
+            using (var p = new POSEntities())
+            {
+                var oldCustomer = p.Customers.FirstOrDefault(x => x.Id == sale.CustomerId);
+
+                if (newCustomer != null)
+                {
+                    if (oldCustomer.Name == newCustomer.Name)
+                    {
+                        return;
+                    }
+                    if (MessageBox.Show("Are you sure you want to change Customer?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    {
+                        soldTo.Text = p.Customers.FirstOrDefault(x => x.Id == sale.CustomerId).Name;
+                        return;
+                    }
+                }
+                var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
+                s.CustomerId = newCustomer.Id;
+                p.SaveChanges();
+            }
+        }
+
+
+        private void soldTo_Leave(object sender, EventArgs e)
+        {
+            if (validateNewCustomer(soldTo.Text) == null)
+            {
+                using (var p = new POSEntities())
+                {
+                    var oldCustomer = p.Customers.FirstOrDefault(x => x.Id == sale.CustomerId);
+
+                    soldTo.Text = p.Customers.FirstOrDefault(x => x.Id == sale.CustomerId).Name;
+                    MessageBox.Show("Customer not found.","", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            using (var p = new POSEntities())
+            {
+                var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
+
+                s.Date = dateOfPurchase.Value;
+                p.SaveChanges();
+                //MessageBox.Show("Date changed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
+
+

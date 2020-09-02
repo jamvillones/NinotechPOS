@@ -180,7 +180,7 @@ namespace POS.UserControls
             {
                 foreach (var i in p.Items)
                 {
-                    itemsTable.Rows.Add(i.Barcode, i.Name, string.Format("₱ {0:n}", i.SellingPrice), i.Department, i.Type, i.Details);
+                    itemsTable.Rows.Add(i.Barcode, i.Name, string.Format("₱ {0:n}", i.SellingPrice), i.Department, i.Type, i.Details, "Delete");
                 }
             }
         }
@@ -252,7 +252,7 @@ namespace POS.UserControls
                 target.Rows.Clear();
                 foreach (var i in searchElements)
                 {
-                    target.Rows.Add(i.Barcode, i.Name, i.SellingPrice, i.Department, i.Type, i.Details);
+                    target.Rows.Add(i.Barcode, i.Name, i.SellingPrice, i.Department, i.Type, i.Details, "Delete");
                 }
             }
         }
@@ -357,6 +357,32 @@ namespace POS.UserControls
 
             var type = itemsTable.SelectedCells[4].Value.ToString();
             addVariationsBtn.Enabled = type != ItemType.Hardware.ToString() ? false : true;
+        }
+
+        private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 6)
+            {
+                return;
+            }
+            if (!UserManager.instance.currentLogin.CanDeleteItem)
+            {
+                return;
+            }
+            if (MessageBox.Show("Are you sure you want to delete the selected item?", "This will also delete items in inventory.", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            using (var p = new POSEntities())
+            {
+                var selected = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex].Cells[0].Value.ToString();
+                var i = p.Items.FirstOrDefault(x => x.Barcode == selected);
+                p.Items.Remove(i);
+                p.SaveChanges();
+            }
+
+            itemsTable.Rows.RemoveAt(e.RowIndex);
         }
     }
 }

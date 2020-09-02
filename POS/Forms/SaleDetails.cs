@@ -122,7 +122,7 @@ namespace POS.Forms
                 var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
                 //get the solditems of this sale and restock them
 
-                addBackToInventory(p.SoldItems.Select(x => x.Id).ToArray());
+                addBackToInventory(p.SoldItems.Where(x=>x.SaleId == s.Id).Select(x => x.Id).ToArray());
                 //p.SoldItems.RemoveRange(s.SoldItems);
 
                 p.Sales.Remove(s);
