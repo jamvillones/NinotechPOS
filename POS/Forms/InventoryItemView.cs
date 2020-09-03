@@ -19,14 +19,15 @@ namespace POS.Forms
         {
             InitializeComponent();
             currlogin = UserManager.instance.currentLogin;
-            Column1.ReadOnly = !(currlogin.CanEditInventory);
+            Column1.ReadOnly = !currlogin.CanEditInventory;
+            removeBtn.Visible = currlogin.CanEditInventory;
         }
         public void SetItemId(string barcode)
         {
             using (var p = new POSEntities())
             {
                 var invItem = p.InventoryItems.Where(x => x.Product.Item.Barcode == barcode);
-               
+
                 var item = p.Items.FirstOrDefault(x => x.Barcode == barcode);
                 barcodeField.Text = item.Barcode;
                 itemName.Text = item.Name;
@@ -38,7 +39,7 @@ namespace POS.Forms
                 foreach (var i in invItem)
                 {
                     //counter++;
-                    invTable.Rows.Add(i.Id, i.SerialNumber, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Supplier.Name);
+                    invTable.Rows.Add(i.Id, i.SerialNumber, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Supplier.Name,"Stockin Log");
                 }
             }
         }
@@ -183,6 +184,16 @@ namespace POS.Forms
         {
             if (RemoveInventoryItem() == false)
                 e.Cancel = true;
+        }
+
+        private void invTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 4) return;
+            var table = sender as DataGridView;
+            using (InventoryStockinLog log = new InventoryStockinLog((int)(table.Rows[e.RowIndex].Cells[0].Value)))
+            {
+                log.ShowDialog();
+            }
         }
     }
 }

@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemVariationsForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.supplier = new System.Windows.Forms.ComboBox();
@@ -48,6 +49,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.varTable = new System.Windows.Forms.DataGridView();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -60,22 +62,25 @@
             // 
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.supplier);
-            this.groupBox1.Location = new System.Drawing.Point(12, 118);
+            this.groupBox1.Location = new System.Drawing.Point(336, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(341, 47);
+            this.groupBox1.Size = new System.Drawing.Size(223, 47);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Supplier";
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button1.Location = new System.Drawing.Point(236, 14);
+            this.button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(6, 16);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 23);
+            this.button1.Size = new System.Drawing.Size(33, 25);
             this.button1.TabIndex = 12;
-            this.button1.Text = "Add Supplier";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.TabStop = false;
+            this.toolTip1.SetToolTip(this.button1, "Add new supplier");
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // supplier
@@ -84,10 +89,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.supplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.supplier.FormattingEnabled = true;
-            this.supplier.Location = new System.Drawing.Point(7, 16);
+            this.supplier.Location = new System.Drawing.Point(45, 18);
             this.supplier.Name = "supplier";
-            this.supplier.Size = new System.Drawing.Size(223, 21);
+            this.supplier.Size = new System.Drawing.Size(172, 21);
             this.supplier.TabIndex = 0;
+            this.supplier.TabStop = false;
             // 
             // groupBox2
             // 
@@ -96,7 +102,7 @@
             this.groupBox2.Controls.Add(this.barcode);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(547, 47);
+            this.groupBox2.Size = new System.Drawing.Size(318, 47);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Barcode";
@@ -105,11 +111,13 @@
             // 
             this.barcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.barcode.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.barcode.Location = new System.Drawing.Point(7, 20);
             this.barcode.Name = "barcode";
             this.barcode.ReadOnly = true;
-            this.barcode.Size = new System.Drawing.Size(534, 20);
+            this.barcode.Size = new System.Drawing.Size(305, 13);
             this.barcode.TabIndex = 0;
+            this.barcode.TabStop = false;
             // 
             // groupBox3
             // 
@@ -118,7 +126,7 @@
             this.groupBox3.Controls.Add(this.itemName);
             this.groupBox3.Location = new System.Drawing.Point(12, 65);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(547, 47);
+            this.groupBox3.Size = new System.Drawing.Size(318, 47);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Item Name";
@@ -127,18 +135,20 @@
             // 
             this.itemName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.itemName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemName.Location = new System.Drawing.Point(7, 20);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(534, 20);
+            this.itemName.Size = new System.Drawing.Size(305, 13);
             this.itemName.TabIndex = 0;
+            this.itemName.TabStop = false;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.cost);
-            this.groupBox4.Location = new System.Drawing.Point(359, 118);
+            this.groupBox4.Location = new System.Drawing.Point(336, 65);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 47);
+            this.groupBox4.Size = new System.Drawing.Size(223, 47);
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Cost";
@@ -148,32 +158,35 @@
             this.cost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cost.DecimalPlaces = 2;
-            this.cost.Location = new System.Drawing.Point(7, 19);
+            this.cost.Location = new System.Drawing.Point(7, 18);
             this.cost.Maximum = new decimal(new int[] {
             999999999,
             0,
             0,
             0});
             this.cost.Name = "cost";
-            this.cost.Size = new System.Drawing.Size(187, 20);
+            this.cost.Size = new System.Drawing.Size(210, 20);
             this.cost.TabIndex = 0;
+            this.cost.TabStop = false;
             this.cost.ThousandsSeparator = true;
             // 
             // addBtn
             // 
             this.addBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.addBtn.Location = new System.Drawing.Point(12, 171);
+            this.addBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addBtn.Location = new System.Drawing.Point(12, 118);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(547, 23);
             this.addBtn.TabIndex = 11;
             this.addBtn.Text = "Add";
-            this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(12, 201);
+            this.panel1.Location = new System.Drawing.Point(12, 148);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(547, 1);
             this.panel1.TabIndex = 13;
@@ -181,12 +194,14 @@
             // refBtn
             // 
             this.refBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.refBtn.Location = new System.Drawing.Point(366, 208);
+            this.refBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.refBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.refBtn.Location = new System.Drawing.Point(366, 155);
             this.refBtn.Name = "refBtn";
             this.refBtn.Size = new System.Drawing.Size(193, 23);
             this.refBtn.TabIndex = 14;
             this.refBtn.Text = "Show References";
-            this.refBtn.UseVisualStyleBackColor = true;
+            this.refBtn.UseVisualStyleBackColor = false;
             this.refBtn.Click += new System.EventHandler(this.refBtn_Click);
             // 
             // Column4
@@ -228,36 +243,36 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.varTable.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.varTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.varTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.varTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.varTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.varTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
             this.Column1,
             this.Column2,
             this.Column4});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.varTable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.varTable.DefaultCellStyle = dataGridViewCellStyle8;
             this.varTable.EnableHeadersVisualStyles = false;
-            this.varTable.Location = new System.Drawing.Point(12, 237);
+            this.varTable.Location = new System.Drawing.Point(12, 184);
             this.varTable.MultiSelect = false;
             this.varTable.Name = "varTable";
             this.varTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.varTable.RowHeadersVisible = false;
             this.varTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.varTable.Size = new System.Drawing.Size(547, 220);
+            this.varTable.Size = new System.Drawing.Size(547, 273);
             this.varTable.StandardTab = true;
             this.varTable.TabIndex = 7;
             this.varTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.varTable_CellContentClick);
@@ -314,5 +329,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridView varTable;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

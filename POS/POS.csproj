@@ -132,6 +132,12 @@
     <Compile Include="Forms\SellForm.Designer.cs">
       <DependentUpon>SellForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InventoryStockinLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InventoryStockinLog.Designer.cs">
+      <DependentUpon>InventoryStockinLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StockinLog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +156,7 @@
     <Compile Include="Forms\VariationReferences.Designer.cs">
       <DependentUpon>VariationReferences.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IOnsave.cs" />
     <Compile Include="InventoryItem.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
@@ -330,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SellForm.resx">
       <DependentUpon>SellForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InventoryStockinLog.resx">
+      <DependentUpon>InventoryStockinLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockinLog.resx">
       <DependentUpon>StockinLog.cs</DependentUpon>

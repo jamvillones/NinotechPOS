@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockinForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockinForm));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.removeBtn = new System.Windows.Forms.Button();
             this.stockinBtn = new System.Windows.Forms.Button();
@@ -47,7 +47,6 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.searchControl = new POS.UserControls.SearchControl();
             this.createItemBtn = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.barcode = new System.Windows.Forms.TextBox();
@@ -68,6 +67,7 @@
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.addBtn = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.searchControl = new POS.UserControls.SearchControl();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -110,14 +110,17 @@
             // 
             // stockinBtn
             // 
-            this.stockinBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.stockinBtn.Location = new System.Drawing.Point(250, 474);
+            this.stockinBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.stockinBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.stockinBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.stockinBtn.Location = new System.Drawing.Point(6, 474);
             this.stockinBtn.Name = "stockinBtn";
-            this.stockinBtn.Size = new System.Drawing.Size(75, 23);
+            this.stockinBtn.Size = new System.Drawing.Size(562, 23);
             this.stockinBtn.TabIndex = 4;
             this.stockinBtn.TabStop = false;
             this.stockinBtn.Text = "Stock in";
-            this.stockinBtn.UseVisualStyleBackColor = true;
+            this.stockinBtn.UseVisualStyleBackColor = false;
             this.stockinBtn.Click += new System.EventHandler(this.stockinBtn_Click);
             // 
             // inventoryTable
@@ -129,9 +132,10 @@
             this.inventoryTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.inventoryTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.inventoryTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
@@ -261,32 +265,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Items";
             // 
-            // searchControl
-            // 
-            this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchControl.Location = new System.Drawing.Point(9, 19);
-            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.SearchText = "";
-            this.searchControl.Size = new System.Drawing.Size(458, 28);
-            this.searchControl.TabIndex = 0;
-            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
-            // 
             // createItemBtn
             // 
-            this.createItemBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createItemBtn.Location = new System.Drawing.Point(473, 19);
+            this.createItemBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.createItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("createItemBtn.Image")));
+            this.createItemBtn.Location = new System.Drawing.Point(9, 19);
             this.createItemBtn.Name = "createItemBtn";
-            this.createItemBtn.Size = new System.Drawing.Size(95, 28);
+            this.createItemBtn.Size = new System.Drawing.Size(34, 28);
             this.createItemBtn.TabIndex = 1;
-            this.createItemBtn.Text = "Create Item";
             this.toolTip.SetToolTip(this.createItemBtn, "Create Item");
-            this.createItemBtn.UseVisualStyleBackColor = true;
+            this.createItemBtn.UseVisualStyleBackColor = false;
             this.createItemBtn.Click += new System.EventHandler(this.createItemBtn_Click);
             // 
             // groupBox8
@@ -369,9 +358,10 @@
             this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightBlue;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
@@ -522,14 +512,17 @@
             // 
             // addBtn
             // 
-            this.addBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.addBtn.Location = new System.Drawing.Point(229, 474);
+            this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.addBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addBtn.Location = new System.Drawing.Point(6, 474);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(75, 23);
+            this.addBtn.Size = new System.Drawing.Size(562, 23);
             this.addBtn.TabIndex = 3;
             this.addBtn.TabStop = false;
             this.addBtn.Text = "Add";
-            this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // toolTip
@@ -538,6 +531,21 @@
             this.toolTip.InitialDelay = 300;
             this.toolTip.ReshowDelay = 100;
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // searchControl
+            // 
+            this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchControl.Location = new System.Drawing.Point(49, 19);
+            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.SearchText = "";
+            this.searchControl.Size = new System.Drawing.Size(519, 28);
+            this.searchControl.TabIndex = 0;
+            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // StockinForm
             // 

@@ -44,7 +44,7 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.amountRecieved = new System.Windows.Forms.NumericUpDown();
             this.saleType = new System.Windows.Forms.ComboBox();
-            this.stockinBtn = new System.Windows.Forms.Button();
+            this.checkoutBtn = new System.Windows.Forms.Button();
             this.cartTable = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,7 +106,7 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel2);
             this.groupBox2.Controls.Add(this.saleType);
-            this.groupBox2.Controls.Add(this.stockinBtn);
+            this.groupBox2.Controls.Add(this.checkoutBtn);
             this.groupBox2.Controls.Add(this.cartTable);
             this.groupBox2.Controls.Add(this.groupBox8);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -139,7 +139,8 @@
             // 
             // button1
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.Location = new System.Drawing.Point(417, 3);
             this.button1.Name = "button1";
@@ -147,7 +148,7 @@
             this.button1.TabIndex = 13;
             this.button1.TabStop = false;
             this.cartTooltip.SetToolTip(this.button1, "Exact amount");
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox6
@@ -236,21 +237,22 @@
             this.saleType.Size = new System.Drawing.Size(474, 21);
             this.saleType.TabIndex = 14;
             // 
-            // stockinBtn
+            // checkoutBtn
             // 
-            this.stockinBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.checkoutBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.stockinBtn.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.stockinBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stockinBtn.ForeColor = System.Drawing.Color.Black;
-            this.stockinBtn.Location = new System.Drawing.Point(6, 423);
-            this.stockinBtn.Name = "stockinBtn";
-            this.stockinBtn.Size = new System.Drawing.Size(474, 23);
-            this.stockinBtn.TabIndex = 16;
-            this.stockinBtn.TabStop = false;
-            this.stockinBtn.Text = "Checkout";
-            this.stockinBtn.UseVisualStyleBackColor = false;
-            this.stockinBtn.Click += new System.EventHandler(this.sell_Click);
+            this.checkoutBtn.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.checkoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkoutBtn.ForeColor = System.Drawing.Color.Black;
+            this.checkoutBtn.Location = new System.Drawing.Point(6, 423);
+            this.checkoutBtn.Name = "checkoutBtn";
+            this.checkoutBtn.Size = new System.Drawing.Size(474, 23);
+            this.checkoutBtn.TabIndex = 16;
+            this.checkoutBtn.TabStop = false;
+            this.checkoutBtn.Text = "Checkout";
+            this.cartTooltip.SetToolTip(this.checkoutBtn, "(ctrl+Enter) To Checkout");
+            this.checkoutBtn.UseVisualStyleBackColor = false;
+            this.checkoutBtn.Click += new System.EventHandler(this.sell_Click);
             // 
             // cartTable
             // 
@@ -260,7 +262,7 @@
             this.cartTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cartTable.BackgroundColor = System.Drawing.Color.White;
+            this.cartTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.cartTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.CadetBlue;
@@ -302,7 +304,6 @@
             this.cartTable.StandardTab = true;
             this.cartTable.TabIndex = 15;
             this.cartTable.TabStop = false;
-            this.cartTooltip.SetToolTip(this.cartTable, "Finalize the table before making any changes in the prizes\r\n");
             this.cartTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.cartTable_UserDeletingRow);
             this.cartTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.barcode_KeyDown);
             // 
@@ -390,21 +391,23 @@
             this.soldTo.Items.AddRange(new object[] {
             "Regular Sale",
             "Charged Sale"});
-            this.soldTo.Location = new System.Drawing.Point(6, 19);
+            this.soldTo.Location = new System.Drawing.Point(40, 18);
             this.soldTo.Name = "soldTo";
-            this.soldTo.Size = new System.Drawing.Size(365, 21);
+            this.soldTo.Size = new System.Drawing.Size(428, 21);
             this.soldTo.TabIndex = 12;
             // 
             // addCustomerBtn
             // 
-            this.addCustomerBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addCustomerBtn.Location = new System.Drawing.Point(377, 18);
+            this.addCustomerBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.addCustomerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.addCustomerBtn.Image = ((System.Drawing.Image)(resources.GetObject("addCustomerBtn.Image")));
+            this.addCustomerBtn.Location = new System.Drawing.Point(6, 15);
             this.addCustomerBtn.Name = "addCustomerBtn";
-            this.addCustomerBtn.Size = new System.Drawing.Size(91, 23);
+            this.addCustomerBtn.Size = new System.Drawing.Size(28, 26);
             this.addCustomerBtn.TabIndex = 11;
             this.addCustomerBtn.TabStop = false;
-            this.addCustomerBtn.Text = "Add Customer";
-            this.addCustomerBtn.UseVisualStyleBackColor = true;
+            this.cartTooltip.SetToolTip(this.addCustomerBtn, "Add New Customer");
+            this.addCustomerBtn.UseVisualStyleBackColor = false;
             this.addCustomerBtn.Click += new System.EventHandler(this.addCustomerBtn_Click);
             // 
             // tableLayoutPanel1
@@ -642,7 +645,7 @@
             this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.itemsTable.BackgroundColor = System.Drawing.Color.White;
+            this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -784,7 +787,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button addBtn;
-        private System.Windows.Forms.Button stockinBtn;
+        private System.Windows.Forms.Button checkoutBtn;
         private System.Windows.Forms.DataGridView cartTable;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox itemName;

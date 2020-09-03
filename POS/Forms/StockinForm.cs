@@ -14,7 +14,11 @@ namespace POS.Forms
     public partial class StockinForm : Form
     {
         List<Product> productsToImport = new List<Product>();
+        /// <summary>
+        /// the event fired 
+        /// </summary>
         public event EventHandler OnSave;
+
         Login currLogin
         {
             get
@@ -22,6 +26,7 @@ namespace POS.Forms
                 return UserManager.instance.currentLogin;
             }
         }
+
         public StockinForm()
         {
             InitializeComponent();
@@ -29,28 +34,27 @@ namespace POS.Forms
 
         void SetTable()
         {
-            //Console.WriteLine("setTable");
             itemsTable.Rows.Clear();
             using (var p = new POSEntities())
             {
                 foreach (var i in p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()))
                     itemsTable.Rows.Add(i.Item?.Barcode, i.Item?.Name, i.Cost, i.Supplier?.Name);
             }
-            itemsTable.Sort(itemsTable.Columns[0], ListSortDirection.Ascending);
         }
+        
         void setAutoComplete()
         {
-            //searchBar.AutoCompleteCustomSource.Clear();
             using (var p = new POSEntities())
             {
                 searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()).Select(x => x.Item.Name).ToArray());
             }
         }
+
         private void StockinForm_Load(object sender, EventArgs e)
         {
             SetTable();
             setAutoComplete();
-            createItemBtn.Enabled = currLogin.CanAddItem;           
+            createItemBtn.Enabled = currLogin.CanAddItem;
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
@@ -113,7 +117,7 @@ namespace POS.Forms
 
         private void stockinBtn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to stock these items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.Cancel)
+            if (MessageBox.Show("Are you sure you want to stock these items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
             {
                 return;
             }
@@ -122,7 +126,6 @@ namespace POS.Forms
                 Product product;
                 for (int i = 0; i < inventoryTable.RowCount; i++)
                 {
-                    InventoryItem it = null;
                     var itemId = inventoryTable.Rows[i].Cells[0].Value.ToString();
                     var suppName = inventoryTable.Rows[i].Cells[6].Value.ToString();
                     var serialNum = inventoryTable.Rows[i].Cells[1].Value.ToString();
@@ -130,9 +133,11 @@ namespace POS.Forms
                     product = p.Products.FirstOrDefault(x => x.ItemId == itemId && x.Supplier.Name == suppName);
 
 
+                    InventoryItem it = new InventoryItem();
+                    //Console.WriteLine(it.Id);
                     if (string.IsNullOrEmpty(serialNum))
                     {
-                        it = p.InventoryItems.FirstOrDefault(x => x.Product.ItemId == itemId && x.Product.Supplier.Name == suppName);
+                        it = p.InventoryItems.FirstOrDefault(x => x.Product.Id == product.Id);
                         if (it == null)
                         {
                             it = new InventoryItem();
@@ -153,8 +158,11 @@ namespace POS.Forms
                         it.SerialNumber = serialNum;
                         p.InventoryItems.Add(it);
                     }
+
+                    //p.SaveChanges();
+
                     var stockinHist = new StockinHistory();
-                    stockinHist.InventoryReference = it.Id;
+                    stockinHist.InventoryItem = it;
                     stockinHist.ItemName = it.Product.Item.Name;
                     stockinHist.Cost = it.Product.Cost;
                     stockinHist.Supplier = it.Product.Supplier.Name;
@@ -166,6 +174,7 @@ namespace POS.Forms
                     p.StockinHistories.Add(stockinHist);
                 }
                 p.SaveChanges();
+
                 OnSave?.Invoke(this, null);
                 MessageBox.Show("Saved.");
                 this.Close();
@@ -193,7 +202,8 @@ namespace POS.Forms
             return false;
         }
 
-        Product selectedProduct;
+        Product selectedProduct;        
+
         void addItem()
         {
             ///check if the item to be added has serial

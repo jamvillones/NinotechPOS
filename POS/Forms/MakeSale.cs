@@ -129,6 +129,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 Sale newSale = new Sale();
+
                 string username = UserManager.instance.currentLogin.Username;
                 newSale.Login = p.Logins.FirstOrDefault(x => x.Username == username);
 
@@ -137,10 +138,6 @@ namespace POS.Forms
 
                 newSale.Date = DateTime.Now;
                 newSale.AmountRecieved = amountRecieved.Value;
-                //newSale.TotalPrice = cartTotalValue;
-
-                //currentSaleType = cartTotalValue - amountRecieved.Value > 0 ? SaleType.Charged : SaleType.Regular;
-                //newSale.SaleType = currentSaleType.ToString();
                 newSale.SaleType = saleType.Text;
 
                 p.Sales.Add(newSale);
@@ -162,7 +159,7 @@ namespace POS.Forms
                     s.Product = p.Products.FirstOrDefault(x => x.Item.Barcode == itemId && x.Supplier.Name == itemSupp);
                     //s.ItemName = cartColumns[2].Value.ToString();
                     //s.ItemSupplier = itemSupp;
-
+                    ///Console.WriteLine(newSale.Id);
                     s.SaleId = newSale.Id;
 
                     var inventoryItem = p.InventoryItems.FirstOrDefault(x => x.Product.ItemId == itemId && x.Product.Supplier.Name == itemSupp && x.SerialNumber == serial);
@@ -419,6 +416,12 @@ namespace POS.Forms
                 addBtn.PerformClick();
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
             }
+            if (e.Control && e.KeyCode == Keys.Enter)
+            {
+                // Do what you want here
+                checkoutBtn.PerformClick();
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -441,8 +444,6 @@ namespace POS.Forms
 
         private void searchControl1_OnSearch(object sender, SearchEventArgs e)
         {
-
-
             using (var p = new POSEntities())
             {
                 var items = p.InventoryItems.Where(x => x.Product.Item.Barcode == e.Text);

@@ -42,12 +42,13 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.sellingPrice = new System.Windows.Forms.TextBox();
             this.invTable = new System.Windows.Forms.DataGridView();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.removeBtn = new System.Windows.Forms.Button();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.removeBtn = new System.Windows.Forms.Button();
+            this.Column5 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -58,11 +59,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.itemName);
             this.groupBox1.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(328, 12);
+            this.groupBox1.Location = new System.Drawing.Point(292, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(310, 43);
+            this.groupBox1.Size = new System.Drawing.Size(270, 43);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Name";
@@ -77,7 +80,7 @@
             this.itemName.Location = new System.Drawing.Point(7, 20);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(297, 15);
+            this.itemName.Size = new System.Drawing.Size(257, 15);
             this.itemName.TabIndex = 0;
             this.itemName.TabStop = false;
             // 
@@ -87,7 +90,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(310, 43);
+            this.groupBox3.Size = new System.Drawing.Size(274, 43);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Barcode";
@@ -102,7 +105,7 @@
             this.barcodeField.Location = new System.Drawing.Point(7, 20);
             this.barcodeField.Name = "barcodeField";
             this.barcodeField.ReadOnly = true;
-            this.barcodeField.Size = new System.Drawing.Size(297, 15);
+            this.barcodeField.Size = new System.Drawing.Size(261, 15);
             this.barcodeField.TabIndex = 0;
             this.barcodeField.TabStop = false;
             // 
@@ -112,7 +115,7 @@
             this.groupBox4.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(12, 61);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(310, 43);
+            this.groupBox4.Size = new System.Drawing.Size(274, 43);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Total Quantity In Stock";
@@ -127,17 +130,19 @@
             this.quantity.Location = new System.Drawing.Point(7, 20);
             this.quantity.Name = "quantity";
             this.quantity.ReadOnly = true;
-            this.quantity.Size = new System.Drawing.Size(297, 15);
+            this.quantity.Size = new System.Drawing.Size(261, 15);
             this.quantity.TabIndex = 0;
             this.quantity.TabStop = false;
             // 
             // groupBox5
             // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.sellingPrice);
             this.groupBox5.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(328, 61);
+            this.groupBox5.Location = new System.Drawing.Point(292, 61);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(310, 43);
+            this.groupBox5.Size = new System.Drawing.Size(270, 43);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Selling Price";
@@ -152,7 +157,7 @@
             this.sellingPrice.Location = new System.Drawing.Point(7, 20);
             this.sellingPrice.Name = "sellingPrice";
             this.sellingPrice.ReadOnly = true;
-            this.sellingPrice.Size = new System.Drawing.Size(297, 15);
+            this.sellingPrice.Size = new System.Drawing.Size(257, 15);
             this.sellingPrice.TabIndex = 0;
             this.sellingPrice.TabStop = false;
             // 
@@ -161,6 +166,9 @@
             this.invTable.AllowUserToAddRows = false;
             this.invTable.AllowUserToResizeColumns = false;
             this.invTable.AllowUserToResizeRows = false;
+            this.invTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.invTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.invTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.invTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -178,7 +186,8 @@
             this.Column3,
             this.Column1,
             this.Column4,
-            this.Column2});
+            this.Column2,
+            this.Column5});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -195,11 +204,38 @@
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.invTable.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.invTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.invTable.Size = new System.Drawing.Size(613, 271);
+            this.invTable.Size = new System.Drawing.Size(537, 271);
             this.invTable.TabIndex = 4;
             this.invTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.invTable_CellBeginEdit);
+            this.invTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.invTable_CellContentClick);
             this.invTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.invTable_CellEndEdit);
             this.invTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.invTable_UserDeletingRow);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.removeBtn);
+            this.groupBox6.Controls.Add(this.invTable);
+            this.groupBox6.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.Location = new System.Drawing.Point(12, 110);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(550, 328);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Items in Inventory";
+            // 
+            // removeBtn
+            // 
+            this.removeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.removeBtn.Location = new System.Drawing.Point(6, 22);
+            this.removeBtn.Name = "removeBtn";
+            this.removeBtn.Size = new System.Drawing.Size(538, 23);
+            this.removeBtn.TabIndex = 5;
+            this.removeBtn.Text = "Remove";
+            this.removeBtn.UseVisualStyleBackColor = true;
+            this.removeBtn.Click += new System.EventHandler(this.removeBtn_Click);
             // 
             // Column3
             // 
@@ -208,7 +244,7 @@
             this.Column3.MinimumWidth = 30;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
-            this.Column3.Visible = false;
+            this.Column3.Width = 66;
             // 
             // Column1
             // 
@@ -233,33 +269,18 @@
             this.Column2.ReadOnly = true;
             this.Column2.Width = 72;
             // 
-            // groupBox6
+            // Column5
             // 
-            this.groupBox6.Controls.Add(this.removeBtn);
-            this.groupBox6.Controls.Add(this.invTable);
-            this.groupBox6.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox6.Location = new System.Drawing.Point(12, 110);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(626, 328);
-            this.groupBox6.TabIndex = 3;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Items in Inventory";
-            // 
-            // removeBtn
-            // 
-            this.removeBtn.Location = new System.Drawing.Point(6, 22);
-            this.removeBtn.Name = "removeBtn";
-            this.removeBtn.Size = new System.Drawing.Size(614, 23);
-            this.removeBtn.TabIndex = 5;
-            this.removeBtn.Text = "Remove";
-            this.removeBtn.UseVisualStyleBackColor = true;
-            this.removeBtn.Click += new System.EventHandler(this.removeBtn_Click);
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column5.HeaderText = "";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 5;
             // 
             // InventoryItemView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 450);
+            this.ClientSize = new System.Drawing.Size(574, 450);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox5);
@@ -304,5 +325,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewButtonColumn Column5;
     }
 }

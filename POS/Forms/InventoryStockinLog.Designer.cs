@@ -1,6 +1,6 @@
 ﻿namespace POS.Forms
 {
-    partial class StockinLog
+    partial class InventoryStockinLog
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockinLog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryStockinLog));
             this.histTable = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,7 +38,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.histTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,14 +71,14 @@
             this.histTable.DefaultCellStyle = dataGridViewCellStyle1;
             this.histTable.EnableHeadersVisualStyles = false;
             this.histTable.GridColor = System.Drawing.Color.White;
-            this.histTable.Location = new System.Drawing.Point(12, 47);
+            this.histTable.Location = new System.Drawing.Point(12, 12);
             this.histTable.MultiSelect = false;
             this.histTable.Name = "histTable";
             this.histTable.ReadOnly = true;
             this.histTable.RowHeadersVisible = false;
             this.histTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.histTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.histTable.Size = new System.Drawing.Size(671, 391);
+            this.histTable.Size = new System.Drawing.Size(671, 426);
             this.histTable.StandardTab = true;
             this.histTable.TabIndex = 2;
             // 
@@ -138,30 +137,20 @@
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             // 
-            // searchControl1
-            // 
-            this.searchControl1.Location = new System.Drawing.Point(12, 13);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(0, 28);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.SearchText = "";
-            this.searchControl1.Size = new System.Drawing.Size(219, 28);
-            this.searchControl1.TabIndex = 3;
-            // 
-            // StockinLog
+            // InventoryStockinLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(695, 450);
-            this.Controls.Add(this.searchControl1);
             this.Controls.Add(this.histTable);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "StockinLog";
+            this.Name = "InventoryStockinLog";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Stockin Log";
+            this.Load += new System.EventHandler(this.InventoryStockinLog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.histTable)).EndInit();
             this.ResumeLayout(false);
 
@@ -176,6 +165,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private UserControls.SearchControl searchControl1;
     }
 }
