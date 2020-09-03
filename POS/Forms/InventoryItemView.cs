@@ -20,6 +20,7 @@ namespace POS.Forms
             InitializeComponent();
             currlogin = UserManager.instance.currentLogin;
             Column1.ReadOnly = !currlogin.CanEditInventory;
+            Column4.ReadOnly = !currlogin.CanEditInventory;
             removeBtn.Visible = currlogin.CanEditInventory;
         }
         public void SetItemId(string barcode)
