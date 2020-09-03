@@ -142,6 +142,7 @@
             this.settingsBtn.TabIndex = 3;
             this.settingsBtn.TabStop = false;
             this.settingsBtn.UseVisualStyleBackColor = true;
+            this.settingsBtn.Visible = false;
             // 
             // pictureBox1
             // 
