@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedSearchForm));
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,12 +47,11 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.search = new System.Windows.Forms.TextBox();
-            this.searchBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.selectBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.serial = new System.Windows.Forms.TextBox();
+            this.searchControl1 = new POS.UserControls.SearchControl();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.discount)).BeginInit();
             this.groupBox12.SuspendLayout();
@@ -233,20 +232,20 @@
             this.Column2,
             this.Column3,
             this.Column5});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemTables.DefaultCellStyle = dataGridViewCellStyle3;
-            this.itemTables.Location = new System.Drawing.Point(12, 158);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemTables.DefaultCellStyle = dataGridViewCellStyle1;
+            this.itemTables.Location = new System.Drawing.Point(12, 160);
             this.itemTables.Name = "itemTables";
             this.itemTables.ReadOnly = true;
             this.itemTables.RowHeadersVisible = false;
             this.itemTables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemTables.Size = new System.Drawing.Size(712, 297);
+            this.itemTables.Size = new System.Drawing.Size(712, 295);
             this.itemTables.TabIndex = 13;
             this.itemTables.TabStop = false;
             this.itemTables.SelectionChanged += new System.EventHandler(this.itemTables_SelectionChanged);
@@ -289,30 +288,6 @@
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             this.Column5.Width = 70;
-            // 
-            // search
-            // 
-            this.search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.search.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.search.Location = new System.Drawing.Point(12, 126);
-            this.search.Name = "search";
-            this.search.Size = new System.Drawing.Size(686, 26);
-            this.search.TabIndex = 0;
-            this.search.KeyDown += new System.Windows.Forms.KeyEventHandler(this.search_KeyDown);
-            // 
-            // searchBtn
-            // 
-            this.searchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
-            this.searchBtn.Location = new System.Drawing.Point(698, 126);
-            this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(26, 26);
-            this.searchBtn.TabIndex = 15;
-            this.searchBtn.UseVisualStyleBackColor = true;
-            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
             // panel1
             // 
@@ -361,16 +336,27 @@
             this.serial.TabIndex = 0;
             this.serial.TabStop = false;
             // 
+            // searchControl1
+            // 
+            this.searchControl1.Location = new System.Drawing.Point(12, 126);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(0, 28);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.SearchText = "";
+            this.searchControl1.Size = new System.Drawing.Size(305, 28);
+            this.searchControl1.TabIndex = 19;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            // 
             // AdvancedSearchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 496);
+            this.Controls.Add(this.searchControl1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.selectBtn);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.searchBtn);
-            this.Controls.Add(this.search);
             this.Controls.Add(this.itemTables);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox12);
@@ -398,7 +384,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -415,8 +400,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox itemName;
         private System.Windows.Forms.DataGridView itemTables;
-        private System.Windows.Forms.TextBox search;
-        private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button selectBtn;
         private System.Windows.Forms.NumericUpDown sellingPrice;
@@ -427,5 +410,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox serial;
+        private UserControls.SearchControl searchControl1;
     }
 }

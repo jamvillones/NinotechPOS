@@ -133,18 +133,6 @@
     <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="searchBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAZNJREFUOE+l
-        08srBWEcxvFxjeS+U26FRKLcikKxk6xt/AVWLCws5A8gJYlkKbeNHSUbIaIsEJIUNnIvIsT3ecfoNGbO
-        wXnq03l/c5r3Oq/lkWz0YBFbWMEYGvGnxKAfL7jBJEahznbxgTXkIWRisYBndCIO7tRjD9co04NgGYI6
-        azKVf1KwjTMk6YFXtIRXdJkqdLLwhF5TeUR/aM+0zCg9+EVGcGI3f2YJc3bTav/6DZUW6JAyTeWKTnDQ
-        blrL8N2bgOhQ1GGVqVxZx4TdtFbRYTeDpg7qsNBUrqizfbtp9eEOxabyTzceEW8qV5qh0TRqGo6hb60N
-        kXBH3+wRZk3lkQhs4ADJyMA83nGBceTDiW7TG0pM5ZMC3EJ3N1cPSDp0r6NNZc9sAFqNtigVXjfqO+U4
-        hz7aYbSiAg3Qnh1Cs96BOtUsL6H3fKMl60M/hV5y6ACmUQrNXDfL+U+XQgMHjfY1Bxq9CAlwopO9QuCA
-        2q5K/Du1eIC705AzDZYa3COwUx1qWHF3OoOwU41NTFmWlfgJajFiZGSnb4IAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAEBAAAAEAIABoBAAAJgAAACAgAAABACAAqBAAAI4EAAAoAAAAEAAAACAAAAABACAAAAAAADAE
