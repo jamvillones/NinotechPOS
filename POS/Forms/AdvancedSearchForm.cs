@@ -95,6 +95,11 @@ namespace POS.Forms
 
         private void selectBtn_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(infoHolder.Name ))
+            {
+                MessageBox.Show("No item Selected", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             switch (MessageBox.Show("The item " + infoHolder.Name + " is about to be added.\n\nAre you sure you want to continue?", "", MessageBoxButtons.YesNo))
             {
                 case DialogResult.Yes:

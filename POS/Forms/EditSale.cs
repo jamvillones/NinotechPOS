@@ -111,7 +111,7 @@ namespace POS.Forms
                 else
                     Inv = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Name == e.Name && x.Product.Supplier.Name == e.Supplier);
 
-                Console.WriteLine(Inv.Product.Item.Name);
+                //Console.WriteLine(Inv.Product.Item.Name);
                 newSoldItem.SaleId = sale.Id;
                 newSoldItem.Product = p.Products.FirstOrDefault(x => x.Item.Name == e.Name && x.Supplier.Name == e.Supplier);
                 newSoldItem.SerialNumber = e.Serial;
