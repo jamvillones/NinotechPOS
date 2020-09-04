@@ -264,6 +264,17 @@ namespace POS.Forms
             if (e.Control && e.KeyCode == Keys.F)
                 this.ActiveControl = searchControl.firsControl;
 
+            if (e.Shift && e.KeyCode == Keys.Enter)
+            {
+                addBtn.PerformClick();
+                e.SuppressKeyPress = true;  
+            }
+            if (e.Control && e.KeyCode == Keys.Enter)
+            {
+                // Do what you want here
+                stockinBtn.PerformClick();
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
             if (e.KeyCode == Keys.F2)
                 this.ActiveControl = serialNumber;
 
