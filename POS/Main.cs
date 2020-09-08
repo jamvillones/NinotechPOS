@@ -184,7 +184,7 @@ namespace POS
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            using(var sellForm = new SellForm())
+            using(var sellForm = new ConsoleSell())
             {
                 sellForm.ShowDialog();
             }

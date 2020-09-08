@@ -156,8 +156,8 @@
             this.sellingPrice.DecimalPlaces = 2;
             this.sellingPrice.Location = new System.Drawing.Point(6, 18);
             this.sellingPrice.Maximum = new decimal(new int[] {
-            1000000,
-            0,
+            1410065407,
+            2,
             0,
             0});
             this.sellingPrice.Name = "sellingPrice";

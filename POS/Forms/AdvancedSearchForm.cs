@@ -43,7 +43,7 @@ namespace POS.Forms
         {
             if (itemTables.SelectedCells.Count == 0)
                 return;
-
+            var id = (int)(itemTables.SelectedCells[0].Value);
             var barc = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[1].Value?.ToString();
             var serialNumber = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[2].Value?.ToString();
             var supplier = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[4].Value.ToString();
@@ -51,7 +51,7 @@ namespace POS.Forms
 
             using (var p = new POSEntities())
             {
-                var i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == barc && x.Product.Supplier.Name == supplier);
+                var i = p.InventoryItems.FirstOrDefault(x => x.Id == id);
 
                 infoHolder.Barcode = i.Product.Item.Barcode;
                 infoHolder.Name = i.Product.Item.Name;
@@ -140,7 +140,7 @@ namespace POS.Forms
                 e.SearchFound = true;
                 itemTables.Rows.Clear();
                 foreach (var i in searchedItems)
-                    itemTables.Rows.Add(i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
+                    itemTables.Rows.Add(i.Id,i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
 
             }
         }
@@ -151,7 +151,7 @@ namespace POS.Forms
             {
                 itemTables.Rows.Clear();
                 foreach (var i in p.InventoryItems)
-                    itemTables.Rows.Add(i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
+                    itemTables.Rows.Add(i.Id,i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
 
             }
         }

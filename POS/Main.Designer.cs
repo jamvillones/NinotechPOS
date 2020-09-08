@@ -42,6 +42,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.inventoryTab = new POS.UserControls.InventoryUC();
+            this.reportTab = new POS.UserControls.ReportUC();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.changePasswordToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,8 +59,6 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.refreshToolStripBtn = new System.Windows.Forms.ToolStripButton();
-            this.inventoryTab = new POS.UserControls.InventoryUC();
-            this.reportTab = new POS.UserControls.ReportUC();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -272,6 +272,24 @@
             this.panel3.Size = new System.Drawing.Size(920, 588);
             this.panel3.TabIndex = 2;
             // 
+            // inventoryTab
+            // 
+            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
+            this.inventoryTab.Name = "inventoryTab";
+            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
+            this.inventoryTab.Size = new System.Drawing.Size(920, 588);
+            this.inventoryTab.TabIndex = 0;
+            // 
+            // reportTab
+            // 
+            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportTab.Location = new System.Drawing.Point(0, 0);
+            this.reportTab.Name = "reportTab";
+            this.reportTab.Size = new System.Drawing.Size(920, 588);
+            this.reportTab.TabIndex = 1;
+            this.reportTab.TabStop = false;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
@@ -382,7 +400,6 @@
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Enabled = false;
             this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
@@ -414,24 +431,6 @@
             this.refreshToolStripBtn.Size = new System.Drawing.Size(23, 22);
             this.refreshToolStripBtn.Text = "Refresh(F5)";
             this.refreshToolStripBtn.Click += new System.EventHandler(this.refreshToolStripBtn_Click);
-            // 
-            // inventoryTab
-            // 
-            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
-            this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
-            this.inventoryTab.Size = new System.Drawing.Size(920, 588);
-            this.inventoryTab.TabIndex = 0;
-            // 
-            // reportTab
-            // 
-            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportTab.Location = new System.Drawing.Point(0, 0);
-            this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(920, 588);
-            this.reportTab.TabIndex = 1;
-            this.reportTab.TabStop = false;
             // 
             // Main
             // 

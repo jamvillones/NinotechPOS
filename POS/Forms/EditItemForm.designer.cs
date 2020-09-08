@@ -39,6 +39,14 @@
             this.barcode.ReadOnly = true;
             this.barcode.TabStop = false;
             // 
+            // sellingPrice
+            // 
+            this.sellingPrice.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            // 
             // EditItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

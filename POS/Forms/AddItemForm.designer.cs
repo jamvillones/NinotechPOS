@@ -58,6 +58,14 @@
             // 
             this.details.Size = new System.Drawing.Size(375, 216);
             // 
+            // sellingPrice
+            // 
+            this.sellingPrice.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            // 
             // itemType
             // 
             this.itemType.SelectedIndexChanged += new System.EventHandler(this.itemType_SelectedIndexChanged);

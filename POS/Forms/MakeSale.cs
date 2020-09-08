@@ -474,6 +474,8 @@ namespace POS.Forms
                     itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
                 }
             }
+            if (checkBox1.Checked)
+                addBtn.PerformClick();
         }
 
         private void searchControl1_OnTextEmpty(object sender, EventArgs e)

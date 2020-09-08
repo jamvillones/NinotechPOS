@@ -102,6 +102,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ConsoleSell.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConsoleSell.Designer.cs">
+      <DependentUpon>ConsoleSell.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ItemVariationsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,6 +308,12 @@
     <Compile Include="UserControls\InventoryUC.Designer.cs">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ItemBoxHolder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ItemBoxHolder.Designer.cs">
+      <DependentUpon>ItemBoxHolder.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Keypad.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -322,6 +334,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConsoleSell.resx">
+      <DependentUpon>ConsoleSell.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemVariationsForm.resx">
       <DependentUpon>ItemVariationsForm.cs</DependentUpon>
@@ -408,6 +423,9 @@
     <EmbeddedResource Include="UserControls\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ItemBoxHolder.resx">
+      <DependentUpon>ItemBoxHolder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Keypad.resx">
       <DependentUpon>Keypad.cs</DependentUpon>
     </EmbeddedResource>
@@ -437,7 +455,9 @@
     <None Include="uiTesting_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_cash_register.ico" />

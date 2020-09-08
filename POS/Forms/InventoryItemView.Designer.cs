@@ -164,6 +164,7 @@
             // invTable
             // 
             this.invTable.AllowUserToAddRows = false;
+            this.invTable.AllowUserToDeleteRows = false;
             this.invTable.AllowUserToResizeColumns = false;
             this.invTable.AllowUserToResizeRows = false;
             this.invTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -296,6 +297,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Inventory Product  View";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InventoryItemView_FormClosed);
+            this.Load += new System.EventHandler(this.InventoryItemView_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);

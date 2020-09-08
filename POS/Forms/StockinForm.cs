@@ -322,12 +322,21 @@ namespace POS.Forms
                 {
                     itemsTable.Rows.Add(i.ItemId, i.Item.Name, i.Cost, i.Supplier.Name);
                 }
+                if(checkBox1.Checked)
+                {
+                    addBtn.PerformClick();
+                }
             }
         }
 
         private void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
             SetTable();
+        }
+
+        private void searchControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

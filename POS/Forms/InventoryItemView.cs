@@ -14,6 +14,7 @@ namespace POS.Forms
     public partial class InventoryItemView : Form
     {
         Login currlogin;
+        bool changesDone = false;
         public event EventHandler OnSave;
         public InventoryItemView()
         {
@@ -22,6 +23,8 @@ namespace POS.Forms
             Column1.ReadOnly = !currlogin.CanEditInventory;
             Column4.ReadOnly = !currlogin.CanEditInventory;
             removeBtn.Visible = currlogin.CanEditInventory;
+
+
         }
         public void SetItemId(string barcode)
         {
@@ -40,7 +43,7 @@ namespace POS.Forms
                 foreach (var i in invItem)
                 {
                     //counter++;
-                    invTable.Rows.Add(i.Id, i.SerialNumber, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Supplier.Name,"Stockin Log");
+                    invTable.Rows.Add(i.Id, i.SerialNumber, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Supplier.Name, "Stockin Log");
                 }
             }
         }
@@ -110,7 +113,8 @@ namespace POS.Forms
                         string s = string.IsNullOrEmpty(dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString()) ? null : dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
                         t.SerialNumber = s;
                         p.SaveChanges();
-                        OnSave?.Invoke(this, null);
+                        //OnSave?.Invoke(this, null);
+                        changesDone = true;
                         MessageBox.Show("Serial successfully updated");
                     }
                 }
@@ -119,8 +123,22 @@ namespace POS.Forms
             {
 
                 int newQuantity = 0;
+                if (dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value==null)
+                {
+                    dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.Quantity;
+                    MessageBox.Show("Invalid Input.");
+                    return;
+                }
+                
                 if (int.TryParse(dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out newQuantity))
                 {
+                    if(newQuantity == 0)
+                    {
+                        dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.Quantity;
+                        MessageBox.Show("Invalid Input.");
+                        return;
+                    }
+
                     if (newQuantity == target.Quantity)
                     {
                         return;
@@ -155,21 +173,28 @@ namespace POS.Forms
         bool RemoveInventoryItem()
         {
             if (invTable.RowCount == 0 || !currlogin.CanEditInventory) return false;
+            var cells = invTable.SelectedCells;
+            if (cells[2].Value.ToString() == "Infinite")
+            {
+                return false;
+            }
             if (MessageBox.Show("Are you sure you want to remove this from inventory? This action cannot be undone.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                var cells = invTable.Rows[invTable.SelectedCells[0].RowIndex].Cells;
-                string b = barcodeField.Text;
-                string s = cells[3].Value.ToString();
+
+                var id = (int)(cells[0].Value);
+                //string b = barcodeField.Text;
+                //string s = cells[3].Value.ToString();
                 using (var p = new POSEntities())
                 {
 
-                    var i = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Barcode == b && x.Product.Supplier.Name == s);
+                    var i = p.InventoryItems.FirstOrDefault(x => x.Id == id);
                     p.InventoryItems.Remove(i);
 
                     p.SaveChanges();
 
                 }
-                OnSave.Invoke(this, null);
+                // OnSave.Invoke(this, null);
+                changesDone = true;
                 MessageBox.Show("Successfully removed from inventory");
                 return true;
             }
@@ -183,8 +208,8 @@ namespace POS.Forms
 
         private void invTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            if (RemoveInventoryItem() == false)
-                e.Cancel = true;
+            //if (RemoveInventoryItem() == false)
+            //    e.Cancel = true;
         }
 
         private void invTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -195,6 +220,17 @@ namespace POS.Forms
             {
                 log.ShowDialog();
             }
+        }
+
+        private void InventoryItemView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InventoryItemView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (changesDone)
+                OnSave?.Invoke(this, null);
         }
     }
 }
