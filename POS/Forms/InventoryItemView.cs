@@ -156,7 +156,8 @@ namespace POS.Forms
                                 var t = p.InventoryItems.FirstOrDefault(x => x.Id == target.Id);
                                 t.Quantity = newQuantity;
                                 p.SaveChanges();
-                                OnSave?.Invoke(this, null);
+                                changesDone = true;
+                                ///OnSave?.Invoke(this, null);
                                 MessageBox.Show("Quantity successfully updated");
                             }
                         }

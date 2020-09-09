@@ -185,7 +185,7 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                if (p.InventoryItems.FirstOrDefault(x => x.SerialNumber == serialNumber.Text) != null)
+                if (p.InventoryItems.Any(x => x.SerialNumber == serialNumber.Text))
                 {
                     MessageBox.Show("Serial number already in inventory.");
                     return true;
