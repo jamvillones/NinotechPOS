@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>33</ApplicationRevision>
+    <ApplicationRevision>34</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -107,6 +107,12 @@
     </Compile>
     <Compile Include="Forms\ConsoleSell.Designer.cs">
       <DependentUpon>ConsoleSell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ItemSaleSetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ItemSaleSetupForm.Designer.cs">
+      <DependentUpon>ItemSaleSetupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ItemVariationsForm.cs">
       <SubType>Form</SubType>
@@ -337,6 +343,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConsoleSell.resx">
       <DependentUpon>ConsoleSell.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ItemSaleSetupForm.resx">
+      <DependentUpon>ItemSaleSetupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemVariationsForm.resx">
       <DependentUpon>ItemVariationsForm.cs</DependentUpon>

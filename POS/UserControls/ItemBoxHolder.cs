@@ -18,6 +18,7 @@ namespace POS.UserControls
         public string Barcode { get; private set; }
         public string Serial { get; private set; }
         public string ItemName { get; private set; }
+        public Image img { get { return picture.Image; } }
         public ItemBoxHolder()
         {
             InitializeComponent();

@@ -52,7 +52,12 @@ namespace POS.Forms
         private void J_Click(object sender, EventArgs e)
         {
             ItemBoxHolder s = sender as ItemBoxHolder;
-            MessageBox.Show(s.ItemName);
+            using(var z = new ItemSaleSetupForm())
+            {
+                z.SetValues(s.Barcode, s.Serial, s.ItemName, s.img, s.Price, s.Quantity);
+                z.ShowDialog();
+            }
+            //MessageBox.Show(s.ItemName);
         }
 
         private void prev_Click(object sender, EventArgs e)
