@@ -45,9 +45,9 @@
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.discount = new System.Windows.Forms.NumericUpDown();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.keypad1 = new POS.UserControls.Keypad();
             this.total = new System.Windows.Forms.Label();
+            this.confirmBtn = new System.Windows.Forms.Button();
+            this.keypad1 = new POS.UserControls.Keypad();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -152,28 +152,32 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.price);
+            this.groupBox4.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.groupBox4.Location = new System.Drawing.Point(12, 161);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(135, 41);
-            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Price per item";
             // 
             // price
             // 
             this.price.DecimalPlaces = 2;
-            this.price.Location = new System.Drawing.Point(7, 15);
+            this.price.Location = new System.Drawing.Point(6, 15);
             this.price.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
             this.price.Name = "price";
-            this.price.Size = new System.Drawing.Size(120, 20);
+            this.price.Size = new System.Drawing.Size(123, 20);
             this.price.TabIndex = 0;
-            this.price.ThousandsSeparator = true;
+            this.price.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.price.ValueChanged += new System.EventHandler(this.price_ValueChanged);
-            this.price.Click += new System.EventHandler(this.price_Click);
             // 
             // groupBox5
             // 
@@ -181,23 +185,27 @@
             this.groupBox5.Location = new System.Drawing.Point(12, 255);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(135, 41);
-            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Quantity";
             // 
             // quantity
             // 
-            this.quantity.Location = new System.Drawing.Point(7, 15);
+            this.quantity.Location = new System.Drawing.Point(6, 15);
+            this.quantity.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(120, 20);
-            this.quantity.TabIndex = 0;
+            this.quantity.Size = new System.Drawing.Size(123, 20);
+            this.quantity.TabIndex = 2;
             this.quantity.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.quantity.ValueChanged += new System.EventHandler(this.price_ValueChanged);
-            this.quantity.Click += new System.EventHandler(this.price_Click);
             // 
             // groupBox6
             // 
@@ -228,25 +236,23 @@
             this.groupBox7.Location = new System.Drawing.Point(12, 208);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(135, 41);
-            this.groupBox7.TabIndex = 7;
+            this.groupBox7.TabIndex = 1;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Discount";
             // 
             // discount
             // 
             this.discount.DecimalPlaces = 2;
-            this.discount.Location = new System.Drawing.Point(7, 15);
+            this.discount.Location = new System.Drawing.Point(6, 15);
             this.discount.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(120, 20);
-            this.discount.TabIndex = 0;
-            this.discount.ThousandsSeparator = true;
+            this.discount.Size = new System.Drawing.Size(123, 20);
+            this.discount.TabIndex = 1;
             this.discount.ValueChanged += new System.EventHandler(this.price_ValueChanged);
-            this.discount.Click += new System.EventHandler(this.price_Click);
             // 
             // groupBox8
             // 
@@ -258,16 +264,27 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Total";
             // 
-            // button1
+            // total
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(12, 302);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(557, 35);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Confirm";
-            this.button1.UseVisualStyleBackColor = false;
+            this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.total.Location = new System.Drawing.Point(8, 15);
+            this.total.Name = "total";
+            this.total.Size = new System.Drawing.Size(403, 114);
+            this.total.TabIndex = 0;
+            this.total.Text = "P 999,999,999";
+            this.total.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // confirmBtn
+            // 
+            this.confirmBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.confirmBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.confirmBtn.Location = new System.Drawing.Point(12, 302);
+            this.confirmBtn.Name = "confirmBtn";
+            this.confirmBtn.Size = new System.Drawing.Size(557, 35);
+            this.confirmBtn.TabIndex = 9;
+            this.confirmBtn.TabStop = false;
+            this.confirmBtn.Text = "Confirm";
+            this.confirmBtn.UseVisualStyleBackColor = false;
             // 
             // keypad1
             // 
@@ -280,16 +297,6 @@
             this.keypad1.Size = new System.Drawing.Size(289, 325);
             this.keypad1.TabIndex = 10;
             // 
-            // total
-            // 
-            this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.total.Location = new System.Drawing.Point(8, 15);
-            this.total.Name = "total";
-            this.total.Size = new System.Drawing.Size(403, 114);
-            this.total.TabIndex = 0;
-            this.total.Text = "999,999,999";
-            this.total.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // ItemSaleSetupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,7 +304,7 @@
             this.ClientSize = new System.Drawing.Size(877, 345);
             this.Controls.Add(this.keypad1);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.confirmBtn);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
@@ -312,7 +319,6 @@
             this.MinimizeBox = false;
             this.Name = "ItemSaleSetupForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.ItemSaleSetupForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pic)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -344,16 +350,16 @@
         private System.Windows.Forms.TextBox serial;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.NumericUpDown price;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.NumericUpDown quantity;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox totalQuantity;
         private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.NumericUpDown discount;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button confirmBtn;
         private UserControls.Keypad keypad1;
         private System.Windows.Forms.Label total;
+        private System.Windows.Forms.NumericUpDown price;
+        private System.Windows.Forms.NumericUpDown quantity;
+        private System.Windows.Forms.NumericUpDown discount;
     }
 }
