@@ -43,28 +43,10 @@ namespace POS.Forms
             InitializeComponent();
         }
 
-        private void variationsTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            var dgt = (DataGridView)sender;
+        //private void variationsTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        //{
 
-            var supplierName = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
-            decimal newcost = new decimal();
-            try
-            {
-                newcost = Convert.ToDecimal(dgt.Rows[e.RowIndex].Cells[1].Value);
-            }
-            catch
-            {
-                MessageBox.Show("input invalid");
-                return;
-            }
-            using (var p = new POSEntities())
-            {
-                var prod = p.Products.FirstOrDefault(x => x.ItemId == item.Barcode && x.Supplier.Name == supplierName);
-                prod.Cost = newcost;
-                p.SaveChanges();
-            }
-        }
+        //}
 
         private void variationsTable_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {

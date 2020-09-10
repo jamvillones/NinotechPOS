@@ -285,6 +285,7 @@
             this.confirmBtn.TabStop = false;
             this.confirmBtn.Text = "Confirm";
             this.confirmBtn.UseVisualStyleBackColor = false;
+            this.confirmBtn.Click += new System.EventHandler(this.confirmBtn_Click);
             // 
             // keypad1
             // 

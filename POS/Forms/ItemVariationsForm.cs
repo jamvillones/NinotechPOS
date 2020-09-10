@@ -252,13 +252,14 @@ namespace POS.Forms
         {
             decimal n;
             var t = sender as DataGridView;
-            var supplier = t.Rows[e.RowIndex].Cells[0].Value.ToString();
+            // var supplier = t.Rows[e.RowIndex].Cells[0].Value.ToString();
+            var id = (int)(t.Rows[e.RowIndex].Cells[0].Value);
             bool isNumeric = decimal.TryParse(t.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out n);
             if (isNumeric)
             {
                 using (var p = new POSEntities())
                 {
-                    var prod = p.Products.FirstOrDefault(x => x.Item.Barcode == barcode.Text && x.Supplier.Name == supplier);
+                    var prod = p.Products.FirstOrDefault(x => x.Id == id);
                     prod.Cost = n;
                     p.SaveChanges();
                     MessageBox.Show("Edit successful.");

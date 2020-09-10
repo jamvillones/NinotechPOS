@@ -47,6 +47,7 @@ namespace POS.UserControls
         public void SetAutoComplete(params string[] values)
         {
             searchText.AutoCompleteCustomSource.Clear();
+            //searchText.Values = values;
             searchText.AutoCompleteCustomSource.AddRange(values);
             
         }

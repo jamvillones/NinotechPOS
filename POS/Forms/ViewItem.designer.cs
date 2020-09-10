@@ -246,6 +246,7 @@
             this.variationsTable.Location = new System.Drawing.Point(6, 19);
             this.variationsTable.MultiSelect = false;
             this.variationsTable.Name = "variationsTable";
+            this.variationsTable.ReadOnly = true;
             this.variationsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.variationsTable.RowHeadersVisible = false;
             this.variationsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -253,7 +254,6 @@
             this.variationsTable.StandardTab = true;
             this.variationsTable.TabIndex = 15;
             this.variationsTable.TabStop = false;
-            this.variationsTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.variationsTable_CellEndEdit);
             this.variationsTable.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.variationsTable_EditingControlShowing);
             // 
             // Column7
@@ -268,6 +268,7 @@
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column1.HeaderText = "Cost";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             this.Column1.Width = 56;
             // 
             // groupBox4

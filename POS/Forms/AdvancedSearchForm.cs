@@ -44,9 +44,9 @@ namespace POS.Forms
             if (itemTables.SelectedCells.Count == 0)
                 return;
             var id = (int)(itemTables.SelectedCells[0].Value);
-            var barc = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[1].Value?.ToString();
-            var serialNumber = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[2].Value?.ToString();
-            var supplier = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[4].Value.ToString();
+            //var barc = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[1].Value?.ToString();
+            var serialNumber = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[3].Value?.ToString();
+            //var supplier = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[4].Value.ToString();
 
 
             using (var p = new POSEntities())
