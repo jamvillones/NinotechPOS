@@ -38,9 +38,9 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                var c = p.Customers.Select(x => x.Name).ToArray();
-                customers.AutoCompleteCustomSource.AddRange(c);
-                customers.Items.AddRange(c);
+                //var c = p.Customers.Select(x => x.Name).ToArray();
+                //customers.AutoCompleteCustomSource.AddRange(c);
+                //customers.Items.AddRange(c);
 
                 var it = p.InventoryItems.OrderBy(y => y.Product.Item.Name);
                 searchControl1.SetAutoComplete(it.Select(x => x.Product.Item.Name).ToArray());
