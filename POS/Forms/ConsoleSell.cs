@@ -18,11 +18,17 @@ namespace POS.Forms
         {
             InitializeComponent();
         }
+        public decimal TotalPrice
+        {
+            get
+            {
+                return cartTable.Rows.Cast<DataGridViewRow>().Sum(x => (decimal)(x.Cells[totalPriceCol.Name].Value));
+            }
+        }
 
-        const int maxItemInView = 16;
+        const int maxItemInView = 25;
         int currentIndex = 1;
         int Indexes = 0;
-        //int max = 1;
         int currentItemCount
         {
             get
@@ -38,10 +44,6 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                //var c = p.Customers.Select(x => x.Name).ToArray();
-                //customers.AutoCompleteCustomSource.AddRange(c);
-                //customers.Items.AddRange(c);
-
                 var it = p.InventoryItems.OrderBy(y => y.Product.Item.Name);
                 searchControl1.SetAutoComplete(it.Select(x => x.Product.Item.Name).ToArray());
                 foreach (var i in it)
@@ -69,9 +71,24 @@ namespace POS.Forms
         private void J_Click(object sender, EventArgs e)
         {
             ItemBoxHolder s = sender as ItemBoxHolder;
+            var sameRow = cartTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(x => (int)(x.Cells[0].Value) == s.Id);
+            var isSameRowPresent = sameRow != null;
+
+            decimal currentPrice = isSameRowPresent ? (decimal)(sameRow.Cells[priceCol.Name].Value) : 0;
+            decimal currentDiscount = isSameRowPresent ? (decimal)(sameRow.Cells[discountCol.Name].Value) : 0;
+
             using (var z = new ItemSaleSetupForm())
             {
-                z.SetValues(s.Barcode, s.Serial, s.ItemName, s.img, s.Price, s.Quantity, s.Id);
+
+                z.SetValues(s.Barcode,
+                            s.Serial,
+                            s.ItemName,
+                            s.img,
+                            isSameRowPresent ? currentPrice : s.Price,
+                            s.Quantity,
+                            s.Id,
+                            isSameRowPresent ? currentDiscount : 0,
+                            isSameRowPresent);
                 z.OnConfirm += Z_OnConfirm;
                 z.ShowDialog();
             }
@@ -79,37 +96,58 @@ namespace POS.Forms
 
         private void Z_OnConfirm(object sender, InventoryItemDetailArgs e)
         {
-            var II = filteredItems.FirstOrDefault(x => x.Id == e.Id);
-            //var removedIndex = filteredItems.IndexOf(II);
+            var boxHolder = filteredItems.FirstOrDefault(x => x.Id == e.Id);
 
+            if (boxHolder.Quantity != 0)
+            {
+                boxHolder.Quantity -= e.Quantity;
+                if (boxHolder.Quantity == 0)
+                {
 
-            totalItems.Remove(II);
-            filteredItems.Remove(II);
-            itemsHolder.Controls.Remove(II);
+                    totalItems.Remove(boxHolder);
+                    filteredItems.Remove(boxHolder);
+                    itemsHolder.Controls.Remove(boxHolder);
 
-            if ((currentIndex*maxItemInView) <= filteredItems.Count)
-                itemsHolder.Controls.Add(filteredItems[(currentIndex * maxItemInView)-1]);
+                    if ((currentIndex * maxItemInView) <= filteredItems.Count)
+                        itemsHolder.Controls.Add(filteredItems[(currentIndex * maxItemInView) - 1]);
 
-            int quotient = filteredItems.Count / maxItemInView;
-            Indexes = (filteredItems.Count % maxItemInView) == 0 ? quotient : quotient + 1;
-            index.Text = (currentIndex + "/" + Indexes).ToString();
-
-
-
+                    int quotient = filteredItems.Count / maxItemInView;
+                    Indexes = (filteredItems.Count % maxItemInView) == 0 ? quotient : quotient + 1;
+                    index.Text = (currentIndex + "/" + Indexes).ToString();
+                }
+            }
 
             using (var p = new POSEntities())
             {
                 var i = p.InventoryItems.FirstOrDefault(x => x.Id == e.Id);
-                cartTable.Rows.Add(i.Id,
-                                   i.Product.Item.Barcode,
-                                   i.SerialNumber,
-                                   i.Product.Item.Name,
-                                   e.Quantity,
-                                   e.Price,
-                                   e.Discount,
-                                   (e.Price - e.Discount) * e.Quantity,
-                                   i.Product.Supplier.Name);
+
+                var sameRow = cartTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(x => (int)(x.Cells[0].Value) == i.Id);
+                if (sameRow == null)
+                {
+
+                    cartTable.Rows.Add(i.Id,
+                                       i.Product.Item.Barcode,
+                                       i.SerialNumber,
+                                       i.Product.Item.Name,
+                                       e.Quantity,
+                                       e.Price,
+                                       e.Discount,
+                                       (e.Price - e.Discount) * e.Quantity,
+                                       i.Product.Supplier.Name);
+                }
+                else
+                {
+                    int newQuantity = (int)(sameRow.Cells[quantityCol.Name].Value) + e.Quantity;
+                    decimal currentPrice = (decimal)(sameRow.Cells[priceCol.Name].Value);
+                    decimal currentDiscount = (decimal)(sameRow.Cells[discountCol.Name].Value);
+
+                    sameRow.Cells[quantityCol.Name].Value = newQuantity;
+                    sameRow.Cells[totalPriceCol.Name].Value = newQuantity * (currentPrice - currentDiscount);
+
+                }
             }
+
+            totalPrice.Text = string.Format("₱{0:n}", TotalPrice);
         }
 
         private void prev_Click(object sender, EventArgs e)
@@ -142,7 +180,6 @@ namespace POS.Forms
 
         private void searchControl1_OnSearch(object sender, SearchEventArgs e)
         {
-            //filteredItems.Clear();
             filteredItems = totalItems.Where(x => x.Barcode == e.Text).ToList();
             if (filteredItems.Count == 0)
             {
@@ -158,6 +195,7 @@ namespace POS.Forms
                 MessageBox.Show("No items found.");
                 return;
             }
+
             e.SearchFound = true;
             currentIndex = 1;
             int quotient = filteredItems.Count / maxItemInView;
@@ -178,7 +216,6 @@ namespace POS.Forms
             Indexes = (filteredItems.Count % maxItemInView) == 0 ? quotient : quotient + 1;
             index.Text = (currentIndex + "/" + Indexes).ToString();
             int length = filteredItems.Count < maxItemInView ? filteredItems.Count : maxItemInView;
-
 
             itemsHolder.Controls.Clear();
             for (int i = 0; i < length; i++)

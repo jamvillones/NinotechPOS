@@ -172,6 +172,7 @@
             this.price.Name = "price";
             this.price.Size = new System.Drawing.Size(123, 20);
             this.price.TabIndex = 0;
+            this.price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.price.Value = new decimal(new int[] {
             1,
             0,
@@ -200,6 +201,7 @@
             this.quantity.Name = "quantity";
             this.quantity.Size = new System.Drawing.Size(123, 20);
             this.quantity.TabIndex = 2;
+            this.quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.quantity.Value = new decimal(new int[] {
             1,
             0,
@@ -252,6 +254,7 @@
             this.discount.Name = "discount";
             this.discount.Size = new System.Drawing.Size(123, 20);
             this.discount.TabIndex = 1;
+            this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discount.ValueChanged += new System.EventHandler(this.price_ValueChanged);
             // 
             // groupBox8
@@ -300,6 +303,7 @@
             // 
             // ItemSaleSetupForm
             // 
+            this.AcceptButton = this.confirmBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 345);
@@ -316,6 +320,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pic);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ItemSaleSetupForm";

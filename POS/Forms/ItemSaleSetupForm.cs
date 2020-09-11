@@ -22,11 +22,11 @@ namespace POS.Forms
 
         public event EventHandler<InventoryItemDetailArgs> OnConfirm;
 
-        public void SetValues(string barcode, string serial, string name, Image img, decimal price, int totalQuantity, int id)
+        public void SetValues(string barcode, string serial, string name, Image img, decimal price, int totalQuantity, int id, decimal discount = 0, bool alreadyInTable = false)
         {
             Id = id;
             this.barcode.Text = barcode;
-            this.serial.Text = serial??"N/A";
+            this.serial.Text = serial ?? "N/A";
 
             quantity.ReadOnly = string.IsNullOrEmpty(serial) ? false : true;
 
@@ -35,11 +35,21 @@ namespace POS.Forms
             pic.Image = img;
 
             this.price.Value = price;
+            this.discount.Value = discount;
+
             this.discount.Maximum = this.price.Value;
             this.tQuantity = totalQuantity;
             this.quantity.Maximum = this.tQuantity == 0 ? 999999999 : tQuantity;
 
             this.totalQuantity.Text = tQuantity == 0 ? "Infinite" : tQuantity.ToString();
+
+            if (alreadyInTable)
+            {
+                this.price.ReadOnly = true;
+                this.discount.ReadOnly = true;
+                this.price.Increment = 0;
+                this.discount.Increment = 0;
+            }
         }
 
         void CalculateTotal()
