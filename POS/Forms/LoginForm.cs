@@ -12,7 +12,7 @@ namespace POS.Forms
 {
     public partial class LoginForm : Form
     {
-        UserManager u;
+        //UserManager u;
         public bool LoginSuccessful
         {
             get; private set;
@@ -20,6 +20,7 @@ namespace POS.Forms
         public LoginForm()
         {
             InitializeComponent();
+            //u = manager;
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
@@ -29,23 +30,18 @@ namespace POS.Forms
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            LoginSuccessful = u.Login(username.Text, password.Text);
+            LoginSuccessful = UserManager.instance.Login(username.Text, password.Text);
             if (LoginSuccessful)
             {
                 this.Close();
                 return;
             }
-            MessageBox.Show("User not found.");           
+            MessageBox.Show("User not found.");
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            if (UserManager.instance == null)
-            {
-                Misc.UserManager.instance = new Misc.UserManager();
-                u = UserManager.instance;
-            }
-            using(var p = new POSEntities())
+            using (var p = new POSEntities())
             {
                 username.AutoCompleteCustomSource.AddRange(p.Logins.Select(x => x.Username).ToArray());
             }

@@ -26,6 +26,8 @@ namespace POS.Forms
             }
         }
 
+
+
         const int maxItemInView = 25;
         int currentIndex = 1;
         int Indexes = 0;
@@ -55,7 +57,7 @@ namespace POS.Forms
                 }
 
                 filteredItems = totalItems;
-
+                totalEntriesValue.Text = filteredItems.Count.ToString(); ;
                 int quotient = filteredItems.Count / maxItemInView;
                 Indexes = (filteredItems.Count % maxItemInView) == 0 ? quotient : quotient + 1;
                 index.Text = (currentIndex + "/" + Indexes).ToString();
@@ -107,6 +109,8 @@ namespace POS.Forms
                     totalItems.Remove(boxHolder);
                     filteredItems.Remove(boxHolder);
                     itemsHolder.Controls.Remove(boxHolder);
+
+                    totalEntriesValue.Text = filteredItems.Count.ToString();
 
                     if ((currentIndex * maxItemInView) <= filteredItems.Count)
                         itemsHolder.Controls.Add(filteredItems[(currentIndex * maxItemInView) - 1]);
@@ -195,7 +199,7 @@ namespace POS.Forms
                 MessageBox.Show("No items found.");
                 return;
             }
-
+            totalEntriesValue.Text = filteredItems.Count.ToString();
             e.SearchFound = true;
             currentIndex = 1;
             int quotient = filteredItems.Count / maxItemInView;
@@ -216,6 +220,8 @@ namespace POS.Forms
             Indexes = (filteredItems.Count % maxItemInView) == 0 ? quotient : quotient + 1;
             index.Text = (currentIndex + "/" + Indexes).ToString();
             int length = filteredItems.Count < maxItemInView ? filteredItems.Count : maxItemInView;
+
+            totalEntriesValue.Text = filteredItems.Count.ToString();
 
             itemsHolder.Controls.Clear();
             for (int i = 0; i < length; i++)

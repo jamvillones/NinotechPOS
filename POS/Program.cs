@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,16 +15,26 @@ namespace POS
         [STAThread]
         static void Main()
         {
-           
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var login = new Forms.LoginForm();
-            Application.Run(login);
 
-            if (login.LoginSuccessful)
+            Interfaces.IMainWindow mainWindow;
+            UserManager.instance = new UserManager();
+            do
             {
-                Application.Run(new Main());
+                var login = new Forms.LoginForm();
+                Application.Run(login);
+
+                var main = new Main();
+                mainWindow = main;
+                if (login.LoginSuccessful)
+                {
+                    Application.Run(main);
+                }
+
             }
+            while (mainWindow.IsSignout());
         }
     }
 }

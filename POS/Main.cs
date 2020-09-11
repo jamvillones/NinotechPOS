@@ -13,7 +13,7 @@ using POS.Misc;
 
 namespace POS
 {
-    public partial class Main : Form
+    public partial class Main : Form,IMainWindow
     {
         List<ITab> uControls = new List<ITab>();
 
@@ -124,7 +124,10 @@ namespace POS
 
         private void userButton_Click(object sender, EventArgs e)
         {
-            //userContextMenuStrip.Show(Cursor.Position.X, Cursor.Position.Y);
+            if (MessageBox.Show("Are you sure you want to logout?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+                return;
+            isSignout = true;
+            this.Close();
         }
 
         private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -235,6 +238,11 @@ namespace POS
         {
             addNewLoginToolStripMenuItem1.Enabled = currLogin.CanAddUser;
             stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
+        }
+        bool isSignout = false;
+        public bool IsSignout()
+        {
+            return isSignout;
         }
 
         //private void toolStripButton4_Click(object sender, EventArgs e)

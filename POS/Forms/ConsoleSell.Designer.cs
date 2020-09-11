@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsoleSell));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.index = new System.Windows.Forms.TextBox();
             this.next = new System.Windows.Forms.Button();
             this.prev = new System.Windows.Forms.Button();
             this.itemsHolder = new System.Windows.Forms.FlowLayoutPanel();
@@ -41,10 +40,6 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.cartTable = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.totalPrice = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,25 +49,19 @@
             this.discountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalPriceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.totalPrice = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.totalEntriesValue = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.index = new System.Windows.Forms.Label();
+            this.searchControl1 = new POS.UserControls.SearchControl();
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cartTable)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // index
-            // 
-            this.index.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.index.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.index.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.index.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.index.Location = new System.Drawing.Point(561, 6);
-            this.index.Name = "index";
-            this.index.Size = new System.Drawing.Size(79, 22);
-            this.index.TabIndex = 5;
-            this.index.Text = "1/1";
-            this.index.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // next
             // 
@@ -183,7 +172,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cartTable.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-            this.cartTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cartTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -226,59 +214,6 @@
             this.cartTable.StandardTab = true;
             this.cartTable.TabIndex = 16;
             this.cartTable.TabStop = false;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.totalPrice);
-            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(9, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(441, 58);
-            this.groupBox2.TabIndex = 18;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Total";
-            // 
-            // totalPrice
-            // 
-            this.totalPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalPrice.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPrice.Location = new System.Drawing.Point(7, 18);
-            this.totalPrice.Name = "totalPrice";
-            this.totalPrice.Size = new System.Drawing.Size(428, 37);
-            this.totalPrice.TabIndex = 0;
-            this.totalPrice.Text = "₱ 0.00";
-            this.totalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.itemsHolder);
-            this.panel2.Controls.Add(this.index);
-            this.panel2.Controls.Add(this.searchControl1);
-            this.panel2.Controls.Add(this.next);
-            this.panel2.Controls.Add(this.prev);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(461, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(723, 561);
-            this.panel2.TabIndex = 5;
-            // 
-            // searchControl1
-            // 
-            this.searchControl1.Location = new System.Drawing.Point(6, 4);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(0, 28);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.SearchText = "";
-            this.searchControl1.Size = new System.Drawing.Size(349, 28);
-            this.searchControl1.TabIndex = 2;
-            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // Column1
             // 
@@ -329,9 +264,11 @@
             // 
             // discountCol
             // 
+            this.discountCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.discountCol.HeaderText = "Discount";
             this.discountCol.Name = "discountCol";
             this.discountCol.ReadOnly = true;
+            this.discountCol.Width = 81;
             // 
             // totalPriceCol
             // 
@@ -347,6 +284,94 @@
             this.Column9.HeaderText = "Supplier";
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.totalPrice);
+            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(9, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(441, 58);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Total";
+            // 
+            // totalPrice
+            // 
+            this.totalPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalPrice.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalPrice.Location = new System.Drawing.Point(7, 18);
+            this.totalPrice.Name = "totalPrice";
+            this.totalPrice.Size = new System.Drawing.Size(428, 37);
+            this.totalPrice.TabIndex = 0;
+            this.totalPrice.Text = "₱ 0.00";
+            this.totalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.totalEntriesValue);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.index);
+            this.panel2.Controls.Add(this.itemsHolder);
+            this.panel2.Controls.Add(this.searchControl1);
+            this.panel2.Controls.Add(this.next);
+            this.panel2.Controls.Add(this.prev);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(461, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(723, 561);
+            this.panel2.TabIndex = 5;
+            // 
+            // totalEntriesValue
+            // 
+            this.totalEntriesValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.totalEntriesValue.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalEntriesValue.Location = new System.Drawing.Point(488, 6);
+            this.totalEntriesValue.Name = "totalEntriesValue";
+            this.totalEntriesValue.Size = new System.Drawing.Size(46, 22);
+            this.totalEntriesValue.TabIndex = 8;
+            this.totalEntriesValue.Text = "0";
+            this.totalEntriesValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(361, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(121, 22);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Total Entries:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // index
+            // 
+            this.index.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.index.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.index.Location = new System.Drawing.Point(540, 6);
+            this.index.Name = "index";
+            this.index.Size = new System.Drawing.Size(100, 22);
+            this.index.TabIndex = 6;
+            this.index.Text = "1/1";
+            this.index.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.Location = new System.Drawing.Point(6, 4);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(0, 28);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.SearchText = "";
+            this.searchControl1.Size = new System.Drawing.Size(349, 28);
+            this.searchControl1.TabIndex = 2;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // ConsoleSell
             // 
@@ -366,13 +391,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.cartTable)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.TextBox index;
         private System.Windows.Forms.Button next;
         private System.Windows.Forms.Button prev;
         private UserControls.SearchControl searchControl1;
@@ -395,5 +418,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn discountCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalPriceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.Label index;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label totalEntriesValue;
     }
 }

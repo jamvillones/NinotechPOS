@@ -168,6 +168,7 @@
     <Compile Include="Forms\VariationReferences.Designer.cs">
       <DependentUpon>VariationReferences.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IMainWindow.cs" />
     <Compile Include="Interfaces\IOnsave.cs" />
     <Compile Include="InventoryItem.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
