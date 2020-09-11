@@ -322,10 +322,6 @@ namespace POS.Forms
                 {
                     itemsTable.Rows.Add(i.ItemId, i.Item.Name, i.Cost, i.Supplier.Name);
                 }
-                if(checkBox1.Checked)
-                {
-                    addBtn.PerformClick();
-                }
             }
         }
 
@@ -334,9 +330,12 @@ namespace POS.Forms
             SetTable();
         }
 
-        private void searchControl_Load(object sender, EventArgs e)
+        private void serialNumber_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if(e.KeyCode == Keys.Enter && isAutoAdd.Checked && barcode.Text != string.Empty)
+            {
+                addItem();
+            }
         }
     }
 }

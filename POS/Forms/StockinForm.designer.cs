@@ -47,12 +47,12 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.searchControl = new POS.UserControls.SearchControl();
             this.createItemBtn = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.barcode = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.isAutoAdd = new System.Windows.Forms.CheckBox();
             this.serialNumber = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.supplier = new System.Windows.Forms.TextBox();
@@ -250,7 +250,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.searchControl);
-            this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.createItemBtn);
             this.groupBox1.Controls.Add(this.groupBox8);
             this.groupBox1.Controls.Add(this.groupBox7);
@@ -268,26 +267,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Items";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(49, 27);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 8;
-            this.toolTip.SetToolTip(this.checkBox1, "Auto add items");
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // searchControl
             // 
             this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchControl.Location = new System.Drawing.Point(70, 19);
+            this.searchControl.Location = new System.Drawing.Point(49, 19);
             this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
             this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
             this.searchControl.Name = "searchControl";
             this.searchControl.SearchText = "";
-            this.searchControl.Size = new System.Drawing.Size(498, 28);
+            this.searchControl.Size = new System.Drawing.Size(519, 28);
             this.searchControl.TabIndex = 0;
             this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
             this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
@@ -333,6 +322,7 @@
             // 
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.isAutoAdd);
             this.groupBox7.Controls.Add(this.serialNumber);
             this.groupBox7.Location = new System.Drawing.Point(9, 159);
             this.groupBox7.Name = "groupBox7";
@@ -341,6 +331,17 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Serial Number";
             // 
+            // isAutoAdd
+            // 
+            this.isAutoAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.isAutoAdd.AutoSize = true;
+            this.isAutoAdd.Location = new System.Drawing.Point(274, 23);
+            this.isAutoAdd.Name = "isAutoAdd";
+            this.isAutoAdd.Size = new System.Drawing.Size(15, 14);
+            this.isAutoAdd.TabIndex = 9;
+            this.toolTip.SetToolTip(this.isAutoAdd, "Auto add items");
+            this.isAutoAdd.UseVisualStyleBackColor = true;
+            // 
             // serialNumber
             // 
             this.serialNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -348,10 +349,11 @@
             this.serialNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.serialNumber.Location = new System.Drawing.Point(7, 20);
             this.serialNumber.Name = "serialNumber";
-            this.serialNumber.Size = new System.Drawing.Size(282, 20);
+            this.serialNumber.Size = new System.Drawing.Size(261, 20);
             this.serialNumber.TabIndex = 0;
             this.toolTip.SetToolTip(this.serialNumber, "(f2) to focus serial number");
             this.serialNumber.TextChanged += new System.EventHandler(this.serialNumber_TextChanged);
+            this.serialNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.serialNumber_KeyDown);
             // 
             // groupBox6
             // 
@@ -581,7 +583,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.groupBox7.ResumeLayout(false);
@@ -634,6 +635,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button createItemBtn;
         private UserControls.SearchControl searchControl;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox isAutoAdd;
     }
 }
