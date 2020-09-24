@@ -126,6 +126,12 @@
     <Compile Include="Forms\AdvancedSearchForm.Designer.cs">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ModifyCartDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModifyCartDetails.Designer.cs">
+      <DependentUpon>ModifyCartDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PrintInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,15 +276,15 @@
       <DependentUpon>ViewItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\ITab.cs" />
-    <Compile Include="Misc\AutoCompleteTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Misc\DGVPrinter.cs" />
     <Compile Include="Misc\EntityExtension.cs" />
     <Compile Include="Misc\Enums.cs" />
     <Compile Include="Misc\Helper.cs" />
     <Compile Include="Misc\ImageDatabaseConverter.cs" />
     <Compile Include="Misc\InventoryItemDetails.cs" />
+    <Compile Include="Misc\KeywordAutocompleteTextbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Misc\SearchEventArgs.cs" />
     <Compile Include="Misc\UserManager.cs" />
     <Compile Include="POSModel.Context.cs">
@@ -358,6 +364,9 @@
     <EmbeddedResource Include="Forms\AdvancedSearchForm.resx">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModifyCartDetails.resx">
+      <DependentUpon>ModifyCartDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\PrintInventory.resx">
       <DependentUpon>PrintInventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -423,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ViewItem.resx">
       <DependentUpon>ViewItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misc\KeywordAutocompleteTextbox.resx">
+      <DependentUpon>KeywordAutocompleteTextbox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

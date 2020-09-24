@@ -407,7 +407,7 @@ namespace POS.Forms
         {
             if (e.Control && e.KeyCode == Keys.F)
             {
-                this.ActiveControl = searchControl.firsControl;
+                this.ActiveControl = searchControl.firstControl;
                 e.SuppressKeyPress = true;
             }
             if (e.Shift && e.KeyCode == Keys.Enter)

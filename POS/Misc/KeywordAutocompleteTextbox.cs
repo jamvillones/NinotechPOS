@@ -1,44 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
-namespace POS.Misc
-{
-    class AutoCompleteTextBox : TextBox
+
+
+    public class KeywordAutoCompleteTextBox : TextBox
     {
         private ListBox _listBox;
         private bool _isAdded;
         private String[] _values;
         private String _formerValue = String.Empty;
 
-        public AutoCompleteTextBox()
+        public KeywordAutoCompleteTextBox()
         {
             InitializeComponent();
             ResetListBox();
+
+            this.KeyDown += this_KeyDown;
+            this.KeyUp += this_KeyUp;
         }
 
         private void InitializeComponent()
         {
-            _listBox = new ListBox();
-            KeyDown += this_KeyDown;
-            KeyUp += this_KeyUp;
+            this._listBox = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // _listBox
+            // 
+            this._listBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._listBox.Location = new System.Drawing.Point(0, 0);
+            this._listBox.Name = "_listBox";
+            this._listBox.Size = new System.Drawing.Size(120, 96);
+            this._listBox.TabIndex = 0;
+            this.ResumeLayout(false);
+
         }
 
         private void ShowListBox()
         {
             if (!_isAdded)
             {
-                Parent.Controls.Add(_listBox);
-                _listBox.Left = Left;
-                _listBox.Top = Top + Height;
+                Form parentForm = this.FindForm(); // new line added
+                parentForm.Controls.Add(_listBox); // adds it to the form
+                Point positionOnForm = parentForm.PointToClient(this.Parent.PointToScreen(this.Location)); // absolute position in the form
+                _listBox.Left = positionOnForm.X;
+                _listBox.Top = positionOnForm.Y + Height;
                 _isAdded = true;
             }
             _listBox.Visible = true;
             _listBox.BringToFront();
         }
+
+
 
         private void ResetListBox()
         {
@@ -54,13 +67,16 @@ namespace POS.Misc
         {
             switch (e.KeyCode)
             {
+                case Keys.Enter:
                 case Keys.Tab:
                     {
                         if (_listBox.Visible)
                         {
-                            InsertWord((String)_listBox.SelectedItem);
+                            Text = _listBox.SelectedItem.ToString();
                             ResetListBox();
                             _formerValue = Text;
+                            this.Select(this.Text.Length, 0);
+                            e.Handled = true;
                         }
                         break;
                     }
@@ -68,16 +84,18 @@ namespace POS.Misc
                     {
                         if ((_listBox.Visible) && (_listBox.SelectedIndex < _listBox.Items.Count - 1))
                             _listBox.SelectedIndex++;
-
+                        e.Handled = true;
                         break;
                     }
                 case Keys.Up:
                     {
                         if ((_listBox.Visible) && (_listBox.SelectedIndex > 0))
                             _listBox.SelectedIndex--;
-
+                        e.Handled = true;
                         break;
                     }
+
+
             }
         }
 
@@ -86,7 +104,10 @@ namespace POS.Misc
             switch (keyData)
             {
                 case Keys.Tab:
-                    return true;
+                    if (_listBox.Visible)
+                        return true;
+                    else
+                        return false;
                 default:
                     return base.IsInputKey(keyData);
             }
@@ -94,17 +115,20 @@ namespace POS.Misc
 
         private void UpdateListBox()
         {
-            if (Text == _formerValue) return;
-            _formerValue = Text;
-            String word = GetWord();
+            if (Text == _formerValue)
+                return;
+
+            _formerValue = this.Text;
+            string word = this.Text;
 
             if (_values != null && word.Length > 0)
             {
-                String[] matches = Array.FindAll(_values,
-                                                 x => (x.StartsWith(word, StringComparison.OrdinalIgnoreCase) && !SelectedValues.Contains(x)));
+                string[] matches = Array.FindAll(_values,
+                                                 x => (x.ToLower().Contains(word.ToLower())));
                 if (matches.Length > 0)
                 {
                     ShowListBox();
+                    _listBox.BeginUpdate();
                     _listBox.Items.Clear();
                     Array.ForEach(matches, x => _listBox.Items.Add(x));
                     _listBox.SelectedIndex = 0;
@@ -115,15 +139,18 @@ namespace POS.Misc
                     {
                         for (int i = 0; i < _listBox.Items.Count; i++)
                         {
-                            _listBox.Height += _listBox.GetItemHeight(i);
+                            if (i < 20)
+                                _listBox.Height += _listBox.GetItemHeight(i);
                             // it item width is larger than the current one
                             // set it to the new max item width
                             // GetItemRectangle does not work for me
                             // we add a little extra space by using '_'
-                            int itemWidth = (int)graphics.MeasureString(((String)_listBox.Items[i]) + "_", _listBox.Font).Width;
-                            _listBox.Width = (_listBox.Width < itemWidth) ? itemWidth : _listBox.Width;
+                            //int itemWidth = (int)graphics.MeasureString(((string)_listBox.Items[i]) + "_", _listBox.Font).Width;
+                            //_listBox.Width = (_listBox.Width < itemWidth) ? itemWidth : this.Width; ;
+                            _listBox.Width = this.Width;
                         }
                     }
+                    _listBox.EndUpdate();
                 }
                 else
                 {
@@ -134,38 +161,6 @@ namespace POS.Misc
             {
                 ResetListBox();
             }
-        }
-
-        private String GetWord()
-        {
-            String text = Text;
-            int pos = SelectionStart;
-
-            int posStart = text.LastIndexOf(' ', (pos < 1) ? 0 : pos - 1);
-            posStart = (posStart == -1) ? 0 : posStart + 1;
-            int posEnd = text.IndexOf(' ', pos);
-            posEnd = (posEnd == -1) ? text.Length : posEnd;
-
-            int length = ((posEnd - posStart) < 0) ? 0 : posEnd - posStart;
-
-            return text.Substring(posStart, length);
-        }
-
-        private void InsertWord(String newTag)
-        {
-            String text = Text;
-            int pos = SelectionStart;
-
-            int posStart = text.LastIndexOf(' ', (pos < 1) ? 0 : pos - 1);
-            posStart = (posStart == -1) ? 0 : posStart + 1;
-            int posEnd = text.IndexOf(' ', pos);
-
-            String firstPart = text.Substring(0, posStart) + newTag;
-            String updatedText = firstPart + ((posEnd == -1) ? "" : text.Substring(posEnd, text.Length - posEnd));
-
-
-            Text = updatedText;
-            SelectionStart = firstPart.Length;
         }
 
         public String[] Values
@@ -188,5 +183,6 @@ namespace POS.Misc
                 return new List<String>(result);
             }
         }
+
     }
-}
+

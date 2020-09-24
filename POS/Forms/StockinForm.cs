@@ -111,7 +111,7 @@ namespace POS.Forms
         private void addBtn_Click(object sender, EventArgs e)
         {
             addItem();
-            this.ActiveControl = searchControl.firsControl;
+            this.ActiveControl = searchControl.firstControl;
             //Console.WriteLine(ActiveControl.Name);
         }
 
@@ -262,7 +262,7 @@ namespace POS.Forms
         private void StockinForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.F)
-                this.ActiveControl = searchControl.firsControl;
+                this.ActiveControl = searchControl.firstControl;
 
             if (e.Shift && e.KeyCode == Keys.Enter)
             {
@@ -332,7 +332,7 @@ namespace POS.Forms
 
         private void serialNumber_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter && isAutoAdd.Checked && barcode.Text != string.Empty)
+            if(e.KeyCode == Keys.Enter && barcode.Text != string.Empty)
             {
                 addItem();
             }

@@ -13,7 +13,7 @@ namespace POS.UserControls
 {
     public partial class SearchControl : UserControl
     {
-        public Control firsControl
+        public Control firstControl
         {
             get
             {
@@ -47,7 +47,7 @@ namespace POS.UserControls
         public void SetAutoComplete(params string[] values)
         {
             searchText.AutoCompleteCustomSource.Clear();
-            //searchText.Values = values;
+            searchText.Values = values;
             searchText.AutoCompleteCustomSource.AddRange(values);
             
         }

@@ -22,13 +22,13 @@ namespace POS.Forms
 
         public event EventHandler<InventoryItemDetailArgs> OnConfirm;
 
-        public void SetValues(string barcode, string serial, string name, Image img, decimal price, int totalQuantity, int id, decimal discount = 0, bool alreadyInTable = false)
+        public void SetValues(int id, string barcode, string serial, string name, Image img, decimal price, int totalQuantity,  decimal discount = 0,  int quantity = 1, bool alreadyInTable = false)
         {
             Id = id;
             this.barcode.Text = barcode;
             this.serial.Text = serial ?? "N/A";
 
-            quantity.ReadOnly = string.IsNullOrEmpty(serial) ? false : true;
+            this.quantity.ReadOnly = string.IsNullOrEmpty(serial) ? false : true;
 
             this.itemName.Text = name;
 
@@ -40,6 +40,7 @@ namespace POS.Forms
             this.discount.Maximum = this.price.Value;
             this.tQuantity = totalQuantity;
             this.quantity.Maximum = this.tQuantity == 0 ? 999999999 : tQuantity;
+            this.quantity.Value = quantity;
 
             this.totalQuantity.Text = tQuantity == 0 ? "Infinite" : tQuantity.ToString();
 

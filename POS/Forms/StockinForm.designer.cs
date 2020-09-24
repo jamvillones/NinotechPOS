@@ -52,7 +52,6 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.barcode = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.isAutoAdd = new System.Windows.Forms.CheckBox();
             this.serialNumber = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.supplier = new System.Windows.Forms.TextBox();
@@ -322,7 +321,6 @@
             // 
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox7.Controls.Add(this.isAutoAdd);
             this.groupBox7.Controls.Add(this.serialNumber);
             this.groupBox7.Location = new System.Drawing.Point(9, 159);
             this.groupBox7.Name = "groupBox7";
@@ -331,17 +329,6 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Serial Number";
             // 
-            // isAutoAdd
-            // 
-            this.isAutoAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.isAutoAdd.AutoSize = true;
-            this.isAutoAdd.Location = new System.Drawing.Point(274, 23);
-            this.isAutoAdd.Name = "isAutoAdd";
-            this.isAutoAdd.Size = new System.Drawing.Size(15, 14);
-            this.isAutoAdd.TabIndex = 9;
-            this.toolTip.SetToolTip(this.isAutoAdd, "Auto add items");
-            this.isAutoAdd.UseVisualStyleBackColor = true;
-            // 
             // serialNumber
             // 
             this.serialNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -349,7 +336,7 @@
             this.serialNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.serialNumber.Location = new System.Drawing.Point(7, 20);
             this.serialNumber.Name = "serialNumber";
-            this.serialNumber.Size = new System.Drawing.Size(261, 20);
+            this.serialNumber.Size = new System.Drawing.Size(282, 20);
             this.serialNumber.TabIndex = 0;
             this.toolTip.SetToolTip(this.serialNumber, "(f2) to focus serial number");
             this.serialNumber.TextChanged += new System.EventHandler(this.serialNumber_TextChanged);
@@ -635,6 +622,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button createItemBtn;
         private UserControls.SearchControl searchControl;
-        private System.Windows.Forms.CheckBox isAutoAdd;
     }
 }

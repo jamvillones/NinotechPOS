@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchControl));
-            this.searchText = new System.Windows.Forms.TextBox();
+            this.searchText = new KeywordAutoCompleteTextBox();
             this.searchBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -37,13 +37,14 @@
             // 
             this.searchText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.searchText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
             this.searchText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchText.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchText.Location = new System.Drawing.Point(3, 3);
             this.searchText.Name = "searchText";
             this.searchText.Size = new System.Drawing.Size(187, 22);
             this.searchText.TabIndex = 0;
+            this.searchText.Values = null;
             this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
             // 
@@ -78,7 +79,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox searchText;
+        private KeywordAutoCompleteTextBox searchText;
         private System.Windows.Forms.Button searchBtn;
     }
 }
