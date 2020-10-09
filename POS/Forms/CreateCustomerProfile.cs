@@ -62,7 +62,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 foreach (var i in p.Customers)
-                    customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete");
+                    customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete","Transactions");
             }
         }
 
@@ -94,7 +94,7 @@ namespace POS.Forms
                     customerTable.Rows.Clear();
                     foreach (var i in s)
                     {
-                        customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete");
+                        customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete","Transactions");
                     }
                 }
 
@@ -109,23 +109,17 @@ namespace POS.Forms
                 customerTable.Rows.Clear();
                 foreach (var i in p.Customers)
                 {
-                    customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete");
+                    customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete","Transactions");
                 }
             }
         }
-
-        private void customerTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        void DeleteCustomer(int rowIndex)
         {
-            if (e.ColumnIndex != 4)
-            {
-                return;
-            }
-
             if (MessageBox.Show("Are you sure you want to delete this customer?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
 
-            var table = sender as DataGridView;
-            var id = (int)(table.Rows[e.RowIndex].Cells[0].Value);
+            var table = customerTable;
+            var id = (int)(table.Rows[rowIndex].Cells[0].Value);
             using (var p = new POSEntities())
             {
                 var c = p.Customers.FirstOrDefault(x => x.Id == id);
@@ -133,8 +127,26 @@ namespace POS.Forms
                     p.Customers.Remove(c);
                 p.SaveChanges();
             }
-            table.Rows.RemoveAt(e.RowIndex);
+            table.Rows.RemoveAt(rowIndex);
             MessageBox.Show("Customer deleted.");
+        }
+
+        private void customerTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 4)
+            {
+                DeleteCustomer(e.RowIndex);
+            }
+            if(e.ColumnIndex == 5)
+            {
+                using(var ct = new CustomerTransactionsForm())
+                {
+                    if(ct.SetId((int)(customerTable.Rows[e.RowIndex].Cells[0].Value)))
+                    ct.ShowDialog();
+                }
+            }
+
+           
         }
 
         int targetCustomerId = 0;

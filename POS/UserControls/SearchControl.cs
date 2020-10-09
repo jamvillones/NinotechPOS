@@ -48,7 +48,7 @@ namespace POS.UserControls
         {
             searchText.AutoCompleteCustomSource.Clear();
             searchText.Values = values;
-            searchText.AutoCompleteCustomSource.AddRange(values);
+            //searchText.AutoCompleteCustomSource.AddRange(values);
             
         }
         public void DoSearch()

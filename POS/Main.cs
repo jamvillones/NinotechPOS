@@ -206,7 +206,7 @@ namespace POS
             }
         }
 
-        private void toolStripButton6_Click(object sender, EventArgs e)
+        private void stockin_Callback(object sender, EventArgs e)
         {
             using (var stockin = new StockinForm())
             {
@@ -220,7 +220,7 @@ namespace POS
             inventoryTab.RefreshData();
         }
 
-        private void toolStripButton7_Click(object sender, EventArgs e)
+        private void sell_Callback(object sender, EventArgs e)
         {
             using (var sellForm = new MakeSale())
             {

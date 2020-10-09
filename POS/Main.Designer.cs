@@ -35,6 +35,7 @@
             this.inventoryBtn = new System.Windows.Forms.Button();
             this.repBtn = new System.Windows.Forms.Button();
             this.statBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.userButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -106,6 +107,7 @@
             this.flowLayoutPanel1.Controls.Add(this.inventoryBtn);
             this.flowLayoutPanel1.Controls.Add(this.repBtn);
             this.flowLayoutPanel1.Controls.Add(this.statBtn);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(80, 561);
@@ -158,7 +160,6 @@
             // 
             this.statBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.statBtn.Enabled = false;
             this.statBtn.FlatAppearance.BorderSize = 0;
             this.statBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.statBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -169,11 +170,31 @@
             this.statBtn.Name = "statBtn";
             this.statBtn.Size = new System.Drawing.Size(80, 80);
             this.statBtn.TabIndex = 3;
-            this.statBtn.Text = "STATISTICS";
+            this.statBtn.Text = "SELL ITEMS";
             this.statBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.statBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.statBtn.UseVisualStyleBackColor = true;
-            this.statBtn.Visible = false;
+            this.statBtn.Click += new System.EventHandler(this.sell_Callback);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(0, 240);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(80, 80);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "STOCKIN";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.stockin_Callback);
             // 
             // panel2
             // 
@@ -385,7 +406,7 @@
             this.stockinToolStrpBtn.Name = "stockinToolStrpBtn";
             this.stockinToolStrpBtn.Size = new System.Drawing.Size(23, 22);
             this.stockinToolStrpBtn.Text = "Stock In";
-            this.stockinToolStrpBtn.Click += new System.EventHandler(this.toolStripButton6_Click);
+            this.stockinToolStrpBtn.Click += new System.EventHandler(this.stockin_Callback);
             // 
             // toolStripButton7
             // 
@@ -395,7 +416,7 @@
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton7.Text = "Sell Items";
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+            this.toolStripButton7.Click += new System.EventHandler(this.sell_Callback);
             // 
             // toolStripButton4
             // 
@@ -498,6 +519,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton stockinToolStrpBtn;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.Button button1;
     }
 }
 

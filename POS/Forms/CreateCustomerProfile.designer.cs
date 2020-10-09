@@ -38,12 +38,13 @@
             this.name = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.customerTable = new System.Windows.Forms.DataGridView();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.delCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.transactCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.searchControl = new POS.UserControls.SearchControl();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -60,7 +61,7 @@
             this.groupBox2.Controls.Add(this.address);
             this.groupBox2.Location = new System.Drawing.Point(6, 70);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(305, 45);
+            this.groupBox2.Size = new System.Drawing.Size(531, 45);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Address";
@@ -73,14 +74,14 @@
             this.address.Location = new System.Drawing.Point(6, 19);
             this.address.MaxLength = 50;
             this.address.Name = "address";
-            this.address.Size = new System.Drawing.Size(293, 20);
+            this.address.Size = new System.Drawing.Size(519, 20);
             this.address.TabIndex = 0;
             // 
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.contact);
-            this.groupBox3.Location = new System.Drawing.Point(317, 70);
+            this.groupBox3.Location = new System.Drawing.Point(543, 70);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(211, 45);
             this.groupBox3.TabIndex = 2;
@@ -101,9 +102,10 @@
             // saveBtn
             // 
             this.saveBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.saveBtn.Location = new System.Drawing.Point(6, 122);
+            this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.saveBtn.Location = new System.Drawing.Point(11, 122);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(522, 23);
+            this.saveBtn.Size = new System.Drawing.Size(738, 23);
             this.saveBtn.TabIndex = 3;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = true;
@@ -116,7 +118,7 @@
             this.groupBox4.Controls.Add(this.name);
             this.groupBox4.Location = new System.Drawing.Point(6, 19);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(522, 45);
+            this.groupBox4.Size = new System.Drawing.Size(748, 45);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Name";
@@ -129,7 +131,7 @@
             this.name.Location = new System.Drawing.Point(6, 19);
             this.name.MaxLength = 50;
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(510, 20);
+            this.name.Size = new System.Drawing.Size(736, 20);
             this.name.TabIndex = 0;
             // 
             // groupBox1
@@ -141,7 +143,7 @@
             this.groupBox1.Controls.Add(this.customerTable);
             this.groupBox1.Location = new System.Drawing.Point(12, 169);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(534, 304);
+            this.groupBox1.Size = new System.Drawing.Size(760, 380);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "List of Customers";
@@ -163,7 +165,8 @@
             this.Column2,
             this.Column3,
             this.Column1,
-            this.Column5});
+            this.delCol,
+            this.transactCol});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -180,27 +183,12 @@
             this.customerTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.customerTable.RowHeadersVisible = false;
             this.customerTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.customerTable.Size = new System.Drawing.Size(522, 245);
+            this.customerTable.Size = new System.Drawing.Size(748, 321);
             this.customerTable.StandardTab = true;
             this.customerTable.TabIndex = 1;
             this.customerTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.customerTable_CellBeginEdit);
             this.customerTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellContentClick);
             this.customerTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellEndEdit);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.groupBox4);
-            this.groupBox5.Controls.Add(this.groupBox2);
-            this.groupBox5.Controls.Add(this.groupBox3);
-            this.groupBox5.Controls.Add(this.saveBtn);
-            this.groupBox5.Location = new System.Drawing.Point(12, 12);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(534, 151);
-            this.groupBox5.TabIndex = 4;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Register Customer";
             // 
             // Column4
             // 
@@ -209,7 +197,7 @@
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             this.Column4.Visible = false;
-            this.Column4.Width = 41;
+            this.Column4.Width = 22;
             // 
             // Column2
             // 
@@ -233,14 +221,35 @@
             this.Column1.Name = "Column1";
             this.Column1.Width = 150;
             // 
-            // Column5
+            // delCol
             // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column5.HeaderText = "";
-            this.Column5.Name = "Column5";
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column5.Width = 19;
+            this.delCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.delCol.HeaderText = "";
+            this.delCol.Name = "delCol";
+            this.delCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.delCol.Width = 19;
+            // 
+            // transactCol
+            // 
+            this.transactCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.transactCol.HeaderText = "";
+            this.transactCol.Name = "transactCol";
+            this.transactCol.Width = 5;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.groupBox4);
+            this.groupBox5.Controls.Add(this.groupBox2);
+            this.groupBox5.Controls.Add(this.groupBox3);
+            this.groupBox5.Controls.Add(this.saveBtn);
+            this.groupBox5.Location = new System.Drawing.Point(12, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(760, 151);
+            this.groupBox5.TabIndex = 4;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Register Customer";
             // 
             // searchControl
             // 
@@ -258,7 +267,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(558, 485);
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -297,6 +306,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewButtonColumn Column5;
+        private System.Windows.Forms.DataGridViewButtonColumn delCol;
+        private System.Windows.Forms.DataGridViewButtonColumn transactCol;
     }
 }

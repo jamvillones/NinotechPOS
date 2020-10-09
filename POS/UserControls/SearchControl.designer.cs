@@ -1,4 +1,6 @@
-﻿namespace POS.UserControls
+﻿using test;
+
+namespace POS.UserControls
 {
     partial class SearchControl
     {
@@ -37,8 +39,6 @@
             // 
             this.searchText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.searchText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchText.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchText.Location = new System.Drawing.Point(3, 3);
             this.searchText.Name = "searchText";

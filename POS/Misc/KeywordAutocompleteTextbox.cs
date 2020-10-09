@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-
+namespace test
+{
     public class KeywordAutoCompleteTextBox : TextBox
     {
         private ListBox _listBox;
@@ -42,6 +43,8 @@ using System.Windows.Forms;
             {
                 Form parentForm = this.FindForm(); // new line added
                 parentForm.Controls.Add(_listBox); // adds it to the form
+                _listBox.KeyDown += ParentForm_KeyDown;
+                _listBox.MouseClick += _listBox_MouseClick;
                 Point positionOnForm = parentForm.PointToClient(this.Parent.PointToScreen(this.Location)); // absolute position in the form
                 _listBox.Left = positionOnForm.X;
                 _listBox.Top = positionOnForm.Y + Height;
@@ -51,7 +54,51 @@ using System.Windows.Forms;
             _listBox.BringToFront();
         }
 
+        private void _listBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (_listBox.Visible)
+            {
+                Text = _listBox.SelectedItem.ToString();
+                ResetListBox();
+                _formerValue = Text;
+                this.Select(this.Text.Length, 0);
+               // e.Handled = true;
+            }
+        }
 
+        private void ParentForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                case Keys.Tab:
+                    {
+                        if (_listBox.Visible)
+                        {
+                            Text = _listBox.SelectedItem.ToString();
+                            ResetListBox();
+                            _formerValue = Text;
+                            this.Select(this.Text.Length, 0);
+                            e.Handled = true;
+                        }
+                        break;
+                    }
+                case Keys.Down:
+                    {
+                        if ((_listBox.Visible) && (_listBox.SelectedIndex < _listBox.Items.Count - 1))
+                            _listBox.SelectedIndex++;
+                        e.Handled = true;
+                        break;
+                    }
+                case Keys.Up:
+                    {
+                        if ((_listBox.Visible) && (_listBox.SelectedIndex > 0))
+                            _listBox.SelectedIndex--;
+                        e.Handled = true;
+                        break;
+                    }
+            }
+        }
 
         private void ResetListBox()
         {
@@ -185,4 +232,4 @@ using System.Windows.Forms;
         }
 
     }
-
+}
