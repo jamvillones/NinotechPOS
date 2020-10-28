@@ -147,6 +147,8 @@
             this.searchControl1.SearchText = "";
             this.searchControl1.Size = new System.Drawing.Size(219, 28);
             this.searchControl1.TabIndex = 3;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // StockinLog
             // 
@@ -162,6 +164,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Stockin Log";
+            this.Load += new System.EventHandler(this.StockinLog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.histTable)).EndInit();
             this.ResumeLayout(false);
 

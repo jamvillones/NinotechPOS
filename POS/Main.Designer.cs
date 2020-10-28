@@ -60,6 +60,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.refreshToolStripBtn = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -325,7 +326,8 @@
             this.toolStripButton4,
             this.toolStripSeparator3,
             this.toolStripButton5,
-            this.refreshToolStripBtn});
+            this.refreshToolStripBtn,
+            this.toolStripButton3});
             this.toolStrip1.Location = new System.Drawing.Point(80, 34);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
@@ -454,6 +456,16 @@
             this.refreshToolStripBtn.Text = "Refresh(F5)";
             this.refreshToolStripBtn.Click += new System.EventHandler(this.refreshToolStripBtn_Click);
             // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click_1);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -520,6 +532,7 @@
         private System.Windows.Forms.ToolStripButton stockinToolStrpBtn;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
     }
 }
 

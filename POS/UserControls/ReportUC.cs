@@ -15,7 +15,7 @@ using POS.Misc;
 
 namespace POS.UserControls
 {
-
+    public enum SaleStatusFilter { All, Pending, Paid, Count }
     public partial class ReportUC : UserControl, ITab
     {
         Button defButton = new Button();
@@ -43,6 +43,11 @@ namespace POS.UserControls
 
         public void Initialize()
         {
+            for (int i = 0; i < (int)SaleStatusFilter.Count; i++)
+                saleStatus.Items.Add(((SaleStatusFilter)i).ToString());
+
+            saleStatus.SelectedIndex = 0;
+
             defButton.Click += DefButton_Click;
             month.Items.Clear();
             for (int i = 0; i < (int)Months.Count; i++)
@@ -137,9 +142,19 @@ namespace POS.UserControls
             using (var p = new POSEntities())
             {
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderBy(x => x.Date);
+                decimal total = sales.ToArray().Sum(x => x.GetSaleTotalPrice() - x.AmountRecieved ?? 0);
+
+                toBeSettledTxt.Text = string.Format("P {0:n}", total);
                 //ids = sales.Select(x => x.Id).ToArray();
                 foreach (var x in sales)
-                    chargedTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
+                    chargedTable.Rows.Add(x.Id,
+                                          x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                                          x.Login?.Username,
+                                          x.Customer.Name,
+                                          string.Format("₱ {0:n}", x.GetSaleTotalPrice()),
+                                          string.Format("₱ {0:n}", x.AmountRecieved),
+                                          string.Format("₱ {0:n}", x.GetSaleTotalPrice() - x.AmountRecieved),
+                                          x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
         }
 
@@ -205,12 +220,42 @@ namespace POS.UserControls
 
         private void regularSalesTab_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void chargedPage_Click(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void saleStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            chargedTable.Rows.Clear();
+
+            using (var p = new POSEntities())
+            {
+                var sales = p.Sales.ToArray().Where(x => x.SaleType == SaleType.Charged.ToString());
+
+                if (chargedSaleSearch.Text != string.Empty)
+                {
+                    sales = sales.Where(x => x.Customer.Name.Contains(chargedSaleSearch.Text));
+                }
+
+                if (saleStatus.Text == "Pending")
+                {
+                    Console.WriteLine("hey");
+                    sales = sales.ToArray().Where(x => x.GetSaleTotalPrice() > x.AmountRecieved);
+                }
+                else if (saleStatus.Text == "Paid")
+                {
+                    sales = sales.ToArray().Where(x => x.GetSaleTotalPrice() <= x.AmountRecieved);
+                }
+
+
+                //ids = sales.Select(x => x.Id).ToArray();
+                foreach (var x in sales.OrderBy(x => x.Date))
+                    chargedTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
+            }
         }
     }
 }

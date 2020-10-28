@@ -17,16 +17,60 @@ namespace POS.Forms
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void StockinLog_Load(object sender, EventArgs e)
+        {
+            using (var p = new POSEntities())
+            {
+                var namegroup = p.StockinHistories.GroupBy(x => x.ItemName);
+
+                searchControl1.SetAutoComplete(namegroup.Select(x => x.Key).ToArray());
+                foreach (var i in p.StockinHistories.OrderByDescending(x => x.Date))
+                    histTable.Rows.Add(i.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                                       i.LoginUsername,
+                                       i.ItemName,
+                                       i.SerialNumber,
+                                       i.Quantity,
+                                       i.Cost,
+                                       i.Supplier);
+            }
+        }
+
+        private void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
+        {
+            using (var p = new POSEntities())
+            {
+                var s = p.StockinHistories.Where(x => x.ItemName.Contains(e.Text));
+                if (s.Count() == 0)
+                {
+                    MessageBox.Show("No items found.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                histTable.Rows.Clear();
+                e.SearchFound = true;
+                foreach (var i in s.OrderByDescending(x => x.Date))
+                    histTable.Rows.Add(i.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                                       i.LoginUsername,
+                                       i.ItemName,
+                                       i.SerialNumber,
+                                       i.Quantity,
+                                       i.Cost,
+                                       i.Supplier);
+            }
+        }
+
+        private void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
             histTable.Rows.Clear();
             using (var p = new POSEntities())
             {
-                //var hist = p.StockinHistories.Where(x => x.Date.Value.Day == dateTimeFilter.Value.Day);
-                //foreach (var i in hist)
-                //{
-                //    histTable.Rows.Add(i.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), i.LoginUsername, i.ItemName, i.SerialNumber, i.Quantity, i.Cost, i.Supplier);
-                //}
+                foreach (var i in p.StockinHistories.OrderByDescending(x => x.Date))
+                    histTable.Rows.Add(i.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                                       i.LoginUsername,
+                                       i.ItemName,
+                                       i.SerialNumber,
+                                       i.Quantity,
+                                       i.Cost,
+                                       i.Supplier);
             }
         }
     }

@@ -245,6 +245,14 @@ namespace POS
             return isSignout;
         }
 
+        private void toolStripButton3_Click_1(object sender, EventArgs e)
+        {
+            using (var s = new StockinLog())
+            {
+                s.ShowDialog();
+            }
+        }
+
         //private void toolStripButton4_Click(object sender, EventArgs e)
         //{
         //    //foreach(var i in uControls)

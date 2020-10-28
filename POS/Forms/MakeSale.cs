@@ -251,6 +251,31 @@ namespace POS.Forms
             }
         }
 
+
+
+
+        //string getSerias()
+        //{
+
+        //}
+        void addItem()
+        {
+            if (itemsTable.SelectedCells.Count == 0)
+                return;
+            if (!string.IsNullOrEmpty(tempItem.Serial))
+            {
+                var i = cartTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(x => x.Cells[1].Value?.ToString() == tempItem.Serial);
+                if (i != null)
+                {
+                    MessageBox.Show("already in cart");
+                    return;
+                }
+            }
+
+            ProcessRightTable();
+            ProcessLeftTable();
+            calculateTotal();
+        }
         void ProcessLeftTable()
         {
             ///infinity
@@ -292,28 +317,10 @@ namespace POS.Forms
             inCart.Add(new ItemInCart(tempItem.Barcode, tempItem.Serial, tempItem.Quantity, tempItem.Supplier));
         }
 
-
-        //string getSerias()
-        //{
-
-        //}
-        void addItem()
+        void calculateTotal()
         {
-            if (itemsTable.SelectedCells.Count == 0)
-                return;
-            if (!string.IsNullOrEmpty(tempItem.Serial))
-            {
-                var i = cartTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(x => x.Cells[1].Value?.ToString() == tempItem.Serial);
-                if (i != null)
-                {
-                    MessageBox.Show("already in cart");
-                    return;
-                }
-            }
-
-            ProcessRightTable();
-            ProcessLeftTable();
-            calculateTotal();
+            cartTotal.Text = string.Format("₱ {0:n}", cartTotalValue);
+            saleType.SelectedIndex = cartTotalValue - amountRecieved.Value > 0 ? 1 : 0;
         }
 
         private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -332,11 +339,6 @@ namespace POS.Forms
             cartTable.Rows.RemoveAt(index);
         }
 
-        void calculateTotal()
-        {
-            cartTotal.Text = string.Format("₱ {0:n}", cartTotalValue);
-            saleType.SelectedIndex = cartTotalValue - amountRecieved.Value > 0 ? 1 : 0;
-        }
 
         private void amountChangedCallback(object sender, EventArgs e)
         {
