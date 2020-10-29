@@ -142,7 +142,7 @@ namespace POS.UserControls
             using (var p = new POSEntities())
             {
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderBy(x => x.Date);
-                decimal total = sales.ToArray().Sum(x => x.GetSaleTotalPrice() - x.AmountRecieved ?? 0);
+                decimal total = sales.ToArray().Sum(x => remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice()));
 
                 toBeSettledTxt.Text = string.Format("P {0:n}", total);
                 //ids = sales.Select(x => x.Id).ToArray();
@@ -153,9 +153,15 @@ namespace POS.UserControls
                                           x.Customer.Name,
                                           string.Format("₱ {0:n}", x.GetSaleTotalPrice()),
                                           string.Format("₱ {0:n}", x.AmountRecieved),
-                                          string.Format("₱ {0:n}", x.GetSaleTotalPrice() - x.AmountRecieved),
+                                          string.Format("₱ {0:n}", remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice())),
                                           x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
+        }
+        decimal remaining(decimal recieved, decimal totalPrice)
+        {
+            if (recieved > totalPrice)
+                return 0;
+            return totalPrice - recieved;
         }
 
         private void month_TextChanged(object sender, EventArgs e)
@@ -166,25 +172,21 @@ namespace POS.UserControls
         }
 
         void searchChargeByName()
-        {
-            //for(int i =0;i< chargedTable.RowCount; i++)
-            //{
-            //    //// need to lower the case because string.contains is case sensitive :(
-            //    string name = chargedTable.Rows[i].Cells[2].Value.ToString().ToLower();
-            //    if (name.Contains(chargedSaleSearch.Text.ToLower()))
-            //    {
-            //        chargedTable.Rows[i].Selected = true;
-            //        chargedTable.FirstDisplayedScrollingRowIndex = i;
-            //        break;
-            //    }
-            //}       
+        {           
             chargedTable.Rows.Clear();
             using (var p = new POSEntities())
             {
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString() && x.Customer.Name.Contains(chargedSaleSearch.Text)).OrderBy(x => x.Date);
                 //ids = sales.Select(x => x.Id).ToArray();
                 foreach (var x in sales)
-                    chargedTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
+                    chargedTable.Rows.Add(x.Id,
+                                          x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                                          x.Login?.Username,
+                                          x.Customer.Name,
+                                          string.Format("₱ {0:n}", x.GetSaleTotalPrice()),
+                                          string.Format("₱ {0:n}", x.AmountRecieved),
+                                          string.Format("₱ {0:n}", remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice())),
+                                          x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
 
         }
@@ -251,10 +253,15 @@ namespace POS.UserControls
                     sales = sales.ToArray().Where(x => x.GetSaleTotalPrice() <= x.AmountRecieved);
                 }
 
-
-                //ids = sales.Select(x => x.Id).ToArray();
-                foreach (var x in sales.OrderBy(x => x.Date))
-                    chargedTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()), string.Format("₱ {0:n}", x.AmountRecieved), x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
+                foreach (var x in sales)
+                    chargedTable.Rows.Add(x.Id,
+                                          x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                                          x.Login?.Username,
+                                          x.Customer.Name,
+                                          string.Format("₱ {0:n}", x.GetSaleTotalPrice()),
+                                          string.Format("₱ {0:n}", x.AmountRecieved),
+                                          string.Format("₱ {0:n}", remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice())),
+                                          x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
         }
     }

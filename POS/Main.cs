@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ using POS.Misc;
 
 namespace POS
 {
-    public partial class Main : Form,IMainWindow
+    public partial class Main : Form, IMainWindow
     {
         List<ITab> uControls = new List<ITab>();
 
@@ -112,7 +113,7 @@ namespace POS
                 RefreshData();
             }
 
-            if(e.Control && e.KeyCode == Keys.P)
+            if (e.Control && e.KeyCode == Keys.P)
             {
                 toolStripButton5.PerformClick();
             }
@@ -187,7 +188,7 @@ namespace POS
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            using(var sellForm = new ConsoleSell())
+            using (var sellForm = new ConsoleSell())
             {
                 sellForm.ShowDialog();
             }
@@ -227,7 +228,7 @@ namespace POS
                 sellForm.ShowDialog();
             }
         }
-        Login currLogin 
+        Login currLogin
         {
             get
             {
@@ -253,10 +254,13 @@ namespace POS
             }
         }
 
-        //private void toolStripButton4_Click(object sender, EventArgs e)
-        //{
-        //    //foreach(var i in uControls)
-        //    //    i.re
-        //}
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            using (var p = new POSEntities())
+            {
+                p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
+            }
+            MessageBox.Show("backup successful");
+        }
     }
 }
