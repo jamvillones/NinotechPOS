@@ -137,7 +137,7 @@ namespace POS.Forms
                     //Console.WriteLine(it.Id);
                     if (string.IsNullOrEmpty(serialNum))
                     {
-                        it = p.InventoryItems.FirstOrDefault(x => x.Product.Id == product.Id);
+                        it = p.InventoryItems.FirstOrDefault(x => x.Product.Id == product.Id && x.SerialNumber == null);
                         if (it == null)
                         {
                             it = new InventoryItem();

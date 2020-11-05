@@ -61,9 +61,7 @@
           <Property Name="CanAddSupplier" Type="bit" Nullable="false" />
           <Property Name="CanEditSupplier" Type="bit" Nullable="false" />
           <Property Name="CanDeleteSupplier" Type="bit" Nullable="false" />
-          <Property Name="CanAddCustomer" Type="bit" Nullable="false" />
           <Property Name="CanStockIn" Type="bit" Nullable="false" />
-          <Property Name="CanSellItem" Type="bit" Nullable="false" />
           <Property Name="CanAddUser" Type="bit" Nullable="false" />
           <Property Name="CanDeleteUser" Type="bit" Nullable="false" />
           <Property Name="CanVoidSale" Type="bit" Nullable="false" />
@@ -383,11 +381,6 @@
             <End Role="Sale" EntitySet="Sales" />
             <End Role="SoldItem" EntitySet="SoldItems" />
           </AssociationSet>
-          <EntitySet Name="Logins" EntityType="POSModel.Login" />
-          <AssociationSet Name="FK_Sale_Login" Association="POSModel.FK_Sale_Login">
-            <End Role="Login" EntitySet="Logins" />
-            <End Role="Sale" EntitySet="Sales" />
-          </AssociationSet>
           <EntitySet Name="Products" EntityType="POSModel.Product" />
           <AssociationSet Name="FK_InventoryItem_Product" Association="POSModel.FK_InventoryItem_Product">
             <End Role="Product" EntitySet="Products" />
@@ -408,6 +401,11 @@
           <AssociationSet Name="FK_StockinHistory_InventoryItem" Association="POSModel.FK_StockinHistory_InventoryItem">
             <End Role="InventoryItem" EntitySet="InventoryItems" />
             <End Role="StockinHistory" EntitySet="StockinHistories" />
+          </AssociationSet>
+          <EntitySet Name="Logins" EntityType="POSModel.Login" />
+          <AssociationSet Name="FK_Sale_Login" Association="POSModel.FK_Sale_Login">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Sale" EntitySet="Sales" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Sale">
@@ -476,43 +474,6 @@
             </Principal>
             <Dependent Role="SoldItem">
               <PropertyRef Name="SaleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Login">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CanAddItem" Type="Boolean" Nullable="false" />
-          <Property Name="CanEditItem" Type="Boolean" Nullable="false" />
-          <Property Name="CanDeleteItem" Type="Boolean" Nullable="false" />
-          <Property Name="CanAddProduct" Type="Boolean" Nullable="false" />
-          <Property Name="CanEditProduct" Type="Boolean" Nullable="false" />
-          <Property Name="CanDeleteProduct" Type="Boolean" Nullable="false" />
-          <Property Name="CanAddSupplier" Type="Boolean" Nullable="false" />
-          <Property Name="CanEditSupplier" Type="Boolean" Nullable="false" />
-          <Property Name="CanDeleteSupplier" Type="Boolean" Nullable="false" />
-          <Property Name="CanAddCustomer" Type="Boolean" Nullable="false" />
-          <Property Name="CanStockIn" Type="Boolean" Nullable="false" />
-          <Property Name="CanSellItem" Type="Boolean" Nullable="false" />
-          <Property Name="CanAddUser" Type="Boolean" Nullable="false" />
-          <Property Name="CanDeleteUser" Type="Boolean" Nullable="false" />
-          <Property Name="CanVoidSale" Type="Boolean" Nullable="false" />
-          <Property Name="CanEditInventory" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Sales" Relationship="POSModel.FK_Sale_Login" FromRole="Login" ToRole="Sale" />
-        </EntityType>
-        <Association Name="FK_Sale_Login">
-          <End Type="POSModel.Login" Role="Login" Multiplicity="0..1" />
-          <End Type="POSModel.Sale" Role="Sale" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Login">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Sale">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -592,6 +553,41 @@
             </Principal>
             <Dependent Role="StockinHistory">
               <PropertyRef Name="InventoryReference" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CanAddItem" Type="Boolean" Nullable="false" />
+          <Property Name="CanEditItem" Type="Boolean" Nullable="false" />
+          <Property Name="CanDeleteItem" Type="Boolean" Nullable="false" />
+          <Property Name="CanAddProduct" Type="Boolean" Nullable="false" />
+          <Property Name="CanEditProduct" Type="Boolean" Nullable="false" />
+          <Property Name="CanDeleteProduct" Type="Boolean" Nullable="false" />
+          <Property Name="CanAddSupplier" Type="Boolean" Nullable="false" />
+          <Property Name="CanEditSupplier" Type="Boolean" Nullable="false" />
+          <Property Name="CanDeleteSupplier" Type="Boolean" Nullable="false" />
+          <Property Name="CanStockIn" Type="Boolean" Nullable="false" />
+          <Property Name="CanAddUser" Type="Boolean" Nullable="false" />
+          <Property Name="CanDeleteUser" Type="Boolean" Nullable="false" />
+          <Property Name="CanVoidSale" Type="Boolean" Nullable="false" />
+          <Property Name="CanEditInventory" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Sales" Relationship="POSModel.FK_Sale_Login" FromRole="Login" ToRole="Sale" />
+        </EntityType>
+        <Association Name="FK_Sale_Login">
+          <End Type="POSModel.Login" Role="Login" Multiplicity="0..1" />
+          <End Type="POSModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -694,6 +690,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="POSModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Logins">
             <EntityTypeMapping TypeName="POSModel.Login">
               <MappingFragment StoreEntitySet="Login">
@@ -701,9 +707,7 @@
                 <ScalarProperty Name="CanVoidSale" ColumnName="CanVoidSale" />
                 <ScalarProperty Name="CanDeleteUser" ColumnName="CanDeleteUser" />
                 <ScalarProperty Name="CanAddUser" ColumnName="CanAddUser" />
-                <ScalarProperty Name="CanSellItem" ColumnName="CanSellItem" />
                 <ScalarProperty Name="CanStockIn" ColumnName="CanStockIn" />
-                <ScalarProperty Name="CanAddCustomer" ColumnName="CanAddCustomer" />
                 <ScalarProperty Name="CanDeleteSupplier" ColumnName="CanDeleteSupplier" />
                 <ScalarProperty Name="CanEditSupplier" ColumnName="CanEditSupplier" />
                 <ScalarProperty Name="CanAddSupplier" ColumnName="CanAddSupplier" />
@@ -715,16 +719,6 @@
                 <ScalarProperty Name="CanAddItem" ColumnName="CanAddItem" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="POSModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
-                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

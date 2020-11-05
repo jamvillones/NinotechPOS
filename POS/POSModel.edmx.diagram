@@ -16,14 +16,14 @@
         <AssociationConnector Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord" />
         <AssociationConnector Association="POSModel.FK_Sale_Customer" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Sale" />
-        <EntityTypeShape EntityType="POSModel.Login" Width="1.5" PointX="5.375" PointY="9.125" />
-        <AssociationConnector Association="POSModel.FK_Sale_Login" />
         <EntityTypeShape EntityType="POSModel.Product" Width="1.5" PointX="10" PointY="2.75" />
         <AssociationConnector Association="POSModel.FK_InventoryItem_Product" />
         <AssociationConnector Association="POSModel.FK_Product_Item" />
         <AssociationConnector Association="POSModel.FK_Product_Supplier" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Product" />
         <AssociationConnector Association="POSModel.FK_StockinHistory_InventoryItem" />
+        <EntityTypeShape EntityType="POSModel.Login" Width="1.5" PointX="5.375" PointY="9" />
+        <AssociationConnector Association="POSModel.FK_Sale_Login" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

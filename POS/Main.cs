@@ -228,6 +228,7 @@ namespace POS
                 sellForm.ShowDialog();
             }
         }
+
         Login currLogin
         {
             get
@@ -235,11 +236,13 @@ namespace POS
                 return UserManager.instance.currentLogin;
             }
         }
+
         private void Main_Load(object sender, EventArgs e)
         {
             addNewLoginToolStripMenuItem1.Enabled = currLogin.CanAddUser;
             stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
         }
+
         bool isSignout = false;
         public bool IsSignout()
         {
@@ -260,7 +263,6 @@ namespace POS
             {
                 p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
             }
-            MessageBox.Show("backup successful");
         }
     }
 }

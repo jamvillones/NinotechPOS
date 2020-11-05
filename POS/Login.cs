@@ -32,9 +32,7 @@ namespace POS
         public bool CanAddSupplier { get; set; }
         public bool CanEditSupplier { get; set; }
         public bool CanDeleteSupplier { get; set; }
-        public bool CanAddCustomer { get; set; }
         public bool CanStockIn { get; set; }
-        public bool CanSellItem { get; set; }
         public bool CanAddUser { get; set; }
         public bool CanDeleteUser { get; set; }
         public bool CanVoidSale { get; set; }

@@ -19,22 +19,25 @@ namespace POS
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Interfaces.IMainWindow mainWindow;
+            Interfaces.IMainWindow mainWindow = null;
             UserManager.instance = new UserManager();
             do
             {
                 var login = new Forms.LoginForm();
                 Application.Run(login);
 
-                var main = new Main();
-                mainWindow = main;
                 if (login.LoginSuccessful)
                 {
+                    var main = new Main();
+                    //choose which main is to open
+                    mainWindow = main;
+
                     Application.Run(main);
                 }
-
             }
-            while (mainWindow.IsSignout());
+            while (mainWindow?.IsSignout() ?? false);
+
+            //Application.Run(new POS.Forms.ReceiptPrintingForm());
         }
     }
 }
