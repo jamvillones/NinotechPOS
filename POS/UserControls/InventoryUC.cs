@@ -106,16 +106,6 @@ namespace POS.UserControls
             }
         }
 
-        //protected virtual void secondBtn_Click(object sender, EventArgs e)
-        //{
-        //    using (var stockin = new StockinForm())
-        //    {
-        //        stockin.OnSave += OnInventoryChangedCallback;
-        //        stockin.ShowDialog();
-        //    }
-
-        //}
-
         private void OnInventoryChangedCallback(object sender, EventArgs e)
         {
             initInventoryTable();
@@ -164,6 +154,7 @@ namespace POS.UserControls
 
                     inventoryTable.Rows.Add(item.Barcode, item.Name, string.Format("₱ {0:n}", item.SellingPrice), (totalQuantity == 0 ? "Infinite" : totalQuantity.ToString()), (totalQuantity == 0 ? "----" : string.Format("₱ {0:n}", totalQuantity * item.SellingPrice)));
                 }
+                totalItemsLabel.Text = string.Format("Total item price: ₱ {0:n}", p.InventoryItems.Sum(x => x.Product.Item.SellingPrice*x.Quantity));
             }
         }
         private void Onsave_Callback(object sender, EventArgs e)

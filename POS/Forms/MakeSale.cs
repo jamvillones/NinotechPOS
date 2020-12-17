@@ -178,8 +178,9 @@ namespace POS.Forms
                 p.SaveChanges();
 
                 OnSave?.Invoke(this, null);
-
-                MessageBox.Show("Sold Items.");
+                //MessageBox.Show("Sold Items.");
+                if (isPrintReceipt.Checked)
+                    printDoc.Print();
 
                 this.Close();
             }
@@ -313,7 +314,7 @@ namespace POS.Forms
                     return;
                 }
             }
-            cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice.ToString(), tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);
+            cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice, tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);
             inCart.Add(new ItemInCart(tempItem.Barcode, tempItem.Serial, tempItem.Quantity, tempItem.Supplier));
         }
 
@@ -483,6 +484,62 @@ namespace POS.Forms
         private void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
             itemsTable.Rows.Clear();
+        }
+
+        Font font = new Font("Arial Narrow", 8, FontStyle.Regular);
+        Font titleFont = new Font("Times New Roman", 10, FontStyle.Bold);
+
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            StringFormat introFormat = new StringFormat();
+            introFormat.Alignment = StringAlignment.Center;
+            string titleString = "NINOTECH COMPUTER PARTS AND ACCESSORIES";
+            var titleSize = e.Graphics.MeasureString(titleString, titleFont, e.PageBounds.Width);
+            var rect = new Rectangle(0, 0, e.PageBounds.Width, (int)titleSize.Height);
+            e.Graphics.DrawString(titleString, titleFont, Brushes.Black, rect, introFormat);
+
+            //StringFormat itemsFormat = new StringFormat();
+            //introFormat.Alignment = StringAlignment.Near;
+
+            string contact = "Arboleda Bldg. Roxas Ave., Kalibo, Aklan\n(036) 268 3798 / 0998 869 1849\nfacebook/ninotechcomputer\nninotech.computer@gmail.com\nWarranty Receipt";
+            var contactSize = e.Graphics.MeasureString(contact, font, e.PageBounds.Width);
+            var contactRect = new Rectangle(0, rect.Bottom, e.PageBounds.Width, (int)contactSize.Height);
+            e.Graphics.DrawString(contact, font, Brushes.Black, contactRect, introFormat);
+
+            string items = "";
+
+            int quantity = 0;
+            string itemName = "";
+            string serial = "";
+            decimal price = 0;
+            decimal discount = 0;
+            decimal total = 0;
+            for (int i = 0; i < cartTable.RowCount; i++)
+            {
+                var rows = cartTable.Rows[i];
+                serial = rows.Cells[1].Value?.ToString() ?? "---";
+                itemName = rows.Cells[2].Value.ToString();
+                quantity = (int)(rows.Cells[3].Value);
+                price = (decimal)(rows.Cells[4].Value);
+                discount = (decimal)(rows.Cells[5].Value);
+                total = quantity * (price - discount);
+
+                items += "ITEM:" + itemName + " x " + quantity + "\n" +
+                         (string.IsNullOrEmpty(serial) ? ("SN:" + serial + "\n") : "") +
+                         "PRICE: " + string.Format("₱{0:n}", price) + " ,DISC: " + string.Format("₱{0:n}", discount) + " \n" +
+                         "TOTAL:" + total + "\n\n";
+            }
+
+            items += "GTOTAL: " + cartTotal.Text + "\n" +
+                     "TENDERED: " + string.Format("₱{0:n}", amountRecieved.Value) + "\n" +
+                     "CHANGE: " + change.Text + "\n" +
+                     "CASHIER: " + UserManager.instance.currentLogin.Username + "\n" +
+                     "CUSTOMER: " + soldTo.Text + "\n" +
+                     DateTime.Now.ToString("MM/dd/yyyy-hh:mm tt");
+
+            var itemStringSize = e.Graphics.MeasureString(items, font, e.PageBounds.Width);
+            var itemsRect = new Rectangle(0, contactRect.Bottom + 5, e.PageBounds.Width, (int)itemStringSize.Height + 2);
+            e.Graphics.DrawString(items, font, Brushes.Black, itemsRect);
         }
     }
 }
