@@ -52,8 +52,8 @@ namespace POS.UserControls
 
                 //var currlog = UserManager.instance.currentLogin;
                 // stockinBtn.Enabled = currlog.CanStockIn ?? false;
-                addVariationsBtn.Enabled = currLogin.CanAddProduct;
-                addItemBtn.Enabled = currLogin.CanAddItem;
+                addVariationsBtn.Enabled = currLogin.CanEditProduct;
+                addItemBtn.Enabled = currLogin.CanEditItem;
                 editItemBtn.Enabled = currLogin.CanEditItem;
             }
 
@@ -308,7 +308,7 @@ namespace POS.UserControls
 
         private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            if (!UserManager.instance.currentLogin.CanDeleteItem)
+            if (!UserManager.instance.currentLogin.CanEditItem)
             {
                 e.Cancel = true;
                 return;
@@ -343,7 +343,7 @@ namespace POS.UserControls
         {
             if (itemsTable.SelectedCells.Count == 0)
                 return;
-            if (!currLogin.CanAddProduct)
+            if (!currLogin.CanEditProduct)
                 return;
 
             var type = itemsTable.SelectedCells[4].Value.ToString();
@@ -356,7 +356,7 @@ namespace POS.UserControls
             {
                 return;
             }
-            if (!UserManager.instance.currentLogin.CanDeleteItem)
+            if (!UserManager.instance.currentLogin.CanEditItem)
             {
                 return;
             }

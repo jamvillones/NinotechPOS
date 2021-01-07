@@ -54,7 +54,7 @@
             this.loginPrivilegesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.addNewSupplierToolstripbuttn = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.stockinToolStrpBtn = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
@@ -119,9 +119,8 @@
             // 
             // inventoryBtn
             // 
-            this.inventoryBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.inventoryBtn.BackColor = System.Drawing.Color.Gray;
+            this.inventoryBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.inventoryBtn.FlatAppearance.BorderSize = 0;
             this.inventoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.inventoryBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -141,8 +140,7 @@
             // 
             // repBtn
             // 
-            this.repBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.repBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.repBtn.FlatAppearance.BorderSize = 0;
             this.repBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.repBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -163,6 +161,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(3, 163);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(74, 1);
@@ -170,9 +169,8 @@
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -191,9 +189,8 @@
             // 
             // statBtn
             // 
-            this.statBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.statBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.statBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.statBtn.FlatAppearance.BorderSize = 0;
             this.statBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.statBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -213,6 +210,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(3, 330);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(74, 1);
@@ -341,7 +339,7 @@
             this.toolStripDropDownButton1,
             this.toolStripSeparator1,
             this.toolStripButton1,
-            this.toolStripButton2,
+            this.addNewSupplierToolstripbuttn,
             this.toolStripSeparator2,
             this.stockinToolStrpBtn,
             this.toolStripButton7,
@@ -386,12 +384,11 @@
             // 
             // loginPrivilegesToolStripMenuItem1
             // 
-            this.loginPrivilegesToolStripMenuItem1.Enabled = false;
             this.loginPrivilegesToolStripMenuItem1.Name = "loginPrivilegesToolStripMenuItem1";
             this.loginPrivilegesToolStripMenuItem1.ShowShortcutKeys = false;
             this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
             this.loginPrivilegesToolStripMenuItem1.Text = "Login Privileges";
-            this.loginPrivilegesToolStripMenuItem1.Visible = false;
+            this.loginPrivilegesToolStripMenuItem1.Click += new System.EventHandler(this.loginPrivilegesToolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
@@ -408,15 +405,15 @@
             this.toolStripButton1.Text = "Customers";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // toolStripButton2
+            // addNewSupplierToolstripbuttn
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "Suppliers";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            this.addNewSupplierToolstripbuttn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.addNewSupplierToolstripbuttn.Image = ((System.Drawing.Image)(resources.GetObject("addNewSupplierToolstripbuttn.Image")));
+            this.addNewSupplierToolstripbuttn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.addNewSupplierToolstripbuttn.Name = "addNewSupplierToolstripbuttn";
+            this.addNewSupplierToolstripbuttn.Size = new System.Drawing.Size(23, 22);
+            this.addNewSupplierToolstripbuttn.Text = "Suppliers";
+            this.addNewSupplierToolstripbuttn.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // toolStripSeparator2
             // 
@@ -531,7 +528,7 @@
         private UserControls.InventoryUC inventoryTab;
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton addNewSupplierToolstripbuttn;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem addNewLoginToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem2;

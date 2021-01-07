@@ -48,20 +48,18 @@ namespace POS.Forms
                 login.Username = UsernameTxt.Text;
                 login.Password = PasswordTxt.Text;
 
-                login.CanAddUser = addLogin.Checked;
-                login.CanDeleteUser = deleteItem.Checked;
-                login.CanStockIn = stockin.Checked;
+                login.CanStockIn = false;
 
-                login.CanAddSupplier = addSupplier.Checked;
-                login.CanEditSupplier = editSupplier.Checked;
-                login.CanDeleteSupplier = deleteSupplier.Checked;
+               // login.CanAddSupplier = false;
+                login.CanEditSupplier = false;
+               // login.CanDeleteSupplier = false;
 
-                login.CanAddItem = addItem.Checked;
-                login.CanEditItem = editItem.Checked;
-                login.CanDeleteItem = deleteItem.Checked;
+                //login.CanAddItem = false;
+                login.CanEditItem = false;
+                //login.CanDeleteItem = false;
 
-                login.CanAddProduct = addProduct.Checked;
-                login.CanEditProduct = editProduct.Checked;
+               // login.CanAddProduct = false;
+                login.CanEditProduct = false;
 
                 a.Logins.Add(login);
                 a.SaveChanges();

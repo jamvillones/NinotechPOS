@@ -52,20 +52,12 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CanAddItem" Type="bit" Nullable="false" />
           <Property Name="CanEditItem" Type="bit" Nullable="false" />
-          <Property Name="CanDeleteItem" Type="bit" Nullable="false" />
-          <Property Name="CanAddProduct" Type="bit" Nullable="false" />
           <Property Name="CanEditProduct" Type="bit" Nullable="false" />
-          <Property Name="CanDeleteProduct" Type="bit" Nullable="false" />
-          <Property Name="CanAddSupplier" Type="bit" Nullable="false" />
           <Property Name="CanEditSupplier" Type="bit" Nullable="false" />
-          <Property Name="CanDeleteSupplier" Type="bit" Nullable="false" />
-          <Property Name="CanStockIn" Type="bit" Nullable="false" />
-          <Property Name="CanAddUser" Type="bit" Nullable="false" />
-          <Property Name="CanDeleteUser" Type="bit" Nullable="false" />
-          <Property Name="CanVoidSale" Type="bit" Nullable="false" />
           <Property Name="CanEditInventory" Type="bit" Nullable="false" />
+          <Property Name="CanStockIn" Type="bit" Nullable="false" />
+          <Property Name="CanVoidSale" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -563,20 +555,12 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CanAddItem" Type="Boolean" Nullable="false" />
           <Property Name="CanEditItem" Type="Boolean" Nullable="false" />
-          <Property Name="CanDeleteItem" Type="Boolean" Nullable="false" />
-          <Property Name="CanAddProduct" Type="Boolean" Nullable="false" />
           <Property Name="CanEditProduct" Type="Boolean" Nullable="false" />
-          <Property Name="CanDeleteProduct" Type="Boolean" Nullable="false" />
-          <Property Name="CanAddSupplier" Type="Boolean" Nullable="false" />
           <Property Name="CanEditSupplier" Type="Boolean" Nullable="false" />
-          <Property Name="CanDeleteSupplier" Type="Boolean" Nullable="false" />
-          <Property Name="CanStockIn" Type="Boolean" Nullable="false" />
-          <Property Name="CanAddUser" Type="Boolean" Nullable="false" />
-          <Property Name="CanDeleteUser" Type="Boolean" Nullable="false" />
-          <Property Name="CanVoidSale" Type="Boolean" Nullable="false" />
           <Property Name="CanEditInventory" Type="Boolean" Nullable="false" />
+          <Property Name="CanStockIn" Type="Boolean" Nullable="false" />
+          <Property Name="CanVoidSale" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Sales" Relationship="POSModel.FK_Sale_Login" FromRole="Login" ToRole="Sale" />
         </EntityType>
         <Association Name="FK_Sale_Login">
@@ -703,20 +687,12 @@
           <EntitySetMapping Name="Logins">
             <EntityTypeMapping TypeName="POSModel.Login">
               <MappingFragment StoreEntitySet="Login">
-                <ScalarProperty Name="CanEditInventory" ColumnName="CanEditInventory" />
                 <ScalarProperty Name="CanVoidSale" ColumnName="CanVoidSale" />
-                <ScalarProperty Name="CanDeleteUser" ColumnName="CanDeleteUser" />
-                <ScalarProperty Name="CanAddUser" ColumnName="CanAddUser" />
                 <ScalarProperty Name="CanStockIn" ColumnName="CanStockIn" />
-                <ScalarProperty Name="CanDeleteSupplier" ColumnName="CanDeleteSupplier" />
+                <ScalarProperty Name="CanEditInventory" ColumnName="CanEditInventory" />
                 <ScalarProperty Name="CanEditSupplier" ColumnName="CanEditSupplier" />
-                <ScalarProperty Name="CanAddSupplier" ColumnName="CanAddSupplier" />
-                <ScalarProperty Name="CanDeleteProduct" ColumnName="CanDeleteProduct" />
                 <ScalarProperty Name="CanEditProduct" ColumnName="CanEditProduct" />
-                <ScalarProperty Name="CanAddProduct" ColumnName="CanAddProduct" />
-                <ScalarProperty Name="CanDeleteItem" ColumnName="CanDeleteItem" />
                 <ScalarProperty Name="CanEditItem" ColumnName="CanEditItem" />
-                <ScalarProperty Name="CanAddItem" ColumnName="CanAddItem" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

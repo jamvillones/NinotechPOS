@@ -155,7 +155,7 @@ namespace POS.Forms
                 return;
 
             var t = sender as DataGridView;
-            if (!currLogin.CanDeleteProduct)
+            if (!currLogin.CanEditProduct)
             {
                 MessageBox.Show("You do not have administrative privileges to perform this action.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

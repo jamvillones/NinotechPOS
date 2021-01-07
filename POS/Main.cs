@@ -105,22 +105,15 @@ namespace POS
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        void AddNewLogin()
-        {
-            if (!UserManager.instance.currentLogin.CanAddUser)
-            {
-                MessageBox.Show("Cannot perform this action!");
-                return;
-            }
-            ///add new login
-            using (var newlogin = new CreateLogin())
-                newlogin.ShowDialog();
-        }
+        //void AddNewLogin()
+        //{
+        //   tr
+        //}
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1)
             {
-                AddNewLogin();
+                TryCreateLogin();
             }
             else if (e.KeyCode == Keys.F2)
             {
@@ -156,7 +149,12 @@ namespace POS
 
         private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!UserManager.instance.currentLogin.CanAddUser)
+            TryCreateLogin();
+        }
+
+        void TryCreateLogin()
+        {
+            if (UserManager.instance.currentLogin.Username != "admin")
             {
                 MessageBox.Show("Cannot perform this action!");
                 return;
@@ -262,8 +260,11 @@ namespace POS
 
         private void Main_Load(object sender, EventArgs e)
         {
-            addNewLoginToolStripMenuItem1.Enabled = currLogin.CanAddUser;
+            addNewLoginToolStripMenuItem1.Enabled = currLogin.Username == "admin";
+            loginPrivilegesToolStripMenuItem1.Enabled = currLogin.Username == "admin";
+            addNewSupplierToolstripbuttn.Enabled = currLogin.CanEditSupplier;
             stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
+            button1.Visible = currLogin.CanStockIn;
         }
 
         bool isSignout = false;
@@ -286,6 +287,12 @@ namespace POS
             {
                 p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
             }
+        }
+
+        private void loginPrivilegesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (var previliges = new UserPrivilegesForm())
+                previliges.ShowDialog();
         }
     }
 }

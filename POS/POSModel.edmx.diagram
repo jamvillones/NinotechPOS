@@ -22,7 +22,7 @@
         <AssociationConnector Association="POSModel.FK_Product_Supplier" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Product" />
         <AssociationConnector Association="POSModel.FK_StockinHistory_InventoryItem" />
-        <EntityTypeShape EntityType="POSModel.Login" Width="1.5" PointX="5.375" PointY="9" />
+        <EntityTypeShape EntityType="POSModel.Login" Width="1.5" PointX="5.5" PointY="6.25" />
         <AssociationConnector Association="POSModel.FK_Sale_Login" />
       </Diagram>
     </edmx:Diagrams>

@@ -54,7 +54,7 @@ namespace POS.Forms
         {
             SetTable();
             setAutoComplete();
-            createItemBtn.Enabled = currLogin.CanAddItem;
+            createItemBtn.Enabled = currLogin.CanEditItem;
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
