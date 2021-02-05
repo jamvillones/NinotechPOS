@@ -65,7 +65,7 @@ namespace POS.Forms
             DGVPrinterHelper.DGVPrinter printer = new DGVPrinterHelper.DGVPrinter();
             printer.OnSuccessfulPrint += Printer_OnSuccessfulPrint;
             printer.PageNumbers = true;
-            printer.PrintMargins = new System.Drawing.Printing.Margins(10, 10, 10, 30);
+            printer.PrintMargins = new System.Drawing.Printing.Margins(10, 10, 10, 20);
             printer.TableAlignment = DGVPrinterHelper.DGVPrinter.Alignment.Center;
             printer.PorportionalColumns = true;
             printer.SubTitle = string.Format(" Date: {0} By: {1}", DateTime.Now, UserManager.instance.currentLogin.Username);
