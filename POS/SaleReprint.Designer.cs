@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaleReprint));
             this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
             this.document = new System.Drawing.Printing.PrintDocument();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.saleIdTxt = new System.Windows.Forms.Label();
@@ -51,9 +52,9 @@
             this.printPreviewControl1.AutoZoom = false;
             this.printPreviewControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.printPreviewControl1.Document = this.document;
-            this.printPreviewControl1.Location = new System.Drawing.Point(250, 28);
+            this.printPreviewControl1.Location = new System.Drawing.Point(250, 37);
             this.printPreviewControl1.Name = "printPreviewControl1";
-            this.printPreviewControl1.Size = new System.Drawing.Size(550, 422);
+            this.printPreviewControl1.Size = new System.Drawing.Size(550, 413);
             this.printPreviewControl1.TabIndex = 0;
             this.printPreviewControl1.Zoom = 0.8D;
             // 
@@ -65,24 +66,37 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.numericUpDown1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(250, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(550, 28);
+            this.panel2.Size = new System.Drawing.Size(550, 37);
             this.panel2.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(348, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(152, 22);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "page";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(515, 3);
+            this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDown1.Location = new System.Drawing.Point(506, 7);
             this.numericUpDown1.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(32, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(32, 22);
             this.numericUpDown1.TabIndex = 0;
             this.numericUpDown1.Value = new decimal(new int[] {
             1,
@@ -91,25 +105,13 @@
             0});
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(6, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "fafdsa";
-            // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(3, 424);
+            this.button1.Location = new System.Drawing.Point(6, 7);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(244, 23);
+            this.button1.Size = new System.Drawing.Size(276, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Print";
             this.button1.UseVisualStyleBackColor = false;
@@ -130,7 +132,6 @@
             // saleIdTxt
             // 
             this.saleIdTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.saleIdTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saleIdTxt.Location = new System.Drawing.Point(3, 16);
             this.saleIdTxt.Name = "saleIdTxt";
             this.saleIdTxt.Size = new System.Drawing.Size(238, 18);
@@ -152,7 +153,6 @@
             // soldToTxt
             // 
             this.soldToTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.soldToTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.soldToTxt.Location = new System.Drawing.Point(3, 16);
             this.soldToTxt.Name = "soldToTxt";
             this.soldToTxt.Size = new System.Drawing.Size(238, 18);
@@ -163,7 +163,6 @@
             // 
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -178,11 +177,11 @@
             this.Controls.Add(this.printPreviewControl1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SaleReprint";
             this.Text = "Sale Reprint";
             this.Load += new System.EventHandler(this.SaleReprint_Load);
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

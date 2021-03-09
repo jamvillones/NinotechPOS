@@ -41,7 +41,7 @@ namespace POS.Forms
 
                 Datetext.Text = sale.Date.Value.ToString("MMMM dd, yyyy hh:mm tt");
                 var soldItems = sale.SoldItems;
-                foreach (var x in soldItems)
+                foreach (var x in soldItems.OrderBy(x=>x.Product.Item.Name))
                 {
                     itemsTable.Rows.Add(x.Product.Item.Name,
                                         x.SerialNumber,

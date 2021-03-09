@@ -29,7 +29,7 @@ namespace POS
                 if (login.LoginSuccessful)
                 {
                     var main = new Main();
-                    //choose which main is to open
+
                     mainWindow = main;
 
                     Application.Run(main);
@@ -37,7 +37,6 @@ namespace POS
             }
             while (mainWindow?.IsSignout() ?? false);
 
-            //Application.Run(new POS.Forms.ReceiptPrintingForm());
 
             //SaleReprint r = new SaleReprint();
             //r.SetId(43268);

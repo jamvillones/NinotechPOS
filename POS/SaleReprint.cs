@@ -39,7 +39,7 @@ namespace POS
 
             printPreviewControl1.Document = document;
         }
-        //Size hardMargins;
+
         Rectangle area;
         PrintAction printAction;
         Pen areaPen = new Pen(Brushes.Red);
@@ -74,23 +74,52 @@ namespace POS
 
             PrintLayout(e);
         }
+        StringFormat farFormat = new StringFormat() { Alignment = StringAlignment.Far };
+        StringFormat centerFormat = new StringFormat() { Alignment = StringAlignment.Center };
         Font contentFont = new Font("Times New Roman", 10, FontStyle.Regular);
-
-        //int page = 1;
-        SoldItem[] items;
+        Font columnFont = new Font("Times New Roman", 10, FontStyle.Bold);
         int index = 0;
+        int pageCount = 1;
 
         void PrintLayout(PrintPageEventArgs e)
         {
             Graphics g = e.Graphics;
-            int yStart = area.Top;
+            Rectangle pageNumberRect = new Rectangle(0, 0, area.Width, 20);
+            farFormat.Alignment = StringAlignment.Far;
+            e.Graphics.DrawString("Page: " + pageCount, contentFont, Brushes.Black, pageNumberRect, farFormat);
+            int colHeight = (int)g.MeasureString("Item Name", contentFont).Height;
 
-            Rectangle rName = new Rectangle();
-            Rectangle rSerial = new Rectangle();
-            Rectangle rQuantity = new Rectangle();
-            Rectangle rPrice = new Rectangle();
-            Rectangle rDiscount = new Rectangle();
-            Rectangle rTotal = new Rectangle();
+            Rectangle colRect = new Rectangle(area.Left, pageNumberRect.Bottom, area.Width * 3 / 9, colHeight);
+            g.DrawRectangle(gridPen, colRect);
+            g.DrawString("Item Name", columnFont, Brushes.Black, colRect,centerFormat);
+
+            colRect.X = colRect.Right;
+            colRect.Width = area.Width * 2 / 9;
+            g.DrawRectangle(gridPen, colRect);
+            g.DrawString("Serial Number", columnFont, Brushes.Black, colRect, centerFormat);
+
+            colRect.X = colRect.Right;
+            colRect.Width = area.Width * 1 / 9;
+            g.DrawRectangle(gridPen, colRect);
+            g.DrawString("Quantity", columnFont, Brushes.Black, colRect, centerFormat);
+
+            colRect.X = colRect.Right;
+            colRect.Width = area.Width * 1 / 9;
+            g.DrawRectangle(gridPen, colRect);
+            g.DrawString("Price", columnFont, Brushes.Black, colRect, centerFormat);
+
+            colRect.X = colRect.Right;
+            colRect.Width = area.Width * 1 / 9;
+            g.DrawRectangle(gridPen, colRect);
+            g.DrawString("Discount", columnFont, Brushes.Black, colRect, centerFormat);
+
+            colRect.X = colRect.Right;
+            colRect.Width = area.Width * 1 / 9;
+            g.DrawRectangle(gridPen, colRect);
+            g.DrawString("Total", columnFont, Brushes.Black, colRect, centerFormat);
+
+            int yStart = colRect.Bottom;
+            Rectangle stringHolderRect = new Rectangle();
 
             while (index < datas.Count)
             {
@@ -100,63 +129,59 @@ namespace POS
 
                 var max = i.Items.Select(x => (int)g.MeasureString(x?.ToString() ?? string.Empty, contentFont, area.Width * 3 / 9).Height).Max();
 
-                if (yStart + max >= area.Height)
+                if (yStart + max > area.Height)
                 {
                     e.HasMorePages = true;
-                    numericUpDown1.Maximum = numericUpDown1.Value + 1;
+                    pageCount++;
                     return;
                 }
                 else
                     e.HasMorePages = false;
 
-                rName.X = area.Left;
-                rName.Width = area.Width * 3 / 9;
-                rName.Y = yStart;
-                rName.Height = max;
+                stringHolderRect.X = area.Left;
+                stringHolderRect.Width = area.Width * 3 / 9;
+                stringHolderRect.Y = yStart;
+                stringHolderRect.Height = max;
 
-                rSerial.X = rName.Right;
-                rSerial.Width = area.Width * 2 / 9;
-                rSerial.Y = yStart;
-                rSerial.Height = max;
+                g.DrawRectangle(gridPen, stringHolderRect);
+                g.DrawString(i[0].ToString(), contentFont, Brushes.Black, stringHolderRect);
 
-                rQuantity.X = rSerial.Right;
-                rQuantity.Width = area.Width * 1 / 9;
-                rQuantity.Y = yStart;
-                rQuantity.Height = max;
+                stringHolderRect.X = stringHolderRect.Right;
+                stringHolderRect.Width = area.Width * 2 / 9;
 
-                rPrice.X = rQuantity.Right;
-                rPrice.Width = area.Width * 1 / 9;
-                rPrice.Y = yStart;
-                rPrice.Height = max;
+                g.DrawRectangle(gridPen, stringHolderRect);
+                g.DrawString(i[1]?.ToString(), contentFont, Brushes.Black, stringHolderRect);
 
-                rDiscount.X = rPrice.Right;
-                rDiscount.Width = area.Width * 1 / 9;
-                rDiscount.Y = yStart;
-                rDiscount.Height = max;
+                stringHolderRect.X = stringHolderRect.Right;
+                stringHolderRect.Width = area.Width * 1 / 9;
+                stringHolderRect.Y = yStart;
+                stringHolderRect.Height = max;
+                g.DrawRectangle(gridPen, stringHolderRect);
+                g.DrawString(i[2].ToString(), contentFont, Brushes.Black, stringHolderRect);
 
-                rTotal.X = rDiscount.Right;
-                rTotal.Width = area.Width * 1 / 9;
-                rTotal.Y = yStart;
-                rTotal.Height = max;
+                stringHolderRect.X = stringHolderRect.Right;
+                stringHolderRect.Width = area.Width * 1 / 9;
 
-                g.DrawRectangle(gridPen, rName);
-                g.DrawRectangle(gridPen, rSerial);
-                g.DrawRectangle(gridPen, rQuantity);
-                g.DrawRectangle(gridPen, rPrice);
-                g.DrawRectangle(gridPen, rDiscount);
-                g.DrawRectangle(gridPen, rTotal);
+                g.DrawRectangle(gridPen, stringHolderRect);
+                g.DrawString(string.Format("₱ {0:n}", (decimal)i[3]), contentFont, Brushes.Black, stringHolderRect, farFormat);
 
-                g.DrawString(i[0].ToString(), contentFont, Brushes.Black, rName);
-                g.DrawString(i[1]?.ToString(), contentFont, Brushes.Black, rSerial);
-                g.DrawString(i[2].ToString(), contentFont, Brushes.Black, rQuantity);
-                g.DrawString(i[3].ToString(), contentFont, Brushes.Black, rPrice);
-                g.DrawString(i[4].ToString(), contentFont, Brushes.Black, rDiscount);
-                g.DrawString(total.ToString(), contentFont, Brushes.Black, rTotal);
+                stringHolderRect.X = stringHolderRect.Right;
+                stringHolderRect.Width = area.Width * 1 / 9;
 
-                yStart = rName.Bottom;
+                g.DrawRectangle(gridPen, stringHolderRect);
+                g.DrawString(string.Format("₱ {0:n}", (decimal)i[4]), contentFont, Brushes.Black, stringHolderRect, farFormat);
+
+                stringHolderRect.X = stringHolderRect.Right;
+                stringHolderRect.Width = area.Width * 1 / 9;
+
+                g.DrawRectangle(gridPen, stringHolderRect);
+                g.DrawString(string.Format("₱ {0:n}", total), contentFont, Brushes.Black, stringHolderRect, farFormat);
+
+                yStart = stringHolderRect.Bottom;
                 index++;
             }
 
+            numericUpDown1.Maximum = pageCount;
             label1.Text = "Page: " + (int)numericUpDown1.Value + " of " + ((int)numericUpDown1.Maximum).ToString();
             index = 0;
         }
