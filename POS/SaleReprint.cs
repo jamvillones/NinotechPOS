@@ -84,97 +84,98 @@ namespace POS
         {
             Graphics g = e.Graphics;
             int yStart = area.Top;
-            using (var p = new POSEntities())
+            //using (var p = new POSEntities())
+            //{
+            //    if (items == null)
+            //    {
+            //        var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
+            //        items = s.SoldItems.OrderBy(x => x.Product.Item.Name).ToArray();
+            //    }
+
+            Rectangle rName = new Rectangle();
+            Rectangle rSerial = new Rectangle();
+            Rectangle rQuantity = new Rectangle();
+            Rectangle rPrice = new Rectangle();
+            Rectangle rDiscount = new Rectangle();
+            Rectangle rTotal = new Rectangle();
+
+            //List<string> entries = new List<string>();
+            while (index < datas.Count)
             {
-                if (items == null)
+                var i = datas[index];
+
+                decimal total = (int)i[2] * ((decimal)i[3] - (decimal)i[4]);
+                //entries.Add(i.Product.Item.Name);
+                //entries.Add(i.SerialNumber);
+                //entries.Add(i.Quantity.ToString());
+                //entries.Add(i.ItemPrice.ToString());
+                //entries.Add(i.Discount.ToString());
+                //entries.Add(total.ToString());
+
+                var max = i.Items.Select(x => (int)g.MeasureString(x?.ToString()??string.Empty, contentFont, area.Width * 3 / 9).Height).Max();
+
+                if (yStart + max >= area.Height)
                 {
-                    var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
-                    items = s.SoldItems.OrderBy(x => x.Product.Item.Name).ToArray();
+                    e.HasMorePages = true;
+                    numericUpDown1.Maximum = numericUpDown1.Value + 1;
+                    return;
                 }
+                else
+                    e.HasMorePages = false;
 
-                Rectangle rName = new Rectangle();
-                Rectangle rSerial = new Rectangle();
-                Rectangle rQuantity = new Rectangle();
-                Rectangle rPrice = new Rectangle();
-                Rectangle rDiscount = new Rectangle();
-                Rectangle rTotal = new Rectangle();
+                rName.X = area.Left;
+                rName.Width = area.Width * 3 / 9;
+                rName.Y = yStart;
+                rName.Height = max;
 
-                List<string> entries = new List<string>();
-                while (index < items.Length)
-                {
-                    var i = items[index];
+                rSerial.X = rName.Right;
+                rSerial.Width = area.Width * 2 / 9;
+                rSerial.Y = yStart;
+                rSerial.Height = max;
 
-                    decimal total = i.Quantity * (i.ItemPrice - i.Discount ?? 0);
-                    entries.Add(i.Product.Item.Name);
-                    entries.Add(i.SerialNumber);
-                    entries.Add(i.Quantity.ToString());
-                    entries.Add(i.ItemPrice.ToString());
-                    entries.Add(i.Discount.ToString());
-                    entries.Add(total.ToString());
+                rQuantity.X = rSerial.Right;
+                rQuantity.Width = area.Width * 1 / 9;
+                rQuantity.Y = yStart;
+                rQuantity.Height = max;
 
-                    var max = entries.Select(x => (int)g.MeasureString(x, contentFont, area.Width * 3 / 9).Height).Max();
+                rPrice.X = rQuantity.Right;
+                rPrice.Width = area.Width * 1 / 9;
+                rPrice.Y = yStart;
+                rPrice.Height = max;
 
-                    if (yStart + max >= area.Height)
-                    {
-                        e.HasMorePages = true;
-                        numericUpDown1.Maximum = numericUpDown1.Value + 1;
-                        return;
-                    }
-                    else
-                        e.HasMorePages = false;
+                rDiscount.X = rPrice.Right;
+                rDiscount.Width = area.Width * 1 / 9;
+                rDiscount.Y = yStart;
+                rDiscount.Height = max;
 
-                    rName.X = area.Left;
-                    rName.Width = area.Width * 3 / 9;
-                    rName.Y = yStart;
-                    rName.Height = max;
+                rTotal.X = rDiscount.Right;
+                rTotal.Width = area.Width * 1 / 9;
+                rTotal.Y = yStart;
+                rTotal.Height = max;
 
-                    rSerial.X = rName.Right;
-                    rSerial.Width = area.Width * 2 / 9;
-                    rSerial.Y = yStart;
-                    rSerial.Height = max;
+                g.DrawRectangle(gridPen, rName);
+                g.DrawRectangle(gridPen, rSerial);
+                g.DrawRectangle(gridPen, rQuantity);
+                g.DrawRectangle(gridPen, rPrice);
+                g.DrawRectangle(gridPen, rDiscount);
+                g.DrawRectangle(gridPen, rTotal);
 
-                    rQuantity.X = rSerial.Right;
-                    rQuantity.Width = area.Width * 1 / 9;
-                    rQuantity.Y = yStart;
-                    rQuantity.Height = max;
+                g.DrawString(i[0].ToString(), contentFont, Brushes.Black, rName);
+                g.DrawString(i[1]?.ToString(), contentFont, Brushes.Black, rSerial);
+                g.DrawString(i[2].ToString().ToString(), contentFont, Brushes.Black, rQuantity);
+                g.DrawString(i[3].ToString(), contentFont, Brushes.Black, rPrice);
+                g.DrawString(i[4].ToString(), contentFont, Brushes.Black, rDiscount);
+                g.DrawString(total.ToString(), contentFont, Brushes.Black, rTotal);
 
-                    rPrice.X = rQuantity.Right;
-                    rPrice.Width = area.Width * 1 / 9;
-                    rPrice.Y = yStart;
-                    rPrice.Height = max;
+                yStart = rName.Bottom;
 
-                    rDiscount.X = rPrice.Right;
-                    rDiscount.Width = area.Width * 1 / 9;
-                    rDiscount.Y = yStart;
-                    rDiscount.Height = max;
-
-                    rTotal.X = rDiscount.Right;
-                    rTotal.Width = area.Width * 1 / 9;
-                    rTotal.Y = yStart;
-                    rTotal.Height = max;
-
-                    g.DrawRectangle(gridPen, rName);
-                    g.DrawRectangle(gridPen, rSerial);
-                    g.DrawRectangle(gridPen, rQuantity);
-                    g.DrawRectangle(gridPen, rPrice);
-                    g.DrawRectangle(gridPen, rDiscount);
-                    g.DrawRectangle(gridPen, rTotal);
-
-                    g.DrawString(i.Product.Item.Name, contentFont, Brushes.Black, rName);
-                    g.DrawString(i.SerialNumber, contentFont, Brushes.Black, rSerial);
-                    g.DrawString(i.Quantity.ToString(), contentFont, Brushes.Black, rQuantity);
-                    g.DrawString(i.ItemPrice.ToString(), contentFont, Brushes.Black, rPrice);
-                    g.DrawString(i.Discount.ToString(), contentFont, Brushes.Black, rDiscount);
-                    g.DrawString(total.ToString(), contentFont, Brushes.Black, rTotal);
-
-                    yStart = rName.Bottom;
-
-                    entries.RemoveRange(0, entries.Count);
-                    index++;
-                }
+                //entries.RemoveRange(0, entries.Count);
+                index++;
             }
+            //}
+
             label1.Text = "Page: " + (int)numericUpDown1.Value + " of " + ((int)numericUpDown1.Maximum).ToString();
-            items = null;
+            //items = null;
             index = 0;
         }
 
@@ -202,7 +203,7 @@ namespace POS
             using (var p = new POSEntities())
             {
                 var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
-                datas = s.SoldItems.OrderBy(x => x.Product.Item.Name).Select(y => new DataListHolder(y.Product.Item.Barcode, y.SerialNumber, y.Quantity, y.ItemPrice, y.Discount)).ToList();
+                datas = s.SoldItems.OrderBy(x => x.Product.Item.Name).Select(y => new DataListHolder(y.Product.Item.Name, y.SerialNumber, y.Quantity, y.ItemPrice, y.Discount??0)).ToList();
             }
         }
 
