@@ -84,13 +84,6 @@ namespace POS
         {
             Graphics g = e.Graphics;
             int yStart = area.Top;
-            //using (var p = new POSEntities())
-            //{
-            //    if (items == null)
-            //    {
-            //        var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
-            //        items = s.SoldItems.OrderBy(x => x.Product.Item.Name).ToArray();
-            //    }
 
             Rectangle rName = new Rectangle();
             Rectangle rSerial = new Rectangle();
@@ -99,20 +92,13 @@ namespace POS
             Rectangle rDiscount = new Rectangle();
             Rectangle rTotal = new Rectangle();
 
-            //List<string> entries = new List<string>();
             while (index < datas.Count)
             {
                 var i = datas[index];
 
                 decimal total = (int)i[2] * ((decimal)i[3] - (decimal)i[4]);
-                //entries.Add(i.Product.Item.Name);
-                //entries.Add(i.SerialNumber);
-                //entries.Add(i.Quantity.ToString());
-                //entries.Add(i.ItemPrice.ToString());
-                //entries.Add(i.Discount.ToString());
-                //entries.Add(total.ToString());
 
-                var max = i.Items.Select(x => (int)g.MeasureString(x?.ToString()??string.Empty, contentFont, area.Width * 3 / 9).Height).Max();
+                var max = i.Items.Select(x => (int)g.MeasureString(x?.ToString() ?? string.Empty, contentFont, area.Width * 3 / 9).Height).Max();
 
                 if (yStart + max >= area.Height)
                 {
@@ -162,20 +148,16 @@ namespace POS
 
                 g.DrawString(i[0].ToString(), contentFont, Brushes.Black, rName);
                 g.DrawString(i[1]?.ToString(), contentFont, Brushes.Black, rSerial);
-                g.DrawString(i[2].ToString().ToString(), contentFont, Brushes.Black, rQuantity);
+                g.DrawString(i[2].ToString(), contentFont, Brushes.Black, rQuantity);
                 g.DrawString(i[3].ToString(), contentFont, Brushes.Black, rPrice);
                 g.DrawString(i[4].ToString(), contentFont, Brushes.Black, rDiscount);
                 g.DrawString(total.ToString(), contentFont, Brushes.Black, rTotal);
 
                 yStart = rName.Bottom;
-
-                //entries.RemoveRange(0, entries.Count);
                 index++;
             }
-            //}
 
             label1.Text = "Page: " + (int)numericUpDown1.Value + " of " + ((int)numericUpDown1.Maximum).ToString();
-            //items = null;
             index = 0;
         }
 
@@ -203,7 +185,7 @@ namespace POS
             using (var p = new POSEntities())
             {
                 var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
-                datas = s.SoldItems.OrderBy(x => x.Product.Item.Name).Select(y => new DataListHolder(y.Product.Item.Name, y.SerialNumber, y.Quantity, y.ItemPrice, y.Discount??0)).ToList();
+                datas = s.SoldItems.OrderBy(x => x.Product.Item.Name).Select(y => new DataListHolder(y.Product.Item.Name, y.SerialNumber, y.Quantity, y.ItemPrice, y.Discount ?? 0)).ToList();
             }
         }
 
