@@ -38,6 +38,11 @@ namespace POS
             while (mainWindow?.IsSignout() ?? false);
 
             //Application.Run(new POS.Forms.ReceiptPrintingForm());
+
+            //SaleReprint r = new SaleReprint();
+            //r.SetId(43268);
+
+            //Application.Run(r);
         }
     }
 }

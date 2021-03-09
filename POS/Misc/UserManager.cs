@@ -14,8 +14,8 @@ namespace POS.Misc
 
         public bool Login(string username, string password)
         {
-            string un = username.Trim(' ');
-            string pw = password.Trim(' ');
+            string un = username.Trim();
+            string pw = password.Trim();
             using (var p = new POSEntities())
             {
                 currentLogin = p.Logins.FirstOrDefault(x => x.Username == un && x.Password == pw);

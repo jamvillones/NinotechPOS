@@ -71,6 +71,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.SaleId = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.itemsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -534,7 +535,7 @@
             this.groupBox9.Controls.Add(this.SaleId);
             this.groupBox9.Location = new System.Drawing.Point(13, 12);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(713, 47);
+            this.groupBox9.Size = new System.Drawing.Size(380, 47);
             this.groupBox9.TabIndex = 19;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Sale Id";
@@ -547,15 +548,27 @@
             this.SaleId.Location = new System.Drawing.Point(7, 28);
             this.SaleId.Name = "SaleId";
             this.SaleId.ReadOnly = true;
-            this.SaleId.Size = new System.Drawing.Size(700, 13);
+            this.SaleId.Size = new System.Drawing.Size(367, 13);
             this.SaleId.TabIndex = 0;
             this.SaleId.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(649, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Print";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 496);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.voidBtn);
@@ -580,6 +593,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sale Details";
             this.Load += new System.EventHandler(this.SaleDetails_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleDetails_KeyDown);
             this.itemsPanel.ResumeLayout(false);
             this.itemsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
@@ -648,5 +662,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.TextBox SaleId;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -41,9 +41,24 @@ namespace POS.Forms
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-            using (var p = new POSEntities())
+            tryConnect();
+        }
+
+        void tryConnect()
+        {
+            try
             {
-                username.AutoCompleteCustomSource.AddRange(p.Logins.Select(x => x.Username).ToArray());
+                using (var p = new POSEntities())
+                {
+                    username.AutoCompleteCustomSource.AddRange(p.Logins.Select(x => x.Username).ToArray());
+                }
+            }
+            catch (Exception ex)
+            {
+                if (MessageBox.Show(ex.Message + "\n\nMake sure the server is on and is connected before clicking retry.", "Connection Failed!", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
+                {
+                    tryConnect();
+                }
             }
         }
 
