@@ -15,7 +15,6 @@ namespace POS
         [STAThread]
         static void Main()
         {
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -36,12 +35,6 @@ namespace POS
                 }
             }
             while (mainWindow?.IsSignout() ?? false);
-
-
-            //SaleReprint r = new SaleReprint();
-            //r.SetId(43268);
-
-            //Application.Run(r);
         }
     }
 }
