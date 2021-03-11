@@ -161,7 +161,6 @@ namespace POS.Forms
             }
 
             numericUpDown1.Maximum = pageCount;
-            //label1.Text = "Page: " + (int)numericUpDown1.Value + " of " + ((int)numericUpDown1.Maximum).ToString();
             index = 0;
         }
 
@@ -191,6 +190,7 @@ namespace POS.Forms
             {
                 button2.PerformClick();
             }
+
             if (e.Alt)
             {
                 if (e.KeyCode == Keys.Left)
@@ -203,23 +203,14 @@ namespace POS.Forms
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            //foreach (var i in PrinterSettings.InstalledPrinters)
-            //{
-            //    comboBox1.Invoke((MethodInvoker)delegate { comboBox1.Items.Add(i); });
-            //}
             var printers = PrinterSettings.InstalledPrinters.Cast<string>().ToArray();
             comboBox1.Invoke((MethodInvoker)delegate { comboBox1.Items.AddRange(printers); });
-
             comboBox1.Invoke((MethodInvoker)delegate { comboBox1.Text = printDocument.PrinterSettings.PrinterName; });
-
-
-
-
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //flowLayoutPanel1.Enabled = true;
+
         }
 
         private void printDocument_BeginPrint(object sender, PrintEventArgs e)
