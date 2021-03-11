@@ -31,22 +31,9 @@ namespace POS.UserControls
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchControl));
-            this.searchText = new KeywordAutoCompleteTextBox();
             this.searchBtn = new System.Windows.Forms.Button();
+            this.searchText = new test.KeywordAutoCompleteTextBox();
             this.SuspendLayout();
-            // 
-            // searchText
-            // 
-            this.searchText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchText.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchText.Location = new System.Drawing.Point(3, 3);
-            this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(187, 22);
-            this.searchText.TabIndex = 0;
-            this.searchText.Values = null;
-            this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
-            this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
             // 
             // searchBtn
             // 
@@ -62,6 +49,19 @@ namespace POS.UserControls
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
+            // searchText
+            // 
+            this.searchText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchText.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchText.Location = new System.Drawing.Point(3, 3);
+            this.searchText.Name = "searchText";
+            this.searchText.Size = new System.Drawing.Size(187, 22);
+            this.searchText.TabIndex = 0;
+            this.searchText.Values = null;
+            this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
+            this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
+            // 
             // SearchControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -69,7 +69,7 @@ namespace POS.UserControls
             this.Controls.Add(this.searchBtn);
             this.Controls.Add(this.searchText);
             this.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.MinimumSize = new System.Drawing.Size(0, 28);
+            this.MinimumSize = new System.Drawing.Size(219, 28);
             this.Name = "SearchControl";
             this.Size = new System.Drawing.Size(219, 28);
             this.ResumeLayout(false);

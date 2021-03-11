@@ -43,43 +43,34 @@ namespace POS.UserControls
 
         public void Initialize()
         {
+            comboFilterType.SelectedIndex = 0;
+
             for (int i = 0; i < (int)SaleStatusFilter.Count; i++)
                 saleStatus.Items.Add(((SaleStatusFilter)i).ToString());
 
             saleStatus.SelectedIndex = 0;
 
             defButton.Click += DefButton_Click;
-            month.Items.Clear();
-            for (int i = 0; i < (int)Months.Count; i++)
-            {
-                month.Items.Add(((Months)i).ToString());
-                month.AutoCompleteCustomSource.Add(((Months)i).ToString());
-            }
-
-            month.Text = DateTime.Today.ToString("MMMM");
-            day.Value = DateTime.Today.Day;
-            year.Value = DateTime.Today.Year;
-            day.Maximum = DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month);
 
             setRegularTableByDate();
+            setCharegedTable();
 
-            tabControl1.Selected += TabControl1_Selected;
+           /// tabControl1.Selected += TabControl1_Selected;
 
         }
 
         private void DefButton_Click(object sender, EventArgs e)
         {
-            searchBtn.PerformClick();
-            chargedSearchBtn.PerformClick();
+
         }
 
         private void TabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            if (e.TabPageIndex == 0)
-                setRegularTableByDate();
+            //if (e.TabPageIndex == 0)
+            //    setRegularTableByDate();
 
-            else if (e.TabPageIndex == 1)
-                setCharegedTable();
+            //else if (e.TabPageIndex == 1)
+            //    setCharegedTable();
         }
 
 
@@ -98,41 +89,34 @@ namespace POS.UserControls
             }
         }
 
-        private void month_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (month.Items.Count == 0 || year.Value < 1)
-                return;
-
-            day.Maximum = DateTime.DaysInMonth((int)year.Value, month.SelectedIndex + 1);
-        }
-
-        private void searchBtn_Click(object sender, EventArgs e)
-        {
-            setRegularTableByDate();
-        }
-
         void setRegularTableByDate()
         {
             string type = SaleType.Regular.ToString();
             saleTable.Rows.Clear();
 
-            IQueryable<Sale> filteredSales;
             using (var p = new POSEntities())
             {
-                filteredSales = p.Sales.Where(x => x.Date.Value.Year == (int)year.Value && x.SaleType == SaleType.Regular.ToString());
+                IQueryable<Sale> filteredSales = p.Sales.Where(x=>x.SaleType == type);
 
-                if (!string.IsNullOrEmpty(month.Text))
-                    filteredSales = filteredSales.Where(x => x.Date.Value.Month == month.SelectedIndex + 1);
+                int index = comboFilterType.SelectedIndex;
 
-                if (!string.IsNullOrEmpty(day.Text))
-                    filteredSales = filteredSales.Where(x => x.Date.Value.Day == (int)day.Value);
-
-                totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.GetSaleTotalPrice()));
-
-                //ids = filteredSales.Select(x => x.Id).ToArray();
+                switch (index)
+                {
+                    case 0:
+                        filteredSales = filteredSales.Where(x => x.Date.Value.Year == dtFilter.Value.Year && x.Date.Value.Month == dtFilter.Value.Month && x.Date.Value.Day == dtFilter.Value.Day);
+                        break;
+                    case 1:
+                        filteredSales = filteredSales.Where(x => x.Date.Value.Year == dtFilter.Value.Year && x.Date.Value.Month == dtFilter.Value.Month);
+                        break;
+                    case 2:
+                        filteredSales = filteredSales.Where(x => x.Date.Value.Year == dtFilter.Value.Year);
+                        break;
+                }
 
                 foreach (var x in filteredSales)
                     saleTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()));
+
+                totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.GetSaleTotalPrice()));
             }
         }
 
@@ -141,8 +125,8 @@ namespace POS.UserControls
             chargedTable.Rows.Clear();
             using (var p = new POSEntities())
             {
-                var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderBy(x => x.Date);
-                decimal total = sales.ToArray().Sum(x => remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice()));
+                var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
+                decimal total = p.Sales.ToArray().Sum(x => remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice()));
 
                 toBeSettledTxt.Text = string.Format("P {0:n}", total);
                 //ids = sales.Select(x => x.Id).ToArray();
@@ -164,15 +148,8 @@ namespace POS.UserControls
             return totalPrice - recieved;
         }
 
-        private void month_TextChanged(object sender, EventArgs e)
-        {
-            day.Enabled = month.Text == string.Empty ? false : true;
-            if (month.Text == string.Empty)
-                day.Text = string.Empty;
-        }
-
         void searchChargeByName()
-        {           
+        {
             chargedTable.Rows.Clear();
             using (var p = new POSEntities())
             {
@@ -263,6 +240,35 @@ namespace POS.UserControls
                                           string.Format("₱ {0:n}", remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice())),
                                           x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
+        }
+
+        private void comboFilterType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            int index = ((ComboBox)sender).SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    dtFilter.CustomFormat = "MMMM d, yyyy";
+                    break;
+                case 1:
+                    dtFilter.CustomFormat = "MMMM yyyy";
+                    break;
+                case 2:
+                    dtFilter.CustomFormat = "yyyy";
+                    break;
+            }
+            setRegularTableByDate();
+        }
+
+        private void dtFilter_ValueChanged(object sender, EventArgs e)
+        {
+            setRegularTableByDate();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

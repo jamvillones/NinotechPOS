@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportUC));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -42,22 +43,19 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.regularSalesTab = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.month = new System.Windows.Forms.ComboBox();
-            this.day = new System.Windows.Forms.NumericUpDown();
-            this.searchBtn = new System.Windows.Forms.Button();
-            this.year = new System.Windows.Forms.NumericUpDown();
+            this.comboFilterType = new System.Windows.Forms.ComboBox();
+            this.dtFilter = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.totalSale = new System.Windows.Forms.Label();
             this.chargedPage = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.toBeSettledTxt = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.saleStatus = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chargedSaleSearch = new System.Windows.Forms.TextBox();
             this.chargedSearchBtn = new System.Windows.Forms.Button();
             this.chargedTable = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.toBeSettledTxt = new System.Windows.Forms.Label();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,18 +64,17 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.saleTable)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.regularSalesTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.day)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.year)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.chargedPage.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chargedTable)).BeginInit();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // saleTable
@@ -89,7 +86,8 @@
             this.saleTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.saleTable.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.saleTable.BackgroundColor = System.Drawing.Color.White;
+            this.saleTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.saleTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.saleTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -123,7 +121,7 @@
             this.saleTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.saleTable.RowHeadersVisible = false;
             this.saleTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.saleTable.Size = new System.Drawing.Size(730, 384);
+            this.saleTable.Size = new System.Drawing.Size(730, 334);
             this.saleTable.StandardTab = true;
             this.saleTable.TabIndex = 1;
             this.saleTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.saleTable_CellMouseDoubleClick);
@@ -179,6 +177,8 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(751, 474);
             this.tabControl1.TabIndex = 3;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.TabControl1_Selected);
             // 
             // regularSalesTab
             // 
@@ -197,92 +197,47 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.month);
-            this.groupBox2.Controls.Add(this.day);
-            this.groupBox2.Controls.Add(this.searchBtn);
-            this.groupBox2.Controls.Add(this.year);
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.comboFilterType);
+            this.groupBox2.Controls.Add(this.dtFilter);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(7, 7);
+            this.groupBox2.Location = new System.Drawing.Point(502, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(301, 43);
+            this.groupBox2.Size = new System.Drawing.Size(235, 43);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Filter";
+            this.groupBox2.Text = "Date Filter";
             // 
-            // month
+            // comboFilterType
             // 
-            this.month.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.month.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.month.FormattingEnabled = true;
-            this.month.Location = new System.Drawing.Point(6, 15);
-            this.month.Name = "month";
-            this.month.Size = new System.Drawing.Size(101, 22);
-            this.month.TabIndex = 2;
-            this.month.SelectedIndexChanged += new System.EventHandler(this.month_SelectedIndexChanged);
-            this.month.TextChanged += new System.EventHandler(this.month_TextChanged);
-            this.month.KeyDown += new System.Windows.Forms.KeyEventHandler(this.month_KeyDown);
+            this.comboFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFilterType.Font = new System.Drawing.Font("Times New Roman", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboFilterType.FormattingEnabled = true;
+            this.comboFilterType.Items.AddRange(new object[] {
+            "Daily",
+            "Monthly",
+            "Yearly"});
+            this.comboFilterType.Location = new System.Drawing.Point(146, 16);
+            this.comboFilterType.Name = "comboFilterType";
+            this.comboFilterType.Size = new System.Drawing.Size(81, 20);
+            this.comboFilterType.TabIndex = 1;
+            this.comboFilterType.SelectedIndexChanged += new System.EventHandler(this.comboFilterType_SelectedIndexChanged);
             // 
-            // day
+            // dtFilter
             // 
-            this.day.Location = new System.Drawing.Point(113, 16);
-            this.day.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.day.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.day.Name = "day";
-            this.day.Size = new System.Drawing.Size(46, 20);
-            this.day.TabIndex = 3;
-            this.day.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.day.KeyDown += new System.Windows.Forms.KeyEventHandler(this.month_KeyDown);
-            // 
-            // searchBtn
-            // 
-            this.searchBtn.Location = new System.Drawing.Point(249, 15);
-            this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(46, 20);
-            this.searchBtn.TabIndex = 5;
-            this.searchBtn.Text = "Search";
-            this.searchBtn.UseVisualStyleBackColor = true;
-            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
-            // 
-            // year
-            // 
-            this.year.Location = new System.Drawing.Point(165, 16);
-            this.year.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.year.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.year.Name = "year";
-            this.year.Size = new System.Drawing.Size(77, 20);
-            this.year.TabIndex = 4;
-            this.year.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.year.KeyDown += new System.Windows.Forms.KeyEventHandler(this.month_KeyDown);
+            this.dtFilter.CustomFormat = "MMMM d, yyyy";
+            this.dtFilter.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFilter.Location = new System.Drawing.Point(6, 16);
+            this.dtFilter.Name = "dtFilter";
+            this.dtFilter.Size = new System.Drawing.Size(134, 20);
+            this.dtFilter.TabIndex = 0;
+            this.dtFilter.ValueChanged += new System.EventHandler(this.dtFilter_ValueChanged);
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.totalSale);
-            this.groupBox1.Location = new System.Drawing.Point(623, 6);
+            this.groupBox1.Location = new System.Drawing.Point(623, 396);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(114, 44);
             this.groupBox1.TabIndex = 8;
@@ -314,6 +269,28 @@
             this.chargedPage.Text = "CHARGED SALE";
             this.chargedPage.UseVisualStyleBackColor = true;
             this.chargedPage.Click += new System.EventHandler(this.chargedPage_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.toBeSettledTxt);
+            this.groupBox5.Location = new System.Drawing.Point(571, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(166, 44);
+            this.groupBox5.TabIndex = 12;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Amount to be settled";
+            // 
+            // toBeSettledTxt
+            // 
+            this.toBeSettledTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.toBeSettledTxt.Location = new System.Drawing.Point(6, 20);
+            this.toBeSettledTxt.Name = "toBeSettledTxt";
+            this.toBeSettledTxt.Size = new System.Drawing.Size(154, 14);
+            this.toBeSettledTxt.TabIndex = 7;
+            this.toBeSettledTxt.Text = "0";
+            this.toBeSettledTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBox4
             // 
@@ -354,18 +331,19 @@
             // 
             this.chargedSaleSearch.Location = new System.Drawing.Point(6, 15);
             this.chargedSaleSearch.Name = "chargedSaleSearch";
-            this.chargedSaleSearch.Size = new System.Drawing.Size(237, 20);
+            this.chargedSaleSearch.Size = new System.Drawing.Size(269, 20);
             this.chargedSaleSearch.TabIndex = 6;
             this.chargedSaleSearch.TextChanged += new System.EventHandler(this.chargedSaleSearch_TextChanged);
             this.chargedSaleSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.chargedSaleSearch_KeyDown);
             // 
             // chargedSearchBtn
             // 
-            this.chargedSearchBtn.Location = new System.Drawing.Point(249, 15);
+            this.chargedSearchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.chargedSearchBtn.Image = ((System.Drawing.Image)(resources.GetObject("chargedSearchBtn.Image")));
+            this.chargedSearchBtn.Location = new System.Drawing.Point(275, 15);
             this.chargedSearchBtn.Name = "chargedSearchBtn";
-            this.chargedSearchBtn.Size = new System.Drawing.Size(46, 20);
+            this.chargedSearchBtn.Size = new System.Drawing.Size(20, 20);
             this.chargedSearchBtn.TabIndex = 5;
-            this.chargedSearchBtn.Text = "Search";
             this.chargedSearchBtn.UseVisualStyleBackColor = true;
             this.chargedSearchBtn.Click += new System.EventHandler(this.chargedSearchBtn_Click);
             // 
@@ -378,7 +356,8 @@
             this.chargedTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.chargedTable.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.chargedTable.BackgroundColor = System.Drawing.Color.White;
+            this.chargedTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.chargedTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.chargedTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -420,40 +399,6 @@
             this.chargedTable.TabIndex = 1;
             this.chargedTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.saleTable_CellMouseDoubleClick);
             // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(364, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "REPORTS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.toBeSettledTxt);
-            this.groupBox5.Location = new System.Drawing.Point(571, 6);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(166, 44);
-            this.groupBox5.TabIndex = 12;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Amount to be settled";
-            // 
-            // toBeSettledTxt
-            // 
-            this.toBeSettledTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.toBeSettledTxt.Location = new System.Drawing.Point(6, 20);
-            this.toBeSettledTxt.Name = "toBeSettledTxt";
-            this.toBeSettledTxt.Size = new System.Drawing.Size(154, 14);
-            this.toBeSettledTxt.TabIndex = 7;
-            this.toBeSettledTxt.Text = "0";
-            this.toBeSettledTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // Column9
             // 
             this.Column9.HeaderText = "SaleId";
@@ -472,6 +417,7 @@
             // 
             this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column7.HeaderText = "Sold By";
+            this.Column7.MinimumWidth = 70;
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
             this.Column7.Width = 70;
@@ -513,6 +459,18 @@
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(364, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 15);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "REPORTS";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ReportUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,15 +483,13 @@
             this.tabControl1.ResumeLayout(false);
             this.regularSalesTab.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.day)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.year)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.chargedPage.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chargedTable)).EndInit();
-            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,10 +499,6 @@
         private System.Windows.Forms.DataGridView saleTable;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage regularSalesTab;
-        private System.Windows.Forms.ComboBox month;
-        private System.Windows.Forms.NumericUpDown year;
-        private System.Windows.Forms.NumericUpDown day;
-        private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.Label totalSale;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -561,10 +513,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ComboBox saleStatus;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label toBeSettledTxt;
+        private System.Windows.Forms.ComboBox comboFilterType;
+        private System.Windows.Forms.DateTimePicker dtFilter;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ComboBox saleStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
