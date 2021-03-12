@@ -54,25 +54,12 @@ namespace POS.UserControls
 
             setRegularTableByDate();
             setCharegedTable();
-
-           /// tabControl1.Selected += TabControl1_Selected;
-
         }
-
+         
         private void DefButton_Click(object sender, EventArgs e)
         {
 
         }
-
-        private void TabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-            //if (e.TabPageIndex == 0)
-            //    setRegularTableByDate();
-
-            //else if (e.TabPageIndex == 1)
-            //    setCharegedTable();
-        }
-
 
         private void saleTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -96,7 +83,7 @@ namespace POS.UserControls
 
             using (var p = new POSEntities())
             {
-                IQueryable<Sale> filteredSales = p.Sales.Where(x=>x.SaleType == type);
+                IQueryable<Sale> filteredSales = p.Sales.Where(x => x.SaleType == type);
 
                 int index = comboFilterType.SelectedIndex;
 
@@ -125,7 +112,7 @@ namespace POS.UserControls
             chargedTable.Rows.Clear();
             using (var p = new POSEntities())
             {
-                var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
+                var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).Take(100).OrderByDescending(x => x.Date);
                 decimal total = p.Sales.ToArray().Sum(x => remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice()));
 
                 toBeSettledTxt.Text = string.Format("P {0:n}", total);
@@ -197,16 +184,6 @@ namespace POS.UserControls
             setCharegedTable();
         }
 
-        private void regularSalesTab_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chargedPage_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void saleStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             chargedTable.Rows.Clear();
@@ -264,11 +241,6 @@ namespace POS.UserControls
         private void dtFilter_ValueChanged(object sender, EventArgs e)
         {
             setRegularTableByDate();
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
