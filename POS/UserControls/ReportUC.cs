@@ -51,8 +51,8 @@ namespace POS.UserControls
 
             defButton.Click += DefButton_Click;
 
-            setRegularTableByDate();
-            //comboFilterType.SelectedIndex = 0;
+            //setRegularTableByDate();
+            comboFilterType.SelectedIndex = 0;
             setCharegedTable();
         }
 
