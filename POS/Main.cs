@@ -44,6 +44,8 @@ namespace POS
         {
             InitializeComponent();
 
+            userButton.Text = UserManager.instance.currentLogin.Username;
+
             uControls.Add(inventoryTab);
             uControls.Add(reportTab);
 
@@ -52,7 +54,6 @@ namespace POS
             foreach (var i in uControls)
                 i.Initialize();
 
-            userButton.Text = UserManager.instance.currentLogin.Username;
             foreach (var i in uControls)
                 refreshToolStripBtn.Click += i.Refresh_Callback;
         }
@@ -268,6 +269,7 @@ namespace POS
         }
 
         bool isSignout = false;
+
         public bool IsSignout()
         {
             return isSignout;
@@ -283,10 +285,7 @@ namespace POS
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            using (var p = new POSEntities())
-            {
-                p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
-            }
+
         }
 
         private void loginPrivilegesToolStripMenuItem1_Click(object sender, EventArgs e)

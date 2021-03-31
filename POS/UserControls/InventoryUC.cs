@@ -14,6 +14,14 @@ namespace POS.UserControls
 {
     public partial class InventoryUC : UserControl, Interfaces.ITab
     {
+        class InventoryDetails
+        {
+            public string Barcode { get; set; }
+            public string Name { get; set; }
+            public decimal SellingPrice { get; set; }
+            public int Quantity { get; set; }
+        }
+
         //Login currLogin;
         public InventoryUC()
         {
@@ -50,13 +58,10 @@ namespace POS.UserControls
                 initInventoryTable();
                 initItemsTable();
 
-                //var currlog = UserManager.instance.currentLogin;
-                // stockinBtn.Enabled = currlog.CanStockIn ?? false;
                 addVariationsBtn.Enabled = currLogin.CanEditProduct;
                 addItemBtn.Enabled = currLogin.CanEditItem;
                 editItemBtn.Enabled = currLogin.CanEditItem;
             }
-
         }
         #endregion
 
@@ -140,39 +145,72 @@ namespace POS.UserControls
             }
         }
 
+        DataGridViewRow createInventoryRow(string key, POSEntities p)
+        {
+            DataGridViewRow r = new DataGridViewRow();
+            var item = p.Items.FirstOrDefault(x => x.Barcode == key);
+            int totalQuantity = p.InventoryItems.Where(x => x.Product.Item.Barcode == key).Sum(x => x.Quantity);
+
+            r.CreateCells(inventoryTable);
+            r.Cells[inventoryBarcodeCol.Index].Value = item.Barcode;
+            r.Cells[inventoryNameCol.Index].Value = item.Name;
+            r.Cells[inventoryPriceCol.Index].Value = string.Format("₱ {0:n}", item.SellingPrice);
+            r.Cells[inventoryQuantityCol.Index].Value = totalQuantity == 0 ? "Infinite" : totalQuantity.ToString();
+            r.Cells[inventoryTotalCol.Index].Value = string.Format("₱ {0:n}", totalQuantity * item.SellingPrice);
+
+            return r;
+        }
+
         void initInventoryTable()
         {
             inventoryTable.Rows.Clear();
 
             using (var p = new POSEntities())
             {
-                var itemGroup = p.InventoryItems.GroupBy(x => x.Product.Item.Barcode);
-                foreach (var i in itemGroup)
-                {
-                    var item = p.Items.FirstOrDefault(x => x.Barcode == i.Key);
-                    int totalQuantity = p.InventoryItems.Where(x => x.Product.Item.Barcode == i.Key).Sum(x => x.Quantity);
+                var rows = p.InventoryItems.ToArray().GroupBy(x => x.Product.Item.Barcode).Select(y => createInventoryRow(y.Key, p)).ToArray();
+                inventoryTable.Rows.AddRange(rows);
+                Console.WriteLine("Inventory initialized");
 
-                    inventoryTable.Rows.Add(item.Barcode, item.Name, string.Format("₱ {0:n}", item.SellingPrice), (totalQuantity == 0 ? "Infinite" : totalQuantity.ToString()), (totalQuantity == 0 ? "----" : string.Format("₱ {0:n}", totalQuantity * item.SellingPrice)));
-                }
-                totalItemsLabel.Text = string.Format("Total item price: ₱ {0:n}", p.InventoryItems.Sum(x => x.Product.Item.SellingPrice*x.Quantity));
+                //foreach (var i in itemGroup)
+                //{
+                //    var item = p.Items.FirstOrDefault(x => x.Barcode == i.Key);
+                //    int totalQuantity = p.InventoryItems.Where(x => x.Product.Item.Barcode == i.Key).Sum(x => x.Quantity);
+
+                //    inventoryTable.Rows.Add(item.Barcode, item.Name, string.Format("₱ {0:n}", item.SellingPrice), (totalQuantity == 0 ? "Infinite" : totalQuantity.ToString()), (totalQuantity == 0 ? "----" : string.Format("₱ {0:n}", totalQuantity * item.SellingPrice)));
+                //}
+
+                totalItemsLabel.Text = string.Format("Total item price: ₱ {0:n}", p.InventoryItems.Sum(x => x.Product.Item.SellingPrice * x.Quantity));
             }
         }
+
         private void Onsave_Callback(object sender, EventArgs e)
         {
             initItemsTable();
-
             initInventoryTable();
         }
 
+        DataGridViewRow createItemRow(Item i)
+        {
+            var row = new DataGridViewRow();
+            row.CreateCells(itemsTable);
+            row.Cells[0].Value = i.Barcode;
+            row.Cells[1].Value = i.Name;
+            row.Cells[2].Value = string.Format("₱ {0:n}", i.SellingPrice);
+            row.Cells[3].Value = i.Department;
+            row.Cells[4].Value = i.Type;
+            row.Cells[5].Value = i.Details;
+            row.Cells[6].Value = "Delete";
+            return row;
+        }
         void initItemsTable()
         {
             itemsTable.Rows.Clear();
+
             using (var p = new POSEntities())
             {
-                foreach (var i in p.Items)
-                {
-                    itemsTable.Rows.Add(i.Barcode, i.Name, string.Format("₱ {0:n}", i.SellingPrice), i.Department, i.Type, i.Details, "Delete");
-                }
+                var rows = p.Items.Select(createItemRow).ToArray();
+                itemsTable.Rows.AddRange(rows);
+                Console.WriteLine("Items Initialized");
             }
         }
 
@@ -230,11 +268,10 @@ namespace POS.UserControls
             using (var p = new POSEntities())
             {
                 searchElements = p.Items.Where(x => x.Barcode == search.Text);
+
                 if (searchElements.Count() == 0)
-                {
-                    ///name
                     searchElements = p.Items.Where(x => x.Name.Contains(search.Text));
-                }
+
                 if (searchElements.Count() == 0)
                 {
                     MessageBox.Show("Sorry, Product not found.");

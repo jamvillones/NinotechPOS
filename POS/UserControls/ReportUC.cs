@@ -43,19 +43,19 @@ namespace POS.UserControls
 
         public void Initialize()
         {
-            comboFilterType.SelectedIndex = 0;
 
-            for (int i = 0; i < (int)SaleStatusFilter.Count; i++)
-                saleStatus.Items.Add(((SaleStatusFilter)i).ToString());
+            //for (int i = 0; i < (int)SaleStatusFilter.Count; i++)
+            //    saleStatus.Items.Add(((SaleStatusFilter)i).ToString());
 
             saleStatus.SelectedIndex = 0;
 
             defButton.Click += DefButton_Click;
 
             setRegularTableByDate();
+            //comboFilterType.SelectedIndex = 0;
             setCharegedTable();
         }
-         
+
         private void DefButton_Click(object sender, EventArgs e)
         {
 
@@ -75,7 +75,18 @@ namespace POS.UserControls
                 saleDetails.ShowDialog();
             }
         }
+        DataGridViewRow createRegularRow(Sale sale)
+        {
+            DataGridViewRow row = new DataGridViewRow();
+            row.CreateCells(saleTable);
+            row.Cells[0].Value = sale.Id;
+            row.Cells[1].Value = sale.Date.Value.ToString("MMM dd, yyyy hh:mm: tt");
+            row.Cells[2].Value = sale.Login?.Username;
+            row.Cells[3].Value = sale.Customer.Name;
+            row.Cells[4].Value = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
 
+            return row;
+        }
         void setRegularTableByDate()
         {
             string type = SaleType.Regular.ToString();
@@ -100,13 +111,30 @@ namespace POS.UserControls
                         break;
                 }
 
-                foreach (var x in filteredSales)
-                    saleTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()));
+                var rows = filteredSales.Select(createRegularRow).ToArray();
+                saleTable.Rows.AddRange(rows);
+                Console.WriteLine("regular sale initialized");
+                //foreach (var x in filteredSales)
+                //    saleTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()));
 
                 totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.GetSaleTotalPrice()));
             }
         }
 
+        DataGridViewRow createChargedRow(Sale sale)
+        {
+            var row = new DataGridViewRow();
+            row.CreateCells(chargedTable);
+            row.Cells[0].Value = sale.Id;
+            row.Cells[1].Value = sale.Date.Value.ToString("MMMM dd, yyyy hh:mm tt");
+            row.Cells[2].Value = sale.Login?.Username;
+            row.Cells[3].Value = sale.Customer.Name;
+            row.Cells[4].Value = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
+            row.Cells[5].Value = string.Format("₱ {0:n}", sale.AmountRecieved);
+            row.Cells[6].Value = string.Format("₱ {0:n}", remaining(sale.AmountRecieved ?? 0, sale.GetSaleTotalPrice()));
+            row.Cells[7].Value = sale.AmountRecieved < sale.GetSaleTotalPrice() ? false : true;
+            return row;
+        }
         void setCharegedTable()
         {
             chargedTable.Rows.Clear();
@@ -116,16 +144,10 @@ namespace POS.UserControls
                 decimal total = p.Sales.ToArray().Sum(x => remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice()));
 
                 toBeSettledTxt.Text = string.Format("P {0:n}", total);
-                //ids = sales.Select(x => x.Id).ToArray();
-                foreach (var x in sales)
-                    chargedTable.Rows.Add(x.Id,
-                                          x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
-                                          x.Login?.Username,
-                                          x.Customer.Name,
-                                          string.Format("₱ {0:n}", x.GetSaleTotalPrice()),
-                                          string.Format("₱ {0:n}", x.AmountRecieved),
-                                          string.Format("₱ {0:n}", remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice())),
-                                          x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
+                var rows = sales.Select(createChargedRow).ToArray();
+                chargedTable.Rows.AddRange(rows);
+                Console.WriteLine("Charged Initialized");
+
             }
         }
         decimal remaining(decimal recieved, decimal totalPrice)
@@ -154,22 +176,31 @@ namespace POS.UserControls
             }
 
         }
-
+        bool searchMade { get; set; } = false;
         private void chargedSearchBtn_Click(object sender, EventArgs e)
         {
+            //var button = sender as Button;
+            if (chargedSaleSearch.Text == string.Empty || string.IsNullOrWhiteSpace(chargedSaleSearch.Text))
+                return;
+
+            searchMade = true;
             searchChargeByName();
         }
 
         private void chargedSaleSearch_TextChanged(object sender, EventArgs e)
         {
-            if (chargedSaleSearch.Text == string.Empty)
+            if (chargedSaleSearch.Text == string.Empty && searchMade)
+            {
                 setCharegedTable();
+                searchMade = false;
+            }
         }
 
         private void chargedSaleSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                searchChargeByName();
+                //searchChargeByName();
+                chargedSearchBtn.PerformClick();
         }
 
         private void month_KeyDown(object sender, KeyEventArgs e)
