@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -86,6 +87,14 @@ namespace POS.Misc
             if (dgt.SelectedCells.Count == 0)
                 return -1;
             return dgt.SelectedCells[0].RowIndex;
+        }
+        public static int LongestWord(Graphics g, Font f, int width, params string[] words)
+        {
+            return (int)words.Select(x => g.MeasureString(x, f, width).Height).DefaultIfEmpty(0).Max();
+        }
+        public static string ToMoneyFormat(this decimal money)
+        {
+            return string.Format("₱{0:N2}", money);
         }
     }
 }

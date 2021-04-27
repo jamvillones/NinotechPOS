@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,12 +42,12 @@ namespace POS.Forms
 
                 Datetext.Text = sale.Date.Value.ToString("MMMM dd, yyyy hh:mm tt");
                 var soldItems = sale.SoldItems;
-                foreach (var x in soldItems.OrderBy(x=>x.Product.Item.Name))
+                foreach (var x in soldItems.OrderBy(x => x.Product.Item.Name))
                 {
                     itemsTable.Rows.Add(x.Product.Item.Name,
                                         x.SerialNumber,
                                         x.Quantity,
-                                        string.Format("₱ {0:n}", x.ItemPrice),
+                                        x.ItemPrice,
                                         x.Discount,
                                         string.Format("₱ {0:n}", (x.Quantity * x.ItemPrice) * ((100 - x.Discount) / 100)),
                                         x.Product.Supplier.Name);
@@ -207,6 +208,30 @@ namespace POS.Forms
         private void button1_Click_1(object sender, EventArgs e)
         {
             OpenPrint();
+        }
+        PrintAction printAction;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            doc.Print();
+        }
+
+        private void doc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            ReceiptDetails details = new ReceiptDetails();
+            details.ControlNumber = sale.Id.ToString();
+            details.CustomerName = soldTo.Text;
+            details.TransactBy = UserManager.instance.currentLogin.Username;
+            details.Tendered = sale.AmountRecieved.Value;
+
+            for (int i = 0; i < itemsTable.RowCount; i++)
+                details.Additem(itemsTable[0, i].Value.ToString(), (int)itemsTable[2, i].Value, (decimal)itemsTable[3, i].Value, (decimal)itemsTable[4, i].Value);
+
+            e.FormatReciept(printAction, details);
+        }
+
+        private void doc_BeginPrint(object sender, PrintEventArgs e)
+        {
+            printAction = e.PrintAction;
         }
     }
 }

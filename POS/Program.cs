@@ -54,6 +54,8 @@ namespace POS
                 }
             }
 
+            //Application.Run(new RecieptTest());
+
         }
     }
 }
