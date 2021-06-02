@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.transactionsTable = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.customerNameTxt = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.customerNameTxt = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.transactionsTable)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +48,9 @@
             this.transactionsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.transactionsTable.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.transactionsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.transactionsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.transactionsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.transactionsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -65,24 +68,6 @@
             this.transactionsTable.TabIndex = 0;
             this.transactionsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.transactionsTable_CellMouseDoubleClick);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.customerNameTxt);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(360, 41);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Customer";
-            // 
-            // customerNameTxt
-            // 
-            this.customerNameTxt.AutoSize = true;
-            this.customerNameTxt.Location = new System.Drawing.Point(7, 20);
-            this.customerNameTxt.Name = "customerNameTxt";
-            this.customerNameTxt.Size = new System.Drawing.Size(0, 13);
-            this.customerNameTxt.TabIndex = 0;
-            // 
             // Column1
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -90,7 +75,6 @@
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             this.Column1.Visible = false;
-            this.Column1.Width = 22;
             // 
             // Column2
             // 
@@ -115,6 +99,24 @@
             this.Column4.ReadOnly = true;
             this.Column4.Width = 56;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.customerNameTxt);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(233, 41);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Customer";
+            // 
+            // customerNameTxt
+            // 
+            this.customerNameTxt.AutoSize = true;
+            this.customerNameTxt.Location = new System.Drawing.Point(7, 20);
+            this.customerNameTxt.Name = "customerNameTxt";
+            this.customerNameTxt.Size = new System.Drawing.Size(0, 13);
+            this.customerNameTxt.TabIndex = 0;
+            // 
             // CustomerTransactionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -123,6 +125,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.transactionsTable);
             this.Name = "CustomerTransactionsForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Customer Transactions";
             ((System.ComponentModel.ISupportInitialize)(this.transactionsTable)).EndInit();

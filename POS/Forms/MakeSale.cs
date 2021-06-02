@@ -385,9 +385,15 @@ namespace POS.Forms
 
         private void addCustomerBtn_Click(object sender, EventArgs e)
         {
-            var createCustomer = new CreateCustomerProfile();
-            createCustomer.OnSave += CreateCustomer_OnSave;
-            createCustomer.ShowDialog();
+            using (var createCustomer = new CreateCustomerProfile())
+            {
+                createCustomer.OnSave += CreateCustomer_OnSave;
+                if (createCustomer.ShowDialog() == DialogResult.OK)
+                {
+                    var text = (string)createCustomer.Tag;
+                    soldTo.Text = text;
+                }
+            }
         }
 
         private void CreateCustomer_OnSave(object sender, EventArgs e)
@@ -500,8 +506,8 @@ namespace POS.Forms
             details.TransactBy = UserManager.instance.currentLogin.Username;
             details.Tendered = amountRecieved.Value;
 
-            for(int i = 0; i < cartTable.RowCount; i++)                           
-                    details.Additem(cartTable[2,i].Value.ToString(), (int)cartTable[3,i].Value, (decimal)cartTable[4,i].Value, (decimal)cartTable[5,i].Value);            
+            for (int i = 0; i < cartTable.RowCount; i++)
+                details.Additem(cartTable[2, i].Value.ToString(), (int)cartTable[3, i].Value, (decimal)cartTable[4, i].Value, (decimal)cartTable[5, i].Value);
 
             e.FormatReciept(printAction, details);
         }
@@ -509,6 +515,36 @@ namespace POS.Forms
         private void printDoc_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             printAction = e.PrintAction;
+        }
+
+        private void soldTo_Validated(object sender, EventArgs e)
+        {
+            if (soldTo.Text == string.Empty)
+                return;
+
+            using (var pos = new POSEntities())
+            {
+                if (!pos.Customers.Any(x => x.Name == soldTo.Text.Trim()))
+                {
+                    if (MessageBox.Show("Customer is not found in database?\nWould you like to register it to proceed? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        using (var createCustomer = new CreateCustomerProfile(soldTo.Text))
+                        {
+                            createCustomer.OnSave += CreateCustomer_OnSave;
+                            if (createCustomer.ShowDialog() == DialogResult.OK)
+                            {
+                                var text = (string)createCustomer.Tag;
+                                soldTo.Text = text;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        soldTo.Text = string.Empty;
+                    }
+
+                }
+            }
         }
     }
 }

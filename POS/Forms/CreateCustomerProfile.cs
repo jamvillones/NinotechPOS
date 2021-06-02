@@ -18,11 +18,19 @@ namespace POS.Forms
         {
             InitializeComponent();
         }
+
+        public CreateCustomerProfile(string Name)
+        {
+            InitializeComponent();
+
+            name.Text = Name.Trim();
+        }
+
         bool canSave()
         {
-            if (string.IsNullOrEmpty(name.Text) || string.IsNullOrEmpty(address.Text) || string.IsNullOrEmpty(contact.Text))
+            if (string.IsNullOrEmpty(name.Text.Trim()))
             {
-                MessageBox.Show("Fields cannot be empty.");
+                MessageBox.Show("Name cannot be empty.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             using (var p = new POSEntities())
@@ -30,39 +38,51 @@ namespace POS.Forms
                 var c = p.Customers.FirstOrDefault(x => x.Name == name.Text);
                 if (c != null)
                 {
-                    MessageBox.Show("Name already taken.");
+                    MessageBox.Show("Name already taken.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
             }
             return true;
         }
+
         private void saveBtn_Click(object sender, EventArgs e)
         {
             if (!canSave())
                 return;
+
             using (var p = new POSEntities())
             {
+                var add = address.Text.Trim();
+                var cont = contact.Text.Trim();
+
                 Customer c = new Customer();
-                //c.Id = Id.Text;
-                c.Name = name.Text;
-                c.Address = address.Text;
-                c.ContactDetails = contact.Text;
+
+                c.Name = name.Text.Trim();
+
+                c.Address = add == string.Empty ? null : add;
+                c.ContactDetails = cont == string.Empty ? null : cont;
+
                 p.Customers.Add(c);
                 p.SaveChanges();
-                MessageBox.Show("Customer Saved.");
+
                 OnSave?.Invoke(this, null);
             }
-            this.Close();
 
+            this.Tag = name.Text.Trim();
+            DialogResult = DialogResult.OK;
+
+            this.Close();
         }
 
         private void CreateCustomerProfile_Load(object sender, EventArgs e)
         {
             customerTable.Rows.Clear();
+
             using (var p = new POSEntities())
             {
-                foreach (var i in p.Customers)
-                    customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete","Transactions");
+                IEnumerable<Customer> customers = p.Customers;
+                var rows = customers.Select(x => customerTable.createRow(x.Id, x.Name, x.Address, x.ContactDetails, "Delete", "Transactions")).ToArray();
+                customerTable.Rows.AddRange(rows);
             }
         }
 
@@ -94,7 +114,7 @@ namespace POS.Forms
                     customerTable.Rows.Clear();
                     foreach (var i in s)
                     {
-                        customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete","Transactions");
+                        customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete", "Transactions");
                     }
                 }
 
@@ -109,7 +129,7 @@ namespace POS.Forms
                 customerTable.Rows.Clear();
                 foreach (var i in p.Customers)
                 {
-                    customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete","Transactions");
+                    customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete", "Transactions");
                 }
             }
         }
@@ -137,16 +157,16 @@ namespace POS.Forms
             {
                 DeleteCustomer(e.RowIndex);
             }
-            if(e.ColumnIndex == 5)
+            if (e.ColumnIndex == 5)
             {
-                using(var ct = new CustomerTransactionsForm())
+                using (var ct = new CustomerTransactionsForm())
                 {
-                    if(ct.SetId((int)(customerTable.Rows[e.RowIndex].Cells[0].Value)))
-                    ct.ShowDialog();
+                    if (ct.SetId((int)(customerTable.Rows[e.RowIndex].Cells[0].Value)))
+                        ct.ShowDialog();
                 }
             }
 
-           
+
         }
 
         int targetCustomerId = 0;
