@@ -175,6 +175,9 @@ namespace POS.Forms
             voidBtn.Enabled = currentLogin.CanVoidSale;
             editItemsBtn.Enabled = currentLogin.CanVoidSale;
 
+            var settings = Properties.Settings.Default;
+            if (!string.IsNullOrEmpty(settings.ReceiptPrinter))
+                doc.PrinterSettings.PrinterName = settings.ReceiptPrinter;
         }
 
         private void editItemsBtn_Click(object sender, EventArgs e)

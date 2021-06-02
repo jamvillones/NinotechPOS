@@ -82,6 +82,7 @@
             this.detailsTxt.Name = "detailsTxt";
             this.detailsTxt.Size = new System.Drawing.Size(301, 87);
             this.detailsTxt.TabIndex = 0;
+            this.detailsTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox3
             // 
@@ -128,6 +129,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RecieptPrintingConfigurations";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reciept Printing Configurations";
             this.Load += new System.EventHandler(this.RecieptPrintingConfigurations_Load);
             this.groupBox1.ResumeLayout(false);

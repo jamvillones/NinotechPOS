@@ -56,6 +56,7 @@
             this.Controls.Add(this.printPreviewControl1);
             this.Name = "RecieptTest";
             this.Text = "RecieptTest";
+            this.Load += new System.EventHandler(this.RecieptTest_Load);
             this.ResumeLayout(false);
 
         }

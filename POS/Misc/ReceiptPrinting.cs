@@ -12,6 +12,7 @@ namespace POS.Misc
 
         public static void FormatReciept(this PrintPageEventArgs e, PrintAction printAction, ReceiptDetails details)
         {
+            var settings = Properties.Settings.Default;
             Graphics graphics = e.Graphics;
 
             Font font = new Font("MS Gothic", 8, FontStyle.Regular);
@@ -32,10 +33,17 @@ namespace POS.Misc
 
             var area = new Rectangle(0, 0, availableWidth - 1, availableHeight - 1);
 
-            string titleString = "Arboleda Bldg. Roxas Avenue, Kalibo, Aklan\n(036) 268 3798 / 0998 869 1849\nfacebook.com/ninotechcomputer\nninotech.computer@gmail.com\n\nWARRANTY RECEIPT";
+            string Header = settings.HeaderText;
+            var headerSize = e.Graphics.MeasureString(Header, titleFont, area.Width);
+            var headerRect = new Rectangle(0, 0, area.Width, (int)Math.Floor(headerSize.Height));
+
+            if (Header != string.Empty)
+                e.Graphics.DrawString(Header, titleFont, Brushes.Black, headerRect);
+
+            string titleString = settings.DetailsText;
 
             var titleSize = e.Graphics.MeasureString(titleString, titleFont, e.PageBounds.Width);
-            var titelRect = new Rectangle(0, 0, area.Width, (int)titleSize.Height);
+            var titelRect = new Rectangle(0, headerRect.Bottom, area.Width, (int)titleSize.Height);
 
             e.Graphics.DrawString(titleString, titleFont, Brushes.Black, titelRect, centerAlignment);
 

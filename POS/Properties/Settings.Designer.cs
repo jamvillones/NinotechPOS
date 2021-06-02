@@ -22,5 +22,41 @@ namespace POS.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HeaderText {
+            get {
+                return ((string)(this["HeaderText"]));
+            }
+            set {
+                this["HeaderText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("[details]")]
+        public string DetailsText {
+            get {
+                return ((string)(this["DetailsText"]));
+            }
+            set {
+                this["DetailsText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ReceiptPrinter {
+            get {
+                return ((string)(this["ReceiptPrinter"]));
+            }
+            set {
+                this["ReceiptPrinter"] = value;
+            }
+        }
     }
 }

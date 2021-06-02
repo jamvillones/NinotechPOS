@@ -47,20 +47,16 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.searchControl = new POS.UserControls.SearchControl();
             this.createItemBtn = new System.Windows.Forms.Button();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.barcode = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.serialNumber = new System.Windows.Forms.TextBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.supplier = new System.Windows.Forms.TextBox();
             this.itemsTable = new System.Windows.Forms.DataGridView();
             this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cost = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemName = new System.Windows.Forms.TextBox();
@@ -68,15 +64,17 @@
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.addBtn = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.searchControl = new POS.UserControls.SearchControl();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
-            this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
@@ -135,6 +133,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.inventoryTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.inventoryTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.inventoryTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -250,14 +249,11 @@
             // 
             this.groupBox1.Controls.Add(this.searchControl);
             this.groupBox1.Controls.Add(this.createItemBtn);
-            this.groupBox1.Controls.Add(this.groupBox8);
             this.groupBox1.Controls.Add(this.groupBox7);
-            this.groupBox1.Controls.Add(this.groupBox6);
-            this.groupBox1.Controls.Add(this.itemsTable);
-            this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.addBtn);
+            this.groupBox1.Controls.Add(this.itemsTable);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
@@ -266,44 +262,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Items";
             // 
-            // searchControl
-            // 
-            this.searchControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchControl.Location = new System.Drawing.Point(49, 19);
-            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.SearchText = "";
-            this.searchControl.Size = new System.Drawing.Size(519, 28);
-            this.searchControl.TabIndex = 0;
-            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
-            // 
             // createItemBtn
             // 
-            this.createItemBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.createItemBtn.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.createItemBtn.FlatAppearance.BorderSize = 0;
+            this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.createItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("createItemBtn.Image")));
-            this.createItemBtn.Location = new System.Drawing.Point(9, 19);
+            this.createItemBtn.Location = new System.Drawing.Point(310, 21);
             this.createItemBtn.Name = "createItemBtn";
-            this.createItemBtn.Size = new System.Drawing.Size(34, 28);
+            this.createItemBtn.Size = new System.Drawing.Size(23, 23);
             this.createItemBtn.TabIndex = 1;
             this.toolTip.SetToolTip(this.createItemBtn, "Create Item");
             this.createItemBtn.UseVisualStyleBackColor = false;
             this.createItemBtn.Click += new System.EventHandler(this.createItemBtn_Click);
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox8.Controls.Add(this.barcode);
-            this.groupBox8.Location = new System.Drawing.Point(310, 53);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(258, 47);
-            this.groupBox8.TabIndex = 7;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Barcode";
             // 
             // barcode
             // 
@@ -311,9 +282,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.barcode.BackColor = System.Drawing.SystemColors.Control;
             this.barcode.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.barcode.Location = new System.Drawing.Point(7, 20);
+            this.barcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barcode.Location = new System.Drawing.Point(73, 39);
             this.barcode.Name = "barcode";
-            this.barcode.Size = new System.Drawing.Size(245, 13);
+            this.barcode.Size = new System.Drawing.Size(480, 13);
             this.barcode.TabIndex = 0;
             this.barcode.TabStop = false;
             // 
@@ -324,7 +296,7 @@
             this.groupBox7.Controls.Add(this.serialNumber);
             this.groupBox7.Location = new System.Drawing.Point(9, 159);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(295, 47);
+            this.groupBox7.Size = new System.Drawing.Size(428, 47);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Serial Number";
@@ -333,36 +305,28 @@
             // 
             this.serialNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.serialNumber.BackColor = System.Drawing.SystemColors.Control;
+            this.serialNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.serialNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.serialNumber.Location = new System.Drawing.Point(7, 20);
             this.serialNumber.Name = "serialNumber";
-            this.serialNumber.Size = new System.Drawing.Size(282, 20);
+            this.serialNumber.Size = new System.Drawing.Size(415, 13);
             this.serialNumber.TabIndex = 0;
             this.toolTip.SetToolTip(this.serialNumber, "(f2) to focus serial number");
             this.serialNumber.TextChanged += new System.EventHandler(this.serialNumber_TextChanged);
             this.serialNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.serialNumber_KeyDown);
             // 
-            // groupBox6
-            // 
-            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox6.Controls.Add(this.supplier);
-            this.groupBox6.Location = new System.Drawing.Point(9, 106);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(295, 47);
-            this.groupBox6.TabIndex = 5;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Supplier";
-            // 
             // supplier
             // 
             this.supplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.supplier.BackColor = System.Drawing.SystemColors.Control;
             this.supplier.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.supplier.Location = new System.Drawing.Point(7, 19);
+            this.supplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supplier.Location = new System.Drawing.Point(73, 58);
             this.supplier.Name = "supplier";
             this.supplier.ReadOnly = true;
-            this.supplier.Size = new System.Drawing.Size(282, 13);
+            this.supplier.Size = new System.Drawing.Size(480, 13);
             this.supplier.TabIndex = 1;
             this.supplier.TabStop = false;
             // 
@@ -377,6 +341,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -443,26 +408,17 @@
             this.Column7.ReadOnly = true;
             this.Column7.Width = 76;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.cost);
-            this.groupBox5.Location = new System.Drawing.Point(310, 106);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(258, 47);
-            this.groupBox5.TabIndex = 5;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Cost";
-            // 
             // cost
             // 
             this.cost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cost.BackColor = System.Drawing.SystemColors.Control;
             this.cost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.cost.Location = new System.Drawing.Point(7, 20);
+            this.cost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cost.Location = new System.Drawing.Point(73, 77);
             this.cost.Name = "cost";
             this.cost.ReadOnly = true;
-            this.cost.Size = new System.Drawing.Size(245, 13);
+            this.cost.Size = new System.Drawing.Size(480, 13);
             this.cost.TabIndex = 0;
             this.cost.TabStop = false;
             // 
@@ -470,23 +426,32 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.cost);
+            this.groupBox3.Controls.Add(this.barcode);
+            this.groupBox3.Controls.Add(this.supplier);
             this.groupBox3.Controls.Add(this.itemName);
             this.groupBox3.Location = new System.Drawing.Point(9, 53);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(295, 47);
+            this.groupBox3.Size = new System.Drawing.Size(559, 100);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Item Name";
+            this.groupBox3.Text = "Item Details";
             // 
             // itemName
             // 
             this.itemName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.itemName.BackColor = System.Drawing.SystemColors.Control;
             this.itemName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemName.Location = new System.Drawing.Point(7, 20);
+            this.itemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemName.Location = new System.Drawing.Point(73, 20);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(282, 13);
+            this.itemName.Size = new System.Drawing.Size(480, 13);
             this.itemName.TabIndex = 0;
             this.itemName.TabStop = false;
             // 
@@ -494,9 +459,9 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.quantity);
-            this.groupBox4.Location = new System.Drawing.Point(310, 159);
+            this.groupBox4.Location = new System.Drawing.Point(443, 159);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(258, 47);
+            this.groupBox4.Size = new System.Drawing.Size(125, 47);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Quantity";
@@ -505,6 +470,8 @@
             // 
             this.quantity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.quantity.BackColor = System.Drawing.SystemColors.Control;
+            this.quantity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.quantity.Location = new System.Drawing.Point(7, 21);
             this.quantity.Maximum = new decimal(new int[] {
             1000000,
@@ -517,7 +484,7 @@
             0,
             0});
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(245, 20);
+            this.quantity.Size = new System.Drawing.Size(112, 16);
             this.quantity.TabIndex = 0;
             this.toolTip.SetToolTip(this.quantity, "(f3) to focus quantity");
             this.quantity.Value = new decimal(new int[] {
@@ -550,6 +517,55 @@
             this.toolTip.ReshowDelay = 100;
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Item Name:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Barcode:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Supplier:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(36, 77);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Cost:";
+            // 
+            // searchControl
+            // 
+            this.searchControl.Location = new System.Drawing.Point(9, 19);
+            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.SearchText = "";
+            this.searchControl.Size = new System.Drawing.Size(295, 28);
+            this.searchControl.TabIndex = 0;
+            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            // 
             // StockinForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -570,15 +586,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -598,15 +608,12 @@
         private System.Windows.Forms.TextBox itemName;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.NumericUpDown quantity;
-        private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataGridView itemsTable;
         private System.Windows.Forms.Button removeBtn;
-        private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.TextBox serialNumber;
         private System.Windows.Forms.TextBox cost;
         private System.Windows.Forms.TextBox supplier;
-        private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.TextBox barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -622,5 +629,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button createItemBtn;
         private UserControls.SearchControl searchControl;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

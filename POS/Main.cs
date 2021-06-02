@@ -54,8 +54,8 @@ namespace POS
             foreach (var i in uControls)
                 i.Initialize();
 
-            foreach (var i in uControls)
-                refreshToolStripBtn.Click += i.Refresh_Callback;
+            //foreach (var i in uControls)
+            //    refreshToolStripBtn.Click += i.Refresh_Callback;
         }
 
         void setChangingColorsBtn(params Button[] buttons)
@@ -137,7 +137,7 @@ namespace POS
         }
         void RefreshData()
         {
-            refreshToolStripBtn.PerformClick();
+           // refreshToolStripBtn.PerformClick();
         }
 
         private void userButton_Click(object sender, EventArgs e)
@@ -292,6 +292,12 @@ namespace POS
         {
             using (var previliges = new UserPrivilegesForm())
                 previliges.ShowDialog();
+        }
+
+        private void toolStripButton2_Click_1(object sender, EventArgs e)
+        {
+            using (var printerSettings = new RecieptPrintingConfigurations())
+                printerSettings.ShowDialog();
         }
     }
 }

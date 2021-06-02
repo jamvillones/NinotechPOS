@@ -39,5 +39,12 @@ namespace POS
 
             e.FormatReciept(printAction, details);
         }
+
+        private void RecieptTest_Load(object sender, EventArgs e)
+        {
+            var settings = Properties.Settings.Default;
+            if (string.IsNullOrEmpty(settings.ReceiptPrinter))
+                printDocument1.PrinterSettings.PrinterName = settings.ReceiptPrinter;
+        }
     }
 }

@@ -148,10 +148,12 @@
             // 
             this.contactDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.contactDetails.BackColor = System.Drawing.SystemColors.Control;
+            this.contactDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.contactDetails.Location = new System.Drawing.Point(6, 19);
             this.contactDetails.MaxLength = 50;
             this.contactDetails.Name = "contactDetails";
-            this.contactDetails.Size = new System.Drawing.Size(355, 20);
+            this.contactDetails.Size = new System.Drawing.Size(355, 13);
             this.contactDetails.TabIndex = 0;
             this.contactDetails.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.contactDetails.Leave += new System.EventHandler(this.supplierName_Leave);
@@ -172,10 +174,12 @@
             // 
             this.supplierName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.supplierName.BackColor = System.Drawing.SystemColors.Control;
+            this.supplierName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.supplierName.Location = new System.Drawing.Point(6, 19);
             this.supplierName.MaxLength = 50;
             this.supplierName.Name = "supplierName";
-            this.supplierName.Size = new System.Drawing.Size(355, 20);
+            this.supplierName.Size = new System.Drawing.Size(355, 13);
             this.supplierName.TabIndex = 0;
             this.supplierName.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             this.supplierName.Leave += new System.EventHandler(this.supplierName_Leave);

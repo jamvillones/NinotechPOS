@@ -94,6 +94,11 @@ namespace POS.Forms
                 var inventoryItems = p.InventoryItems.Select(x => x.Product.Item.Name).ToArray();
                 searchControl.SetAutoComplete(inventoryItems);
             }
+
+            var settings = Properties.Settings.Default;
+
+            if (!string.IsNullOrEmpty(settings.ReceiptPrinter))
+                printDoc.PrinterSettings.PrinterName = settings.ReceiptPrinter;
         }
 
         bool alreadyInTable(out int index)
@@ -182,7 +187,9 @@ namespace POS.Forms
                 OnSave?.Invoke(this, null);
                 //MessageBox.Show("Sold Items.");
                 if (isPrintReceipt.Checked)
+                {
                     printDoc.Print();
+                }
 
                 this.Close();
             }
@@ -325,7 +332,8 @@ namespace POS.Forms
         void calculateTotal()
         {
             cartTotal.Text = string.Format("₱ {0:n}", cartTotalValue);
-            saleType.SelectedIndex = cartTotalValue - amountRecieved.Value > 0 ? 1 : 0;
+
+            saleType.Text = cartTotalValue - amountRecieved.Value > 0 ? "Charged" : "Regular";
         }
 
         private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)

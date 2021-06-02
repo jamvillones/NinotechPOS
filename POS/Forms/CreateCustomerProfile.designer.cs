@@ -37,15 +37,15 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.name = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.searchControl = new POS.UserControls.SearchControl();
             this.customerTable = new System.Windows.Forms.DataGridView();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.searchControl = new POS.UserControls.SearchControl();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.transactCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -156,18 +156,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "List of Customers";
             // 
-            // searchControl
-            // 
-            this.searchControl.Location = new System.Drawing.Point(6, 19);
-            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.SearchText = "";
-            this.searchControl.Size = new System.Drawing.Size(219, 28);
-            this.searchControl.TabIndex = 5;
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl_OnTextEmpty);
-            // 
             // customerTable
             // 
             this.customerTable.AllowUserToAddRows = false;
@@ -210,51 +198,6 @@
             this.customerTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellContentClick);
             this.customerTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellEndEdit);
             // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column4.HeaderText = "Id";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "CUSTOMER NAME";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column3.HeaderText = "ADDRESS";
-            this.Column3.MinimumWidth = 150;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 150;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column1.HeaderText = "CONTACT DETAILS";
-            this.Column1.MinimumWidth = 150;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 150;
-            // 
-            // delCol
-            // 
-            this.delCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.delCol.HeaderText = "";
-            this.delCol.Name = "delCol";
-            this.delCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.delCol.Width = 19;
-            // 
-            // transactCol
-            // 
-            this.transactCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.transactCol.HeaderText = "";
-            this.transactCol.Name = "transactCol";
-            this.transactCol.Width = 5;
-            // 
             // groupBox5
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -269,6 +212,63 @@
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Register Customer";
+            // 
+            // searchControl
+            // 
+            this.searchControl.Location = new System.Drawing.Point(6, 19);
+            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.SearchText = "";
+            this.searchControl.Size = new System.Drawing.Size(219, 28);
+            this.searchControl.TabIndex = 5;
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl_OnTextEmpty);
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column4.HeaderText = "Id";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Visible = false;
+            this.Column4.Width = 22;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "NAME";
+            this.Column2.MinimumWidth = 110;
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column3.HeaderText = "ADDRESS";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 84;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column1.HeaderText = "CONTACT";
+            this.Column1.MinimumWidth = 140;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 140;
+            // 
+            // delCol
+            // 
+            this.delCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.delCol.HeaderText = "";
+            this.delCol.Name = "delCol";
+            this.delCol.Width = 5;
+            // 
+            // transactCol
+            // 
+            this.transactCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.transactCol.HeaderText = "";
+            this.transactCol.Name = "transactCol";
+            this.transactCol.Width = 5;
             // 
             // CreateCustomerProfile
             // 
