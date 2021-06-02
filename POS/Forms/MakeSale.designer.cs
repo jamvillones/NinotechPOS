@@ -30,11 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MakeSale));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.saleType = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.isPrintReceipt = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -82,8 +84,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cartTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.printDoc = new System.Drawing.Printing.PrintDocument();
-            this.label1 = new System.Windows.Forms.Label();
-            this.saleType = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -122,6 +122,25 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cart";
+            // 
+            // saleType
+            // 
+            this.saleType.AutoSize = true;
+            this.saleType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saleType.Location = new System.Drawing.Point(76, 28);
+            this.saleType.Name = "saleType";
+            this.saleType.Size = new System.Drawing.Size(51, 13);
+            this.saleType.TabIndex = 19;
+            this.saleType.Text = "Regular";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Sale Type: ";
             // 
             // isPrintReceipt
             // 
@@ -226,7 +245,7 @@
             this.button1.TabStop = false;
             this.cartTooltip.SetToolTip(this.button1, "Exact amount");
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.exactAmount_Click);
             // 
             // amountRecieved
             // 
@@ -274,14 +293,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cartTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.cartTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.cartTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cartTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -292,14 +311,14 @@
             this.Column11,
             this.Column5,
             this.Column9});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cartTable.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cartTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.cartTable.EnableHeadersVisualStyles = false;
             this.cartTable.GridColor = System.Drawing.Color.White;
             this.cartTable.Location = new System.Drawing.Point(6, 153);
@@ -459,11 +478,12 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(226, 24);
+            this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.checkBox1.Location = new System.Drawing.Point(245, 25);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(128, 17);
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
             this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Auto add items in cart";
+            this.checkBox1.Text = "AUTO ADD";
             this.cartTooltip.SetToolTip(this.checkBox1, "Auto add items");
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -473,11 +493,11 @@
             this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
             this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
             this.searchControl.Name = "searchControl";
-            this.searchControl.SearchText = "";
-            this.searchControl.Size = new System.Drawing.Size(211, 28);
+            this.searchControl.SearchedText = "";
+            this.searchControl.Size = new System.Drawing.Size(230, 28);
             this.searchControl.TabIndex = 0;
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
             // 
             // tableLayoutPanel3
             // 
@@ -525,7 +545,7 @@
             this.discount.Size = new System.Drawing.Size(106, 16);
             this.discount.TabIndex = 0;
             this.discount.ThousandsSeparator = true;
-            this.discount.ValueChanged += new System.EventHandler(this.numerice_ValueChanged);
+            this.discount.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
             // 
             // groupBox12
             // 
@@ -585,7 +605,7 @@
             0,
             0,
             0});
-            this.quantity.ValueChanged += new System.EventHandler(this.numerice_ValueChanged);
+            this.quantity.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
             // 
             // groupBox5
             // 
@@ -624,7 +644,7 @@
             0,
             0,
             0});
-            this.price.ValueChanged += new System.EventHandler(this.numerice_ValueChanged);
+            this.price.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
             // 
             // groupBox3
             // 
@@ -677,14 +697,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -693,14 +713,14 @@
             this.Column6,
             this.Column10,
             this.Column4});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle4;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.Location = new System.Drawing.Point(6, 153);
             this.itemsTable.MultiSelect = false;
@@ -772,25 +792,6 @@
             // 
             this.printDoc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDoc_BeginPrint);
             this.printDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Sale Type: ";
-            // 
-            // saleType
-            // 
-            this.saleType.AutoSize = true;
-            this.saleType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saleType.Location = new System.Drawing.Point(76, 28);
-            this.saleType.Name = "saleType";
-            this.saleType.Size = new System.Drawing.Size(51, 13);
-            this.saleType.TabIndex = 19;
-            this.saleType.Text = "Regular";
             // 
             // MakeSale
             // 

@@ -204,7 +204,7 @@
             this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
             this.searchControl1.MinimumSize = new System.Drawing.Size(0, 28);
             this.searchControl1.Name = "searchControl1";
-            this.searchControl1.SearchText = "";
+            this.searchControl1.SearchedText = "";
             this.searchControl1.Size = new System.Drawing.Size(220, 28);
             this.searchControl1.TabIndex = 0;
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);

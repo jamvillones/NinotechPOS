@@ -559,7 +559,7 @@
             this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
             this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
             this.searchControl.Name = "searchControl";
-            this.searchControl.SearchText = "";
+            this.searchControl.SearchedText = "";
             this.searchControl.Size = new System.Drawing.Size(295, 28);
             this.searchControl.TabIndex = 0;
             this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");

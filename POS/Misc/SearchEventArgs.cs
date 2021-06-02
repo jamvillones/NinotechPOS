@@ -17,7 +17,7 @@ namespace POS.Misc
         {
             get
             {
-                return sender.SearchText;
+                return sender.SearchedText;
             }
         }
         public bool SearchFound
@@ -25,5 +25,6 @@ namespace POS.Misc
             get { return sender.SearchDone; }
             set { sender.SearchDone = value; }
         }
+        public bool SameSearch { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace POS.UserControls
                 return searchText;
             }
         }
+        private string prevSearch = "";
         public bool SearchDone = false;
         /// <summary>
         /// triggers upon hitting enter or pressing search Button;
@@ -29,11 +30,11 @@ namespace POS.UserControls
         /// triggers when search bar text become empty and a search has been done
         /// </summary>
         public event EventHandler OnTextEmpty;
-        public string SearchText
+        public string SearchedText
         {
             get
             {
-                return searchText.Text;
+                return searchText.Text.Trim();
             }
             set
             {
@@ -49,33 +50,42 @@ namespace POS.UserControls
             searchText.AutoCompleteCustomSource.Clear();
             searchText.Values = values;
             //searchText.AutoCompleteCustomSource.AddRange(values);
-            
+
         }
         public void DoSearch()
         {
-            if (searchText.Text == string.Empty)
+            if (SearchedText == string.Empty)
                 return;
 
-            OnSearch?.Invoke(this, new SearchEventArgs(this));
+            this.ActiveControl = searchText;
+            //if (prevSearch == SearchedText)
+            searchText.SelectAll();
+            OnSearch?.Invoke(this, new SearchEventArgs(this) { SameSearch = prevSearch == SearchedText });
+
+            prevSearch = SearchedText;
         }
         private void searchBtn_Click(object sender, EventArgs e)
         {
-            if (searchText.Text == string.Empty)
-                return;
+            //if (searchText.Text == string.Empty)
+            //    return;
 
-            OnSearch?.Invoke(this, new SearchEventArgs(this));
+            //OnSearch?.Invoke(this, new SearchEventArgs(this));
+            DoSearch();
         }
 
         private void searchText_TextChanged(object sender, EventArgs e)
         {
             if (searchText.TextLength == 0 && SearchDone)
                 OnTextEmpty?.Invoke(this, null);
+
+            prevSearch = "";
         }
 
         private void searchText_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                searchBtn.PerformClick();
+                DoSearch();
+                //searchBtn.PerformClick();
         }
     }
 }

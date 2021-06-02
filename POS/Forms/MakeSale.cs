@@ -49,10 +49,7 @@ namespace POS.Forms
             public string Serial { get; set; }
             public int Quantity { get; set; }
             public string Supplier { get; set; }
-        }
-        List<ItemInCart> inCart = new List<ItemInCart>();
-
-        // SaleType currentSaleType = SaleType.Regular;
+        }       
 
         decimal cartTotalValue
         {
@@ -78,7 +75,7 @@ namespace POS.Forms
         public MakeSale(string barcode)
         {
             InitializeComponent();
-            searchControl.SearchText = barcode;
+            searchControl.SearchedText = barcode;
             doSearch();
         }
 
@@ -194,7 +191,9 @@ namespace POS.Forms
                 this.Close();
             }
         }
+
         int saleId { get; set; }
+
         int quantToAdd(int input, int rightQ, int leftQ)
         {
             if (input <= leftQ - rightQ)
@@ -233,9 +232,7 @@ namespace POS.Forms
             price.Text = tempItem.SellingPrice.ToString();
             totalPrice.Text = tempItem.TotalPrice.ToString();
             itemName.Text = tempItem.Name;
-
         }
-
 
         DataGridViewRow leftCurrentRow
         {
@@ -260,14 +257,9 @@ namespace POS.Forms
                 return Convert.ToInt32(leftCurrentRow.Cells[3].Value);
             }
         }
-
-
-
-
-        //string getSerias()
-        //{
-
-        //}
+        /// <summary>
+        /// handles the handling of table when items are added in cart table
+        /// </summary>
         void addItem()
         {
             if (itemsTable.SelectedCells.Count == 0)
@@ -286,6 +278,7 @@ namespace POS.Forms
             ProcessLeftTable();
             calculateTotal();
         }
+
         void ProcessLeftTable()
         {
             ///infinity
@@ -324,9 +317,8 @@ namespace POS.Forms
                     return;
                 }
             }
-            cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice, tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);
 
-            inCart.Add(new ItemInCart(tempItem.Barcode, tempItem.Serial, tempItem.Quantity, tempItem.Supplier));
+            cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice, tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);           
         }
 
         void calculateTotal()
@@ -351,7 +343,6 @@ namespace POS.Forms
             int index = cartTable.CurrentCell.RowIndex;
             cartTable.Rows.RemoveAt(index);
         }
-
 
         private void amountChangedCallback(object sender, EventArgs e)
         {
@@ -382,12 +373,13 @@ namespace POS.Forms
             }
         }
 
-        private void numerice_ValueChanged(object sender, EventArgs e)
+        private void numeric_ValueChanged(object sender, EventArgs e)
         {
             tempItem.Quantity = (int)quantity.Value;
             discount.Maximum = price.Value;
             tempItem.discount = discount.Value;
             tempItem.SellingPrice = price.Value;
+
             totalPrice.Text = tempItem.TotalPrice.ToString();
         }
 
@@ -408,17 +400,19 @@ namespace POS.Forms
         {
             soldTo.Items.Clear();
             soldTo.AutoCompleteCustomSource.Clear();
-
+            ///repopulate customer items
             using (var p = new POSEntities())
             {
                 soldTo.Items.AddRange(p.Customers.Select(x => x.Name).ToArray());
                 soldTo.AutoCompleteCustomSource.AddRange(p.Customers.Select(x => x.Name).ToArray());
             }
         }
+
         void doSearch()
         {
             searchControl.DoSearch();
         }
+
         private void searchBtn_Click(object sender, EventArgs e)
         {
             doSearch();
@@ -445,7 +439,7 @@ namespace POS.Forms
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void exactAmount_Click(object sender, EventArgs e)
         {
             amountRecieved.Value = cartTotalValue;
         }
@@ -458,13 +452,33 @@ namespace POS.Forms
                 return;
             }
 
-            var i = inCart.FirstOrDefault(x => x.Barcode == e.Row.Cells[0].Value.ToString() && x.Serial == e.Row.Cells[1].Value?.ToString() && x.Supplier == e.Row.Cells[7].Value.ToString());
-            inCart.Remove(i);
             itemsTable.Rows.Clear();
         }
-
-        private void searchControl1_OnSearch(object sender, SearchEventArgs e)
+        /// <summary>
+        /// this gets the contents of the cart in enumerable form
+        /// </summary>
+        IEnumerable<DataGridViewRow> inCart
         {
+            get
+            {
+                return cartTable.Rows.Cast<DataGridViewRow>();
+            }
+        }
+        /// <summary>
+        /// callback function of search's actual search mechanism
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void search_OnSearch(object sender, SearchEventArgs e)
+        {
+            if (e.SameSearch)
+            {
+                addItem();
+                return;
+            }
+
+            var cartContent = inCart;
+
             using (var p = new POSEntities())
             {
                 var items = p.InventoryItems.Where(x => x.Product.Item.Barcode == e.Text);
@@ -477,34 +491,57 @@ namespace POS.Forms
                         items = p.InventoryItems.Where(x => x.Product.Item.Name.Contains(e.Text));
                     }
                 }
-                var filtered = items.ToArray().Where(x => !inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name && y.Quantity >= x.Quantity));
+                var filtered = items.AsEnumerable().Where(x => !cartContent.Any(y =>
+                    (string)y.Cells[0].Value == x.Product.Item.Barcode &&
+                    (string)y.Cells[1].Value == x.SerialNumber &&
+                    (string)y.Cells[7].Value == x.Product.Supplier.Name &&
+                    (int)y.Cells[3].Value >= x.Quantity
+                    ));
 
                 if (filtered.Count() == 0)
                 {
-                    MessageBox.Show("Item not found.");
+                    MessageBox.Show("Item not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
+
                 e.SearchFound = true;
+
                 itemsTable.Rows.Clear();
+
                 foreach (var i in filtered)
                 {
                     // int newQuant  = filtered.FirstOrDefault(x=> inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name)).
-                    var j = inCart.FirstOrDefault(x => inCart.Any(y => y.Barcode == i.Product.Item.Barcode && y.Serial == i.SerialNumber && y.Supplier == i.Product.Supplier.Name));
-                    int newQuant = i.Quantity - (j == null ? 0 : j.Quantity);
+                    var j = cartContent.FirstOrDefault(x => inCart.Any(y =>
+                     (string)y.Cells[0].Value == i.Product.Item.Barcode &&
+                     (string)y.Cells[1].Value == i.SerialNumber &&
+                     (string)y.Cells[7].Value == i.Product.Supplier.Name));
+
+                    int newQuant = i.Quantity - (j == null ? 0 : (int)j.Cells[3].Value);
 
                     itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
                 }
             }
-            if (checkBox1.Checked)
-                addBtn.PerformClick();
-        }
 
-        private void searchControl1_OnTextEmpty(object sender, EventArgs e)
+            if (checkBox1.Checked)
+                addItem();
+        }
+        /// <summary>
+        /// when user deletes searched content
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void search_OnTextEmpty(object sender, EventArgs e)
         {
             itemsTable.Rows.Clear();
         }
 
+        #region printing receipt
         PrintAction printAction;
+
+        private void printDoc_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            printAction = e.PrintAction;
+        }
 
         private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
@@ -519,12 +556,13 @@ namespace POS.Forms
 
             e.FormatReciept(printAction, details);
         }
+        #endregion
 
-        private void printDoc_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            printAction = e.PrintAction;
-        }
-
+        /// <summary>
+        /// this handles the creation of new customer when the supplied customer is not registered yet.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void soldTo_Validated(object sender, EventArgs e)
         {
             if (soldTo.Text == string.Empty)
