@@ -227,10 +227,8 @@ namespace POS.UserControls
                 {
                     sales = sales.Where(x => x.Customer.Name.Contains(chargedSaleSearch.Text));
                 }
-
                 if (saleStatus.Text == "Pending")
-                {
-                    Console.WriteLine("hey");
+                {                   
                     sales = sales.ToArray().Where(x => x.GetSaleTotalPrice() > x.AmountRecieved);
                 }
                 else if (saleStatus.Text == "Paid")
@@ -238,7 +236,7 @@ namespace POS.UserControls
                     sales = sales.ToArray().Where(x => x.GetSaleTotalPrice() <= x.AmountRecieved);
                 }
 
-                foreach (var x in sales)
+                foreach (var x in sales.OrderByDescending(y=>y.Id))
                     chargedTable.Rows.Add(x.Id,
                                           x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
                                           x.Login?.Username,
