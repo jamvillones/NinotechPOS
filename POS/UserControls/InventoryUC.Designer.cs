@@ -30,8 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sellBtn = new System.Windows.Forms.Button();
             this.inventoryTable = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -55,9 +56,9 @@
             this.search = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.inventoryBarcodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inventoryNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inventoryPriceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inventoryQuantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inventoryPriceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inventoryNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inventoryTotalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
@@ -100,19 +101,19 @@
             this.inventoryTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.inventoryTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.inventoryBarcodeCol,
-            this.inventoryNameCol,
-            this.inventoryPriceCol,
             this.inventoryQuantityCol,
+            this.inventoryPriceCol,
+            this.inventoryNameCol,
             this.inventoryTotalCol});
             this.inventoryTable.ContextMenuStrip = this.contextMenuStrip;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.inventoryTable.EnableHeadersVisualStyles = false;
             this.inventoryTable.GridColor = System.Drawing.Color.White;
             this.inventoryTable.Location = new System.Drawing.Point(8, 63);
@@ -269,14 +270,14 @@
             this.Column8,
             this.Column7,
             this.DeleteColumn});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.Location = new System.Drawing.Point(8, 63);
             this.itemsTable.MultiSelect = false;
@@ -391,6 +392,20 @@
             this.inventoryBarcodeCol.ReadOnly = true;
             this.inventoryBarcodeCol.Width = 84;
             // 
+            // inventoryQuantityCol
+            // 
+            this.inventoryQuantityCol.HeaderText = "QUANTITY";
+            this.inventoryQuantityCol.Name = "inventoryQuantityCol";
+            this.inventoryQuantityCol.ReadOnly = true;
+            // 
+            // inventoryPriceCol
+            // 
+            this.inventoryPriceCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.inventoryPriceCol.HeaderText = "PRICE";
+            this.inventoryPriceCol.Name = "inventoryPriceCol";
+            this.inventoryPriceCol.ReadOnly = true;
+            this.inventoryPriceCol.Width = 64;
+            // 
             // inventoryNameCol
             // 
             this.inventoryNameCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -398,29 +413,16 @@
             this.inventoryNameCol.Name = "inventoryNameCol";
             this.inventoryNameCol.ReadOnly = true;
             // 
-            // inventoryPriceCol
-            // 
-            this.inventoryPriceCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.inventoryPriceCol.HeaderText = "SELLING PRICE";
-            this.inventoryPriceCol.MinimumWidth = 150;
-            this.inventoryPriceCol.Name = "inventoryPriceCol";
-            this.inventoryPriceCol.ReadOnly = true;
-            this.inventoryPriceCol.Width = 150;
-            // 
-            // inventoryQuantityCol
-            // 
-            this.inventoryQuantityCol.HeaderText = "QUANTITY";
-            this.inventoryQuantityCol.Name = "inventoryQuantityCol";
-            this.inventoryQuantityCol.ReadOnly = true;
-            // 
             // inventoryTotalCol
             // 
             this.inventoryTotalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.inventoryTotalCol.DefaultCellStyle = dataGridViewCellStyle1;
             this.inventoryTotalCol.HeaderText = "TOTAL PRICE";
-            this.inventoryTotalCol.MinimumWidth = 150;
+            this.inventoryTotalCol.MinimumWidth = 105;
             this.inventoryTotalCol.Name = "inventoryTotalCol";
             this.inventoryTotalCol.ReadOnly = true;
-            this.inventoryTotalCol.Width = 150;
+            this.inventoryTotalCol.Width = 105;
             // 
             // InventoryUC
             // 
@@ -469,9 +471,9 @@
         private System.Windows.Forms.DataGridViewButtonColumn DeleteColumn;
         private System.Windows.Forms.Label totalItemsLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn inventoryBarcodeCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn inventoryNameCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn inventoryPriceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn inventoryQuantityCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn inventoryPriceCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn inventoryNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn inventoryTotalCol;
     }
 }
