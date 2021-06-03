@@ -18,13 +18,16 @@ namespace POS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            Interfaces.IMainWindow mainWindow = null;
+           
             bool backup = false;
+            bool singedOut = false;
+
             UserManager.instance = new UserManager();
 
             do
             {
+                singedOut = false;
+
                 var login = new Forms.LoginForm();
                 Application.Run(login);
 
@@ -32,14 +35,14 @@ namespace POS
                 {
                     backup = true;
 
-                    var main = new Main();
-
-                    mainWindow = main;
+                    var main = new Main();                   
 
                     Application.Run(main);
+
+                    singedOut = main.IsSigneout;
                 }
             }
-            while (mainWindow?.IsSignout() ?? false);
+            while (singedOut);
 
             if (backup)
             {
@@ -53,9 +56,6 @@ namespace POS
                     MessageBox.Show(ex.Message, "Backup failed.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-            //Application.Run(new RecieptTest());
-
         }
     }
 }

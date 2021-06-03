@@ -106,10 +106,7 @@ namespace POS
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        //void AddNewLogin()
-        //{
-        //   tr
-        //}
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1)
@@ -135,18 +132,23 @@ namespace POS
                 toolStripButton5.PerformClick();
             }
         }
+
         void RefreshData()
         {
-           // refreshToolStripBtn.PerformClick();
+           
         }
 
         private void userButton_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to logout?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 return;
-            isSignout = true;
+
+            IsSigneout = true;
+
             this.Close();
         }
+
+        public bool IsSigneout { get; private set; } = false;
 
         private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -266,13 +268,6 @@ namespace POS
             addNewSupplierToolstripbuttn.Enabled = currLogin.CanEditSupplier;
             stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
             button1.Visible = currLogin.CanStockIn;
-        }
-
-        bool isSignout = false;
-
-        public bool IsSignout()
-        {
-            return isSignout;
         }
 
         private void toolStripButton3_Click_1(object sender, EventArgs e)
