@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>67</ApplicationRevision>
+    <ApplicationRevision>69</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -518,6 +518,7 @@
     <EmbeddedResource Include="UserControls\SearchControl.resx">
       <DependentUpon>SearchControl.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <EntityDeploy Include="POSModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -536,11 +537,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="uiTesting_TemporaryKey.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons8_cash_register.ico" />
