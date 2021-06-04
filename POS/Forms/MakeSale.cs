@@ -473,54 +473,59 @@ namespace POS.Forms
         {            
             if (!e.SameSearch)
             {
-                var cartContent = inCart;
-
-                using (var p = new POSEntities())
-                {
-                    var items = p.InventoryItems.Where(x => x.Product.Item.Barcode == e.Text);
-
-                    if (items.Count() == 0)
-                    {
-                        items = p.InventoryItems.Where(x => x.SerialNumber == e.Text);
-                        if (items.Count() == 0)
-                        {
-                            items = p.InventoryItems.Where(x => x.Product.Item.Name.Contains(e.Text));
-                        }
-                    }
-                    var filtered = items.AsEnumerable().Where(x => !cartContent.Any(y =>
-                        (string)y.Cells[0].Value == x.Product.Item.Barcode &&
-                        (string)y.Cells[1].Value == x.SerialNumber &&
-                        (string)y.Cells[7].Value == x.Product.Supplier.Name &&
-                        (int)y.Cells[3].Value >= x.Quantity
-                        ));
-
-                    if (filtered.Count() == 0)
-                    {
-                        MessageBox.Show("Item not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
-                    }
-
-                    e.SearchFound = true;
-
-                    itemsTable.Rows.Clear();
-
-                    foreach (var i in filtered)
-                    {
-                        // int newQuant  = filtered.FirstOrDefault(x=> inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name)).
-                        var j = cartContent.FirstOrDefault(x => inCart.Any(y =>
-                         (string)y.Cells[0].Value == i.Product.Item.Barcode &&
-                         (string)y.Cells[1].Value == i.SerialNumber &&
-                         (string)y.Cells[7].Value == i.Product.Supplier.Name));
-
-                        int newQuant = i.Quantity - (j == null ? 0 : (int)j.Cells[3].Value);
-
-                        itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
-                    }
-                }
+                PopulateTableBySearch(e);
             }
 
             if (checkBox1.Checked)
                 addItem();
+        }
+
+        void PopulateTableBySearch(SearchEventArgs e)
+        {
+            var cartContent = inCart;
+
+            using (var p = new POSEntities())
+            {
+                var items = p.InventoryItems.Where(x => x.Product.Item.Barcode == e.Text);
+
+                if (items.Count() == 0)
+                {
+                    items = p.InventoryItems.Where(x => x.SerialNumber == e.Text);
+                    if (items.Count() == 0)
+                    {
+                        items = p.InventoryItems.Where(x => x.Product.Item.Name.Contains(e.Text));
+                    }
+                }
+
+                var filtered = items.AsEnumerable().Where(x => !cartContent.Any(y =>
+                    (string)y.Cells[0].Value == x.Product.Item.Barcode &&
+                    (string)y.Cells[1].Value == x.SerialNumber &&
+                    (string)y.Cells[7].Value == x.Product.Supplier.Name &&
+                    (int)y.Cells[3].Value >= x.Quantity
+                    ));
+
+                if (filtered.Count() == 0)
+                {
+                    MessageBox.Show("Item not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                e.SearchFound = true;
+
+                itemsTable.Rows.Clear();
+
+                foreach (var i in filtered)
+                {                    
+                    var j = cartContent.FirstOrDefault(x => inCart.Any(y =>
+                     (string)y.Cells[0].Value == i.Product.Item.Barcode &&
+                     (string)y.Cells[1].Value == i.SerialNumber &&
+                     (string)y.Cells[7].Value == i.Product.Supplier.Name));
+
+                    int newQuant = i.Quantity - (j == null ? 0 : (int)j.Cells[3].Value);
+
+                    itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
+                }
+            }
         }
         /// <summary>
         /// when user deletes searched content
