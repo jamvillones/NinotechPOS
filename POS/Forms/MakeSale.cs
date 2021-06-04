@@ -49,7 +49,7 @@ namespace POS.Forms
             public string Serial { get; set; }
             public int Quantity { get; set; }
             public string Supplier { get; set; }
-        }       
+        }
 
         decimal cartTotalValue
         {
@@ -318,7 +318,7 @@ namespace POS.Forms
                 }
             }
 
-            cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice, tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);           
+            cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice, tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);
         }
 
         void calculateTotal()
@@ -471,7 +471,7 @@ namespace POS.Forms
         /// <param name="e"></param>
         private void search_OnSearch(object sender, SearchEventArgs e)
         {
-            if (e.SameSearch)
+            if (e.SameSearch && checkBox1.Checked)
             {
                 addItem();
                 return;
