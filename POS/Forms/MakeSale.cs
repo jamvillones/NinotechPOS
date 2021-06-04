@@ -470,55 +470,52 @@ namespace POS.Forms
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void search_OnSearch(object sender, SearchEventArgs e)
-        {
-            if (e.SameSearch && checkBox1.Checked)
+        {            
+            if (!e.SameSearch)
             {
-                addItem();
-                return;
-            }
+                var cartContent = inCart;
 
-            var cartContent = inCart;
-
-            using (var p = new POSEntities())
-            {
-                var items = p.InventoryItems.Where(x => x.Product.Item.Barcode == e.Text);
-
-                if (items.Count() == 0)
+                using (var p = new POSEntities())
                 {
-                    items = p.InventoryItems.Where(x => x.SerialNumber == e.Text);
+                    var items = p.InventoryItems.Where(x => x.Product.Item.Barcode == e.Text);
+
                     if (items.Count() == 0)
                     {
-                        items = p.InventoryItems.Where(x => x.Product.Item.Name.Contains(e.Text));
+                        items = p.InventoryItems.Where(x => x.SerialNumber == e.Text);
+                        if (items.Count() == 0)
+                        {
+                            items = p.InventoryItems.Where(x => x.Product.Item.Name.Contains(e.Text));
+                        }
                     }
-                }
-                var filtered = items.AsEnumerable().Where(x => !cartContent.Any(y =>
-                    (string)y.Cells[0].Value == x.Product.Item.Barcode &&
-                    (string)y.Cells[1].Value == x.SerialNumber &&
-                    (string)y.Cells[7].Value == x.Product.Supplier.Name &&
-                    (int)y.Cells[3].Value >= x.Quantity
-                    ));
+                    var filtered = items.AsEnumerable().Where(x => !cartContent.Any(y =>
+                        (string)y.Cells[0].Value == x.Product.Item.Barcode &&
+                        (string)y.Cells[1].Value == x.SerialNumber &&
+                        (string)y.Cells[7].Value == x.Product.Supplier.Name &&
+                        (int)y.Cells[3].Value >= x.Quantity
+                        ));
 
-                if (filtered.Count() == 0)
-                {
-                    MessageBox.Show("Item not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
+                    if (filtered.Count() == 0)
+                    {
+                        MessageBox.Show("Item not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
 
-                e.SearchFound = true;
+                    e.SearchFound = true;
 
-                itemsTable.Rows.Clear();
+                    itemsTable.Rows.Clear();
 
-                foreach (var i in filtered)
-                {
-                    // int newQuant  = filtered.FirstOrDefault(x=> inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name)).
-                    var j = cartContent.FirstOrDefault(x => inCart.Any(y =>
-                     (string)y.Cells[0].Value == i.Product.Item.Barcode &&
-                     (string)y.Cells[1].Value == i.SerialNumber &&
-                     (string)y.Cells[7].Value == i.Product.Supplier.Name));
+                    foreach (var i in filtered)
+                    {
+                        // int newQuant  = filtered.FirstOrDefault(x=> inCart.Any(y => y.Barcode == x.Product.Item.Barcode && y.Serial == x.SerialNumber && y.Supplier == x.Product.Supplier.Name)).
+                        var j = cartContent.FirstOrDefault(x => inCart.Any(y =>
+                         (string)y.Cells[0].Value == i.Product.Item.Barcode &&
+                         (string)y.Cells[1].Value == i.SerialNumber &&
+                         (string)y.Cells[7].Value == i.Product.Supplier.Name));
 
-                    int newQuant = i.Quantity - (j == null ? 0 : (int)j.Cells[3].Value);
+                        int newQuant = i.Quantity - (j == null ? 0 : (int)j.Cells[3].Value);
 
-                    itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
+                        itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
+                    }
                 }
             }
 
