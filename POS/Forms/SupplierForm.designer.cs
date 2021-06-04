@@ -40,9 +40,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.supplierName = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.supplierTable)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -124,9 +124,9 @@
             this.addSuppBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.addSuppBtn.Enabled = false;
             this.addSuppBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addSuppBtn.Location = new System.Drawing.Point(12, 127);
+            this.addSuppBtn.Location = new System.Drawing.Point(6, 127);
             this.addSuppBtn.Name = "addSuppBtn";
-            this.addSuppBtn.Size = new System.Drawing.Size(355, 23);
+            this.addSuppBtn.Size = new System.Drawing.Size(367, 23);
             this.addSuppBtn.TabIndex = 2;
             this.addSuppBtn.Text = "Add New Supplier";
             this.addSuppBtn.UseVisualStyleBackColor = false;
@@ -198,18 +198,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Supplier List";
             // 
-            // searchControl1
-            // 
-            this.searchControl1.Location = new System.Drawing.Point(5, 19);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(0, 28);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(220, 28);
-            this.searchControl1.TabIndex = 0;
-            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.addSuppBtn);
@@ -231,6 +219,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(378, 1);
             this.panel1.TabIndex = 2;
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.Location = new System.Drawing.Point(5, 19);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(0, 28);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.SearchedText = "";
+            this.searchControl1.Size = new System.Drawing.Size(220, 28);
+            this.searchControl1.TabIndex = 0;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // SupplierForm
             // 

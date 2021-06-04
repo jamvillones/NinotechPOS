@@ -170,16 +170,29 @@ namespace POS.Forms
         }
 
         int targetCustomerId = 0;
+        string lastValue = "";
         private void customerTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             var table = sender as DataGridView;
             targetCustomerId = (int)(table.Rows[e.RowIndex].Cells[0].Value);
+            lastValue = table[e.ColumnIndex, e.RowIndex].Value?.ToString();
         }
 
         private void customerTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var table = sender as DataGridView;
-            var value = table.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+            if (table[e.ColumnIndex, e.RowIndex].Value?.ToString() == lastValue)
+                return;
+
+            if (MessageBox.Show("Are you sure you want to edit this item?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                table[e.ColumnIndex, e.RowIndex].Value = lastValue;
+                lastValue = "";
+                return;
+            }
+
+            var value = table.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
 
             using (var p = new POSEntities())
             {
@@ -187,6 +200,11 @@ namespace POS.Forms
                 switch (e.ColumnIndex)
                 {
                     case 1:
+                        if (value == null)
+                        {
+                            MessageBox.Show("Name cannot be null", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         target.Name = value;
                         break;
                     case 2:
