@@ -296,7 +296,6 @@
     </Compile>
     <Compile Include="Interfaces\ITab.cs" />
     <Compile Include="Misc\ControlExtension.cs" />
-    <Compile Include="Misc\DGVPrinter.cs" />
     <Compile Include="Misc\EntityExtension.cs" />
     <Compile Include="Misc\Enums.cs" />
     <Compile Include="Misc\Helper.cs" />

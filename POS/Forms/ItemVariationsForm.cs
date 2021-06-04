@@ -15,6 +15,7 @@ namespace POS.Forms
     public partial class ItemVariationsForm : Form
     {
         bool changesMade = false;
+
         public event EventHandler Onsave;
 
         Item target;

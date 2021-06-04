@@ -18,12 +18,30 @@ namespace POS.UserControls
     public enum SaleStatusFilter { All, Pending, Paid, Count }
     public partial class ReportUC : UserControl, ITab
     {
-        Button defButton = new Button();
-        //int[] ids;
-
         public ReportUC()
         {
             InitializeComponent();
+        }
+
+        private void ReportUC_Load(object sender, EventArgs e)
+        {
+            for (int i = 0; i < (int)SaleStatusFilter.Count; i++)
+                saleStatus.Items.Add(((SaleStatusFilter)i).ToString());
+
+            saleStatus.SelectedIndex = 0;
+            comboFilterType.SelectedIndex = 0;
+
+            saleStatus.SelectedIndexChanged += saleStatus_SelectedIndexChanged;
+            comboFilterType.SelectedIndexChanged += comboFilterType_SelectedIndexChanged;
+
+            //using (var p = new POSEntities())
+            //{
+            //    await Task.Run(() => { setRegularTableByDate(p); });
+            //    Console.WriteLine("regular sale finished");
+
+            //    await Task.Run(() => { setCharegedTable(p); });
+            //    Console.WriteLine("charged sale finished");
+            //}
         }
 
         public void RefreshData()
@@ -38,22 +56,15 @@ namespace POS.UserControls
 
         public Button EnterButton()
         {
-            return defButton;
+            return null;
         }
 
-        public void Initialize()
+        public async Task InitializeAsync()
         {
+            var regT = Task.Run(() => { setRegularTableByDate(); });
+            var chargedT = Task.Run(() => { setCharegedTable(); });
 
-            //for (int i = 0; i < (int)SaleStatusFilter.Count; i++)
-            //    saleStatus.Items.Add(((SaleStatusFilter)i).ToString());
-
-            saleStatus.SelectedIndex = 0;
-
-            defButton.Click += DefButton_Click;
-
-            //setRegularTableByDate();
-            comboFilterType.SelectedIndex = 0;
-            setCharegedTable();
+            await Task.WhenAll(regT, chargedT);
         }
 
         private void DefButton_Click(object sender, EventArgs e)
@@ -71,10 +82,13 @@ namespace POS.UserControls
             using (var saleDetails = new SaleDetails())
             {
                 saleDetails.SetId(index);
+
                 saleDetails.OnSave += (a, b) => { setCharegedTable(); };
+
                 saleDetails.ShowDialog();
             }
         }
+
         DataGridViewRow createRegularRow(Sale sale)
         {
             DataGridViewRow row = new DataGridViewRow();
@@ -87,16 +101,21 @@ namespace POS.UserControls
 
             return row;
         }
+        POSEntities posEnt => new POSEntities();
         void setRegularTableByDate()
         {
-            string type = SaleType.Regular.ToString();
-            saleTable.Rows.Clear();
-
-            using (var p = new POSEntities())
+            Console.WriteLine("started: Regular");
+            using (var p = posEnt)
             {
+                string type = SaleType.Regular.ToString();
+
+                saleTable.InvokeIfRequired(() => { saleTable.Rows.Clear(); });
+
                 IQueryable<Sale> filteredSales = p.Sales.Where(x => x.SaleType == type);
 
-                int index = comboFilterType.SelectedIndex;
+                int index = 0;
+
+                comboFilterType.InvokeIfRequired(() => { index = comboFilterType.SelectedIndex; });
 
                 switch (index)
                 {
@@ -111,14 +130,15 @@ namespace POS.UserControls
                         break;
                 }
 
-                var rows = filteredSales.Select(createRegularRow).ToArray();
-                saleTable.Rows.AddRange(rows);
-                Console.WriteLine("regular sale initialized");
-                //foreach (var x in filteredSales)
-                //    saleTable.Rows.Add(x.Id, x.Date.Value.ToString("MMMM dd, yyyy hh:mm: tt"), x.Login?.Username, x.Customer.Name, string.Format("₱ {0:n}", x.GetSaleTotalPrice()));
+                saleTable.InvokeIfRequired(() =>
+                {
+                    var rows = filteredSales.Select(createRegularRow).ToArray();
+                    saleTable.Rows.AddRange(rows);
+                });
 
-                totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.GetSaleTotalPrice()));
+                totalSale.InvokeIfRequired(() => { totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.GetSaleTotalPrice())); });
             }
+            Console.WriteLine("finished: Regular");
         }
 
         DataGridViewRow createChargedRow(Sale sale)
@@ -137,19 +157,22 @@ namespace POS.UserControls
         }
         void setCharegedTable()
         {
-            chargedTable.Rows.Clear();
-            using (var p = new POSEntities())
+            Console.WriteLine("started: Charged");
+            using (var p = posEnt)
             {
+                chargedTable.InvokeIfRequired(() => { chargedTable.Rows.Clear(); });
+
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).Take(100).OrderByDescending(x => x.Date);
                 decimal total = p.Sales.ToArray().Sum(x => remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice()));
 
-                toBeSettledTxt.Text = string.Format("P {0:n}", total);
-                var rows = sales.Select(createChargedRow).ToArray();
-                chargedTable.Rows.AddRange(rows);
-                Console.WriteLine("Charged Initialized");
+                toBeSettledTxt.InvokeIfRequired(() => { toBeSettledTxt.Text = string.Format("P {0:n}", total); });
 
+                var rows = sales.Select(createChargedRow).ToArray();
+                chargedTable.InvokeIfRequired(() => { chargedTable.Rows.AddRange(rows); });
             }
+            Console.WriteLine("finished: Charged");
         }
+
         decimal remaining(decimal recieved, decimal totalPrice)
         {
             if (recieved > totalPrice)
@@ -186,35 +209,35 @@ namespace POS.UserControls
             searchMade = true;
             searchChargeByName();
         }
-
         private void chargedSaleSearch_TextChanged(object sender, EventArgs e)
         {
             if (chargedSaleSearch.Text == string.Empty && searchMade)
             {
+                //using (var p = new POSEntities())
                 setCharegedTable();
                 searchMade = false;
             }
         }
-
         private void chargedSaleSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                //searchChargeByName();
                 chargedSearchBtn.PerformClick();
         }
-
         private void month_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+            {
+                //using (var p = new POSEntities())
                 setRegularTableByDate();
+            }
         }
-
         public void Refresh_Callback(object sender, EventArgs e)
         {
+
             setRegularTableByDate();
             setCharegedTable();
-        }
 
+        }
         private void saleStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             chargedTable.Rows.Clear();
@@ -228,7 +251,7 @@ namespace POS.UserControls
                     sales = sales.Where(x => x.Customer.Name.Contains(chargedSaleSearch.Text));
                 }
                 if (saleStatus.Text == "Pending")
-                {                   
+                {
                     sales = sales.ToArray().Where(x => x.GetSaleTotalPrice() > x.AmountRecieved);
                 }
                 else if (saleStatus.Text == "Paid")
@@ -236,7 +259,7 @@ namespace POS.UserControls
                     sales = sales.ToArray().Where(x => x.GetSaleTotalPrice() <= x.AmountRecieved);
                 }
 
-                foreach (var x in sales.OrderByDescending(y=>y.Id))
+                foreach (var x in sales.OrderByDescending(y => y.Id))
                     chargedTable.Rows.Add(x.Id,
                                           x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
                                           x.Login?.Username,
@@ -247,10 +270,8 @@ namespace POS.UserControls
                                           x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
             }
         }
-
         private void comboFilterType_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             int index = ((ComboBox)sender).SelectedIndex;
             switch (index)
             {
@@ -264,11 +285,12 @@ namespace POS.UserControls
                     dtFilter.CustomFormat = "yyyy";
                     break;
             }
+
             setRegularTableByDate();
         }
-
         private void dtFilter_ValueChanged(object sender, EventArgs e)
         {
+            //using (var p = new POSEntities())
             setRegularTableByDate();
         }
     }

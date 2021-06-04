@@ -50,12 +50,6 @@ namespace POS
             uControls.Add(reportTab);
 
             setChangingColorsBtn(inventoryBtn, repBtn);
-
-            foreach (var i in uControls)
-                i.Initialize();
-
-            //foreach (var i in uControls)
-            //    refreshToolStripBtn.Click += i.Refresh_Callback;
         }
 
         void setChangingColorsBtn(params Button[] buttons)
@@ -135,7 +129,7 @@ namespace POS
 
         void RefreshData()
         {
-           
+
         }
 
         private void userButton_Click(object sender, EventArgs e)
@@ -261,13 +255,20 @@ namespace POS
             }
         }
 
-        private void Main_Load(object sender, EventArgs e)
+        private async void Main_Load(object sender, EventArgs e)
         {
             addNewLoginToolStripMenuItem1.Enabled = currLogin.Username == "admin";
             loginPrivilegesToolStripMenuItem1.Enabled = currLogin.Username == "admin";
             addNewSupplierToolstripbuttn.Enabled = currLogin.CanEditSupplier;
             stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
             button1.Visible = currLogin.CanStockIn;
+
+
+            var t = inventoryTab.InitializeAsync();
+            var r = reportTab.InitializeAsync();
+
+            await Task.WhenAll(t, r);
+            Console.WriteLine("Tables initialized.");
         }
 
         private void toolStripButton3_Click_1(object sender, EventArgs e)

@@ -44,6 +44,7 @@ namespace POS.UserControls
         {
             return null;
         }
+
         Login currLogin
         {
             get
@@ -51,17 +52,13 @@ namespace POS.UserControls
                 return UserManager.instance.currentLogin;
             }
         }
-        public virtual void Initialize()
-        {
-            using (var p = new POSEntities())
-            {
-                initInventoryTable();
-                initItemsTable();
 
-                addVariationsBtn.Enabled = currLogin.CanEditProduct;
-                addItemBtn.Enabled = currLogin.CanEditItem;
-                editItemBtn.Enabled = currLogin.CanEditItem;
-            }
+        public async Task InitializeAsync()
+        {           
+            var iTask = Task.Run(() => { initItemsTable(); });
+            var inventTask = Task.Run(() => { initInventoryTable(); });
+
+            await Task.WhenAll(iTask, inventTask);
         }
         #endregion
 
@@ -95,7 +92,6 @@ namespace POS.UserControls
         private void InView_OnSave(object sender, EventArgs e)
         {
             initInventoryTable();
-            //throw new NotImplementedException();
         }
 
         protected virtual void firstBtn_Click(object sender, EventArgs e)
@@ -111,8 +107,14 @@ namespace POS.UserControls
             }
         }
 
+        /// <summary>
+        /// attempts to shortens the creation of entity
+        /// </summary>
+        POSEntities posEnt => new POSEntities();
+
         private void OnInventoryChangedCallback(object sender, EventArgs e)
         {
+            //using (var p = posEnt)
             initInventoryTable();
         }
         #endregion
@@ -163,30 +165,27 @@ namespace POS.UserControls
 
         void initInventoryTable()
         {
-            inventoryTable.Rows.Clear();
-
-            using (var p = new POSEntities())
+            Console.WriteLine("started: Inventory");
+            using (var p = posEnt)
             {
+                inventoryTable.InvokeIfRequired(() => { inventoryTable.Rows.Clear(); });
+                ///creates the row
                 var rows = p.InventoryItems.ToArray().GroupBy(x => x.Product.Item.Barcode).Select(y => createInventoryRow(y.Key, p)).ToArray();
-                inventoryTable.Rows.AddRange(rows);
-                Console.WriteLine("Inventory initialized");
 
-                //foreach (var i in itemGroup)
-                //{
-                //    var item = p.Items.FirstOrDefault(x => x.Barcode == i.Key);
-                //    int totalQuantity = p.InventoryItems.Where(x => x.Product.Item.Barcode == i.Key).Sum(x => x.Quantity);
+                inventoryTable.InvokeIfRequired(() => { inventoryTable.Rows.AddRange(rows); });
 
-                //    inventoryTable.Rows.Add(item.Barcode, item.Name, string.Format("₱ {0:n}", item.SellingPrice), (totalQuantity == 0 ? "Infinite" : totalQuantity.ToString()), (totalQuantity == 0 ? "----" : string.Format("₱ {0:n}", totalQuantity * item.SellingPrice)));
-                //}
-
-                totalItemsLabel.Text = string.Format("Total item price: ₱ {0:n}", p.InventoryItems.Sum(x => x.Product.Item.SellingPrice * x.Quantity));
+                totalItemsLabel.InvokeIfRequired(() => { totalItemsLabel.Text = string.Format("Total item price: ₱ {0:n}", p.InventoryItems.Sum(x => x.Product.Item.SellingPrice * x.Quantity)); });
             }
+            loadingLabelInventory.InvokeIfRequired(() => { loadingLabelInventory.Visible = false; });
+            Console.WriteLine("finished: Inventory");
         }
 
         private void Onsave_Callback(object sender, EventArgs e)
         {
+
             initItemsTable();
             initInventoryTable();
+
         }
 
         DataGridViewRow createItemRow(Item i)
@@ -204,14 +203,17 @@ namespace POS.UserControls
         }
         void initItemsTable()
         {
-            itemsTable.Rows.Clear();
-
-            using (var p = new POSEntities())
+            Console.WriteLine("started: Items");
+            using (var p = posEnt)
             {
+                itemsTable.InvokeIfRequired(() => { itemsTable.Rows.Clear(); });
+
                 var rows = p.Items.Select(createItemRow).ToArray();
-                itemsTable.Rows.AddRange(rows);
-                Console.WriteLine("Items Initialized");
+                itemsTable.InvokeIfRequired(() => { itemsTable.Rows.AddRange(rows); });
             }
+
+            loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = false; });
+            Console.WriteLine("finished: Items");
         }
 
         private void editBtn_Click(object sender, EventArgs e)
@@ -243,9 +245,9 @@ namespace POS.UserControls
 
         public void Refresh_Callback(object sender, EventArgs e)
         {
-            Console.WriteLine("Refreshed: " + this.Name);
-            initInventoryTable();
-            initItemsTable();
+            //Console.WriteLine("Refreshed: " + this.Name);
+            //initInventoryTable();
+            //initItemsTable();
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
@@ -332,6 +334,7 @@ namespace POS.UserControls
         {
             if (string.IsNullOrEmpty(search.Text))
             {
+
                 if (tabControl.SelectedIndex == 0)
                 {
                     initInventoryTable();
@@ -340,6 +343,7 @@ namespace POS.UserControls
                 {
                     initItemsTable();
                 }
+
             }
         }
 
@@ -371,9 +375,22 @@ namespace POS.UserControls
 
         }
 
-        private void InventoryUC_Load(object sender, EventArgs e)
+        private async void InventoryUC_Load(object sender, EventArgs e)
         {
             //currLogin = UserManager.instance.currentLogin;
+
+            addVariationsBtn.Enabled = currLogin.CanEditProduct;
+            addItemBtn.Enabled = currLogin.CanEditItem;
+            editItemBtn.Enabled = currLogin.CanEditItem;
+
+            //using (var p = new POSEntities())
+            //{
+            //    await Task.Run(() => { initItemsTable(p); });
+            //    Console.WriteLine("items finished!");
+
+            //    await Task.Run(() => { initInventoryTable(p); });
+            //    Console.WriteLine("inventory finished!");
+            //}
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)

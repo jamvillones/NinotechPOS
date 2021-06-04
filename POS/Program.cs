@@ -33,6 +33,7 @@ namespace POS
 
                 if (login.LoginSuccessful)
                 {
+                    login.Dispose();
                     backup = true;
 
                     var main = new Main();                   
@@ -40,7 +41,9 @@ namespace POS
                     Application.Run(main);
 
                     singedOut = main.IsSigneout;
+                    main.Dispose();
                 }
+                GC.Collect();
             }
             while (singedOut);
 

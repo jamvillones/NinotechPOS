@@ -15,5 +15,12 @@ namespace POS
             row.CreateCells(dt, obs);
             return row;
         }
+
+        public static void InvokeIfRequired(this Control c, Action a){
+            if (c.InvokeRequired)
+                c.Invoke(a);
+            else
+                a();
+        }
     }
 }
