@@ -25,23 +25,11 @@ namespace POS.UserControls
 
         private void ReportUC_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < (int)SaleStatusFilter.Count; i++)
-                saleStatus.Items.Add(((SaleStatusFilter)i).ToString());
-
             saleStatus.SelectedIndex = 0;
             comboFilterType.SelectedIndex = 0;
 
             saleStatus.SelectedIndexChanged += saleStatus_SelectedIndexChanged;
             comboFilterType.SelectedIndexChanged += comboFilterType_SelectedIndexChanged;
-
-            //using (var p = new POSEntities())
-            //{
-            //    await Task.Run(() => { setRegularTableByDate(p); });
-            //    Console.WriteLine("regular sale finished");
-
-            //    await Task.Run(() => { setCharegedTable(p); });
-            //    Console.WriteLine("charged sale finished");
-            //}
         }
 
         public void RefreshData()
