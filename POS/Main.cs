@@ -16,7 +16,6 @@ namespace POS
 {
     public partial class Main : Form, IMainWindow
     {
-        List<ITab> uControls = new List<ITab>();
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -40,16 +39,32 @@ namespace POS
             }
         }
 
+        //List<ITab> uControls = new List<ITab>();
         public Main()
         {
             InitializeComponent();
+        }
 
+        private async void Main_Load(object sender, EventArgs e)
+        {
             userButton.Text = UserManager.instance.currentLogin.Username;
-
-            uControls.Add(inventoryTab);
-            uControls.Add(reportTab);
-
             setChangingColorsBtn(inventoryBtn, repBtn);
+            addNewLoginToolStripMenuItem1.Enabled = currLogin.Username == "admin";
+            loginPrivilegesToolStripMenuItem1.Enabled = currLogin.Username == "admin";
+            addNewSupplierToolstripbuttn.Enabled = currLogin.CanEditSupplier;
+            stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
+            button1.Visible = currLogin.CanStockIn;
+
+            //uControls.Add(inventoryTab);
+            //uControls.Add(reportTab);
+
+
+            var t = inventoryTab.InitializeAsync();
+            var r = reportTab.InitializeAsync();
+
+            await Task.WhenAll(t, r);
+
+            Console.WriteLine("Tables initialized.");
         }
 
         void setChangingColorsBtn(params Button[] buttons)
@@ -253,22 +268,6 @@ namespace POS
             {
                 return UserManager.instance.currentLogin;
             }
-        }
-
-        private async void Main_Load(object sender, EventArgs e)
-        {
-            addNewLoginToolStripMenuItem1.Enabled = currLogin.Username == "admin";
-            loginPrivilegesToolStripMenuItem1.Enabled = currLogin.Username == "admin";
-            addNewSupplierToolstripbuttn.Enabled = currLogin.CanEditSupplier;
-            stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
-            button1.Visible = currLogin.CanStockIn;
-
-
-            var t = inventoryTab.InitializeAsync();
-            var r = reportTab.InitializeAsync();
-
-            await Task.WhenAll(t, r);
-            Console.WriteLine("Tables initialized.");
         }
 
         private void toolStripButton3_Click_1(object sender, EventArgs e)
