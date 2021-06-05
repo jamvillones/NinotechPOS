@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
+            this.sideButtonsPanel = new System.Windows.Forms.Panel();
+            this.settingsBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.inventoryBtn = new System.Windows.Forms.Button();
             this.repBtn = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.separatorPanel1 = new System.Windows.Forms.Panel();
+            this.stockInBtn = new System.Windows.Forms.Button();
             this.statBtn = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.separatorPanel2 = new System.Windows.Forms.Panel();
+            this.topMostPanel = new System.Windows.Forms.Panel();
             this.userButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.appTitleLabel = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.tabHoldersPanel = new System.Windows.Forms.Panel();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.changePasswordToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,42 +63,42 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.inventoryTab = new POS.UserControls.InventoryUC();
             this.reportTab = new POS.UserControls.ReportUC();
-            this.panel1.SuspendLayout();
+            this.sideButtonsPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.topMostPanel.SuspendLayout();
+            this.tabHoldersPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // sideButtonsPanel
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel1.Controls.Add(this.button7);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(80, 650);
-            this.panel1.TabIndex = 0;
+            this.sideButtonsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.sideButtonsPanel.Controls.Add(this.settingsBtn);
+            this.sideButtonsPanel.Controls.Add(this.flowLayoutPanel1);
+            this.sideButtonsPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sideButtonsPanel.Location = new System.Drawing.Point(0, 0);
+            this.sideButtonsPanel.Name = "sideButtonsPanel";
+            this.sideButtonsPanel.Size = new System.Drawing.Size(80, 650);
+            this.sideButtonsPanel.TabIndex = 0;
             // 
-            // button7
+            // settingsBtn
             // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
-            this.button7.Location = new System.Drawing.Point(0, 570);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(80, 80);
-            this.button7.TabIndex = 5;
-            this.button7.TabStop = false;
-            this.button7.Text = "SETTINGS";
-            this.button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Visible = false;
+            this.settingsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.settingsBtn.FlatAppearance.BorderSize = 0;
+            this.settingsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.settingsBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingsBtn.ForeColor = System.Drawing.Color.White;
+            this.settingsBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsBtn.Image")));
+            this.settingsBtn.Location = new System.Drawing.Point(0, 570);
+            this.settingsBtn.Name = "settingsBtn";
+            this.settingsBtn.Size = new System.Drawing.Size(80, 80);
+            this.settingsBtn.TabIndex = 5;
+            this.settingsBtn.TabStop = false;
+            this.settingsBtn.Text = "SETTINGS";
+            this.settingsBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.settingsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.settingsBtn.UseVisualStyleBackColor = true;
+            this.settingsBtn.Visible = false;
             // 
             // flowLayoutPanel1
             // 
@@ -109,10 +109,10 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.flowLayoutPanel1.Controls.Add(this.inventoryBtn);
             this.flowLayoutPanel1.Controls.Add(this.repBtn);
-            this.flowLayoutPanel1.Controls.Add(this.panel4);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.separatorPanel1);
+            this.flowLayoutPanel1.Controls.Add(this.stockInBtn);
             this.flowLayoutPanel1.Controls.Add(this.statBtn);
-            this.flowLayoutPanel1.Controls.Add(this.panel5);
+            this.flowLayoutPanel1.Controls.Add(this.separatorPanel2);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(80, 561);
@@ -159,34 +159,34 @@
             this.repBtn.UseVisualStyleBackColor = true;
             this.repBtn.Click += new System.EventHandler(this.repBtn_Click);
             // 
-            // panel4
+            // separatorPanel1
             // 
-            this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(3, 163);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(74, 1);
-            this.panel4.TabIndex = 2;
+            this.separatorPanel1.BackColor = System.Drawing.Color.White;
+            this.separatorPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.separatorPanel1.Location = new System.Drawing.Point(3, 163);
+            this.separatorPanel1.Name = "separatorPanel1";
+            this.separatorPanel1.Size = new System.Drawing.Size(74, 1);
+            this.separatorPanel1.TabIndex = 2;
             // 
-            // button1
+            // stockInBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(0, 167);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 80);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "STOCKIN";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.stockin_Callback);
+            this.stockInBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.stockInBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.stockInBtn.FlatAppearance.BorderSize = 0;
+            this.stockInBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.stockInBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockInBtn.ForeColor = System.Drawing.Color.White;
+            this.stockInBtn.Image = ((System.Drawing.Image)(resources.GetObject("stockInBtn.Image")));
+            this.stockInBtn.Location = new System.Drawing.Point(0, 167);
+            this.stockInBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.stockInBtn.Name = "stockInBtn";
+            this.stockInBtn.Size = new System.Drawing.Size(80, 80);
+            this.stockInBtn.TabIndex = 4;
+            this.stockInBtn.Text = "STOCKIN";
+            this.stockInBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.stockInBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.stockInBtn.UseVisualStyleBackColor = false;
+            this.stockInBtn.Click += new System.EventHandler(this.stockin_Callback);
             // 
             // statBtn
             // 
@@ -208,29 +208,29 @@
             this.statBtn.UseVisualStyleBackColor = false;
             this.statBtn.Click += new System.EventHandler(this.sell_Callback);
             // 
-            // panel5
+            // separatorPanel2
             // 
-            this.panel5.BackColor = System.Drawing.Color.White;
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(3, 330);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(74, 1);
-            this.panel5.TabIndex = 5;
+            this.separatorPanel2.BackColor = System.Drawing.Color.White;
+            this.separatorPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.separatorPanel2.Location = new System.Drawing.Point(3, 330);
+            this.separatorPanel2.Name = "separatorPanel2";
+            this.separatorPanel2.Size = new System.Drawing.Size(74, 1);
+            this.separatorPanel2.TabIndex = 5;
             // 
-            // panel2
+            // topMostPanel
             // 
-            this.panel2.BackColor = System.Drawing.Color.DimGray;
-            this.panel2.Controls.Add(this.userButton);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.button6);
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.button5);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(80, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(920, 34);
-            this.panel2.TabIndex = 1;
-            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.topMostPanel.BackColor = System.Drawing.Color.DimGray;
+            this.topMostPanel.Controls.Add(this.userButton);
+            this.topMostPanel.Controls.Add(this.appTitleLabel);
+            this.topMostPanel.Controls.Add(this.button6);
+            this.topMostPanel.Controls.Add(this.button4);
+            this.topMostPanel.Controls.Add(this.button5);
+            this.topMostPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topMostPanel.Location = new System.Drawing.Point(80, 0);
+            this.topMostPanel.Name = "topMostPanel";
+            this.topMostPanel.Size = new System.Drawing.Size(920, 34);
+            this.topMostPanel.TabIndex = 1;
+            this.topMostPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
             // userButton
             // 
@@ -250,16 +250,16 @@
             this.userButton.UseVisualStyleBackColor = false;
             this.userButton.Click += new System.EventHandler(this.userButton_Click);
             // 
-            // label1
+            // appTitleLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(6, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 19);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "POINT OF  SALE";
+            this.appTitleLabel.AutoSize = true;
+            this.appTitleLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.appTitleLabel.ForeColor = System.Drawing.Color.White;
+            this.appTitleLabel.Location = new System.Drawing.Point(6, 8);
+            this.appTitleLabel.Name = "appTitleLabel";
+            this.appTitleLabel.Size = new System.Drawing.Size(130, 19);
+            this.appTitleLabel.TabIndex = 3;
+            this.appTitleLabel.Text = "POINT OF  SALE";
             // 
             // button6
             // 
@@ -303,17 +303,15 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.exitBtn_Click);
             // 
-            // panel3
+            // tabHoldersPanel
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.inventoryTab);
-            this.panel3.Controls.Add(this.reportTab);
-            this.panel3.Location = new System.Drawing.Point(80, 62);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(920, 588);
-            this.panel3.TabIndex = 2;
+            this.tabHoldersPanel.Controls.Add(this.inventoryTab);
+            this.tabHoldersPanel.Controls.Add(this.reportTab);
+            this.tabHoldersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabHoldersPanel.Location = new System.Drawing.Point(80, 59);
+            this.tabHoldersPanel.Name = "tabHoldersPanel";
+            this.tabHoldersPanel.Size = new System.Drawing.Size(920, 591);
+            this.tabHoldersPanel.TabIndex = 2;
             // 
             // toolStrip
             // 
@@ -470,15 +468,15 @@
             this.inventoryTab.Location = new System.Drawing.Point(0, 0);
             this.inventoryTab.Name = "inventoryTab";
             this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
-            this.inventoryTab.Size = new System.Drawing.Size(920, 588);
-            this.inventoryTab.TabIndex = 0;
+            this.inventoryTab.Size = new System.Drawing.Size(920, 591);
+            this.inventoryTab.TabIndex = 2;
             // 
             // reportTab
             // 
             this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportTab.Location = new System.Drawing.Point(0, 0);
             this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(920, 588);
+            this.reportTab.Size = new System.Drawing.Size(920, 591);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
             // 
@@ -488,10 +486,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 650);
             this.ControlBox = false;
+            this.Controls.Add(this.tabHoldersPanel);
             this.Controls.Add(this.toolStrip);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.topMostPanel);
+            this.Controls.Add(this.sideButtonsPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -500,14 +498,15 @@
             this.Name = "Main";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.sideButtonsPanel.ResumeLayout(false);
+            this.sideButtonsPanel.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
+            this.topMostPanel.ResumeLayout(false);
+            this.topMostPanel.PerformLayout();
+            this.tabHoldersPanel.ResumeLayout(false);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -517,21 +516,21 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel sideButtonsPanel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button inventoryBtn;
         private System.Windows.Forms.Button repBtn;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel topMostPanel;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button settingsBtn;
+        private System.Windows.Forms.Label appTitleLabel;
+        private System.Windows.Forms.Panel tabHoldersPanel;
         private System.Windows.Forms.Button statBtn;
         private UserControls.ReportUC reportTab;
         private System.Windows.Forms.Button userButton;
-        private UserControls.InventoryUC inventoryTab;
+       // private UserControls.InventoryUC inventoryTab;
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton addNewSupplierToolstripbuttn;
@@ -545,12 +544,13 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton stockinToolStrpBtn;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button stockInBtn;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel separatorPanel1;
+        private System.Windows.Forms.Panel separatorPanel2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private UserControls.InventoryUC inventoryTab;
     }
 }
 

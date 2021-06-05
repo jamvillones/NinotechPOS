@@ -39,38 +39,45 @@ namespace POS
             }
         }
 
-        //List<ITab> uControls = new List<ITab>();
         public Main()
         {
             InitializeComponent();
         }
-
+        bool isLoading { get; set; } = true;
+        bool isClosing { get; set; } = false;
         private async void Main_Load(object sender, EventArgs e)
         {
-            userButton.Text = UserManager.instance.currentLogin.Username;
-            setChangingColorsBtn(inventoryBtn, repBtn);
-            addNewLoginToolStripMenuItem1.Enabled = currLogin.Username == "admin";
-            loginPrivilegesToolStripMenuItem1.Enabled = currLogin.Username == "admin";
-            addNewSupplierToolstripbuttn.Enabled = currLogin.CanEditSupplier;
-            stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
-            button1.Visible = currLogin.CanStockIn;
 
-            //uControls.Add(inventoryTab);
-            //uControls.Add(reportTab);
+            var init = Task.Run(() =>
+            {
+                userButton.InvokeIfRequired(() => { userButton.Text = UserManager.instance.currentLogin.Username; });
 
+                setChangingColorsBtn(inventoryBtn, repBtn);
+
+                addNewLoginToolStripMenuItem1.Enabled = currLogin.Username == "admin";
+                loginPrivilegesToolStripMenuItem1.Enabled = currLogin.Username == "admin";
+                addNewSupplierToolstripbuttn.Enabled = currLogin.CanEditSupplier;
+                stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
+
+                stockInBtn.InvokeIfRequired(() => { stockInBtn.Visible = currLogin.CanStockIn; });
+            });
 
             var t = inventoryTab.InitializeAsync();
             var r = reportTab.InitializeAsync();
 
-            await Task.WhenAll(t, r);
+            await Task.WhenAll(r, init);
+            Console.WriteLine("Form initialized.");
 
-            Console.WriteLine("Tables initialized.");
+            isLoading = false;
+
+            if (isClosing)
+                this.Close();
         }
 
         void setChangingColorsBtn(params Button[] buttons)
         {
             foreach (var i in buttons)
-                i.Click += buttonColorChangeCallback;
+                i.InvokeIfRequired(() => { i.Click += buttonColorChangeCallback; });
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
@@ -280,7 +287,12 @@ namespace POS
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            if (isLoading)
+            {
+                this.Hide();
+                isClosing = true;
+                e.Cancel = true;
+            }
         }
 
         private void loginPrivilegesToolStripMenuItem1_Click(object sender, EventArgs e)

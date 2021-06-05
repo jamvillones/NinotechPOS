@@ -35,6 +35,7 @@ namespace POS.UserControls
             initInventoryTable();
             initItemsTable();
         }
+
         public virtual Button EnterButton()
         {
             return null;
@@ -45,13 +46,13 @@ namespace POS.UserControls
             return null;
         }
 
-        Login currLogin
-        {
-            get
-            {
-                return UserManager.instance.currentLogin;
-            }
-        }
+       //// Login currLogin
+       // {
+       //     get
+       //     {
+       //         return UserManager.instance.currentLogin;
+       //     }
+       // }
 
         public async Task InitializeAsync()
         {           
@@ -201,6 +202,7 @@ namespace POS.UserControls
             row.Cells[6].Value = "Delete";
             return row;
         }
+
         void initItemsTable()
         {
             Console.WriteLine("started: Items");
@@ -375,28 +377,28 @@ namespace POS.UserControls
 
         }
 
-        private async void InventoryUC_Load(object sender, EventArgs e)
+        private void InventoryUC_Load(object sender, EventArgs e)
         {
-            //currLogin = UserManager.instance.currentLogin;
+            try
+            {
+                var currLogin = UserManager.instance.currentLogin;
 
-            addVariationsBtn.Enabled = currLogin.CanEditProduct;
-            addItemBtn.Enabled = currLogin.CanEditItem;
-            editItemBtn.Enabled = currLogin.CanEditItem;
+                addVariationsBtn.Enabled = currLogin.CanEditProduct;
+                addItemBtn.Enabled = currLogin.CanEditItem;
+                editItemBtn.Enabled = currLogin.CanEditItem;
+            }
+            catch
+            {
 
-            //using (var p = new POSEntities())
-            //{
-            //    await Task.Run(() => { initItemsTable(p); });
-            //    Console.WriteLine("items finished!");
-
-            //    await Task.Run(() => { initInventoryTable(p); });
-            //    Console.WriteLine("inventory finished!");
-            //}
+            }
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
         {
             if (itemsTable.SelectedCells.Count == 0)
                 return;
+            var currLogin = UserManager.instance.currentLogin;
+
             if (!currLogin.CanEditProduct)
                 return;
 
