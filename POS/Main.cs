@@ -45,31 +45,36 @@ namespace POS
         }
         bool isLoading { get; set; } = true;
         bool isClosing { get; set; } = false;
+
+        /// <summary>
+        /// this handles the properties of buttons depending on login
+        /// </summary>
+        private void LoadButtonProperties()
+        {
+            var cl = currLogin;
+
+            userButton.InvokeIfRequired(() => { userButton.Text = cl.Username; });
+
+            addNewLoginToolStripMenuItem1.Enabled = cl.Username == "admin";
+            loginPrivilegesToolStripMenuItem1.Enabled = cl.Username == "admin";
+            addNewSupplierToolstripbuttn.Enabled = cl.CanEditSupplier;
+            stockinToolStrpBtn.Enabled = cl.CanStockIn;
+
+            stockInBtn.InvokeIfRequired(() => { stockInBtn.Visible = cl.CanStockIn; });
+        }
+
         private async void Main_Load(object sender, EventArgs e)
         {
+            setChangingColorsBtn(inventoryBtn, repBtn);
 
-            var init = Task.Run(() =>
-            {
-                userButton.InvokeIfRequired(() => { userButton.Text = UserManager.instance.currentLogin.Username; });
-
-                setChangingColorsBtn(inventoryBtn, repBtn);
-
-                addNewLoginToolStripMenuItem1.Enabled = currLogin.Username == "admin";
-                loginPrivilegesToolStripMenuItem1.Enabled = currLogin.Username == "admin";
-                addNewSupplierToolstripbuttn.Enabled = currLogin.CanEditSupplier;
-                stockinToolStrpBtn.Enabled = currLogin.CanStockIn;
-
-                stockInBtn.InvokeIfRequired(() => { stockInBtn.Visible = currLogin.CanStockIn; });
-            });
-
+            var init = Task.Run((Action)LoadButtonProperties);
             var t = inventoryTab.InitializeAsync();
             var r = reportTab.InitializeAsync();
 
-            await Task.WhenAll(r, init);
+            await Task.WhenAll(t, r, init);
+
             Console.WriteLine("Form initialized.");
-
             isLoading = false;
-
             if (isClosing)
                 this.Close();
         }
