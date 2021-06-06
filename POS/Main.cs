@@ -55,12 +55,15 @@ namespace POS
 
             userButton.InvokeIfRequired(() => { userButton.Text = cl.Username; });
 
-            addNewLoginToolStripMenuItem1.Enabled = cl.Username == "admin";
-            loginPrivilegesToolStripMenuItem1.Enabled = cl.Username == "admin";
-            addNewSupplierToolstripbuttn.Enabled = cl.CanEditSupplier;
-            stockinToolStrpBtn.Enabled = cl.CanStockIn;
+            toolStrip.InvokeIfRequired(() =>
+            {
+                addNewLoginToolStripMenuItem1.Enabled = cl.Username == "admin";
+                loginPrivilegesToolStripMenuItem1.Enabled = cl.Username == "admin";
+                addNewSupplierToolstripbuttn.Enabled = cl.CanEditSupplier;
+            });
+            //stockinToolStrpBtn.Enabled = cl.CanStockIn;
 
-            stockInBtn.InvokeIfRequired(() => { stockInBtn.Visible = cl.CanStockIn; });
+            //stockInBtn.InvokeIfRequired(() => { stockInBtn.Visible = cl.CanStockIn; });
         }
 
         private async void Main_Load(object sender, EventArgs e)
@@ -130,28 +133,7 @@ namespace POS
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1)
-            {
-                TryCreateLogin();
-            }
-            else if (e.KeyCode == Keys.F2)
-            {
-                ///change password
-                using (var changepass = new ChangePass())
-                {
-                    changepass.SetUser(UserManager.instance.currentLogin.Username);
-                    changepass.ShowDialog();
-                }
-            }
-            else if (e.KeyCode == Keys.F5)
-            {
-                RefreshData();
-            }
 
-            if (e.Control && e.KeyCode == Keys.P)
-            {
-                toolStripButton5.PerformClick();
-            }
         }
 
         void RefreshData()
@@ -171,122 +153,84 @@ namespace POS
 
         public bool IsSigneout { get; private set; } = false;
 
-        private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TryCreateLogin();
-        }
+        //private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    TryCreateLogin();
+        //}
 
-        void TryCreateLogin()
+        //void TryCreateLogin()
+        //{
+        //    if (UserManager.instance.currentLogin.Username != "admin")
+        //    {
+        //        MessageBox.Show("Cannot perform this action!");
+        //        return;
+        //    }
+        //    ///add new login
+        //    using (var newlogin = new CreateLogin())
+        //        newlogin.ShowDialog();
+        //}
+
+        #region toolstrips
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDialog<ChangePass>((x) => { x.SetUser(UserManager.instance.currentLogin.Username); });
+        }
+        private void addNewLoginToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (UserManager.instance.currentLogin.Username != "admin")
             {
                 MessageBox.Show("Cannot perform this action!");
                 return;
             }
-            ///add new login
-            using (var newlogin = new CreateLogin())
-                newlogin.ShowDialog();
+            OpenDialog<CreateLogin>();
+        }
+        private void loginPrivilegesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDialog<UserPrivilegesForm>();
         }
 
-        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void openSupplier_Click(object sender, EventArgs e)
         {
-            using (var changepass = new ChangePass())
+            OpenDialog<SupplierForm>();
+        }
+        private void createCustomer_Click(object sender, EventArgs e)
+        {
+            OpenDialog<CreateCustomerProfile>();
+        }
+        private void stockinLog_Click(object sender, EventArgs e)
+        {
+            OpenDialog<StockinLog>();
+        }
+        private void printInventory_Click(object sender, EventArgs e)
+        {
+            OpenDialog<PrintInventory>();
+        }
+        private void receiptConfig_Click(object sender, EventArgs e)
+        {
+            OpenDialog<RecieptPrintingConfigurations>();
+        }
+        void OpenDialog<T>() where T : Form, new()
+        {
+            using (T f = new T())
             {
-                changepass.SetUser(UserManager.instance.currentLogin.Username);
-                changepass.ShowDialog();
+                f.ShowDialog();
             }
         }
-
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        void OpenDialog<T>(Action<T> action) where T : Form, new()
         {
-            using (var supplier = new SupplierForm())
-                supplier.ShowDialog();
-        }
-
-        private void addNewLoginToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            using (var login = new CreateLogin())
-                login.ShowDialog();
-        }
-
-        private void changePasswordToolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-
-            using (var changePass = new ChangePass())
+            using (T f = new T())
             {
-                changePass.SetUser(UserManager.instance.currentLogin.Username);
-                changePass.ShowDialog();
+                action(f);
+                f.ShowDialog();
             }
         }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            using (var customer = new CreateCustomerProfile())
-                customer.ShowDialog();
-        }
-
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {
-            using (StockinLog log = new StockinLog())
-                log.ShowDialog();
-        }
-
-        private void toolStripButton4_Click(object sender, EventArgs e)
-        {
-            using (var sellForm = new ConsoleSell())
-            {
-                sellForm.ShowDialog();
-            }
-        }
-
-        private void refreshToolStripBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-            using (var print = new PrintInventory())
-            {
-                print.ShowDialog();
-            }
-        }
-
-        private void stockin_Callback(object sender, EventArgs e)
-        {
-            using (var stockin = new StockinForm())
-            {
-                stockin.OnSave += Stockin_OnSave; ;
-                stockin.ShowDialog();
-            }
-        }
-
-        private void Stockin_OnSave(object sender, EventArgs e)
-        {
-            inventoryTab.RefreshData();
-        }
-
-        private void sell_Callback(object sender, EventArgs e)
-        {
-            using (var sellForm = new MakeSale())
-            {
-                sellForm.ShowDialog();
-            }
-        }
+        #endregion
 
         Login currLogin
         {
             get
             {
                 return UserManager.instance.currentLogin;
-            }
-        }
-
-        private void toolStripButton3_Click_1(object sender, EventArgs e)
-        {
-            using (var s = new StockinLog())
-            {
-                s.ShowDialog();
             }
         }
 
@@ -298,18 +242,6 @@ namespace POS
                 isClosing = true;
                 e.Cancel = true;
             }
-        }
-
-        private void loginPrivilegesToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            using (var previliges = new UserPrivilegesForm())
-                previliges.ShowDialog();
-        }
-
-        private void toolStripButton2_Click_1(object sender, EventArgs e)
-        {
-            using (var printerSettings = new RecieptPrintingConfigurations())
-                printerSettings.ShowDialog();
         }
     }
 }

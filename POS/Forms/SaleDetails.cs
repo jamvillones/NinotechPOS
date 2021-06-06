@@ -67,21 +67,19 @@ namespace POS.Forms
             remaining.Text = string.Format("₱ {0:n}", (sale.GetSaleTotalPrice() - sale.AmountRecieved));
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        void addPayment()
         {
-            addPaymentButton.Enabled = addPayment.Value <= 0 ? false : true;
-        }
+            if (paymentNum.Value == 0)
+                return;
 
-        private void addPaymentButton_Click(object sender, EventArgs e)
-        {
+            if (MessageBox.Show("Are you sure you want to add payment?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
             using (var p = new POSEntities())
             {
                 var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
-                s.AmountRecieved += addPayment.Value;
-                //if(s.AmountRecieved >= s.TotalPrice)
-                //{
-                //    s.SaleType = Misc.SaleType.Regular.ToString();
-                //}
+                s.AmountRecieved += paymentNum.Value;
+
                 if (s.AmountRecieved >= s.GetSaleTotalPrice())
                 {
 
@@ -95,28 +93,34 @@ namespace POS.Forms
                 transaction.Sale = s;
                 transaction.Username = currentLogin.Username;
                 transaction.TransactionTime = DateTime.Now;
-                transaction.AmountPayed = addPayment.Value;
+                transaction.AmountPayed = paymentNum.Value;
                 p.ChargedPayRecords.Add(transaction);
                 p.SaveChanges();
                 OnSave?.Invoke(this, null);
-                MessageBox.Show(s.AmountRecieved < s.GetSaleTotalPrice() ? "Payment added." : "Amount fully Paid.");
+
+                MessageBox.Show(s.AmountRecieved < s.GetSaleTotalPrice() ? "Payment added." : "Amount fully Paid.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void addPaymentButton_Click(object sender, EventArgs e)
+        {
+            addPayment();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var ts = new TransactionHistoryForm();
-            ts.SetId(sale.Id);
-            ts.ShowDialog();
+            using (var ts = new TransactionHistoryForm())
+            {
+                ts.SetId(sale.Id);
+                ts.ShowDialog();
+            }
         }
 
         private void voidBtn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to void this sale?", "All sold items that is associated with this sale will be stocked and this sale will be removed", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
-            {
+            if (MessageBox.Show("All sold items that is associated with this sale will be stocked and this sale will be removed", "Are you sure you want to void this sale?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                 return;
 
-            }
             using (var p = new POSEntities())
             {
                 //get the reference of the sale
@@ -172,8 +176,8 @@ namespace POS.Forms
 
         private void SaleDetails_Load(object sender, EventArgs e)
         {
-            voidBtn.Enabled = currentLogin.CanVoidSale;
-            editItemsBtn.Enabled = currentLogin.CanVoidSale;
+            voidBtn.Visible = currentLogin.CanVoidSale;
+            editItemsBtn.Visible = currentLogin.CanVoidSale;
 
             var settings = Properties.Settings.Default;
             if (!string.IsNullOrEmpty(settings.ReceiptPrinter))
@@ -235,6 +239,12 @@ namespace POS.Forms
         private void doc_BeginPrint(object sender, PrintEventArgs e)
         {
             printAction = e.PrintAction;
+        }
+
+        private void paymentNum_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                addPayment();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace POS.UserControls
         #region Tab functions
         public virtual void RefreshData()
         {
-            initInventoryTable();
+            // initInventoryTable();
             initItemsTable();
         }
 
@@ -46,20 +46,18 @@ namespace POS.UserControls
             return null;
         }
 
-       //// Login currLogin
-       // {
-       //     get
-       //     {
-       //         return UserManager.instance.currentLogin;
-       //     }
-       // }
+        //// Login currLogin
+        // {
+        //     get
+        //     {
+        //         return UserManager.instance.currentLogin;
+        //     }
+        // }
 
         public async Task InitializeAsync()
-        {           
-            var iTask = Task.Run(() => { initItemsTable(); });
-            var inventTask = Task.Run(() => { initInventoryTable(); });
-
-            await Task.WhenAll(iTask, inventTask);
+        {
+            var iTask = initItemsTableAsync();
+            await iTask;
         }
         #endregion
 
@@ -92,16 +90,16 @@ namespace POS.UserControls
 
         private void InView_OnSave(object sender, EventArgs e)
         {
-            initInventoryTable();
+            // initInventoryTable();
         }
 
-        protected virtual void firstBtn_Click(object sender, EventArgs e)
+        protected virtual void sellItem_Click(object sender, EventArgs e)
         {
-            if (inventoryTable.SelectedCells.Count == 0)
+            if (itemsTable.SelectedCells.Count == 0)
             {
                 return;
             }
-            using (var sell = new MakeSale(inventoryTable.SelectedCells[0].Value.ToString()))
+            using (var sell = new MakeSale(itemsTable.SelectedCells[0].Value.ToString()))
             {
                 sell.OnSave += OnInventoryChangedCallback;
                 sell.ShowDialog();
@@ -115,8 +113,8 @@ namespace POS.UserControls
 
         private void OnInventoryChangedCallback(object sender, EventArgs e)
         {
-            //using (var p = posEnt)
-            initInventoryTable();
+            ////using (var p = posEnt)
+            //initInventoryTable();
         }
         #endregion
 
@@ -148,73 +146,102 @@ namespace POS.UserControls
             }
         }
 
-        DataGridViewRow createInventoryRow(string key, POSEntities p)
-        {
-            DataGridViewRow r = new DataGridViewRow();
-            var item = p.Items.FirstOrDefault(x => x.Barcode == key);
-            int totalQuantity = p.InventoryItems.Where(x => x.Product.Item.Barcode == key).Sum(x => x.Quantity);
-
-            r.CreateCells(inventoryTable);
-            r.Cells[inventoryBarcodeCol.Index].Value = item.Barcode;
-            r.Cells[inventoryNameCol.Index].Value = item.Name;
-            r.Cells[inventoryPriceCol.Index].Value = string.Format("₱ {0:n}", item.SellingPrice);
-            r.Cells[inventoryQuantityCol.Index].Value = totalQuantity == 0 ? "Infinite" : totalQuantity.ToString();
-            r.Cells[inventoryTotalCol.Index].Value = string.Format("₱ {0:n}", totalQuantity * item.SellingPrice);
-
-            return r;
-        }
-
-        void initInventoryTable()
-        {
-            Console.WriteLine("started: Inventory");
-            using (var p = posEnt)
-            {
-                inventoryTable.InvokeIfRequired(() => { inventoryTable.Rows.Clear(); });
-                ///creates the row
-                var rows = p.InventoryItems.ToArray().GroupBy(x => x.Product.Item.Barcode).Select(y => createInventoryRow(y.Key, p)).ToArray();
-
-                inventoryTable.InvokeIfRequired(() => { inventoryTable.Rows.AddRange(rows); });
-
-                totalItemsLabel.InvokeIfRequired(() => { totalItemsLabel.Text = string.Format("Total item price: ₱ {0:n}", p.InventoryItems.Sum(x => x.Product.Item.SellingPrice * x.Quantity)); });
-            }
-            loadingLabelInventory.InvokeIfRequired(() => { loadingLabelInventory.Visible = false; });
-            Console.WriteLine("finished: Inventory");
-        }
-
         private void Onsave_Callback(object sender, EventArgs e)
         {
-
-            initItemsTable();
-            initInventoryTable();
-
+            var init = initItemsTableAsync();
         }
 
         DataGridViewRow createItemRow(Item i)
         {
             var row = new DataGridViewRow();
-            row.CreateCells(itemsTable);
-            row.Cells[0].Value = i.Barcode;
-            row.Cells[1].Value = i.Name;
-            row.Cells[2].Value = string.Format("₱ {0:n}", i.SellingPrice);
-            row.Cells[3].Value = i.Department;
-            row.Cells[4].Value = i.Type;
-            row.Cells[5].Value = i.Details;
-            row.Cells[6].Value = "Delete";
+            //row.CreateCells(itemsTable);
+            //row.Cells[0].Value = i.Barcode;
+            //row.Cells[1].Value = i.Name;
+            //row.Cells[2].Value = string.Format("₱ {0:n}", i.SellingPrice);
+            //row.Cells[3].Value = i.Department;
+            //row.Cells[4].Value = i.Type;
+            //row.Cells[5].Value = i.Details;
+            //row.Cells[6].Value = "Delete";
+
             return row;
+        }
+
+        private async Task<DataGridViewRow[]> createItemRowsAsync(IEnumerable<Item> items)
+        {
+            DataGridViewRow[] rows = null;
+            await Task.Run(() =>
+            {
+                rows = items.Select(x => itemsTable.createRow(
+                   x.Barcode,
+                   x.Name,
+                   getItemQuantity(x),
+                   string.Format("₱ {0:n}", x.SellingPrice),
+                   x.Type
+                   )).ToArray();
+            });
+
+            return rows;
+        }
+
+        string getItemQuantity(Item i)
+        {
+            int quantity = i.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
+
+            if (quantity == 0 && (i.Type == "Software" || i.Type == "Service"))
+                return "∞";
+
+            return quantity == 0 ? "EMPTY" : quantity.ToString();
+        }
+
+        private async Task initItemsTableAsync()
+        {
+
+            Console.WriteLine("started: Items");
+            loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = true; });
+
+            itemsTable.InvokeIfRequired(() =>
+            {
+                itemsTable.SelectionChanged -= itemsTable_SelectionChanged;
+                itemsTable.Rows.Clear();
+            });
+
+            using (var p = posEnt)
+            {
+                ///create the rows in the background
+                var rows = await createItemRowsAsync(p.Items);
+                ///if created then set to table
+                itemsTable.InvokeIfRequired(() =>
+                {
+                    itemsTable.Rows.AddRange(rows);
+                    itemsTable.SelectionChanged += itemsTable_SelectionChanged;
+                });
+                decimal total = p.InventoryItems.Select(x => x.Quantity * x.Product.Item.SellingPrice).DefaultIfEmpty(0).Sum();
+
+                totalPriceTxt.InvokeIfRequired(() => { totalPriceTxt.Text = "Total inventory price: " + string.Format("₱ {0:n}", total); });
+            }
+
+            ///off the loading label
+            loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = false; });
+            Console.WriteLine("finished: Items");
         }
 
         void initItemsTable()
         {
+            ///prompt the start
             Console.WriteLine("started: Items");
+
             using (var p = posEnt)
             {
+                ///erase the table first
                 itemsTable.InvokeIfRequired(() => { itemsTable.Rows.Clear(); });
-
+                ///
                 var rows = p.Items.Select(createItemRow).ToArray();
                 itemsTable.InvokeIfRequired(() => { itemsTable.Rows.AddRange(rows); });
             }
 
             loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = false; });
+
+            ///prompt the finish
             Console.WriteLine("finished: Items");
         }
 
@@ -255,14 +282,9 @@ namespace POS.UserControls
         private void searchBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(search.Text))
-            {
                 return;
-            }
 
-            if (tabControl.SelectedIndex == 0)
-                SearchInventory(inventoryTable);
-            else
-                searchItem(itemsTable);
+            searchItem(itemsTable);
         }
 
         void searchItem(DataGridView target)
@@ -278,7 +300,7 @@ namespace POS.UserControls
 
                 if (searchElements.Count() == 0)
                 {
-                    MessageBox.Show("Sorry, Product not found.");
+                    MessageBox.Show("Sorry, Product not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 target.Rows.Clear();
@@ -329,24 +351,18 @@ namespace POS.UserControls
             if (e.KeyCode == Keys.Enter)
             {
                 searchBtn.PerformClick();
+
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
         }
 
-        private void search_TextChanged(object sender, EventArgs e)
+        private async void search_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(search.Text))
-            {
+            if (!string.IsNullOrEmpty(search.Text))
+                return;
 
-                if (tabControl.SelectedIndex == 0)
-                {
-                    initInventoryTable();
-                }
-                else
-                {
-                    initItemsTable();
-                }
-
-            }
+            await initItemsTableAsync();
         }
 
         private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -386,6 +402,8 @@ namespace POS.UserControls
                 addVariationsBtn.Enabled = currLogin.CanEditProduct;
                 addItemBtn.Enabled = currLogin.CanEditItem;
                 editItemBtn.Enabled = currLogin.CanEditItem;
+                stockinBtn.Enabled = currLogin.CanStockIn;
+
             }
             catch
             {
@@ -402,7 +420,7 @@ namespace POS.UserControls
             if (!currLogin.CanEditProduct)
                 return;
 
-            var type = itemsTable.SelectedCells[4].Value.ToString();
+            var type = itemsTable.SelectedCells[4].Value?.ToString();
             addVariationsBtn.Enabled = type != ItemType.Hardware.ToString() ? false : true;
         }
 
@@ -430,6 +448,23 @@ namespace POS.UserControls
             }
 
             itemsTable.Rows.RemoveAt(e.RowIndex);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (var s = new StockinForm())
+            {
+                //s.OnSave += S_OnSave;
+                if (s.ShowDialog() == DialogResult.OK)
+                {
+                    var init = initItemsTableAsync();
+                }
+            }
+        }
+
+        private void S_OnSave(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

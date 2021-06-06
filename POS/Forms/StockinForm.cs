@@ -32,16 +32,29 @@ namespace POS.Forms
             InitializeComponent();
         }
 
-        void SetTable()
+        private async Task SetTable()
         {
-            itemsTable.Rows.Clear();
-            using (var p = new POSEntities())
+            itemsTable.InvokeIfRequired(() => { itemsTable.Rows.Clear(); });
+
+            try
             {
-                foreach (var i in p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()))
-                    itemsTable.Rows.Add(i.Item?.Barcode, i.Item?.Name, i.Cost, i.Supplier?.Name);
+                using (var p = new POSEntities())
+                {
+                    foreach (var i in p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()))
+                    {
+                        itemsTable.InvokeIfRequired(() => itemsTable.Rows.Add(i.Item?.Barcode, i.Item?.Name, i.Cost, i.Supplier?.Name));
+                    }
+                }
             }
+            catch
+            {
+
+            }
+
+            await Task.CompletedTask;
+
         }
-        
+
         void setAutoComplete()
         {
             using (var p = new POSEntities())
@@ -50,11 +63,12 @@ namespace POS.Forms
             }
         }
 
-        private void StockinForm_Load(object sender, EventArgs e)
+        private async void StockinForm_Load(object sender, EventArgs e)
         {
-            SetTable();
-            setAutoComplete();
             createItemBtn.Enabled = currLogin.CanEditItem;
+            setAutoComplete();
+
+            await SetTable();
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
@@ -175,9 +189,9 @@ namespace POS.Forms
                 }
                 p.SaveChanges();
 
-                OnSave?.Invoke(this, null);
-                MessageBox.Show("Saved.");
-                this.Close();
+                //OnSave?.Invoke(this, null);
+                MessageBox.Show("Saved.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
             }
         }
 
@@ -202,7 +216,7 @@ namespace POS.Forms
             return false;
         }
 
-        Product selectedProduct;        
+        Product selectedProduct;
 
         void addItem()
         {
@@ -267,7 +281,7 @@ namespace POS.Forms
             if (e.Shift && e.KeyCode == Keys.Enter)
             {
                 addBtn.PerformClick();
-                e.SuppressKeyPress = true;  
+                e.SuppressKeyPress = true;
             }
             if (e.Control && e.KeyCode == Keys.Enter)
             {
@@ -291,10 +305,10 @@ namespace POS.Forms
             }
         }
 
-        private void Additem_OnSave(object sender, EventArgs e)
+        private async void Additem_OnSave(object sender, EventArgs e)
         {
-            SetTable();
             setAutoComplete();
+            await SetTable();
         }
 
         private void searchControl1_OnSearch(object sender, SearchEventArgs e)
@@ -332,7 +346,7 @@ namespace POS.Forms
 
         private void serialNumber_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter && barcode.Text != string.Empty)
+            if (e.KeyCode == Keys.Enter && barcode.Text != string.Empty)
             {
                 addItem();
             }

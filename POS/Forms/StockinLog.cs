@@ -17,22 +17,36 @@ namespace POS.Forms
             InitializeComponent();
         }
 
-        private void StockinLog_Load(object sender, EventArgs e)
+        private async void StockinLog_Load(object sender, EventArgs e)
         {
             using (var p = new POSEntities())
             {
                 var namegroup = p.StockinHistories.GroupBy(x => x.ItemName);
 
                 searchControl1.SetAutoComplete(namegroup.Select(x => x.Key).ToArray());
-                foreach (var i in p.StockinHistories.OrderByDescending(x => x.Date))
-                    histTable.Rows.Add(i.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
-                                       i.LoginUsername,
-                                       i.ItemName,
-                                       i.SerialNumber,
-                                       i.Quantity,
-                                       i.Cost,
-                                       i.Supplier);
+
+                var rows = createRow(p.StockinHistories);
+
+                histTable.Rows.AddRange(await rows);                            
             }
+        }
+
+        private async Task<DataGridViewRow[]> createRow(IEnumerable<StockinHistory> s)
+        {
+            DataGridViewRow[] row = null;
+            await Task.Run(() =>
+            {
+                row = s.Select(x => histTable.createRow(
+                    x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                    x.LoginUsername,
+                    x.ItemName,
+                    x.SerialNumber,
+                    x.Quantity,
+                    x.Cost,
+                    x.Supplier
+                    )).ToArray();
+            });
+            return row;
         }
 
         private void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)

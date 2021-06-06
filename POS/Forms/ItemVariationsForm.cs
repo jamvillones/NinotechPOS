@@ -52,7 +52,7 @@ namespace POS.Forms
                 supplier.Items.AddRange(p.Suppliers.Where(x => x.Products.FirstOrDefault(y => y.Item.Barcode == target.Barcode) == null).Select(x => x.Name).ToArray());
                 foreach (var i in p.Products.Where(x => x.Item.Barcode == target.Barcode))
                 {
-                    varTable.Rows.Add(i.Id, i.Supplier.Name, i.Cost, "Delete");
+                    varTable.Rows.Add(i.Id, i.Supplier?.Name, i.Cost, "Delete");
                 }
             }
         }

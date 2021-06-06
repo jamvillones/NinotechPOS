@@ -28,7 +28,7 @@ namespace POS.Forms
                 Id = prod.Id;
                 barcode.Text = prod.Item.Barcode;
                 itemName.Text = prod.Item.Name;
-                supplier.Text = prod.Supplier.Name;
+                supplier.Text = prod.Supplier?.Name;
                 cost.Text = prod.Cost.ToString();
 
                 var refInv = p.InventoryItems.Where(x => x.Product.Id == prod.Id);

@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaleDetails));
             this.itemsPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,7 +59,7 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.saleType = new System.Windows.Forms.TextBox();
             this.addPaymentGroup = new System.Windows.Forms.GroupBox();
-            this.addPayment = new System.Windows.Forms.NumericUpDown();
+            this.paymentNum = new System.Windows.Forms.NumericUpDown();
             this.addPaymentButton = new System.Windows.Forms.Button();
             this.remainGroup = new System.Windows.Forms.GroupBox();
             this.remaining = new System.Windows.Forms.TextBox();
@@ -68,11 +68,11 @@
             this.soldBy = new System.Windows.Forms.TextBox();
             this.voidBtn = new System.Windows.Forms.Button();
             this.editItemsBtn = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.SaleId = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.doc = new System.Drawing.Printing.PrintDocument();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.itemsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -83,10 +83,11 @@
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.addPaymentGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.addPayment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).BeginInit();
             this.remainGroup.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox9.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // itemsPanel
@@ -100,7 +101,7 @@
             this.itemsPanel.Controls.Add(this.itemsTable);
             this.itemsPanel.Location = new System.Drawing.Point(12, 229);
             this.itemsPanel.Name = "itemsPanel";
-            this.itemsPanel.Size = new System.Drawing.Size(714, 166);
+            this.itemsPanel.Size = new System.Drawing.Size(714, 203);
             this.itemsPanel.TabIndex = 2;
             // 
             // label1
@@ -127,14 +128,14 @@
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.itemsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column2,
@@ -144,14 +145,14 @@
             this.Column6,
             this.Column7,
             this.Column5});
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle5;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.DarkGray;
             this.itemsTable.Location = new System.Drawing.Point(3, 21);
@@ -161,7 +162,7 @@
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.itemsTable.Size = new System.Drawing.Size(704, 138);
+            this.itemsTable.Size = new System.Drawing.Size(704, 175);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
             // 
@@ -183,8 +184,8 @@
             // Column3
             // 
             this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column3.HeaderText = "Quantity";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -193,8 +194,8 @@
             // Column4
             // 
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column4.HeaderText = "Price";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
@@ -209,8 +210,8 @@
             // Column7
             // 
             this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Column7.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Column7.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column7.HeaderText = "Total";
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
@@ -276,7 +277,7 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.total);
-            this.groupBox2.Location = new System.Drawing.Point(579, 401);
+            this.groupBox2.Location = new System.Drawing.Point(579, 438);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(146, 47);
             this.groupBox2.TabIndex = 13;
@@ -300,7 +301,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.amountRecieved);
-            this.groupBox1.Location = new System.Drawing.Point(427, 401);
+            this.groupBox1.Location = new System.Drawing.Point(427, 438);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(146, 47);
             this.groupBox1.TabIndex = 14;
@@ -393,36 +394,35 @@
             // addPaymentGroup
             // 
             this.addPaymentGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addPaymentGroup.Controls.Add(this.addPayment);
+            this.addPaymentGroup.Controls.Add(this.paymentNum);
             this.addPaymentGroup.Controls.Add(this.addPaymentButton);
-            this.addPaymentGroup.Location = new System.Drawing.Point(12, 401);
+            this.addPaymentGroup.Location = new System.Drawing.Point(12, 438);
             this.addPaymentGroup.Name = "addPaymentGroup";
             this.addPaymentGroup.Size = new System.Drawing.Size(257, 47);
             this.addPaymentGroup.TabIndex = 14;
             this.addPaymentGroup.TabStop = false;
             this.addPaymentGroup.Text = "Add Payment";
             // 
-            // addPayment
+            // paymentNum
             // 
-            this.addPayment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.paymentNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.addPayment.DecimalPlaces = 2;
-            this.addPayment.Location = new System.Drawing.Point(6, 21);
-            this.addPayment.Maximum = new decimal(new int[] {
+            this.paymentNum.DecimalPlaces = 2;
+            this.paymentNum.Location = new System.Drawing.Point(6, 21);
+            this.paymentNum.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
-            this.addPayment.Name = "addPayment";
-            this.addPayment.Size = new System.Drawing.Size(195, 20);
-            this.addPayment.TabIndex = 2;
-            this.addPayment.ThousandsSeparator = true;
-            this.addPayment.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.paymentNum.Name = "paymentNum";
+            this.paymentNum.Size = new System.Drawing.Size(195, 20);
+            this.paymentNum.TabIndex = 2;
+            this.paymentNum.ThousandsSeparator = true;
+            this.paymentNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentNum_KeyDown);
             // 
             // addPaymentButton
             // 
             this.addPaymentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addPaymentButton.Enabled = false;
             this.addPaymentButton.Location = new System.Drawing.Point(207, 18);
             this.addPaymentButton.Name = "addPaymentButton";
             this.addPaymentButton.Size = new System.Drawing.Size(41, 23);
@@ -435,7 +435,7 @@
             // 
             this.remainGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.remainGroup.Controls.Add(this.remaining);
-            this.remainGroup.Location = new System.Drawing.Point(275, 401);
+            this.remainGroup.Location = new System.Drawing.Point(275, 438);
             this.remainGroup.Name = "remainGroup";
             this.remainGroup.Size = new System.Drawing.Size(146, 47);
             this.remainGroup.TabIndex = 15;
@@ -457,10 +457,9 @@
             // 
             // recHistBtn
             // 
-            this.recHistBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.recHistBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.recHistBtn.Location = new System.Drawing.Point(12, 461);
+            this.recHistBtn.Location = new System.Drawing.Point(311, 6);
             this.recHistBtn.Name = "recHistBtn";
             this.recHistBtn.Size = new System.Drawing.Size(146, 23);
             this.recHistBtn.TabIndex = 16;
@@ -494,11 +493,10 @@
             // 
             // voidBtn
             // 
-            this.voidBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.voidBtn.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.voidBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.voidBtn.ForeColor = System.Drawing.Color.Black;
-            this.voidBtn.Location = new System.Drawing.Point(579, 461);
+            this.voidBtn.Location = new System.Drawing.Point(6, 6);
             this.voidBtn.Name = "voidBtn";
             this.voidBtn.Size = new System.Drawing.Size(147, 23);
             this.voidBtn.TabIndex = 17;
@@ -508,26 +506,15 @@
             // 
             // editItemsBtn
             // 
-            this.editItemsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.editItemsBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.editItemsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.editItemsBtn.Location = new System.Drawing.Point(427, 461);
+            this.editItemsBtn.Location = new System.Drawing.Point(159, 6);
             this.editItemsBtn.Name = "editItemsBtn";
             this.editItemsBtn.Size = new System.Drawing.Size(146, 23);
             this.editItemsBtn.TabIndex = 17;
             this.editItemsBtn.Text = "Edit Items";
             this.editItemsBtn.UseVisualStyleBackColor = false;
             this.editItemsBtn.Click += new System.EventHandler(this.editItemsBtn_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(12, 454);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(714, 1);
-            this.panel1.TabIndex = 18;
             // 
             // groupBox9
             // 
@@ -536,7 +523,7 @@
             this.groupBox9.Controls.Add(this.SaleId);
             this.groupBox9.Location = new System.Drawing.Point(13, 12);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(380, 47);
+            this.groupBox9.Size = new System.Drawing.Size(713, 47);
             this.groupBox9.TabIndex = 19;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Sale Id";
@@ -549,16 +536,17 @@
             this.SaleId.Location = new System.Drawing.Point(7, 28);
             this.SaleId.Name = "SaleId";
             this.SaleId.ReadOnly = true;
-            this.SaleId.Size = new System.Drawing.Size(367, 13);
+            this.SaleId.Size = new System.Drawing.Size(700, 13);
             this.SaleId.TabIndex = 0;
             this.SaleId.TabStop = false;
             // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(524, 12);
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Location = new System.Drawing.Point(463, 6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(201, 23);
+            this.button2.Size = new System.Drawing.Size(146, 23);
             this.button2.TabIndex = 21;
             this.button2.Text = "Print Receipt";
             this.button2.UseVisualStyleBackColor = true;
@@ -569,18 +557,27 @@
             this.doc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.doc_BeginPrint);
             this.doc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.doc_PrintPage);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.voidBtn);
+            this.flowLayoutPanel1.Controls.Add(this.editItemsBtn);
+            this.flowLayoutPanel1.Controls.Add(this.recHistBtn);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 498);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(738, 35);
+            this.flowLayoutPanel1.TabIndex = 18;
+            // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 496);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(738, 533);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.groupBox9);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.voidBtn);
             this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.recHistBtn);
-            this.Controls.Add(this.editItemsBtn);
             this.Controls.Add(this.remainGroup);
             this.Controls.Add(this.addPaymentGroup);
             this.Controls.Add(this.groupBox5);
@@ -618,13 +615,14 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.addPaymentGroup.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.addPayment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).EndInit();
             this.remainGroup.ResumeLayout(false);
             this.remainGroup.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -650,7 +648,7 @@
         private System.Windows.Forms.TextBox saleType;
         private System.Windows.Forms.GroupBox addPaymentGroup;
         private System.Windows.Forms.Button addPaymentButton;
-        private System.Windows.Forms.NumericUpDown addPayment;
+        private System.Windows.Forms.NumericUpDown paymentNum;
         private System.Windows.Forms.GroupBox remainGroup;
         private System.Windows.Forms.TextBox remaining;
         private System.Windows.Forms.Button recHistBtn;
@@ -665,10 +663,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Button voidBtn;
         private System.Windows.Forms.Button editItemsBtn;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.TextBox SaleId;
         private System.Windows.Forms.Button button2;
         private System.Drawing.Printing.PrintDocument doc;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

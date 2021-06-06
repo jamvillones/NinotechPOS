@@ -58,14 +58,6 @@
             // 
             this.details.Size = new System.Drawing.Size(375, 216);
             // 
-            // sellingPrice
-            // 
-            this.sellingPrice.Maximum = new decimal(new int[] {
-            1410065407,
-            2,
-            0,
-            0});
-            // 
             // itemType
             // 
             this.itemType.SelectedIndexChanged += new System.EventHandler(this.itemType_SelectedIndexChanged);
@@ -82,7 +74,7 @@
             this.VariationGroup.Controls.Add(this.groupBox10);
             this.VariationGroup.Controls.Add(this.groupBox9);
             this.VariationGroup.Controls.Add(this.variationTable);
-            this.VariationGroup.Location = new System.Drawing.Point(406, 196);
+            this.VariationGroup.Location = new System.Drawing.Point(406, 167);
             this.VariationGroup.Name = "VariationGroup";
             this.VariationGroup.Size = new System.Drawing.Size(388, 242);
             this.VariationGroup.TabIndex = 8;
@@ -221,7 +213,7 @@
             // AddItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(803, 484);
+            //this.ClientSize = new System.Drawing.Size(803, 484);
             this.Controls.Add(this.VariationGroup);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddItemForm";

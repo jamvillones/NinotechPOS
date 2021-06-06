@@ -170,7 +170,7 @@
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.details);
-            this.groupBox6.Location = new System.Drawing.Point(12, 196);
+            this.groupBox6.Location = new System.Drawing.Point(12, 167);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(782, 242);
             this.groupBox6.TabIndex = 7;
@@ -232,14 +232,16 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.saveBtn.Location = new System.Drawing.Point(364, 449);
+            this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.saveBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.saveBtn.Location = new System.Drawing.Point(12, 417);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.Size = new System.Drawing.Size(169, 23);
             this.saveBtn.TabIndex = 0;
             this.saveBtn.TabStop = false;
             this.saveBtn.Text = "Save";
-            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // openFileDialog
@@ -276,7 +278,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 484);
+            this.ClientSize = new System.Drawing.Size(803, 452);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.takePhotoBtn);
