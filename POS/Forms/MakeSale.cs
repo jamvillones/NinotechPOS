@@ -103,7 +103,9 @@ namespace POS.Forms
             for (int i = 0; i < cartTable.RowCount; i++)
             {
                 var row = cartTable.Rows[i];
-                if (tempItem.Barcode == row.Cells[0].Value.ToString() && tempItem.discount == Convert.ToDecimal(row.Cells[5].Value) && tempItem.Supplier == row.Cells[7].Value.ToString())
+                if (tempItem.Barcode == row.Cells[0].Value.ToString() &&
+                    tempItem.discount == Convert.ToDecimal(row.Cells[5].Value) &&
+                    tempItem.Supplier == row.Cells[7].Value?.ToString())
                 {
                     index = i;
                     return true;
@@ -151,7 +153,7 @@ namespace POS.Forms
 
                     var cartColumns = cartTable.Rows[i].Cells;
                     var itemId = cartColumns[0].Value.ToString();
-                    var itemSupp = cartColumns[7].Value.ToString();
+                    var itemSupp = cartColumns[7].Value?.ToString();
                     var serial = cartColumns[1].Value?.ToString();
 
                     s.Discount = Convert.ToDecimal(cartColumns[5].Value);
@@ -222,7 +224,7 @@ namespace POS.Forms
             tempItem.Serial = cRows.Cells[1].Value?.ToString();
             tempItem.Name = cRows.Cells[2].Value.ToString();
             tempItem.SellingPrice = Convert.ToDecimal(cRows.Cells[4].Value);
-            tempItem.Supplier = cRows.Cells[5].Value.ToString();
+            tempItem.Supplier = cRows.Cells[5].Value?.ToString();
             tempItem.discount = discount.Value;
 
             quantity.Value = string.IsNullOrEmpty(tempItem.Serial) ? quantity.Value : 1;
@@ -523,7 +525,7 @@ namespace POS.Forms
 
                     int newQuant = i.Quantity - (j == null ? 0 : (int)j.Cells[3].Value);
 
-                    itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier.Name);
+                    itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier?.Name);
                 }
             }
         }

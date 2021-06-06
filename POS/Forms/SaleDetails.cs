@@ -50,7 +50,7 @@ namespace POS.Forms
                                         x.ItemPrice,
                                         x.Discount,
                                         string.Format("₱ {0:n}", (x.Quantity * x.ItemPrice) * ((100 - x.Discount) / 100)),
-                                        x.Product.Supplier.Name);
+                                        x.Product.Supplier?.Name);
                 }
                 total.Text = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
                 amountRecieved.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
