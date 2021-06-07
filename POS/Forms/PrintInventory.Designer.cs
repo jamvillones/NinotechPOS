@@ -212,6 +212,7 @@
             this.MinimizeBox = false;
             this.Name = "PrintInventory";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Print Inventory";
             this.Load += new System.EventHandler(this.PrintInventory_Load);
