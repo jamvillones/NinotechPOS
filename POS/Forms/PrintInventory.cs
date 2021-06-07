@@ -239,7 +239,9 @@ namespace POS.Forms
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-
+            var value = (double)trackBar1.Value / 100;
+           // Console.WriteLine(value);
+            printPreviewControl1.Zoom = value;
         }
     }
 }

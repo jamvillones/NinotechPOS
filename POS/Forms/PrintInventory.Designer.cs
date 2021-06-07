@@ -68,9 +68,9 @@
             this.printPreviewControl1.Document = this.printDocument;
             this.printPreviewControl1.Location = new System.Drawing.Point(0, 0);
             this.printPreviewControl1.Name = "printPreviewControl1";
-            this.printPreviewControl1.Size = new System.Drawing.Size(787, 715);
+            this.printPreviewControl1.Size = new System.Drawing.Size(880, 715);
             this.printPreviewControl1.TabIndex = 2;
-            this.printPreviewControl1.Zoom = 0.8D;
+            this.printPreviewControl1.Zoom = 0.5D;
             // 
             // worker
             // 
@@ -83,7 +83,7 @@
             // 
             this.panel1.Controls.Add(this.flowLayoutPanel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(787, 0);
+            this.panel1.Location = new System.Drawing.Point(880, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(339, 715);
             this.panel1.TabIndex = 3;
@@ -152,7 +152,7 @@
             // 
             this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(8, 162);
+            this.button2.Location = new System.Drawing.Point(8, 150);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(321, 23);
             this.button2.TabIndex = 3;
@@ -183,7 +183,7 @@
             this.groupBox2.Controls.Add(this.trackBar1);
             this.groupBox2.Location = new System.Drawing.Point(8, 100);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(321, 56);
+            this.groupBox2.Size = new System.Drawing.Size(321, 44);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Zoom";
@@ -192,11 +192,12 @@
             // 
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trackBar1.Location = new System.Drawing.Point(3, 16);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Minimum = 1;
+            this.trackBar1.Maximum = 200;
+            this.trackBar1.Minimum = 50;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(315, 37);
+            this.trackBar1.Size = new System.Drawing.Size(315, 25);
             this.trackBar1.TabIndex = 0;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Value = 50;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
@@ -204,7 +205,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1126, 715);
+            this.ClientSize = new System.Drawing.Size(1219, 715);
             this.Controls.Add(this.printPreviewControl1);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
