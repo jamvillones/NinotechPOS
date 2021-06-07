@@ -49,10 +49,12 @@ namespace POS.UserControls
 
         public async Task InitializeAsync()
         {
-            var regT = Task.Run(() => { setRegularTableByDate(); });
             var chargedT = Task.Run(() => { setCharegedTable(); });
+            var regT = Task.Run(() => { setRegularTableByDate(); });
 
             await Task.WhenAll(regT, chargedT);
+
+            //await Task.Run(() => { setCharegedTable(); });
         }
 
         private void DefButton_Click(object sender, EventArgs e)
@@ -143,9 +145,11 @@ namespace POS.UserControls
             row.Cells[7].Value = sale.AmountRecieved < sale.GetSaleTotalPrice() ? false : true;
             return row;
         }
+
         void setCharegedTable()
         {
             Console.WriteLine("started: Charged");
+
             using (var p = posEnt)
             {
                 chargedTable.InvokeIfRequired(() => { chargedTable.Rows.Clear(); });
@@ -158,6 +162,7 @@ namespace POS.UserControls
                 var rows = sales.Select(createChargedRow).ToArray();
                 chargedTable.InvokeIfRequired(() => { chargedTable.Rows.AddRange(rows); });
             }
+
             Console.WriteLine("finished: Charged");
         }
 

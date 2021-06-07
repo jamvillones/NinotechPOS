@@ -71,6 +71,7 @@ namespace POS
             setChangingColorsBtn(inventoryBtn, repBtn);
 
             var init = Task.Run((Action)LoadButtonProperties);
+
             var t = inventoryTab.InitializeAsync();
             var r = reportTab.InitializeAsync();
 

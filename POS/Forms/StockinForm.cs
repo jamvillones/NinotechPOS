@@ -36,22 +36,21 @@ namespace POS.Forms
         {
             itemsTable.InvokeIfRequired(() => { itemsTable.Rows.Clear(); });
 
-            try
+            await Task.Run(() =>
             {
+                loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = true; });
+                searchControl.InvokeIfRequired(() => { searchControl.Enabled = false; });
+
                 using (var p = new POSEntities())
                 {
-                    foreach (var i in p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()))
-                    {
-                        itemsTable.InvokeIfRequired(() => itemsTable.Rows.Add(i.Item?.Barcode, i.Item?.Name, i.Cost, i.Supplier?.Name));
-                    }
+                    IEnumerable<Product> prod = p.Products;
+                    var rows = prod.Where(x => x.Item.Type == ItemType.Hardware.ToString()).Select(y => itemsTable.createRow(y.Item?.Barcode, y.Item.Name, y.Cost, y.Supplier?.Name)).ToArray();
+                    itemsTable.InvokeIfRequired(() => { itemsTable.Rows.AddRange(rows); });
                 }
-            }
-            catch
-            {
 
-            }
-
-            await Task.CompletedTask;
+                loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = false; });
+                searchControl.InvokeIfRequired(() => { searchControl.Enabled = true; });
+            });
 
         }
 
@@ -68,7 +67,9 @@ namespace POS.Forms
             createItemBtn.Enabled = currLogin.CanEditItem;
             setAutoComplete();
 
-            await SetTable();
+            var init = SetTable();
+
+            await init;
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
@@ -305,10 +306,10 @@ namespace POS.Forms
             }
         }
 
-        private async void Additem_OnSave(object sender, EventArgs e)
+        private void Additem_OnSave(object sender, EventArgs e)
         {
             setAutoComplete();
-            await SetTable();
+            var init = SetTable();
         }
 
         private void searchControl1_OnSearch(object sender, SearchEventArgs e)
@@ -341,7 +342,7 @@ namespace POS.Forms
 
         private void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
-            SetTable();
+            var t = SetTable();
         }
 
         private void serialNumber_KeyDown(object sender, KeyEventArgs e)
