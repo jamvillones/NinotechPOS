@@ -237,6 +237,13 @@ namespace POS
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!isClosing)
+                if (MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
             if (isLoading)
             {
                 this.Hide();

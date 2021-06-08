@@ -37,13 +37,9 @@
             this.tablePanel = new System.Windows.Forms.Panel();
             this.loadingLabelItem = new System.Windows.Forms.Label();
             this.itemsTable = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sideFlow = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
+            this.viewStockBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.stockinBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -56,6 +52,11 @@
             this.contentPanel = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.totalPriceTxt = new System.Windows.Forms.Label();
+            this.barcodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip.SuspendLayout();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
@@ -119,11 +120,11 @@
             this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn3,
+            this.barcodeCol,
             this.quantityCol,
-            this.dataGridViewTextBoxColumn4,
-            this.Column8});
+            this.priceCol,
+            this.nameCol,
+            this.typeCol});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -149,45 +150,10 @@
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             this.itemsTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.itemsTable_UserDeletingRow);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.Frozen = true;
-            this.dataGridViewTextBoxColumn1.HeaderText = "BARCODE";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 84;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "NAME";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 100;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 300;
-            // 
-            // quantityCol
-            // 
-            this.quantityCol.HeaderText = "QTY";
-            this.quantityCol.Name = "quantityCol";
-            this.quantityCol.ReadOnly = true;
-            this.quantityCol.Width = 54;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "PRICE";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column8.HeaderText = "Type";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            // 
             // sideFlow
             // 
             this.sideFlow.Controls.Add(this.button1);
+            this.sideFlow.Controls.Add(this.viewStockBtn);
             this.sideFlow.Controls.Add(this.panel1);
             this.sideFlow.Controls.Add(this.stockinBtn);
             this.sideFlow.Controls.Add(this.panel2);
@@ -221,10 +187,29 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.sellItem_Click);
             // 
+            // viewStockBtn
+            // 
+            this.viewStockBtn.BackColor = System.Drawing.Color.White;
+            this.viewStockBtn.FlatAppearance.BorderSize = 0;
+            this.viewStockBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.viewStockBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewStockBtn.Image = ((System.Drawing.Image)(resources.GetObject("viewStockBtn.Image")));
+            this.viewStockBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.viewStockBtn.Location = new System.Drawing.Point(10, 53);
+            this.viewStockBtn.Margin = new System.Windows.Forms.Padding(5);
+            this.viewStockBtn.Name = "viewStockBtn";
+            this.viewStockBtn.Size = new System.Drawing.Size(150, 33);
+            this.viewStockBtn.TabIndex = 15;
+            this.viewStockBtn.TabStop = false;
+            this.viewStockBtn.Text = "VIEW STOCK";
+            this.viewStockBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.viewStockBtn.UseVisualStyleBackColor = false;
+            this.viewStockBtn.Click += new System.EventHandler(this.viewStockBtn_Click);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(10, 53);
+            this.panel1.Location = new System.Drawing.Point(10, 96);
             this.panel1.Margin = new System.Windows.Forms.Padding(5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(150, 1);
@@ -238,7 +223,7 @@
             this.stockinBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stockinBtn.Image = ((System.Drawing.Image)(resources.GetObject("stockinBtn.Image")));
             this.stockinBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.stockinBtn.Location = new System.Drawing.Point(10, 64);
+            this.stockinBtn.Location = new System.Drawing.Point(10, 107);
             this.stockinBtn.Margin = new System.Windows.Forms.Padding(5);
             this.stockinBtn.Name = "stockinBtn";
             this.stockinBtn.Size = new System.Drawing.Size(150, 33);
@@ -252,7 +237,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Location = new System.Drawing.Point(10, 107);
+            this.panel2.Location = new System.Drawing.Point(10, 150);
             this.panel2.Margin = new System.Windows.Forms.Padding(5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(150, 1);
@@ -266,7 +251,7 @@
             this.addItemBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("addItemBtn.Image")));
             this.addItemBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addItemBtn.Location = new System.Drawing.Point(10, 118);
+            this.addItemBtn.Location = new System.Drawing.Point(10, 161);
             this.addItemBtn.Margin = new System.Windows.Forms.Padding(5);
             this.addItemBtn.Name = "addItemBtn";
             this.addItemBtn.Size = new System.Drawing.Size(150, 33);
@@ -285,7 +270,7 @@
             this.editItemBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("editItemBtn.Image")));
             this.editItemBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.editItemBtn.Location = new System.Drawing.Point(10, 161);
+            this.editItemBtn.Location = new System.Drawing.Point(10, 204);
             this.editItemBtn.Margin = new System.Windows.Forms.Padding(5);
             this.editItemBtn.Name = "editItemBtn";
             this.editItemBtn.Size = new System.Drawing.Size(150, 33);
@@ -304,7 +289,7 @@
             this.addVariationsBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addVariationsBtn.Image = ((System.Drawing.Image)(resources.GetObject("addVariationsBtn.Image")));
             this.addVariationsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.addVariationsBtn.Location = new System.Drawing.Point(10, 204);
+            this.addVariationsBtn.Location = new System.Drawing.Point(10, 247);
             this.addVariationsBtn.Margin = new System.Windows.Forms.Padding(5);
             this.addVariationsBtn.Name = "addVariationsBtn";
             this.addVariationsBtn.Size = new System.Drawing.Size(150, 33);
@@ -377,13 +362,50 @@
             // 
             this.totalPriceTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.totalPriceTxt.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPriceTxt.Location = new System.Drawing.Point(427, 58);
+            this.totalPriceTxt.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalPriceTxt.Location = new System.Drawing.Point(427, 73);
             this.totalPriceTxt.Name = "totalPriceTxt";
             this.totalPriceTxt.Size = new System.Drawing.Size(337, 14);
             this.totalPriceTxt.TabIndex = 7;
-            this.totalPriceTxt.Text = "Total Inventory Price: ₱ 1000";
+            this.totalPriceTxt.Text = "TOTAL INVENTORY PRICE: ₱ 1000";
             this.totalPriceTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // barcodeCol
+            // 
+            this.barcodeCol.Frozen = true;
+            this.barcodeCol.HeaderText = "BARCODE";
+            this.barcodeCol.Name = "barcodeCol";
+            this.barcodeCol.ReadOnly = true;
+            this.barcodeCol.Width = 84;
+            // 
+            // quantityCol
+            // 
+            this.quantityCol.HeaderText = "QTY";
+            this.quantityCol.Name = "quantityCol";
+            this.quantityCol.ReadOnly = true;
+            this.quantityCol.Width = 54;
+            // 
+            // priceCol
+            // 
+            this.priceCol.HeaderText = "PRICE";
+            this.priceCol.Name = "priceCol";
+            this.priceCol.ReadOnly = true;
+            // 
+            // nameCol
+            // 
+            this.nameCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameCol.HeaderText = "NAME";
+            this.nameCol.MinimumWidth = 100;
+            this.nameCol.Name = "nameCol";
+            this.nameCol.ReadOnly = true;
+            // 
+            // typeCol
+            // 
+            this.typeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.typeCol.HeaderText = "Type";
+            this.typeCol.Name = "typeCol";
+            this.typeCol.ReadOnly = true;
+            this.typeCol.Width = 56;
             // 
             // InventoryUC
             // 
@@ -429,10 +451,11 @@
         private System.Windows.Forms.Panel contentPanel;
         private System.Windows.Forms.Label totalPriceTxt;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        protected System.Windows.Forms.Button viewStockBtn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn barcodeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
     }
 }

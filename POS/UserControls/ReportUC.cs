@@ -79,18 +79,7 @@ namespace POS.UserControls
             }
         }
 
-        DataGridViewRow createRegularRow(Sale sale)
-        {
-            DataGridViewRow row = new DataGridViewRow();
-            row.CreateCells(saleTable);
-            row.Cells[0].Value = sale.Id;
-            row.Cells[1].Value = sale.Date.Value.ToString("MMM dd, yyyy hh:mm: tt");
-            row.Cells[2].Value = sale.Login?.Username;
-            row.Cells[3].Value = sale.Customer.Name;
-            row.Cells[4].Value = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
 
-            return row;
-        }
         POSEntities posEnt => new POSEntities();
         void setRegularTableByDate()
         {
@@ -131,18 +120,32 @@ namespace POS.UserControls
             Console.WriteLine("finished: Regular");
         }
 
-        DataGridViewRow createChargedRow(Sale sale)
+        DataGridViewRow createRegularRow(Sale sale)
         {
-            var row = new DataGridViewRow();
-            row.CreateCells(chargedTable);
+            DataGridViewRow row = new DataGridViewRow();
+            row.CreateCells(saleTable);
             row.Cells[0].Value = sale.Id;
-            row.Cells[1].Value = sale.Date.Value.ToString("MMMM dd, yyyy hh:mm tt");
+            row.Cells[1].Value = sale.Date.Value.ToString("MMM dd, yyyy hh:mm: tt");
             row.Cells[2].Value = sale.Login?.Username;
             row.Cells[3].Value = sale.Customer.Name;
             row.Cells[4].Value = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
-            row.Cells[5].Value = string.Format("₱ {0:n}", sale.AmountRecieved);
-            row.Cells[6].Value = string.Format("₱ {0:n}", remaining(sale.AmountRecieved ?? 0, sale.GetSaleTotalPrice()));
-            row.Cells[7].Value = sale.AmountRecieved < sale.GetSaleTotalPrice() ? false : true;
+
+            return row;
+        }
+        DataGridViewRow createChargedRow(Sale sale)
+        {
+            var row = new DataGridViewRow();
+            row.CreateCells(
+                chargedTable,
+                sale.Id,
+                sale.Customer.Name,
+                sale.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                string.Format("₱ {0:n}", sale.GetSaleTotalPrice()),
+                string.Format("₱ {0:n}", sale.AmountRecieved),
+                string.Format("₱ {0:n}", remaining(sale.AmountRecieved ?? 0, sale.GetSaleTotalPrice())),
+                sale.Login?.Username,
+                sale.AmountRecieved < sale.GetSaleTotalPrice() ? false : true
+            );
             return row;
         }
 

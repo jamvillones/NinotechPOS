@@ -61,7 +61,8 @@ namespace POS.UserControls
             {
                 return;
             }
-            if (itemsTable.SelectedCells[2].Value.ToString() == "EMPTY")
+
+            if (itemsTable.SelectedCells[quantityCol.Index].Value.ToString() == "EMPTY")
             {
                 using (var s = new MakeSale())
                 {
@@ -102,10 +103,12 @@ namespace POS.UserControls
             }
         }
 
-        object getValueByCurrentRowAndSpecificColumn(DataGridView target, int column)
-        {
-            return target.Rows[target.SelectedCells[0].RowIndex].Cells[column].Value;
-        }
+        //object getValueByCurrentRowAndSpecificColumn(DataGridView target, int column)
+        //{
+        //    return target.Rows[target.SelectedCells[0].RowIndex].Cells[column].Value;
+        //}
+
+        string selectedBarcode => itemsTable.SelectedCells[0].Value.ToString();
 
         private void addItemBtn_Click(object sender, EventArgs e)
         {
@@ -161,9 +164,9 @@ namespace POS.UserControls
 
             row.CreateCells(itemsTable,
                  x.Barcode,
-                 x.Name,
                  q,
                  string.Format("₱ {0:n}", x.SellingPrice),
+                 x.Name,
                  x.Type
                 );
 
@@ -192,7 +195,7 @@ namespace POS.UserControls
                 });
                 decimal total = p.InventoryItems.Select(x => x.Quantity * x.Product.Item.SellingPrice).DefaultIfEmpty(0).Sum();
 
-                totalPriceTxt.InvokeIfRequired(() => { totalPriceTxt.Text = "Total inventory price: " + string.Format("₱ {0:n}", total); });
+                totalPriceTxt.InvokeIfRequired(() => { totalPriceTxt.Text = "TOTAL INVENTORY PRICE: " + string.Format("₱ {0:n}", total); });
             }
 
             ///off the loading label
@@ -249,7 +252,7 @@ namespace POS.UserControls
             using (var editItem = new EditItemForm())
             {
                 editItem.OnSave += Onsave_Callback;
-                editItem.GetBarcode(getValueByCurrentRowAndSpecificColumn(itemsTable, 0).ToString());
+                editItem.GetBarcode(selectedBarcode);
                 editItem.ShowDialog();
             }
         }
@@ -435,6 +438,18 @@ namespace POS.UserControls
         private void S_OnSave(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
+        }
+
+        private void viewStockBtn_Click(object sender, EventArgs e)
+        {
+            if (itemsTable.RowCount == 0)
+                return;
+
+            using (var inventoryView = new InventoryItemView())
+            {
+                inventoryView.SetItemId(selectedBarcode);
+                inventoryView.ShowDialog();
+            }
         }
     }
 }

@@ -76,7 +76,7 @@ namespace POS.Forms
             Graphics g = e.Graphics;
             Rectangle pageNumberRect = new Rectangle(0, 0, area.Width, 40);
             farFormat.Alignment = StringAlignment.Far;
-            g.DrawString("Date Printed: " + DateTime.Now.ToString("MMM/d/yyyy hh:mm tt").ToUpper()+"\nUser: "+UserManager.instance.currentLogin.Username, contentFont, Brushes.Black, pageNumberRect);
+            g.DrawString("Date Printed: " + DateTime.Now.ToString("MMM/d/yyyy hh:mm tt").ToUpper() + "\nUser: " + UserManager.instance.currentLogin.Username, contentFont, Brushes.Black, pageNumberRect);
             g.DrawString("Page: " + pageCount, contentFont, Brushes.Black, pageNumberRect, farFormat);
             int colHeight = (int)g.MeasureString("Item Name", contentFont).Height;
 
@@ -161,7 +161,6 @@ namespace POS.Forms
                 index++;
             }
 
-            numericUpDown1.Maximum = pageCount;
             index = 0;
         }
 
@@ -240,7 +239,7 @@ namespace POS.Forms
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             var value = (double)trackBar1.Value / 100;
-           // Console.WriteLine(value);
+            // Console.WriteLine(value);
             printPreviewControl1.Zoom = value;
         }
     }

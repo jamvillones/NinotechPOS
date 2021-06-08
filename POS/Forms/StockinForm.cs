@@ -45,7 +45,15 @@ namespace POS.Forms
                 {
                     IEnumerable<Product> prod = p.Products;
                     var rows = prod.Where(x => x.Item.Type == ItemType.Hardware.ToString()).Select(y => itemsTable.createRow(y.Item?.Barcode, y.Item.Name, y.Cost, y.Supplier?.Name)).ToArray();
-                    itemsTable.InvokeIfRequired(() => { itemsTable.Rows.AddRange(rows); });
+
+
+                    itemsTable.InvokeIfRequired(() =>
+                    {
+                        if (itemsTable.IsDisposed || itemsTable.Disposing)                        
+                            return;
+                        
+                        itemsTable.Rows.AddRange(rows);
+                    });
                 }
 
                 loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = false; });

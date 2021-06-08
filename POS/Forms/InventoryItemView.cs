@@ -35,10 +35,10 @@ namespace POS.Forms
                 var item = p.Items.FirstOrDefault(x => x.Barcode == barcode);
                 barcodeField.Text = item.Barcode;
                 itemName.Text = item.Name;
-                sellingPrice.Text = string.Format("₱ {0:n}", item.SellingPrice);
+               // sellingPrice.Text = string.Format("₱ {0:n}", item.SellingPrice);
 
                 //var invItem = p.InventoryItems.Where(x => x.Product.Item.Barcode == item.Barcode);
-                quantity.Text = invItem.Sum(x => x.Quantity).ToString();
+                quantity.Text = invItem.Select(x => x.Quantity).DefaultIfEmpty(0).Sum().ToString();
                 //int counter = 0;
                 foreach (var i in invItem)
                 {

@@ -120,19 +120,19 @@
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="barcodeCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="quantityCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="dataGridViewTextBoxColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="priceCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="nameCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="typeCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
@@ -145,6 +145,16 @@
         B1jKa2x73d+n2HadcuPDPtiDLcyiD+6G1/bhltciN5dwhAs4mrWewtrP4X++tGKG4E0b2MMSRuDLvOYM
         m1CYdKXzFI6expGdugfJ/U41o6q4jU7VxfJElrtC+TdTMZ1wxbexiR34bdjuwr+ZgzUfJb3fU+rRrip+
         pe79VNILYREeJM8ECeEbPERwnYFfY7QAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="viewStockBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAARFJREFUOE+V
+        0r1LAmEAx/ErFcIG54YkHCJCaHATiaKpqamgLShprKFJlyRbQmgp6C9oKBqCoFoDh8AhWySdTIQGw+YW
+        +/7uhbv0TrgvfPB5Hnju8V4MTxHs4BFNvOECCxjbDF5RxSYyyKKEPg7gWxTaWMGkFoaaRxu66Ei7eMGE
+        OfNvGV3EzJmnZ2xj1pwF944Va+jWwhJOMaWFgK6xZw3d6sihjH0tBPQA/cN/XeEEaXxjHcNN4wdz5szT
+        InpIYQNfeEIecahz3FnD0Q7xCeeBJOxfnXiJX5xhFb5toYMabnAP3cYtdPLAVoRv+mB0ut69Hk4SSu/Z
+        2SwFhOoY3gscIVT61p3NH1oIm+65YRjG2h8ufTbWyYSYdQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="stockinBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
