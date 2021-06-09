@@ -125,7 +125,7 @@ namespace POS.UserControls
             DataGridViewRow row = new DataGridViewRow();
             row.CreateCells(saleTable);
             row.Cells[0].Value = sale.Id;
-            row.Cells[1].Value = sale.Date.Value.ToString("MMM dd, yyyy hh:mm: tt");
+            row.Cells[1].Value = sale.Date.Value.ToString("MMM d, yyyy hh:mm: tt");
             row.Cells[2].Value = sale.Login?.Username;
             row.Cells[3].Value = sale.Customer.Name;
             row.Cells[4].Value = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
@@ -139,7 +139,7 @@ namespace POS.UserControls
                 chargedTable,
                 sale.Id,
                 sale.Customer.Name,
-                sale.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                sale.Date.Value.ToString("MMM d, yyyy hh:mm tt"),
                 string.Format("₱ {0:n}", sale.GetSaleTotalPrice()),
                 string.Format("₱ {0:n}", sale.AmountRecieved),
                 string.Format("₱ {0:n}", remaining(sale.AmountRecieved ?? 0, sale.GetSaleTotalPrice())),

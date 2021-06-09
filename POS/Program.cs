@@ -18,47 +18,49 @@ namespace POS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           
-            bool backup = false;
-            bool singedOut = false;
 
-            UserManager.instance = new UserManager();
+            //bool backup = false;
+            //bool singedOut = false;
 
-            do
-            {
-                singedOut = false;
+            //UserManager.instance = new UserManager();
 
-                var login = new Forms.LoginForm();
-                Application.Run(login);
+            //do
+            //{
+            //    singedOut = false;
 
-                if (login.LoginSuccessful)
-                {
-                    login.Dispose();
-                    backup = true;
+            //    var login = new Forms.LoginForm();
+            //    Application.Run(login);
 
-                    var main = new Main();                   
+            //    if (login.LoginSuccessful)
+            //    {
+            //        login.Dispose();
+            //        backup = true;
 
-                    Application.Run(main);
+            //        var main = new Main();
 
-                    singedOut = main.IsSigneout;
-                    main.Dispose();
-                }
-                GC.Collect();
-            }
-            while (singedOut);
+            //        Application.Run(main);
 
-            if (backup)
-            {
-                try
-                {
-                    using (var p = new POSEntities())
-                        p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Backup failed.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
+            //        singedOut = main.IsSigneout;
+            //        main.Dispose();
+            //    }
+            //    GC.Collect();
+            //}
+            //while (singedOut);
+
+            //if (backup)
+            //{
+            //    try
+            //    {
+            //        using (var p = new POSEntities())
+            //            p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message, "Backup failed.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
+
+            Application.Run(new SellItem());
         }
     }
 }
