@@ -55,6 +55,7 @@ namespace POS.UserControls
         #endregion
 
         #region Control Actions
+        SellItem s = null;
         protected virtual void sellItem_Click(object sender, EventArgs e)
         {
             if (itemsTable.SelectedCells.Count == 0)
@@ -62,20 +63,38 @@ namespace POS.UserControls
                 return;
             }
 
-            if (itemsTable.SelectedCells[quantityCol.Index].Value.ToString() == "EMPTY")
+            //if (itemsTable.SelectedCells[quantityCol.Index].Value.ToString() == "EMPTY")
+            //{
+            //    using (var s = new MakeSale())
+            //    {
+            //        s.OnSave += OnInventoryChangedCallback;
+            //        s.ShowDialog();
+            //    }
+            //    return;
+            //}
+            //using (var sell = new MakeSale(itemsTable.SelectedCells[0].Value.ToString()))
+            //{
+            //    sell.OnSave += OnInventoryChangedCallback;
+            //    sell.ShowDialog();
+            //}
+            if (s != null)
             {
-                using (var s = new MakeSale())
-                {
-                    s.OnSave += OnInventoryChangedCallback;
-                    s.ShowDialog();
-                }
+                s.BringToFront();
                 return;
             }
-            using (var sell = new MakeSale(itemsTable.SelectedCells[0].Value.ToString()))
-            {
-                sell.OnSave += OnInventoryChangedCallback;
-                sell.ShowDialog();
-            }
+
+            s = new SellItem();
+            s.FormClosed += S_FormClosed;
+            s.Show();
+        }
+
+        private void S_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            var sell = sender as SellItem;
+            sell.Dispose();
+
+            s = null;
+            //throw new NotImplementedException();
         }
 
         private async void OnInventoryChangedCallback(object sender, EventArgs e)
