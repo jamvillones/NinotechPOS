@@ -556,7 +556,7 @@ namespace POS.Forms
             details.Tendered = amountRecieved.Value;
 
             for (int i = 0; i < cartTable.RowCount; i++)
-                details.Additem(cartTable[2, i].Value.ToString(), (int)cartTable[3, i].Value, (decimal)cartTable[4, i].Value, (decimal)cartTable[5, i].Value);
+                details.Additem(cartTable[2, i].Value.ToString(), cartTable[1, i].Value.ToString(),(int)cartTable[3, i].Value, (decimal)cartTable[4, i].Value, (decimal)cartTable[5, i].Value);
 
             e.FormatReciept(printAction, details);
         }

@@ -34,7 +34,7 @@ namespace POS
 
             for (int i = 1; i <= 5; i++)
             {
-                details.Additem("Lerom Ipsum", i, 2500.25m, 365);
+                details.Additem("Lerom Ipsum","serial", i, 2500.25m, 365);
             }
 
             e.FormatReciept(printAction, details);

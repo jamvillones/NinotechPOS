@@ -376,20 +376,19 @@
             this.barcodeCol.HeaderText = "BARCODE";
             this.barcodeCol.Name = "barcodeCol";
             this.barcodeCol.ReadOnly = true;
-            this.barcodeCol.Width = 84;
             // 
             // quantityCol
             // 
             this.quantityCol.HeaderText = "QTY";
             this.quantityCol.Name = "quantityCol";
             this.quantityCol.ReadOnly = true;
-            this.quantityCol.Width = 54;
             // 
             // priceCol
             // 
             this.priceCol.HeaderText = "PRICE";
             this.priceCol.Name = "priceCol";
             this.priceCol.ReadOnly = true;
+            this.priceCol.Width = 120;
             // 
             // nameCol
             // 

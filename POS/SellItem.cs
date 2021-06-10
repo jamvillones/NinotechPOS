@@ -142,5 +142,21 @@ namespace POS
         {
             // handler.OnSearch -= Handler_OnSearch;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (var checkout = new Checkout(cart))
+                checkout.ShowDialog();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            bool value = checkBox1.Checked;
+
+            foreach (var i in tableRows)
+            {
+                i.Cells[1].Value = value;
+            }
+        }
     }
 }

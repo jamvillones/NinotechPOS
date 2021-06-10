@@ -69,7 +69,7 @@ namespace POS.Misc
                 var contentsRect = new Rectangle();
 
 
-                var colSize = graphics.MeasureString("Item Name", font);
+                var colSize = graphics.MeasureString("Item Name / Serial", font);
 
                 var colRect = new Rectangle(0,
                                             secondRect.Bottom + 10,
@@ -78,7 +78,7 @@ namespace POS.Misc
 
                 //graphics.DrawRectangle(bluePen, colRect);
                 graphics.DrawLine(bluePen, new Point(0, colRect.Top), new Point(area.Width, colRect.Top));
-                graphics.DrawString("Item Name:", font, Brushes.Black, colRect);
+                graphics.DrawString("Item Name: / Serial", font, Brushes.Black, colRect);
 
                 colRect.Y = colRect.Bottom;
 
@@ -105,7 +105,7 @@ namespace POS.Misc
                 int currentY = colRect.Bottom + 2;
                 foreach (var i in details.Items)
                 {
-                    var size = graphics.MeasureString(i.Name, titleFont, area.Width);
+                    var size = graphics.MeasureString(i.Name + (i.Serial != null ? "\nSN: " + i.Serial : ""), titleFont, area.Width);
 
                     contentsRect.X = area.Left;
                     contentsRect.Y = currentY;
@@ -113,7 +113,7 @@ namespace POS.Misc
                     contentsRect.Height = (int)size.Height;
 
                     //graphics.DrawRectangle(bluePen, contentsRect);
-                    graphics.DrawString(i.Name, titleFont, Brushes.Black, contentsRect);
+                    graphics.DrawString(i.Name + (i.Serial != null ? "\nSN: " + i.Serial : ""), titleFont, Brushes.Black, contentsRect);
 
                     currentY += (int)size.Height + 2;
 
@@ -193,6 +193,7 @@ namespace POS.Misc
         public class ItemDetails
         {
             public string Name { get; set; }
+            public string Serial { get; set; }
             public int Quantity { get; set; }
             public decimal Price { get; set; }
             public decimal Discount { get; set; }
@@ -210,11 +211,12 @@ namespace POS.Misc
         public decimal GrandTotal => Items.Sum(x => x.Total);
         public decimal Change => Tendered - GrandTotal;
 
-        public void Additem(string name, int quantity, decimal price, decimal discount)
+        public void Additem(string name, string serial, int quantity, decimal price, decimal discount)
         {
             var i = new ItemDetails()
             {
                 Name = name,
+                Serial = serial,
                 Quantity = quantity,
                 Price = price,
                 Discount = discount

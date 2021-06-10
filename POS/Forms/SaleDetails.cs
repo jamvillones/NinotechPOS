@@ -231,7 +231,7 @@ namespace POS.Forms
             details.Tendered = sale.AmountRecieved.Value;
 
             for (int i = 0; i < itemsTable.RowCount; i++)
-                details.Additem(itemsTable[0, i].Value.ToString(), (int)itemsTable[2, i].Value, (decimal)itemsTable[3, i].Value, (decimal)itemsTable[4, i].Value);
+                details.Additem(itemsTable[0, i].Value.ToString(), itemsTable[1, i].Value.ToString(), (int)itemsTable[2, i].Value, (decimal)itemsTable[3, i].Value, (decimal)itemsTable[4, i].Value);
 
             e.FormatReciept(printAction, details);
         }

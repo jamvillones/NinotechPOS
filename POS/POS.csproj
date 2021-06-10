@@ -93,6 +93,12 @@
     <Compile Include="ChargedPayRecord.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Checkout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Checkout.Designer.cs">
+      <DependentUpon>Checkout.cs</DependentUpon>
+    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
@@ -388,6 +394,9 @@
     <Compile Include="UserControls\SearchControl.designer.cs">
       <DependentUpon>SearchControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Checkout.resx">
+      <DependentUpon>Checkout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConsoleSell.resx">
       <DependentUpon>ConsoleSell.cs</DependentUpon>
     </EmbeddedResource>
