@@ -56,7 +56,21 @@ namespace POS
         private void Handler_OnSearch(object sender, SearchHandler e)
         {
             e.SeachFound = true;
-            PerformSearch(e.SearchedString);
+
+            string[] parts = e.SearchedString.Split('*');
+
+            int quantity = 1;
+            string text = e.SearchedString;
+
+            if (parts.Length == 2)
+            {
+                if (int.TryParse(parts[0].Trim(), out quantity))
+                {
+                    text = parts[1].Trim();
+                }
+            }
+
+            PerformSearch(text, quantity);
         }
 
         void PerformSearch(string e)
@@ -91,6 +105,46 @@ namespace POS
                 decimal discount = (decimal)cart[discCol.Index, index].Value;
 
                 cart[qtyCol.Index, index].Value = newQuantity;
+                cart[totalCol.Index, index].Value = newQuantity * (price - discount);
+            }
+
+            updateTotal();
+        }
+
+        void PerformSearch(string e, int q)
+        {
+            label1.Visible = false;
+
+            var text = e;
+            var inventories = inventoryItems.Where(a => !tableRows.Any(b => (int)b.Cells[idCol.Index].Value == a.Id && (int)b.Cells[qtyCol.Index].Value == a.Qty));
+            var inv = inventories.FirstOrDefault(x => x.Serial == text);
+
+            if (inv == null)
+            {
+                inv = inventories.FirstOrDefault(x => x.Barcode == text);
+
+                if (inv == null)
+                {
+                    // MessageBox.Show("No item found.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    label1.Visible = true;
+                    return;
+                }
+            }
+
+            int index = getIndex(inv.Id);
+
+            if (index == -1)
+            {
+                addTable(inv, (inv.Qty == 0 ? q : (q > inv.Qty ? inv.Qty : q)));
+            }
+            else
+            {
+                int newQuantity = (int)cart[qtyCol.Index, index].Value + q;
+
+                decimal price = (decimal)cart[priceCol.Index, index].Value;
+                decimal discount = (decimal)cart[discCol.Index, index].Value;
+
+                cart[qtyCol.Index, index].Value = inv.Qty == 0 ? newQuantity : (newQuantity > inv.Qty ? inv.Qty : newQuantity);
                 cart[totalCol.Index, index].Value = newQuantity * (price - discount);
             }
 
