@@ -5,24 +5,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8b697f4d49574b6eb0435a4fde9b7de3" Name="Diagram1">
-        <EntityTypeShape EntityType="POSModel.ChargedPayRecord" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="POSModel.Customer" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="POSModel.InventoryItem" Width="1.5" PointX="13.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="POSModel.Item" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="POSModel.StockinHistory" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="POSModel.Supplier" Width="1.5" PointX="7.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="POSModel.Sale" Width="1.5" PointX="3" PointY="3.625" />
-        <EntityTypeShape EntityType="POSModel.SoldItem" Width="1.5" PointX="12.875" PointY="3.625" />
+        <EntityTypeShape EntityType="POSModel.ChargedPayRecord" Width="2.25" PointX="2.375" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="POSModel.Customer" Width="1.5" PointX="0.5" PointY="1.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="POSModel.InventoryItem" Width="1.5" PointX="9.625" PointY="1.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="POSModel.Item" Width="1.5" PointX="7.25" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="POSModel.StockinHistory" Width="1.5" PointX="9.625" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="POSModel.Supplier" Width="1.5" PointX="7.25" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="POSModel.Sale" Width="1.5" PointX="2.75" PointY="1.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="POSModel.SoldItem" Width="1.5" PointX="5" PointY="1.625" IsExpanded="false" />
         <AssociationConnector Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord" />
         <AssociationConnector Association="POSModel.FK_Sale_Customer" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Sale" />
-        <EntityTypeShape EntityType="POSModel.Product" Width="1.5" PointX="10" PointY="2.75" />
+        <EntityTypeShape EntityType="POSModel.Product" Width="1.5" PointX="7.25" PointY="1.625" IsExpanded="false" />
         <AssociationConnector Association="POSModel.FK_InventoryItem_Product" />
         <AssociationConnector Association="POSModel.FK_Product_Item" />
         <AssociationConnector Association="POSModel.FK_Product_Supplier" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Product" />
         <AssociationConnector Association="POSModel.FK_StockinHistory_InventoryItem" />
-        <EntityTypeShape EntityType="POSModel.Login" Width="1.5" PointX="5.5" PointY="6.25" />
+        <EntityTypeShape EntityType="POSModel.Login" Width="1.5" PointX="2.75" PointY="2.75" IsExpanded="false" />
         <AssociationConnector Association="POSModel.FK_Sale_Login" />
       </Diagram>
     </edmx:Diagrams>
