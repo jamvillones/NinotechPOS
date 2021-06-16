@@ -16,5 +16,6 @@ namespace POS.Interfaces
 
         void RefreshData();
         void Refresh_Callback(object sender, EventArgs e);
+        void CancelLoading();
     }
 }

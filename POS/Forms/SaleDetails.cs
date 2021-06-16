@@ -52,19 +52,19 @@ namespace POS.Forms
                                         string.Format("₱ {0:n}", (x.Quantity * x.ItemPrice) * ((100 - x.Discount) / 100)),
                                         x.Product.Supplier?.Name);
                 }
-                total.Text = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
+                total.Text = string.Format("₱ {0:n}", sale.Total);
                 amountRecieved.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
                 recHistBtn.Visible = p.ChargedPayRecords.FirstOrDefault(x => x.Sale.Id == sale.Id) != null ? true : false;
             }
 
 
-            if (saleType.Text == "Chareged" || string.IsNullOrEmpty(saleType.Text) || sale.AmountRecieved >= sale.GetSaleTotalPrice())
+            if (saleType.Text == "Chareged" || string.IsNullOrEmpty(saleType.Text) || sale.AmountRecieved >= sale.Total)
             {
                 remainGroup.Visible = false;
                 addPaymentGroup.Visible = false;
                 return;
             }
-            remaining.Text = string.Format("₱ {0:n}", (sale.GetSaleTotalPrice() - sale.AmountRecieved));
+            remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
         }
 
         void addPayment()
@@ -80,14 +80,14 @@ namespace POS.Forms
                 var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
                 s.AmountRecieved += paymentNum.Value;
 
-                if (s.AmountRecieved >= s.GetSaleTotalPrice())
-                {
+                //if (s.AmountRecieved >= s.Total)
+                //{
 
-                    s.AmountRecieved = s.GetSaleTotalPrice();
-                }
+                //    s.AmountRecieved = s.Total;
+                //}
 
                 amountRecieved.Text = string.Format("₱ {0:n}", s.AmountRecieved);
-                remaining.Text = string.Format("₱ {0:n}", (s.GetSaleTotalPrice() - s.AmountRecieved));
+                remaining.Text = string.Format("₱ {0:n}", s.Remaining);
 
                 var transaction = new ChargedPayRecord();
                 transaction.Sale = s;
@@ -98,7 +98,7 @@ namespace POS.Forms
                 p.SaveChanges();
                 OnSave?.Invoke(this, null);
 
-                MessageBox.Show(s.AmountRecieved < s.GetSaleTotalPrice() ? "Payment added." : "Amount fully Paid.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(s.AmountRecieved < s.Total ? "Payment added." : "Amount fully Paid.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -231,7 +231,7 @@ namespace POS.Forms
             details.Tendered = sale.AmountRecieved.Value;
 
             for (int i = 0; i < itemsTable.RowCount; i++)
-                details.Additem(itemsTable[0, i].Value.ToString(), itemsTable[1, i].Value.ToString(), (int)itemsTable[2, i].Value, (decimal)itemsTable[3, i].Value, (decimal)itemsTable[4, i].Value);
+                details.Additem(itemsTable[0, i].Value.ToString(), itemsTable[1, i].Value?.ToString(), (int)itemsTable[2, i].Value, (decimal)itemsTable[3, i].Value, (decimal)itemsTable[4, i].Value);
 
             e.FormatReciept(printAction, details);
         }

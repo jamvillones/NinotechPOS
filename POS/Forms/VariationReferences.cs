@@ -42,14 +42,14 @@ namespace POS.Forms
                                             i.Product.Item.SellingPrice));
                 }
 
-                var sales = p.Sales.Where(x => p.SoldItems.Any(y => y.SaleId == x.Id && y.ProductId ==Id));
+                var sales = p.Sales.Where(x => p.SoldItems.Any(y => y.SaleId == x.Id && y.ProductId == Id));
                 foreach (var i in sales)
                 {
                     soldTable.Rows.Add(i.Date.Value.ToString("MMMM, dd yyyy hh:mm tt"),
                                                              i.Customer.Name,
                                                              i.Login.Username,
                                                              string.Format("₱ {0:n}",
-                                                             i.GetSaleTotalPrice()),
+                                                             i.Total),
                                                              i.SaleType);
                 }
 

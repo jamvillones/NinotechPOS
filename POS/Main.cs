@@ -43,8 +43,8 @@ namespace POS
         {
             InitializeComponent();
         }
-        bool isLoading { get; set; } = true;
-        bool isClosing { get; set; } = false;
+        //bool isLoading { get; set; } = true;
+        //bool isClosing { get; set; } = false;
 
         /// <summary>
         /// this handles the properties of buttons depending on login
@@ -75,12 +75,16 @@ namespace POS
             var t = inventoryTab.InitializeAsync();
             var r = reportTab.InitializeAsync();
 
-            await Task.WhenAll(t, r, init);
+            await Task.WhenAll(
+                t,
+                r,
+                init
+                );
 
-            Console.WriteLine("Form initialized.");
-            isLoading = false;
-            if (isClosing)
-                this.Close();
+            Console.WriteLine("===== Form Initialized =====");
+            //isLoading = false;
+            //if (isClosing)
+            //    this.Close();
         }
 
         void setChangingColorsBtn(params Button[] buttons)
@@ -237,19 +241,20 @@ namespace POS
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!isClosing && !IsSigneout)
+            if (!IsSigneout)
                 if (MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 {
                     e.Cancel = true;
                     return;
                 }
 
-            if (isLoading)
-            {
-                this.Hide();
-                isClosing = true;
-                e.Cancel = true;
-            }
+
+            CancelLoadings(inventoryTab);           
+        }
+        void CancelLoadings(params ITab[] tabs)
+        {
+            foreach (var i in tabs)
+                i.CancelLoading();
         }
     }
 }

@@ -10,8 +10,7 @@ using System.Windows.Forms;
 using POS.Interfaces;
 using POS.Forms;
 using POS.Misc;
-
-
+using System.Threading;
 
 namespace POS.UserControls
 {
@@ -30,11 +29,24 @@ namespace POS.UserControls
 
             saleStatus.SelectedIndexChanged += saleStatus_SelectedIndexChanged;
             comboFilterType.SelectedIndexChanged += comboFilterType_SelectedIndexChanged;
+            dtFilter.ValueChanged += dtFilter_ValueChanged;
         }
 
         public void RefreshData()
         {
 
+        }
+
+        CancellationTokenSource regularSource = new CancellationTokenSource();
+        CancellationTokenSource chargedSource = new CancellationTokenSource();
+
+        public void CancelLoading()
+        {
+            if (regularSource != null)
+                regularSource.Cancel();
+
+            if (chargedSource != null)
+                chargedSource.Cancel();
         }
 
         public Control FirstControl()
@@ -49,12 +61,21 @@ namespace POS.UserControls
 
         public async Task InitializeAsync()
         {
-            var chargedT = Task.Run(() => { setCharegedTable(); });
-            var regT = Task.Run(() => { setRegularTableByDate(); });
+            var chargedT = setCharegedTable();
+            var regT = setRegularTableByDate();
 
-            await Task.WhenAll(regT, chargedT);
+            var setOther = Task.Run(() =>
+            {
+                using (var p = new POSEntities())
+                {
+                    IEnumerable<Sale> charged = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString());
+                    decimal total = charged.Select(x => x.Remaining).DefaultIfEmpty(0).Sum();
 
-            //await Task.Run(() => { setCharegedTable(); });
+                    toBeSettledTxt.InvokeIfRequired(() => { toBeSettledTxt.Text = string.Format("P {0:n}", total); });
+                }
+            });
+
+            await Task.WhenAll(chargedT, regT, setOther);
         }
 
         private void DefButton_Click(object sender, EventArgs e)
@@ -72,23 +93,28 @@ namespace POS.UserControls
             using (var saleDetails = new SaleDetails())
             {
                 saleDetails.SetId(index);
-
-                saleDetails.OnSave += (a, b) => { setCharegedTable(); };
-
+                saleDetails.OnSave += SaleDetails_OnSave;
                 saleDetails.ShowDialog();
             }
         }
 
+        private async void SaleDetails_OnSave(object sender, EventArgs e)
+        {
+            await setCharegedTable();
+        }
 
         POSEntities posEnt => new POSEntities();
-        void setRegularTableByDate()
+
+        private async Task setRegularTableByDate()
         {
             Console.WriteLine("started: Regular");
+
+            if (regularSource == null)
+                regularSource = new CancellationTokenSource();
+
             using (var p = posEnt)
             {
                 string type = SaleType.Regular.ToString();
-
-                saleTable.InvokeIfRequired(() => { saleTable.Rows.Clear(); });
 
                 IQueryable<Sale> filteredSales = p.Sales.Where(x => x.SaleType == type);
 
@@ -109,93 +135,159 @@ namespace POS.UserControls
                         break;
                 }
 
-                saleTable.InvokeIfRequired(() =>
+                try
                 {
-                    var rows = filteredSales.Select(createRegularRow).ToArray();
-                    saleTable.Rows.AddRange(rows);
-                });
+                    saleTable.InvokeIfRequired(() => { saleTable.Rows.Clear(); });
+                    var rows = await createRegularRow(filteredSales);
 
-                totalSale.InvokeIfRequired(() => { totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.GetSaleTotalPrice())); });
+                    saleTable.InvokeIfRequired(() => { saleTable.Rows.AddRange(rows); });
+                    totalSale.InvokeIfRequired(() => { totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.Total)); });
+
+                    Console.WriteLine("finished: Regular");
+                }
+                catch
+                {
+                    regularSource.Dispose();
+                    regularSource = null;
+                }
             }
-            Console.WriteLine("finished: Regular");
-        }
 
-        DataGridViewRow createRegularRow(Sale sale)
+            // await Task.Delay(5000);
+        }
+        private async Task<DataGridViewRow[]> createRegularRow(IEnumerable<Sale> sales)
         {
-            DataGridViewRow row = new DataGridViewRow();
-            row.CreateCells(saleTable);
-            row.Cells[0].Value = sale.Id;
-            row.Cells[1].Value = sale.Date.Value.ToString("MMM d, yyyy hh:mm: tt");
-            row.Cells[2].Value = sale.Login?.Username;
-            row.Cells[3].Value = sale.Customer.Name;
-            row.Cells[4].Value = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
+            var rows = new List<DataGridViewRow>();
 
-            return row;
-        }
-        DataGridViewRow createChargedRow(Sale sale)
-        {
-            var row = new DataGridViewRow();
-            row.CreateCells(
-                chargedTable,
-                sale.Id,
-                sale.Customer.Name,
-                sale.Date.Value.ToString("MMM d, yyyy hh:mm tt"),
-                string.Format("₱ {0:n}", sale.GetSaleTotalPrice()),
-                string.Format("₱ {0:n}", sale.AmountRecieved),
-                string.Format("₱ {0:n}", remaining(sale.AmountRecieved ?? 0, sale.GetSaleTotalPrice())),
-                sale.Login?.Username,
-                sale.AmountRecieved < sale.GetSaleTotalPrice() ? false : true
-            );
-            return row;
+            await Task.Run(() =>
+            {
+                try
+                {
+                    foreach (var i in sales)
+                    {
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.CreateCells(saleTable);
+                        row.Cells[0].Value = i.Id;
+                        row.Cells[1].Value = i.Date.Value.ToString("MMM d, yyyy hh:mm: tt");
+                        row.Cells[2].Value = i.Login?.Username;
+                        row.Cells[3].Value = i.Customer.Name;
+                        row.Cells[4].Value = string.Format("₱ {0:n}", i.Total);
+
+                        rows.Add(row);
+
+                        regularSource.Token.ThrowIfCancellationRequested();
+                    }
+                }
+                catch { }
+            });
+
+            regularSource.Token.ThrowIfCancellationRequested();
+
+            return rows.ToArray();
         }
 
-        void setCharegedTable()
+        private async Task setCharegedTable()
         {
             Console.WriteLine("started: Charged");
+
+            if (chargedSource == null)
+                chargedSource = new CancellationTokenSource();
 
             using (var p = posEnt)
             {
                 chargedTable.InvokeIfRequired(() => { chargedTable.Rows.Clear(); });
 
-                var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).Take(100).OrderByDescending(x => x.Date);
-                decimal total = p.Sales.ToArray().Sum(x => remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice()));
+                var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
 
-                toBeSettledTxt.InvokeIfRequired(() => { toBeSettledTxt.Text = string.Format("P {0:n}", total); });
+                try
+                {
+                    var rows = await createChargedRow(sales);
 
-                var rows = sales.Select(createChargedRow).ToArray();
-                chargedTable.InvokeIfRequired(() => { chargedTable.Rows.AddRange(rows); });
+                    chargedTable.InvokeIfRequired(() => { chargedTable.Rows.AddRange(rows); });
+
+                    Console.WriteLine("finished: Charged");
+                }
+                catch
+                {
+                    chargedSource.Dispose();
+                    chargedSource = null;
+                }
             }
-
-            Console.WriteLine("finished: Charged");
         }
 
-        decimal remaining(decimal recieved, decimal totalPrice)
+        private async Task<DataGridViewRow[]> createChargedRow(IEnumerable<Sale> sale)
         {
-            if (recieved > totalPrice)
-                return 0;
-            return totalPrice - recieved;
-        }
+            var rows = new List<DataGridViewRow>();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    foreach (var i in sale)
+                    {
+                        var row = new DataGridViewRow();
 
-        void searchChargeByName()
+                        if (!i.FullyPaid && i.AmountRecieved == 0)
+                            row.DefaultCellStyle.ForeColor = Color.DarkRed;
+
+                        else if (i.FullyPaid)
+                            row.DefaultCellStyle.ForeColor = Color.DarkGreen;
+
+                        row.CreateCells(chargedTable,
+                            i.Id,
+                            i.Customer.Name,
+                            i.Date.Value.ToString("MMM d, yyyy hh:mm tt"),
+                            string.Format("₱ {0:n}", i.Total),
+                            string.Format("₱ {0:n}", i.AmountRecieved),
+                            string.Format("₱ {0:n}", i.Remaining),
+                            i.Login?.Username,
+                            i.FullyPaid
+                        );
+
+                        //foreach (var x in sales.OrderByDescending(y => y.Id))
+                        //    chargedTable.Rows.Add(x.Id,
+                        //                          x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                        //                          x.Login?.Username,
+                        //                          x.Customer.Name,
+                        //                          string.Format("₱ {0:n}", x.Total),
+                        //                          string.Format("₱ {0:n}", x.AmountRecieved),
+                        //                          string.Format("₱ {0:n}", x.Remaining),
+                        //                          x.Remaining > 0 ? false : true);
+
+                        rows.Add(row);
+
+                        chargedSource.Token.ThrowIfCancellationRequested();
+                    }
+                }
+                catch { }
+            });
+
+            chargedSource.Token.ThrowIfCancellationRequested();
+
+            return rows.ToArray();
+        }
+        //decimal remaining(decimal recieved, decimal totalPrice)
+        //{
+        //    if (recieved > totalPrice)
+        //        return 0;
+
+        //    return totalPrice - recieved;
+        //}
+
+        private async void searchChargeByName()
         {
             chargedTable.Rows.Clear();
+
             using (var p = new POSEntities())
             {
                 var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString() && x.Customer.Name.Contains(chargedSaleSearch.Text)).OrderBy(x => x.Date);
-                //ids = sales.Select(x => x.Id).ToArray();
-                foreach (var x in sales)
-                    chargedTable.Rows.Add(x.Id,
-                                          x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
-                                          x.Login?.Username,
-                                          x.Customer.Name,
-                                          string.Format("₱ {0:n}", x.GetSaleTotalPrice()),
-                                          string.Format("₱ {0:n}", x.AmountRecieved),
-                                          string.Format("₱ {0:n}", remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice())),
-                                          x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
+
+                var r = await createChargedRow(sales);
+
+                chargedTable.Rows.AddRange(r);
             }
 
         }
         bool searchMade { get; set; } = false;
+
         private void chargedSearchBtn_Click(object sender, EventArgs e)
         {
             //var button = sender as Button;
@@ -210,8 +302,8 @@ namespace POS.UserControls
             if (chargedSaleSearch.Text == string.Empty && searchMade)
             {
                 //using (var p = new POSEntities())
-                setCharegedTable();
                 searchMade = false;
+                var s = setCharegedTable();
             }
         }
         private void chargedSaleSearch_KeyDown(object sender, KeyEventArgs e)
@@ -224,17 +316,16 @@ namespace POS.UserControls
             if (e.KeyCode == Keys.Enter)
             {
                 //using (var p = new POSEntities())
-                setRegularTableByDate();
+                var s = setRegularTableByDate();
             }
         }
+
         public void Refresh_Callback(object sender, EventArgs e)
         {
 
-            setRegularTableByDate();
-            setCharegedTable();
-
         }
-        private void saleStatus_SelectedIndexChanged(object sender, EventArgs e)
+
+        private async void saleStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             chargedTable.Rows.Clear();
 
@@ -248,24 +339,19 @@ namespace POS.UserControls
                 }
                 if (saleStatus.Text == "Pending")
                 {
-                    sales = sales.ToArray().Where(x => x.GetSaleTotalPrice() > x.AmountRecieved);
+                    sales = sales.ToArray().Where(x => x.Remaining > 0);
                 }
                 else if (saleStatus.Text == "Paid")
                 {
-                    sales = sales.ToArray().Where(x => x.GetSaleTotalPrice() <= x.AmountRecieved);
+                    sales = sales.ToArray().Where(x => x.Remaining >= 0);
                 }
 
-                foreach (var x in sales.OrderByDescending(y => y.Id))
-                    chargedTable.Rows.Add(x.Id,
-                                          x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
-                                          x.Login?.Username,
-                                          x.Customer.Name,
-                                          string.Format("₱ {0:n}", x.GetSaleTotalPrice()),
-                                          string.Format("₱ {0:n}", x.AmountRecieved),
-                                          string.Format("₱ {0:n}", remaining(x.AmountRecieved ?? 0, x.GetSaleTotalPrice())),
-                                          x.AmountRecieved < x.GetSaleTotalPrice() ? false : true);
+                var r = await createChargedRow(sales);
+
+                chargedTable.Rows.AddRange(r);
             }
         }
+
         private void comboFilterType_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = ((ComboBox)sender).SelectedIndex;
@@ -282,12 +368,12 @@ namespace POS.UserControls
                     break;
             }
 
-            setRegularTableByDate();
+            var s = setRegularTableByDate();
         }
+
         private void dtFilter_ValueChanged(object sender, EventArgs e)
         {
-            //using (var p = new POSEntities())
-            setRegularTableByDate();
+            var s = setRegularTableByDate();
         }
     }
 }

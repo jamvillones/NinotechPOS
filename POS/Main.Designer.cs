@@ -170,7 +170,7 @@
             this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userButton.Image = ((System.Drawing.Image)(resources.GetObject("userButton.Image")));
             this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userButton.Location = new System.Drawing.Point(673, 4);
+            this.userButton.Location = new System.Drawing.Point(673, 3);
             this.userButton.Name = "userButton";
             this.userButton.Size = new System.Drawing.Size(156, 27);
             this.userButton.TabIndex = 5;

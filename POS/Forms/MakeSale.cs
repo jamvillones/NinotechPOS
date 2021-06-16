@@ -72,9 +72,15 @@ namespace POS.Forms
             InitializeComponent();
         }
 
-        public MakeSale(string barcode)
+        //public MakeSale(string barcode)
+        //{
+        //    InitializeComponent();
+        //    searchControl.SearchedText = barcode;
+        //    doSearch();
+        //}
+
+        public void SellSpecific(string barcode)
         {
-            InitializeComponent();
             searchControl.SearchedText = barcode;
             doSearch();
         }
@@ -472,7 +478,7 @@ namespace POS.Forms
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void search_OnSearch(object sender, SearchEventArgs e)
-        {            
+        {
             if (!e.SameSearch)
             {
                 PopulateTableBySearch(e);
@@ -517,7 +523,7 @@ namespace POS.Forms
                 itemsTable.Rows.Clear();
 
                 foreach (var i in filtered)
-                {                    
+                {
                     var j = cartContent.FirstOrDefault(x => inCart.Any(y =>
                      (string)y.Cells[0].Value == i.Product.Item.Barcode &&
                      (string)y.Cells[1].Value == i.SerialNumber &&
@@ -556,7 +562,7 @@ namespace POS.Forms
             details.Tendered = amountRecieved.Value;
 
             for (int i = 0; i < cartTable.RowCount; i++)
-                details.Additem(cartTable[2, i].Value.ToString(), cartTable[1, i].Value.ToString(),(int)cartTable[3, i].Value, (decimal)cartTable[4, i].Value, (decimal)cartTable[5, i].Value);
+                details.Additem(cartTable[2, i].Value.ToString(), cartTable[1, i].Value.ToString(), (int)cartTable[3, i].Value, (decimal)cartTable[4, i].Value, (decimal)cartTable[5, i].Value);
 
             e.FormatReciept(printAction, details);
         }

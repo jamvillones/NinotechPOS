@@ -19,7 +19,7 @@ namespace POS.Forms
             {
                 currentSale = p.Sales.FirstOrDefault(x => x.Id == id);
                 custName.Text = currentSale.Customer.Name;
-                total.Text = string.Format("₱ {0:n}", currentSale.GetSaleTotalPrice());
+                total.Text = string.Format("₱ {0:n}", currentSale.Total);
 
                 table.Rows.Clear();
                 var ts = p.ChargedPayRecords.Where(x => x.SaleId == currentSale.Id);

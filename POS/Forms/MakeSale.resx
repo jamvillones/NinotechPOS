@@ -117,6 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="cartTooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAARhJREFUOE/N
+        0s0rhFEUx/GjEM3fQLZsZi01sbPRlLJgZzVekpqalI3ITEMpmSwsrZjIS5m9MtsZG4nyksbGTvkHfH/n
+        eqapZ7KUX33qntute89zHvs3GUIeB7jAFSo4xyYGEUsnSrhHDlNYxR1e8YZbPGIXOt/MFo7Q5ZXZOHrC
+        0rK4wR505hR6nWcAz4gOj+ATy16FqIVp1DCKF/TBFrGtxU/OMIs1r0ImcIwlFLGDOdgGtBllEg0UvApJ
+        4hppHEKvWkfs5gzU8wc6tEHa3TwP71k9JFSQFL6w4FXIJWZQxxg0gX549LVP0OuV2TC6w9JWUMU+ytA3
+        aW3J56ZRPKF1zg/QLe/QnPXC2Jyj/PaHab/tH/bXMfsGzKM+kPcxlzMAAAAASUVORK5CYII=
+</value>
+  </data>
+  <metadata name="cartTooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -140,20 +157,6 @@
   </metadata>
   <metadata name="Column9.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAARhJREFUOE/N
-        0s0rhFEUx/GjEM3fQLZsZi01sbPRlLJgZzVekpqalI3ITEMpmSwsrZjIS5m9MtsZG4nyksbGTvkHfH/n
-        eqapZ7KUX33qntute89zHvs3GUIeB7jAFSo4xyYGEUsnSrhHDlNYxR1e8YZbPGIXOt/MFo7Q5ZXZOHrC
-        0rK4wR505hR6nWcAz4gOj+ATy16FqIVp1DCKF/TBFrGtxU/OMIs1r0ImcIwlFLGDOdgGtBllEg0UvApJ
-        4hppHEKvWkfs5gzU8wc6tEHa3TwP71k9JFSQFL6w4FXIJWZQxxg0gX549LVP0OuV2TC6w9JWUMU+ytA3
-        aW3J56ZRPKF1zg/QLe/QnPXC2Jyj/PaHab/tH/bXMfsGzKM+kPcxlzMAAAAASUVORK5CYII=
-</value>
-  </data>
-  <metadata name="cartTooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
   </metadata>
   <data name="addCustomerBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -186,7 +189,7 @@
     <value>127, 17</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>34</value>
+    <value>50</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

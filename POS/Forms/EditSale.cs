@@ -53,7 +53,7 @@ namespace POS.Forms
                                         x.Product.Supplier.Name,
                                         "Return Item");
                 }
-                total.Text = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
+                total.Text = string.Format("₱ {0:n}", sale.Total);
                 amountRecieved.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
 
                 soldTo.Text = sale.Customer.Name;
@@ -65,7 +65,7 @@ namespace POS.Forms
                 dateOfPurchase.Value = sale.Date.Value;
 
             }
-            remaining.Text = string.Format("₱ {0:n}", (sale.GetSaleTotalPrice() - sale.AmountRecieved));
+            remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -150,8 +150,8 @@ namespace POS.Forms
 
         private void itemsTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            total.Text = string.Format("₱ {0:n}", sale.GetSaleTotalPrice());
-            remaining.Text = string.Format("₱ {0:n}", (sale.GetSaleTotalPrice() - sale.AmountRecieved));
+            total.Text = string.Format("₱ {0:n}", sale.Total);
+            remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
         }
 
         private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
