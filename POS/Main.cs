@@ -43,17 +43,16 @@ namespace POS
         {
             InitializeComponent();
         }
-        //bool isLoading { get; set; } = true;
-        //bool isClosing { get; set; } = false;
 
         /// <summary>
         /// this handles the properties of buttons depending on login
         /// </summary>
-        private void LoadButtonProperties()
+        private void LoadProperties()
         {
             var cl = currLogin;
 
             userButton.InvokeIfRequired(() => { userButton.Text = cl.Username; });
+            textBox1.InvokeIfRequired(() => textBox1.Text = Properties.Settings.Default.Note);
 
             toolStrip.InvokeIfRequired(() =>
             {
@@ -61,16 +60,14 @@ namespace POS
                 loginPrivilegesToolStripMenuItem1.Enabled = cl.Username == "admin";
                 addNewSupplierToolstripbuttn.Enabled = cl.CanEditSupplier;
             });
-            //stockinToolStrpBtn.Enabled = cl.CanStockIn;
 
-            //stockInBtn.InvokeIfRequired(() => { stockInBtn.Visible = cl.CanStockIn; });
         }
 
         private async void Main_Load(object sender, EventArgs e)
         {
             setChangingColorsBtn(inventoryBtn, repBtn);
 
-            var init = Task.Run((Action)LoadButtonProperties);
+            var init = Task.Run((Action)LoadProperties);
 
             var t = inventoryTab.InitializeAsync();
             var r = reportTab.InitializeAsync();
@@ -158,23 +155,6 @@ namespace POS
 
         public bool IsSigneout { get; private set; } = false;
 
-        //private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    TryCreateLogin();
-        //}
-
-        //void TryCreateLogin()
-        //{
-        //    if (UserManager.instance.currentLogin.Username != "admin")
-        //    {
-        //        MessageBox.Show("Cannot perform this action!");
-        //        return;
-        //    }
-        //    ///add new login
-        //    using (var newlogin = new CreateLogin())
-        //        newlogin.ShowDialog();
-        //}
-
         #region toolstrips
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -249,7 +229,12 @@ namespace POS
                 }
 
 
-            CancelLoadings(inventoryTab);           
+            string n = textBox1.Text.Trim();
+            Properties.Settings.Default.Note = n == string.Empty ? null : n;
+            Properties.Settings.Default.Save();
+
+
+            CancelLoadings(inventoryTab);
         }
         void CancelLoadings(params ITab[] tabs)
         {

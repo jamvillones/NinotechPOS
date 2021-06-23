@@ -40,9 +40,6 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.tabHoldersPanel = new System.Windows.Forms.Panel();
-            this.inventoryTab = new POS.UserControls.InventoryUC();
-            this.reportTab = new POS.UserControls.ReportUC();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.changePasswordToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,11 +53,21 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.tabHoldersPanel = new System.Windows.Forms.Panel();
+            this.inventoryTab = new POS.UserControls.InventoryUC();
+            this.reportTab = new POS.UserControls.ReportUC();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.sideButtonsPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.topMostPanel.SuspendLayout();
-            this.tabHoldersPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
+            this.tabHoldersPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // sideButtonsPanel
@@ -159,7 +166,7 @@
             this.topMostPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topMostPanel.Location = new System.Drawing.Point(80, 0);
             this.topMostPanel.Name = "topMostPanel";
-            this.topMostPanel.Size = new System.Drawing.Size(920, 34);
+            this.topMostPanel.Size = new System.Drawing.Size(1095, 34);
             this.topMostPanel.TabIndex = 1;
             this.topMostPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
@@ -170,9 +177,9 @@
             this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userButton.Image = ((System.Drawing.Image)(resources.GetObject("userButton.Image")));
             this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userButton.Location = new System.Drawing.Point(673, 3);
+            this.userButton.Location = new System.Drawing.Point(903, 4);
             this.userButton.Name = "userButton";
-            this.userButton.Size = new System.Drawing.Size(156, 27);
+            this.userButton.Size = new System.Drawing.Size(105, 27);
             this.userButton.TabIndex = 5;
             this.userButton.TabStop = false;
             this.userButton.Text = "Username";
@@ -198,9 +205,9 @@
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Location = new System.Drawing.Point(830, 3);
+            this.button6.Location = new System.Drawing.Point(1014, 4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(25, 25);
+            this.button6.Size = new System.Drawing.Size(26, 25);
             this.button6.TabIndex = 2;
             this.button6.TabStop = false;
             this.button6.UseVisualStyleBackColor = true;
@@ -212,9 +219,9 @@
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(861, 3);
+            this.button4.Location = new System.Drawing.Point(1040, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(25, 25);
+            this.button4.Size = new System.Drawing.Size(26, 25);
             this.button4.TabIndex = 1;
             this.button4.TabStop = false;
             this.button4.UseVisualStyleBackColor = true;
@@ -226,41 +233,13 @@
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(892, 3);
+            this.button5.Location = new System.Drawing.Point(1066, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(25, 25);
+            this.button5.Size = new System.Drawing.Size(26, 25);
             this.button5.TabIndex = 0;
             this.button5.TabStop = false;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.exitBtn_Click);
-            // 
-            // tabHoldersPanel
-            // 
-            this.tabHoldersPanel.Controls.Add(this.inventoryTab);
-            this.tabHoldersPanel.Controls.Add(this.reportTab);
-            this.tabHoldersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabHoldersPanel.Location = new System.Drawing.Point(80, 59);
-            this.tabHoldersPanel.Name = "tabHoldersPanel";
-            this.tabHoldersPanel.Size = new System.Drawing.Size(920, 591);
-            this.tabHoldersPanel.TabIndex = 2;
-            // 
-            // inventoryTab
-            // 
-            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
-            this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
-            this.inventoryTab.Size = new System.Drawing.Size(920, 591);
-            this.inventoryTab.TabIndex = 2;
-            // 
-            // reportTab
-            // 
-            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportTab.Location = new System.Drawing.Point(0, 0);
-            this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(920, 591);
-            this.reportTab.TabIndex = 1;
-            this.reportTab.TabStop = false;
             // 
             // toolStrip
             // 
@@ -278,7 +257,7 @@
             this.toolStrip.Location = new System.Drawing.Point(80, 34);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip.Size = new System.Drawing.Size(920, 25);
+            this.toolStrip.Size = new System.Drawing.Size(1095, 25);
             this.toolStrip.TabIndex = 3;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -383,13 +362,87 @@
             this.toolStripButton2.Text = "Receipt Printer Settings";
             this.toolStripButton2.Click += new System.EventHandler(this.receiptConfig_Click);
             // 
+            // splitContainer
+            // 
+            this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.Location = new System.Drawing.Point(80, 59);
+            this.splitContainer.Name = "splitContainer";
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add(this.tabHoldersPanel);
+            this.splitContainer.Panel1MinSize = 600;
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add(this.label1);
+            this.splitContainer.Panel2.Controls.Add(this.textBox1);
+            this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(15);
+            this.splitContainer.Panel2MinSize = 200;
+            this.splitContainer.Size = new System.Drawing.Size(1095, 591);
+            this.splitContainer.SplitterDistance = 892;
+            this.splitContainer.SplitterWidth = 1;
+            this.splitContainer.TabIndex = 4;
+            // 
+            // tabHoldersPanel
+            // 
+            this.tabHoldersPanel.Controls.Add(this.inventoryTab);
+            this.tabHoldersPanel.Controls.Add(this.reportTab);
+            this.tabHoldersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabHoldersPanel.Location = new System.Drawing.Point(0, 0);
+            this.tabHoldersPanel.Name = "tabHoldersPanel";
+            this.tabHoldersPanel.Size = new System.Drawing.Size(890, 589);
+            this.tabHoldersPanel.TabIndex = 3;
+            // 
+            // inventoryTab
+            // 
+            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
+            this.inventoryTab.Name = "inventoryTab";
+            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
+            this.inventoryTab.Size = new System.Drawing.Size(890, 589);
+            this.inventoryTab.TabIndex = 2;
+            // 
+            // reportTab
+            // 
+            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportTab.Location = new System.Drawing.Point(0, 0);
+            this.reportTab.Name = "reportTab";
+            this.reportTab.Size = new System.Drawing.Size(890, 589);
+            this.reportTab.TabIndex = 1;
+            this.reportTab.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Note:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.AcceptsReturn = true;
+            this.textBox1.AcceptsTab = true;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.HideSelection = false;
+            this.textBox1.Location = new System.Drawing.Point(15, 15);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.textBox1.Size = new System.Drawing.Size(170, 559);
+            this.textBox1.TabIndex = 1;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.ClientSize = new System.Drawing.Size(1175, 650);
             this.ControlBox = false;
-            this.Controls.Add(this.tabHoldersPanel);
+            this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.topMostPanel);
             this.Controls.Add(this.sideButtonsPanel);
@@ -409,9 +462,14 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.topMostPanel.ResumeLayout(false);
             this.topMostPanel.PerformLayout();
-            this.tabHoldersPanel.ResumeLayout(false);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            this.splitContainer.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
+            this.tabHoldersPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -429,8 +487,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button settingsBtn;
         private System.Windows.Forms.Label appTitleLabel;
-        private System.Windows.Forms.Panel tabHoldersPanel;
-        private UserControls.ReportUC reportTab;
         private System.Windows.Forms.Button userButton;
        // private UserControls.InventoryUC inventoryTab;
         private System.Windows.Forms.ToolStrip toolStrip;
@@ -446,7 +502,12 @@
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.Panel tabHoldersPanel;
         private UserControls.InventoryUC inventoryTab;
+        private UserControls.ReportUC reportTab;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

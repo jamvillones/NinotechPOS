@@ -107,17 +107,27 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 var s = p.Customers.Where(x => x.Name.Contains(e.Text));
-                if (s.Count() != 0)
-                {
 
-                    e.SearchFound = true;
-                    customerTable.Rows.Clear();
-                    foreach (var i in s)
-                    {
-                        customerTable.Rows.Add(i.Id, i.Name, i.Address, i.ContactDetails, "Delete", "Transactions");
-                    }
+                if (s.Count() == 0)
+                {
+                    MessageBox.Show("Entry not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
                 }
 
+                e.SearchFound = true;
+
+                customerTable.Rows.Clear();
+                foreach (var i in s)
+                {
+                    customerTable.Rows.Add(
+                        i.Id,
+                        i.Name,
+                        i.Address,
+                        i.ContactDetails,
+                        "Delete",
+                        "Transactions"
+                        );
+                }
             }
         }
 

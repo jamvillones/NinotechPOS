@@ -27,7 +27,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 //var s = p.InventoryItems.ToArray();
-                datas = p.InventoryItems.ToArray().OrderBy(x => x.Product.Item.Barcode).Select(y => new DataListHolder(y.Product.Item.Barcode, y.SerialNumber, y.Product.Item.Name, y.Quantity)).ToList();
+                datas = p.InventoryItems.ToArray().OrderBy(x => x.Product.Item.Name).Select(y => new DataListHolder(y.Product.Item.Barcode, y.SerialNumber, y.Product.Item.Name, y.Quantity)).ToList();
             }
         }
 

@@ -110,7 +110,7 @@ namespace POS.UserControls
             Console.WriteLine("started: Regular");
 
             if (regularSource == null)
-                regularSource = new CancellationTokenSource();
+                regularSource = new CancellationTokenSource();         
 
             using (var p = posEnt)
             {
@@ -150,9 +150,7 @@ namespace POS.UserControls
                     regularSource.Dispose();
                     regularSource = null;
                 }
-            }
-
-            // await Task.Delay(5000);
+            }        
         }
         private async Task<DataGridViewRow[]> createRegularRow(IEnumerable<Sale> sales)
         {
@@ -374,6 +372,22 @@ namespace POS.UserControls
         private void dtFilter_ValueChanged(object sender, EventArgs e)
         {
             var s = setRegularTableByDate();
+        }
+
+        private void saleTable_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F5)
+            {
+                var s = setRegularTableByDate();
+            }
+        }
+
+        private void chargedTable_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                var s = setCharegedTable();
+            }
         }
     }
 }

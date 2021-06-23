@@ -320,7 +320,7 @@ namespace POS.UserControls
         bool searchItem(string s)
         {
             CancelLoading();
-            IQueryable<Item> searchElements;
+            IEnumerable<Item> searchElements;
 
             ///barcode
             using (var p = new POSEntities())
@@ -330,9 +330,12 @@ namespace POS.UserControls
                 if (searchElements.Count() == 0)
                     searchElements = p.Items.Where(x => x.Name.Contains(s));
 
+                if (!checkBox1.Checked)
+                    searchElements = searchElements.Where(x => x.QuantityInInventory != 0);
+
                 if (searchElements.Count() == 0)
                 {
-                    MessageBox.Show("Sorry, Product not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Sorry, Product not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     return false;
                 }
 
@@ -395,7 +398,6 @@ namespace POS.UserControls
                 p.Items.Remove(i);
                 p.SaveChanges();
             }
-            ///initItemsTable();
         }
 
         private void button1_Click(object sender, EventArgs e)

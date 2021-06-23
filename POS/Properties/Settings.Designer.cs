@@ -58,5 +58,17 @@ namespace POS.Properties {
                 this["ReceiptPrinter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Note {
+            get {
+                return ((string)(this["Note"]));
+            }
+            set {
+                this["Note"] = value;
+            }
+        }
     }
 }

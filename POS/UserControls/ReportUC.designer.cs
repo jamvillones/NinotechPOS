@@ -56,7 +56,6 @@
             this.chargedSaleSearch = new System.Windows.Forms.TextBox();
             this.chargedSearchBtn = new System.Windows.Forms.Button();
             this.chargedTable = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,6 +63,7 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.saleTable)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.regularSalesTab.SuspendLayout();
@@ -121,6 +121,7 @@
             this.saleTable.StandardTab = true;
             this.saleTable.TabIndex = 1;
             this.saleTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.saleTable_CellMouseDoubleClick);
+            this.saleTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.saleTable_KeyDown);
             // 
             // Column8
             // 
@@ -135,14 +136,13 @@
             this.Column1.HeaderText = "DATE";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Width = 55;
+            this.Column1.Width = 150;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "BY";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
-            this.Column4.Width = 43;
             // 
             // Column2
             // 
@@ -207,9 +207,9 @@
             "Daily",
             "Monthly",
             "Yearly"});
-            this.comboFilterType.Location = new System.Drawing.Point(301, 15);
+            this.comboFilterType.Location = new System.Drawing.Point(294, 15);
             this.comboFilterType.Name = "comboFilterType";
-            this.comboFilterType.Size = new System.Drawing.Size(81, 20);
+            this.comboFilterType.Size = new System.Drawing.Size(90, 20);
             this.comboFilterType.TabIndex = 1;
             // 
             // dtFilter
@@ -220,7 +220,6 @@
             this.dtFilter.Name = "dtFilter";
             this.dtFilter.Size = new System.Drawing.Size(289, 20);
             this.dtFilter.TabIndex = 0;
-            this.dtFilter.ValueChanged += new System.EventHandler(this.dtFilter_ValueChanged);
             // 
             // groupBox1
             // 
@@ -305,9 +304,9 @@
             "All",
             "Pending",
             "Paid"});
-            this.saleStatus.Location = new System.Drawing.Point(301, 15);
+            this.saleStatus.Location = new System.Drawing.Point(294, 15);
             this.saleStatus.Name = "saleStatus";
-            this.saleStatus.Size = new System.Drawing.Size(83, 20);
+            this.saleStatus.Size = new System.Drawing.Size(90, 20);
             this.saleStatus.TabIndex = 0;
             // 
             // chargedSaleSearch
@@ -378,18 +377,7 @@
             this.chargedTable.StandardTab = true;
             this.chargedTable.TabIndex = 1;
             this.chargedTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.saleTable_CellMouseDoubleClick);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(364, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "REPORTS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chargedTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.chargedTable_KeyDown);
             // 
             // Column9
             // 
@@ -413,6 +401,7 @@
             this.dataGridViewTextBoxColumn1.HeaderText = "DATE";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 150;
             // 
             // dataGridViewTextBoxColumn3
             // 
@@ -440,6 +429,18 @@
             this.Column7.HeaderText = "BY";
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(364, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 15);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "REPORTS";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ReportUC
             // 

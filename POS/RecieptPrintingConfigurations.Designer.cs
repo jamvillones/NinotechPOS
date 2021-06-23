@@ -60,6 +60,7 @@
             this.titlelTxt.Name = "titlelTxt";
             this.titlelTxt.Size = new System.Drawing.Size(301, 13);
             this.titlelTxt.TabIndex = 0;
+            this.titlelTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox2
             // 

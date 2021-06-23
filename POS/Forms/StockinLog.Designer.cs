@@ -40,6 +40,7 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchControl1 = new POS.UserControls.SearchControl();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.histTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,12 +88,13 @@
             this.histTable.RowHeadersVisible = false;
             this.histTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.histTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.histTable.Size = new System.Drawing.Size(671, 391);
+            this.histTable.Size = new System.Drawing.Size(846, 423);
             this.histTable.StandardTab = true;
             this.histTable.TabIndex = 2;
             // 
             // Column1
             // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column1.HeaderText = "Date/Time";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
@@ -103,7 +105,7 @@
             this.Column7.HeaderText = "By";
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
-            this.Column7.Width = 44;
+            this.Column7.Width = 50;
             // 
             // Column2
             // 
@@ -128,17 +130,18 @@
             // 
             // Column3
             // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column3.HeaderText = "Cost";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
-            this.Column3.Width = 53;
             // 
             // Column5
             // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column5.HeaderText = "Supplier";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
+            this.Column5.Width = 70;
             // 
             // searchControl1
             // 
@@ -147,16 +150,30 @@
             this.searchControl1.MinimumSize = new System.Drawing.Size(0, 28);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(219, 28);
+            this.searchControl1.Size = new System.Drawing.Size(340, 28);
             this.searchControl1.TabIndex = 3;
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Checked = false;
+            this.dateTimePicker1.CustomFormat = "MMM d, yyyy";
+            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(356, 16);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowCheckBox = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(134, 22);
+            this.dateTimePicker1.TabIndex = 4;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // StockinLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 450);
+            this.ClientSize = new System.Drawing.Size(870, 482);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.searchControl1);
             this.Controls.Add(this.histTable);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -182,5 +199,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
