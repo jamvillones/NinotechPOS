@@ -381,7 +381,7 @@
             this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(15);
             this.splitContainer.Panel2MinSize = 200;
             this.splitContainer.Size = new System.Drawing.Size(1095, 591);
-            this.splitContainer.SplitterDistance = 892;
+            this.splitContainer.SplitterDistance = 882;
             this.splitContainer.SplitterWidth = 1;
             this.splitContainer.TabIndex = 4;
             // 
@@ -392,7 +392,7 @@
             this.tabHoldersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabHoldersPanel.Location = new System.Drawing.Point(0, 0);
             this.tabHoldersPanel.Name = "tabHoldersPanel";
-            this.tabHoldersPanel.Size = new System.Drawing.Size(890, 589);
+            this.tabHoldersPanel.Size = new System.Drawing.Size(880, 589);
             this.tabHoldersPanel.TabIndex = 3;
             // 
             // inventoryTab
@@ -401,7 +401,7 @@
             this.inventoryTab.Location = new System.Drawing.Point(0, 0);
             this.inventoryTab.Name = "inventoryTab";
             this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
-            this.inventoryTab.Size = new System.Drawing.Size(890, 589);
+            this.inventoryTab.Size = new System.Drawing.Size(880, 589);
             this.inventoryTab.TabIndex = 2;
             // 
             // reportTab
@@ -409,7 +409,7 @@
             this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportTab.Location = new System.Drawing.Point(0, 0);
             this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(890, 589);
+            this.reportTab.Size = new System.Drawing.Size(880, 589);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
             // 
@@ -433,7 +433,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.textBox1.Size = new System.Drawing.Size(170, 559);
+            this.textBox1.Size = new System.Drawing.Size(180, 559);
             this.textBox1.TabIndex = 1;
             // 
             // Main

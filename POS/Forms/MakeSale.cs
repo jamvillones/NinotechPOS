@@ -238,7 +238,7 @@ namespace POS.Forms
             tempItem.Quantity = (int)quantity.Value;
 
             price.Text = tempItem.SellingPrice.ToString();
-            totalPrice.Text = tempItem.TotalPrice.ToString();
+            //totalPrice.Text = tempItem.TotalPrice.ToString();
             itemName.Text = tempItem.Name;
         }
 
@@ -388,7 +388,7 @@ namespace POS.Forms
             tempItem.discount = discount.Value;
             tempItem.SellingPrice = price.Value;
 
-            totalPrice.Text = tempItem.TotalPrice.ToString();
+            //totalPrice.Text = tempItem.TotalPrice.ToString();
         }
 
         private void addCustomerBtn_Click(object sender, EventArgs e)
@@ -543,6 +543,11 @@ namespace POS.Forms
         private void search_OnTextEmpty(object sender, EventArgs e)
         {
             itemsTable.Rows.Clear();
+
+            itemName.Text = string.Empty;
+            price.Value = 1;
+            discount.Value = 1;
+            quantity.Value = 1;
         }
 
         #region printing receipt

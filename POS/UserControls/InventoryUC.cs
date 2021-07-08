@@ -87,21 +87,26 @@ namespace POS.UserControls
         {
             if (itemsTable.SelectedCells.Count == 0)
             {
+                createSellForm();
                 return;
             }
 
+            string itemQ = itemsTable.SelectedCells[quantityCol.Index].Value.ToString();
+            string barc = itemsTable.SelectedCells[barcodeCol.Index].Value.ToString();
+
             if (s != null)
-            {
-                string itemQ = itemsTable.SelectedCells[quantityCol.Index].Value.ToString();
-                string barc = itemsTable.SelectedCells[barcodeCol.Index].Value.ToString();
-
-                if (itemQ != "EMPTY")
-                    s.SellSpecific(barc);
-
                 s.BringToFront();
 
+            else
+            {
+                createSellForm();
             }
 
+            if (itemQ != "EMPTY") s.SellSpecific(barc);
+        }
+
+        void createSellForm()
+        {
             s = new MakeSale();
             s.OnSave += S_OnSave;
             s.FormClosed += S_FormClosed;
