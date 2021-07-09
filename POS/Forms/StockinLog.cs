@@ -179,7 +179,6 @@ namespace POS.Forms
                 updateTable(e.RowIndex, qtyToMinus);
 
                 p.SaveChanges();
-
             }
         }
 
