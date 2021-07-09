@@ -41,7 +41,7 @@ namespace POS.Forms
 
                 IEnumerable<StockinHistory> s = p.StockinHistories;
 
-                if(dateTimePicker1.Checked)
+                if (dateTimePicker1.Checked)
                     s = s.Where(x => x.Date.Value.Date == dateTimePicker1.Value.Date);
 
                 var rows = await createRowAsync(s);
@@ -79,13 +79,15 @@ namespace POS.Forms
                     var row = new DataGridViewRow();
 
                     row.CreateCells(histTable,
+                        x.Id,
                         x.Date.Value.ToString("MMM d, yyyy hh:mm tt"),
                         x.LoginUsername,
                         x.ItemName,
                         x.SerialNumber,
                         x.Quantity,
                         string.Format("₱ {0:n}", x.Cost),
-                        x.Supplier
+                        x.Supplier,
+                        "Undo"
                         );
 
                     rows.Add(row);
@@ -101,7 +103,7 @@ namespace POS.Forms
             {
                 var s = p.StockinHistories.AsEnumerable().Where(x => x.ItemName.Contains(e.Text));
 
-                if(dateTimePicker1.Checked)
+                if (dateTimePicker1.Checked)
                     s = s.Where(x => x.Date.Value.Date == dateTimePicker1.Value.Date);
 
                 if (s.Count() == 0)
@@ -132,9 +134,81 @@ namespace POS.Forms
                     s = s.Where(x => x.Date.Value.Date == dateTimePicker1.Value.Date);
 
                 histTable.Rows.Clear();
-                var row = await createRowAsync(s);
-                histTable.Rows.AddRange(row);
+
+                try
+                {
+                    var row = await createRowAsync(s);
+                    histTable.Rows.AddRange(row);
+                }
+                catch
+                {
+
+                }
             }
+        }
+
+        private void histTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex != 8)
+                return;
+
+            if (MessageBox.Show("Are you sure you want to undo this action?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
+            var id = (int)histTable[0, e.RowIndex].Value;
+
+            int quantity = (int)histTable[5, e.RowIndex].Value;
+            string serial = histTable[4, e.RowIndex].Value?.ToString();
+
+            using (var p = new POSEntities())
+            {
+                var stockinHist = p.StockinHistories.FirstOrDefault(x => x.Id == id);
+                var reference = stockinHist.InventoryItem;
+
+                if (reference == null)
+                {
+                    MessageBox.Show("Item is either deleted or soldout", "Cannot undo.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int remaining = reference.Quantity - quantity;
+                int qtyToMinus = remaining < 0 ? reference.Quantity : quantity;
+
+                DecreaseInventory(p, qtyToMinus, reference);
+                DecreaseStockinHist(p, qtyToMinus, stockinHist);
+                updateTable(e.RowIndex, qtyToMinus);
+
+                p.SaveChanges();
+
+            }
+        }
+
+        void DecreaseInventory(POSEntities p, int quantity, InventoryItem i)
+        {
+            i.Quantity -= quantity;
+            if (i.Quantity <= 0)
+                p.InventoryItems.Remove(i);
+        }
+
+        void DecreaseStockinHist(POSEntities p, int quanity, StockinHistory st)
+        {
+            st.Quantity -= quanity;
+            if (st.Quantity <= 0)
+                p.StockinHistories.Remove(st);
+        }
+        void updateTable(int rowIndex, int toMinus)
+        {
+            var row = histTable.Rows[rowIndex];
+            var q = (int)row.Cells[5].Value;
+            q -= toMinus;
+
+            if (q <= 0)
+            {
+                histTable.Rows.RemoveAt(rowIndex);
+                return;
+            }
+
+            row.Cells[5].Value = q;
         }
     }
 }
