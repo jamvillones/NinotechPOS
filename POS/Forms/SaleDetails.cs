@@ -246,5 +246,24 @@ namespace POS.Forms
             if (e.KeyCode == Keys.Enter)
                 addPayment();
         }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            using (var det = new EditSaleDetails())
+            {
+                det.SaleId = sale.Id;
+
+                if (det.ShowDialog() == DialogResult.OK)
+                {
+                    using (var p = new POSEntities())
+                    {
+                        sale = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
+
+                        soldTo.Text = sale.Customer.Name;
+                        Datetext.Text = sale.Date.Value.ToString("MMMM dd, yyyy hh:mm tt");
+                    }
+                }
+            }
+        }
     }
 }

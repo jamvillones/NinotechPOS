@@ -69,7 +69,7 @@ namespace POS.Forms
         Font contentFont = new Font("Times New Roman", 10, FontStyle.Regular);
         Font columnFont = new Font("Times New Roman", 10, FontStyle.Bold);
         int index = 0;
-        int pageCount = 1;
+        int pageCount { get; set; } = 1;
 
         void PrintLayout(PrintPageEventArgs e)
         {
@@ -216,6 +216,7 @@ namespace POS.Forms
         private void printDocument_BeginPrint(object sender, PrintEventArgs e)
         {
             printAction = e.PrintAction;
+            pageCount = 1;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -241,6 +242,17 @@ namespace POS.Forms
             var value = (double)trackBar1.Value / 100;
             // Console.WriteLine(value);
             printPreviewControl1.Zoom = value;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (printPreviewControl1.StartPage > 0)
+                printPreviewControl1.StartPage--;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            printPreviewControl1.StartPage++;
         }
     }
 }
