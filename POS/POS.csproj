@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>81</ApplicationRevision>
+    <ApplicationRevision>83</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -103,6 +103,12 @@
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataListHolder.cs" />
+    <Compile Include="EditSaleDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditSaleDetails.Designer.cs">
+      <DependentUpon>EditSaleDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ConsoleSell.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -396,6 +402,9 @@
     </Compile>
     <EmbeddedResource Include="Checkout.resx">
       <DependentUpon>Checkout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditSaleDetails.resx">
+      <DependentUpon>EditSaleDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConsoleSell.resx">
       <DependentUpon>ConsoleSell.cs</DependentUpon>

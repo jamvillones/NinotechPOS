@@ -73,6 +73,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.doc = new System.Drawing.Printing.PrintDocument();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.itemsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -101,7 +102,7 @@
             this.itemsPanel.Controls.Add(this.itemsTable);
             this.itemsPanel.Location = new System.Drawing.Point(12, 229);
             this.itemsPanel.Name = "itemsPanel";
-            this.itemsPanel.Size = new System.Drawing.Size(714, 203);
+            this.itemsPanel.Size = new System.Drawing.Size(750, 203);
             this.itemsPanel.TabIndex = 2;
             // 
             // label1
@@ -162,7 +163,7 @@
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.itemsTable.Size = new System.Drawing.Size(704, 175);
+            this.itemsTable.Size = new System.Drawing.Size(740, 175);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
             // 
@@ -232,7 +233,7 @@
             this.groupBox8.Controls.Add(this.soldTo);
             this.groupBox8.Location = new System.Drawing.Point(399, 65);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(327, 47);
+            this.groupBox8.Size = new System.Drawing.Size(363, 47);
             this.groupBox8.TabIndex = 11;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Sold to";
@@ -245,14 +246,12 @@
             this.soldTo.Location = new System.Drawing.Point(7, 28);
             this.soldTo.Name = "soldTo";
             this.soldTo.ReadOnly = true;
-            this.soldTo.Size = new System.Drawing.Size(314, 13);
+            this.soldTo.Size = new System.Drawing.Size(350, 13);
             this.soldTo.TabIndex = 0;
             this.soldTo.TabStop = false;
             // 
             // groupBox7
             // 
-            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.Controls.Add(this.Datetext);
             this.groupBox7.Location = new System.Drawing.Point(12, 171);
             this.groupBox7.Name = "groupBox7";
@@ -277,7 +276,7 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.total);
-            this.groupBox2.Location = new System.Drawing.Point(579, 438);
+            this.groupBox2.Location = new System.Drawing.Point(615, 438);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(146, 47);
             this.groupBox2.TabIndex = 13;
@@ -301,7 +300,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.amountRecieved);
-            this.groupBox1.Location = new System.Drawing.Point(427, 438);
+            this.groupBox1.Location = new System.Drawing.Point(463, 438);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(146, 47);
             this.groupBox1.TabIndex = 14;
@@ -350,7 +349,7 @@
             this.groupBox4.Controls.Add(this.contact);
             this.groupBox4.Location = new System.Drawing.Point(399, 118);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(327, 47);
+            this.groupBox4.Size = new System.Drawing.Size(363, 47);
             this.groupBox4.TabIndex = 13;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Contact Details";
@@ -363,7 +362,7 @@
             this.contact.Location = new System.Drawing.Point(7, 28);
             this.contact.Name = "contact";
             this.contact.ReadOnly = true;
-            this.contact.Size = new System.Drawing.Size(314, 13);
+            this.contact.Size = new System.Drawing.Size(350, 13);
             this.contact.TabIndex = 0;
             this.contact.TabStop = false;
             // 
@@ -374,7 +373,7 @@
             this.groupBox5.Controls.Add(this.saleType);
             this.groupBox5.Location = new System.Drawing.Point(399, 171);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(327, 47);
+            this.groupBox5.Size = new System.Drawing.Size(363, 47);
             this.groupBox5.TabIndex = 14;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Sale Type";
@@ -387,7 +386,7 @@
             this.saleType.Location = new System.Drawing.Point(10, 23);
             this.saleType.Name = "saleType";
             this.saleType.ReadOnly = true;
-            this.saleType.Size = new System.Drawing.Size(311, 13);
+            this.saleType.Size = new System.Drawing.Size(347, 13);
             this.saleType.TabIndex = 0;
             this.saleType.TabStop = false;
             // 
@@ -398,7 +397,7 @@
             this.addPaymentGroup.Controls.Add(this.addPaymentButton);
             this.addPaymentGroup.Location = new System.Drawing.Point(12, 438);
             this.addPaymentGroup.Name = "addPaymentGroup";
-            this.addPaymentGroup.Size = new System.Drawing.Size(257, 47);
+            this.addPaymentGroup.Size = new System.Drawing.Size(293, 47);
             this.addPaymentGroup.TabIndex = 14;
             this.addPaymentGroup.TabStop = false;
             this.addPaymentGroup.Text = "Add Payment";
@@ -415,7 +414,7 @@
             0,
             0});
             this.paymentNum.Name = "paymentNum";
-            this.paymentNum.Size = new System.Drawing.Size(195, 20);
+            this.paymentNum.Size = new System.Drawing.Size(231, 20);
             this.paymentNum.TabIndex = 2;
             this.paymentNum.ThousandsSeparator = true;
             this.paymentNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentNum_KeyDown);
@@ -423,7 +422,7 @@
             // addPaymentButton
             // 
             this.addPaymentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addPaymentButton.Location = new System.Drawing.Point(207, 18);
+            this.addPaymentButton.Location = new System.Drawing.Point(243, 18);
             this.addPaymentButton.Name = "addPaymentButton";
             this.addPaymentButton.Size = new System.Drawing.Size(41, 23);
             this.addPaymentButton.TabIndex = 1;
@@ -435,7 +434,7 @@
             // 
             this.remainGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.remainGroup.Controls.Add(this.remaining);
-            this.remainGroup.Location = new System.Drawing.Point(275, 438);
+            this.remainGroup.Location = new System.Drawing.Point(311, 438);
             this.remainGroup.Name = "remainGroup";
             this.remainGroup.Size = new System.Drawing.Size(146, 47);
             this.remainGroup.TabIndex = 15;
@@ -459,7 +458,7 @@
             // 
             this.recHistBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.recHistBtn.Location = new System.Drawing.Point(311, 6);
+            this.recHistBtn.Location = new System.Drawing.Point(615, 6);
             this.recHistBtn.Name = "recHistBtn";
             this.recHistBtn.Size = new System.Drawing.Size(146, 23);
             this.recHistBtn.TabIndex = 16;
@@ -469,8 +468,6 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.soldBy);
             this.groupBox6.Location = new System.Drawing.Point(13, 65);
             this.groupBox6.Name = "groupBox6";
@@ -508,7 +505,7 @@
             // 
             this.editItemsBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.editItemsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.editItemsBtn.Location = new System.Drawing.Point(159, 6);
+            this.editItemsBtn.Location = new System.Drawing.Point(311, 6);
             this.editItemsBtn.Name = "editItemsBtn";
             this.editItemsBtn.Size = new System.Drawing.Size(146, 23);
             this.editItemsBtn.TabIndex = 17;
@@ -523,7 +520,7 @@
             this.groupBox9.Controls.Add(this.SaleId);
             this.groupBox9.Location = new System.Drawing.Point(13, 12);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(713, 47);
+            this.groupBox9.Size = new System.Drawing.Size(749, 47);
             this.groupBox9.TabIndex = 19;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Sale Id";
@@ -536,7 +533,7 @@
             this.SaleId.Location = new System.Drawing.Point(7, 28);
             this.SaleId.Name = "SaleId";
             this.SaleId.ReadOnly = true;
-            this.SaleId.Size = new System.Drawing.Size(700, 13);
+            this.SaleId.Size = new System.Drawing.Size(736, 13);
             this.SaleId.TabIndex = 0;
             this.SaleId.TabStop = false;
             // 
@@ -560,21 +557,34 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.voidBtn);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.editItemsBtn);
-            this.flowLayoutPanel1.Controls.Add(this.recHistBtn);
             this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Controls.Add(this.recHistBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 498);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(738, 35);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(774, 35);
             this.flowLayoutPanel1.TabIndex = 18;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(159, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(146, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Edit Details";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 533);
+            this.ClientSize = new System.Drawing.Size(774, 533);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox6);
@@ -668,5 +678,6 @@
         private System.Windows.Forms.Button button2;
         private System.Drawing.Printing.PrintDocument doc;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button button1;
     }
 }
