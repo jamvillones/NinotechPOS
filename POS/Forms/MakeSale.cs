@@ -546,7 +546,7 @@ namespace POS.Forms
 
             itemName.Text = string.Empty;
             price.Value = 1;
-            discount.Value = 1;
+            discount.Value = 0;
             quantity.Value = 1;
         }
 
