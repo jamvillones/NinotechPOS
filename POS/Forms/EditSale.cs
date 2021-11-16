@@ -44,12 +44,13 @@ namespace POS.Forms
                 SaleId.Text = sale.Id.ToString();
                 foreach (var x in soldItems)
                 {
-                    itemsTable.Rows.Add(x.Id, x.Product.Item.Name,
+                    itemsTable.Rows.Add(x.Id, 
+                        x.Product.Item.Name,
                                         x.SerialNumber,
                                         x.Quantity,
                                         string.Format("₱ {0:n}", x.ItemPrice),
-                                        x.Discount,
-                                        string.Format("₱ {0:n}", (x.Quantity * x.ItemPrice) * ((100 - x.Discount) / 100)),
+                                        string.Format("₱ {0:n}", x.Discount),
+                                        string.Format("₱ {0:n}", (x.Quantity * (x.ItemPrice-x.Discount))),
                                         x.Product.Supplier.Name,
                                         "Return Item");
                 }

@@ -51,7 +51,7 @@ namespace POS
         {
             var cl = currLogin;
 
-            userButton.InvokeIfRequired(() => { userButton.Text = cl.Username; });
+            userButton.InvokeIfRequired(() => { userButton.Text = cl.Name??"user"; });
             textBox1.InvokeIfRequired(() => textBox1.Text = Properties.Settings.Default.Note);
 
             toolStrip.InvokeIfRequired(() =>

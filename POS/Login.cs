@@ -29,6 +29,7 @@ namespace POS
         public bool CanEditInventory { get; set; }
         public bool CanStockIn { get; set; }
         public bool CanVoidSale { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }

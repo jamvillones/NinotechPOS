@@ -58,6 +58,7 @@
           <Property Name="CanEditInventory" Type="bit" Nullable="false" />
           <Property Name="CanStockIn" Type="bit" Nullable="false" />
           <Property Name="CanVoidSale" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -561,6 +562,7 @@
           <Property Name="CanEditInventory" Type="Boolean" Nullable="false" />
           <Property Name="CanStockIn" Type="Boolean" Nullable="false" />
           <Property Name="CanVoidSale" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sales" Relationship="POSModel.FK_Sale_Login" FromRole="Login" ToRole="Sale" />
         </EntityType>
         <Association Name="FK_Sale_Login">
@@ -687,6 +689,7 @@
           <EntitySetMapping Name="Logins">
             <EntityTypeMapping TypeName="POSModel.Login">
               <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CanVoidSale" ColumnName="CanVoidSale" />
                 <ScalarProperty Name="CanStockIn" ColumnName="CanStockIn" />
                 <ScalarProperty Name="CanEditInventory" ColumnName="CanEditInventory" />

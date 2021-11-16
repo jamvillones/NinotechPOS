@@ -47,6 +47,10 @@ namespace POS.Forms
 
                 login.Username = UsernameTxt.Text;
                 login.Password = PasswordTxt.Text;
+                if (!string.IsNullOrWhiteSpace(nameTxt.Text))
+                {
+                    login.Name = nameTxt.Text.Trim();
+                }
 
                 login.CanStockIn = false;
 
@@ -88,6 +92,26 @@ namespace POS.Forms
         {
             if (ConfirmPassTxt.Text == string.Empty) return;
             checkImage.Visible = SamePassword ? true : false;
+        }
+
+        private void CreateLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

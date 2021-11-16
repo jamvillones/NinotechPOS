@@ -110,7 +110,7 @@
             this.password.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password.Location = new System.Drawing.Point(7, 20);
             this.password.Name = "password";
-            this.password.PasswordChar = '*';
+            this.password.PasswordChar = '●';
             this.password.Size = new System.Drawing.Size(222, 19);
             this.password.TabIndex = 0;
             // 

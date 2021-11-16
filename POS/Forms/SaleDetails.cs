@@ -45,12 +45,13 @@ namespace POS.Forms
                 foreach (var x in soldItems.OrderBy(x => x.Product.Item.Name))
                 {
                     itemsTable.Rows.Add(x.Product.Item.Name,
-                                        x.SerialNumber,
+                                        x.SerialNumber ?? "--",
+                                        x.Product.Supplier?.Name,
                                         x.Quantity,
-                                        x.ItemPrice,
-                                        x.Discount,
-                                        string.Format("₱ {0:n}", (x.Quantity * x.ItemPrice) * ((100 - x.Discount) / 100)),
-                                        x.Product.Supplier?.Name);
+                                        string.Format("₱ {0:n}", x.ItemPrice),
+                                        string.Format("₱ {0:n}", x.Discount),
+                                        string.Format("₱ {0:n}", (x.Quantity * (x.ItemPrice - x.Discount))),
+                                        x.Quantity,x.ItemPrice,x.Discount);
                 }
                 total.Text = string.Format("₱ {0:n}", sale.Total);
                 amountRecieved.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
@@ -219,7 +220,14 @@ namespace POS.Forms
         PrintAction printAction;
         private void button2_Click(object sender, EventArgs e)
         {
-            doc.Print();
+            try
+            {
+                doc.Print();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void doc_PrintPage(object sender, PrintPageEventArgs e)
@@ -227,11 +235,17 @@ namespace POS.Forms
             ReceiptDetails details = new ReceiptDetails();
             details.ControlNumber = sale.Id.ToString();
             details.CustomerName = soldTo.Text;
-            details.TransactBy = UserManager.instance.currentLogin.Username;
+            details.TransactBy = UserManager.instance.currentLogin.Name??"User";
             details.Tendered = sale.AmountRecieved.Value;
 
             for (int i = 0; i < itemsTable.RowCount; i++)
-                details.Additem(itemsTable[0, i].Value.ToString(), itemsTable[1, i].Value?.ToString(), (int)itemsTable[2, i].Value, (decimal)itemsTable[3, i].Value, (decimal)itemsTable[4, i].Value);
+                
+                details.Additem(
+                    itemsTable[nameCol.Index, i].Value.ToString(),
+                    itemsTable[serialCol.Index, i].Value.ToString(),
+                    (int)itemsTable[actualQty.Index, i].Value,
+                    (decimal)itemsTable[actualPrice.Index, i].Value,
+                    (decimal)itemsTable[actualDiscount.Index, i].Value);
 
             e.FormatReciept(printAction, details);
         }
