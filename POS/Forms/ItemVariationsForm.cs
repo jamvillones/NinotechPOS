@@ -171,47 +171,43 @@ namespace POS.Forms
                 var solditemwiththisproduct = p.SoldItems.Where(x => x.Product.Id == variation.Id);
                 var inv = p.InventoryItems.Where(x => x.Product.Id == variation.Id);
                 bool condition = solditemwiththisproduct.Count() != 0 || inv.Count() != 0;
-                DialogResult dialog = MessageBox.Show("Are you sure you want to remove item variation of this item with supplier " + s + (condition ? "?\n\nThis will also remove record of sold items with this product or Item in inventory with this kind of Product.\n\n(Click show references to see dependencies)\n\nWould you like to choose a substitute item instead?\n\nYES - choose a replacement\nNO - proceed with removal\nCANCEL - cancel removal" : ""),
+                DialogResult dialog = MessageBox.Show("Are you sure you want to remove item variation of this item with supplier " + s + (condition ? "?\n\nThis will also remove record of sold items with this product or Item in inventory with this kind of Product.\n\n(Click show references to see dependencies)" : ""),
                                                  condition ? "Not safe to delete" : "Safe to delete",
-                                                 condition ? MessageBoxButtons.YesNoCancel : MessageBoxButtons.OKCancel,
+                                                 MessageBoxButtons.YesNo,
                                                  condition ? MessageBoxIcon.Stop : MessageBoxIcon.Asterisk);
                 if (dialog == DialogResult.Yes)
                 {
-                    bool godelete = true;
-                    ///prompt user to provide substitute to product
+                    //bool godelete = true;
+                    /////prompt user to provide substitute to product
 
-                    using (var subs = new SubstituteProduct(variation.Id))
-                    {
-                        //subs.OnChoose += Subs_OnChoose;
-                        subs.OnChoose += (a, b) =>
-                        {
-                            if (b == null)
-                            {
-                                godelete = false;
-                                return;
-                            }
-                            foreach (var i in solditemwiththisproduct)
-                            {
-                                i.ProductId = b.Id;
-                            }
-                            foreach (var i in inv)
-                            {
-                                i.ProductId = b.Id;
-                            }
-                        };
-                        subs.ShowDialog();
-                    }
-                    if (!godelete)
-                        return;
+                    //using (var subs = new SubstituteProduct(variation.Id))
+                    //{
+                    //    //subs.OnChoose += Subs_OnChoose;
+                    //    subs.OnChoose += (a, b) =>
+                    //    {
+                    //        if (b == null)
+                    //        {
+                    //            godelete = false;
+                    //            return;
+                    //        }
+                    //        foreach (var i in solditemwiththisproduct)
+                    //        {
+                    //            i.ProductId = b.Id;
+                    //        }
+                    //        foreach (var i in inv)
+                    //        {
+                    //            i.ProductId = b.Id;
+                    //        }
+                    //    };
+                    //    subs.ShowDialog();
+                    //}
+                    //if (!godelete)
+                    //    return;
                 }
-                else if (dialog == DialogResult.No || dialog == DialogResult.OK)
-                {
-
-                }
-                else
+                else if (dialog == DialogResult.No)
                 {
                     return;
-                }
+                }              
 
                 p.Products.Remove(variation);
                 p.SaveChanges();

@@ -59,6 +59,7 @@ namespace POS
                 addNewLoginToolStripMenuItem1.Enabled = cl.Username == "admin";
                 loginPrivilegesToolStripMenuItem1.Enabled = cl.Username == "admin";
                 addNewSupplierToolstripbuttn.Enabled = cl.CanEditSupplier;
+                toolStripButton3.Enabled = cl.CanStockIn;
             });
 
         }

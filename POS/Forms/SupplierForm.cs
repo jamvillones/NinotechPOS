@@ -32,7 +32,7 @@ namespace POS.Forms
                         supplierTable.Rows.Add(x.Id, x.Name, x.ContactDetails, "Delete");
                     }
                     searchControl1.SetAutoComplete(p.Suppliers.Select(x => x.Name).ToArray());
-                    forbiddenId = (int)( supplierTable.Rows[0].Cells[0].Value);
+                    //forbiddenId = (int)( supplierTable.Rows[0].Cells[0].Value);
 
                 }
                 resetAutoComplete();
@@ -148,18 +148,14 @@ namespace POS.Forms
             supplierName.ResetText();
             contactDetails.ResetText();
         }
-        int forbiddenId;
+        
         private void supplierTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex != 3)
                 return;
             var dgt = sender as DataGridView;
             var id = (int)(dgt.Rows[e.RowIndex].Cells[0].Value);
-            if (id == forbiddenId)
-            {
-                MessageBox.Show("None is the default Supplier. Action terminated.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
-            }
+            
             if (MessageBox.Show("Are you sure you want to delete supplier: " + dgt.Rows[e.RowIndex].Cells[1].Value.ToString() + "\n\nTo edit details, simply edit the cells in the table."
                                , "",
                                MessageBoxButtons.YesNo,
@@ -167,12 +163,18 @@ namespace POS.Forms
             {
                 return;
             }
-
-            using (var p = new POSEntities())
+            try
             {
-                var s = p.Suppliers.FirstOrDefault(x => x.Id == id);
-                p.Suppliers.Remove(s);
-                p.SaveChanges();
+                using (var p = new POSEntities())
+                {
+                    var s = p.Suppliers.FirstOrDefault(x => x.Id == id);
+                    p.Suppliers.Remove(s);
+                    p.SaveChanges();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Supplier cannot be deleted\nThis supplier is already referenced in one of the items", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             resetAutoComplete();
             dgt.Rows.RemoveAt(e.RowIndex);
