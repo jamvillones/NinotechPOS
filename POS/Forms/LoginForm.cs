@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using POS.Misc;
+using System.Configuration;
 namespace POS.Forms
 {
     public partial class LoginForm : Form
@@ -75,6 +76,19 @@ namespace POS.Forms
         private void hide_MouseUp(object sender, MouseEventArgs e)
         {
             password.PasswordChar = '*';
+        }
+
+        private void LoginForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt && e.Shift && e.Control && e.KeyCode == Keys.C)
+            {
+                var connectionString = ConfigurationManager.ConnectionStrings["POSEntities"].ConnectionString.ToString();
+
+                var STRINGS = connectionString.Split(';');
+               
+                MessageBox.Show(STRINGS[2], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
     }
 }

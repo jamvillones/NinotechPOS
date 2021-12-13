@@ -30,14 +30,12 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.currPassword = new System.Windows.Forms.TextBox();
-            this.newPassword = new System.Windows.Forms.TextBox();
-            this.confirmPassword = new System.Windows.Forms.TextBox();
             this.ConfirmBtn = new System.Windows.Forms.Button();
             this.currUser = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.nameTxt = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // label1
@@ -53,61 +51,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 102);
+            this.label2.Location = new System.Drawing.Point(75, 72);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 13);
+            this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Current Password:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 128);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "New Password:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 154);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(119, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Confirm New Password:";
+            this.label2.Text = "Password:";
             // 
             // currPassword
             // 
-            this.currPassword.Location = new System.Drawing.Point(137, 99);
+            this.currPassword.Location = new System.Drawing.Point(137, 69);
             this.currPassword.MaxLength = 50;
             this.currPassword.Name = "currPassword";
             this.currPassword.PasswordChar = '*';
             this.currPassword.Size = new System.Drawing.Size(329, 20);
             this.currPassword.TabIndex = 5;
             // 
-            // newPassword
-            // 
-            this.newPassword.Location = new System.Drawing.Point(137, 125);
-            this.newPassword.MaxLength = 50;
-            this.newPassword.Name = "newPassword";
-            this.newPassword.PasswordChar = '*';
-            this.newPassword.Size = new System.Drawing.Size(329, 20);
-            this.newPassword.TabIndex = 6;
-            // 
-            // confirmPassword
-            // 
-            this.confirmPassword.Location = new System.Drawing.Point(137, 151);
-            this.confirmPassword.MaxLength = 50;
-            this.confirmPassword.Name = "confirmPassword";
-            this.confirmPassword.PasswordChar = '*';
-            this.confirmPassword.Size = new System.Drawing.Size(329, 20);
-            this.confirmPassword.TabIndex = 7;
-            // 
             // ConfirmBtn
             // 
             this.ConfirmBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.ConfirmBtn.Location = new System.Drawing.Point(211, 198);
+            this.ConfirmBtn.Location = new System.Drawing.Point(211, 99);
             this.ConfirmBtn.Name = "ConfirmBtn";
             this.ConfirmBtn.Size = new System.Drawing.Size(75, 23);
             this.ConfirmBtn.TabIndex = 8;
@@ -126,26 +88,40 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(61, 32);
+            this.label5.Location = new System.Drawing.Point(93, 46);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(356, 13);
+            this.label5.Size = new System.Drawing.Size(38, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Note: If you forgot your password, contact the administrator for assistance.";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label5.Text = "Name:";
+            // 
+            // nameTxt
+            // 
+            this.nameTxt.Location = new System.Drawing.Point(137, 43);
+            this.nameTxt.MaxLength = 50;
+            this.nameTxt.Name = "nameTxt";
+            this.nameTxt.PasswordChar = '*';
+            this.nameTxt.Size = new System.Drawing.Size(329, 20);
+            this.nameTxt.TabIndex = 11;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Location = new System.Drawing.Point(13, 36);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(453, 1);
+            this.panel1.TabIndex = 12;
             // 
             // ChangePass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 233);
+            this.ClientSize = new System.Drawing.Size(480, 134);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.nameTxt);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.currUser);
             this.Controls.Add(this.ConfirmBtn);
-            this.Controls.Add(this.confirmPassword);
-            this.Controls.Add(this.newPassword);
             this.Controls.Add(this.currPassword);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
@@ -153,7 +129,7 @@
             this.Name = "ChangePass";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Change Password";
+            this.Text = "Change Login Credentials";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,13 +139,11 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox currPassword;
-        private System.Windows.Forms.TextBox newPassword;
-        private System.Windows.Forms.TextBox confirmPassword;
         private System.Windows.Forms.Button ConfirmBtn;
         private System.Windows.Forms.TextBox currUser;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox nameTxt;
+        private System.Windows.Forms.Panel panel1;
     }
 }

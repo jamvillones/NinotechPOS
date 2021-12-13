@@ -28,21 +28,12 @@ namespace POS.Forms
                 var user = eb.Logins.FirstOrDefault(x => x.Username == u);
                 currentUser = user;
                 currUser.Text = user.Username;
+                nameTxt.Text = user.Name;
             }
         }
         bool canSave()
         {
-            if (currPassword.Text != currentUser.Password)
-            {
-                MessageBox.Show("Current password is not correct.");
-                return false;
-            }
-            if (newPassword.Text != confirmPassword.Text)
-            {
-                MessageBox.Show("New password and confirm password does not match");
-                return false;
-            }
-            return currPassword.Text != string.Empty || newPassword.Text != string.Empty || confirmPassword.Text != string.Empty;
+            return currPassword.Text != string.Empty;
         }
         private void ConfirmBtn_Click(object sender, EventArgs e)
         {
@@ -54,7 +45,9 @@ namespace POS.Forms
                 var u = eb.Logins.FirstOrDefault(x => x.Username == currentUser.Username);
                 if (u != null)
                 {
-                    u.Password = newPassword.Text;
+                    u.Password = currPassword.Text;
+                    if (!string.IsNullOrWhiteSpace(nameTxt.Text))
+                        u.Name = nameTxt.Text.Trim();
                 }
                 eb.SaveChanges();
                 MessageBox.Show("Password successfully changed.");

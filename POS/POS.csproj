@@ -16,7 +16,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\user\Desktop\DESKTOP-0JUPRBT\</PublishUrl>
+    <PublishUrl>C:\Users\user\Desktop\DESKTOP-M20FPE5\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>90</ApplicationRevision>
+    <ApplicationRevision>92</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -75,6 +75,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
@@ -313,6 +314,12 @@
     <Compile Include="Misc\ReceiptPrinting.cs" />
     <Compile Include="Misc\SearchEventArgs.cs" />
     <Compile Include="Misc\UserManager.cs" />
+    <Compile Include="MoneyCalculator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MoneyCalculator.Designer.cs">
+      <DependentUpon>MoneyCalculator.cs</DependentUpon>
+    </Compile>
     <Compile Include="POSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -360,6 +367,12 @@
     </Compile>
     <Compile Include="SellItem.Designer.cs">
       <DependentUpon>SellItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShiftSummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShiftSummaryForm.Designer.cs">
+      <DependentUpon>ShiftSummaryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SoldItem.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
@@ -499,6 +512,9 @@
     <EmbeddedResource Include="Misc\KeywordAutocompleteTextbox.resx">
       <DependentUpon>KeywordAutocompleteTextbox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MoneyCalculator.resx">
+      <DependentUpon>MoneyCalculator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -520,6 +536,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SellItem.resx">
       <DependentUpon>SellItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShiftSummaryForm.resx">
+      <DependentUpon>ShiftSummaryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>
