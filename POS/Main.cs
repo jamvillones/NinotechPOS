@@ -242,5 +242,16 @@ namespace POS
             foreach (var i in tabs)
                 i.CancelLoading();
         }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            using(var shiftSum = new ShiftSummaryForm())
+            {
+                if(shiftSum.ShowDialog()== DialogResult.OK)
+                {
+
+                }
+            }
+        }
     }
 }

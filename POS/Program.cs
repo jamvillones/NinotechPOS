@@ -1,4 +1,5 @@
-﻿using POS.Misc;
+﻿using OfficeOpenXml;
+using POS.Misc;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,6 +19,7 @@ namespace POS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             bool backup = false;
             bool singedOut = false;

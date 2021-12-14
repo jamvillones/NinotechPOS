@@ -27,7 +27,18 @@ namespace POS
 
     partial class Sale
     {
+        /// <summary>
+        /// grand total of the sale
+        /// </summary>
         public decimal Total => this.SoldItems.Select(x => x.Quantity * (x.ItemPrice - x.Discount ?? 0)).DefaultIfEmpty(0).Sum();
+
+        /// <summary>
+        /// used as the actual gained money
+        /// </summary>
+        public decimal TotalGained => AmountRecieved > Total ? Total : AmountRecieved ?? 0;
+        /// <summary>
+        /// remaining to be paid
+        /// </summary>
         public decimal Remaining
         {
             get
@@ -36,6 +47,9 @@ namespace POS
                 return r < 0 ? 0 : r;
             }
         }
+        /// <summary>
+        /// is it fully paid?
+        /// </summary>
         public bool FullyPaid => Remaining == 0;
     }
 }
