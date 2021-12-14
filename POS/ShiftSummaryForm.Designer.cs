@@ -36,6 +36,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.startingCash = new System.Windows.Forms.NumericUpDown();
+            this.resultTxt = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -49,14 +52,26 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.salesTable = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saleTotalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.invoiceTable = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invoiceTotalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.expensesTable = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.expensesTotalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
@@ -94,25 +109,15 @@
             this.fivehundreds = new System.Windows.Forms.NumericUpDown();
             this.thousands = new System.Windows.Forms.NumericUpDown();
             this.totalCashTxt = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.resultTxt = new System.Windows.Forms.Label();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.saleTotalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.expensesTotalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.invoiceTotalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.startingCash)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.salesTable)).BeginInit();
+            this.panel4.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.invoiceTable)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -130,7 +135,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.twohundreds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fivehundreds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thousands)).BeginInit();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -157,6 +161,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Controls.Add(this.resultTxt);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label7);
@@ -171,6 +176,44 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(504, 80);
             this.panel2.TabIndex = 2;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.startingCash);
+            this.groupBox1.Location = new System.Drawing.Point(300, 34);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 40);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Starting Cash";
+            // 
+            // startingCash
+            // 
+            this.startingCash.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.startingCash.DecimalPlaces = 2;
+            this.startingCash.Location = new System.Drawing.Point(6, 14);
+            this.startingCash.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            this.startingCash.Name = "startingCash";
+            this.startingCash.Size = new System.Drawing.Size(186, 20);
+            this.startingCash.TabIndex = 0;
+            this.startingCash.ThousandsSeparator = true;
+            this.startingCash.ValueChanged += new System.EventHandler(this.startingCash_ValueChanged);
+            // 
+            // resultTxt
+            // 
+            this.resultTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.resultTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resultTxt.Location = new System.Drawing.Point(206, 8);
+            this.resultTxt.Name = "resultTxt";
+            this.resultTxt.Size = new System.Drawing.Size(291, 23);
+            this.resultTxt.TabIndex = 10;
+            this.resultTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6
             // 
@@ -325,6 +368,43 @@
             this.salesTable.Size = new System.Drawing.Size(490, 256);
             this.salesTable.TabIndex = 4;
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Customer";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 200;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "By";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // saleTotalCol
+            // 
+            this.saleTotalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.saleTotalCol.HeaderText = "Total";
+            this.saleTotalCol.Name = "saleTotalCol";
+            this.saleTotalCol.ReadOnly = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.usersOption);
+            this.panel4.Controls.Add(this.datePicker);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(490, 30);
+            this.panel4.TabIndex = 6;
+            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.White;
@@ -376,6 +456,24 @@
             this.invoiceTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.invoiceTable_CellEndEdit);
             this.invoiceTable.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.invoiceTable_RowsRemoved);
             // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Details";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 200;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Particular";
+            this.Column3.MinimumWidth = 100;
+            this.Column3.Name = "Column3";
+            // 
+            // invoiceTotalCol
+            // 
+            this.invoiceTotalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.invoiceTotalCol.HeaderText = "Total";
+            this.invoiceTotalCol.Name = "invoiceTotalCol";
+            // 
             // label12
             // 
             this.label12.BackColor = System.Drawing.SystemColors.Control;
@@ -426,6 +524,24 @@
             this.expensesTable.TabIndex = 7;
             this.expensesTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellEndEdit);
             this.expensesTable.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.expensesTable_RowsRemoved);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Details";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Particulars";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 100;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // expensesTotalCol
+            // 
+            this.expensesTotalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.expensesTotalCol.HeaderText = "Total";
+            this.expensesTotalCol.Name = "expensesTotalCol";
             // 
             // label10
             // 
@@ -487,6 +603,14 @@
             this.tabPage4.Size = new System.Drawing.Size(496, 322);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Cash Calculation";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Black;
+            this.panel3.Location = new System.Drawing.Point(11, 278);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(321, 1);
+            this.panel3.TabIndex = 54;
             // 
             // label25
             // 
@@ -871,34 +995,6 @@
             this.totalCashTxt.Text = "Total: ₱ 0:00";
             this.totalCashTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.Location = new System.Drawing.Point(11, 278);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(321, 1);
-            this.panel3.TabIndex = 54;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.usersOption);
-            this.panel4.Controls.Add(this.datePicker);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(3, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(490, 30);
-            this.panel4.TabIndex = 6;
-            // 
-            // resultTxt
-            // 
-            this.resultTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.resultTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resultTxt.Location = new System.Drawing.Point(206, 8);
-            this.resultTxt.Name = "resultTxt";
-            this.resultTxt.Size = new System.Drawing.Size(291, 23);
-            this.resultTxt.TabIndex = 10;
-            this.resultTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // saveFileDialog
             // 
             this.saveFileDialog.CheckPathExists = false;
@@ -906,69 +1002,6 @@
             this.saveFileDialog.DefaultExt = "xlsx";
             this.saveFileDialog.Filter = "Excel Files | *.xlsx";
             this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Customer";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 200;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "By";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // saleTotalCol
-            // 
-            this.saleTotalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.saleTotalCol.HeaderText = "Total";
-            this.saleTotalCol.Name = "saleTotalCol";
-            this.saleTotalCol.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Details";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Particulars";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 100;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // expensesTotalCol
-            // 
-            this.expensesTotalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.expensesTotalCol.HeaderText = "Total";
-            this.expensesTotalCol.Name = "expensesTotalCol";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Details";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 200;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Particular";
-            this.Column3.MinimumWidth = 100;
-            this.Column3.Name = "Column3";
-            // 
-            // invoiceTotalCol
-            // 
-            this.invoiceTotalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.invoiceTotalCol.HeaderText = "Total";
-            this.invoiceTotalCol.Name = "invoiceTotalCol";
             // 
             // ShiftSummaryForm
             // 
@@ -986,9 +1019,12 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.startingCash)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.salesTable)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.invoiceTable)).EndInit();
             this.tabPage3.ResumeLayout(false);
@@ -1007,7 +1043,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.twohundreds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fivehundreds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thousands)).EndInit();
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1088,5 +1123,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoiceTotalCol;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NumericUpDown startingCash;
     }
 }

@@ -18,7 +18,7 @@ namespace POS
             InitializeComponent();
         }
 
-        private decimal resultAmount => totalCash - ((totalSales + totalInvoice) - totalExpenses);
+        private decimal resultAmount => totalCash - ((totalSales + totalInvoice + startingCash.Value) - totalExpenses);
 
         private Color resultsColor
         {
@@ -420,6 +420,10 @@ namespace POS
                 ws.Cells["F1"].Value = resultAmount;
                 ws.Cells["F1:G1"].Merge = true;
 
+                ws.Cells["E2"].Value = "STARTING CASH:";
+                ws.Cells["F2"].Value = startingCash.Value;
+                ws.Cells["F2:G2"].Merge = true;
+
                 ws.Cells["E3"].Value = "LOGIN:";
                 ws.Cells["F3"].Value = usersOption.Text;
                 ws.Cells["E4"].Value = "DATE:";
@@ -429,13 +433,17 @@ namespace POS
 
                 await package.SaveAsync();
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             saveFileDialog.FileName = "Shift Report " + datePicker.Value.ToString("MMM_d_yyyy_h_mm_tt");
             saveFileDialog.ShowDialog();
+        }
+
+        private void startingCash_ValueChanged(object sender, EventArgs e)
+        {
+            updateResult();
         }
     }
 }
