@@ -434,7 +434,7 @@ namespace POS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            saveFileDialog.FileName = "Shift Report " + DateTime.Now.ToString("MMM_d_yyyy_h_mm_tt");
+            saveFileDialog.FileName = "Shift Report " + datePicker.Value.ToString("MMM_d_yyyy_h_mm_tt");
             saveFileDialog.ShowDialog();
         }
     }
