@@ -53,13 +53,13 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tabHoldersPanel = new System.Windows.Forms.Panel();
             this.inventoryTab = new POS.UserControls.InventoryUC();
             this.reportTab = new POS.UserControls.ReportUC();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.sideButtonsPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.topMostPanel.SuspendLayout();
@@ -281,14 +281,14 @@
             // changePasswordToolStripMenuItem2
             // 
             this.changePasswordToolStripMenuItem2.Name = "changePasswordToolStripMenuItem2";
-            this.changePasswordToolStripMenuItem2.Size = new System.Drawing.Size(168, 22);
-            this.changePasswordToolStripMenuItem2.Text = "Change Password";
+            this.changePasswordToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.changePasswordToolStripMenuItem2.Text = "Change Credentials";
             this.changePasswordToolStripMenuItem2.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
             // 
             // addNewLoginToolStripMenuItem1
             // 
             this.addNewLoginToolStripMenuItem1.Name = "addNewLoginToolStripMenuItem1";
-            this.addNewLoginToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
+            this.addNewLoginToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.addNewLoginToolStripMenuItem1.Text = "Add New Login";
             this.addNewLoginToolStripMenuItem1.Click += new System.EventHandler(this.addNewLoginToolStripMenuItem_Click);
             // 
@@ -296,7 +296,7 @@
             // 
             this.loginPrivilegesToolStripMenuItem1.Name = "loginPrivilegesToolStripMenuItem1";
             this.loginPrivilegesToolStripMenuItem1.ShowShortcutKeys = false;
-            this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
+            this.loginPrivilegesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.loginPrivilegesToolStripMenuItem1.Text = "Login Privileges";
             this.loginPrivilegesToolStripMenuItem1.Click += new System.EventHandler(this.loginPrivilegesToolStripMenuItem_Click);
             // 
@@ -364,6 +364,16 @@
             this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton2.Text = "Receipt Printer Settings";
             this.toolStripButton2.Click += new System.EventHandler(this.receiptConfig_Click);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Text = "toolStripButton4";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // splitContainer
             // 
@@ -438,16 +448,6 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.textBox1.Size = new System.Drawing.Size(180, 559);
             this.textBox1.TabIndex = 1;
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "toolStripButton4";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // Main
             // 

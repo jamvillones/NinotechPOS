@@ -29,6 +29,7 @@ namespace POS.Forms
                 currentUser = user;
                 currUser.Text = user.Username;
                 nameTxt.Text = user.Name;
+                currPassword.Text = user.Password;
             }
         }
         bool canSave()
@@ -50,7 +51,7 @@ namespace POS.Forms
                         u.Name = nameTxt.Text.Trim();
                 }
                 eb.SaveChanges();
-                MessageBox.Show("Password successfully changed.");
+                MessageBox.Show("Successfully changed.");
                 this.Close();
             }
         }

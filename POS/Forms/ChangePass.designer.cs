@@ -99,7 +99,6 @@
             this.nameTxt.Location = new System.Drawing.Point(137, 43);
             this.nameTxt.MaxLength = 50;
             this.nameTxt.Name = "nameTxt";
-            this.nameTxt.PasswordChar = '*';
             this.nameTxt.Size = new System.Drawing.Size(329, 20);
             this.nameTxt.TabIndex = 11;
             // 
