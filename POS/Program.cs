@@ -22,13 +22,13 @@ namespace POS
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             bool backup = false;
-            bool singedOut = false;
+            bool signedOut = false;
 
             UserManager.instance = new UserManager();
 
             do
             {
-                singedOut = false;
+                signedOut = false;
 
                 var login = new Forms.LoginForm();
                 Application.Run(login);
@@ -42,12 +42,12 @@ namespace POS
 
                     Application.Run(main);
 
-                    singedOut = main.IsSigneout;
+                    signedOut = main.IsSigneout;
                     main.Dispose();
                 }
                 GC.Collect();
             }
-            while (singedOut);
+            while (signedOut);
 
             if (backup)
             {
@@ -58,7 +58,7 @@ namespace POS
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Backup failed.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Console.WriteLine(ex.Message);
                 }
             }
 
