@@ -172,7 +172,7 @@ namespace POS.Forms
                     p.SaveChanges();
                 }
             }
-            catch(Exception ex)
+            catch
             {
                 MessageBox.Show("Supplier cannot be deleted\nThis supplier is already referenced in one of the items", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

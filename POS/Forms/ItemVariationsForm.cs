@@ -14,8 +14,6 @@ namespace POS.Forms
 {
     public partial class ItemVariationsForm : Form
     {
-        bool changesMade = false;
-
         public event EventHandler Onsave;
 
         Item target;
@@ -81,7 +79,7 @@ namespace POS.Forms
 
                 p.Products.Add(newVariation);
                 p.SaveChanges();
-                changesMade = true;
+                //changesMade = true;
 
                 varTable.Rows.Add(newVariation.Id, newVariation.Supplier.Name, cost.Value, "Delete");
             }
@@ -207,13 +205,13 @@ namespace POS.Forms
                 else if (dialog == DialogResult.No)
                 {
                     return;
-                }              
+                }
 
                 p.Products.Remove(variation);
                 p.SaveChanges();
 
                 supplier.Items.Add(s);
-                changesMade = true;
+                //changesMade = true;
             }
             t.Rows.RemoveAt(e.RowIndex);
         }

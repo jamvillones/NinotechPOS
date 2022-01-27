@@ -42,6 +42,9 @@ namespace POS
         public Main()
         {
             InitializeComponent();
+
+            MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            Location = Screen.FromHandle(this.Handle).WorkingArea.Location;
         }
 
         /// <summary>
@@ -51,7 +54,7 @@ namespace POS
         {
             var cl = currLogin;
 
-            userButton.InvokeIfRequired(() => { userButton.Text = cl.Name??"user"; });
+            userButton.InvokeIfRequired(() => { userButton.Text = cl.Name ?? "user"; });
             textBox1.InvokeIfRequired(() => textBox1.Text = Properties.Settings.Default.Note);
 
             toolStrip.InvokeIfRequired(() =>
@@ -245,13 +248,18 @@ namespace POS
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            using(var shiftSum = new ShiftSummaryForm())
+            using (var shiftSum = new ShiftSummaryForm())
             {
-                if(shiftSum.ShowDialog()== DialogResult.OK)
+                if (shiftSum.ShowDialog() == DialogResult.OK)
                 {
 
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            splitContainer.Panel2Collapsed = !splitContainer.Panel2Collapsed;
         }
     }
 }

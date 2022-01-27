@@ -12,7 +12,6 @@ namespace POS
 {
     public partial class SellItem : Form
     {
-        public event EventHandler OnSave;
 
         SearchHandler handler = new SearchHandler();
 

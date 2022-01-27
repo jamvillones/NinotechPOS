@@ -17,7 +17,6 @@ namespace POS.Forms
         /// <summary>
         /// the event fired 
         /// </summary>
-        public event EventHandler OnSave;
 
         Login currLogin
         {
@@ -49,9 +48,9 @@ namespace POS.Forms
 
                     itemsTable.InvokeIfRequired(() =>
                     {
-                        if (itemsTable.IsDisposed || itemsTable.Disposing)                        
+                        if (itemsTable.IsDisposed || itemsTable.Disposing)
                             return;
-                        
+
                         itemsTable.Rows.AddRange(rows);
                     });
                 }
