@@ -45,14 +45,29 @@ namespace POS.Forms
                 var sales = p.Sales.Where(x => p.SoldItems.Any(y => y.SaleId == x.Id && y.ProductId == Id));
                 foreach (var i in sales)
                 {
-                    soldTable.Rows.Add(i.Date.Value.ToString("MMMM, dd yyyy hh:mm tt"),
-                                                             i.Customer.Name,
-                                                             i.Login.Username,
-                                                             string.Format("₱ {0:n}",
-                                                             i.Total),
-                                                             i.SaleType);
+                    soldTable.Rows.Add(
+                        i.Id,
+                        i.Date.Value.ToString("MMMM, dd yyyy hh:mm tt"),
+                        i.Customer.Name,
+                        i.Login.Username,
+                        string.Format("₱ {0:n}", i.Total)
+                        );
                 }
 
+            }
+
+        }
+
+        private void soldTable_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void soldTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            using (var details = new SaleDetails())
+            {
+                details.SetId((int)soldTable.SelectedCells[0].Value);
+                details.ShowDialog();
             }
 
         }

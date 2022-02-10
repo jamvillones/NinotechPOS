@@ -194,7 +194,24 @@ namespace POS.UserControls
             {
                 chargedTable.InvokeIfRequired(() => { chargedTable.Rows.Clear(); });
 
-                var sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
+                IEnumerable<Sale> sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
+
+                int status = 0;
+
+                saleStatus.InvokeIfRequired(() => status = saleStatus.SelectedIndex);
+                switch (status)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        sales = sales.Where(x => x.Remaining > 0);
+                        break;
+                    case 2:
+                        sales = sales.Where(x => x.Remaining <= 0);
+                        break;
+                    default:
+                        break;
+                }
 
                 try
                 {
@@ -328,7 +345,7 @@ namespace POS.UserControls
 
         void filterCharged(POSEntities p, ref IEnumerable<Sale> sales)
         {
-            sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderBy(x => x.Date);
+            sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
 
             if (chargedSaleSearch.Text != string.Empty)
             {

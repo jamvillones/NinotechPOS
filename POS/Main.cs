@@ -257,7 +257,7 @@ namespace POS
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void toolStripButton6_Click(object sender, EventArgs e)
         {
             splitContainer.Panel2Collapsed = !splitContainer.Panel2Collapsed;
         }

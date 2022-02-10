@@ -101,7 +101,12 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                var s = p.StockinHistories.AsEnumerable().Where(x => x.ItemName.Contains(e.Text));
+                IEnumerable<StockinHistory> s = null;
+
+                s = p.StockinHistories.Where(x => x.SerialNumber == e.Text);
+
+                if (s.Count() == 0)
+                    s = p.StockinHistories.AsEnumerable().Where(x => x.ItemName.Contains(e.Text));
 
                 if (dateTimePicker1.Checked)
                     s = s.Where(x => x.Date.Value.Date == dateTimePicker1.Value.Date);

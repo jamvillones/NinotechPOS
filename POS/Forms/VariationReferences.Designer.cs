@@ -49,11 +49,11 @@
             this.itemName = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.supplier = new System.Windows.Forms.TextBox();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -207,18 +207,17 @@
             // 
             this.soldTable.AllowUserToAddRows = false;
             this.soldTable.AllowUserToDeleteRows = false;
-            this.soldTable.AllowUserToResizeColumns = false;
             this.soldTable.AllowUserToResizeRows = false;
             this.soldTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.soldTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.soldTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.soldTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.soldTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column6,
             this.Column8,
             this.Column9,
             this.Column10,
-            this.Column11,
-            this.Column12});
+            this.Column11});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -236,6 +235,8 @@
             this.soldTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.soldTable.Size = new System.Drawing.Size(434, 335);
             this.soldTable.TabIndex = 1;
+            this.soldTable.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.soldTable_CellContentDoubleClick);
+            this.soldTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.soldTable_CellMouseDoubleClick);
             // 
             // groupBox3
             // 
@@ -303,17 +304,21 @@
             this.supplier.TabIndex = 0;
             this.supplier.TabStop = false;
             // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Sale Id";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Visible = false;
+            // 
             // Column8
             // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column8.HeaderText = "Date";
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
-            this.Column8.Width = 55;
             // 
             // Column9
             // 
-            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column9.HeaderText = "Sold by";
             this.Column9.MinimumWidth = 67;
             this.Column9.Name = "Column9";
@@ -322,12 +327,11 @@
             // 
             // Column10
             // 
-            this.Column10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Column10.HeaderText = "Sold to";
             this.Column10.MinimumWidth = 67;
             this.Column10.Name = "Column10";
             this.Column10.ReadOnly = true;
-            this.Column10.Width = 67;
             // 
             // Column11
             // 
@@ -336,13 +340,6 @@
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
             this.Column11.Width = 80;
-            // 
-            // Column12
-            // 
-            this.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column12.HeaderText = "Sale type";
-            this.Column12.Name = "Column12";
-            this.Column12.ReadOnly = true;
             // 
             // VariationReferences
             // 
@@ -390,10 +387,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
     }
 }
