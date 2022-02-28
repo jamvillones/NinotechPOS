@@ -40,9 +40,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.amountRecieved = new System.Windows.Forms.NumericUpDown();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.change = new System.Windows.Forms.TextBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.cartTotal = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.saleType = new System.Windows.Forms.Label();
@@ -64,19 +62,20 @@
             this.price = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.quantity = new System.Windows.Forms.NumericUpDown();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.itemName = new System.Windows.Forms.TextBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.itemsTable = new System.Windows.Forms.DataGridView();
+            this.cartTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.printDoc = new System.Drawing.Printing.PrintDocument();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cartTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.printDoc = new System.Drawing.Printing.PrintDocument();
-            this.searchControl = new POS.UserControls.SearchControl();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,11 +84,10 @@
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.searchControl = new POS.UserControls.SearchControl();
             this.groupBox2.SuspendLayout();
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountRecieved)).BeginInit();
-            this.groupBox10.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cartTable)).BeginInit();
@@ -103,16 +101,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.price)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.change);
+            this.groupBox2.Controls.Add(this.cartTotal);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.groupBox9);
-            this.groupBox2.Controls.Add(this.groupBox10);
-            this.groupBox2.Controls.Add(this.groupBox6);
             this.groupBox2.Controls.Add(this.panel3);
             this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.cartTable);
@@ -132,11 +132,14 @@
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(550, 123);
+            this.button1.Location = new System.Drawing.Point(439, 126);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 35);
+            this.button1.Size = new System.Drawing.Size(164, 26);
             this.button1.TabIndex = 14;
             this.button1.TabStop = false;
+            this.button1.Text = "Exact Amount";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.cartTooltip.SetToolTip(this.button1, "Exact amount");
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.exactAmount_Click);
@@ -149,7 +152,7 @@
             this.groupBox9.Location = new System.Drawing.Point(7, 116);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox9.Size = new System.Drawing.Size(537, 42);
+            this.groupBox9.Size = new System.Drawing.Size(420, 42);
             this.groupBox9.TabIndex = 12;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "TENDERED";
@@ -168,62 +171,33 @@
             0,
             0});
             this.amountRecieved.Name = "amountRecieved";
-            this.amountRecieved.Size = new System.Drawing.Size(527, 18);
+            this.amountRecieved.Size = new System.Drawing.Size(410, 18);
             this.amountRecieved.TabIndex = 3;
-            this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.amountRecieved.ThousandsSeparator = true;
-            this.amountRecieved.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.amountRecieved.ValueChanged += new System.EventHandler(this.amountChangedCallback);
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox10.Controls.Add(this.change);
-            this.groupBox10.Location = new System.Drawing.Point(7, 200);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(537, 42);
-            this.groupBox10.TabIndex = 11;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "CHANGE";
             // 
             // change
             // 
             this.change.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.change.Dock = System.Windows.Forms.DockStyle.Fill;
             this.change.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.change.Location = new System.Drawing.Point(3, 16);
+            this.change.Location = new System.Drawing.Point(28, 214);
             this.change.Name = "change";
             this.change.ReadOnly = true;
-            this.change.Size = new System.Drawing.Size(531, 15);
+            this.change.Size = new System.Drawing.Size(214, 15);
             this.change.TabIndex = 0;
             this.change.TabStop = false;
-            this.change.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox6.Controls.Add(this.cartTotal);
-            this.groupBox6.Location = new System.Drawing.Point(7, 158);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(537, 42);
-            this.groupBox6.TabIndex = 10;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "GRAND TOTAL";
             // 
             // cartTotal
             // 
             this.cartTotal.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.cartTotal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cartTotal.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cartTotal.Location = new System.Drawing.Point(3, 16);
+            this.cartTotal.Location = new System.Drawing.Point(29, 180);
             this.cartTotal.Name = "cartTotal";
             this.cartTotal.ReadOnly = true;
-            this.cartTotal.Size = new System.Drawing.Size(531, 15);
+            this.cartTotal.Size = new System.Drawing.Size(214, 15);
             this.cartTotal.TabIndex = 0;
             this.cartTotal.TabStop = false;
-            this.cartTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.cartTotal.TextChanged += new System.EventHandler(this.amountChangedCallback);
             // 
             // panel3
@@ -283,7 +257,7 @@
             this.checkoutBtn.Size = new System.Drawing.Size(601, 27);
             this.checkoutBtn.TabIndex = 16;
             this.checkoutBtn.TabStop = false;
-            this.checkoutBtn.Text = "Checkout";
+            this.checkoutBtn.Text = "Checkout (ctrl+ENTER)";
             this.cartTooltip.SetToolTip(this.checkoutBtn, "(ctrl+Enter) To Checkout");
             this.checkoutBtn.UseVisualStyleBackColor = false;
             this.checkoutBtn.Click += new System.EventHandler(this.sell_Click);
@@ -307,16 +281,17 @@
             // 
             this.cartTable.AllowUserToAddRows = false;
             this.cartTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.cartTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.cartTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cartTable.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.cartTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cartTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.cartTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -336,13 +311,11 @@
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlDark;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.cartTable.DefaultCellStyle = dataGridViewCellStyle3;
-            this.cartTable.EnableHeadersVisualStyles = false;
-            this.cartTable.GridColor = System.Drawing.Color.White;
-            this.cartTable.Location = new System.Drawing.Point(6, 248);
+            this.cartTable.Location = new System.Drawing.Point(6, 235);
             this.cartTable.MultiSelect = false;
             this.cartTable.Name = "cartTable";
             this.cartTable.ReadOnly = true;
@@ -350,7 +323,7 @@
             this.cartTable.RowHeadersVisible = false;
             this.cartTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.cartTable.ShowCellToolTips = false;
-            this.cartTable.Size = new System.Drawing.Size(604, 321);
+            this.cartTable.Size = new System.Drawing.Size(604, 334);
             this.cartTable.StandardTab = true;
             this.cartTable.TabIndex = 15;
             this.cartTable.TabStop = false;
@@ -382,29 +355,34 @@
             this.soldTo.Items.AddRange(new object[] {
             "Regular Sale",
             "Charged Sale"});
-            this.soldTo.Location = new System.Drawing.Point(38, 15);
+            this.soldTo.Location = new System.Drawing.Point(6, 15);
             this.soldTo.Name = "soldTo";
-            this.soldTo.Size = new System.Drawing.Size(559, 26);
+            this.soldTo.Size = new System.Drawing.Size(415, 26);
             this.soldTo.TabIndex = 12;
             this.soldTo.Text = "Walkin";
             this.soldTo.Validated += new System.EventHandler(this.soldTo_Validated);
             // 
             // addCustomerBtn
             // 
+            this.addCustomerBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addCustomerBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.addCustomerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addCustomerBtn.Image = ((System.Drawing.Image)(resources.GetObject("addCustomerBtn.Image")));
-            this.addCustomerBtn.Location = new System.Drawing.Point(6, 15);
+            this.addCustomerBtn.Location = new System.Drawing.Point(433, 15);
             this.addCustomerBtn.Name = "addCustomerBtn";
-            this.addCustomerBtn.Size = new System.Drawing.Size(26, 26);
+            this.addCustomerBtn.Size = new System.Drawing.Size(164, 26);
             this.addCustomerBtn.TabIndex = 11;
             this.addCustomerBtn.TabStop = false;
+            this.addCustomerBtn.Text = "Add Customer";
+            this.addCustomerBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.addCustomerBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.cartTooltip.SetToolTip(this.addCustomerBtn, "Add New Customer");
             this.addCustomerBtn.UseVisualStyleBackColor = false;
             this.addCustomerBtn.Click += new System.EventHandler(this.addCustomerBtn_Click);
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -420,12 +398,13 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.itemName);
             this.groupBox1.Controls.Add(this.groupBox7);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.groupBox4);
-            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.addBtn);
             this.groupBox1.Controls.Add(this.itemsTable);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -438,20 +417,18 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.Controls.Add(this.discount);
-            this.groupBox7.Location = new System.Drawing.Point(7, 158);
+            this.groupBox7.Location = new System.Drawing.Point(138, 116);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox7.Size = new System.Drawing.Size(603, 42);
+            this.groupBox7.Size = new System.Drawing.Size(125, 42);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "DISCOUNT";
             // 
             // discount
             // 
-            this.discount.BackColor = System.Drawing.SystemColors.Control;
+            this.discount.BackColor = System.Drawing.Color.White;
             this.discount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.discount.DecimalPlaces = 2;
             this.discount.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -463,11 +440,10 @@
             0,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(593, 18);
+            this.discount.Size = new System.Drawing.Size(115, 18);
             this.discount.TabIndex = 0;
-            this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.discount.ThousandsSeparator = true;
-            this.discount.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.discount.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
             // 
             // panel2
@@ -499,20 +475,18 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.price);
             this.groupBox5.Location = new System.Drawing.Point(7, 116);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox5.Size = new System.Drawing.Size(603, 42);
+            this.groupBox5.Size = new System.Drawing.Size(125, 42);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "PRICE";
             // 
             // price
             // 
-            this.price.BackColor = System.Drawing.SystemColors.Control;
+            this.price.BackColor = System.Drawing.Color.White;
             this.price.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.price.DecimalPlaces = 2;
             this.price.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -529,11 +503,10 @@
             0,
             0});
             this.price.Name = "price";
-            this.price.Size = new System.Drawing.Size(593, 18);
+            this.price.Size = new System.Drawing.Size(115, 18);
             this.price.TabIndex = 1;
-            this.price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.price.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.price.ThousandsSeparator = true;
-            this.price.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.price.Value = new decimal(new int[] {
             1,
             0,
@@ -545,18 +518,19 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.BackColor = System.Drawing.Color.White;
             this.groupBox4.Controls.Add(this.quantity);
-            this.groupBox4.Location = new System.Drawing.Point(7, 200);
+            this.groupBox4.Location = new System.Drawing.Point(269, 116);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox4.Size = new System.Drawing.Size(603, 42);
+            this.groupBox4.Size = new System.Drawing.Size(341, 42);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "QTY";
+            this.groupBox4.Text = "QUANTITY";
             // 
             // quantity
             // 
-            this.quantity.BackColor = System.Drawing.SystemColors.Control;
+            this.quantity.BackColor = System.Drawing.Color.White;
             this.quantity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.quantity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.quantity.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -572,11 +546,10 @@
             0,
             0});
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(593, 18);
+            this.quantity.Size = new System.Drawing.Size(331, 18);
             this.quantity.TabIndex = 0;
-            this.quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.quantity.ThousandsSeparator = true;
-            this.quantity.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
             this.quantity.Value = new decimal(new int[] {
             1,
             0,
@@ -584,28 +557,17 @@
             0});
             this.quantity.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.itemName);
-            this.groupBox3.Location = new System.Drawing.Point(6, 69);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(604, 47);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "NAME";
-            // 
             // itemName
             // 
             this.itemName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.itemName.BackColor = System.Drawing.Color.White;
             this.itemName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemName.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemName.Location = new System.Drawing.Point(7, 20);
+            this.itemName.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemName.Location = new System.Drawing.Point(8, 90);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(591, 15);
+            this.itemName.Size = new System.Drawing.Size(603, 15);
             this.itemName.TabIndex = 0;
             this.itemName.TabStop = false;
             this.itemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -622,7 +584,7 @@
             this.addBtn.Size = new System.Drawing.Size(604, 28);
             this.addBtn.TabIndex = 8;
             this.addBtn.TabStop = false;
-            this.addBtn.Text = "Add";
+            this.addBtn.Text = "Add (shift+ENTER)";
             this.cartTooltip.SetToolTip(this.addBtn, "Shift+Enter to add");
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
@@ -632,17 +594,17 @@
             this.itemsTable.AllowUserToAddRows = false;
             this.itemsTable.AllowUserToDeleteRows = false;
             this.itemsTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
             this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.itemsTable.BackgroundColor = System.Drawing.Color.White;
+            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -660,68 +622,23 @@
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle6;
-            this.itemsTable.EnableHeadersVisualStyles = false;
-            this.itemsTable.Location = new System.Drawing.Point(6, 248);
+            this.itemsTable.Location = new System.Drawing.Point(6, 164);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(604, 339);
+            this.itemsTable.Size = new System.Drawing.Size(604, 423);
             this.itemsTable.TabIndex = 7;
             this.itemsTable.TabStop = false;
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             this.itemsTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.barcode_KeyDown);
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column1.HeaderText = "Barcode";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 81;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Serial";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 66;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Name";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 200;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Qty";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 52;
-            // 
-            // Column10
-            // 
-            this.Column10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column10.HeaderText = "Price";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column4.HeaderText = "Supplier";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 80;
             // 
             // cartTooltip
             // 
@@ -733,6 +650,134 @@
             this.printDoc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDoc_BeginPrint);
             this.printDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 164);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "GRAND TOTAL:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 198);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "CHANGE:";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(279, 71);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "ITEM NAME:";
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column1.HeaderText = "BARCODE";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 77;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "SERIAL";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 66;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "NAME";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 200;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "QTY";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 52;
+            // 
+            // Column10
+            // 
+            this.Column10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column10.HeaderText = "PRICE";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column4.HeaderText = "SUPPLIER";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 77;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn1.HeaderText = "BARCODE";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 77;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "SERIAL";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 66;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "NAME";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "QTY";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 52;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "PRICE";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 63;
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "DISC";
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column5.HeaderText = "TOTAL";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column9
+            // 
+            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column9.HeaderText = "SUPP";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 57;
+            // 
             // searchControl
             // 
             this.searchControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -743,69 +788,15 @@
             this.searchControl.SearchedText = "";
             this.searchControl.Size = new System.Drawing.Size(602, 28);
             this.searchControl.TabIndex = 0;
+            this.cartTooltip.SetToolTip(this.searchControl, "ctrl+F");
             this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
             this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Barcode";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 81;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "Serial";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 66;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Qty";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 52;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Price";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 63;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "Discount";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column5.HeaderText = "Total";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column9
-            // 
-            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column9.HeaderText = "Supplier";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 80;
             // 
             // MakeSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1244, 636);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -819,18 +810,16 @@
             this.Load += new System.EventHandler(this.StockinForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MakeSale_KeyDown);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.amountRecieved)).EndInit();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cartTable)).EndInit();
             this.groupBox8.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.discount)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -839,8 +828,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.price)).EndInit();
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
             this.ResumeLayout(false);
 
@@ -853,16 +840,13 @@
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button checkoutBtn;
         private System.Windows.Forms.DataGridView cartTable;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox itemName;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.NumericUpDown quantity;
         private System.Windows.Forms.DataGridView itemsTable;
-        private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox cartTotal;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.TextBox change;
         private System.Windows.Forms.NumericUpDown amountRecieved;
         private System.Windows.Forms.Button addCustomerBtn;
@@ -882,6 +866,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;

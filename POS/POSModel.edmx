@@ -20,9 +20,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="ContactDetails" Type="nvarchar" MaxLength="50" />
-          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ContactDetails" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="InventoryItem">
           <Key>
@@ -300,9 +300,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ContactDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sales" Relationship="POSModel.FK_Sale_Customer" FromRole="Customer" ToRole="Sale" />
         </EntityType>
         <EntityType Name="InventoryItem">

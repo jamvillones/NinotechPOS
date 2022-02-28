@@ -37,7 +37,7 @@ namespace POS.Forms
                 this.Close();
                 return;
             }
-            MessageBox.Show("User not found.");
+            MessageBox.Show("User not found.","Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace POS.Forms
 
         private void hide_MouseUp(object sender, MouseEventArgs e)
         {
-            password.PasswordChar = '*';
+            password.PasswordChar = '●';
         }
 
         private void LoginForm_KeyDown(object sender, KeyEventArgs e)
@@ -89,6 +89,11 @@ namespace POS.Forms
                 MessageBox.Show(STRINGS[2], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
+        }
+
+        private void password_TextChanged(object sender, EventArgs e)
+        {
+            hide.Visible = !string.IsNullOrWhiteSpace(password.Text);
         }
     }
 }

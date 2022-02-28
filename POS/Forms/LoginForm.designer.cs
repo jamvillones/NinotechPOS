@@ -28,35 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.username = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.hide = new System.Windows.Forms.PictureBox();
             this.password = new System.Windows.Forms.TextBox();
             this.loginBtn = new System.Windows.Forms.Button();
             this.settingsBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.exitBtn = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.hide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.username);
-            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.ForeColor = System.Drawing.Color.White;
-            this.groupBox1.Location = new System.Drawing.Point(44, 198);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(261, 49);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "USERNAME";
             // 
             // username
             // 
@@ -67,36 +57,23 @@
             this.username.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.username.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.username.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.username.Location = new System.Drawing.Point(7, 20);
+            this.username.Location = new System.Drawing.Point(102, 212);
             this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(248, 19);
+            this.username.Size = new System.Drawing.Size(188, 19);
             this.username.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.hide);
-            this.groupBox2.Controls.Add(this.password);
-            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(44, 253);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(261, 49);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "PASSWORD";
+            this.toolTip1.SetToolTip(this.username, "Username");
             // 
             // hide
             // 
             this.hide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.hide.Image = ((System.Drawing.Image)(resources.GetObject("hide.Image")));
-            this.hide.Location = new System.Drawing.Point(235, 20);
+            this.hide.Location = new System.Drawing.Point(270, 244);
             this.hide.Name = "hide";
             this.hide.Size = new System.Drawing.Size(20, 20);
             this.hide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.hide.TabIndex = 6;
             this.hide.TabStop = false;
+            this.hide.Visible = false;
             this.hide.Click += new System.EventHandler(this.hide_Click);
             this.hide.MouseDown += new System.Windows.Forms.MouseEventHandler(this.hide_MouseDown);
             this.hide.MouseUp += new System.Windows.Forms.MouseEventHandler(this.hide_MouseUp);
@@ -108,11 +85,13 @@
             this.password.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.password.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.password.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.password.Location = new System.Drawing.Point(7, 20);
+            this.password.Location = new System.Drawing.Point(102, 245);
             this.password.Name = "password";
             this.password.PasswordChar = '●';
-            this.password.Size = new System.Drawing.Size(222, 19);
-            this.password.TabIndex = 0;
+            this.password.Size = new System.Drawing.Size(162, 19);
+            this.password.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.password, "Password");
+            this.password.TextChanged += new System.EventHandler(this.password_TextChanged);
             // 
             // loginBtn
             // 
@@ -121,7 +100,7 @@
             this.loginBtn.FlatAppearance.BorderSize = 0;
             this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginBtn.ForeColor = System.Drawing.Color.White;
-            this.loginBtn.Location = new System.Drawing.Point(82, 315);
+            this.loginBtn.Location = new System.Drawing.Point(82, 308);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(186, 34);
             this.loginBtn.TabIndex = 2;
@@ -169,6 +148,40 @@
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Location = new System.Drawing.Point(60, 237);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(230, 1);
+            this.panel1.TabIndex = 6;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(60, 211);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(60, 244);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox3.TabIndex = 9;
+            this.pictureBox3.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Location = new System.Drawing.Point(60, 270);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(230, 1);
+            this.panel2.TabIndex = 8;
+            // 
             // LoginForm
             // 
             this.AcceptButton = this.loginBtn;
@@ -176,12 +189,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(350, 520);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.hide);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.password);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.username);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.settingsBtn);
             this.Controls.Add(this.loginBtn);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
@@ -192,26 +210,27 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginForm_KeyDown);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox username;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.Button loginBtn;
         private System.Windows.Forms.Button settingsBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button exitBtn;
         private System.Windows.Forms.PictureBox hide;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
