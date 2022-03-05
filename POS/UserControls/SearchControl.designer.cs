@@ -33,6 +33,8 @@ namespace POS.UserControls
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchControl));
             this.searchBtn = new System.Windows.Forms.Button();
             this.searchText = new test.KeywordAutoCompleteTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // searchBtn
@@ -54,16 +56,27 @@ namespace POS.UserControls
             // searchText
             // 
             this.searchText.AcceptsReturn = true;
-            this.searchText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchText.BackColor = System.Drawing.Color.White;
             this.searchText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.searchText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchText.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchText.Location = new System.Drawing.Point(3, 4);
+            this.searchText.Location = new System.Drawing.Point(10, 3);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(187, 19);
+            this.searchText.Size = new System.Drawing.Size(173, 19);
             this.searchText.TabIndex = 0;
             this.searchText.Values = null;
             this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.searchText);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.panel1.Size = new System.Drawing.Size(193, 26);
+            this.panel1.TabIndex = 2;
             // 
             // SearchControl
             // 
@@ -71,14 +84,15 @@ namespace POS.UserControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.searchText);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.searchBtn);
             this.MaximumSize = new System.Drawing.Size(9999, 28);
             this.MinimumSize = new System.Drawing.Size(219, 22);
             this.Name = "SearchControl";
             this.Size = new System.Drawing.Size(219, 26);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -86,5 +100,6 @@ namespace POS.UserControls
 
         private KeywordAutoCompleteTextBox searchText;
         private System.Windows.Forms.Button searchBtn;
+        private System.Windows.Forms.Panel panel1;
     }
 }
