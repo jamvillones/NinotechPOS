@@ -37,13 +37,15 @@ namespace POS.UserControls
             // 
             // searchBtn
             // 
-            this.searchBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.searchBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.searchBtn.FlatAppearance.BorderSize = 0;
             this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
-            this.searchBtn.Location = new System.Drawing.Point(190, 3);
+            this.searchBtn.Location = new System.Drawing.Point(193, 0);
+            this.searchBtn.Margin = new System.Windows.Forms.Padding(0);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(26, 22);
+            this.searchBtn.Size = new System.Drawing.Size(26, 26);
             this.searchBtn.TabIndex = 1;
             this.searchBtn.TabStop = false;
             this.searchBtn.UseVisualStyleBackColor = false;
@@ -52,12 +54,12 @@ namespace POS.UserControls
             // searchText
             // 
             this.searchText.AcceptsReturn = true;
-            this.searchText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchText.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchText.Location = new System.Drawing.Point(3, 3);
+            this.searchText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.searchText.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchText.Location = new System.Drawing.Point(3, 4);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(187, 22);
+            this.searchText.Size = new System.Drawing.Size(187, 19);
             this.searchText.TabIndex = 0;
             this.searchText.Values = null;
             this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
@@ -67,12 +69,14 @@ namespace POS.UserControls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.searchBtn);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.searchText);
+            this.Controls.Add(this.searchBtn);
             this.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.MinimumSize = new System.Drawing.Size(219, 28);
+            this.MinimumSize = new System.Drawing.Size(219, 22);
             this.Name = "SearchControl";
-            this.Size = new System.Drawing.Size(219, 28);
+            this.Size = new System.Drawing.Size(219, 26);
             this.ResumeLayout(false);
             this.PerformLayout();
 
