@@ -94,7 +94,7 @@ namespace POS.Forms
                 soldTo.Items.AddRange(soldtoItems);
                 soldTo.AutoCompleteCustomSource.AddRange(soldtoItems);
 
-                var inventoryItems = p.InventoryItems.GroupBy(x=>x.Product.Item.Name).Select(x => x.Key).ToArray();
+                var inventoryItems = p.InventoryItems.GroupBy(x=>x.Product.Item.Name).Select(z => z.Key).ToArray();
                 searchControl.SetAutoComplete(inventoryItems);
             }
 
