@@ -520,7 +520,7 @@
             this.groupBox7.Controls.Add(this.discount);
             this.groupBox7.Location = new System.Drawing.Point(485, 118);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.groupBox7.Size = new System.Drawing.Size(125, 42);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
@@ -533,14 +533,14 @@
             this.discount.DecimalPlaces = 2;
             this.discount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.discount.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.discount.Location = new System.Drawing.Point(5, 18);
+            this.discount.Location = new System.Drawing.Point(10, 18);
             this.discount.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(115, 18);
+            this.discount.Size = new System.Drawing.Size(105, 18);
             this.discount.TabIndex = 0;
             this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.discount.ThousandsSeparator = true;
@@ -579,7 +579,7 @@
             this.groupBox5.Controls.Add(this.price);
             this.groupBox5.Location = new System.Drawing.Point(354, 118);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.groupBox5.Size = new System.Drawing.Size(125, 42);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
@@ -592,7 +592,7 @@
             this.price.DecimalPlaces = 2;
             this.price.Dock = System.Windows.Forms.DockStyle.Fill;
             this.price.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.price.Location = new System.Drawing.Point(5, 18);
+            this.price.Location = new System.Drawing.Point(10, 18);
             this.price.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -604,7 +604,7 @@
             0,
             0});
             this.price.Name = "price";
-            this.price.Size = new System.Drawing.Size(115, 18);
+            this.price.Size = new System.Drawing.Size(105, 18);
             this.price.TabIndex = 1;
             this.price.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.price.ThousandsSeparator = true;
@@ -623,7 +623,7 @@
             this.groupBox4.Controls.Add(this.quantity);
             this.groupBox4.Location = new System.Drawing.Point(6, 118);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.groupBox4.Size = new System.Drawing.Size(342, 42);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
@@ -635,7 +635,7 @@
             this.quantity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.quantity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.quantity.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quantity.Location = new System.Drawing.Point(5, 18);
+            this.quantity.Location = new System.Drawing.Point(10, 18);
             this.quantity.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -647,7 +647,7 @@
             0,
             0});
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(332, 18);
+            this.quantity.Size = new System.Drawing.Size(322, 18);
             this.quantity.TabIndex = 0;
             this.quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.quantity.ThousandsSeparator = true;
@@ -680,13 +680,13 @@
             this.itemsTable.AllowUserToAddRows = false;
             this.itemsTable.AllowUserToDeleteRows = false;
             this.itemsTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gainsboro;
             this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemsTable.BackgroundColor = System.Drawing.Color.White;
-            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -708,8 +708,8 @@
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.itemsTable.Location = new System.Drawing.Point(6, 164);

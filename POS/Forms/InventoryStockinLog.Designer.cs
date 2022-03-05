@@ -52,6 +52,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.histTable.BackgroundColor = System.Drawing.Color.White;
             this.histTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.histTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.histTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.histTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -144,7 +145,6 @@
             this.ClientSize = new System.Drawing.Size(695, 450);
             this.Controls.Add(this.histTable);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InventoryStockinLog";
             this.ShowInTaskbar = false;
