@@ -193,7 +193,14 @@ namespace POS.Forms
                 //MessageBox.Show("Sold Items.");
                 if (isPrintReceipt.Checked)
                 {
-                    printDoc.Print();
+                    try
+                    {
+                        printDoc.Print();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Printing failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
 
                 this.Close();

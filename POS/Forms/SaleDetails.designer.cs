@@ -40,6 +40,16 @@
             this.itemsPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.itemsTable = new System.Windows.Forms.DataGridView();
+            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serialCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actualQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actualPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actualDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.soldTo = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -69,16 +79,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.doc = new System.Drawing.Printing.PrintDocument();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serialCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actualQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actualPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actualDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.groupBox8.SuspendLayout();
@@ -126,14 +126,14 @@
             this.itemsTable.AllowUserToAddRows = false;
             this.itemsTable.AllowUserToDeleteRows = false;
             this.itemsTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemsTable.BackgroundColor = System.Drawing.Color.White;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.itemsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -176,6 +176,86 @@
             this.itemsTable.Size = new System.Drawing.Size(852, 205);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
+            // 
+            // nameCol
+            // 
+            this.nameCol.HeaderText = "NAME";
+            this.nameCol.Name = "nameCol";
+            this.nameCol.ReadOnly = true;
+            this.nameCol.Width = 264;
+            // 
+            // serialCol
+            // 
+            this.serialCol.HeaderText = "SERIAL";
+            this.serialCol.Name = "serialCol";
+            this.serialCol.ReadOnly = true;
+            this.serialCol.Width = 106;
+            // 
+            // supplierCol
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.supplierCol.DefaultCellStyle = dataGridViewCellStyle3;
+            this.supplierCol.HeaderText = "SUPPLIER";
+            this.supplierCol.Name = "supplierCol";
+            this.supplierCol.ReadOnly = true;
+            // 
+            // qtyCol
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.qtyCol.DefaultCellStyle = dataGridViewCellStyle4;
+            this.qtyCol.HeaderText = "QTY";
+            this.qtyCol.Name = "qtyCol";
+            this.qtyCol.ReadOnly = true;
+            this.qtyCol.Width = 56;
+            // 
+            // priceCol
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.priceCol.DefaultCellStyle = dataGridViewCellStyle5;
+            this.priceCol.HeaderText = "PRICE";
+            this.priceCol.Name = "priceCol";
+            this.priceCol.ReadOnly = true;
+            this.priceCol.Width = 58;
+            // 
+            // discountCol
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.discountCol.DefaultCellStyle = dataGridViewCellStyle6;
+            this.discountCol.HeaderText = "DISCOUNT";
+            this.discountCol.Name = "discountCol";
+            this.discountCol.ReadOnly = true;
+            // 
+            // totalCol
+            // 
+            this.totalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.totalCol.DefaultCellStyle = dataGridViewCellStyle7;
+            this.totalCol.HeaderText = "TOTAL";
+            this.totalCol.Name = "totalCol";
+            this.totalCol.ReadOnly = true;
+            // 
+            // actualQty
+            // 
+            this.actualQty.HeaderText = "qty";
+            this.actualQty.Name = "actualQty";
+            this.actualQty.ReadOnly = true;
+            this.actualQty.Visible = false;
+            // 
+            // actualPrice
+            // 
+            this.actualPrice.HeaderText = "price";
+            this.actualPrice.Name = "actualPrice";
+            this.actualPrice.ReadOnly = true;
+            this.actualPrice.Visible = false;
+            // 
+            // actualDiscount
+            // 
+            this.actualDiscount.HeaderText = "discount";
+            this.actualDiscount.Name = "actualDiscount";
+            this.actualDiscount.ReadOnly = true;
+            this.actualDiscount.Visible = false;
             // 
             // groupBox8
             // 
@@ -517,86 +597,6 @@
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(884, 35);
             this.flowLayoutPanel1.TabIndex = 18;
-            // 
-            // nameCol
-            // 
-            this.nameCol.HeaderText = "NAME";
-            this.nameCol.Name = "nameCol";
-            this.nameCol.ReadOnly = true;
-            this.nameCol.Width = 264;
-            // 
-            // serialCol
-            // 
-            this.serialCol.HeaderText = "SERIAL";
-            this.serialCol.Name = "serialCol";
-            this.serialCol.ReadOnly = true;
-            this.serialCol.Width = 106;
-            // 
-            // supplierCol
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.supplierCol.DefaultCellStyle = dataGridViewCellStyle3;
-            this.supplierCol.HeaderText = "SUPPLIER";
-            this.supplierCol.Name = "supplierCol";
-            this.supplierCol.ReadOnly = true;
-            // 
-            // qtyCol
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.qtyCol.DefaultCellStyle = dataGridViewCellStyle4;
-            this.qtyCol.HeaderText = "QTY";
-            this.qtyCol.Name = "qtyCol";
-            this.qtyCol.ReadOnly = true;
-            this.qtyCol.Width = 56;
-            // 
-            // priceCol
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.priceCol.DefaultCellStyle = dataGridViewCellStyle5;
-            this.priceCol.HeaderText = "PRICE";
-            this.priceCol.Name = "priceCol";
-            this.priceCol.ReadOnly = true;
-            this.priceCol.Width = 58;
-            // 
-            // discountCol
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.discountCol.DefaultCellStyle = dataGridViewCellStyle6;
-            this.discountCol.HeaderText = "DISCOUNT";
-            this.discountCol.Name = "discountCol";
-            this.discountCol.ReadOnly = true;
-            // 
-            // totalCol
-            // 
-            this.totalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.totalCol.DefaultCellStyle = dataGridViewCellStyle7;
-            this.totalCol.HeaderText = "TOTAL";
-            this.totalCol.Name = "totalCol";
-            this.totalCol.ReadOnly = true;
-            // 
-            // actualQty
-            // 
-            this.actualQty.HeaderText = "qty";
-            this.actualQty.Name = "actualQty";
-            this.actualQty.ReadOnly = true;
-            this.actualQty.Visible = false;
-            // 
-            // actualPrice
-            // 
-            this.actualPrice.HeaderText = "price";
-            this.actualPrice.Name = "actualPrice";
-            this.actualPrice.ReadOnly = true;
-            this.actualPrice.Visible = false;
-            // 
-            // actualDiscount
-            // 
-            this.actualDiscount.HeaderText = "discount";
-            this.actualDiscount.Name = "actualDiscount";
-            this.actualDiscount.ReadOnly = true;
-            this.actualDiscount.Visible = false;
             // 
             // SaleDetails
             // 
