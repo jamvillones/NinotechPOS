@@ -457,6 +457,21 @@ namespace POS.Forms
                 this.ActiveControl = discount;
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
             }
+            if (e.KeyCode == Keys.F5)
+            {
+                this.ActiveControl = soldTo;
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
+            if (e.KeyCode == Keys.F6)
+            {
+                this.ActiveControl = amountRecieved;
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
+            if (e.KeyCode == Keys.F7)
+            {
+                this.ActiveControl = exactAmountBtn;
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
             if (e.Control && e.KeyCode == Keys.Enter)
             {
                 // Do what you want here

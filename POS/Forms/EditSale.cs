@@ -51,7 +51,7 @@ namespace POS.Forms
                                         string.Format("₱ {0:n}", x.ItemPrice),
                                         string.Format("₱ {0:n}", x.Discount),
                                         string.Format("₱ {0:n}", (x.Quantity * (x.ItemPrice-x.Discount))),
-                                        x.Product.Supplier.Name,
+                                        x.Product.Supplier?.Name,
                                         "Return Item");
                 }
                 total.Text = string.Format("₱ {0:n}", sale.Total);
@@ -143,7 +143,7 @@ namespace POS.Forms
                                     string.Format("₱ {0:n}", newSoldItem.ItemPrice),
                                     newSoldItem.Discount,
                                     string.Format("₱ {0:n}", (newSoldItem.Quantity * newSoldItem.ItemPrice) * ((100 - newSoldItem.Discount) / 100)),
-                                    newSoldItem.Product.Supplier.Name,
+                                    newSoldItem.Product.Supplier?.Name,
                                     "Return Item");
 
             }

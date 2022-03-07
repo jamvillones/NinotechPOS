@@ -496,5 +496,20 @@ namespace POS.UserControls
                 inventoryView.ShowDialog();
             }
         }
+
+        private async void button2_Click_1(object sender, EventArgs e)
+        {
+            await initItemsTableAsync();
+        }
+
+        private void InventoryUC_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+
+        private void itemsTable_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+                button2.PerformClick();
+        }
     }
 }

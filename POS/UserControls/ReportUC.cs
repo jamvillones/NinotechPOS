@@ -90,6 +90,14 @@ namespace POS.UserControls
             var table = (DataGridView)sender;
             int index = (int)(table.SelectedCells[0].Value);
 
+            using (var context = new POSEntities())
+                if (!context.Sales.Any(x => x.Id == index))
+                {
+                    MessageBox.Show("Sale removed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    table.Rows.RemoveAt(e.RowIndex);
+                    return;
+                }
+
             using (var saleDetails = new SaleDetails())
             {
                 saleDetails.SetId(index);

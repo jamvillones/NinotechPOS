@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MakeSale));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.change = new System.Windows.Forms.TextBox();
             this.cartTotal = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.exactAmountBtn = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.amountRecieved = new System.Windows.Forms.NumericUpDown();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -111,7 +111,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.change);
             this.groupBox2.Controls.Add(this.cartTotal);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.exactAmountBtn);
             this.groupBox2.Controls.Add(this.groupBox9);
             this.groupBox2.Controls.Add(this.panel3);
             this.groupBox2.Controls.Add(this.panel1);
@@ -166,24 +166,24 @@
             this.cartTotal.TabStop = false;
             this.cartTotal.TextChanged += new System.EventHandler(this.amountChangedCallback);
             // 
-            // button1
+            // exactAmountBtn
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(439, 126);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(164, 26);
-            this.button1.TabIndex = 14;
-            this.button1.TabStop = false;
-            this.button1.Text = "Exact Amount";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.cartTooltip.SetToolTip(this.button1, "Exact amount");
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.exactAmount_Click);
+            this.exactAmountBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.exactAmountBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.exactAmountBtn.FlatAppearance.BorderSize = 0;
+            this.exactAmountBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.exactAmountBtn.Image = ((System.Drawing.Image)(resources.GetObject("exactAmountBtn.Image")));
+            this.exactAmountBtn.Location = new System.Drawing.Point(439, 126);
+            this.exactAmountBtn.Name = "exactAmountBtn";
+            this.exactAmountBtn.Size = new System.Drawing.Size(164, 26);
+            this.exactAmountBtn.TabIndex = 14;
+            this.exactAmountBtn.TabStop = false;
+            this.exactAmountBtn.Text = "Exact Amount";
+            this.exactAmountBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.exactAmountBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.cartTooltip.SetToolTip(this.exactAmountBtn, "Exact amount (F7)");
+            this.exactAmountBtn.UseVisualStyleBackColor = false;
+            this.exactAmountBtn.Click += new System.EventHandler(this.exactAmount_Click);
             // 
             // groupBox9
             // 
@@ -196,7 +196,7 @@
             this.groupBox9.Size = new System.Drawing.Size(420, 42);
             this.groupBox9.TabIndex = 12;
             this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "TENDERED";
+            this.groupBox9.Text = "TENDERED (F6)";
             // 
             // amountRecieved
             // 
@@ -216,6 +216,7 @@
             this.amountRecieved.TabIndex = 3;
             this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.amountRecieved.ThousandsSeparator = true;
+            this.cartTooltip.SetToolTip(this.amountRecieved, "F6");
             this.amountRecieved.ValueChanged += new System.EventHandler(this.amountChangedCallback);
             // 
             // panel3
@@ -299,22 +300,22 @@
             // 
             this.cartTable.AllowUserToAddRows = false;
             this.cartTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.White;
-            this.cartTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.cartTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.cartTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cartTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.cartTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.cartTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.cartTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cartTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -325,14 +326,14 @@
             this.Column11,
             this.Column5,
             this.Column9});
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.ControlDark;
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cartTable.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cartTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.cartTable.Location = new System.Drawing.Point(6, 235);
             this.cartTable.MultiSelect = false;
             this.cartTable.Name = "cartTable";
@@ -415,7 +416,7 @@
             this.groupBox8.Size = new System.Drawing.Size(603, 47);
             this.groupBox8.TabIndex = 9;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "SOLD TO";
+            this.groupBox8.Text = "SOLD TO (F5)";
             // 
             // soldTo
             // 
@@ -434,6 +435,7 @@
             this.soldTo.Size = new System.Drawing.Size(415, 26);
             this.soldTo.TabIndex = 12;
             this.soldTo.Text = "Walkin";
+            this.cartTooltip.SetToolTip(this.soldTo, "F5");
             this.soldTo.Validated += new System.EventHandler(this.soldTo_Validated);
             // 
             // addCustomerBtn
@@ -572,7 +574,7 @@
             this.searchControl.SearchedText = "";
             this.searchControl.Size = new System.Drawing.Size(602, 28);
             this.searchControl.TabIndex = 0;
-            this.cartTooltip.SetToolTip(this.searchControl, "ctrl+F");
+            this.cartTooltip.SetToolTip(this.searchControl, "F1 to gain focus");
             this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
             this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
             // 
@@ -700,22 +702,22 @@
             this.itemsTable.AllowUserToAddRows = false;
             this.itemsTable.AllowUserToDeleteRows = false;
             this.itemsTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.Gainsboro;
-            this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Gainsboro;
+            this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemsTable.BackgroundColor = System.Drawing.Color.White;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -724,14 +726,14 @@
             this.Column6,
             this.Column10,
             this.Column4});
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.itemsTable.Location = new System.Drawing.Point(6, 164);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
@@ -867,7 +869,7 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Drawing.Printing.PrintDocument printDoc;
         private System.Windows.Forms.CheckBox isPrintReceipt;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button exactAmountBtn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label saleType;
         private System.Windows.Forms.Panel panel1;

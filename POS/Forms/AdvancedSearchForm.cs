@@ -19,11 +19,11 @@ namespace POS.Forms
             InitializeComponent();
             InitializeTable();
             setAutoComplete();
-            
+
         }
         void setAutoComplete()
         {
-            using(var p = new POSEntities())
+            using (var p = new POSEntities())
             {
                 searchControl1.SetAutoComplete(p.InventoryItems.Select(x => x.Product.Item.Name).ToArray());
             }
@@ -55,7 +55,7 @@ namespace POS.Forms
 
                 infoHolder.Barcode = i.Product.Item.Barcode;
                 infoHolder.Name = i.Product.Item.Name;
-                infoHolder.Supplier = i.Product.Supplier.Name;
+                infoHolder.Supplier = i.Product.Supplier?.Name;
                 infoHolder.SellingPrice = i.Product.Item.SellingPrice;
                 infoHolder.Quantity = 1;
 
@@ -91,7 +91,11 @@ namespace POS.Forms
                 MessageBox.Show("No item Selected", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            switch (MessageBox.Show("The item " + infoHolder.Name + " is about to be added.\n\nAre you sure you want to continue?", "", MessageBoxButtons.YesNo))
+            switch (MessageBox.Show(
+                "The item " + infoHolder.Name + " is about to be added.",
+                "Are you sure you want to continue?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question))
             {
                 case DialogResult.Yes:
                     addToCart();
@@ -140,7 +144,7 @@ namespace POS.Forms
                 e.SearchFound = true;
                 itemTables.Rows.Clear();
                 foreach (var i in searchedItems)
-                    itemTables.Rows.Add(i.Id,i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
+                    itemTables.Rows.Add(i.Id, i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
 
             }
         }
@@ -151,7 +155,12 @@ namespace POS.Forms
             {
                 itemTables.Rows.Clear();
                 foreach (var i in p.InventoryItems)
-                    itemTables.Rows.Add(i.Id,i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
+                    itemTables.Rows.Add(
+                        i.Id, i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(),
+                        i.Product.Item.Barcode,
+                        i.SerialNumber,
+                        i.Product.Item.Name,
+                        i.Product.Supplier?.Name);
 
             }
         }
