@@ -102,10 +102,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionConfigurations.cs">
+    <Compile Include="Forms\ConnectionConfigurations.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConnectionConfigurations.Designer.cs">
+    <Compile Include="Forms\ConnectionConfigurations.Designer.cs">
       <DependentUpon>ConnectionConfigurations.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\Tools.cs" />
@@ -388,10 +388,10 @@
     <Compile Include="SellItem.Designer.cs">
       <DependentUpon>SellItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShiftSummaryForm.cs">
+    <Compile Include="Forms\ShiftSummaryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ShiftSummaryForm.Designer.cs">
+    <Compile Include="Forms\ShiftSummaryForm.Designer.cs">
       <DependentUpon>ShiftSummaryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SoldItem.cs">
@@ -437,7 +437,7 @@
     <EmbeddedResource Include="Checkout.resx">
       <DependentUpon>Checkout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConnectionConfigurations.resx">
+    <EmbeddedResource Include="Forms\ConnectionConfigurations.resx">
       <DependentUpon>ConnectionConfigurations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditSaleDetails.resx">
@@ -561,7 +561,7 @@
     <EmbeddedResource Include="SellItem.resx">
       <DependentUpon>SellItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ShiftSummaryForm.resx">
+    <EmbeddedResource Include="Forms\ShiftSummaryForm.resx">
       <DependentUpon>ShiftSummaryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\InventoryUC.resx">
