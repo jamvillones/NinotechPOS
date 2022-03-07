@@ -93,5 +93,17 @@ namespace Connections
 
         //}
 
+        public static bool ConnectionNotSet
+        {
+            get
+            {
+                var settings = POS.Properties.Settings.Default;
+
+                return string.IsNullOrWhiteSpace(settings.DataSource) ||
+                    string.IsNullOrWhiteSpace(settings.PortName) ||
+                    string.IsNullOrWhiteSpace(settings.UserId) ||
+                    string.IsNullOrWhiteSpace(settings.Password);
+            }
+        }
     }
 }

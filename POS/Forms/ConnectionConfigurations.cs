@@ -68,6 +68,7 @@ namespace POS
         {
             saveSettings();
             DialogResult = DialogResult.OK;
+            this.Close();
         }
         /// <summary>
         /// save the values to settings

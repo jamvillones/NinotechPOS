@@ -26,6 +26,11 @@ namespace POS
 
             UserManager.instance = new UserManager();
 
+            if (Connections.Tools.ConnectionNotSet)
+            {
+                Application.Run(new ConnectionConfigurations());
+            }
+
             do
             {
                 signedOut = false;
