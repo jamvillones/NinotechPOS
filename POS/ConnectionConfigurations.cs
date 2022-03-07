@@ -74,7 +74,13 @@ namespace POS
         /// </summary>
         private void saveSettings()
         {
+            var settings = Properties.Settings.Default;
 
+            settings.DataSource = dataSource;
+            settings.PortName = portName;
+            settings.UserId = id;
+            settings.Password = password;
+            settings.Save();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -83,6 +89,16 @@ namespace POS
                                 string.IsNullOrWhiteSpace(portName) || 
                                 string.IsNullOrWhiteSpace(id) || 
                                 string.IsNullOrWhiteSpace(password));
+        }
+
+        private void ConnectionConfigurations_Load(object sender, EventArgs e)
+        {
+            var settings = Properties.Settings.Default;
+
+            dataSource = settings.DataSource;
+            portName = settings.PortName;
+            id = settings.UserId;
+            password = settings.Password;
         }
     }
 }

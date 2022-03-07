@@ -201,6 +201,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Connection Configurations";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConnectionConfigurations_FormClosing);
+            this.Load += new System.EventHandler(this.ConnectionConfigurations_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

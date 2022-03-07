@@ -25,9 +25,9 @@ namespace Connections
                 // init the sqlbuilder with the full EF connectionstring cargo
                 var sqlCnxStringBuilder = new SqlConnectionStringBuilder(entityCnxStringBuilder.ProviderConnectionString);
 
-                //sqlCnxStringBuilder.DataSource = settins.DataSource + "," + settins.PortName;
-                //sqlCnxStringBuilder.UserID = settins.Userid;
-                //sqlCnxStringBuilder.Password = settins.Password;
+                sqlCnxStringBuilder.DataSource = settins.DataSource + "," + settins.PortName;
+                sqlCnxStringBuilder.UserID = settins.UserId;
+                sqlCnxStringBuilder.Password = settins.Password;
 
                 //// set the integrated security status
                 //sqlCnxStringBuilder.IntegratedSecurity = false;

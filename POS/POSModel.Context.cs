@@ -9,6 +9,7 @@
 
 namespace POS
 {
+    using Connections;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -18,6 +19,7 @@ namespace POS
         public POSEntities()
             : base("name=POSEntities")
         {
+            this.ChangeDatabase();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
