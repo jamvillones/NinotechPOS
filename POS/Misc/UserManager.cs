@@ -27,7 +27,7 @@ namespace POS.Misc
                 }
                 catch
                 {
-                    MessageBox.Show("Cannot connect to database.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   // MessageBox.Show("Cannot connect to database.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             return false;
