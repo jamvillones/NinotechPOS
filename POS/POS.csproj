@@ -122,7 +122,7 @@
     <Compile Include="Customer.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataListHolder.cs" />
+    <Compile Include="Misc\DataListHolder.cs" />
     <Compile Include="EditSaleDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -381,7 +381,7 @@
     <Compile Include="SaleReprint.Designer.cs">
       <DependentUpon>SaleReprint.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchHandler.cs" />
+    <Compile Include="Misc\SearchHandler.cs" />
     <Compile Include="SellItem.cs">
       <SubType>Form</SubType>
     </Compile>
