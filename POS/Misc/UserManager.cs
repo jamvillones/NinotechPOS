@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 //using VS2017POS.EntitiyFolder;
 
 namespace POS.Misc
@@ -18,9 +19,16 @@ namespace POS.Misc
             string pw = password.Trim();
             using (var p = new POSEntities())
             {
-                currentLogin = p.Logins.FirstOrDefault(x => x.Username == un && x.Password == pw);
-                if (currentLogin != null)
-                    return true;
+                try
+                {
+                    currentLogin = p.Logins.FirstOrDefault(x => x.Username == un && x.Password == pw);
+                    if (currentLogin != null)
+                        return true;
+                }
+                catch
+                {
+                    MessageBox.Show("Cannot connect to database.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             return false;
         }
