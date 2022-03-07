@@ -438,7 +438,7 @@ namespace POS.UserControls
                 return;
 
             var type = itemsTable.SelectedCells[4].Value?.ToString();
-            addVariationsBtn.Enabled = type != ItemType.Hardware.ToString() ? false : true;
+            addVariationsBtn.Enabled = type != ItemType.Quantifiable.ToString() ? false : true;
         }
 
         private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)

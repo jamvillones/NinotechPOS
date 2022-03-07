@@ -94,7 +94,7 @@ namespace POS.Forms
                 soldTo.Items.AddRange(soldtoItems);
                 soldTo.AutoCompleteCustomSource.AddRange(soldtoItems);
 
-                var inventoryItems = p.InventoryItems.GroupBy(x=>x.Product.Item.Name).Select(z => z.Key).ToArray();
+                var inventoryItems = p.InventoryItems.GroupBy(x => x.Product.Item.Name).Select(z => z.Key).ToArray();
                 searchControl.SetAutoComplete(inventoryItems);
             }
 
@@ -174,7 +174,7 @@ namespace POS.Forms
                     s.SaleId = newSale.Id;
 
                     var inventoryItem = p.InventoryItems.FirstOrDefault(x => x.Product.ItemId == itemId && x.Product.Supplier.Name == itemSupp && x.SerialNumber == serial);
-                    if (inventoryItem != null && inventoryItem.Product.Item.Type == ItemType.Hardware.ToString())
+                    if (inventoryItem != null && inventoryItem.Product.Item.Type == ItemType.Quantifiable.ToString())
                     {
 
                         inventoryItem.Quantity -= s.Quantity;
@@ -197,7 +197,7 @@ namespace POS.Forms
                     {
                         printDoc.Print();
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, "Printing failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -435,21 +435,38 @@ namespace POS.Forms
 
         private void MakeSale_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.F)
+            if (e.KeyCode == Keys.F1)
             {
                 this.ActiveControl = searchControl.firstControl;
                 e.SuppressKeyPress = true;
             }
-            if (e.Shift && e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.F2)
             {
                 // Do what you want here
-                addBtn.PerformClick();
+                // addBtn.PerformClick();
+                this.ActiveControl = quantity;
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
+            if (e.KeyCode == Keys.F3)
+            {
+                this.ActiveControl = price;
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
+            if (e.KeyCode == Keys.F4)
+            {
+                this.ActiveControl = discount;
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
             }
             if (e.Control && e.KeyCode == Keys.Enter)
             {
                 // Do what you want here
                 checkoutBtn.PerformClick();
+                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            }
+            if (e.Shift && e.KeyCode == Keys.Enter)
+            {
+                // Do what you want here
+                addBtn.PerformClick();
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
             }
         }

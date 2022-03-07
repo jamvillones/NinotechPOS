@@ -43,7 +43,7 @@ namespace POS.Forms
                 using (var p = new POSEntities())
                 {
                     IEnumerable<Product> prod = p.Products;
-                    var rows = prod.Where(x => x.Item.Type == ItemType.Hardware.ToString()).Select(y => itemsTable.createRow(y.Item?.Barcode, y.Item.Name, y.Cost, y.Supplier?.Name)).ToArray();
+                    var rows = prod.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).Select(y => itemsTable.createRow(y.Item?.Barcode, y.Item.Name, y.Cost, y.Supplier?.Name)).ToArray();
 
 
                     itemsTable.InvokeIfRequired(() =>
@@ -65,7 +65,7 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Hardware.ToString()).Select(x => x.Item.Name).ToArray());
+                searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).Select(x => x.Item.Name).ToArray());
             }
         }
 
@@ -323,10 +323,10 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                var products = p.Products.Where(x => x.Item.Barcode == e.Text && x.Item.Type == ItemType.Hardware.ToString());
+                var products = p.Products.Where(x => x.Item.Barcode == e.Text && x.Item.Type == ItemType.Quantifiable.ToString());
                 if (products.Count() == 0)
                 {
-                    products = p.Products.Where(x => x.Item.Name.Contains(e.Text) && x.Item.Type == ItemType.Hardware.ToString());
+                    products = p.Products.Where(x => x.Item.Name.Contains(e.Text) && x.Item.Type == ItemType.Quantifiable.ToString());
                     if (products.Count() == 0)
                     {
                         if (MessageBox.Show("Would you like to create an item?", "Item not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

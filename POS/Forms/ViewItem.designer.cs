@@ -193,7 +193,7 @@
             // 
             // ImageBox
             // 
-            this.ImageBox.BackColor = System.Drawing.SystemColors.Control;
+            this.ImageBox.BackColor = System.Drawing.Color.White;
             this.ImageBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ImageBox.Location = new System.Drawing.Point(0, 0);
             this.ImageBox.Name = "ImageBox";

@@ -105,6 +105,9 @@ namespace POS.Forms
                     {
                         item.SampleImage = ImageDatabaseConverter.imageToByteArray(ImageBox.Image);
                     }
+                    else
+                        item.SampleImage = null;
+
                     p.Items.Add(item);
                     if (item.Type == ItemType.Service.ToString() || item.Type == ItemType.Software.ToString())
                     {
@@ -155,8 +158,8 @@ namespace POS.Forms
         }
         private void itemType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            VariationGroup.Enabled = itemType.Text == ItemType.Hardware.ToString();
-            if (itemType.Text != ItemType.Hardware.ToString())
+            VariationGroup.Enabled = itemType.Text == ItemType.Quantifiable.ToString();
+            if (itemType.Text != ItemType.Quantifiable.ToString())
                 variationTable.Rows.Clear();
         }
 

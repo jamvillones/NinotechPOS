@@ -105,5 +105,14 @@ namespace POS.Forms
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var img = ImageBox.Image;
+
+            //ImageBox.Image?.Dispose();
+            img?.Dispose();
+            ImageBox.Image = null;
+        }
     }
 }

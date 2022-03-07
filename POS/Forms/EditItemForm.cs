@@ -57,6 +57,8 @@ namespace POS.Forms
                     {
                         item.SampleImage = Misc.ImageDatabaseConverter.imageToByteArray(ImageBox.Image);
                     }
+                    else
+                        item.SampleImage = null;
 
                     p.SaveChanges();
                     InvokeEvent();                    

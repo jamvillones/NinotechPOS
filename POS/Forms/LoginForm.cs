@@ -37,7 +37,7 @@ namespace POS.Forms
                 this.Close();
                 return;
             }
-            MessageBox.Show("User not found.","Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Login failed!","", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

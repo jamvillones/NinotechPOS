@@ -44,14 +44,9 @@ namespace POS
             var det = detailsTxt.Text.Trim();
             var receiptPrinter = comboBox1.Text.Trim();
 
-            if (!string.IsNullOrEmpty(header))
-                settings.HeaderText = header;
-
-            if (!string.IsNullOrEmpty(det))
-                settings.DetailsText = det;
-
-            if (!string.IsNullOrEmpty(receiptPrinter))
-                settings.ReceiptPrinter = receiptPrinter;            
+            settings.HeaderText = header;
+            settings.DetailsText = det;
+            settings.ReceiptPrinter = receiptPrinter;
 
             settings.Save();
 

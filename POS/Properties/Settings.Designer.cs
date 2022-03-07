@@ -37,7 +37,7 @@ namespace POS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("[details]")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DetailsText {
             get {
                 return ((string)(this["DetailsText"]));

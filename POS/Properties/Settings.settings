@@ -6,7 +6,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DetailsText" Type="System.String" Scope="User">
-      <Value Profile="(Default)">[details]</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ReceiptPrinter" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

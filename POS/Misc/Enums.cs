@@ -8,5 +8,5 @@ namespace POS.Misc
 {
     enum SaleType { Regular, Charged, Count };
     enum Months { January, February, March, April, May, June, July, August, September, October, November, December, Count }
-    enum ItemType { Hardware,Software,Service,Count}
+    enum ItemType { Quantifiable,Software,Service,Count}
 }

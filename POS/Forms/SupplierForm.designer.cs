@@ -40,9 +40,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.supplierName = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.searchControl1 = new POS.UserControls.SearchControl();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.supplierTable)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -60,8 +60,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.supplierTable.BackgroundColor = System.Drawing.Color.White;
-            this.supplierTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.supplierTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.supplierTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.supplierTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.supplierTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
@@ -77,11 +76,11 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.supplierTable.DefaultCellStyle = dataGridViewCellStyle1;
             this.supplierTable.EnableHeadersVisualStyles = false;
-            this.supplierTable.Location = new System.Drawing.Point(8, 53);
+            this.supplierTable.Location = new System.Drawing.Point(6, 53);
             this.supplierTable.MultiSelect = false;
             this.supplierTable.Name = "supplierTable";
             this.supplierTable.RowHeadersVisible = false;
-            this.supplierTable.Size = new System.Drawing.Size(357, 250);
+            this.supplierTable.Size = new System.Drawing.Size(367, 250);
             this.supplierTable.TabIndex = 1;
             this.supplierTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.supplierTable_CellBeginEdit);
             this.supplierTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.supplierTable_CellContentClick);
@@ -198,6 +197,21 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Supplier List";
             // 
+            // searchControl1
+            // 
+            this.searchControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl1.BackColor = System.Drawing.Color.White;
+            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl1.Location = new System.Drawing.Point(6, 19);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(2, 28);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.SearchedText = "";
+            this.searchControl1.Size = new System.Drawing.Size(270, 28);
+            this.searchControl1.TabIndex = 0;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.addSuppBtn);
@@ -219,18 +233,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(378, 1);
             this.panel1.TabIndex = 2;
-            // 
-            // searchControl1
-            // 
-            this.searchControl1.Location = new System.Drawing.Point(5, 19);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(0, 28);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(220, 28);
-            this.searchControl1.TabIndex = 0;
-            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // SupplierForm
             // 

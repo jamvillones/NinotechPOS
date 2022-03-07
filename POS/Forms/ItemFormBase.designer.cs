@@ -46,6 +46,7 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.itemType = new System.Windows.Forms.ComboBox();
+            this.removeBtn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.imageHolder.SuspendLayout();
@@ -88,6 +89,7 @@
             this.groupBox2.Controls.Add(this.imageHolder);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(5);
             this.groupBox2.Size = new System.Drawing.Size(200, 123);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -95,16 +97,17 @@
             // 
             // imageHolder
             // 
-            this.imageHolder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.imageHolder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imageHolder.Controls.Add(this.ImageBox);
             this.imageHolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageHolder.Location = new System.Drawing.Point(3, 16);
+            this.imageHolder.Location = new System.Drawing.Point(5, 18);
             this.imageHolder.Name = "imageHolder";
-            this.imageHolder.Size = new System.Drawing.Size(194, 104);
+            this.imageHolder.Size = new System.Drawing.Size(190, 100);
             this.imageHolder.TabIndex = 0;
             // 
             // ImageBox
             // 
+            this.ImageBox.BackColor = System.Drawing.Color.White;
             this.ImageBox.Location = new System.Drawing.Point(-2, 1);
             this.ImageBox.Name = "ImageBox";
             this.ImageBox.Size = new System.Drawing.Size(194, 104);
@@ -221,12 +224,12 @@
             // 
             // takePhotoBtn
             // 
-            this.takePhotoBtn.Location = new System.Drawing.Point(62, 138);
+            this.takePhotoBtn.Location = new System.Drawing.Point(14, 138);
             this.takePhotoBtn.Name = "takePhotoBtn";
-            this.takePhotoBtn.Size = new System.Drawing.Size(107, 23);
+            this.takePhotoBtn.Size = new System.Drawing.Size(87, 23);
             this.takePhotoBtn.TabIndex = 0;
             this.takePhotoBtn.TabStop = false;
-            this.takePhotoBtn.Text = "Take a photo";
+            this.takePhotoBtn.Text = "Pick an Image";
             this.takePhotoBtn.UseVisualStyleBackColor = true;
             this.takePhotoBtn.Click += new System.EventHandler(this.takePhotoBtn_Click);
             // 
@@ -274,11 +277,23 @@
             this.itemType.Size = new System.Drawing.Size(139, 21);
             this.itemType.TabIndex = 0;
             // 
+            // removeBtn
+            // 
+            this.removeBtn.Location = new System.Drawing.Point(107, 138);
+            this.removeBtn.Name = "removeBtn";
+            this.removeBtn.Size = new System.Drawing.Size(105, 23);
+            this.removeBtn.TabIndex = 8;
+            this.removeBtn.TabStop = false;
+            this.removeBtn.Text = "Remove Image";
+            this.removeBtn.UseVisualStyleBackColor = true;
+            this.removeBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
             // ItemFormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(803, 452);
+            this.Controls.Add(this.removeBtn);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.takePhotoBtn);
@@ -331,5 +346,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         protected System.Windows.Forms.ComboBox itemType;
         protected System.Windows.Forms.GroupBox groupBox6;
+        protected System.Windows.Forms.Button removeBtn;
     }
 }
