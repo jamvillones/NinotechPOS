@@ -82,11 +82,14 @@ namespace POS.Forms
         {
             if (e.Alt && e.Shift && e.Control && e.KeyCode == Keys.C)
             {
-                var connectionString = ConfigurationManager.ConnectionStrings["POSEntities"].ConnectionString.ToString();
+                //var connectionString = ConfigurationManager.ConnectionStrings["POSEntities"].ConnectionString.ToString();
 
-                var STRINGS = connectionString.Split(';');
-               
-                MessageBox.Show(STRINGS[2], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //var STRINGS = connectionString.Split(';');
+
+                //MessageBox.Show(STRINGS[2], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var config = new ConnectionConfigurations();
+                config.ShowDialog();
+
             }
 
         }
