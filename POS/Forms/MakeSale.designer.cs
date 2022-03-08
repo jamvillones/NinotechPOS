@@ -41,9 +41,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.change = new System.Windows.Forms.TextBox();
             this.cartTotal = new System.Windows.Forms.TextBox();
-            this.exactAmountBtn = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.amountRecieved = new System.Windows.Forms.NumericUpDown();
+            this.exactAmountBtn = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.saleType = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -69,7 +69,6 @@
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.discount = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.searchControl = new POS.UserControls.SearchControl();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.price = new System.Windows.Forms.NumericUpDown();
@@ -85,6 +84,7 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cartTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.printDoc = new System.Drawing.Printing.PrintDocument();
+            this.searchControl = new POS.UserControls.SearchControl();
             this.groupBox2.SuspendLayout();
             this.groupBox9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountRecieved)).BeginInit();
@@ -111,7 +111,6 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.change);
             this.groupBox2.Controls.Add(this.cartTotal);
-            this.groupBox2.Controls.Add(this.exactAmountBtn);
             this.groupBox2.Controls.Add(this.groupBox9);
             this.groupBox2.Controls.Add(this.panel3);
             this.groupBox2.Controls.Add(this.panel1);
@@ -166,58 +165,60 @@
             this.cartTotal.TabStop = false;
             this.cartTotal.TextChanged += new System.EventHandler(this.amountChangedCallback);
             // 
-            // exactAmountBtn
-            // 
-            this.exactAmountBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.exactAmountBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.exactAmountBtn.FlatAppearance.BorderSize = 0;
-            this.exactAmountBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.exactAmountBtn.Image = ((System.Drawing.Image)(resources.GetObject("exactAmountBtn.Image")));
-            this.exactAmountBtn.Location = new System.Drawing.Point(439, 126);
-            this.exactAmountBtn.Name = "exactAmountBtn";
-            this.exactAmountBtn.Size = new System.Drawing.Size(164, 26);
-            this.exactAmountBtn.TabIndex = 14;
-            this.exactAmountBtn.TabStop = false;
-            this.exactAmountBtn.Text = "Exact Amount";
-            this.exactAmountBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.exactAmountBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.cartTooltip.SetToolTip(this.exactAmountBtn, "Exact amount (F7)");
-            this.exactAmountBtn.UseVisualStyleBackColor = false;
-            this.exactAmountBtn.Click += new System.EventHandler(this.exactAmount_Click);
-            // 
             // groupBox9
             // 
             this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox9.Controls.Add(this.amountRecieved);
+            this.groupBox9.Controls.Add(this.exactAmountBtn);
             this.groupBox9.Location = new System.Drawing.Point(7, 116);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox9.Size = new System.Drawing.Size(420, 42);
+            this.groupBox9.Size = new System.Drawing.Size(602, 42);
             this.groupBox9.TabIndex = 12;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "TENDERED (F6)";
             // 
             // amountRecieved
             // 
+            this.amountRecieved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.amountRecieved.BackColor = System.Drawing.SystemColors.Control;
-            this.amountRecieved.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.amountRecieved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.amountRecieved.DecimalPlaces = 2;
-            this.amountRecieved.Dock = System.Windows.Forms.DockStyle.Fill;
             this.amountRecieved.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountRecieved.Location = new System.Drawing.Point(5, 18);
+            this.amountRecieved.Location = new System.Drawing.Point(5, 13);
             this.amountRecieved.Maximum = new decimal(new int[] {
             1215752191,
             23,
             0,
             0});
             this.amountRecieved.Name = "amountRecieved";
-            this.amountRecieved.Size = new System.Drawing.Size(410, 18);
+            this.amountRecieved.Size = new System.Drawing.Size(421, 22);
             this.amountRecieved.TabIndex = 3;
             this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.amountRecieved.ThousandsSeparator = true;
             this.cartTooltip.SetToolTip(this.amountRecieved, "F6");
             this.amountRecieved.ValueChanged += new System.EventHandler(this.amountChangedCallback);
+            // 
+            // exactAmountBtn
+            // 
+            this.exactAmountBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.exactAmountBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.exactAmountBtn.FlatAppearance.BorderSize = 0;
+            this.exactAmountBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.exactAmountBtn.Image = ((System.Drawing.Image)(resources.GetObject("exactAmountBtn.Image")));
+            this.exactAmountBtn.Location = new System.Drawing.Point(432, 10);
+            this.exactAmountBtn.Name = "exactAmountBtn";
+            this.exactAmountBtn.Size = new System.Drawing.Size(164, 26);
+            this.exactAmountBtn.TabIndex = 14;
+            this.exactAmountBtn.TabStop = false;
+            this.exactAmountBtn.Text = "  Exact Amount";
+            this.exactAmountBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.exactAmountBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.cartTooltip.SetToolTip(this.exactAmountBtn, "Exact amount (F7)");
+            this.exactAmountBtn.UseVisualStyleBackColor = false;
+            this.exactAmountBtn.Click += new System.EventHandler(this.exactAmount_Click);
             // 
             // panel3
             // 
@@ -432,7 +433,7 @@
             "Charged Sale"});
             this.soldTo.Location = new System.Drawing.Point(6, 15);
             this.soldTo.Name = "soldTo";
-            this.soldTo.Size = new System.Drawing.Size(415, 26);
+            this.soldTo.Size = new System.Drawing.Size(421, 26);
             this.soldTo.TabIndex = 12;
             this.soldTo.Text = "Walkin";
             this.cartTooltip.SetToolTip(this.soldTo, "F5");
@@ -449,7 +450,7 @@
             this.addCustomerBtn.Size = new System.Drawing.Size(164, 26);
             this.addCustomerBtn.TabIndex = 11;
             this.addCustomerBtn.TabStop = false;
-            this.addCustomerBtn.Text = "Add Customer";
+            this.addCustomerBtn.Text = "  Add Customer";
             this.addCustomerBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.addCustomerBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.cartTooltip.SetToolTip(this.addCustomerBtn, "Add New Customer");
@@ -493,25 +494,25 @@
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(279, 71);
+            this.label4.Location = new System.Drawing.Point(13, 74);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "ITEM NAME:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // itemName
             // 
             this.itemName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemName.BackColor = System.Drawing.Color.White;
-            this.itemName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemName.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemName.Location = new System.Drawing.Point(8, 90);
+            this.itemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.itemName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemName.Location = new System.Drawing.Point(6, 89);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(603, 15);
+            this.itemName.Size = new System.Drawing.Size(604, 22);
             this.itemName.TabIndex = 0;
             this.itemName.TabStop = false;
             this.itemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -534,7 +535,7 @@
             this.discount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.discount.DecimalPlaces = 2;
             this.discount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.discount.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.discount.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.discount.Location = new System.Drawing.Point(10, 18);
             this.discount.Maximum = new decimal(new int[] {
             1000000,
@@ -560,23 +561,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(604, 45);
             this.panel2.TabIndex = 0;
-            // 
-            // searchControl
-            // 
-            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl.BackColor = System.Drawing.Color.White;
-            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchControl.Location = new System.Drawing.Point(0, 17);
-            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.SearchedText = "";
-            this.searchControl.Size = new System.Drawing.Size(602, 28);
-            this.searchControl.TabIndex = 0;
-            this.cartTooltip.SetToolTip(this.searchControl, "F1 to gain focus");
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
             // 
             // checkBox1
             // 
@@ -611,7 +595,7 @@
             this.price.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.price.DecimalPlaces = 2;
             this.price.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.price.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.price.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.price.Location = new System.Drawing.Point(10, 18);
             this.price.Maximum = new decimal(new int[] {
             9999999,
@@ -655,7 +639,7 @@
             this.quantity.BackColor = System.Drawing.Color.White;
             this.quantity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.quantity.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.quantity.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quantity.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quantity.Location = new System.Drawing.Point(10, 18);
             this.quantity.Maximum = new decimal(new int[] {
             1000000,
@@ -801,6 +785,23 @@
             // 
             this.printDoc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDoc_BeginPrint);
             this.printDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // searchControl
+            // 
+            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl.BackColor = System.Drawing.Color.White;
+            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchControl.Location = new System.Drawing.Point(0, 17);
+            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.SearchedText = "";
+            this.searchControl.Size = new System.Drawing.Size(602, 28);
+            this.searchControl.TabIndex = 0;
+            this.cartTooltip.SetToolTip(this.searchControl, "F1 to gain focus");
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
             // 
             // MakeSale
             // 

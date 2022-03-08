@@ -72,6 +72,7 @@
             this.groupBox2.Controls.Add(this.detailsTxt);
             this.groupBox2.Location = new System.Drawing.Point(13, 61);
             this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
             this.groupBox2.Size = new System.Drawing.Size(409, 191);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -79,14 +80,13 @@
             // 
             // detailsTxt
             // 
-            this.detailsTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.detailsTxt.BackColor = System.Drawing.SystemColors.Control;
             this.detailsTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.detailsTxt.Location = new System.Drawing.Point(7, 98);
+            this.detailsTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.detailsTxt.Location = new System.Drawing.Point(10, 23);
             this.detailsTxt.Multiline = true;
             this.detailsTxt.Name = "detailsTxt";
-            this.detailsTxt.Size = new System.Drawing.Size(396, 87);
+            this.detailsTxt.Size = new System.Drawing.Size(389, 158);
             this.detailsTxt.TabIndex = 0;
             this.detailsTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 

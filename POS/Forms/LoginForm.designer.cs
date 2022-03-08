@@ -58,6 +58,7 @@
             this.username.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.username.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.username.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.username.ForeColor = System.Drawing.Color.White;
             this.username.Location = new System.Drawing.Point(102, 212);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(188, 19);
@@ -86,6 +87,7 @@
             this.password.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.password.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.password.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password.ForeColor = System.Drawing.Color.White;
             this.password.Location = new System.Drawing.Point(102, 245);
             this.password.Name = "password";
             this.password.PasswordChar = '●';
@@ -100,13 +102,13 @@
             this.loginBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.loginBtn.FlatAppearance.BorderSize = 0;
             this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loginBtn.ForeColor = System.Drawing.Color.Black;
+            this.loginBtn.ForeColor = System.Drawing.Color.White;
             this.loginBtn.Location = new System.Drawing.Point(82, 315);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(186, 34);
             this.loginBtn.TabIndex = 2;
             this.loginBtn.TabStop = false;
-            this.loginBtn.Text = "Login";
+            this.loginBtn.Text = "LOGIN";
             this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
@@ -187,11 +189,11 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(93, 158);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(165, 24);
+            this.label1.Size = new System.Drawing.Size(157, 22);
             this.label1.TabIndex = 10;
             this.label1.Text = "NIÑOTECH POS";
             // 

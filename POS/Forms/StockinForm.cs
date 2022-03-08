@@ -65,7 +65,7 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).Select(x => x.Item.Name).ToArray());
+                searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).GroupBy(y=>y.Item.Name).Select(a => a.Key).ToArray());
             }
         }
 
@@ -283,8 +283,6 @@ namespace POS.Forms
 
         private void StockinForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.F)
-                this.ActiveControl = searchControl.firstControl;
 
             if (e.Shift && e.KeyCode == Keys.Enter)
             {
@@ -297,6 +295,9 @@ namespace POS.Forms
                 stockinBtn.PerformClick();
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
             }
+            if (e.KeyCode == Keys.F1)
+                this.ActiveControl = searchControl.firstControl;
+
             if (e.KeyCode == Keys.F2)
                 this.ActiveControl = serialNumber;
 

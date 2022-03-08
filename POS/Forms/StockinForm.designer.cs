@@ -89,9 +89,9 @@
             this.groupBox2.Controls.Add(this.stockinBtn);
             this.groupBox2.Controls.Add(this.inventoryTable);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(583, 3);
+            this.groupBox2.Location = new System.Drawing.Point(495, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(574, 506);
+            this.groupBox2.Size = new System.Drawing.Size(486, 505);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "To stockin";
@@ -100,27 +100,29 @@
             // 
             this.removeBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.removeBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.removeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.removeBtn.Location = new System.Drawing.Point(6, 19);
             this.removeBtn.Name = "removeBtn";
-            this.removeBtn.Size = new System.Drawing.Size(562, 23);
+            this.removeBtn.Size = new System.Drawing.Size(474, 28);
             this.removeBtn.TabIndex = 8;
             this.removeBtn.TabStop = false;
             this.removeBtn.Text = "Remove";
-            this.removeBtn.UseVisualStyleBackColor = true;
+            this.removeBtn.UseVisualStyleBackColor = false;
             this.removeBtn.Click += new System.EventHandler(this.removeBtn_Click);
             // 
             // stockinBtn
             // 
             this.stockinBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.stockinBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.stockinBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.stockinBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.stockinBtn.Location = new System.Drawing.Point(6, 474);
+            this.stockinBtn.Location = new System.Drawing.Point(6, 469);
             this.stockinBtn.Name = "stockinBtn";
-            this.stockinBtn.Size = new System.Drawing.Size(562, 23);
+            this.stockinBtn.Size = new System.Drawing.Size(474, 28);
             this.stockinBtn.TabIndex = 4;
             this.stockinBtn.TabStop = false;
-            this.stockinBtn.Text = "Stock in";
+            this.stockinBtn.Text = "STOCK IN (CTRL+ENTER)";
             this.toolTip.SetToolTip(this.stockinBtn, "(ctrl+Enter) to stock in");
             this.stockinBtn.UseVisualStyleBackColor = false;
             this.stockinBtn.Click += new System.EventHandler(this.stockinBtn_Click);
@@ -135,13 +137,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.inventoryTable.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.inventoryTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.inventoryTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.inventoryTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.inventoryTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
@@ -163,14 +164,14 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.inventoryTable.EnableHeadersVisualStyles = false;
-            this.inventoryTable.Location = new System.Drawing.Point(6, 48);
+            this.inventoryTable.Location = new System.Drawing.Point(6, 53);
             this.inventoryTable.MultiSelect = false;
             this.inventoryTable.Name = "inventoryTable";
             this.inventoryTable.ReadOnly = true;
             this.inventoryTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.inventoryTable.RowHeadersVisible = false;
             this.inventoryTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.inventoryTable.Size = new System.Drawing.Size(562, 420);
+            this.inventoryTable.Size = new System.Drawing.Size(474, 410);
             this.inventoryTable.StandardTab = true;
             this.inventoryTable.TabIndex = 4;
             this.inventoryTable.TabStop = false;
@@ -245,7 +246,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1160, 512);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 511);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // groupBox1
@@ -260,7 +261,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(574, 506);
+            this.groupBox1.Size = new System.Drawing.Size(486, 505);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Items";
@@ -274,7 +275,7 @@
             this.panel1.Controls.Add(this.loadingLabelItem);
             this.panel1.Location = new System.Drawing.Point(9, 212);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(559, 256);
+            this.panel1.Size = new System.Drawing.Size(471, 251);
             this.panel1.TabIndex = 6;
             // 
             // itemsTable
@@ -284,13 +285,12 @@
             this.itemsTable.AllowUserToResizeColumns = false;
             this.itemsTable.AllowUserToResizeRows = false;
             this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
@@ -317,7 +317,7 @@
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(559, 240);
+            this.itemsTable.Size = new System.Drawing.Size(471, 235);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 6;
             this.itemsTable.TabStop = false;
@@ -385,14 +385,18 @@
             // 
             // createItemBtn
             // 
-            this.createItemBtn.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.createItemBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.createItemBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.createItemBtn.FlatAppearance.BorderSize = 0;
-            this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("createItemBtn.Image")));
-            this.createItemBtn.Location = new System.Drawing.Point(310, 21);
+            this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.createItemBtn.Location = new System.Drawing.Point(310, 19);
             this.createItemBtn.Name = "createItemBtn";
-            this.createItemBtn.Size = new System.Drawing.Size(23, 23);
+            this.createItemBtn.Size = new System.Drawing.Size(170, 28);
             this.createItemBtn.TabIndex = 1;
+            this.createItemBtn.TabStop = false;
+            this.createItemBtn.Text = "Create New Item";
+            this.createItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.toolTip.SetToolTip(this.createItemBtn, "Create Item");
             this.createItemBtn.UseVisualStyleBackColor = false;
             this.createItemBtn.Click += new System.EventHandler(this.createItemBtn_Click);
@@ -404,10 +408,10 @@
             this.groupBox7.Controls.Add(this.serialNumber);
             this.groupBox7.Location = new System.Drawing.Point(9, 159);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(428, 47);
+            this.groupBox7.Size = new System.Drawing.Size(340, 47);
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Serial Number";
+            this.groupBox7.Text = "Serial Number (F2)";
             // 
             // serialNumber
             // 
@@ -418,7 +422,7 @@
             this.serialNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.serialNumber.Location = new System.Drawing.Point(7, 20);
             this.serialNumber.Name = "serialNumber";
-            this.serialNumber.Size = new System.Drawing.Size(415, 13);
+            this.serialNumber.Size = new System.Drawing.Size(327, 13);
             this.serialNumber.TabIndex = 0;
             this.toolTip.SetToolTip(this.serialNumber, "(f2) to focus serial number");
             this.serialNumber.TextChanged += new System.EventHandler(this.serialNumber_TextChanged);
@@ -438,7 +442,7 @@
             this.groupBox3.Controls.Add(this.itemName);
             this.groupBox3.Location = new System.Drawing.Point(9, 53);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(559, 100);
+            this.groupBox3.Size = new System.Drawing.Size(471, 100);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Item Details";
@@ -484,66 +488,70 @@
             this.cost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cost.BackColor = System.Drawing.SystemColors.Control;
-            this.cost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.cost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cost.Location = new System.Drawing.Point(73, 77);
+            this.cost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cost.Location = new System.Drawing.Point(74, 74);
             this.cost.Name = "cost";
             this.cost.ReadOnly = true;
-            this.cost.Size = new System.Drawing.Size(480, 13);
+            this.cost.Size = new System.Drawing.Size(392, 20);
             this.cost.TabIndex = 0;
             this.cost.TabStop = false;
+            this.cost.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // barcode
             // 
             this.barcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.barcode.BackColor = System.Drawing.SystemColors.Control;
-            this.barcode.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.barcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barcode.Location = new System.Drawing.Point(73, 39);
+            this.barcode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.barcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barcode.Location = new System.Drawing.Point(74, 36);
             this.barcode.Name = "barcode";
-            this.barcode.Size = new System.Drawing.Size(480, 13);
+            this.barcode.Size = new System.Drawing.Size(392, 20);
             this.barcode.TabIndex = 0;
             this.barcode.TabStop = false;
+            this.barcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // supplier
             // 
             this.supplier.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.supplier.BackColor = System.Drawing.SystemColors.Control;
-            this.supplier.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.supplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.supplier.Location = new System.Drawing.Point(73, 58);
+            this.supplier.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.supplier.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supplier.Location = new System.Drawing.Point(74, 55);
             this.supplier.Name = "supplier";
             this.supplier.ReadOnly = true;
-            this.supplier.Size = new System.Drawing.Size(480, 13);
+            this.supplier.Size = new System.Drawing.Size(392, 20);
             this.supplier.TabIndex = 1;
             this.supplier.TabStop = false;
+            this.supplier.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // itemName
             // 
             this.itemName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemName.BackColor = System.Drawing.SystemColors.Control;
-            this.itemName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemName.Location = new System.Drawing.Point(73, 20);
+            this.itemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.itemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemName.Location = new System.Drawing.Point(74, 17);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(480, 13);
+            this.itemName.Size = new System.Drawing.Size(392, 20);
             this.itemName.TabIndex = 0;
             this.itemName.TabStop = false;
+            this.itemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.quantity);
-            this.groupBox4.Location = new System.Drawing.Point(443, 159);
+            this.groupBox4.Location = new System.Drawing.Point(355, 159);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(125, 47);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Quantity";
+            this.groupBox4.Text = "Quantity (F3)";
             // 
             // quantity
             // 
@@ -579,12 +587,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.addBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addBtn.Location = new System.Drawing.Point(6, 474);
+            this.addBtn.Location = new System.Drawing.Point(9, 469);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(562, 23);
+            this.addBtn.Size = new System.Drawing.Size(471, 28);
             this.addBtn.TabIndex = 3;
             this.addBtn.TabStop = false;
-            this.addBtn.Text = "Add";
+            this.addBtn.Text = "ADD (SHIFT+ENTER)";
             this.toolTip.SetToolTip(this.addBtn, "(shift+Enter) to add");
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
@@ -600,7 +608,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 512);
+            this.ClientSize = new System.Drawing.Size(984, 511);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -608,7 +616,7 @@
             this.Name = "StockinForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Stockin";
+            this.Text = "Stock In";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.StockinForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StockinForm_KeyDown);
