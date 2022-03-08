@@ -48,12 +48,13 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.loadingLabelItem = new System.Windows.Forms.Label();
             this.itemsTable = new System.Windows.Forms.DataGridView();
             this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loadingLabelItem = new System.Windows.Forms.Label();
+            this.searchControl = new POS.UserControls.SearchControl();
             this.createItemBtn = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.serialNumber = new System.Windows.Forms.TextBox();
@@ -70,7 +71,6 @@
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.addBtn = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.searchControl = new POS.UserControls.SearchControl();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -277,20 +277,6 @@
             this.panel1.Size = new System.Drawing.Size(559, 256);
             this.panel1.TabIndex = 6;
             // 
-            // loadingLabelItem
-            // 
-            this.loadingLabelItem.AutoSize = true;
-            this.loadingLabelItem.BackColor = System.Drawing.SystemColors.Control;
-            this.loadingLabelItem.Dock = System.Windows.Forms.DockStyle.Top;
-            this.loadingLabelItem.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadingLabelItem.ForeColor = System.Drawing.Color.Green;
-            this.loadingLabelItem.Location = new System.Drawing.Point(0, 0);
-            this.loadingLabelItem.Name = "loadingLabelItem";
-            this.loadingLabelItem.Size = new System.Drawing.Size(92, 16);
-            this.loadingLabelItem.TabIndex = 11;
-            this.loadingLabelItem.Text = "LOADING DATA...";
-            this.loadingLabelItem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // itemsTable
             // 
             this.itemsTable.AllowUserToAddRows = false;
@@ -366,6 +352,36 @@
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
             this.Column7.Width = 76;
+            // 
+            // loadingLabelItem
+            // 
+            this.loadingLabelItem.AutoSize = true;
+            this.loadingLabelItem.BackColor = System.Drawing.SystemColors.Control;
+            this.loadingLabelItem.Dock = System.Windows.Forms.DockStyle.Top;
+            this.loadingLabelItem.Font = new System.Drawing.Font("Arial Narrow", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadingLabelItem.ForeColor = System.Drawing.Color.Green;
+            this.loadingLabelItem.Location = new System.Drawing.Point(0, 0);
+            this.loadingLabelItem.Name = "loadingLabelItem";
+            this.loadingLabelItem.Size = new System.Drawing.Size(92, 16);
+            this.loadingLabelItem.TabIndex = 11;
+            this.loadingLabelItem.Text = "LOADING DATA...";
+            this.loadingLabelItem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // searchControl
+            // 
+            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl.BackColor = System.Drawing.Color.White;
+            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl.Location = new System.Drawing.Point(9, 19);
+            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.SearchedText = "";
+            this.searchControl.Size = new System.Drawing.Size(295, 28);
+            this.searchControl.TabIndex = 0;
+            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // createItemBtn
             // 
@@ -579,19 +595,6 @@
             this.toolTip.InitialDelay = 300;
             this.toolTip.ReshowDelay = 100;
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
-            // searchControl
-            // 
-            this.searchControl.Location = new System.Drawing.Point(9, 19);
-            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl.MinimumSize = new System.Drawing.Size(0, 28);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.SearchedText = "";
-            this.searchControl.Size = new System.Drawing.Size(295, 28);
-            this.searchControl.TabIndex = 0;
-            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // StockinForm
             // 
