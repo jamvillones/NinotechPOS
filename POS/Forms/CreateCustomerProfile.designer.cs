@@ -37,16 +37,16 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.name = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.customerTable = new System.Windows.Forms.DataGridView();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.searchControl = new POS.UserControls.SearchControl();
+            this.customerTable = new System.Windows.Forms.DataGridView();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.transactCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -62,7 +62,7 @@
             this.groupBox2.Controls.Add(this.address);
             this.groupBox2.Location = new System.Drawing.Point(6, 70);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(305, 45);
+            this.groupBox2.Size = new System.Drawing.Size(405, 45);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Address";
@@ -77,14 +77,14 @@
             this.address.Location = new System.Drawing.Point(6, 19);
             this.address.MaxLength = 50;
             this.address.Name = "address";
-            this.address.Size = new System.Drawing.Size(293, 13);
+            this.address.Size = new System.Drawing.Size(393, 13);
             this.address.TabIndex = 0;
             // 
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.contact);
-            this.groupBox3.Location = new System.Drawing.Point(317, 70);
+            this.groupBox3.Location = new System.Drawing.Point(417, 70);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(287, 45);
             this.groupBox3.TabIndex = 2;
@@ -112,7 +112,7 @@
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveBtn.Location = new System.Drawing.Point(6, 122);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(598, 23);
+            this.saveBtn.Size = new System.Drawing.Size(698, 23);
             this.saveBtn.TabIndex = 3;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = false;
@@ -125,7 +125,7 @@
             this.groupBox4.Controls.Add(this.name);
             this.groupBox4.Location = new System.Drawing.Point(6, 19);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(598, 45);
+            this.groupBox4.Size = new System.Drawing.Size(698, 45);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Name";
@@ -140,7 +140,7 @@
             this.name.Location = new System.Drawing.Point(6, 19);
             this.name.MaxLength = 50;
             this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(586, 13);
+            this.name.Size = new System.Drawing.Size(686, 13);
             this.name.TabIndex = 0;
             // 
             // groupBox1
@@ -152,10 +152,25 @@
             this.groupBox1.Controls.Add(this.customerTable);
             this.groupBox1.Location = new System.Drawing.Point(12, 176);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(610, 273);
+            this.groupBox1.Size = new System.Drawing.Size(710, 273);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "List of Customers";
+            // 
+            // searchControl
+            // 
+            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl.BackColor = System.Drawing.Color.White;
+            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl.Location = new System.Drawing.Point(6, 19);
+            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.SearchedText = "";
+            this.searchControl.Size = new System.Drawing.Size(270, 28);
+            this.searchControl.TabIndex = 5;
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl_OnTextEmpty);
             // 
             // customerTable
             // 
@@ -190,52 +205,12 @@
             this.customerTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.customerTable.RowHeadersVisible = false;
             this.customerTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.customerTable.Size = new System.Drawing.Size(598, 214);
+            this.customerTable.Size = new System.Drawing.Size(698, 214);
             this.customerTable.StandardTab = true;
             this.customerTable.TabIndex = 1;
             this.customerTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.customerTable_CellBeginEdit);
             this.customerTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellContentClick);
             this.customerTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellEndEdit);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.groupBox4);
-            this.groupBox5.Controls.Add(this.groupBox2);
-            this.groupBox5.Controls.Add(this.groupBox3);
-            this.groupBox5.Controls.Add(this.saveBtn);
-            this.groupBox5.Location = new System.Drawing.Point(12, 12);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(610, 151);
-            this.groupBox5.TabIndex = 4;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Register Customer";
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Location = new System.Drawing.Point(12, 169);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(610, 1);
-            this.panel1.TabIndex = 5;
-            // 
-            // searchControl
-            // 
-            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl.BackColor = System.Drawing.Color.White;
-            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl.Location = new System.Drawing.Point(6, 19);
-            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.SearchedText = "";
-            this.searchControl.Size = new System.Drawing.Size(270, 28);
-            this.searchControl.TabIndex = 5;
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl_OnTextEmpty);
             // 
             // Column4
             // 
@@ -244,7 +219,6 @@
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             this.Column4.Visible = false;
-            this.Column4.Width = 22;
             // 
             // Column2
             // 
@@ -281,11 +255,36 @@
             this.transactCol.Name = "transactCol";
             this.transactCol.Width = 5;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox5.Controls.Add(this.groupBox4);
+            this.groupBox5.Controls.Add(this.groupBox2);
+            this.groupBox5.Controls.Add(this.groupBox3);
+            this.groupBox5.Controls.Add(this.saveBtn);
+            this.groupBox5.Location = new System.Drawing.Point(12, 12);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(710, 151);
+            this.groupBox5.TabIndex = 4;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Register Customer";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Location = new System.Drawing.Point(12, 169);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(710, 1);
+            this.panel1.TabIndex = 5;
+            // 
             // CreateCustomerProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 461);
+            this.ClientSize = new System.Drawing.Size(734, 461);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);

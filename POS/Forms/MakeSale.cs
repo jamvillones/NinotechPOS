@@ -55,7 +55,7 @@ namespace POS.Forms
         {
             get
             {
-                decimal temp = new decimal();
+                decimal temp = 0;
                 for (int i = 0; i < cartTable.RowCount; i++)
                 {
                     decimal v = Convert.ToDecimal(cartTable.Rows[i].Cells[6].Value);
@@ -67,18 +67,12 @@ namespace POS.Forms
 
         ItemInfoHolder tempItem;
         public event EventHandler OnSave;
+
         public MakeSale()
         {
             InitializeComponent();
         }
-
-        //public MakeSale(string barcode)
-        //{
-        //    InitializeComponent();
-        //    searchControl.SearchedText = barcode;
-        //    doSearch();
-        //}
-
+        
         public void SellSpecific(string barcode)
         {
             searchControl.SearchedText = barcode;
@@ -272,6 +266,7 @@ namespace POS.Forms
                 return Convert.ToInt32(leftCurrentRow.Cells[3].Value);
             }
         }
+
         /// <summary>
         /// handles the handling of table when items are added in cart table
         /// </summary>
@@ -339,8 +334,9 @@ namespace POS.Forms
         void calculateTotal()
         {
             cartTotal.Text = string.Format("₱ {0:n}", cartTotalValue);
-
-            saleType.Text = cartTotalValue - amountRecieved.Value > 0 ? "Charged" : "Regular";
+            var value = cartTotalValue - amountRecieved.Value;
+            saleType.ForeColor = value > 0 ? Color.Red : Color.DarkGreen;
+            saleType.Text = value > 0 ? "CHARGED" : "REGULAR";
         }
 
         private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -366,9 +362,12 @@ namespace POS.Forms
 
             decimal amountRec = amountRecieved.Value;
 
-            change.Text = string.Format("₱ {0:n}", (amountRec - cartTotalValue));
+            //var c = amountRec - cartTotalValue;
             calculateTotal();
+            change.Text = string.Format("₱ {0:n}", changeAmount);
         }
+
+        decimal changeAmount => amountRecieved.Value - cartTotalValue < 0 ? 0 : amountRecieved.Value - cartTotalValue;
 
         void SetSoldTo()
         {
@@ -469,8 +468,7 @@ namespace POS.Forms
             }
             if (e.KeyCode == Keys.F7)
             {
-                this.ActiveControl = exactAmountBtn;
-                e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+                exactAmountBtn.PerformClick();
             }
             if (e.Control && e.KeyCode == Keys.Enter)
             {
@@ -498,9 +496,8 @@ namespace POS.Forms
                 e.Cancel = true;
                 return;
             }
-
-            itemsTable.Rows.Clear();
         }
+
         /// <summary>
         /// this gets the contents of the cart in enumerable form
         /// </summary>
@@ -511,6 +508,7 @@ namespace POS.Forms
                 return cartTable.Rows.Cast<DataGridViewRow>();
             }
         }
+
         /// <summary>
         /// callback function of search's actual search mechanism
         /// </summary>
@@ -519,9 +517,8 @@ namespace POS.Forms
         private void search_OnSearch(object sender, SearchEventArgs e)
         {
             if (!e.SameSearch)
-            {
                 PopulateTableBySearch(e);
-            }
+
 
             if (checkBox1.Checked)
                 addItem();
@@ -574,6 +571,7 @@ namespace POS.Forms
                 }
             }
         }
+
         /// <summary>
         /// when user deletes searched content
         /// </summary>
@@ -639,17 +637,17 @@ namespace POS.Forms
                         }
                     }
                     else
-                    {
-                        soldTo.Text = string.Empty;
-                    }
-
+                        soldTo.ResetText();
                 }
             }
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void cartTable_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
+            calculateTotal();
+            change.Text = string.Format("₱ {0:n}", changeAmount);
 
+            searchControl.ClearField();
         }
     }
 }

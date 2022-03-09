@@ -497,10 +497,10 @@ namespace POS.UserControls
             }
         }
 
-        private async void button2_Click_1(object sender, EventArgs e)
-        {
-            await initItemsTableAsync();
-        }
+        //private async void button2_Click_1(object sender, EventArgs e)
+        //{
+        //   //await initItemsTableAsync();
+        //}
 
         private void InventoryUC_KeyDown(object sender, KeyEventArgs e)
         {
@@ -508,8 +508,8 @@ namespace POS.UserControls
 
         private void itemsTable_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F5)
-                button2.PerformClick();
+            //if (e.KeyCode == Keys.F5)
+            //    button2.PerformClick();
         }
     }
 }

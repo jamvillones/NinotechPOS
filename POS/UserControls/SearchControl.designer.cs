@@ -59,7 +59,7 @@ namespace POS.UserControls
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.panel1.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.panel1.Size = new System.Drawing.Size(185, 24);
             this.panel1.TabIndex = 2;
             // 
@@ -70,9 +70,9 @@ namespace POS.UserControls
             this.searchText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.searchText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.searchText.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchText.Location = new System.Drawing.Point(10, 3);
+            this.searchText.Location = new System.Drawing.Point(5, 3);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(165, 19);
+            this.searchText.Size = new System.Drawing.Size(175, 19);
             this.searchText.TabIndex = 0;
             this.searchText.Values = null;
             this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);

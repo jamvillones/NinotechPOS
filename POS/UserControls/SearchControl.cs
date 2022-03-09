@@ -73,6 +73,11 @@ namespace POS.UserControls
             DoSearch();
         }
 
+        public void ClearField()
+        {
+            searchText.Clear();
+        }
+
         private void searchText_TextChanged(object sender, EventArgs e)
         {
             if (searchText.TextLength == 0 && SearchDone)

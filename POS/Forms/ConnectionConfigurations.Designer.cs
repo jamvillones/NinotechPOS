@@ -198,6 +198,7 @@
             this.MinimizeBox = false;
             this.Name = "ConnectionConfigurations";
             this.Padding = new System.Windows.Forms.Padding(5);
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Connection Configurations";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConnectionConfigurations_FormClosing);

@@ -61,8 +61,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.contextMenuStrip.SuspendLayout();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
@@ -205,8 +203,6 @@
             this.sideFlow.Controls.Add(this.addItemBtn);
             this.sideFlow.Controls.Add(this.editItemBtn);
             this.sideFlow.Controls.Add(this.addVariationsBtn);
-            this.sideFlow.Controls.Add(this.panel5);
-            this.sideFlow.Controls.Add(this.button2);
             this.sideFlow.Dock = System.Windows.Forms.DockStyle.Left;
             this.sideFlow.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.sideFlow.Location = new System.Drawing.Point(0, 0);
@@ -453,34 +449,6 @@
             this.toolTip1.SetToolTip(this.checkBox1, "Search should include empty");
             this.checkBox1.UseVisualStyleBackColor = false;
             // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Black;
-            this.panel5.Location = new System.Drawing.Point(10, 290);
-            this.panel5.Margin = new System.Windows.Forms.Padding(5);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(150, 1);
-            this.panel5.TabIndex = 16;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(10, 301);
-            this.button2.Margin = new System.Windows.Forms.Padding(5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 33);
-            this.button2.TabIndex = 17;
-            this.button2.TabStop = false;
-            this.button2.Text = "REFRESH ENTRIES";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -538,7 +506,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Panel panel5;
-        protected System.Windows.Forms.Button button2;
     }
 }

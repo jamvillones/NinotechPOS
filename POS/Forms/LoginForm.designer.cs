@@ -223,7 +223,6 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LoginForm";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginForm_KeyDown);
