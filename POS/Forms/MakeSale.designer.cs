@@ -530,9 +530,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(353, 116);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(91, 13);
+            this.label8.Size = new System.Drawing.Size(63, 13);
             this.label8.TabIndex = 13;
-            this.label8.Text = "ITEM NAME: (F3)";
+            this.label8.Text = "PRICE: (F3)";
             // 
             // price
             // 
