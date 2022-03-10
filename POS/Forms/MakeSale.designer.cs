@@ -76,7 +76,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.itemName = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.searchControl = new POS.UserControls.SearchControl();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.itemsTable = new System.Windows.Forms.DataGridView();
@@ -88,6 +87,7 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cartTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.printDoc = new System.Drawing.Printing.PrintDocument();
+            this.searchControl = new POS.UserControls.SearchControl();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountRecieved)).BeginInit();
             this.panel3.SuspendLayout();
@@ -307,13 +307,14 @@
             this.checkoutBtn.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.checkoutBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkoutBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutBtn.ForeColor = System.Drawing.Color.Black;
             this.checkoutBtn.Location = new System.Drawing.Point(0, 17);
             this.checkoutBtn.Name = "checkoutBtn";
             this.checkoutBtn.Size = new System.Drawing.Size(592, 27);
             this.checkoutBtn.TabIndex = 16;
             this.checkoutBtn.TabStop = false;
-            this.checkoutBtn.Text = "Checkout (ctrl+ENTER)";
+            this.checkoutBtn.Text = "CHECKOUT (ctrl+ENTER)";
             this.cartTooltip.SetToolTip(this.checkoutBtn, "(ctrl+Enter) To Checkout");
             this.checkoutBtn.UseVisualStyleBackColor = false;
             this.checkoutBtn.Click += new System.EventHandler(this.sell_Click);
@@ -639,23 +640,6 @@
             this.panel2.Size = new System.Drawing.Size(595, 45);
             this.panel2.TabIndex = 0;
             // 
-            // searchControl
-            // 
-            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl.BackColor = System.Drawing.Color.White;
-            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchControl.Location = new System.Drawing.Point(0, 17);
-            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.SearchedText = "";
-            this.searchControl.Size = new System.Drawing.Size(595, 28);
-            this.searchControl.TabIndex = 0;
-            this.cartTooltip.SetToolTip(this.searchControl, "F1 to gain focus");
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
-            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
@@ -681,14 +665,14 @@
             this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.addBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.addBtn.FlatAppearance.BorderSize = 2;
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.Location = new System.Drawing.Point(6, 579);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(595, 28);
             this.addBtn.TabIndex = 8;
             this.addBtn.TabStop = false;
-            this.addBtn.Text = "Add (shift+ENTER)";
+            this.addBtn.Text = "ADD (shift+ENTER)";
             this.cartTooltip.SetToolTip(this.addBtn, "Shift+Enter to add");
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
@@ -797,6 +781,23 @@
             // 
             this.printDoc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDoc_BeginPrint);
             this.printDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // searchControl
+            // 
+            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl.BackColor = System.Drawing.Color.White;
+            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchControl.Location = new System.Drawing.Point(0, 17);
+            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.SearchedText = "";
+            this.searchControl.Size = new System.Drawing.Size(595, 28);
+            this.searchControl.TabIndex = 0;
+            this.cartTooltip.SetToolTip(this.searchControl, "F1 to gain focus");
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
             // 
             // MakeSale
             // 
