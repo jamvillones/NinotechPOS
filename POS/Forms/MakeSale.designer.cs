@@ -76,6 +76,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.itemName = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.searchControl = new POS.UserControls.SearchControl();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.addBtn = new System.Windows.Forms.Button();
             this.itemsTable = new System.Windows.Forms.DataGridView();
@@ -87,7 +88,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cartTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.printDoc = new System.Drawing.Printing.PrintDocument();
-            this.searchControl = new POS.UserControls.SearchControl();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountRecieved)).BeginInit();
             this.panel3.SuspendLayout();
@@ -147,7 +147,7 @@
             this.exactAmountBtn.Size = new System.Drawing.Size(170, 22);
             this.exactAmountBtn.TabIndex = 14;
             this.exactAmountBtn.TabStop = false;
-            this.exactAmountBtn.Text = "  Exact Amount";
+            this.exactAmountBtn.Text = "  Exact Amount (F7)";
             this.exactAmountBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.exactAmountBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.cartTooltip.SetToolTip(this.exactAmountBtn, "Exact amount (F7)");
@@ -640,6 +640,23 @@
             this.panel2.Size = new System.Drawing.Size(595, 45);
             this.panel2.TabIndex = 0;
             // 
+            // searchControl
+            // 
+            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl.BackColor = System.Drawing.Color.White;
+            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchControl.Location = new System.Drawing.Point(0, 17);
+            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
+            this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.SearchedText = "";
+            this.searchControl.Size = new System.Drawing.Size(595, 28);
+            this.searchControl.TabIndex = 0;
+            this.cartTooltip.SetToolTip(this.searchControl, "F1 to gain focus");
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
@@ -781,23 +798,6 @@
             // 
             this.printDoc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDoc_BeginPrint);
             this.printDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
-            // 
-            // searchControl
-            // 
-            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl.BackColor = System.Drawing.Color.White;
-            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchControl.Location = new System.Drawing.Point(0, 17);
-            this.searchControl.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.SearchedText = "";
-            this.searchControl.Size = new System.Drawing.Size(595, 28);
-            this.searchControl.TabIndex = 0;
-            this.cartTooltip.SetToolTip(this.searchControl, "F1 to gain focus");
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
             // 
             // MakeSale
             // 
