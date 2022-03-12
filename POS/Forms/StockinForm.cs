@@ -65,7 +65,7 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).GroupBy(y=>y.Item.Name).Select(a => a.Key).ToArray());
+                searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).GroupBy(y => y.Item.Name).Select(a => a.Key).ToArray());
             }
         }
 
@@ -181,10 +181,9 @@ namespace POS.Forms
                         p.InventoryItems.Add(it);
                     }
 
-                    //p.SaveChanges();
-
                     var stockinHist = new StockinHistory();
-                    stockinHist.InventoryItem = it;
+
+                    stockinHist.ProductId = product.Id;
                     stockinHist.ItemName = it.Product.Item.Name;
                     stockinHist.Cost = it.Product.Cost;
                     stockinHist.Supplier = it.Product.Supplier.Name;
@@ -195,9 +194,9 @@ namespace POS.Forms
 
                     p.StockinHistories.Add(stockinHist);
                 }
+
                 p.SaveChanges();
 
-                //OnSave?.Invoke(this, null);
                 MessageBox.Show("Saved.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
             }

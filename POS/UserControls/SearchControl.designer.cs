@@ -76,6 +76,7 @@ namespace POS.UserControls
             this.searchText.TabIndex = 0;
             this.searchText.Values = null;
             this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
+            this.searchText.Enter += new System.EventHandler(this.searchText_Enter);
             this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
             // 
             // SearchControl

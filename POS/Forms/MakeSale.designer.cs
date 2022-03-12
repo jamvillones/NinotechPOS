@@ -67,6 +67,7 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.discount = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -473,6 +474,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.discount);
             this.groupBox1.Controls.Add(this.label8);
@@ -492,6 +494,20 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inventory";
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.White;
+            this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(220, 545);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(167, 19);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "* ITEM NOT FOUND *";
+            this.label10.Visible = false;
             // 
             // label9
             // 
@@ -813,6 +829,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sell Item";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MakeSale_FormClosing);
             this.Load += new System.EventHandler(this.StockinForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MakeSale_KeyDown);
             this.groupBox2.ResumeLayout(false);
@@ -883,5 +900,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }

@@ -40,7 +40,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.histTable)).BeginInit();
@@ -73,8 +72,7 @@
             this.Column6,
             this.Column4,
             this.Column3,
-            this.Column5,
-            this.Column8});
+            this.Column5});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -95,7 +93,6 @@
             this.histTable.Size = new System.Drawing.Size(846, 423);
             this.histTable.StandardTab = true;
             this.histTable.TabIndex = 2;
-            this.histTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.histTable_CellContentClick);
             // 
             // Column9
             // 
@@ -153,14 +150,6 @@
             this.Column5.HeaderText = "Supplier";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column8.HeaderText = "";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 5;
             // 
             // dateTimePicker1
             // 
@@ -223,6 +212,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewButtonColumn Column8;
     }
 }

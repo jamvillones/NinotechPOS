@@ -152,40 +152,40 @@ namespace POS.Forms
             }
         }
 
-        private void histTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex != 8)
-                return;
+        //private void histTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    //if (e.ColumnIndex != 8)
+        //    //    return;
 
-            if (MessageBox.Show("Are you sure you want to undo this action?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
+        //    //if (MessageBox.Show("Are you sure you want to undo this action?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+        //    //    return;
 
-            var id = (int)histTable[0, e.RowIndex].Value;
+        //    //var id = (int)histTable[0, e.RowIndex].Value;
 
-            int quantity = (int)histTable[5, e.RowIndex].Value;
-            string serial = histTable[4, e.RowIndex].Value?.ToString();
+        //    //int quantity = (int)histTable[5, e.RowIndex].Value;
+        //    //string serial = histTable[4, e.RowIndex].Value?.ToString();
 
-            using (var p = new POSEntities())
-            {
-                var stockinHist = p.StockinHistories.FirstOrDefault(x => x.Id == id);
-                var reference = stockinHist.InventoryItem;
+        //    //using (var p = new POSEntities())
+        //    //{
+        //    //    var stockinHist = p.StockinHistories.FirstOrDefault(x => x.Id == id);
+        //    //    var reference = stockinHist.InventoryItem;
 
-                if (reference == null)
-                {
-                    MessageBox.Show("Item is either deleted or soldout", "Cannot undo.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+        //    //    if (reference == null)
+        //    //    {
+        //    //        MessageBox.Show("Item is either deleted or soldout", "Cannot undo.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    //        return;
+        //    //    }
 
-                int remaining = reference.Quantity - quantity;
-                int qtyToMinus = remaining < 0 ? reference.Quantity : quantity;
+        //    //    int remaining = reference.Quantity - quantity;
+        //    //    int qtyToMinus = remaining < 0 ? reference.Quantity : quantity;
 
-                DecreaseInventory(p, qtyToMinus, reference);
-                DecreaseStockinHist(p, qtyToMinus, stockinHist);
-                updateTable(e.RowIndex, qtyToMinus);
+        //    //    DecreaseInventory(p, qtyToMinus, reference);
+        //    //    DecreaseStockinHist(p, qtyToMinus, stockinHist);
+        //    //    updateTable(e.RowIndex, qtyToMinus);
 
-                p.SaveChanges();
-            }
-        }
+        //    //    p.SaveChanges();
+        //    //}
+        //}
 
         void DecreaseInventory(POSEntities p, int quantity, InventoryItem i)
         {

@@ -83,6 +83,7 @@ namespace POS.UserControls
             if (searchText.TextLength == 0 && SearchDone)
                 OnTextEmpty?.Invoke(this, null);
 
+            SearchDone = false;
             prevSearch = "";
         }
 
@@ -91,6 +92,11 @@ namespace POS.UserControls
             if (e.KeyCode == Keys.Enter)
                 DoSearch();
                 //searchBtn.PerformClick();
+        }
+
+        private void searchText_Enter(object sender, EventArgs e)
+        {
+            searchText.SelectAll();
         }
     }
 }

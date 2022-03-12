@@ -72,7 +72,7 @@ namespace POS.Forms
         {
             InitializeComponent();
         }
-        
+
         public void SellSpecific(string barcode)
         {
             searchControl.SearchedText = barcode;
@@ -120,6 +120,8 @@ namespace POS.Forms
             addItem();
         }
 
+
+        bool changesMade { get; set; } = false;
         private void sell_Click(object sender, EventArgs e)
         {
             if (cartTable.RowCount == 0)
@@ -183,7 +185,7 @@ namespace POS.Forms
                 p.SaveChanges();
 
                 saleId = newSale.Id;
-                OnSave?.Invoke(this, null);
+                /// OnSave?.Invoke(this, null);
                 //MessageBox.Show("Sold Items.");
                 if (isPrintReceipt.Checked)
                 {
@@ -197,8 +199,16 @@ namespace POS.Forms
                     }
                 }
 
-                this.Close();
+                ///this.Close();
+                changesMade = true;
+                reset();
             }
+        }
+        void reset()
+        {
+            cartTable.Rows.Clear();
+            amountRecieved.Value = 0;
+            searchControl.ClearField();
         }
 
         int saleId { get; set; }
@@ -516,6 +526,7 @@ namespace POS.Forms
         /// <param name="e"></param>
         private void search_OnSearch(object sender, SearchEventArgs e)
         {
+            label10.Visible = false;
             if (!e.SameSearch)
                 PopulateTableBySearch(e);
 
@@ -550,7 +561,8 @@ namespace POS.Forms
 
                 if (filtered.Count() == 0)
                 {
-                    MessageBox.Show("Item not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //MessageBox.Show("Item not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    label10.Visible = true;
                     return;
                 }
 
@@ -579,6 +591,7 @@ namespace POS.Forms
         /// <param name="e"></param>
         private void search_OnTextEmpty(object sender, EventArgs e)
         {
+            label10.Visible = false;
             itemsTable.Rows.Clear();
 
             itemName.Text = string.Empty;
@@ -648,6 +661,12 @@ namespace POS.Forms
             change.Text = string.Format("₱ {0:n}", changeAmount);
 
             searchControl.ClearField();
+        }
+
+        private void MakeSale_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (changesMade)
+                OnSave?.Invoke(this, null);
         }
     }
 }

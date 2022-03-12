@@ -23,9 +23,11 @@ namespace POS.Forms
         private void InventoryStockinLog_Load(object sender, EventArgs e)
         {
             histTable.Rows.Clear();
+
             using (var p = new POSEntities())
             {
-                var hist = p.StockinHistories.Where(x => x.InventoryReference == id);
+                var item = p.InventoryItems.FirstOrDefault(x => x.Id == id);
+                var hist = p.StockinHistories.Where(x => x.Product.Id  == item.Product.Id);
                 foreach (var i in hist)
                 {
                     histTable.Rows.Add(i.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), i.LoginUsername, i.ItemName, i.SerialNumber, i.Quantity, i.Cost, i.Supplier);

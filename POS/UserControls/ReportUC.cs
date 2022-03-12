@@ -174,7 +174,7 @@ namespace POS.UserControls
                         row.CreateCells(saleTable);
                         row.Cells[0].Value = i.Id;
                         row.Cells[1].Value = i.Date.Value.ToString("MMM d, yyyy hh:mm: tt");
-                        row.Cells[2].Value = i.Login?.Username;
+                        row.Cells[2].Value = i.Login?.Name??"not set";
                         row.Cells[3].Value = i.Customer.Name;
                         row.Cells[4].Value = string.Format("₱ {0:n}", i.Total);
 
@@ -261,7 +261,7 @@ namespace POS.UserControls
                             string.Format("₱ {0:n}", i.Total),
                             string.Format("₱ {0:n}", i.AmountRecieved),
                             string.Format("₱ {0:n}", i.Remaining),
-                            i.Login?.Username,
+                            i.Login?.Name??"not set",
                             i.FullyPaid
                         );
 
