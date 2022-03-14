@@ -47,6 +47,8 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.itemType = new System.Windows.Forms.ComboBox();
             this.removeBtn = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.imageHolder.SuspendLayout();
@@ -57,6 +59,8 @@
             this.groupBox6.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -145,7 +149,7 @@
             this.groupBox5.Controls.Add(this.sellingPrice);
             this.groupBox5.Location = new System.Drawing.Point(224, 104);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(250, 40);
+            this.groupBox5.Size = new System.Drawing.Size(407, 40);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Item Selling Price";
@@ -164,7 +168,7 @@
             0,
             0});
             this.sellingPrice.Name = "sellingPrice";
-            this.sellingPrice.Size = new System.Drawing.Size(238, 16);
+            this.sellingPrice.Size = new System.Drawing.Size(395, 16);
             this.sellingPrice.TabIndex = 1;
             this.sellingPrice.ThousandsSeparator = true;
             // 
@@ -173,10 +177,10 @@
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.details);
-            this.groupBox6.Location = new System.Drawing.Point(12, 167);
+            this.groupBox6.Location = new System.Drawing.Point(12, 196);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(782, 242);
-            this.groupBox6.TabIndex = 7;
+            this.groupBox6.Size = new System.Drawing.Size(782, 213);
+            this.groupBox6.TabIndex = 78;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Item Details ";
             // 
@@ -193,7 +197,7 @@
             this.details.MaxLength = 500;
             this.details.Multiline = true;
             this.details.Name = "details";
-            this.details.Size = new System.Drawing.Size(769, 216);
+            this.details.Size = new System.Drawing.Size(769, 187);
             this.details.TabIndex = 0;
             // 
             // groupBox8
@@ -201,10 +205,10 @@
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox8.Controls.Add(this.itemDepartment);
-            this.groupBox8.Location = new System.Drawing.Point(480, 104);
+            this.groupBox8.Location = new System.Drawing.Point(637, 104);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(157, 40);
-            this.groupBox8.TabIndex = 5;
+            this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Item Department";
             // 
@@ -235,15 +239,16 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.saveBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveBtn.Location = new System.Drawing.Point(12, 417);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(169, 23);
+            this.saveBtn.Size = new System.Drawing.Size(782, 23);
             this.saveBtn.TabIndex = 0;
             this.saveBtn.TabStop = false;
-            this.saveBtn.Text = "Save";
+            this.saveBtn.Text = "SAVE";
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
@@ -256,10 +261,10 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.itemType);
-            this.groupBox4.Location = new System.Drawing.Point(643, 104);
+            this.groupBox4.Location = new System.Drawing.Point(637, 150);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(151, 40);
-            this.groupBox4.TabIndex = 6;
+            this.groupBox4.Size = new System.Drawing.Size(157, 40);
+            this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Item Type";
             // 
@@ -274,8 +279,9 @@
             this.itemType.Location = new System.Drawing.Point(6, 13);
             this.itemType.MaxLength = 50;
             this.itemType.Name = "itemType";
-            this.itemType.Size = new System.Drawing.Size(139, 21);
+            this.itemType.Size = new System.Drawing.Size(145, 21);
             this.itemType.TabIndex = 0;
+            this.itemType.SelectedIndexChanged += new System.EventHandler(this.itemType_SelectedIndexChanged);
             // 
             // removeBtn
             // 
@@ -288,11 +294,49 @@
             this.removeBtn.UseVisualStyleBackColor = true;
             this.removeBtn.Click += new System.EventHandler(this.button1_Click);
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.numericUpDown1);
+            this.groupBox7.Location = new System.Drawing.Point(224, 150);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(407, 40);
+            this.groupBox7.TabIndex = 5;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Critical Qty";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDown1.BackColor = System.Drawing.SystemColors.Control;
+            this.numericUpDown1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericUpDown1.Location = new System.Drawing.Point(6, 18);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(395, 16);
+            this.numericUpDown1.TabIndex = 1;
+            this.numericUpDown1.ThousandsSeparator = true;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // ItemFormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(803, 452);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.removeBtn);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.saveBtn);
@@ -322,6 +366,8 @@
             this.groupBox6.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -347,5 +393,7 @@
         protected System.Windows.Forms.ComboBox itemType;
         protected System.Windows.Forms.GroupBox groupBox6;
         protected System.Windows.Forms.Button removeBtn;
+        private System.Windows.Forms.GroupBox groupBox7;
+        protected System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

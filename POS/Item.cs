@@ -27,6 +27,7 @@ namespace POS
         public string Details { get; set; }
         public byte[] SampleImage { get; set; }
         public string Type { get; set; }
+        public Nullable<int> CriticalQuantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

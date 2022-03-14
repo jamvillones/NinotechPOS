@@ -162,7 +162,7 @@ namespace POS.UserControls
             var init = initItemsTableAsync();
         }
 
-        string getItemQuantity(Item i)
+        string getItemQuantityString(Item i)
         {
             int quantity = i.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
 
@@ -171,6 +171,10 @@ namespace POS.UserControls
 
             return quantity == 0 ? "EMPTY" : quantity.ToString();
         }
+        //int getItemQuantity(Item i)
+        //{
+        //    return i.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
+        //}
 
         private async Task initItemsTableAsync()
         {
@@ -189,7 +193,8 @@ namespace POS.UserControls
 
             using (var p = posEnt)
             {
-                decimal total = p.InventoryItems.Select(x => x.Quantity * x.Product.Item.SellingPrice).DefaultIfEmpty(0).Sum();
+                decimal total = p.InventoryItems.Where(y => y.Product.Item.Type == ItemType.Quantifiable.ToString()).Select(x => x.Quantity * x.Product.Item.SellingPrice).DefaultIfEmpty(0).Sum();
+
                 totalPriceTxt.InvokeIfRequired(() => { totalPriceTxt.Text = string.Format("₱ {0:n}", total); });
 
                 try
@@ -215,11 +220,9 @@ namespace POS.UserControls
                     tokenSource2.Dispose();
                     tokenSource2 = null;
                 }
-
-                ///if created then set to table
             }
-
         }
+
         private async Task<DataGridViewRow[]> createItemRowsAsync(IEnumerable<Item> items, CancellationToken ct)
         {
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
@@ -228,23 +231,16 @@ namespace POS.UserControls
             {
                 try
                 {
-                    //progressBar1.InvokeIfRequired(() =>
-                    //{
-                    //    progressBar1.Value = 0;
-                    //    progressBar1.Maximum = items.Count();
-                    //});
+                    criticalQtyCounter = 0;
+                    ///criticalLabel.InvokeIfRequired(() => criticalLabel.Text = "0");
                     foreach (var i in items)
                     {
                         rows.Add(createItemRow(i));
 
-                        //progressBar1.InvokeIfRequired(() =>
-                        //{
-                        //    progressBar1.Value++;
-                        //    Console.WriteLine(progressBar1.Value);
-                        //});
-
                         ct.ThrowIfCancellationRequested();
                     }
+
+                    criticalLabel.InvokeIfRequired(() => criticalLabel.Text = criticalQtyCounter.ToString());
                 }
                 catch
                 {
@@ -257,11 +253,32 @@ namespace POS.UserControls
             return rows.ToArray();
         }
 
+        bool isInCriticalQuantity(Item x)
+        {
+            if (x.Type == ItemType.Quantifiable.ToString())
+            {
+                var q = x.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
+                if (q == 0)
+                    return false;
+
+                return (q <= (x.CriticalQuantity ?? 1));
+            }
+            return false;
+        }
+
+        int criticalQtyCounter = 0;
         DataGridViewRow createItemRow(Item x)
         {
             var row = new DataGridViewRow();
-            string q = getItemQuantity(x);
-            //Console.WriteLine(q);
+            string q = getItemQuantityString(x);
+
+            if (isInCriticalQuantity(x))
+            {
+                row.DefaultCellStyle.BackColor = Color.IndianRed;
+                row.DefaultCellStyle.ForeColor = Color.White;
+                criticalQtyCounter++;
+            }
+
             switch (q)
             {
                 case "EMPTY":

@@ -44,6 +44,7 @@
           <Property Name="Details" Type="nvarchar" MaxLength="500" />
           <Property Name="SampleImage" Type="image" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="CriticalQuantity" Type="int" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -305,23 +306,9 @@
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sales" Relationship="POSModel.FK_Sale_Customer" FromRole="Customer" ToRole="Sale" />
         </EntityType>
-        <EntityType Name="Item">
-          <Key>
-            <PropertyRef Name="Barcode" />
-          </Key>
-          <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SellingPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="SampleImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="POSModel.FK_Product_Item" FromRole="Item" ToRole="Product" />
-        </EntityType>
         <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ChargedPayRecords" EntityType="Self.ChargedPayRecord" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="Items" EntityType="Self.Item" />
           <EntitySet Name="Sales" EntityType="POSModel.Sale" />
           <EntitySet Name="SoldItems" EntityType="POSModel.SoldItem" />
           <AssociationSet Name="FK_ChargedPayRecord_ChargedPayRecord" Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord">
@@ -337,10 +324,6 @@
             <End Role="SoldItem" EntitySet="SoldItems" />
           </AssociationSet>
           <EntitySet Name="Products" EntityType="POSModel.Product" />
-          <AssociationSet Name="FK_Product_Item" Association="POSModel.FK_Product_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
           <AssociationSet Name="FK_SoldItem_Product" Association="POSModel.FK_SoldItem_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="SoldItem" EntitySet="SoldItems" />
@@ -364,6 +347,11 @@
           <AssociationSet Name="FK_StockinHistory_Product" Association="POSModel.FK_StockinHistory_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="StockinHistory" EntitySet="StockinHistories" />
+          </AssociationSet>
+          <EntitySet Name="Items" EntityType="POSModel.Item" />
+          <AssociationSet Name="FK_Item_Product" Association="POSModel.FK_Item_Product">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Sale">
@@ -443,26 +431,12 @@
           <Property Name="ItemId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SupplierId" Type="Int32" />
           <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="Item" Relationship="POSModel.FK_Product_Item" FromRole="Product" ToRole="Item" />
           <NavigationProperty Name="SoldItems" Relationship="POSModel.FK_SoldItem_Product" FromRole="Product" ToRole="SoldItem" />
           <NavigationProperty Name="Supplier" Relationship="POSModel.FK_ProductBySupplier_Supplier" FromRole="Product" ToRole="Supplier" />
           <NavigationProperty Name="InventoryItems" Relationship="POSModel.FK_Product_ProductBySupplier" FromRole="Product" ToRole="InventoryItem" />
           <NavigationProperty Name="StockinHistories" Relationship="POSModel.FK_StockinHistory_Product" FromRole="Product" ToRole="StockinHistory" />
+          <NavigationProperty Name="Item" Relationship="POSModel.FK_Item_Product" FromRole="Product" ToRole="Item" />
         </EntityType>
-        <Association Name="FK_Product_Item">
-          <End Type="POSModel.Item" Role="Item" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="POSModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="Barcode" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="ItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SoldItem_Product">
           <End Type="POSModel.Product" Role="Product" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -577,6 +551,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Barcode" />
+          </Key>
+          <Property Name="Barcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SampleImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CriticalQuantity" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="POSModel.FK_Item_Product" FromRole="Item" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Item_Product">
+          <End Type="POSModel.Item" Role="Item" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="POSModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Barcode" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -601,19 +603,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ContactDetails" ColumnName="ContactDetails" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="POSModel.Item">
-              <MappingFragment StoreEntitySet="Item">
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="SampleImage" ColumnName="SampleImage" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -699,6 +688,20 @@
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="POSModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="CriticalQuantity" ColumnName="CriticalQuantity" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SampleImage" ColumnName="SampleImage" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

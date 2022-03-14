@@ -17,7 +17,7 @@ namespace POS.Forms
 
         Color hardwareColor = Color.Blue;
         Color softwareColor = Color.Red;
-        Color serviceColor = Color.DarkGreen;
+        Color serviceColor = Color.DarkGreen;       
 
         public void SetItemId(string Id)
         {
@@ -29,8 +29,9 @@ namespace POS.Forms
                 sellingPrice.Text = string.Format("₱ {0:n}", item.SellingPrice);
                 itemType.Text = item.Type;
                 setTypeColor(item.Type.Trim());
-                department.Text = item.Department;
+                department.Text = item.Department ?? "*Not set";
                 details.Text = item.Details;
+                textBox1.Text = item.CriticalQuantity?.ToString() ?? "*Not set";
 
                 ImageBox.Image = Misc.ImageDatabaseConverter.byteArrayToImage(item.SampleImage);
                 var stock = p.InventoryItems.Where(x => x.Product.Item.Barcode == item.Barcode);
@@ -38,7 +39,7 @@ namespace POS.Forms
                 {
                     stockTable.Rows.Add(i.SerialNumber, i.Quantity, i.Product.Supplier?.Name);
                 }
-                groupBox9.Text = groupBox9.Text +" - " + stock.Select(x => x.Quantity).DefaultIfEmpty(0).Sum().ToString();
+                groupBox9.Text = groupBox9.Text + " - " + stock.Select(x => x.Quantity).DefaultIfEmpty(0).Sum().ToString();
 
                 var variations = p.Products.Where(x => x.ItemId == item.Barcode);
                 variationsTable.Rows.Clear();
@@ -53,9 +54,11 @@ namespace POS.Forms
         {
             InitializeComponent();
         }
+
         void setTypeColor(string t)
         {
-            switch (t) {
+            switch (t)
+            {
                 case "Hardware":
                     itemType.ForeColor = hardwareColor;
                     break;
@@ -68,6 +71,7 @@ namespace POS.Forms
             }
 
         }
+
         //private void variationsTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         //{
 

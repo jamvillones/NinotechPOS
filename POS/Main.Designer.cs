@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.sideButtonsPanel = new System.Windows.Forms.Panel();
-            this.settingsBtn = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.inventoryBtn = new System.Windows.Forms.Button();
             this.repBtn = new System.Windows.Forms.Button();
             this.topMostPanel = new System.Windows.Forms.Panel();
@@ -55,17 +53,16 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tabHoldersPanel = new System.Windows.Forms.Panel();
-            this.inventoryTab = new POS.UserControls.InventoryUC();
-            this.reportTab = new POS.UserControls.ReportUC();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.inventoryTab = new POS.UserControls.InventoryUC();
+            this.reportTab = new POS.UserControls.ReportUC();
             this.sideButtonsPanel.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.topMostPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -78,46 +75,15 @@
             // sideButtonsPanel
             // 
             this.sideButtonsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.sideButtonsPanel.Controls.Add(this.settingsBtn);
-            this.sideButtonsPanel.Controls.Add(this.flowLayoutPanel1);
+            this.sideButtonsPanel.Controls.Add(this.repBtn);
+            this.sideButtonsPanel.Controls.Add(this.inventoryBtn);
             this.sideButtonsPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.sideButtonsPanel.Location = new System.Drawing.Point(0, 0);
             this.sideButtonsPanel.Name = "sideButtonsPanel";
-            this.sideButtonsPanel.Size = new System.Drawing.Size(80, 650);
+            this.sideButtonsPanel.Size = new System.Drawing.Size(115, 650);
             this.sideButtonsPanel.TabIndex = 0;
-            // 
-            // settingsBtn
-            // 
-            this.settingsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.settingsBtn.FlatAppearance.BorderSize = 0;
-            this.settingsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.settingsBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.settingsBtn.ForeColor = System.Drawing.Color.White;
-            this.settingsBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsBtn.Image")));
-            this.settingsBtn.Location = new System.Drawing.Point(0, 570);
-            this.settingsBtn.Name = "settingsBtn";
-            this.settingsBtn.Size = new System.Drawing.Size(80, 80);
-            this.settingsBtn.TabIndex = 5;
-            this.settingsBtn.TabStop = false;
-            this.settingsBtn.Text = "SETTINGS";
-            this.settingsBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.settingsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.settingsBtn.UseVisualStyleBackColor = true;
-            this.settingsBtn.Visible = false;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.flowLayoutPanel1.Controls.Add(this.inventoryBtn);
-            this.flowLayoutPanel1.Controls.Add(this.repBtn);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(80, 561);
-            this.flowLayoutPanel1.TabIndex = 0;
+            this.toolTip.SetToolTip(this.sideButtonsPanel, "Double click to hide/show");
+            this.sideButtonsPanel.DoubleClick += new System.EventHandler(this.sideButtonsPanel_DoubleClick);
             // 
             // inventoryBtn
             // 
@@ -131,7 +97,7 @@
             this.inventoryBtn.Location = new System.Drawing.Point(0, 0);
             this.inventoryBtn.Margin = new System.Windows.Forms.Padding(0);
             this.inventoryBtn.Name = "inventoryBtn";
-            this.inventoryBtn.Size = new System.Drawing.Size(80, 80);
+            this.inventoryBtn.Size = new System.Drawing.Size(115, 80);
             this.inventoryBtn.TabIndex = 1;
             this.inventoryBtn.TabStop = false;
             this.inventoryBtn.Text = "PRODUCTS";
@@ -151,10 +117,10 @@
             this.repBtn.Location = new System.Drawing.Point(0, 80);
             this.repBtn.Margin = new System.Windows.Forms.Padding(0);
             this.repBtn.Name = "repBtn";
-            this.repBtn.Size = new System.Drawing.Size(80, 80);
+            this.repBtn.Size = new System.Drawing.Size(115, 80);
             this.repBtn.TabIndex = 2;
             this.repBtn.TabStop = false;
-            this.repBtn.Text = "REPORTS";
+            this.repBtn.Text = "TRANSACTIONS";
             this.repBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.repBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.repBtn.UseVisualStyleBackColor = true;
@@ -169,9 +135,9 @@
             this.topMostPanel.Controls.Add(this.button4);
             this.topMostPanel.Controls.Add(this.button5);
             this.topMostPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topMostPanel.Location = new System.Drawing.Point(80, 0);
+            this.topMostPanel.Location = new System.Drawing.Point(115, 0);
             this.topMostPanel.Name = "topMostPanel";
-            this.topMostPanel.Size = new System.Drawing.Size(1095, 34);
+            this.topMostPanel.Size = new System.Drawing.Size(1060, 34);
             this.topMostPanel.TabIndex = 1;
             this.topMostPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             // 
@@ -183,9 +149,10 @@
             this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userButton.Image = ((System.Drawing.Image)(resources.GetObject("userButton.Image")));
             this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userButton.Location = new System.Drawing.Point(882, 4);
+            this.userButton.Location = new System.Drawing.Point(820, 4);
             this.userButton.Name = "userButton";
-            this.userButton.Size = new System.Drawing.Size(126, 27);
+            this.userButton.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.userButton.Size = new System.Drawing.Size(150, 25);
             this.userButton.TabIndex = 5;
             this.userButton.TabStop = false;
             this.userButton.Text = "Username";
@@ -208,50 +175,55 @@
             // button6
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.BackColor = System.Drawing.Color.DimGray;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(1014, 4);
+            this.button6.Location = new System.Drawing.Point(976, 4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(26, 25);
+            this.button6.Size = new System.Drawing.Size(27, 25);
             this.button6.TabIndex = 2;
             this.button6.TabStop = false;
             this.button6.Text = "_";
-            this.button6.UseVisualStyleBackColor = true;
+            this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.BackColor = System.Drawing.Color.DimGray;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(1040, 4);
+            this.button4.Location = new System.Drawing.Point(1003, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(26, 25);
+            this.button4.Size = new System.Drawing.Size(27, 25);
             this.button4.TabIndex = 1;
             this.button4.TabStop = false;
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button5.BackColor = System.Drawing.Color.DarkRed;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.ForeColor = System.Drawing.Color.Black;
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(1066, 4);
+            this.button5.Location = new System.Drawing.Point(1030, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(26, 25);
+            this.button5.Size = new System.Drawing.Size(27, 25);
             this.button5.TabIndex = 0;
             this.button5.TabStop = false;
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.exitBtn_Click);
             // 
             // toolStrip
             // 
             this.toolStrip.BackColor = System.Drawing.SystemColors.Control;
+            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1,
             this.toolStripSeparator1,
@@ -265,10 +237,11 @@
             this.toolStripButton4,
             this.toolStripSeparator3,
             this.toolStripButton6});
-            this.toolStrip.Location = new System.Drawing.Point(80, 34);
+            this.toolStrip.Location = new System.Drawing.Point(115, 34);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStrip.Size = new System.Drawing.Size(1095, 25);
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.toolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStrip.Size = new System.Drawing.Size(1060, 25);
             this.toolStrip.TabIndex = 3;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -383,12 +356,28 @@
             this.toolStripButton4.Text = "Shift Summary";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton6.Text = "toolStripButton6";
+            this.toolStripButton6.ToolTipText = "Show/Hide Notes";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
             // splitContainer
             // 
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer.Location = new System.Drawing.Point(80, 59);
+            this.splitContainer.Location = new System.Drawing.Point(115, 59);
             this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
@@ -403,7 +392,7 @@
             this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(15);
             this.splitContainer.Panel2Collapsed = true;
             this.splitContainer.Panel2MinSize = 0;
-            this.splitContainer.Size = new System.Drawing.Size(1095, 591);
+            this.splitContainer.Size = new System.Drawing.Size(1060, 591);
             this.splitContainer.SplitterDistance = 893;
             this.splitContainer.SplitterWidth = 1;
             this.splitContainer.TabIndex = 4;
@@ -415,26 +404,8 @@
             this.tabHoldersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabHoldersPanel.Location = new System.Drawing.Point(0, 0);
             this.tabHoldersPanel.Name = "tabHoldersPanel";
-            this.tabHoldersPanel.Size = new System.Drawing.Size(1093, 589);
+            this.tabHoldersPanel.Size = new System.Drawing.Size(1058, 589);
             this.tabHoldersPanel.TabIndex = 3;
-            // 
-            // inventoryTab
-            // 
-            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
-            this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
-            this.inventoryTab.Size = new System.Drawing.Size(1093, 589);
-            this.inventoryTab.TabIndex = 2;
-            // 
-            // reportTab
-            // 
-            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportTab.Location = new System.Drawing.Point(0, 0);
-            this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(1093, 589);
-            this.reportTab.TabIndex = 1;
-            this.reportTab.TabStop = false;
             // 
             // label1
             // 
@@ -459,21 +430,23 @@
             this.textBox1.Size = new System.Drawing.Size(64, 68);
             this.textBox1.TabIndex = 1;
             // 
-            // toolStripSeparator3
+            // inventoryTab
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
+            this.inventoryTab.Name = "inventoryTab";
+            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
+            this.inventoryTab.Size = new System.Drawing.Size(1058, 589);
+            this.inventoryTab.TabIndex = 2;
             // 
-            // toolStripButton6
+            // reportTab
             // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton6.Text = "toolStripButton6";
-            this.toolStripButton6.ToolTipText = "Show/Hide Notes";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportTab.Location = new System.Drawing.Point(0, 0);
+            this.reportTab.Name = "reportTab";
+            this.reportTab.Size = new System.Drawing.Size(1058, 589);
+            this.reportTab.TabIndex = 1;
+            this.reportTab.TabStop = false;
             // 
             // Main
             // 
@@ -498,8 +471,6 @@
             this.Load += new System.EventHandler(this.Main_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.sideButtonsPanel.ResumeLayout(false);
-            this.sideButtonsPanel.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.topMostPanel.ResumeLayout(false);
             this.topMostPanel.PerformLayout();
             this.toolStrip.ResumeLayout(false);
@@ -518,14 +489,12 @@
         #endregion
 
         private System.Windows.Forms.Panel sideButtonsPanel;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button inventoryBtn;
         private System.Windows.Forms.Button repBtn;
         private System.Windows.Forms.Panel topMostPanel;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button settingsBtn;
         private System.Windows.Forms.Label appTitleLabel;
         private System.Windows.Forms.Button userButton;
        // private UserControls.InventoryUC inventoryTab;

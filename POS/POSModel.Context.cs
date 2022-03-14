@@ -13,7 +13,7 @@ namespace POS
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class POSEntities : DbContext
     {
         public POSEntities()
@@ -21,15 +21,14 @@ namespace POS
         {
             this.ChangeDatabase();
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<ChargedPayRecord> ChargedPayRecords { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<SoldItem> SoldItems { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -37,5 +36,6 @@ namespace POS
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<InventoryItem> InventoryItems { get; set; }
         public virtual DbSet<StockinHistory> StockinHistories { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
     }
 }

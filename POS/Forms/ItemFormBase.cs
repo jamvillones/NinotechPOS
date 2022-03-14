@@ -114,5 +114,24 @@ namespace POS.Forms
             img?.Dispose();
             ImageBox.Image = null;
         }
+
+        private void itemType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            numericUpDown1.Enabled = itemType.SelectedIndex == 0;
+        }
+
+        protected string dept
+        {
+            get => string.IsNullOrWhiteSpace(itemDepartment.Text) ? null : itemDepartment.Text.Trim();
+            set => itemDepartment.Text = value.Trim();
+        }
+        /// <summary>
+        /// yeah deets. deal with it!
+        /// </summary>
+        protected string deets
+        {
+            get => string.IsNullOrWhiteSpace(details.Text) ? null : details.Text.Trim();
+            set => details.Text = value.Trim();
+        }
     }
 }

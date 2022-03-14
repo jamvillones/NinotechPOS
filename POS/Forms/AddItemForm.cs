@@ -97,10 +97,15 @@ namespace POS.Forms
                     item.SellingPrice = sellingPrice.Value;
                     //item.Cost = cost.Value;
 
-                    item.Department = string.IsNullOrEmpty(itemDepartment.Text) ? null : itemDepartment.Text;
+                    //item.Department = string.IsNullOrEmpty(itemDepartment.Text) ? null : itemDepartment.Text;
+                    item.Department = dept;
+                    item.Details = deets;
                     // item.Type = itemType.Text;
                     item.Type = itemType.Text;
-                    item.Details = details.Text;
+
+                    if (numericUpDown1.Enabled)
+                        item.CriticalQuantity = (int)numericUpDown1.Value;
+
                     if (ImageBox.Image != null)
                     {
                         item.SampleImage = ImageDatabaseConverter.imageToByteArray(ImageBox.Image);

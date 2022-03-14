@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MakeSale));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -87,7 +86,6 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cartTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.printDoc = new System.Drawing.Printing.PrintDocument();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.amountRecieved)).BeginInit();
@@ -119,10 +117,10 @@
             this.groupBox2.Controls.Add(this.panel1);
             this.groupBox2.Controls.Add(this.cartTable);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(627, 10);
+            this.groupBox2.Location = new System.Drawing.Point(547, 10);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(5, 10, 10, 10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(607, 616);
+            this.groupBox2.Size = new System.Drawing.Size(527, 616);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cart";
@@ -143,7 +141,7 @@
             this.exactAmountBtn.FlatAppearance.BorderSize = 0;
             this.exactAmountBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.exactAmountBtn.Image = ((System.Drawing.Image)(resources.GetObject("exactAmountBtn.Image")));
-            this.exactAmountBtn.Location = new System.Drawing.Point(430, 132);
+            this.exactAmountBtn.Location = new System.Drawing.Point(350, 132);
             this.exactAmountBtn.Name = "exactAmountBtn";
             this.exactAmountBtn.Size = new System.Drawing.Size(170, 22);
             this.exactAmountBtn.TabIndex = 14;
@@ -151,7 +149,6 @@
             this.exactAmountBtn.Text = "  Exact Amount (F7)";
             this.exactAmountBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.exactAmountBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.cartTooltip.SetToolTip(this.exactAmountBtn, "Exact amount (F7)");
             this.exactAmountBtn.UseVisualStyleBackColor = false;
             this.exactAmountBtn.Click += new System.EventHandler(this.exactAmount_Click);
             // 
@@ -170,12 +167,12 @@
             0,
             0});
             this.amountRecieved.Name = "amountRecieved";
-            this.amountRecieved.Size = new System.Drawing.Size(413, 22);
+            this.amountRecieved.Size = new System.Drawing.Size(333, 22);
             this.amountRecieved.TabIndex = 5;
             this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.amountRecieved.ThousandsSeparator = true;
-            this.cartTooltip.SetToolTip(this.amountRecieved, "F6");
             this.amountRecieved.ValueChanged += new System.EventHandler(this.amountChangedCallback);
+            this.amountRecieved.Enter += new System.EventHandler(this.quantity_Enter);
             // 
             // label5
             // 
@@ -200,17 +197,16 @@
             "Charged Sale"});
             this.soldTo.Location = new System.Drawing.Point(6, 86);
             this.soldTo.Name = "soldTo";
-            this.soldTo.Size = new System.Drawing.Size(595, 26);
+            this.soldTo.Size = new System.Drawing.Size(515, 26);
             this.soldTo.TabIndex = 4;
             this.soldTo.Text = "Walkin";
-            this.cartTooltip.SetToolTip(this.soldTo, "F5");
             this.soldTo.Validated += new System.EventHandler(this.soldTo_Validated);
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(427, 162);
+            this.label3.Location = new System.Drawing.Point(347, 162);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 23;
@@ -231,7 +227,7 @@
             this.change.BackColor = System.Drawing.Color.LightGray;
             this.change.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.change.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.change.Location = new System.Drawing.Point(430, 177);
+            this.change.Location = new System.Drawing.Point(350, 177);
             this.change.Name = "change";
             this.change.ReadOnly = true;
             this.change.Size = new System.Drawing.Size(170, 39);
@@ -251,7 +247,7 @@
             this.cartTotal.Location = new System.Drawing.Point(6, 177);
             this.cartTotal.Name = "cartTotal";
             this.cartTotal.ReadOnly = true;
-            this.cartTotal.Size = new System.Drawing.Size(413, 39);
+            this.cartTotal.Size = new System.Drawing.Size(333, 39);
             this.cartTotal.TabIndex = 0;
             this.cartTotal.TabStop = false;
             this.cartTotal.Text = "₱ 0.00";
@@ -267,7 +263,7 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Location = new System.Drawing.Point(6, 19);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(594, 45);
+            this.panel3.Size = new System.Drawing.Size(514, 45);
             this.panel3.TabIndex = 21;
             // 
             // saleType
@@ -276,7 +272,7 @@
             this.saleType.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saleType.Location = new System.Drawing.Point(0, 17);
             this.saleType.Name = "saleType";
-            this.saleType.Size = new System.Drawing.Size(592, 26);
+            this.saleType.Size = new System.Drawing.Size(512, 26);
             this.saleType.TabIndex = 19;
             this.saleType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -286,7 +282,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(592, 17);
+            this.label1.Size = new System.Drawing.Size(512, 17);
             this.label1.TabIndex = 18;
             this.label1.Text = "Sale Type";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -300,7 +296,7 @@
             this.panel1.Controls.Add(this.isPrintReceipt);
             this.panel1.Location = new System.Drawing.Point(7, 561);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(594, 46);
+            this.panel1.Size = new System.Drawing.Size(514, 46);
             this.panel1.TabIndex = 20;
             // 
             // checkoutBtn
@@ -312,11 +308,10 @@
             this.checkoutBtn.ForeColor = System.Drawing.Color.Black;
             this.checkoutBtn.Location = new System.Drawing.Point(0, 17);
             this.checkoutBtn.Name = "checkoutBtn";
-            this.checkoutBtn.Size = new System.Drawing.Size(592, 27);
+            this.checkoutBtn.Size = new System.Drawing.Size(512, 27);
             this.checkoutBtn.TabIndex = 16;
             this.checkoutBtn.TabStop = false;
             this.checkoutBtn.Text = "CHECKOUT (ctrl+ENTER)";
-            this.cartTooltip.SetToolTip(this.checkoutBtn, "(ctrl+Enter) To Checkout");
             this.checkoutBtn.UseVisualStyleBackColor = false;
             this.checkoutBtn.Click += new System.EventHandler(this.sell_Click);
             // 
@@ -330,7 +325,7 @@
             this.isPrintReceipt.Location = new System.Drawing.Point(0, 0);
             this.isPrintReceipt.Name = "isPrintReceipt";
             this.isPrintReceipt.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.isPrintReceipt.Size = new System.Drawing.Size(592, 17);
+            this.isPrintReceipt.Size = new System.Drawing.Size(512, 17);
             this.isPrintReceipt.TabIndex = 17;
             this.isPrintReceipt.TabStop = false;
             this.isPrintReceipt.Text = "Print Receipt";
@@ -382,7 +377,7 @@
             this.cartTable.RowHeadersVisible = false;
             this.cartTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.cartTable.ShowCellToolTips = false;
-            this.cartTable.Size = new System.Drawing.Size(595, 333);
+            this.cartTable.Size = new System.Drawing.Size(515, 333);
             this.cartTable.StandardTab = true;
             this.cartTable.TabIndex = 15;
             this.cartTable.TabStop = false;
@@ -468,7 +463,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1244, 636);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1084, 636);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // groupBox1
@@ -490,7 +485,7 @@
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(10, 10, 5, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(607, 616);
+            this.groupBox1.Size = new System.Drawing.Size(527, 616);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Inventory";
@@ -502,7 +497,7 @@
             this.label10.BackColor = System.Drawing.Color.White;
             this.label10.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(220, 545);
+            this.label10.Location = new System.Drawing.Point(180, 531);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(167, 19);
             this.label10.TabIndex = 15;
@@ -513,7 +508,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(480, 118);
+            this.label9.Location = new System.Drawing.Point(400, 118);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(87, 13);
             this.label9.TabIndex = 14;
@@ -526,7 +521,7 @@
             this.discount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.discount.DecimalPlaces = 2;
             this.discount.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.discount.Location = new System.Drawing.Point(480, 132);
+            this.discount.Location = new System.Drawing.Point(400, 132);
             this.discount.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -537,14 +532,14 @@
             this.discount.TabIndex = 3;
             this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.discount.ThousandsSeparator = true;
-            this.cartTooltip.SetToolTip(this.discount, "F4");
             this.discount.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
+            this.discount.Enter += new System.EventHandler(this.quantity_Enter);
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(353, 116);
+            this.label8.Location = new System.Drawing.Point(273, 116);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(63, 13);
             this.label8.TabIndex = 13;
@@ -557,7 +552,7 @@
             this.price.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.price.DecimalPlaces = 2;
             this.price.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.price.Location = new System.Drawing.Point(353, 132);
+            this.price.Location = new System.Drawing.Point(273, 132);
             this.price.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -573,13 +568,13 @@
             this.price.TabIndex = 2;
             this.price.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.price.ThousandsSeparator = true;
-            this.cartTooltip.SetToolTip(this.price, "F3");
             this.price.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.price.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
+            this.price.Enter += new System.EventHandler(this.quantity_Enter);
             // 
             // label7
             // 
@@ -609,17 +604,17 @@
             0,
             0});
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(341, 22);
+            this.quantity.Size = new System.Drawing.Size(261, 22);
             this.quantity.TabIndex = 1;
             this.quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.quantity.ThousandsSeparator = true;
-            this.cartTooltip.SetToolTip(this.quantity, "F2");
             this.quantity.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.quantity.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
+            this.quantity.Enter += new System.EventHandler(this.quantity_Enter);
             // 
             // label4
             // 
@@ -640,7 +635,7 @@
             this.itemName.Location = new System.Drawing.Point(6, 87);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(595, 26);
+            this.itemName.Size = new System.Drawing.Size(515, 26);
             this.itemName.TabIndex = 0;
             this.itemName.TabStop = false;
             this.itemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -653,7 +648,7 @@
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Location = new System.Drawing.Point(6, 19);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(595, 45);
+            this.panel2.Size = new System.Drawing.Size(515, 45);
             this.panel2.TabIndex = 0;
             // 
             // searchControl
@@ -667,9 +662,8 @@
             this.searchControl.MinimumSize = new System.Drawing.Size(2, 28);
             this.searchControl.Name = "searchControl";
             this.searchControl.SearchedText = "";
-            this.searchControl.Size = new System.Drawing.Size(595, 28);
+            this.searchControl.Size = new System.Drawing.Size(515, 28);
             this.searchControl.TabIndex = 0;
-            this.cartTooltip.SetToolTip(this.searchControl, "F1 to gain focus");
             this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.search_OnSearch);
             this.searchControl.OnTextEmpty += new System.EventHandler(this.search_OnTextEmpty);
             // 
@@ -685,12 +679,11 @@
             this.checkBox1.Location = new System.Drawing.Point(0, 0);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.checkBox1.Size = new System.Drawing.Size(595, 17);
+            this.checkBox1.Size = new System.Drawing.Size(515, 17);
             this.checkBox1.TabIndex = 9;
             this.checkBox1.TabStop = false;
             this.checkBox1.Text = "Auto Add";
             this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cartTooltip.SetToolTip(this.checkBox1, "Auto add items");
             this.checkBox1.UseVisualStyleBackColor = false;
             // 
             // addBtn
@@ -702,11 +695,10 @@
             this.addBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.Location = new System.Drawing.Point(6, 579);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(595, 28);
+            this.addBtn.Size = new System.Drawing.Size(515, 28);
             this.addBtn.TabIndex = 8;
             this.addBtn.TabStop = false;
             this.addBtn.Text = "ADD (shift+ENTER)";
-            this.cartTooltip.SetToolTip(this.addBtn, "Shift+Enter to add");
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
@@ -754,7 +746,7 @@
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(595, 409);
+            this.itemsTable.Size = new System.Drawing.Size(515, 409);
             this.itemsTable.TabIndex = 7;
             this.itemsTable.TabStop = false;
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
@@ -805,11 +797,6 @@
             this.Column4.ReadOnly = true;
             this.Column4.Width = 77;
             // 
-            // cartTooltip
-            // 
-            this.cartTooltip.ShowAlways = true;
-            this.cartTooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
             // printDoc
             // 
             this.printDoc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDoc_BeginPrint);
@@ -820,11 +807,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1244, 636);
+            this.ClientSize = new System.Drawing.Size(1084, 636);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(773, 458);
             this.Name = "MakeSale";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sell Item";
@@ -866,7 +853,6 @@
         private System.Windows.Forms.NumericUpDown amountRecieved;
         private System.Windows.Forms.ComboBox soldTo;
         private System.Windows.Forms.NumericUpDown discount;
-        private System.Windows.Forms.ToolTip cartTooltip;
         private System.Windows.Forms.NumericUpDown price;
         private UserControls.SearchControl searchControl;
         private System.Windows.Forms.CheckBox checkBox1;

@@ -668,5 +668,12 @@ namespace POS.Forms
             if (changesMade)
                 OnSave?.Invoke(this, null);
         }
+
+        private void quantity_Enter(object sender, EventArgs e)
+        {
+            var n = sender as NumericUpDown;
+
+            n.Select(0, n.Text.Length);
+        }
     }
 }

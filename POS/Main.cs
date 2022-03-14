@@ -261,5 +261,16 @@ namespace POS
         {
             splitContainer.Panel2Collapsed = !splitContainer.Panel2Collapsed;
         }
+
+        int showedWidth = 115;
+        int collapsedWidth = 3;
+        private void sideButtonsPanel_DoubleClick(object sender, EventArgs e)
+        {
+            var s = sender as Panel;
+
+            s.Width = s.Width == showedWidth ? collapsedWidth : showedWidth;
+
+            //s.Visible = false;
+        }
     }
 }

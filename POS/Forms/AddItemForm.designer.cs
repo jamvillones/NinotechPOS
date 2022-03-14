@@ -43,6 +43,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sellingPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).BeginInit();
             this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.VariationGroup.SuspendLayout();
             this.groupBox10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cost)).BeginInit();
@@ -56,7 +57,7 @@
             // 
             // details
             // 
-            this.details.Size = new System.Drawing.Size(375, 216);
+            this.details.Size = new System.Drawing.Size(375, 189);
             // 
             // itemType
             // 
@@ -64,19 +65,19 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Size = new System.Drawing.Size(388, 242);
+            this.groupBox6.Size = new System.Drawing.Size(388, 215);
             // 
             // VariationGroup
             // 
-            this.VariationGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.VariationGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.VariationGroup.Controls.Add(this.button1);
             this.VariationGroup.Controls.Add(this.groupBox10);
             this.VariationGroup.Controls.Add(this.groupBox9);
             this.VariationGroup.Controls.Add(this.variationTable);
-            this.VariationGroup.Location = new System.Drawing.Point(406, 167);
+            this.VariationGroup.Location = new System.Drawing.Point(406, 196);
             this.VariationGroup.Name = "VariationGroup";
-            this.VariationGroup.Size = new System.Drawing.Size(388, 242);
+            this.VariationGroup.Size = new System.Drawing.Size(388, 215);
             this.VariationGroup.TabIndex = 8;
             this.VariationGroup.TabStop = false;
             this.VariationGroup.Text = "Item Variation";
@@ -190,7 +191,7 @@
             this.variationTable.RowHeadersVisible = false;
             this.variationTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.variationTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.variationTable.Size = new System.Drawing.Size(376, 141);
+            this.variationTable.Size = new System.Drawing.Size(376, 114);
             this.variationTable.StandardTab = true;
             this.variationTable.TabIndex = 1;
             this.variationTable.TabStop = false;
@@ -213,11 +214,12 @@
             // AddItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            //this.ClientSize = new System.Drawing.Size(803, 484);
+            this.ClientSize = new System.Drawing.Size(803, 452);
             this.Controls.Add(this.VariationGroup);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddItemForm";
             this.Load += new System.EventHandler(this.AddItemForm_Load);
+            this.Controls.SetChildIndex(this.removeBtn, 0);
             this.Controls.SetChildIndex(this.VariationGroup, 0);
             this.Controls.SetChildIndex(this.groupBox6, 0);
             this.Controls.SetChildIndex(this.takePhotoBtn, 0);
@@ -225,6 +227,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ImageBox)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.VariationGroup.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cost)).EndInit();

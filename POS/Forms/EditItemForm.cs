@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,18 +24,26 @@ namespace POS.Forms
         public override void Init()
         {
             base.Init();
-            itemType.Enabled = false;
 
             Item item;
-            using(var p = new POSEntities())
+            using (var p = new POSEntities())
             {
                 item = p.Items.FirstOrDefault(x => x.Barcode == barcode.Text);
                 ImageBox.Image = POS.Misc.ImageDatabaseConverter.byteArrayToImage(item.SampleImage);
             }
             name.Text = item.Name;
             sellingPrice.Value = item.SellingPrice;
-            itemDepartment.Text = item.Department;
-            details.Text = item.Details;
+            itemDepartment.Text = dept;
+            details.Text = deets;
+
+            for (int i = 0; i < (int)ItemType.Count; i++)
+                itemType.Items.Add((ItemType)i).ToString();
+
+            itemType.Text = item.Type;
+
+            numericUpDown1.Value = item.CriticalQuantity ?? 1;
+
+            itemType.Enabled = false;
         }
         public void GetBarcode(string item)
         {
@@ -53,6 +62,10 @@ namespace POS.Forms
                     //item.Type = itemType.Text;
                     item.Department = itemDepartment.Text;
                     item.Details = details.Text;
+
+                    if (numericUpDown1.Enabled)
+                        item.CriticalQuantity = (int)numericUpDown1.Value;
+
                     if (ImageBox.Image != null)
                     {
                         item.SampleImage = Misc.ImageDatabaseConverter.imageToByteArray(ImageBox.Image);
@@ -61,7 +74,7 @@ namespace POS.Forms
                         item.SampleImage = null;
 
                     p.SaveChanges();
-                    InvokeEvent();                    
+                    InvokeEvent();
                     MessageBox.Show("Successfully saved.");
                     this.Close();
                 }
