@@ -93,12 +93,8 @@ namespace POS.Forms
                     item.Name = name.Text;
 
                     item.SellingPrice = sellingPrice.Value;
-                    //item.Cost = cost.Value;
-
-                    //item.Department = string.IsNullOrEmpty(itemDepartment.Text) ? null : itemDepartment.Text;
                     item.Department = dept;
                     item.Details = deets;
-                    // item.Type = itemType.Text;
                     item.Type = itemType.Text;
 
                     if (numericUpDown1.Value > 0 && numericUpDown1.Enabled)
@@ -215,7 +211,6 @@ namespace POS.Forms
                 return;
             }
             variationTable.Rows.Add(supplierOption.Text, cost.Value);
-            //supplierOption.Items.RemoveAt(supplierOption.SelectedIndex);
         }
 
         private void AddItemForm_Load(object sender, EventArgs e)

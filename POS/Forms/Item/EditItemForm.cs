@@ -31,6 +31,7 @@ namespace POS.Forms
                 item = p.Items.FirstOrDefault(x => x.Barcode == barcode.Text);
                 ImageBox.Image = POS.Misc.ImageDatabaseConverter.byteArrayToImage(item.SampleImage);
             }
+
             name.Text = item.Name;
             sellingPrice.Value = item.SellingPrice;
             itemDepartment.Text = dept;
@@ -40,9 +41,7 @@ namespace POS.Forms
                 itemType.Items.Add((ItemType)i).ToString();
 
             itemType.Text = item.Type;
-
             numericUpDown1.Value = item.CriticalQuantity ?? 0;
-
             itemType.Enabled = false;
         }
         public void GetBarcode(string item)
@@ -57,9 +56,7 @@ namespace POS.Forms
                 {
                     var item = p.Items.FirstOrDefault(x => x.Barcode == barcode.Text);
                     item.Name = name.Text;
-                    //item.Cost = cost.Value;
                     item.SellingPrice = sellingPrice.Value;
-                    //item.Type = itemType.Text;
                     item.Department = itemDepartment.Text;
                     item.Details = details.Text;
 
