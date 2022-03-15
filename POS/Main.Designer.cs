@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.sideButtonsPanel = new System.Windows.Forms.Panel();
-            this.inventoryBtn = new System.Windows.Forms.Button();
             this.repBtn = new System.Windows.Forms.Button();
+            this.inventoryBtn = new System.Windows.Forms.Button();
             this.topMostPanel = new System.Windows.Forms.Panel();
             this.userButton = new System.Windows.Forms.Button();
             this.appTitleLabel = new System.Windows.Forms.Label();
@@ -57,11 +57,11 @@
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tabHoldersPanel = new System.Windows.Forms.Panel();
+            this.inventoryTab = new POS.UserControls.InventoryUC();
+            this.reportTab = new POS.UserControls.ReportUC();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.inventoryTab = new POS.UserControls.InventoryUC();
-            this.reportTab = new POS.UserControls.ReportUC();
             this.sideButtonsPanel.SuspendLayout();
             this.topMostPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -85,6 +85,26 @@
             this.toolTip.SetToolTip(this.sideButtonsPanel, "Double click to hide/show");
             this.sideButtonsPanel.DoubleClick += new System.EventHandler(this.sideButtonsPanel_DoubleClick);
             // 
+            // repBtn
+            // 
+            this.repBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.repBtn.FlatAppearance.BorderSize = 0;
+            this.repBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.repBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repBtn.ForeColor = System.Drawing.Color.White;
+            this.repBtn.Image = ((System.Drawing.Image)(resources.GetObject("repBtn.Image")));
+            this.repBtn.Location = new System.Drawing.Point(0, 100);
+            this.repBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.repBtn.Name = "repBtn";
+            this.repBtn.Size = new System.Drawing.Size(115, 100);
+            this.repBtn.TabIndex = 2;
+            this.repBtn.TabStop = false;
+            this.repBtn.Text = "TRANSACTIONS";
+            this.repBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.repBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.repBtn.UseVisualStyleBackColor = true;
+            this.repBtn.Click += new System.EventHandler(this.repBtn_Click);
+            // 
             // inventoryBtn
             // 
             this.inventoryBtn.BackColor = System.Drawing.Color.Gray;
@@ -97,7 +117,7 @@
             this.inventoryBtn.Location = new System.Drawing.Point(0, 0);
             this.inventoryBtn.Margin = new System.Windows.Forms.Padding(0);
             this.inventoryBtn.Name = "inventoryBtn";
-            this.inventoryBtn.Size = new System.Drawing.Size(115, 80);
+            this.inventoryBtn.Size = new System.Drawing.Size(115, 100);
             this.inventoryBtn.TabIndex = 1;
             this.inventoryBtn.TabStop = false;
             this.inventoryBtn.Text = "PRODUCTS";
@@ -105,26 +125,6 @@
             this.inventoryBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.inventoryBtn.UseVisualStyleBackColor = false;
             this.inventoryBtn.Click += new System.EventHandler(this.inventoryBtn_Click);
-            // 
-            // repBtn
-            // 
-            this.repBtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.repBtn.FlatAppearance.BorderSize = 0;
-            this.repBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.repBtn.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repBtn.ForeColor = System.Drawing.Color.White;
-            this.repBtn.Image = ((System.Drawing.Image)(resources.GetObject("repBtn.Image")));
-            this.repBtn.Location = new System.Drawing.Point(0, 80);
-            this.repBtn.Margin = new System.Windows.Forms.Padding(0);
-            this.repBtn.Name = "repBtn";
-            this.repBtn.Size = new System.Drawing.Size(115, 80);
-            this.repBtn.TabIndex = 2;
-            this.repBtn.TabStop = false;
-            this.repBtn.Text = "TRANSACTIONS";
-            this.repBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.repBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.repBtn.UseVisualStyleBackColor = true;
-            this.repBtn.Click += new System.EventHandler(this.repBtn_Click);
             // 
             // topMostPanel
             // 
@@ -407,6 +407,24 @@
             this.tabHoldersPanel.Size = new System.Drawing.Size(1058, 589);
             this.tabHoldersPanel.TabIndex = 3;
             // 
+            // inventoryTab
+            // 
+            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
+            this.inventoryTab.Name = "inventoryTab";
+            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
+            this.inventoryTab.Size = new System.Drawing.Size(1058, 589);
+            this.inventoryTab.TabIndex = 2;
+            // 
+            // reportTab
+            // 
+            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportTab.Location = new System.Drawing.Point(0, 0);
+            this.reportTab.Name = "reportTab";
+            this.reportTab.Size = new System.Drawing.Size(1058, 589);
+            this.reportTab.TabIndex = 1;
+            this.reportTab.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -429,24 +447,6 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.textBox1.Size = new System.Drawing.Size(64, 68);
             this.textBox1.TabIndex = 1;
-            // 
-            // inventoryTab
-            // 
-            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
-            this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
-            this.inventoryTab.Size = new System.Drawing.Size(1058, 589);
-            this.inventoryTab.TabIndex = 2;
-            // 
-            // reportTab
-            // 
-            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportTab.Location = new System.Drawing.Point(0, 0);
-            this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(1058, 589);
-            this.reportTab.TabIndex = 1;
-            this.reportTab.TabStop = false;
             // 
             // Main
             // 

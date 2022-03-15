@@ -66,6 +66,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.criticalLabel = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.contextMenuStrip.SuspendLayout();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
@@ -88,6 +89,7 @@
             // 
             // tablePanel
             // 
+            this.tablePanel.Controls.Add(this.panel4);
             this.tablePanel.Controls.Add(this.itemsTable);
             this.tablePanel.Controls.Add(this.label2);
             this.tablePanel.Controls.Add(this.totalPriceTxt);
@@ -140,7 +142,7 @@
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(555, 336);
+            this.itemsTable.Size = new System.Drawing.Size(555, 341);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 6;
             this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
@@ -203,12 +205,12 @@
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(15, 351);
+            this.label2.Location = new System.Drawing.Point(15, 356);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(555, 25);
+            this.label2.Size = new System.Drawing.Size(555, 20);
             this.label2.TabIndex = 0;
             this.label2.Text = "TOTAL INVENTORY VALUE";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // totalPriceTxt
             // 
@@ -393,7 +395,7 @@
             this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
             this.searchBtn.Location = new System.Drawing.Point(390, 52);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(33, 26);
+            this.searchBtn.Size = new System.Drawing.Size(40, 26);
             this.searchBtn.TabIndex = 5;
             this.searchBtn.TabStop = false;
             this.searchBtn.UseVisualStyleBackColor = true;
@@ -477,6 +479,15 @@
             this.criticalLabel.TabIndex = 11;
             this.criticalLabel.Text = "0";
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.Black;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(15, 355);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(555, 1);
+            this.panel4.TabIndex = 11;
+            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -536,5 +547,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
+        private System.Windows.Forms.Panel panel4;
     }
 }

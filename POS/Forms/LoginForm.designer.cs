@@ -59,9 +59,9 @@
             this.username.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.username.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.username.ForeColor = System.Drawing.Color.White;
-            this.username.Location = new System.Drawing.Point(102, 212);
+            this.username.Location = new System.Drawing.Point(93, 212);
             this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(188, 19);
+            this.username.Size = new System.Drawing.Size(197, 19);
             this.username.TabIndex = 0;
             this.toolTip1.SetToolTip(this.username, "Username");
             // 
@@ -88,10 +88,10 @@
             this.password.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.password.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password.ForeColor = System.Drawing.Color.White;
-            this.password.Location = new System.Drawing.Point(102, 245);
+            this.password.Location = new System.Drawing.Point(93, 245);
             this.password.Name = "password";
             this.password.PasswordChar = '●';
-            this.password.Size = new System.Drawing.Size(162, 19);
+            this.password.Size = new System.Drawing.Size(171, 19);
             this.password.TabIndex = 1;
             this.toolTip1.SetToolTip(this.password, "Password");
             this.password.TextChanged += new System.EventHandler(this.password_TextChanged);
@@ -108,7 +108,7 @@
             this.loginBtn.Size = new System.Drawing.Size(186, 34);
             this.loginBtn.TabIndex = 2;
             this.loginBtn.TabStop = false;
-            this.loginBtn.Text = "LOGIN";
+            this.loginBtn.Text = "LOG IN";
             this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 

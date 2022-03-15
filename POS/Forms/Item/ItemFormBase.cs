@@ -122,7 +122,7 @@ namespace POS.Forms
 
         protected string dept
         {
-            get => string.IsNullOrWhiteSpace(itemDepartment.Text) ? null : itemDepartment.Text.Trim();
+            get => string.IsNullOrWhiteSpace(itemDepartment.Text) || string.IsNullOrEmpty(itemDepartment.Text) ? null : itemDepartment.Text.Trim();
             set => itemDepartment.Text = value.Trim();
         }
         /// <summary>

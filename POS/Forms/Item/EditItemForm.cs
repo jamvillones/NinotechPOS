@@ -57,8 +57,8 @@ namespace POS.Forms
                     var item = p.Items.FirstOrDefault(x => x.Barcode == barcode.Text);
                     item.Name = name.Text;
                     item.SellingPrice = sellingPrice.Value;
-                    item.Department = itemDepartment.Text;
-                    item.Details = details.Text;
+                    item.Department = dept;
+                    item.Details = deets;
 
                     if (numericUpDown1.Value > 0 && numericUpDown1.Enabled)
                         item.CriticalQuantity = (int)numericUpDown1.Value;

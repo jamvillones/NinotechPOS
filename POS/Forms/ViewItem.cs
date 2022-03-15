@@ -17,7 +17,7 @@ namespace POS.Forms
 
         Color hardwareColor = Color.Blue;
         Color softwareColor = Color.Red;
-        Color serviceColor = Color.DarkGreen;       
+        Color serviceColor = Color.DarkGreen;
 
         public void SetItemId(string Id)
         {
@@ -30,7 +30,7 @@ namespace POS.Forms
                 itemType.Text = item.Type;
                 setTypeColor(item.Type.Trim());
                 department.Text = item.Department ?? "*Not set";
-                details.Text = item.Details;
+                details.Text = item.Details ?? "*Not set";
                 textBox1.Text = item.CriticalQuantity?.ToString() ?? "*Not set";
 
                 ImageBox.Image = Misc.ImageDatabaseConverter.byteArrayToImage(item.SampleImage);

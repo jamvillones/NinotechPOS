@@ -17,10 +17,17 @@ namespace POS
         }
 
         public static void InvokeIfRequired(this Control c, Action a){
-            if (c.InvokeRequired)
-                c.Invoke(a);
-            else
-                a();
+            try
+            {
+                if (c.InvokeRequired)
+                    c?.Invoke(a);
+                else
+                    a();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

@@ -82,7 +82,7 @@
             this.groupBox8.Controls.Add(this.department);
             this.groupBox8.Location = new System.Drawing.Point(271, 150);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(263, 40);
+            this.groupBox8.Size = new System.Drawing.Size(271, 40);
             this.groupBox8.TabIndex = 3;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Department";
@@ -96,14 +96,14 @@
             this.department.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.department.Location = new System.Drawing.Point(6, 19);
             this.department.Name = "department";
-            this.department.Size = new System.Drawing.Size(251, 13);
+            this.department.Size = new System.Drawing.Size(259, 13);
             this.department.TabIndex = 2;
             // 
             // groupBox6
             // 
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.details);
-            this.groupBox6.Location = new System.Drawing.Point(540, 12);
+            this.groupBox6.Location = new System.Drawing.Point(548, 12);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(254, 178);
             this.groupBox6.TabIndex = 5;
@@ -132,7 +132,7 @@
             this.groupBox5.Controls.Add(this.sellingPrice);
             this.groupBox5.Location = new System.Drawing.Point(271, 104);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(263, 40);
+            this.groupBox5.Size = new System.Drawing.Size(271, 40);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Price";
@@ -146,7 +146,7 @@
             this.sellingPrice.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sellingPrice.Location = new System.Drawing.Point(6, 19);
             this.sellingPrice.Name = "sellingPrice";
-            this.sellingPrice.Size = new System.Drawing.Size(251, 13);
+            this.sellingPrice.Size = new System.Drawing.Size(259, 13);
             this.sellingPrice.TabIndex = 1;
             // 
             // groupBox3
@@ -156,7 +156,7 @@
             this.groupBox3.Controls.Add(this.itemName);
             this.groupBox3.Location = new System.Drawing.Point(271, 58);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(263, 40);
+            this.groupBox3.Size = new System.Drawing.Size(271, 40);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Name";
@@ -170,7 +170,7 @@
             this.itemName.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.itemName.Location = new System.Drawing.Point(7, 20);
             this.itemName.Name = "itemName";
-            this.itemName.Size = new System.Drawing.Size(250, 13);
+            this.itemName.Size = new System.Drawing.Size(258, 13);
             this.itemName.TabIndex = 0;
             // 
             // groupBox2
@@ -212,7 +212,7 @@
             this.groupBox1.Controls.Add(this.barcode);
             this.groupBox1.Location = new System.Drawing.Point(271, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(263, 40);
+            this.groupBox1.Size = new System.Drawing.Size(271, 40);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Barcode";
@@ -226,7 +226,7 @@
             this.barcode.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barcode.Location = new System.Drawing.Point(7, 20);
             this.barcode.Name = "barcode";
-            this.barcode.Size = new System.Drawing.Size(250, 13);
+            this.barcode.Size = new System.Drawing.Size(258, 13);
             this.barcode.TabIndex = 0;
             // 
             // variationsTable
@@ -267,7 +267,7 @@
             this.variationsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.variationsTable.RowHeadersVisible = false;
             this.variationsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.variationsTable.Size = new System.Drawing.Size(244, 207);
+            this.variationsTable.Size = new System.Drawing.Size(244, 204);
             this.variationsTable.StandardTab = true;
             this.variationsTable.TabIndex = 15;
             this.variationsTable.TabStop = false;
@@ -293,10 +293,10 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.variationsTable);
-            this.groupBox4.Location = new System.Drawing.Point(540, 242);
+            this.groupBox4.Location = new System.Drawing.Point(548, 242);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox4.Size = new System.Drawing.Size(254, 230);
+            this.groupBox4.Size = new System.Drawing.Size(254, 227);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Variations";
@@ -308,7 +308,7 @@
             this.groupBox7.Controls.Add(this.itemType);
             this.groupBox7.Location = new System.Drawing.Point(271, 196);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(263, 40);
+            this.groupBox7.Size = new System.Drawing.Size(271, 40);
             this.groupBox7.TabIndex = 4;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Type";
@@ -322,7 +322,7 @@
             this.itemType.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.itemType.Location = new System.Drawing.Point(6, 19);
             this.itemType.Name = "itemType";
-            this.itemType.Size = new System.Drawing.Size(251, 13);
+            this.itemType.Size = new System.Drawing.Size(259, 13);
             this.itemType.TabIndex = 2;
             // 
             // groupBox9
@@ -334,7 +334,7 @@
             this.groupBox9.Location = new System.Drawing.Point(9, 242);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox9.Size = new System.Drawing.Size(525, 230);
+            this.groupBox9.Size = new System.Drawing.Size(533, 227);
             this.groupBox9.TabIndex = 12;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Inventory Stock";
@@ -378,7 +378,7 @@
             this.stockTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.stockTable.RowHeadersVisible = false;
             this.stockTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.stockTable.Size = new System.Drawing.Size(515, 207);
+            this.stockTable.Size = new System.Drawing.Size(523, 204);
             this.stockTable.StandardTab = true;
             this.stockTable.TabIndex = 15;
             this.stockTable.TabStop = false;
@@ -410,7 +410,7 @@
             // 
             this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox10.Controls.Add(this.textBox1);
-            this.groupBox10.Location = new System.Drawing.Point(540, 196);
+            this.groupBox10.Location = new System.Drawing.Point(548, 196);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(254, 40);
             this.groupBox10.TabIndex = 13;
@@ -433,7 +433,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 484);
+            this.ClientSize = new System.Drawing.Size(814, 481);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox6);
@@ -446,8 +446,8 @@
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(682, 395);
             this.Name = "ViewItem";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "View Item";

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangePass));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.currPassword = new System.Windows.Forms.TextBox();
@@ -59,31 +60,37 @@
             // 
             // currPassword
             // 
+            this.currPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.currPassword.Location = new System.Drawing.Point(137, 69);
             this.currPassword.MaxLength = 50;
             this.currPassword.Name = "currPassword";
-            this.currPassword.PasswordChar = '*';
+            this.currPassword.PasswordChar = '●';
             this.currPassword.Size = new System.Drawing.Size(329, 20);
-            this.currPassword.TabIndex = 5;
+            this.currPassword.TabIndex = 2;
             // 
             // ConfirmBtn
             // 
             this.ConfirmBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.ConfirmBtn.Location = new System.Drawing.Point(211, 99);
+            this.ConfirmBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ConfirmBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ConfirmBtn.Location = new System.Drawing.Point(137, 99);
             this.ConfirmBtn.Name = "ConfirmBtn";
-            this.ConfirmBtn.Size = new System.Drawing.Size(75, 23);
+            this.ConfirmBtn.Size = new System.Drawing.Size(206, 23);
             this.ConfirmBtn.TabIndex = 8;
             this.ConfirmBtn.Text = "Confirm";
-            this.ConfirmBtn.UseVisualStyleBackColor = true;
+            this.ConfirmBtn.UseVisualStyleBackColor = false;
             this.ConfirmBtn.Click += new System.EventHandler(this.ConfirmBtn_Click);
             // 
             // currUser
             // 
+            this.currUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.currUser.Location = new System.Drawing.Point(137, 9);
             this.currUser.Name = "currUser";
             this.currUser.ReadOnly = true;
             this.currUser.Size = new System.Drawing.Size(329, 20);
-            this.currUser.TabIndex = 9;
+            this.currUser.TabIndex = 0;
             // 
             // label5
             // 
@@ -96,14 +103,18 @@
             // 
             // nameTxt
             // 
+            this.nameTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.nameTxt.Location = new System.Drawing.Point(137, 43);
             this.nameTxt.MaxLength = 50;
             this.nameTxt.Name = "nameTxt";
             this.nameTxt.Size = new System.Drawing.Size(329, 20);
-            this.nameTxt.TabIndex = 11;
+            this.nameTxt.TabIndex = 1;
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.Location = new System.Drawing.Point(13, 36);
             this.panel1.Name = "panel1";
@@ -123,10 +134,11 @@
             this.Controls.Add(this.currPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ChangePass";
-            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Change Login Credentials";
             this.ResumeLayout(false);

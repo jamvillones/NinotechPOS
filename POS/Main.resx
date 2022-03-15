@@ -117,19 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>110, 19</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="inventoryBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAK5JREFUSEtj
-        GLng////VUC8kca4CmodAkAlaA02Qq1DAJAgRI6mYHBZvBiI39AYL4ZaN5IBMBg6gPgoBTgKao4umjgy
-        7gBbhgyAgpQmrjKoOdYQLlZAk1Q9ci02AuKbOPA0sGXIAChIFYtJBkCNQ9tiID0wQQ2kR7MTMqCpxQNT
-        ZJIMgBqHtsVA2gyIsTUCQBizIQAUHPKJa+hYTGmDPhBqjgaaODLGbNCPEMDAAABb5q5iJYwaGAAAAABJ
-        RU5ErkJggg==
-</value>
-  </data>
   <data name="repBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAARhJREFUSEvt
@@ -140,6 +128,18 @@
         cYPgsVzdhOAyOnvHFzmWcoPsV73OKtWsdHYAcdeBOb8A9ctckUep+xsAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="inventoryBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAK5JREFUSEtj
+        GLng////VUC8kca4CmodAkAlaA02Qq1DAJAgRI6mYHBZvBiI39AYL4ZaN5IBMBg6gPgoBTgKao4umjgy
+        7gBbhgyAgpQmrjKoOdYQLlZAk1Q9ci02AuKbOPA0sGXIAChIFYtJBkCNQ9tiID0wQQ2kR7MTMqCpxQNT
+        ZJIMgBqHtsVA2gyIsTUCQBizIQAUHPKJa+hYTGmDPhBqjgaaODLGbNCPEMDAAABb5q5iJYwaGAAAAABJ
+        RU5ErkJggg==
+</value>
+  </data>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>110, 19</value>
+  </metadata>
   <data name="userButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAMdJREFUOE+N
@@ -271,9 +271,6 @@
         rkJggg==
 </value>
   </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>110, 19</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>53</value>
   </metadata>

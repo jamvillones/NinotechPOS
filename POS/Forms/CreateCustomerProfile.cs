@@ -80,7 +80,7 @@ namespace POS.Forms
 
             using (var p = new POSEntities())
             {
-                IEnumerable<Customer> customers = p.Customers;
+                IEnumerable<Customer> customers = p.Customers.OrderBy(x => x.Name);
                 var rows = customers.Select(x => customerTable.createRow(x.Id, x.Name, x.Address, x.ContactDetails, "Delete", "Transactions")).ToArray();
                 customerTable.Rows.AddRange(rows);
             }

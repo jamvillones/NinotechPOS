@@ -32,9 +32,8 @@ namespace POS.Forms
                         supplierTable.Rows.Add(x.Id, x.Name, x.ContactDetails, "Delete");
                     }
                     searchControl1.SetAutoComplete(p.Suppliers.Select(x => x.Name).ToArray());
-                    //forbiddenId = (int)( supplierTable.Rows[0].Cells[0].Value);
-
                 }
+
                 resetAutoComplete();
             }
             catch
@@ -49,11 +48,6 @@ namespace POS.Forms
             {
                 searchControl1.SetAutoComplete(p.Suppliers.Select(x => x.Name).ToArray());
             }
-        }
-
-        private void supplierTable_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-        {
-
         }
 
         #region edits
@@ -118,44 +112,45 @@ namespace POS.Forms
             }
         }
 
+        string supplier => string.IsNullOrWhiteSpace(supplierName.Text) ? null : supplierName.Text.Trim();
+        string contact => string.IsNullOrWhiteSpace(contactDetails.Text) ? null : contactDetails.Text.Trim();
+
+        bool canSave => supplier != null && contact != null;
+
+
         private void addSuppBtn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to add a new Supplier?","", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (!canSave)
                 return;
+
+            if (MessageBox.Show("Are you sure you want to add a new Supplier?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+
             using (var p = new POSEntities())
             {
-                var name = supplierName.Text.Trim(' ');
-                var contact = contactDetails.Text.Trim(' ');
-
-                //if(p.Suppliers.Any(x=>x.Name == name ))
-                //{
-                //    MessageBox.Show("Supplier already present.");
-                //    return;
-                //}
-
                 var newSupplier = new Supplier();
-                newSupplier.Name = name;
+                newSupplier.Name = supplier;
                 newSupplier.ContactDetails = contact;
                 p.Suppliers.Add(newSupplier);
 
                 supplierTable.Rows.Add(newSupplier.Id, newSupplier.Name, newSupplier.ContactDetails, "Delete");
 
-                //suppliers.Add(newSupplier);
                 p.SaveChanges();
             }
+
             resetAutoComplete();
             OnSave?.Invoke(this, null);
             supplierName.ResetText();
             contactDetails.ResetText();
         }
-        
+
         private void supplierTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex != 3)
                 return;
             var dgt = sender as DataGridView;
             var id = (int)(dgt.Rows[e.RowIndex].Cells[0].Value);
-            
+
             if (MessageBox.Show("Are you sure you want to delete supplier: " + dgt.Rows[e.RowIndex].Cells[1].Value.ToString() + "\n\nTo edit details, simply edit the cells in the table."
                                , "",
                                MessageBoxButtons.YesNo,
