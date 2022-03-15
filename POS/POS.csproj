@@ -237,10 +237,10 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddItemForm.cs">
+    <Compile Include="Forms\Item\AddItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddItemForm.designer.cs">
+    <Compile Include="Forms\Item\AddItemForm.designer.cs">
       <DependentUpon>AddItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ChangePass.cs">
@@ -261,10 +261,10 @@
     <Compile Include="Forms\CreateLogin.designer.cs">
       <DependentUpon>CreateLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditItemForm.cs">
+    <Compile Include="Forms\Item\EditItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EditItemForm.designer.cs">
+    <Compile Include="Forms\Item\EditItemForm.designer.cs">
       <DependentUpon>EditItemForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\InventoryItemView.cs">
@@ -273,10 +273,10 @@
     <Compile Include="Forms\InventoryItemView.Designer.cs">
       <DependentUpon>InventoryItemView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ItemFormBase.cs">
+    <Compile Include="Forms\Item\ItemFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ItemFormBase.designer.cs">
+    <Compile Include="Forms\Item\ItemFormBase.designer.cs">
       <DependentUpon>ItemFormBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginForm.cs">
@@ -491,7 +491,7 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddItemForm.resx">
+    <EmbeddedResource Include="Forms\Item\AddItemForm.resx">
       <DependentUpon>AddItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChangePass.resx">
@@ -503,13 +503,13 @@
     <EmbeddedResource Include="Forms\CreateLogin.resx">
       <DependentUpon>CreateLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditItemForm.resx">
+    <EmbeddedResource Include="Forms\Item\EditItemForm.resx">
       <DependentUpon>EditItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryItemView.resx">
       <DependentUpon>InventoryItemView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ItemFormBase.resx">
+    <EmbeddedResource Include="Forms\Item\ItemFormBase.resx">
       <DependentUpon>ItemFormBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">

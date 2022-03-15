@@ -41,7 +41,7 @@ namespace POS.Forms
 
             itemType.Text = item.Type;
 
-            numericUpDown1.Value = item.CriticalQuantity ?? 1;
+            numericUpDown1.Value = item.CriticalQuantity ?? 0;
 
             itemType.Enabled = false;
         }
@@ -63,8 +63,10 @@ namespace POS.Forms
                     item.Department = itemDepartment.Text;
                     item.Details = details.Text;
 
-                    if (numericUpDown1.Enabled)
+                    if (numericUpDown1.Value > 0 && numericUpDown1.Enabled)
                         item.CriticalQuantity = (int)numericUpDown1.Value;
+                    else
+                        item.CriticalQuantity = null;
 
                     if (ImageBox.Image != null)
                     {

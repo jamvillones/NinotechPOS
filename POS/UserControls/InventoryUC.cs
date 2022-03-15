@@ -258,7 +258,7 @@ namespace POS.UserControls
             if (x.Type == ItemType.Quantifiable.ToString())
             {
                 var q = x.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
-                if (q == 0)
+                if (q == 0 || x.CriticalQuantity == null)
                     return false;
 
                 return (q <= (x.CriticalQuantity ?? 1));

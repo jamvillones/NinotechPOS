@@ -84,8 +84,6 @@ namespace POS.Forms
                     break;
             }
 
-
-
             try
             {
                 using (var p = new POSEntities())
@@ -103,8 +101,10 @@ namespace POS.Forms
                     // item.Type = itemType.Text;
                     item.Type = itemType.Text;
 
-                    if (numericUpDown1.Enabled)
+                    if (numericUpDown1.Value > 0 && numericUpDown1.Enabled)
                         item.CriticalQuantity = (int)numericUpDown1.Value;
+                    else
+                        item.CriticalQuantity = null;
 
                     if (ImageBox.Image != null)
                     {
@@ -209,7 +209,7 @@ namespace POS.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             if (supplierOption.Text == string.Empty) return;
-            if(supplierPresent(supplierOption.Text))
+            if (supplierPresent(supplierOption.Text))
             {
                 MessageBox.Show("Supplier already present.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
@@ -237,7 +237,7 @@ namespace POS.Forms
             supplierOption.Items.Clear();
             supplierOption.AutoCompleteCustomSource.Clear();
             using (var p = new POSEntities())
-            {               
+            {
                 supplierOption.Items.AddRange(p.Suppliers.OrderBy(x => x.Name).Select(y => y.Name).ToArray());
                 supplierOption.AutoCompleteCustomSource.AddRange(p.Suppliers.OrderBy(x => x.Name).Select(y => y.Name).ToArray());
             }
