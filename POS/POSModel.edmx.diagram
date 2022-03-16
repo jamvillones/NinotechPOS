@@ -12,18 +12,18 @@
         <AssociationConnector Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord" />
         <AssociationConnector Association="POSModel.FK_Sale_Customer" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Sale" />
-        <EntityTypeShape EntityType="POSModel.Product" Width="1.5" PointX="7.25" PointY="1.625" IsExpanded="false" />
-        <AssociationConnector Association="POSModel.FK_SoldItem_Product" />
         <EntityTypeShape EntityType="POSModel.Login" Width="1.5" PointX="2.75" PointY="3.375" IsExpanded="false" />
         <AssociationConnector Association="POSModel.FK_Sale_Login" />
         <EntityTypeShape EntityType="POSModel.Supplier" Width="1.5" PointX="7.25" PointY="3.25" IsExpanded="false" />
-        <AssociationConnector Association="POSModel.FK_ProductBySupplier_Supplier" />
-        <EntityTypeShape EntityType="POSModel.InventoryItem" Width="1.5" PointX="9.625" PointY="1.625" IsExpanded="false" />
-        <AssociationConnector Association="POSModel.FK_Product_ProductBySupplier" />
-        <EntityTypeShape EntityType="POSModel.StockinHistory" Width="1.5" PointX="9.625" PointY="2.75" IsExpanded="false" />
-        <AssociationConnector Association="POSModel.FK_StockinHistory_Product" />
+        <EntityTypeShape EntityType="POSModel.InventoryItem" Width="1.5" PointX="9.875" PointY="1.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="POSModel.StockinHistory" Width="1.5" PointX="9.875" PointY="2.375" IsExpanded="false" />
         <EntityTypeShape EntityType="POSModel.Item" Width="1.5" PointX="7.25" PointY="0.5" IsExpanded="false" />
-        <AssociationConnector Association="POSModel.FK_Item_Product" />
+        <EntityTypeShape EntityType="POSModel.Product" Width="1.5" PointX="7.25" PointY="1.625" IsExpanded="false" />
+        <AssociationConnector Association="POSModel.FK_Product_ProductBySupplier" />
+        <AssociationConnector Association="POSModel.FK_Product_Item" />
+        <AssociationConnector Association="POSModel.FK_ProductBySupplier_Supplier" />
+        <AssociationConnector Association="POSModel.FK_SoldItem_Product" />
+        <AssociationConnector Association="POSModel.FK_StockinHistory_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

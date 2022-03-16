@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>120</ApplicationRevision>
+    <ApplicationRevision>123</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -108,7 +108,13 @@
     <Compile Include="Forms\ConnectionConfigurations.Designer.cs">
       <DependentUpon>ConnectionConfigurations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Item.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Misc\Tools.cs" />
+    <Compile Include="Product.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SaleSummary\CashModel.cs" />
     <Compile Include="ChargedPayRecord.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
@@ -219,9 +225,6 @@
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SaleSummary\InvoiceModel.cs" />
-    <Compile Include="Item.cs">
-      <DependentUpon>POSModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Login.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
@@ -348,9 +351,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>POSModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Product.cs">
-      <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

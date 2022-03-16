@@ -17,8 +17,8 @@ namespace POS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.SoldItems = new HashSet<SoldItem>();
             this.InventoryItems = new HashSet<InventoryItem>();
+            this.SoldItems = new HashSet<SoldItem>();
             this.StockinHistories = new HashSet<StockinHistory>();
         }
     
@@ -28,12 +28,12 @@ namespace POS
         public Nullable<decimal> Cost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SoldItem> SoldItems { get; set; }
+        public virtual ICollection<InventoryItem> InventoryItems { get; set; }
+        public virtual Item Item { get; set; }
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InventoryItem> InventoryItems { get; set; }
+        public virtual ICollection<SoldItem> SoldItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockinHistory> StockinHistories { get; set; }
-        public virtual Item Item { get; set; }
     }
 }
