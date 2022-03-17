@@ -69,6 +69,11 @@ namespace POS.UserControls
         public async Task InitializeAsync()
         {
             await initItemsTableAsync();
+
+            foreach (var i in criticalItemNames)
+                notifyIcon.BalloonTipText += i + "\n";
+
+            notifyIcon.ShowBalloonTip(2);
         }
 
         public void CancelLoading()
@@ -232,6 +237,7 @@ namespace POS.UserControls
                 try
                 {
                     criticalQtyCounter = 0;
+                    criticalItemNames = new List<string>();
                     ///criticalLabel.InvokeIfRequired(() => criticalLabel.Text = "0");
                     foreach (var i in items)
                     {
@@ -266,6 +272,7 @@ namespace POS.UserControls
             return false;
         }
 
+        List<string> criticalItemNames { get; set; } = new List<string>();
         int criticalQtyCounter = 0;
         DataGridViewRow createItemRow(Item x)
         {
@@ -277,6 +284,8 @@ namespace POS.UserControls
                 row.DefaultCellStyle.BackColor = Color.IndianRed;
                 row.DefaultCellStyle.ForeColor = Color.White;
                 criticalQtyCounter++;
+
+                criticalItemNames.Add(x.Name);
             }
 
             switch (q)

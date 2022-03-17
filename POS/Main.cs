@@ -82,6 +82,7 @@ namespace POS
                 init
                 );
 
+            
             Console.WriteLine("===== Form Initialized =====");
             //isLoading = false;
             //if (isClosing)
