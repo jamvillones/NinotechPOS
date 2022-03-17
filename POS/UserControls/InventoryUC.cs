@@ -52,8 +52,7 @@ namespace POS.UserControls
         #region Tab functions
         public virtual void RefreshData()
         {
-            // initInventoryTable();
-            // initItemsTable();
+            
         }
 
         public virtual Button EnterButton()
@@ -194,7 +193,9 @@ namespace POS.UserControls
 
         private async Task initItemsTableAsync()
         {
+            isRefreshing = true;
             Console.WriteLine("started: Items");
+
 
             tokenSource2 = new CancellationTokenSource();
 
@@ -237,6 +238,7 @@ namespace POS.UserControls
                     tokenSource2 = null;
                 }
             }
+            isRefreshing = false;
         }
 
         private async Task<DataGridViewRow[]> createItemRowsAsync(IEnumerable<Item> items, CancellationToken ct)
@@ -296,7 +298,7 @@ namespace POS.UserControls
                 row.DefaultCellStyle.ForeColor = Color.White;
                 criticalQtyCounter++;
 
-                criticalItemNames.Add(x.Name);
+                criticalItemNames.Add(x.Name +" ("+x.QuantityInInventory+") ");
             }
 
             switch (q)
@@ -547,6 +549,14 @@ namespace POS.UserControls
         {
             //if (e.KeyCode == Keys.F5)
             //    button2.PerformClick();
+        }
+
+        bool isRefreshing { get; set; } = false;
+        private async void button2_Click_1(object sender, EventArgs e)
+        {
+            if (!isRefreshing)
+                await initItemsTableAsync();
+
         }
     }
 }
