@@ -70,6 +70,17 @@ namespace POS.UserControls
         {
             await initItemsTableAsync();
 
+            showNotif();
+        }
+
+        void showNotif()
+        {
+            if (criticalItemNames.Count == 0)
+                return;
+
+            var isPlural = criticalItemNames.Count > 1;
+            notifyIcon.BalloonTipTitle = (isPlural ? "These " : "This") + (isPlural ? "items" : "item") + " " + (isPlural ? "are" : "is") + " in critical quantity!";
+
             foreach (var i in criticalItemNames)
                 notifyIcon.BalloonTipText += i + "\n";
 

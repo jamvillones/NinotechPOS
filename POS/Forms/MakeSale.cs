@@ -185,6 +185,8 @@ namespace POS.Forms
                 p.SaveChanges();
 
                 saleId = newSale.Id;
+
+                notifyIcon.ShowBalloonTip(1);
                 /// OnSave?.Invoke(this, null);
                 //MessageBox.Show("Sold Items.");
                 if (isPrintReceipt.Checked)
@@ -674,6 +676,14 @@ namespace POS.Forms
             var n = sender as NumericUpDown;
 
             n.Select(0, n.Text.Length);
+        }
+
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {            
+            if (WindowState == FormWindowState.Minimized)
+                this.WindowState = FormWindowState.Maximized;
+            else
+                this.WindowState = FormWindowState.Minimized;
         }
     }
 }
