@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>126</ApplicationRevision>
+    <ApplicationRevision>130</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -111,7 +111,14 @@
     <Compile Include="Item.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ItemCartDetailsEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemCartDetailsEdit.Designer.cs">
+      <DependentUpon>ItemCartDetailsEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Misc\Tools.cs" />
+    <Compile Include="NewCartDetails.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
@@ -478,6 +485,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VariationReferences.resx">
       <DependentUpon>VariationReferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemCartDetailsEdit.resx">
+      <DependentUpon>ItemCartDetailsEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

@@ -37,7 +37,10 @@ namespace POS.Forms
                 this.Close();
                 return;
             }
-            MessageBox.Show("Login failed!","", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ///MessageBox.Show("Login failed!","", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ///
+            System.Media.SystemSounds.Hand.Play();
+            label2.Text = "LOG IN FAILED!";
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -97,6 +100,12 @@ namespace POS.Forms
         private void password_TextChanged(object sender, EventArgs e)
         {
             hide.Visible = !string.IsNullOrWhiteSpace(password.Text);
+            label2.Text = string.Empty;
+        }
+
+        private void username_TextChanged(object sender, EventArgs e)
+        {
+            label2.Text = string.Empty;
         }
     }
 }

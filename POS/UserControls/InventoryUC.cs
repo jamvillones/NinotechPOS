@@ -37,6 +37,7 @@ namespace POS.UserControls
 
         private async void Sh_OnTextCleared(object sender, EventArgs e)
         {
+            criticalIsShowing = false;
             await initItemsTableAsync();
         }
 
@@ -44,7 +45,7 @@ namespace POS.UserControls
         {
             if (e.SameSearch)
                 return;
-
+            criticalIsShowing = false;
             e.SeachFound = searchItem(e.SearchedString);
 
         }
@@ -52,7 +53,7 @@ namespace POS.UserControls
         #region Tab functions
         public virtual void RefreshData()
         {
-            
+
         }
 
         public virtual Button EnterButton()
@@ -272,18 +273,18 @@ namespace POS.UserControls
             return rows.ToArray();
         }
 
-        bool isInCriticalQuantity(Item x)
-        {
-            if (x.Type == ItemType.Quantifiable.ToString())
-            {
-                var q = x.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
-                if (q == 0 || x.CriticalQuantity == null)
-                    return false;
+        //bool isInCriticalQuantity(Item x)
+        //{
+        //    if (x.Type == ItemType.Quantifiable.ToString())
+        //    {
+        //        var q = x.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
+        //        if (q == 0 || x.CriticalQuantity == null)
+        //            return false;
 
-                return (q <= (x.CriticalQuantity ?? 1));
-            }
-            return false;
-        }
+        //        return (q <= (x.CriticalQuantity ?? 1));
+        //    }
+        //    return false;
+        //}
 
         List<string> criticalItemNames { get; set; } = new List<string>();
         int criticalQtyCounter = 0;
@@ -292,13 +293,13 @@ namespace POS.UserControls
             var row = new DataGridViewRow();
             string q = getItemQuantityString(x);
 
-            if (isInCriticalQuantity(x))
+            if (x.InCriticalQuantity)
             {
                 row.DefaultCellStyle.BackColor = Color.IndianRed;
                 row.DefaultCellStyle.ForeColor = Color.White;
                 criticalQtyCounter++;
 
-                criticalItemNames.Add(x.Name +" ("+x.QuantityInInventory+") ");
+                criticalItemNames.Add(x.Name + " (" + x.QuantityInInventory + ") ");
             }
 
             switch (q)
@@ -557,6 +558,36 @@ namespace POS.UserControls
             if (!isRefreshing)
                 await initItemsTableAsync();
 
+        }
+        bool _critShowing = false;
+        bool criticalIsShowing
+        {
+            get => _critShowing;
+            set
+            {
+                _critShowing = value;
+
+                criticalLabel.ForeColor = _critShowing ? Color.Blue : Color.Maroon;
+            }
+        }
+
+        private async void criticalLabel_Click(object sender, EventArgs e)
+        {
+            if (!criticalIsShowing)
+                await Task.Run(() =>
+                {
+                    using (var c = new POSEntities())
+                    {
+                        IEnumerable<Item> critItems = c.Items.AsEnumerable().Where(x => x.InCriticalQuantity);
+                        Console.WriteLine(critItems.Count());
+
+                        fillTable(critItems);
+                    }
+                });
+            else
+                await initItemsTableAsync();
+
+            criticalIsShowing = !criticalIsShowing;
         }
     }
 }

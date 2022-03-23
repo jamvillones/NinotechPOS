@@ -34,7 +34,6 @@
             this.hide = new System.Windows.Forms.PictureBox();
             this.password = new System.Windows.Forms.TextBox();
             this.loginBtn = new System.Windows.Forms.Button();
-            this.settingsBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.exitBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -43,6 +42,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.hide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -64,6 +64,7 @@
             this.username.Size = new System.Drawing.Size(197, 19);
             this.username.TabIndex = 0;
             this.toolTip1.SetToolTip(this.username, "Username");
+            this.username.TextChanged += new System.EventHandler(this.username_TextChanged);
             // 
             // hide
             // 
@@ -111,20 +112,6 @@
             this.loginBtn.Text = "LOG IN";
             this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
-            // 
-            // settingsBtn
-            // 
-            this.settingsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.settingsBtn.FlatAppearance.BorderSize = 0;
-            this.settingsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.settingsBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsBtn.Image")));
-            this.settingsBtn.Location = new System.Drawing.Point(308, 478);
-            this.settingsBtn.Name = "settingsBtn";
-            this.settingsBtn.Size = new System.Drawing.Size(30, 30);
-            this.settingsBtn.TabIndex = 3;
-            this.settingsBtn.TabStop = false;
-            this.settingsBtn.UseVisualStyleBackColor = true;
-            this.settingsBtn.Visible = false;
             // 
             // pictureBox1
             // 
@@ -197,13 +184,26 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "NIÑOTECH POS";
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(60, 274);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(230, 38);
+            this.label2.TabIndex = 11;
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // LoginForm
             // 
             this.AcceptButton = this.loginBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(350, 520);
+            this.ClientSize = new System.Drawing.Size(350, 550);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.panel2);
@@ -214,7 +214,6 @@
             this.Controls.Add(this.username);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.settingsBtn);
             this.Controls.Add(this.loginBtn);
             this.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -239,7 +238,6 @@
         private System.Windows.Forms.TextBox username;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.Button loginBtn;
-        private System.Windows.Forms.Button settingsBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button exitBtn;
         private System.Windows.Forms.PictureBox hide;
@@ -249,5 +247,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

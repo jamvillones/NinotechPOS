@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace POS
 {
-    //static class EntityExtension
-    //{
-    //    public static decimal GetSaleTotalPrice(this Sale sale)
-    //    {
-    //        decimal total = 0;
-    //        using (var p = new POSEntities())
-    //        {
-    //            total = p.Sales.FirstOrDefault(x => x.Id == sale.Id).SoldItems.Sum(y => y.Quantity * (y.ItemPrice - y.Discount ?? 0));
-    //        }
-    //        return total;
-
-    //    }
-
-    //}
     partial class Item
     {
         public int QuantityInInventory => this.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
+        public bool InCriticalQuantity
+        {
+            get
+            {
+                if (this.Type != ItemType.Quantifiable.ToString() || this.CriticalQuantity == null) return false;
+
+                var q = this.QuantityInInventory;
+
+                if (q == 0)
+                    return false;
+
+                return (q <= this.CriticalQuantity);
+            }
+        }
     }
 
     partial class Sale

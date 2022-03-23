@@ -340,7 +340,16 @@ namespace POS.Forms
                 }
             }
 
-            cartTable.Rows.Add(tempItem.Barcode, tempItem.Serial, tempItem.Name, tempItem.Quantity, tempItem.SellingPrice, tempItem.discount, tempItem.TotalPrice.ToString(), tempItem.Supplier);
+            cartTable.Rows.Add(
+                tempItem.Barcode,
+                tempItem.Serial,
+                tempItem.Name,
+                tempItem.Quantity,
+                tempItem.SellingPrice,
+                tempItem.discount,
+                tempItem.TotalPrice.ToString(),
+                tempItem.Supplier
+                );
         }
 
         void calculateTotal()
@@ -349,6 +358,7 @@ namespace POS.Forms
             var value = cartTotalValue - amountRecieved.Value;
             saleType.ForeColor = value > 0 ? Color.Red : Color.DarkGreen;
             saleType.Text = value > 0 ? "CHARGED" : "REGULAR";
+            change.Text = string.Format("₱ {0:n}", changeAmount);
         }
 
         private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -660,7 +670,7 @@ namespace POS.Forms
         private void cartTable_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             calculateTotal();
-            change.Text = string.Format("₱ {0:n}", changeAmount);
+
 
             searchControl.ClearField();
         }
@@ -679,11 +689,54 @@ namespace POS.Forms
         }
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
-        {            
+        {
             if (WindowState == FormWindowState.Minimized)
                 this.WindowState = FormWindowState.Maximized;
             else
                 this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void cartTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1)
+                return;
+
+            var dgt = sender as DataGridView;
+            if (dgt.SelectedCells[1].Value != null)
+                return;
+
+
+            var n = dgt.SelectedCells[2].Value.ToString();
+            var q = (int)dgt.SelectedCells[3].Value;
+            var p = (decimal)dgt.SelectedCells[4].Value;
+            var d = (decimal)dgt.SelectedCells[5].Value;
+            var s = dgt.SelectedCells[7].Value.ToString();
+            int maxQ = 0;
+
+            Connections.ContextTools.UseContext<POSEntities>((c) =>
+            {
+                maxQ = c.InventoryItems.FirstOrDefault(x => x.Product.Item.Name == n && x.Product.Supplier.Name == s).Quantity;
+            }, false);
+
+            if (maxQ <= 0)
+                maxQ = 999999999;
+
+            using (var dets = new ItemCartDetailsEdit(n, q, p, d, maxQ))
+            {
+                if (dets.ShowDialog() == DialogResult.OK)
+                {
+                    searchControl.ClearField();
+
+                    var newDets = (NewCartDetails)dets.Tag;
+
+                    dgt.SelectedCells[3].Value = newDets.Quantity;
+                    dgt.SelectedCells[4].Value = newDets.Price;
+                    dgt.SelectedCells[5].Value = newDets.Discount;
+                    dgt.SelectedCells[6].Value = newDets.GrandTotal;
+
+                    calculateTotal();
+                }
+            }
         }
     }
 }

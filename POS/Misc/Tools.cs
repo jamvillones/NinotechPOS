@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Connections
 {
-    public static class Tools
+    public static class ContextTools
     {
 
         public static void ChangeDatabase(this DbContext source)
@@ -29,8 +29,6 @@ namespace Connections
                 sqlCnxStringBuilder.UserID = settins.UserId;
                 sqlCnxStringBuilder.Password = settins.Password;
 
-                //// set the integrated security status
-                //sqlCnxStringBuilder.IntegratedSecurity = false;
                 // now flip the properties that were changed
                 source.Database.Connection.ConnectionString
                     = sqlCnxStringBuilder.ConnectionString;
@@ -74,25 +72,6 @@ namespace Connections
             }
         }
 
-        //public static string ConString
-        //{
-        //    get
-        //    {
-        //        var sqlCnxStringBuilder = new SqlConnectionStringBuilder();
-
-        //        var settings = OrderForm.Properties.Settings.Default;
-
-        //        //sqlCnxStringBuilder.InitialCatalog = settings.InitialCatalog;
-        //        sqlCnxStringBuilder.DataSource = settings.DataSource;
-        //        sqlCnxStringBuilder.UserID = settings.Userid;
-        //        sqlCnxStringBuilder.Password = settings.Password;
-        //        //sqlCnxStringBuilder.IntegratedSecurity = settings.IntegratedSecurity;
-
-        //        return sqlCnxStringBuilder.ConnectionString;
-        //    }
-
-        //}
-
         public static bool ConnectionNotSet
         {
             get
@@ -100,10 +79,47 @@ namespace Connections
                 var settings = POS.Properties.Settings.Default;
 
                 return string.IsNullOrWhiteSpace(settings.DataSource) ||
-                    string.IsNullOrWhiteSpace(settings.PortName) ||
-                    string.IsNullOrWhiteSpace(settings.UserId) ||
-                    string.IsNullOrWhiteSpace(settings.Password);
+                       string.IsNullOrWhiteSpace(settings.PortName) ||
+                       string.IsNullOrWhiteSpace(settings.UserId) ||
+                       string.IsNullOrWhiteSpace(settings.Password);
             }
+        }
+
+        /// <summary>
+        /// HAHAHA just a neat way to use DBcontext? ;) I think? - Jam Villones
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="action"></param>
+        /// <param name="isContextSaving"></param>
+        /// <returns></returns>
+        public static bool UseContext<T>(Action<T> action, bool isContextSaving = true) where T : DbContext, new()
+        {
+            T context = null;
+            bool result = false;
+
+            try
+            {
+                context = new T();
+
+                context.ChangeDatabase();
+
+                action(context);
+
+                if (isContextSaving)
+                    context.SaveChanges();
+
+                result = true;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);               
+            }
+            finally
+            {
+                context?.Dispose();
+            }
+
+            return result;
         }
     }
 }

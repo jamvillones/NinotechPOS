@@ -27,7 +27,7 @@ namespace POS
             UserManager.instance = new UserManager();
 
             /// prompt connection initialization before going to login
-            if (Connections.Tools.ConnectionNotSet)            
+            if (Connections.ContextTools.ConnectionNotSet)            
                 Application.Run(new ConnectionConfigurations());
             
 
