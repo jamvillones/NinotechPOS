@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -435,6 +435,12 @@
     <Compile Include="UserControls\SearchControl.designer.cs">
       <DependentUpon>SearchControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="VisualSellForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VisualSellForm.Designer.cs">
+      <DependentUpon>VisualSellForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Checkout.resx">
       <DependentUpon>Checkout.cs</DependentUpon>
     </EmbeddedResource>
@@ -579,6 +585,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchControl.resx">
       <DependentUpon>SearchControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisualSellForm.resx">
+      <DependentUpon>VisualSellForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

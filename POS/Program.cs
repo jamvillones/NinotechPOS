@@ -19,55 +19,56 @@ namespace POS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            bool backup = false;
-            bool signedOut = false;
+            //ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            UserManager.instance = new UserManager();
+            //bool backup = false;
+            //bool signedOut = false;
 
-            /// prompt connection initialization before going to login
-            if (Connections.ContextTools.ConnectionNotSet)            
-                Application.Run(new ConnectionConfigurations());
+            //UserManager.instance = new UserManager();
+
+            ///// prompt connection initialization before going to login
+            //if (Connections.ContextTools.ConnectionNotSet)            
+            //    Application.Run(new ConnectionConfigurations());
             
 
-            do
-            {
-                signedOut = false;
+            //do
+            //{
+            //    signedOut = false;
 
-                var login = new Forms.LoginForm();
-                Application.Run(login);
+            //    var login = new Forms.LoginForm();
+            //    Application.Run(login);
 
-                if (login.LoginSuccessful)
-                {
-                    login.Dispose();
-                    backup = true;
+            //    if (login.LoginSuccessful)
+            //    {
+            //        login.Dispose();
+            //        backup = true;
 
-                    var main = new Main();
+            //        var main = new Main();
 
-                    Application.Run(main);
+            //        Application.Run(main);
 
-                    signedOut = main.IsSigneout;
-                    main.Dispose();
-                }
-                GC.Collect();
-            }
-            while (signedOut);
+            //        signedOut = main.IsSigneout;
+            //        main.Dispose();
+            //    }
+            //    GC.Collect();
+            //}
+            //while (signedOut);
 
-            if (backup)
-            {
-                try
-                {
-                    using (var p = new POSEntities())
-                        p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
+            //if (backup)
+            //{
+            //    try
+            //    {
+            //        using (var p = new POSEntities())
+            //            p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+            //}
 
-            //Application.Run(new SellItem());
+            Application.Run(new VisualSellForm());
         }
     }
 }

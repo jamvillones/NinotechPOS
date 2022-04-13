@@ -206,12 +206,12 @@ namespace POS
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            bool value = checkBox1.Checked;
+            //bool value = checkBox1.Checked;
 
-            foreach (var i in tableRows)
-            {
-                i.Cells[1].Value = value;
-            }
+            //foreach (var i in tableRows)
+            //{
+            //    i.Cells[1].Value = value;
+            //}
         }
     }
 }
