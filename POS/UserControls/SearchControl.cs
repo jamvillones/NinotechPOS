@@ -48,8 +48,8 @@ namespace POS.UserControls
         public void SetAutoComplete(params string[] values)
         {
             searchText.AutoCompleteCustomSource.Clear();
-            searchText.Values = values;
-            //searchText.AutoCompleteCustomSource.AddRange(values);
+            //searchText.Values = values;
+            searchText.AutoCompleteCustomSource.AddRange(values);
 
         }
         public void DoSearch()
@@ -91,12 +91,18 @@ namespace POS.UserControls
         {
             if (e.KeyCode == Keys.Enter)
                 DoSearch();
-                //searchBtn.PerformClick();
+            //searchBtn.PerformClick();
         }
 
         private void searchText_Enter(object sender, EventArgs e)
         {
             searchText.SelectAll();
+        }
+
+        private void SearchControl_Load(object sender, EventArgs e)
+        {
+            searchText.KeyDown += searchText_KeyDown;
+            searchText.TextChanged += searchText_TextChanged;
         }
     }
 }

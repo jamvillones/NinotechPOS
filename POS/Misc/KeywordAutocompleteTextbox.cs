@@ -9,8 +9,7 @@ namespace test
     {
         private ListBox _listBox;
         private bool _isAdded;
-        private String[] _values;
-        private String _formerValue = String.Empty;
+        private string _formerValue = string.Empty;
 
         public KeywordAutoCompleteTextBox()
         {
@@ -168,9 +167,9 @@ namespace test
             _formerValue = this.Text;
             string word = this.Text;
 
-            if (_values != null && word.Length > 0)
+            if (Values != null && word.Length > 0)
             {
-                string[] matches = Array.FindAll(_values,
+                string[] matches = Array.FindAll(Values,
                                                  x => (x.ToLower().Contains(word.ToLower())));
                 if (matches.Length > 0)
                 {
@@ -210,24 +209,14 @@ namespace test
             }
         }
 
-        public String[] Values
-        {
-            get
-            {
-                return _values;
-            }
-            set
-            {
-                _values = value;
-            }
-        }
+        public string[] Values { get; set; }
 
-        public List<String> SelectedValues
+        public List<string> SelectedValues
         {
             get
             {
-                String[] result = Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                return new List<String>(result);
+                string[] result = Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                return new List<string>(result);
             }
         }
 

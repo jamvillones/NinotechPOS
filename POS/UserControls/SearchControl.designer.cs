@@ -33,7 +33,7 @@ namespace POS.UserControls
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchControl));
             this.searchBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.searchText = new test.KeywordAutoCompleteTextBox();
+            this.searchText = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,19 +65,15 @@ namespace POS.UserControls
             // 
             // searchText
             // 
-            this.searchText.AcceptsReturn = true;
-            this.searchText.BackColor = System.Drawing.Color.White;
+            this.searchText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.searchText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.searchText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchText.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchText.Location = new System.Drawing.Point(5, 3);
             this.searchText.Name = "searchText";
             this.searchText.Size = new System.Drawing.Size(175, 19);
             this.searchText.TabIndex = 0;
-            this.searchText.Values = null;
-            this.searchText.TextChanged += new System.EventHandler(this.searchText_TextChanged);
-            this.searchText.Enter += new System.EventHandler(this.searchText_Enter);
-            this.searchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchText_KeyDown);
             // 
             // SearchControl
             // 
@@ -92,6 +88,7 @@ namespace POS.UserControls
             this.MinimumSize = new System.Drawing.Size(219, 22);
             this.Name = "SearchControl";
             this.Size = new System.Drawing.Size(217, 24);
+            this.Load += new System.EventHandler(this.SearchControl_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -99,9 +96,8 @@ namespace POS.UserControls
         }
 
         #endregion
-
-        private KeywordAutoCompleteTextBox searchText;
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox searchText;
     }
 }

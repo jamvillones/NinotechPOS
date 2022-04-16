@@ -227,7 +227,7 @@
             // 
             this.totalPriceTxt.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.totalPriceTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalPriceTxt.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.totalPriceTxt.ForeColor = System.Drawing.Color.SeaGreen;
             this.totalPriceTxt.Location = new System.Drawing.Point(15, 376);
             this.totalPriceTxt.Name = "totalPriceTxt";
             this.totalPriceTxt.Size = new System.Drawing.Size(555, 25);
