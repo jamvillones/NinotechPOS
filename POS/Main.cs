@@ -253,7 +253,7 @@ namespace POS
             {
                 if (shiftSum.ShowDialog() == DialogResult.OK)
                 {
-
+                   
                 }
             }
         }

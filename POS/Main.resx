@@ -118,6 +118,29 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAARtJREFUSEvt
+        lbFKw1AUhmM6KS106FBnBzsGdCvdHKSj4Noxq6Av4NhXKdStL2Cngs59Axc3waWlmH4nOVtuSC45CCX5
+        4Nv+8//LbRO0NJMkSYYY1/QeQ62sBgdjtGCpldXgwGpYuNbacghbDo+1thwJZzcmeA138cbDGf6ii0hr
+        baF4ij/pRJ5P9HvZVaD0BQ+y4OAdBxq1gcJzXEh7AXPsaNwGCi9xI+0O9hhr1A5Kb/FLFhx840SjdlD6
+        gEUvd4tXGrWBwjN8xT90scKexm2g8AL//RENcC3tDuQn9KxROygN8UMWHMifxVSjtlAcpRN5dviEdx72
+        tbYcws37Oo2yGxOqDwscvGV3tfEelpctj+OxprZfqJYTIQiOxpDP1UhirkAAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAa5JREFUSEu1
+        l71KA0EURhMloJ2NvYUoxkbfIAi2gk8hllZBi4haCKKiIPjTC5Z5AQsbCdpZiIhRgqCdClr5w3ruzIVV
+        3MSd2dkDB5aZe7/LbrKbTcGFKIrKeIA3+KTK8T6OaFk4CC3iCn5iO2RvCYvalh3CliU5JTVtywZBQ/hh
+        ItPxjoPa7g8hGybOjTVt94eQc5vlREPb/SHk3mY50dJ2fwi5s1lONLXdH0IaNsuJU233h5BNm+XEurb7
+        Q8ikzXJiQtv9IaQLmyYuHdcY5ulF0LSJTMeUtoWBwCOb25FDLQ8Hob14ZeKTucQeLQ8LwVUzIpmqloWH
+        8JqdkciqloWDUPk9rmBLJrThEaUm+zeakH5cQJfb6RbnsU9j0kNTN87hG/ryjDOY7gpQKO9VZxiKE+z8
+        YkCBfEYvUh0YOfuKjvkNG8P4KlU5ISc0oONiWNwz2/myo+NiWKzbvVyp67gYWbR7uZI4WF7G82ZRx8Ww
+        WEL5K/IlFYGRzF0s6bi/sDmK2/iAWZGMLSxr/P9QLM/ncZxFuRLHeIHyTP5528mxrMme1Eit9Ixhm6dW
+        ofANJCKD/3Ib3SIAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="repBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAARhJREFUSEvt
