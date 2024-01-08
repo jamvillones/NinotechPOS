@@ -1,218 +1,214 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace POS.Forms
-{
-    public partial class StockinLog : Form
-    {
-        public StockinLog()
-        {
+namespace POS.Forms {
+    public partial class StockinLog : Form {
+        public StockinLog() {
             InitializeComponent();
+
+            //dateTimePicker2.MaxDate = DateTime.Now;
+            dateTimePicker1.MaxDate = DateTime.Now;
         }
 
-        private async void StockinLog_Load(object sender, EventArgs e)
-        {
-            var init = Task.Run(() =>
-            {
-                using (var p = new POSEntities())
-                {
+        //bool InRangeMode => dateTimePicker2.Checked && dateTimePicker1.Value.Date != dateTimePicker2.Value.Date;
+
+        private string keyword = string.Empty;
+        private DateTime From_Date => dateTimePicker1.Value.Date;
+        //private DateTime To_Date {
+        //    get {
+        //        switch (filterMode) {
+        //            case DateFilterMode.Monthly:
+        //                return new DateTime(
+        //                    dateTimePicker2.Value.Year,
+        //                    dateTimePicker2.Value.Month,
+        //                    DateTime.DaysInMonth(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month),
+        //                    23, 59, 59);
+        //            case DateFilterMode.Annually:
+        //                return new DateTime(dateTimePicker2.Value.Year,
+        //                    12,
+        //                    DateTime.DaysInMonth(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month),
+        //                    23, 59, 59);
+        //            default:
+        //                return dateTimePicker2.Value;
+        //        }
+        //    }
+        //}
+
+        public DateFilterMode filterMode = DateFilterMode.Daily;
+
+        private async void StockinLog_Load(object sender, EventArgs e) {
+            var init = Task.Run(() => {
+                using (var p = new POSEntities()) {
                     var namegroup = p.StockinHistories.GroupBy(x => x.ItemName);
                     searchControl1.InvokeIfRequired(() => searchControl1.SetAutoComplete(namegroup.Select(x => x.Key).ToArray()));
                 }
             });
 
-            var tableInit = initTableAsync();
+            var tableInit = LoadDataAsync();
 
             await Task.WhenAll(init, tableInit);
         }
 
-        private async Task initTableAsync()
-        {
-            using (var p = new POSEntities())
-            {
+        private async Task LoadDataAsync() {
+            using (var p = new POSEntities()) {
+                var stockins = await p.StockinHistories
+                    .AsNoTracking()
+                    .FilterByKeyword(keyword)
+                    .FilterByDate(From_Date, filterMode)
+                    .OrderByDescending(s => s.Date)
+                        .ThenBy(s => s.ItemName)
+                    .AsQueryable()
+                    .ToListAsync();
+
                 histTable.InvokeIfRequired(() => histTable.Rows.Clear());
 
-                IEnumerable<StockinHistory> s = p.StockinHistories;
+                var rows = stockins
+                    .Select(CreateRow)
+                    .ToArray();
 
-                if (dateTimePicker1.Checked)
-                    s = s.Where(x => x.Date.Value.Date == dateTimePicker1.Value.Date);
-
-                var rows = await createRowAsync(s);
                 histTable.InvokeIfRequired(() => histTable.Rows.AddRange(rows));
             }
         }
 
-        //private async Task<DataGridViewRow[]> createRow(IEnumerable<StockinHistory> s)
-        //{
-        //    DataGridViewRow[] row = null;
-        //    await Task.Run(() =>
-        //    {
-        //        ro
-        //        //row = s.Select(x => histTable.createRow(
-        //        //    x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
-        //        //    x.LoginUsername,
-        //        //    x.ItemName,
-        //        //    x.SerialNumber,
-        //        //    x.Quantity,
-        //        //    x.Cost,
-        //        //    x.Supplier
-        //        //    )).ToArray();
-        //    });
-        //    return row;
-        //}
+        private DataGridViewRow CreateRow(StockinHistory stockinHistory) {
+            var row = new DataGridViewRow();
 
-        private async Task<DataGridViewRow[]> createRowAsync(IEnumerable<StockinHistory> s)
-        {
-            var rows = new List<DataGridViewRow>();
+            row.CreateCells(histTable,
+                       stockinHistory.Id,
+                       stockinHistory.Date.Value.ToString("MMM d, yyyy hh:mm tt"),
+                       stockinHistory.LoginUsername,
+                       stockinHistory.ItemName,
+                       stockinHistory.SerialNumber,
+                       stockinHistory.Quantity?.ToString("N0"),
+                       string.Format("₱ {0:n}", stockinHistory.Cost),
+                       stockinHistory.Supplier,
+                       "Undo"
+                       );
 
-            await Task.Run(() =>
-            {
-                foreach (var x in s.OrderByDescending(x => x.Date))
-                {
-                    var row = new DataGridViewRow();
-
-                    row.CreateCells(histTable,
-                        x.Id,
-                        x.Date.Value.ToString("MMM d, yyyy hh:mm tt"),
-                        x.LoginUsername,
-                        x.ItemName,
-                        x.SerialNumber,
-                        x.Quantity,
-                        string.Format("₱ {0:n}", x.Cost),
-                        x.Supplier,
-                        "Undo"
-                        );
-
-                    rows.Add(row);
-                }
-            });
-
-            return rows.ToArray();
+            return row;
         }
 
-        private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
-        {
-            using (var p = new POSEntities())
-            {
-                IEnumerable<StockinHistory> s = null;
+        private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e) {
+            keyword = e.Text;
 
-                s = p.StockinHistories.Where(x => x.SerialNumber == e.Text);
+            await LoadDataAsync();
 
-                if (s.Count() == 0)
-                    s = p.StockinHistories.AsEnumerable().Where(x => x.ItemName.Contains(e.Text));
+            e.SearchFound = true;
 
-                if (dateTimePicker1.Checked)
-                    s = s.Where(x => x.Date.Value.Date == dateTimePicker1.Value.Date);
-
-                if (s.Count() == 0)
-                {
-                    MessageBox.Show("No items found.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                e.SearchFound = true;
-
-                histTable.Rows.Clear();
-                var row = await createRowAsync(s);
-                histTable.Rows.AddRange(row);
+            if (histTable.RowCount == 0) {
+                MessageBox.Show("No entries found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
         }
 
-        private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
-        {
-            await initTableAsync();
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+            keyword = string.Empty;
+            await LoadDataAsync();
         }
 
-        private async void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            using (var p = new POSEntities())
-            {
-                var s = p.StockinHistories.AsEnumerable();
-
-                if (dateTimePicker1.Checked)
-                    s = s.Where(x => x.Date.Value.Date == dateTimePicker1.Value.Date);
-
-                histTable.Rows.Clear();
-
-                try
-                {
-                    var row = await createRowAsync(s);
-                    histTable.Rows.AddRange(row);
-                }
-                catch
-                {
-
-                }
-            }
+        private async void datePicker_ValueChanged(object sender, EventArgs e) {
+            await LoadDataAsync();
         }
 
-        //private void histTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    //if (e.ColumnIndex != 8)
-        //    //    return;
+        private async void dateTimePicker2_ValueChanged(object sender, EventArgs e) {
+            await LoadDataAsync();
+        }
 
-        //    //if (MessageBox.Show("Are you sure you want to undo this action?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-        //    //    return;
-
-        //    //var id = (int)histTable[0, e.RowIndex].Value;
-
-        //    //int quantity = (int)histTable[5, e.RowIndex].Value;
-        //    //string serial = histTable[4, e.RowIndex].Value?.ToString();
-
-        //    //using (var p = new POSEntities())
-        //    //{
-        //    //    var stockinHist = p.StockinHistories.FirstOrDefault(x => x.Id == id);
-        //    //    var reference = stockinHist.InventoryItem;
-
-        //    //    if (reference == null)
-        //    //    {
-        //    //        MessageBox.Show("Item is either deleted or soldout", "Cannot undo.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    //        return;
-        //    //    }
-
-        //    //    int remaining = reference.Quantity - quantity;
-        //    //    int qtyToMinus = remaining < 0 ? reference.Quantity : quantity;
-
-        //    //    DecreaseInventory(p, qtyToMinus, reference);
-        //    //    DecreaseStockinHist(p, qtyToMinus, stockinHist);
-        //    //    updateTable(e.RowIndex, qtyToMinus);
-
-        //    //    p.SaveChanges();
-        //    //}
-        //}
-
-        void DecreaseInventory(POSEntities p, int quantity, InventoryItem i)
-        {
+        void DecreaseInventory(POSEntities p, int quantity, InventoryItem i) {
             i.Quantity -= quantity;
             if (i.Quantity <= 0)
                 p.InventoryItems.Remove(i);
         }
 
-        void DecreaseStockinHist(POSEntities p, int quanity, StockinHistory st)
-        {
+        void DecreaseStockinHist(POSEntities p, int quanity, StockinHistory st) {
             st.Quantity -= quanity;
             if (st.Quantity <= 0)
                 p.StockinHistories.Remove(st);
         }
-        void updateTable(int rowIndex, int toMinus)
-        {
+        void updateTable(int rowIndex, int toMinus) {
             var row = histTable.Rows[rowIndex];
             var q = (int)row.Cells[5].Value;
             q -= toMinus;
 
-            if (q <= 0)
-            {
+            if (q <= 0) {
                 histTable.Rows.RemoveAt(rowIndex);
                 return;
             }
 
             row.Cells[5].Value = q;
+        }
+
+        private async void all_CheckedChanged(object sender, EventArgs e) {
+            if (sender is RadioButton rb && rb.Checked) {
+                filterMode = DateFilterMode.All;
+                dateTimePicker1.Visible = false;
+                await LoadDataAsync();
+            }
+        }
+
+        private async void annually_CheckedChanged(object sender, EventArgs e) {
+            if (sender is RadioButton rb && rb.Checked) {
+                filterMode = DateFilterMode.Annually;
+                dateTimePicker1.CustomFormat = "yyyy";
+                dateTimePicker1.Visible = true;
+                await LoadDataAsync();
+            }
+        }
+
+        private async void monthly_CheckedChanged(object sender, EventArgs e) {
+            if (sender is RadioButton rb && rb.Checked) {
+                filterMode = DateFilterMode.Monthly;
+                dateTimePicker1.CustomFormat = "MMM yyyy";
+                dateTimePicker1.Visible = true;
+                await LoadDataAsync();
+            }
+        }
+
+        private async void daily_CheckedChanged(object sender, EventArgs e) {
+            if (sender is RadioButton rb && rb.Checked) {
+                filterMode = DateFilterMode.Daily;
+                dateTimePicker1.CustomFormat = "MMM d, yyyy";
+                dateTimePicker1.Visible = true;
+                await LoadDataAsync();
+            }
+        }
+    }
+    public static class StockinExtension {
+        public static IQueryable<StockinHistory> FilterByDate(
+            this IQueryable<StockinHistory> stockins,
+            DateTime dateSelected,
+            DateFilterMode filterMode) {
+
+            switch (filterMode) {
+                case DateFilterMode.Daily:
+                    return stockins.Where(s => s.Date.Value.Year == dateSelected.Year &&
+                                              s.Date.Value.Month == dateSelected.Month &&
+                                              s.Date.Value.Day == dateSelected.Day);
+                case DateFilterMode.Monthly:
+                    return stockins.Where(s => s.Date.Value.Year == dateSelected.Year &&
+                                             s.Date.Value.Month == dateSelected.Month);
+                case DateFilterMode.Annually:
+                    return stockins.Where(s => s.Date.Value.Year == dateSelected.Year);
+                default:
+                    return stockins;
+
+            }
+        }
+
+        public static IQueryable<StockinHistory> FilterByKeyword(
+            this IQueryable<StockinHistory> stockins,
+            string keyword = "") {
+
+            if (string.IsNullOrWhiteSpace(keyword))
+                return stockins;
+
+            return stockins.Where(s => s.ItemName.Contains(keyword));
         }
     }
 }
