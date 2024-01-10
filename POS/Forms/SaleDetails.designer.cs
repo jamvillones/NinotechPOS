@@ -38,8 +38,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaleDetails));
             this.itemsPanel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.itemsTable = new System.Windows.Forms.DataGridView();
+            this.soldTo = new System.Windows.Forms.TextBox();
+            this.total = new System.Windows.Forms.TextBox();
+            this.amountRecieved = new System.Windows.Forms.TextBox();
+            this.paymentNum = new System.Windows.Forms.NumericUpDown();
+            this.addPaymentButton = new System.Windows.Forms.Button();
+            this.remaining = new System.Windows.Forms.TextBox();
+            this.recHistBtn = new System.Windows.Forms.Button();
+            this.soldBy = new System.Windows.Forms.TextBox();
+            this.voidBtn = new System.Windows.Forms.Button();
+            this.editItemsBtn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.doc = new System.Drawing.Printing.PrintDocument();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serialCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,50 +62,35 @@
             this.actualQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.actualPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.actualDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.soldTo = new System.Windows.Forms.TextBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.Datetext = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.total = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.amountRecieved = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.address = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.contact = new System.Windows.Forms.TextBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.saleType = new System.Windows.Forms.TextBox();
-            this.addPaymentGroup = new System.Windows.Forms.GroupBox();
-            this.paymentNum = new System.Windows.Forms.NumericUpDown();
-            this.addPaymentButton = new System.Windows.Forms.Button();
-            this.remainGroup = new System.Windows.Forms.GroupBox();
-            this.remaining = new System.Windows.Forms.TextBox();
-            this.recHistBtn = new System.Windows.Forms.Button();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.soldBy = new System.Windows.Forms.TextBox();
-            this.voidBtn = new System.Windows.Forms.Button();
-            this.editItemsBtn = new System.Windows.Forms.Button();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.SaleId = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.doc = new System.Drawing.Printing.PrintDocument();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.remainGroup = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.addPaymentGroup = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.itemsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
-            this.groupBox8.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.addPaymentGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).BeginInit();
-            this.remainGroup.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.remainGroup.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.addPaymentGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // itemsPanel
@@ -103,23 +100,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.itemsPanel.BackColor = System.Drawing.Color.White;
             this.itemsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.itemsPanel.Controls.Add(this.label1);
             this.itemsPanel.Controls.Add(this.itemsTable);
-            this.itemsPanel.Location = new System.Drawing.Point(12, 229);
+            this.itemsPanel.Location = new System.Drawing.Point(12, 84);
             this.itemsPanel.Name = "itemsPanel";
-            this.itemsPanel.Size = new System.Drawing.Size(860, 231);
+            this.itemsPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.itemsPanel.Size = new System.Drawing.Size(860, 354);
             this.itemsPanel.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(4, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 14);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Items Sold";
             // 
             // itemsTable
             // 
@@ -128,21 +114,20 @@
             this.itemsTable.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.itemsTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.itemsTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.itemsTable.BackgroundColor = System.Drawing.Color.White;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.itemsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -160,36 +145,209 @@
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle8;
+            this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.DarkGray;
-            this.itemsTable.Location = new System.Drawing.Point(3, 21);
+            this.itemsTable.Location = new System.Drawing.Point(5, 5);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.itemsTable.Size = new System.Drawing.Size(852, 205);
+            this.itemsTable.Size = new System.Drawing.Size(848, 342);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
+            // 
+            // soldTo
+            // 
+            this.soldTo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.soldTo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.soldTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.soldTo.Location = new System.Drawing.Point(0, 13);
+            this.soldTo.Name = "soldTo";
+            this.soldTo.ReadOnly = true;
+            this.soldTo.Size = new System.Drawing.Size(461, 13);
+            this.soldTo.TabIndex = 0;
+            this.soldTo.TabStop = false;
+            this.soldTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // total
+            // 
+            this.total.BackColor = System.Drawing.SystemColors.Control;
+            this.total.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.total.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.total.Location = new System.Drawing.Point(0, 25);
+            this.total.Name = "total";
+            this.total.ReadOnly = true;
+            this.total.Size = new System.Drawing.Size(150, 14);
+            this.total.TabIndex = 0;
+            this.total.TabStop = false;
+            this.total.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // amountRecieved
+            // 
+            this.amountRecieved.BackColor = System.Drawing.SystemColors.Control;
+            this.amountRecieved.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.amountRecieved.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.amountRecieved.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.amountRecieved.Location = new System.Drawing.Point(0, 25);
+            this.amountRecieved.Name = "amountRecieved";
+            this.amountRecieved.ReadOnly = true;
+            this.amountRecieved.Size = new System.Drawing.Size(150, 14);
+            this.amountRecieved.TabIndex = 0;
+            this.amountRecieved.TabStop = false;
+            this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // paymentNum
+            // 
+            this.paymentNum.BackColor = System.Drawing.SystemColors.Control;
+            this.paymentNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.paymentNum.DecimalPlaces = 2;
+            this.paymentNum.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.paymentNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentNum.Location = new System.Drawing.Point(0, 21);
+            this.paymentNum.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.paymentNum.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            this.paymentNum.Name = "paymentNum";
+            this.paymentNum.Size = new System.Drawing.Size(148, 17);
+            this.paymentNum.TabIndex = 2;
+            this.paymentNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.paymentNum.ThousandsSeparator = true;
+            this.paymentNum.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
+            this.paymentNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentNum_KeyDown);
+            // 
+            // addPaymentButton
+            // 
+            this.addPaymentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.addPaymentButton.BackColor = System.Drawing.Color.Transparent;
+            this.addPaymentButton.FlatAppearance.BorderSize = 0;
+            this.addPaymentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addPaymentButton.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addPaymentButton.Location = new System.Drawing.Point(127, 17);
+            this.addPaymentButton.Name = "addPaymentButton";
+            this.addPaymentButton.Size = new System.Drawing.Size(20, 20);
+            this.addPaymentButton.TabIndex = 1;
+            this.addPaymentButton.Text = "+";
+            this.addPaymentButton.UseVisualStyleBackColor = false;
+            this.addPaymentButton.Click += new System.EventHandler(this.addPaymentButton_Click);
+            // 
+            // remaining
+            // 
+            this.remaining.BackColor = System.Drawing.SystemColors.Control;
+            this.remaining.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.remaining.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.remaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remaining.Location = new System.Drawing.Point(0, 25);
+            this.remaining.Name = "remaining";
+            this.remaining.ReadOnly = true;
+            this.remaining.Size = new System.Drawing.Size(150, 14);
+            this.remaining.TabIndex = 0;
+            this.remaining.TabStop = false;
+            this.remaining.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // recHistBtn
+            // 
+            this.recHistBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.recHistBtn.Location = new System.Drawing.Point(479, 13);
+            this.recHistBtn.Name = "recHistBtn";
+            this.recHistBtn.Size = new System.Drawing.Size(150, 35);
+            this.recHistBtn.TabIndex = 16;
+            this.recHistBtn.Text = "Show Payment History";
+            this.recHistBtn.UseVisualStyleBackColor = false;
+            this.recHistBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // soldBy
+            // 
+            this.soldBy.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.soldBy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.soldBy.Location = new System.Drawing.Point(0, 13);
+            this.soldBy.Name = "soldBy";
+            this.soldBy.ReadOnly = true;
+            this.soldBy.Size = new System.Drawing.Size(461, 13);
+            this.soldBy.TabIndex = 0;
+            this.soldBy.TabStop = false;
+            this.soldBy.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // voidBtn
+            // 
+            this.voidBtn.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.voidBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.voidBtn.ForeColor = System.Drawing.Color.Black;
+            this.voidBtn.Location = new System.Drawing.Point(11, 13);
+            this.voidBtn.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.voidBtn.Name = "voidBtn";
+            this.voidBtn.Size = new System.Drawing.Size(150, 35);
+            this.voidBtn.TabIndex = 17;
+            this.voidBtn.Text = "Void Sale";
+            this.voidBtn.UseVisualStyleBackColor = false;
+            this.voidBtn.Click += new System.EventHandler(this.voidBtn_Click);
+            // 
+            // editItemsBtn
+            // 
+            this.editItemsBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.editItemsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.editItemsBtn.Location = new System.Drawing.Point(167, 13);
+            this.editItemsBtn.Name = "editItemsBtn";
+            this.editItemsBtn.Size = new System.Drawing.Size(150, 35);
+            this.editItemsBtn.TabIndex = 17;
+            this.editItemsBtn.Text = "Edit Items";
+            this.editItemsBtn.UseVisualStyleBackColor = false;
+            this.editItemsBtn.Click += new System.EventHandler(this.editItemsBtn_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Location = new System.Drawing.Point(323, 13);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(150, 35);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Print Receipt";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // doc
+            // 
+            this.doc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.doc_BeginPrint);
+            this.doc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.doc_PrintPage);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this.voidBtn);
+            this.flowLayoutPanel1.Controls.Add(this.editItemsBtn);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Controls.Add(this.recHistBtn);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 500);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(11, 10, 0, 10);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(884, 61);
+            this.flowLayoutPanel1.TabIndex = 18;
             // 
             // nameCol
             // 
             this.nameCol.HeaderText = "NAME";
             this.nameCol.Name = "nameCol";
             this.nameCol.ReadOnly = true;
-            this.nameCol.Width = 264;
             // 
             // serialCol
             // 
             this.serialCol.HeaderText = "SERIAL";
             this.serialCol.Name = "serialCol";
             this.serialCol.ReadOnly = true;
-            this.serialCol.Width = 106;
             // 
             // supplierCol
             // 
@@ -206,7 +364,6 @@
             this.qtyCol.HeaderText = "QTY";
             this.qtyCol.Name = "qtyCol";
             this.qtyCol.ReadOnly = true;
-            this.qtyCol.Width = 56;
             // 
             // priceCol
             // 
@@ -215,7 +372,6 @@
             this.priceCol.HeaderText = "PRICE";
             this.priceCol.Name = "priceCol";
             this.priceCol.ReadOnly = true;
-            this.priceCol.Width = 58;
             // 
             // discountCol
             // 
@@ -257,435 +413,256 @@
             this.actualDiscount.ReadOnly = true;
             this.actualDiscount.Visible = false;
             // 
-            // groupBox8
+            // panel1
             // 
-            this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox8.Controls.Add(this.soldTo);
-            this.groupBox8.Location = new System.Drawing.Point(399, 65);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(473, 47);
-            this.groupBox8.TabIndex = 11;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Sold to";
+            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.Controls.Add(this.soldTo);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(461, 30);
+            this.panel1.TabIndex = 19;
             // 
-            // soldTo
+            // panel2
             // 
-            this.soldTo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.soldTo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.soldTo.Location = new System.Drawing.Point(7, 28);
-            this.soldTo.Name = "soldTo";
-            this.soldTo.ReadOnly = true;
-            this.soldTo.Size = new System.Drawing.Size(460, 13);
-            this.soldTo.TabIndex = 0;
-            this.soldTo.TabStop = false;
+            this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 29);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(461, 1);
+            this.panel2.TabIndex = 0;
             // 
-            // groupBox7
+            // label2
             // 
-            this.groupBox7.Controls.Add(this.Datetext);
-            this.groupBox7.Location = new System.Drawing.Point(12, 171);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(381, 47);
-            this.groupBox7.TabIndex = 13;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Date";
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Sold To:";
             // 
-            // Datetext
+            // panel3
             // 
-            this.Datetext.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Datetext.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Datetext.Location = new System.Drawing.Point(10, 23);
-            this.Datetext.Name = "Datetext";
-            this.Datetext.ReadOnly = true;
-            this.Datetext.Size = new System.Drawing.Size(365, 13);
-            this.Datetext.TabIndex = 0;
-            this.Datetext.TabStop = false;
+            this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel3.Controls.Add(this.soldBy);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Location = new System.Drawing.Point(12, 48);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(461, 30);
+            this.panel3.TabIndex = 20;
             // 
-            // groupBox2
+            // label3
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.total);
-            this.groupBox2.Location = new System.Drawing.Point(725, 466);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(146, 47);
-            this.groupBox2.TabIndex = 13;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Grand Total";
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Sold By:";
             // 
-            // total
+            // panel4
             // 
-            this.total.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.total.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.total.Location = new System.Drawing.Point(6, 23);
-            this.total.Name = "total";
-            this.total.ReadOnly = true;
-            this.total.Size = new System.Drawing.Size(134, 13);
-            this.total.TabIndex = 0;
-            this.total.TabStop = false;
-            this.total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.panel4.BackColor = System.Drawing.Color.Black;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 29);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(461, 1);
+            this.panel4.TabIndex = 0;
             // 
-            // groupBox1
+            // flowLayoutPanel2
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.amountRecieved);
-            this.groupBox1.Location = new System.Drawing.Point(573, 466);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(146, 47);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Amount Recieved";
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel2.Controls.Add(this.addPaymentGroup);
+            this.flowLayoutPanel2.Controls.Add(this.panel5);
+            this.flowLayoutPanel2.Controls.Add(this.remainGroup);
+            this.flowLayoutPanel2.Controls.Add(this.panel9);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 444);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(11, 5, 0, 5);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(884, 56);
+            this.flowLayoutPanel2.TabIndex = 3;
             // 
-            // amountRecieved
+            // panel5
             // 
-            this.amountRecieved.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.amountRecieved.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.amountRecieved.Location = new System.Drawing.Point(6, 23);
-            this.amountRecieved.Name = "amountRecieved";
-            this.amountRecieved.ReadOnly = true;
-            this.amountRecieved.Size = new System.Drawing.Size(134, 13);
-            this.amountRecieved.TabIndex = 0;
-            this.amountRecieved.TabStop = false;
-            this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.panel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel5.Controls.Add(this.amountRecieved);
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Controls.Add(this.panel6);
+            this.panel5.Location = new System.Drawing.Point(564, 8);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(150, 40);
+            this.panel5.TabIndex = 21;
             // 
-            // groupBox3
+            // label4
             // 
-            this.groupBox3.Controls.Add(this.address);
-            this.groupBox3.Location = new System.Drawing.Point(12, 118);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(381, 47);
-            this.groupBox3.TabIndex = 12;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Address";
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(95, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Amount Recieved:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // address
+            // panel6
             // 
-            this.address.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.address.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.address.Location = new System.Drawing.Point(7, 28);
-            this.address.Name = "address";
-            this.address.ReadOnly = true;
-            this.address.Size = new System.Drawing.Size(368, 13);
-            this.address.TabIndex = 0;
-            this.address.TabStop = false;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.contact);
-            this.groupBox4.Location = new System.Drawing.Point(399, 118);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(473, 47);
-            this.groupBox4.TabIndex = 13;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Contact Details";
-            // 
-            // contact
-            // 
-            this.contact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.contact.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contact.Location = new System.Drawing.Point(7, 28);
-            this.contact.Name = "contact";
-            this.contact.ReadOnly = true;
-            this.contact.Size = new System.Drawing.Size(460, 13);
-            this.contact.TabIndex = 0;
-            this.contact.TabStop = false;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.saleType);
-            this.groupBox5.Location = new System.Drawing.Point(399, 171);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(473, 47);
-            this.groupBox5.TabIndex = 14;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Sale Type";
-            // 
-            // saleType
-            // 
-            this.saleType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.saleType.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.saleType.Location = new System.Drawing.Point(10, 23);
-            this.saleType.Name = "saleType";
-            this.saleType.ReadOnly = true;
-            this.saleType.Size = new System.Drawing.Size(457, 13);
-            this.saleType.TabIndex = 0;
-            this.saleType.TabStop = false;
-            // 
-            // addPaymentGroup
-            // 
-            this.addPaymentGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addPaymentGroup.Controls.Add(this.paymentNum);
-            this.addPaymentGroup.Controls.Add(this.addPaymentButton);
-            this.addPaymentGroup.Location = new System.Drawing.Point(159, 466);
-            this.addPaymentGroup.Name = "addPaymentGroup";
-            this.addPaymentGroup.Size = new System.Drawing.Size(256, 47);
-            this.addPaymentGroup.TabIndex = 14;
-            this.addPaymentGroup.TabStop = false;
-            this.addPaymentGroup.Text = "Add Payment";
-            // 
-            // paymentNum
-            // 
-            this.paymentNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.paymentNum.DecimalPlaces = 2;
-            this.paymentNum.Location = new System.Drawing.Point(6, 21);
-            this.paymentNum.Maximum = new decimal(new int[] {
-            1410065407,
-            2,
-            0,
-            0});
-            this.paymentNum.Name = "paymentNum";
-            this.paymentNum.Size = new System.Drawing.Size(194, 20);
-            this.paymentNum.TabIndex = 2;
-            this.paymentNum.ThousandsSeparator = true;
-            this.paymentNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentNum_KeyDown);
-            // 
-            // addPaymentButton
-            // 
-            this.addPaymentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addPaymentButton.Location = new System.Drawing.Point(206, 18);
-            this.addPaymentButton.Name = "addPaymentButton";
-            this.addPaymentButton.Size = new System.Drawing.Size(41, 23);
-            this.addPaymentButton.TabIndex = 1;
-            this.addPaymentButton.Text = "Add";
-            this.addPaymentButton.UseVisualStyleBackColor = true;
-            this.addPaymentButton.Click += new System.EventHandler(this.addPaymentButton_Click);
+            this.panel6.BackColor = System.Drawing.Color.Black;
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(0, 39);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(150, 1);
+            this.panel6.TabIndex = 0;
             // 
             // remainGroup
             // 
-            this.remainGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.remainGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.remainGroup.BackColor = System.Drawing.SystemColors.Control;
             this.remainGroup.Controls.Add(this.remaining);
-            this.remainGroup.Location = new System.Drawing.Point(421, 466);
+            this.remainGroup.Controls.Add(this.label5);
+            this.remainGroup.Controls.Add(this.panel8);
+            this.remainGroup.Location = new System.Drawing.Point(408, 8);
             this.remainGroup.Name = "remainGroup";
-            this.remainGroup.Size = new System.Drawing.Size(146, 47);
-            this.remainGroup.TabIndex = 15;
-            this.remainGroup.TabStop = false;
-            this.remainGroup.Text = "Remaining";
+            this.remainGroup.Size = new System.Drawing.Size(150, 40);
+            this.remainGroup.TabIndex = 22;
             // 
-            // remaining
+            // label5
             // 
-            this.remaining.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.remaining.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.remaining.Location = new System.Drawing.Point(6, 23);
-            this.remaining.Name = "remaining";
-            this.remaining.ReadOnly = true;
-            this.remaining.Size = new System.Drawing.Size(134, 13);
-            this.remaining.TabIndex = 0;
-            this.remaining.TabStop = false;
-            this.remaining.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Remaining:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // recHistBtn
+            // panel8
             // 
-            this.recHistBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.recHistBtn.Location = new System.Drawing.Point(463, 6);
-            this.recHistBtn.Name = "recHistBtn";
-            this.recHistBtn.Size = new System.Drawing.Size(146, 23);
-            this.recHistBtn.TabIndex = 16;
-            this.recHistBtn.Text = "Show Payment History";
-            this.recHistBtn.UseVisualStyleBackColor = false;
-            this.recHistBtn.Click += new System.EventHandler(this.button1_Click);
+            this.panel8.BackColor = System.Drawing.Color.Black;
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel8.Location = new System.Drawing.Point(0, 39);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(150, 1);
+            this.panel8.TabIndex = 0;
             // 
-            // groupBox6
+            // panel9
             // 
-            this.groupBox6.Controls.Add(this.soldBy);
-            this.groupBox6.Location = new System.Drawing.Point(13, 65);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(380, 47);
-            this.groupBox6.TabIndex = 12;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Sold by";
+            this.panel9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel9.BackColor = System.Drawing.SystemColors.Control;
+            this.panel9.Controls.Add(this.total);
+            this.panel9.Controls.Add(this.label6);
+            this.panel9.Controls.Add(this.panel10);
+            this.panel9.Location = new System.Drawing.Point(252, 8);
+            this.panel9.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(150, 40);
+            this.panel9.TabIndex = 22;
             // 
-            // soldBy
+            // label6
             // 
-            this.soldBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.soldBy.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.soldBy.Location = new System.Drawing.Point(7, 28);
-            this.soldBy.Name = "soldBy";
-            this.soldBy.ReadOnly = true;
-            this.soldBy.Size = new System.Drawing.Size(367, 13);
-            this.soldBy.TabIndex = 0;
-            this.soldBy.TabStop = false;
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Grand Total:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // voidBtn
+            // panel10
             // 
-            this.voidBtn.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.voidBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.voidBtn.ForeColor = System.Drawing.Color.Black;
-            this.voidBtn.Location = new System.Drawing.Point(6, 6);
-            this.voidBtn.Name = "voidBtn";
-            this.voidBtn.Size = new System.Drawing.Size(147, 23);
-            this.voidBtn.TabIndex = 17;
-            this.voidBtn.Text = "Void Sale";
-            this.voidBtn.UseVisualStyleBackColor = false;
-            this.voidBtn.Click += new System.EventHandler(this.voidBtn_Click);
+            this.panel10.BackColor = System.Drawing.Color.Black;
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel10.Location = new System.Drawing.Point(0, 39);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(150, 1);
+            this.panel10.TabIndex = 0;
             // 
-            // editItemsBtn
+            // addPaymentGroup
             // 
-            this.editItemsBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.editItemsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.editItemsBtn.Location = new System.Drawing.Point(159, 6);
-            this.editItemsBtn.Name = "editItemsBtn";
-            this.editItemsBtn.Size = new System.Drawing.Size(146, 23);
-            this.editItemsBtn.TabIndex = 17;
-            this.editItemsBtn.Text = "Edit Items";
-            this.editItemsBtn.UseVisualStyleBackColor = false;
-            this.editItemsBtn.Click += new System.EventHandler(this.editItemsBtn_Click);
+            this.addPaymentGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.addPaymentGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.addPaymentGroup.Controls.Add(this.addPaymentButton);
+            this.addPaymentGroup.Controls.Add(this.paymentNum);
+            this.addPaymentGroup.Controls.Add(this.label7);
+            this.addPaymentGroup.Location = new System.Drawing.Point(720, 8);
+            this.addPaymentGroup.Name = "addPaymentGroup";
+            this.addPaymentGroup.Size = new System.Drawing.Size(150, 40);
+            this.addPaymentGroup.TabIndex = 22;
             // 
-            // groupBox9
+            // label7
             // 
-            this.groupBox9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox9.Controls.Add(this.SaleId);
-            this.groupBox9.Location = new System.Drawing.Point(13, 12);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(859, 47);
-            this.groupBox9.TabIndex = 19;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Sale Id";
-            // 
-            // SaleId
-            // 
-            this.SaleId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaleId.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.SaleId.Location = new System.Drawing.Point(7, 28);
-            this.SaleId.Name = "SaleId";
-            this.SaleId.ReadOnly = true;
-            this.SaleId.Size = new System.Drawing.Size(846, 13);
-            this.SaleId.TabIndex = 0;
-            this.SaleId.TabStop = false;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(311, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(146, 23);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "Print Receipt";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // doc
-            // 
-            this.doc.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.doc_BeginPrint);
-            this.doc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.doc_PrintPage);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.voidBtn);
-            this.flowLayoutPanel1.Controls.Add(this.editItemsBtn);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.Controls.Add(this.recHistBtn);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 526);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(884, 35);
-            this.flowLayoutPanel1.TabIndex = 18;
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Add Payment:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 561);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.groupBox9);
-            this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.remainGroup);
-            this.Controls.Add(this.addPaymentGroup);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox8);
-            this.Controls.Add(this.groupBox7);
+            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.itemsPanel);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "SaleDetails";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sale Details";
+            this.Text = "Sale";
             this.Load += new System.EventHandler(this.SaleDetails_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleDetails_KeyDown);
             this.itemsPanel.ResumeLayout(false);
-            this.itemsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.addPaymentGroup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.remainGroup.ResumeLayout(false);
             this.remainGroup.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.addPaymentGroup.ResumeLayout(false);
+            this.addPaymentGroup.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel itemsPanel;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView itemsTable;
-        private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.TextBox soldTo;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.TextBox Datetext;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox total;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox amountRecieved;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox address;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox contact;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox saleType;
-        private System.Windows.Forms.GroupBox addPaymentGroup;
         private System.Windows.Forms.Button addPaymentButton;
         private System.Windows.Forms.NumericUpDown paymentNum;
-        private System.Windows.Forms.GroupBox remainGroup;
         private System.Windows.Forms.TextBox remaining;
         private System.Windows.Forms.Button recHistBtn;
-        private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.TextBox soldBy;
         private System.Windows.Forms.Button voidBtn;
         private System.Windows.Forms.Button editItemsBtn;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.TextBox SaleId;
         private System.Windows.Forms.Button button2;
         private System.Drawing.Printing.PrintDocument doc;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -699,5 +676,23 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn actualQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn actualPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn actualDiscount;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel remainGroup;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel addPaymentGroup;
+        private System.Windows.Forms.Label label7;
     }
 }
