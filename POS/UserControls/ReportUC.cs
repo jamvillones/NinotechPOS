@@ -12,18 +12,14 @@ using POS.Forms;
 using POS.Misc;
 using System.Threading;
 
-namespace POS.UserControls
-{
+namespace POS.UserControls {
     public enum SaleStatusFilter { All, Pending, Paid, Count }
-    public partial class ReportUC : UserControl, ITab
-    {
-        public ReportUC()
-        {
+    public partial class ReportUC : UserControl, ITab {
+        public ReportUC() {
             InitializeComponent();
         }
 
-        private void ReportUC_Load(object sender, EventArgs e)
-        {
+        private void ReportUC_Load(object sender, EventArgs e) {
             saleStatus.SelectedIndex = 0;
             comboFilterType.SelectedIndex = 0;
 
@@ -32,16 +28,14 @@ namespace POS.UserControls
             dtFilter.ValueChanged += dtFilter_ValueChanged;
         }
 
-        public void RefreshData()
-        {
+        public void RefreshData() {
 
         }
 
         CancellationTokenSource regularSource = new CancellationTokenSource();
         CancellationTokenSource chargedSource = new CancellationTokenSource();
 
-        public void CancelLoading()
-        {
+        public void CancelLoading() {
             if (regularSource != null)
                 regularSource.Cancel();
 
@@ -49,25 +43,20 @@ namespace POS.UserControls
                 chargedSource.Cancel();
         }
 
-        public Control FirstControl()
-        {
+        public Control FirstControl() {
             return null;
         }
 
-        public Button EnterButton()
-        {
+        public Button EnterButton() {
             return null;
         }
 
-        public async Task InitializeAsync()
-        {
+        public async Task InitializeAsync() {
             var chargedT = setCharegedTable();
             var regT = setRegularTableByDate();
 
-            var setOther = Task.Run(() =>
-            {
-                using (var p = new POSEntities())
-                {
+            var setOther = Task.Run(() => {
+                using (var p = new POSEntities()) {
                     IEnumerable<Sale> charged = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString());
                     decimal total = charged.Select(x => x.Remaining).DefaultIfEmpty(0).Sum();
 
@@ -78,50 +67,43 @@ namespace POS.UserControls
             await Task.WhenAll(chargedT, regT, setOther);
         }
 
-        private void DefButton_Click(object sender, EventArgs e)
-        {
+        private void DefButton_Click(object sender, EventArgs e) {
 
         }
 
-        private void saleTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
+        private void saleTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.RowIndex == -1)
                 return;
             var table = (DataGridView)sender;
             int index = (int)(table.SelectedCells[0].Value);
 
             using (var context = new POSEntities())
-                if (!context.Sales.Any(x => x.Id == index))
-                {
+                if (!context.Sales.Any(x => x.Id == index)) {
                     MessageBox.Show("Sale removed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     table.Rows.RemoveAt(e.RowIndex);
                     return;
                 }
 
-            using (var saleDetails = new SaleDetails())
-            {
+            using (var saleDetails = new SaleDetails()) {
                 saleDetails.SetId(index);
                 saleDetails.OnSave += SaleDetails_OnSave;
                 saleDetails.ShowDialog();
             }
         }
 
-        private async void SaleDetails_OnSave(object sender, EventArgs e)
-        {
+        private async void SaleDetails_OnSave(object sender, EventArgs e) {
             await setCharegedTable();
         }
 
         POSEntities posEnt => new POSEntities();
 
-        private async Task setRegularTableByDate()
-        {
+        private async Task setRegularTableByDate() {
             Console.WriteLine("started: Regular");
 
             if (regularSource == null)
                 regularSource = new CancellationTokenSource();
 
-            using (var p = posEnt)
-            {
+            using (var p = posEnt) {
                 string type = SaleType.Regular.ToString();
 
                 IQueryable<Sale> filteredSales = p.Sales.Where(x => x.SaleType == type);
@@ -130,8 +112,7 @@ namespace POS.UserControls
 
                 comboFilterType.InvokeIfRequired(() => { index = comboFilterType.SelectedIndex; });
 
-                switch (index)
-                {
+                switch (index) {
                     case 0:
                         filteredSales = filteredSales.Where(x => x.Date.Value.Year == dtFilter.Value.Year && x.Date.Value.Month == dtFilter.Value.Month && x.Date.Value.Day == dtFilter.Value.Day);
                         break;
@@ -143,8 +124,7 @@ namespace POS.UserControls
                         break;
                 }
 
-                try
-                {
+                try {
                     saleTable.InvokeIfRequired(() => { saleTable.Rows.Clear(); });
                     var rows = await createRegularRow(filteredSales);
 
@@ -153,28 +133,23 @@ namespace POS.UserControls
 
                     Console.WriteLine("finished: Regular");
                 }
-                catch
-                {
+                catch {
                     regularSource.Dispose();
                     regularSource = null;
                 }
             }
         }
-        private async Task<DataGridViewRow[]> createRegularRow(IEnumerable<Sale> sales)
-        {
+        private async Task<DataGridViewRow[]> createRegularRow(IEnumerable<Sale> sales) {
             var rows = new List<DataGridViewRow>();
 
-            await Task.Run(() =>
-            {
-                try
-                {
-                    foreach (var i in sales)
-                    {
+            await Task.Run(() => {
+                try {
+                    foreach (var i in sales) {
                         DataGridViewRow row = new DataGridViewRow();
                         row.CreateCells(saleTable);
                         row.Cells[0].Value = i.Id;
                         row.Cells[1].Value = i.Date.Value.ToString("MMM d, yyyy hh:mm: tt");
-                        row.Cells[2].Value = i.Login?.Name??"not set";
+                        row.Cells[2].Value = i.Login?.Name ?? "not set";
                         row.Cells[3].Value = i.Customer.Name;
                         row.Cells[4].Value = string.Format("₱ {0:n}", i.Total);
 
@@ -191,15 +166,13 @@ namespace POS.UserControls
             return rows.ToArray();
         }
 
-        private async Task setCharegedTable()
-        {
+        private async Task setCharegedTable() {
             Console.WriteLine("started: Charged");
 
             if (chargedSource == null)
                 chargedSource = new CancellationTokenSource();
 
-            using (var p = posEnt)
-            {
+            using (var p = posEnt) {
                 chargedTable.InvokeIfRequired(() => { chargedTable.Rows.Clear(); });
 
                 IEnumerable<Sale> sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
@@ -207,8 +180,7 @@ namespace POS.UserControls
                 int status = 0;
 
                 saleStatus.InvokeIfRequired(() => status = saleStatus.SelectedIndex);
-                switch (status)
-                {
+                switch (status) {
                     case 0:
                         break;
                     case 1:
@@ -221,31 +193,25 @@ namespace POS.UserControls
                         break;
                 }
 
-                try
-                {
+                try {
                     var rows = await createChargedRow(sales);
 
                     chargedTable.InvokeIfRequired(() => { chargedTable.Rows.AddRange(rows); });
 
                     Console.WriteLine("finished: Charged");
                 }
-                catch
-                {
+                catch {
                     chargedSource.Dispose();
                     chargedSource = null;
                 }
             }
         }
 
-        private async Task<DataGridViewRow[]> createChargedRow(IEnumerable<Sale> sale)
-        {
+        private async Task<DataGridViewRow[]> createChargedRow(IEnumerable<Sale> sale) {
             var rows = new List<DataGridViewRow>();
-            await Task.Run(() =>
-            {
-                try
-                {
-                    foreach (var i in sale)
-                    {
+            await Task.Run(() => {
+                try {
+                    foreach (var i in sale) {
                         var row = new DataGridViewRow();
 
                         if (!i.FullyPaid && i.AmountRecieved == 0)
@@ -261,7 +227,7 @@ namespace POS.UserControls
                             string.Format("₱ {0:n}", i.Total),
                             string.Format("₱ {0:n}", i.AmountRecieved),
                             string.Format("₱ {0:n}", i.Remaining),
-                            i.Login?.Name??"not set",
+                            i.Login?.Name ?? "not set",
                             i.FullyPaid
                         );
 
@@ -295,12 +261,10 @@ namespace POS.UserControls
         //    return totalPrice - recieved;
         //}
 
-        private async Task searchChargeByName()
-        {
+        private async Task searchChargeByName() {
             chargedTable.Rows.Clear();
 
-            using (var p = new POSEntities())
-            {
+            using (var p = new POSEntities()) {
                 IEnumerable<Sale> sales = p.Sales;
 
                 filterCharged(p, ref sales);
@@ -313,8 +277,7 @@ namespace POS.UserControls
         }
         bool searchMade { get; set; } = false;
 
-        private async void chargedSearchBtn_Click(object sender, EventArgs e)
-        {
+        private async void chargedSearchBtn_Click(object sender, EventArgs e) {
             //var button = sender as Button;
             if (chargedSaleSearch.Text == string.Empty || string.IsNullOrWhiteSpace(chargedSaleSearch.Text))
                 return;
@@ -323,58 +286,46 @@ namespace POS.UserControls
 
             await searchChargeByName();
         }
-        private void chargedSaleSearch_TextChanged(object sender, EventArgs e)
-        {
-            if (chargedSaleSearch.Text == string.Empty && searchMade)
-            {
+        private void chargedSaleSearch_TextChanged(object sender, EventArgs e) {
+            if (chargedSaleSearch.Text == string.Empty && searchMade) {
                 //using (var p = new POSEntities())
                 searchMade = false;
                 var s = setCharegedTable();
             }
         }
-        private void chargedSaleSearch_KeyDown(object sender, KeyEventArgs e)
-        {
+        private void chargedSaleSearch_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.Enter)
                 chargedSearchBtn.PerformClick();
         }
-        private void month_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
+        private void month_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
                 //using (var p = new POSEntities())
                 var s = setRegularTableByDate();
             }
         }
 
-        public void Refresh_Callback(object sender, EventArgs e)
-        {
+        public void Refresh_Callback(object sender, EventArgs e) {
 
         }
 
-        void filterCharged(POSEntities p, ref IEnumerable<Sale> sales)
-        {
+        void filterCharged(POSEntities p, ref IEnumerable<Sale> sales) {
             sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
 
-            if (chargedSaleSearch.Text != string.Empty)
-            {
+            if (chargedSaleSearch.Text != string.Empty) {
                 var t = chargedSaleSearch.Text.Trim().ToLower();
                 sales = sales.Where(x => x.Customer.Name.ToLower().Contains(t));
             }
-            if (saleStatus.Text == "Pending")
-            {
+            if (saleStatus.Text == "Pending") {
                 sales = sales.Where(x => x.Remaining > 0);
             }
-            else if (saleStatus.Text == "Paid")
-            {
+            else if (saleStatus.Text == "Paid") {
                 sales = sales.Where(x => x.Remaining <= 0);
             }
         }
-        private async void saleStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private async void saleStatus_SelectedIndexChanged(object sender, EventArgs e) {
             chargedTable.Rows.Clear();
 
-            using (var p = new POSEntities())
-            {
+            using (var p = new POSEntities()) {
                 IEnumerable<Sale> sales = p.Sales;
 
                 filterCharged(p, ref sales);
@@ -385,11 +336,9 @@ namespace POS.UserControls
             }
         }
 
-        private void comboFilterType_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void comboFilterType_SelectedIndexChanged(object sender, EventArgs e) {
             int index = ((ComboBox)sender).SelectedIndex;
-            switch (index)
-            {
+            switch (index) {
                 case 0:
                     dtFilter.CustomFormat = "MMMM d, yyyy";
                     break;
@@ -404,25 +353,29 @@ namespace POS.UserControls
             var s = setRegularTableByDate();
         }
 
-        private void dtFilter_ValueChanged(object sender, EventArgs e)
-        {
+        private void dtFilter_ValueChanged(object sender, EventArgs e) {
             var s = setRegularTableByDate();
         }
 
-        private void saleTable_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F5)
-            {
+        private void saleTable_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.F5) {
                 var s = setRegularTableByDate();
             }
         }
 
-        private void chargedTable_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F5)
-            {
+        private void chargedTable_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.F5) {
                 var s = setCharegedTable();
             }
+        }
+
+        private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
+            e.SearchFound = true;
+            await searchChargeByName();
+        }
+
+        private void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+
         }
     }
 }
