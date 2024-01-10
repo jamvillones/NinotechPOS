@@ -39,7 +39,7 @@ namespace POS.UserControls
             // 
             // searchBtn
             // 
-            this.searchBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.searchBtn.BackColor = System.Drawing.Color.Transparent;
             this.searchBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.searchBtn.FlatAppearance.BorderSize = 0;
             this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

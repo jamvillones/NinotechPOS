@@ -29,10 +29,14 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierForm));
             this.supplierTable = new System.Windows.Forms.DataGridView();
             this.addSuppBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.searchControl1 = new POS.UserControls.SearchControl();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -46,7 +50,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.searchControl1 = new POS.UserControls.SearchControl();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.supplierTable)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -59,31 +63,42 @@
             this.supplierTable.AllowUserToAddRows = false;
             this.supplierTable.AllowUserToDeleteRows = false;
             this.supplierTable.AllowUserToResizeRows = false;
-            this.supplierTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            this.supplierTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.supplierTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.supplierTable.BackgroundColor = System.Drawing.Color.White;
-            this.supplierTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.supplierTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.supplierTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.supplierTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.supplierTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.supplierTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
             this.Column1,
             this.Column2,
             this.Column4});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.supplierTable.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.supplierTable.DefaultCellStyle = dataGridViewCellStyle4;
+            this.supplierTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.supplierTable.EnableHeadersVisualStyles = false;
-            this.supplierTable.Location = new System.Drawing.Point(6, 53);
+            this.supplierTable.Location = new System.Drawing.Point(5, 56);
             this.supplierTable.MultiSelect = false;
             this.supplierTable.Name = "supplierTable";
             this.supplierTable.RowHeadersVisible = false;
-            this.supplierTable.Size = new System.Drawing.Size(649, 537);
+            this.supplierTable.Size = new System.Drawing.Size(650, 533);
             this.supplierTable.StandardTab = true;
             this.supplierTable.TabIndex = 1;
             this.supplierTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.supplierTable_CellBeginEdit);
@@ -92,12 +107,12 @@
             // 
             // addSuppBtn
             // 
-            this.addSuppBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.addSuppBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addSuppBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.addSuppBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addSuppBtn.Location = new System.Drawing.Point(230, 104);
+            this.addSuppBtn.Location = new System.Drawing.Point(6, 101);
             this.addSuppBtn.Name = "addSuppBtn";
-            this.addSuppBtn.Size = new System.Drawing.Size(200, 23);
+            this.addSuppBtn.Size = new System.Drawing.Size(200, 30);
             this.addSuppBtn.TabIndex = 2;
             this.addSuppBtn.Text = "ADD SUPPLIER";
             this.addSuppBtn.UseVisualStyleBackColor = false;
@@ -108,14 +123,32 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.searchControl1);
             this.groupBox3.Controls.Add(this.supplierTable);
-            this.groupBox3.Location = new System.Drawing.Point(12, 153);
+            this.groupBox3.Controls.Add(this.panel1);
+            this.groupBox3.Controls.Add(this.searchControl1);
+            this.groupBox3.Location = new System.Drawing.Point(12, 155);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(660, 596);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(5);
+            this.groupBox3.Size = new System.Drawing.Size(660, 594);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Supplier List";
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl1.BackColor = System.Drawing.Color.White;
+            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchControl1.Location = new System.Drawing.Point(5, 18);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(350, 28);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(2, 28);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.SearchedText = "";
+            this.searchControl1.Size = new System.Drawing.Size(350, 28);
+            this.searchControl1.TabIndex = 0;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // groupBox4
             // 
@@ -126,7 +159,7 @@
             this.groupBox4.Controls.Add(this.addSuppBtn);
             this.groupBox4.Location = new System.Drawing.Point(12, 12);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(660, 135);
+            this.groupBox4.Size = new System.Drawing.Size(660, 137);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Add New Supplier";
@@ -221,21 +254,23 @@
             // 
             // Column3
             // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column3.HeaderText = "Id";
             this.Column3.Name = "Column3";
             this.Column3.Visible = false;
+            this.Column3.Width = 22;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "Supplier Name";
             this.Column1.Name = "Column1";
             this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Column1.Width = 542;
             // 
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.FillWeight = 200F;
             this.Column2.HeaderText = "Contact Details";
             this.Column2.MinimumWidth = 100;
             this.Column2.Name = "Column2";
@@ -248,20 +283,13 @@
             this.Column4.Name = "Column4";
             this.Column4.Width = 5;
             // 
-            // searchControl1
+            // panel1
             // 
-            this.searchControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl1.BackColor = System.Drawing.Color.White;
-            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl1.Location = new System.Drawing.Point(6, 19);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(2, 28);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(270, 28);
-            this.searchControl1.TabIndex = 0;
-            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(5, 46);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(650, 10);
+            this.panel1.TabIndex = 2;
             // 
             // SupplierForm
             // 
@@ -309,5 +337,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewButtonColumn Column4;
+        private System.Windows.Forms.Panel panel1;
     }
 }

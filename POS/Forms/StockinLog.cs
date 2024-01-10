@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,35 +13,28 @@ namespace POS.Forms {
         public StockinLog() {
             InitializeComponent();
 
-            //dateTimePicker2.MaxDate = DateTime.Now;
-            dateTimePicker1.MaxDate = DateTime.Now;
+            regular_Dt.MaxDate = DateTime.Now;
+            range_from_Dt.MaxDate = DateTime.Now;
+            range_to_Dt.MaxDate = DateTime.Now;
         }
 
-        //bool InRangeMode => dateTimePicker2.Checked && dateTimePicker1.Value.Date != dateTimePicker2.Value.Date;
+        bool InRangeMode => radioButton5.Checked;
 
         private string keyword = string.Empty;
-        private DateTime From_Date => dateTimePicker1.Value.Date;
-        //private DateTime To_Date {
-        //    get {
-        //        switch (filterMode) {
-        //            case DateFilterMode.Monthly:
-        //                return new DateTime(
-        //                    dateTimePicker2.Value.Year,
-        //                    dateTimePicker2.Value.Month,
-        //                    DateTime.DaysInMonth(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month),
-        //                    23, 59, 59);
-        //            case DateFilterMode.Annually:
-        //                return new DateTime(dateTimePicker2.Value.Year,
-        //                    12,
-        //                    DateTime.DaysInMonth(dateTimePicker2.Value.Year, dateTimePicker2.Value.Month),
-        //                    23, 59, 59);
-        //            default:
-        //                return dateTimePicker2.Value;
-        //        }
-        //    }
-        //}
+        private DateTime Date => regular_Dt.Value.Date;
+
+        private DateTime From_Date => range_from_Dt.Value.Date;
+
+        private DateTime To_Date => new DateTime(
+                            range_to_Dt.Value.Year,
+                            range_to_Dt.Value.Month,
+                            range_to_Dt.Value.Day,
+                            23, 59, 59);
+
 
         public DateFilterMode filterMode = DateFilterMode.Daily;
+
+        private CancellationTokenSource CancelSource = null;
 
         private async void StockinLog_Load(object sender, EventArgs e) {
             var init = Task.Run(() => {
@@ -55,24 +49,57 @@ namespace POS.Forms {
             await Task.WhenAll(init, tableInit);
         }
 
+        bool TryCancelCurrentOperation() {
+            try {
+                CancelSource?.Cancel();
+                return true;
+            }
+            catch (ObjectDisposedException) {
+
+                return false;
+            }
+
+        }
+
         private async Task LoadDataAsync() {
-            using (var p = new POSEntities()) {
-                var stockins = await p.StockinHistories
-                    .AsNoTracking()
-                    .FilterByKeyword(keyword)
-                    .FilterByDate(From_Date, filterMode)
-                    .OrderByDescending(s => s.Date)
-                        .ThenBy(s => s.ItemName)
-                    .AsQueryable()
-                    .ToListAsync();
 
-                histTable.InvokeIfRequired(() => histTable.Rows.Clear());
+            TryCancelCurrentOperation();
 
-                var rows = stockins
-                    .Select(CreateRow)
-                    .ToArray();
+            CancelSource = new CancellationTokenSource();
+            var token = CancelSource.Token;
 
-                histTable.InvokeIfRequired(() => histTable.Rows.AddRange(rows));
+            try {
+
+                using (var p = new POSEntities()) {
+                    var stockins = p.StockinHistories
+                        .AsNoTracking()
+                        .FilterByKeyword(keyword)
+                        .AsQueryable();
+
+                    stockins = (InRangeMode ? stockins.FilterByDateRange(From_Date, To_Date) :
+                                              stockins.FilterByDate(Date, filterMode))
+                        .OrderByDescending(x => x.Date)
+                            .ThenBy(s => s.ItemName);
+
+                    var finalResult = await stockins.ToListAsync();
+
+                    histTable.InvokeIfRequired(() => histTable.Rows.Clear());
+
+                    var rows = finalResult
+                        .Select(CreateRow)
+                        .ToArray();
+
+                    token.ThrowIfCancellationRequested();
+
+                    histTable.InvokeIfRequired(() => histTable.Rows.AddRange(rows));
+                    _totalCost.Text = string.Format("₱ {0:n}", finalResult.Select(x => x.Cost * x.Quantity).Sum());
+                }
+            }
+            catch (OperationCanceledException) {
+
+            }
+            finally {
+                CancelSource.Dispose();
             }
         }
 
@@ -116,38 +143,12 @@ namespace POS.Forms {
             await LoadDataAsync();
         }
 
-        private async void dateTimePicker2_ValueChanged(object sender, EventArgs e) {
-            await LoadDataAsync();
-        }
-
-        void DecreaseInventory(POSEntities p, int quantity, InventoryItem i) {
-            i.Quantity -= quantity;
-            if (i.Quantity <= 0)
-                p.InventoryItems.Remove(i);
-        }
-
-        void DecreaseStockinHist(POSEntities p, int quanity, StockinHistory st) {
-            st.Quantity -= quanity;
-            if (st.Quantity <= 0)
-                p.StockinHistories.Remove(st);
-        }
-        void updateTable(int rowIndex, int toMinus) {
-            var row = histTable.Rows[rowIndex];
-            var q = (int)row.Cells[5].Value;
-            q -= toMinus;
-
-            if (q <= 0) {
-                histTable.Rows.RemoveAt(rowIndex);
-                return;
-            }
-
-            row.Cells[5].Value = q;
-        }
-
         private async void all_CheckedChanged(object sender, EventArgs e) {
             if (sender is RadioButton rb && rb.Checked) {
+
                 filterMode = DateFilterMode.All;
-                dateTimePicker1.Visible = false;
+                regular_Dt.Visible = false;
+
                 await LoadDataAsync();
             }
         }
@@ -155,8 +156,9 @@ namespace POS.Forms {
         private async void annually_CheckedChanged(object sender, EventArgs e) {
             if (sender is RadioButton rb && rb.Checked) {
                 filterMode = DateFilterMode.Annually;
-                dateTimePicker1.CustomFormat = "yyyy";
-                dateTimePicker1.Visible = true;
+                regular_Dt.CustomFormat = "yyyy";
+                regular_Dt.Visible = true;
+
                 await LoadDataAsync();
             }
         }
@@ -164,8 +166,9 @@ namespace POS.Forms {
         private async void monthly_CheckedChanged(object sender, EventArgs e) {
             if (sender is RadioButton rb && rb.Checked) {
                 filterMode = DateFilterMode.Monthly;
-                dateTimePicker1.CustomFormat = "MMM yyyy";
-                dateTimePicker1.Visible = true;
+                regular_Dt.CustomFormat = "MMM yyyy";
+                regular_Dt.Visible = true;
+
                 await LoadDataAsync();
             }
         }
@@ -173,10 +176,88 @@ namespace POS.Forms {
         private async void daily_CheckedChanged(object sender, EventArgs e) {
             if (sender is RadioButton rb && rb.Checked) {
                 filterMode = DateFilterMode.Daily;
-                dateTimePicker1.CustomFormat = "MMM d, yyyy";
-                dateTimePicker1.Visible = true;
+                regular_Dt.CustomFormat = "MMM d, yyyy";
+                regular_Dt.Visible = true;
+
                 await LoadDataAsync();
             }
+        }
+
+        private async void dateRange_CheckedChanged(object sender, EventArgs e) {
+            if (sender is RadioButton rb) {
+                if (rb.Checked) {
+                    regular_Dt.Visible = false;
+                    dateRangeHolder.Visible = true;
+
+                    await LoadDataAsync();
+                }
+                else
+                    dateRangeHolder.Visible = false;
+
+            }
+        }
+
+        bool preventFrom = false;
+        private async void range_to_Dt_ValueChanged(object sender, EventArgs e) {
+            ///this makes sure that the from event doesnt trigger a load
+            preventFrom = true;
+            range_from_Dt.MaxDate = range_to_Dt.Value.Date;
+            preventFrom = false;
+
+            await LoadDataAsync();
+        }
+
+        private async void range_from_Dt_ValueChanged(object sender, EventArgs e) {
+            if (preventFrom)
+                return;
+
+            await LoadDataAsync();
+        }
+
+        private async void histTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.RowIndex == -1 || e.ColumnIndex != col_removeBtn.Index) return;
+
+            var login = UserManager.instance.currentLogin;
+
+            if (!login.CanEditInventory) {
+                MessageBox.Show("You do not have permission to undo stockin.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to undo this stockin?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
+
+            var id = histTable.GetSelectedId();
+
+            using (var context = new POSEntities()) {
+                var stockin = await context.StockinHistories.FirstOrDefaultAsync(x => x.Id == id);
+
+                ///with serial
+                if (!string.IsNullOrWhiteSpace(stockin.SerialNumber)) {
+                    var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.SerialNumber == stockin.SerialNumber);
+                    if (invItem != null) {
+                        context.InventoryItems.Remove(invItem);
+                    }
+                    else {
+                        MessageBox.Show("This stockin cannot be undone!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                    }
+                }
+                else {
+                    var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.ProductId == stockin.ProductId);
+                    if (invItem != null) {
+                        invItem.Quantity -= (int)stockin.Quantity;
+                    }
+                    else {
+                        MessageBox.Show("This stockin cannot be undone!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                    }
+                }
+
+                context.StockinHistories.Remove(stockin);
+                await context.SaveChangesAsync();
+            }
+
+            MessageBox.Show("Stockin successfully undone.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            histTable.Rows.RemoveAt(histTable.DataGridViewCurrentRowIndex());
         }
     }
     public static class StockinExtension {
@@ -200,6 +281,12 @@ namespace POS.Forms {
 
             }
         }
+
+        public static IQueryable<StockinHistory> FilterByDateRange(
+           this IQueryable<StockinHistory> stockins,
+           DateTime from,
+           DateTime to) => stockins.Where(s => s.Date >= from && s.Date <= to);
+
 
         public static IQueryable<StockinHistory> FilterByKeyword(
             this IQueryable<StockinHistory> stockins,

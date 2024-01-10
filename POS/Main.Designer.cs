@@ -59,11 +59,11 @@
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tabHoldersPanel = new System.Windows.Forms.Panel();
-            this.inventoryTab = new POS.UserControls.InventoryUC();
-            this.reportTab = new POS.UserControls.ReportUC();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.inventoryTab = new POS.UserControls.InventoryUC();
+            this.reportTab = new POS.UserControls.ReportUC();
             this.sideButtonsPanel.SuspendLayout();
             this.topMostPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -451,24 +451,6 @@
             this.tabHoldersPanel.Size = new System.Drawing.Size(1058, 589);
             this.tabHoldersPanel.TabIndex = 3;
             // 
-            // inventoryTab
-            // 
-            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
-            this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
-            this.inventoryTab.Size = new System.Drawing.Size(1058, 589);
-            this.inventoryTab.TabIndex = 2;
-            // 
-            // reportTab
-            // 
-            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportTab.Location = new System.Drawing.Point(0, 0);
-            this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(1058, 589);
-            this.reportTab.TabIndex = 1;
-            this.reportTab.TabStop = false;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -491,6 +473,24 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.textBox1.Size = new System.Drawing.Size(64, 68);
             this.textBox1.TabIndex = 1;
+            // 
+            // inventoryTab
+            // 
+            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inventoryTab.Location = new System.Drawing.Point(0, 0);
+            this.inventoryTab.Name = "inventoryTab";
+            this.inventoryTab.Padding = new System.Windows.Forms.Padding(15);
+            this.inventoryTab.Size = new System.Drawing.Size(1058, 589);
+            this.inventoryTab.TabIndex = 2;
+            // 
+            // reportTab
+            // 
+            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportTab.Location = new System.Drawing.Point(0, 0);
+            this.reportTab.Name = "reportTab";
+            this.reportTab.Size = new System.Drawing.Size(1058, 589);
+            this.reportTab.TabIndex = 1;
+            this.reportTab.TabStop = false;
             // 
             // Main
             // 
