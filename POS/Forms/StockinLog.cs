@@ -214,6 +214,13 @@ namespace POS.Forms {
             await LoadDataAsync();
         }
 
+        void ShowStockinFailedMessage() {
+            MessageBox.Show("The amount of stock-in you are trying to revoke exceeds the current stock quantity. Please make sure to undo the correct stockin entry.",
+                            "Stockin Correction Terminated.",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+        }
+
         private async void histTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.RowIndex == -1 || e.ColumnIndex != col_removeBtn.Index) return;
 
@@ -238,22 +245,21 @@ namespace POS.Forms {
                         context.InventoryItems.Remove(invItem);
                     }
                     else {
-                        MessageBox.Show("This stockin cannot be undone!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                        ShowStockinFailedMessage();
+                        return;
                     }
                 }
                 else {
                     var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.ProductId == stockin.ProductId);
+
                     if (invItem != null || invItem.Quantity >= stockin.Quantity) {
                         invItem.Quantity -= (int)stockin.Quantity;
                         if (invItem.Quantity <= 0)
                             context.InventoryItems.Remove(invItem);
                     }
                     else {
-                        MessageBox.Show(
-                            "The amount of stock-in you are trying to revoke exceeds the current stock quantity. Please make sure to undo the correct stockin entry.",
-                            "Stockin Correction Terminated.",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning); return;
+                        ShowStockinFailedMessage();
+                        return;
                     }
                 }
 
