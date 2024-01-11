@@ -37,16 +37,16 @@ namespace POS.Forms {
         private CancellationTokenSource CancelSource = null;
 
         private async void StockinLog_Load(object sender, EventArgs e) {
-            var init = Task.Run(() => {
-                using (var p = new POSEntities()) {
-                    var namegroup = p.StockinHistories.GroupBy(x => x.ItemName);
-                    searchControl1.InvokeIfRequired(() => searchControl1.SetAutoComplete(namegroup.Select(x => x.Key).ToArray()));
-                }
-            });
+            //var init = Task.Run(() => {
+            //    using (var p = new POSEntities()) {
+            //        var namegroup = p.StockinHistories.GroupBy(x => x.ItemName);
+            //        searchControl1.InvokeIfRequired(() => searchControl1.SetAutoComplete(namegroup.Select(x => x.Key).ToArray()));
+            //    }
+            //});
 
-            var tableInit = LoadDataAsync();
+            await LoadDataAsync();
 
-            await Task.WhenAll(init, tableInit);
+            //await Task.WhenAll(init, tableInit);
         }
 
         bool TryCancelCurrentOperation() {
@@ -307,7 +307,7 @@ namespace POS.Forms {
             if (string.IsNullOrWhiteSpace(keyword))
                 return stockins;
 
-            return stockins.Where(s => s.ItemName.Contains(keyword));
+            return stockins.Where(s => s.ItemName.Contains(keyword) || s.SerialNumber == keyword);
         }
     }
 }

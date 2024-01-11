@@ -154,6 +154,9 @@ namespace POS.Forms {
         }
 
         private void editItemsBtn_Click(object sender, EventArgs e) {
+
+            this.Close();
+
             using (var editsolditems = new EditSale(sale.Id)) {
                 editsolditems.ShowDialog();
             }
@@ -192,7 +195,7 @@ namespace POS.Forms {
             details.ControlNumber = sale.Id.ToString();
             details.CustomerName = soldTo.Text;
             details.TransactBy = UserManager.instance.currentLogin.Name ?? "User";
-            details.Tendered = sale.AmountRecieved.Value;
+            details.Tendered = sale.AmountRecieved;
 
             for (int i = 0; i < itemsTable.RowCount; i++)
 

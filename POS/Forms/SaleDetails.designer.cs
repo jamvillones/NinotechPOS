@@ -39,6 +39,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaleDetails));
             this.itemsPanel = new System.Windows.Forms.Panel();
             this.itemsTable = new System.Windows.Forms.DataGridView();
+            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serialCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.supplierCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actualQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actualPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actualDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.soldTo = new System.Windows.Forms.TextBox();
             this.total = new System.Windows.Forms.TextBox();
             this.amountRecieved = new System.Windows.Forms.TextBox();
@@ -52,23 +62,15 @@
             this.button2 = new System.Windows.Forms.Button();
             this.doc = new System.Drawing.Printing.PrintDocument();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.serialCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.supplierCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actualQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actualPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actualDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.addPaymentGroup = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -78,8 +80,6 @@
             this.panel9 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.addPaymentGroup = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
             this.itemsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).BeginInit();
@@ -87,10 +87,10 @@
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.addPaymentGroup.SuspendLayout();
             this.panel5.SuspendLayout();
             this.remainGroup.SuspendLayout();
             this.panel9.SuspendLayout();
-            this.addPaymentGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // itemsPanel
@@ -164,6 +164,82 @@
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
             // 
+            // nameCol
+            // 
+            this.nameCol.HeaderText = "NAME";
+            this.nameCol.Name = "nameCol";
+            this.nameCol.ReadOnly = true;
+            // 
+            // serialCol
+            // 
+            this.serialCol.HeaderText = "SERIAL";
+            this.serialCol.Name = "serialCol";
+            this.serialCol.ReadOnly = true;
+            // 
+            // supplierCol
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.supplierCol.DefaultCellStyle = dataGridViewCellStyle3;
+            this.supplierCol.HeaderText = "SUPPLIER";
+            this.supplierCol.Name = "supplierCol";
+            this.supplierCol.ReadOnly = true;
+            // 
+            // qtyCol
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.qtyCol.DefaultCellStyle = dataGridViewCellStyle4;
+            this.qtyCol.HeaderText = "QTY";
+            this.qtyCol.Name = "qtyCol";
+            this.qtyCol.ReadOnly = true;
+            // 
+            // priceCol
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.priceCol.DefaultCellStyle = dataGridViewCellStyle5;
+            this.priceCol.HeaderText = "PRICE";
+            this.priceCol.Name = "priceCol";
+            this.priceCol.ReadOnly = true;
+            // 
+            // discountCol
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.discountCol.DefaultCellStyle = dataGridViewCellStyle6;
+            this.discountCol.HeaderText = "DISCOUNT";
+            this.discountCol.Name = "discountCol";
+            this.discountCol.ReadOnly = true;
+            // 
+            // totalCol
+            // 
+            this.totalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.totalCol.DefaultCellStyle = dataGridViewCellStyle7;
+            this.totalCol.HeaderText = "TOTAL";
+            this.totalCol.Name = "totalCol";
+            this.totalCol.ReadOnly = true;
+            // 
+            // actualQty
+            // 
+            this.actualQty.HeaderText = "qty";
+            this.actualQty.Name = "actualQty";
+            this.actualQty.ReadOnly = true;
+            this.actualQty.Visible = false;
+            // 
+            // actualPrice
+            // 
+            this.actualPrice.HeaderText = "price";
+            this.actualPrice.Name = "actualPrice";
+            this.actualPrice.ReadOnly = true;
+            this.actualPrice.Visible = false;
+            // 
+            // actualDiscount
+            // 
+            this.actualDiscount.HeaderText = "discount";
+            this.actualDiscount.Name = "actualDiscount";
+            this.actualDiscount.ReadOnly = true;
+            this.actualDiscount.Visible = false;
+            // 
             // soldTo
             // 
             this.soldTo.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -183,10 +259,11 @@
             this.total.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.total.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.total.Location = new System.Drawing.Point(0, 25);
+            this.total.Location = new System.Drawing.Point(0, 19);
+            this.total.Multiline = true;
             this.total.Name = "total";
             this.total.ReadOnly = true;
-            this.total.Size = new System.Drawing.Size(150, 14);
+            this.total.Size = new System.Drawing.Size(150, 20);
             this.total.TabIndex = 0;
             this.total.TabStop = false;
             this.total.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -197,22 +274,23 @@
             this.amountRecieved.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.amountRecieved.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.amountRecieved.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountRecieved.Location = new System.Drawing.Point(0, 25);
+            this.amountRecieved.Location = new System.Drawing.Point(0, 19);
+            this.amountRecieved.Multiline = true;
             this.amountRecieved.Name = "amountRecieved";
             this.amountRecieved.ReadOnly = true;
-            this.amountRecieved.Size = new System.Drawing.Size(150, 14);
+            this.amountRecieved.Size = new System.Drawing.Size(150, 20);
             this.amountRecieved.TabIndex = 0;
             this.amountRecieved.TabStop = false;
             this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // paymentNum
             // 
+            this.paymentNum.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.paymentNum.BackColor = System.Drawing.SystemColors.Control;
             this.paymentNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.paymentNum.DecimalPlaces = 2;
-            this.paymentNum.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.paymentNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentNum.Location = new System.Drawing.Point(0, 21);
+            this.paymentNum.Location = new System.Drawing.Point(3, 19);
             this.paymentNum.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.paymentNum.Maximum = new decimal(new int[] {
             1410065407,
@@ -220,7 +298,7 @@
             0,
             0});
             this.paymentNum.Name = "paymentNum";
-            this.paymentNum.Size = new System.Drawing.Size(148, 17);
+            this.paymentNum.Size = new System.Drawing.Size(118, 17);
             this.paymentNum.TabIndex = 2;
             this.paymentNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.paymentNum.ThousandsSeparator = true;
@@ -234,7 +312,7 @@
             this.addPaymentButton.FlatAppearance.BorderSize = 0;
             this.addPaymentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addPaymentButton.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addPaymentButton.Location = new System.Drawing.Point(127, 17);
+            this.addPaymentButton.Location = new System.Drawing.Point(126, 16);
             this.addPaymentButton.Name = "addPaymentButton";
             this.addPaymentButton.Size = new System.Drawing.Size(20, 20);
             this.addPaymentButton.TabIndex = 1;
@@ -248,10 +326,11 @@
             this.remaining.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.remaining.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.remaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remaining.Location = new System.Drawing.Point(0, 25);
+            this.remaining.Location = new System.Drawing.Point(0, 19);
+            this.remaining.Multiline = true;
             this.remaining.Name = "remaining";
             this.remaining.ReadOnly = true;
-            this.remaining.Size = new System.Drawing.Size(150, 14);
+            this.remaining.Size = new System.Drawing.Size(150, 20);
             this.remaining.TabIndex = 0;
             this.remaining.TabStop = false;
             this.remaining.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -337,82 +416,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(884, 61);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
-            // nameCol
-            // 
-            this.nameCol.HeaderText = "NAME";
-            this.nameCol.Name = "nameCol";
-            this.nameCol.ReadOnly = true;
-            // 
-            // serialCol
-            // 
-            this.serialCol.HeaderText = "SERIAL";
-            this.serialCol.Name = "serialCol";
-            this.serialCol.ReadOnly = true;
-            // 
-            // supplierCol
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.supplierCol.DefaultCellStyle = dataGridViewCellStyle3;
-            this.supplierCol.HeaderText = "SUPPLIER";
-            this.supplierCol.Name = "supplierCol";
-            this.supplierCol.ReadOnly = true;
-            // 
-            // qtyCol
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.qtyCol.DefaultCellStyle = dataGridViewCellStyle4;
-            this.qtyCol.HeaderText = "QTY";
-            this.qtyCol.Name = "qtyCol";
-            this.qtyCol.ReadOnly = true;
-            // 
-            // priceCol
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.priceCol.DefaultCellStyle = dataGridViewCellStyle5;
-            this.priceCol.HeaderText = "PRICE";
-            this.priceCol.Name = "priceCol";
-            this.priceCol.ReadOnly = true;
-            // 
-            // discountCol
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.discountCol.DefaultCellStyle = dataGridViewCellStyle6;
-            this.discountCol.HeaderText = "DISCOUNT";
-            this.discountCol.Name = "discountCol";
-            this.discountCol.ReadOnly = true;
-            // 
-            // totalCol
-            // 
-            this.totalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.totalCol.DefaultCellStyle = dataGridViewCellStyle7;
-            this.totalCol.HeaderText = "TOTAL";
-            this.totalCol.Name = "totalCol";
-            this.totalCol.ReadOnly = true;
-            // 
-            // actualQty
-            // 
-            this.actualQty.HeaderText = "qty";
-            this.actualQty.Name = "actualQty";
-            this.actualQty.ReadOnly = true;
-            this.actualQty.Visible = false;
-            // 
-            // actualPrice
-            // 
-            this.actualPrice.HeaderText = "price";
-            this.actualPrice.Name = "actualPrice";
-            this.actualPrice.ReadOnly = true;
-            this.actualPrice.Visible = false;
-            // 
-            // actualDiscount
-            // 
-            this.actualDiscount.HeaderText = "discount";
-            this.actualDiscount.Name = "actualDiscount";
-            this.actualDiscount.ReadOnly = true;
-            this.actualDiscount.Visible = false;
-            // 
             // panel1
             // 
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -424,15 +427,6 @@
             this.panel1.Size = new System.Drawing.Size(461, 30);
             this.panel1.TabIndex = 19;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 29);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(461, 1);
-            this.panel2.TabIndex = 0;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -442,6 +436,15 @@
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Sold To:";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 29);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(461, 1);
+            this.panel2.TabIndex = 0;
             // 
             // panel3
             // 
@@ -488,6 +491,29 @@
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(11, 5, 0, 5);
             this.flowLayoutPanel2.Size = new System.Drawing.Size(884, 56);
             this.flowLayoutPanel2.TabIndex = 3;
+            // 
+            // addPaymentGroup
+            // 
+            this.addPaymentGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.addPaymentGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.addPaymentGroup.Controls.Add(this.addPaymentButton);
+            this.addPaymentGroup.Controls.Add(this.paymentNum);
+            this.addPaymentGroup.Controls.Add(this.label7);
+            this.addPaymentGroup.Location = new System.Drawing.Point(720, 8);
+            this.addPaymentGroup.Name = "addPaymentGroup";
+            this.addPaymentGroup.Size = new System.Drawing.Size(150, 40);
+            this.addPaymentGroup.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Add Payment:";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel5
             // 
@@ -585,29 +611,6 @@
             this.panel10.Size = new System.Drawing.Size(150, 1);
             this.panel10.TabIndex = 0;
             // 
-            // addPaymentGroup
-            // 
-            this.addPaymentGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.addPaymentGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.addPaymentGroup.Controls.Add(this.addPaymentButton);
-            this.addPaymentGroup.Controls.Add(this.paymentNum);
-            this.addPaymentGroup.Controls.Add(this.label7);
-            this.addPaymentGroup.Location = new System.Drawing.Point(720, 8);
-            this.addPaymentGroup.Name = "addPaymentGroup";
-            this.addPaymentGroup.Size = new System.Drawing.Size(150, 40);
-            this.addPaymentGroup.TabIndex = 22;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Add Payment:";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -636,14 +639,14 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.addPaymentGroup.ResumeLayout(false);
+            this.addPaymentGroup.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.remainGroup.ResumeLayout(false);
             this.remainGroup.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
-            this.addPaymentGroup.ResumeLayout(false);
-            this.addPaymentGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

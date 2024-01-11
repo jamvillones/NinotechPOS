@@ -10,30 +10,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace POS
-{
-    public partial class SaleReprint : Form
-    {
-        public SaleReprint()
-        {
+namespace POS {
+    public partial class SaleReprint : Form {
+        public SaleReprint() {
             InitializeComponent();
         }
         Sale sale = null;
-        public bool SetId(int id)
-        {
-            using (var p = new POSEntities())
-            {
+        public bool SetId(int id) {
+            using (var p = new POSEntities()) {
                 sale = p.Sales.FirstOrDefault(x => x.Id == id);
-                if (sale != null)
-                {
+                if (sale != null) {
                     Initialize(sale);
                     return true;
                 }
             }
             return false;
         }
-        void Initialize(Sale s)
-        {
+        void Initialize(Sale s) {
             saleIdTxt.Text = s.Id.ToString();
             soldToTxt.Text = s.Customer.Name;
 
@@ -44,8 +37,7 @@ namespace POS
         PrintAction printAction;
         Pen areaPen = new Pen(Brushes.Red);
         Pen gridPen = new Pen(Brushes.Gray);
-        private void document_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
+        private void document_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e) {
 
             Graphics graphics = e.Graphics;
             RectangleF marginBounds = e.MarginBounds;
@@ -66,8 +58,7 @@ namespace POS
                     : printableArea.Height));
 
             area = new Rectangle(1, 1, availableWidth - 1, availableHeight - 1);
-            if (printAction == PrintAction.PrintToPreview)
-            {
+            if (printAction == PrintAction.PrintToPreview) {
                 //e.Graphics.DrawRectangle(areaPen, area);
                 // drawLines(area, e.Graphics, 9);
             }
@@ -81,8 +72,7 @@ namespace POS
         int index = 0;
         int pageCount = 1;
 
-        void PrintLayout(PrintPageEventArgs e)
-        {
+        void PrintLayout(PrintPageEventArgs e) {
             Graphics g = e.Graphics;
             Rectangle pageNumberRect = new Rectangle(0, 0, area.Width, 20);
             farFormat.Alignment = StringAlignment.Far;
@@ -91,7 +81,7 @@ namespace POS
 
             Rectangle colRect = new Rectangle(area.Left, pageNumberRect.Bottom, area.Width * 3 / 9, colHeight);
             g.DrawRectangle(gridPen, colRect);
-            g.DrawString("Item Name", columnFont, Brushes.Black, colRect,centerFormat);
+            g.DrawString("Item Name", columnFont, Brushes.Black, colRect, centerFormat);
 
             colRect.X = colRect.Right;
             colRect.Width = area.Width * 2 / 9;
@@ -121,16 +111,14 @@ namespace POS
             int yStart = colRect.Bottom;
             Rectangle stringHolderRect = new Rectangle();
 
-            while (index < datas.Count)
-            {
+            while (index < datas.Count) {
                 var i = datas[index];
 
                 decimal total = (int)i[2] * ((decimal)i[3] - (decimal)i[4]);
 
                 var max = i.Items.Select(x => (int)g.MeasureString(x?.ToString() ?? string.Empty, contentFont, area.Width * 3 / 9).Height).Max();
 
-                if (yStart + max > area.Height)
-                {
+                if (yStart + max > area.Height) {
                     e.HasMorePages = true;
                     pageCount++;
                     return;
@@ -186,11 +174,9 @@ namespace POS
             index = 0;
         }
 
-        void drawLines(RectangleF p, Graphics g, int xDivision)
-        {
+        void drawLines(RectangleF p, Graphics g, int xDivision) {
             Pen linePen = new Pen(Brushes.Blue);
-            for (int i = 1; i < xDivision; i++)
-            {
+            for (int i = 1; i < xDivision; i++) {
                 int x = ((int)p.Width / xDivision) * i;
                 Point start = new Point(x, 0);
                 Point end = new Point(x, (int)p.Height);
@@ -199,28 +185,23 @@ namespace POS
             }
         }
 
-        private void document_BeginPrint(object sender, PrintEventArgs e)
-        {
+        private void document_BeginPrint(object sender, PrintEventArgs e) {
             printAction = e.PrintAction;
         }
 
         List<DataListHolder> datas = new List<DataListHolder>();
-        private void SaleReprint_Load(object sender, EventArgs e)
-        {
-            using (var p = new POSEntities())
-            {
+        private void SaleReprint_Load(object sender, EventArgs e) {
+            using (var p = new POSEntities()) {
                 var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
-                datas = s.SoldItems.OrderBy(x => x.Product.Item.Name).Select(y => new DataListHolder(y.Product.Item.Name, y.SerialNumber, y.Quantity, y.ItemPrice, y.Discount ?? 0)).ToList();
+                datas = s.SoldItems.OrderBy(x => x.Product.Item.Name).Select(y => new DataListHolder(y.Product.Item.Name, y.SerialNumber, y.Quantity, y.ItemPrice, y.Discount)).ToList();
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+        private void button1_Click(object sender, EventArgs e) {
             document.Print();
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e) {
             printPreviewControl1.StartPage = (int)numericUpDown1.Value - 1;
 
             label1.Text = "Page: " + (int)numericUpDown1.Value + " of " + ((int)numericUpDown1.Maximum).ToString();

@@ -1,29 +1,28 @@
-﻿using System;
+﻿using POS.Forms;
+using POS.Interfaces;
+using POS.Misc;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using POS.Interfaces;
-using POS.Forms;
-using POS.Misc;
-using System.Threading;
 
 namespace POS.UserControls {
     public enum SaleStatusFilter { All, Pending, Paid, Count }
+
     public partial class ReportUC : UserControl, ITab {
         public ReportUC() {
             InitializeComponent();
         }
 
         private void ReportUC_Load(object sender, EventArgs e) {
-            saleStatus.SelectedIndex = 0;
             comboFilterType.SelectedIndex = 0;
 
-            saleStatus.SelectedIndexChanged += saleStatus_SelectedIndexChanged;
             comboFilterType.SelectedIndexChanged += comboFilterType_SelectedIndexChanged;
             dtFilter.ValueChanged += dtFilter_ValueChanged;
         }
@@ -32,15 +31,25 @@ namespace POS.UserControls {
 
         }
 
-        CancellationTokenSource regularSource = new CancellationTokenSource();
-        CancellationTokenSource chargedSource = new CancellationTokenSource();
+        CancellationTokenSource regularSource = null;
+        CancellationTokenSource chargedSource = null;
+
+        string keyword = string.Empty;
+        SaleStatusFilter statusFilter = SaleStatusFilter.Pending;
 
         public void CancelLoading() {
-            if (regularSource != null)
-                regularSource.Cancel();
+            TryCancelTokenSource(regularSource);
+            TryCancelTokenSource(chargedSource);
+        }
 
-            if (chargedSource != null)
-                chargedSource.Cancel();
+        bool TryCancelTokenSource(CancellationTokenSource source) {
+            try {
+                source?.Cancel();
+                return true;
+            }
+            catch (ObjectDisposedException) {
+                return false;
+            }
         }
 
         public Control FirstControl() {
@@ -52,19 +61,19 @@ namespace POS.UserControls {
         }
 
         public async Task InitializeAsync() {
-            var chargedT = setCharegedTable();
+            _chargedLoadingTask = LoadChargedAsync();
             var regT = setRegularTableByDate();
 
-            var setOther = Task.Run(() => {
-                using (var p = new POSEntities()) {
-                    IEnumerable<Sale> charged = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString());
-                    decimal total = charged.Select(x => x.Remaining).DefaultIfEmpty(0).Sum();
+            //var setOther = Task.Run(() => {
+            //    using (var p = new POSEntities()) {
+            //        IEnumerable<Sale> charged = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString());
+            //        decimal total = charged.Select(x => x.Remaining).DefaultIfEmpty(0).Sum();
 
-                    toBeSettledTxt.InvokeIfRequired(() => { toBeSettledTxt.Text = string.Format("P {0:n}", total); });
-                }
-            });
+            //        //toBeSettledTxt.InvokeIfRequired(() => { toBeSettledTxt.Text = string.Format("P {0:n}", total); });
+            //    }
+            //});
 
-            await Task.WhenAll(chargedT, regT, setOther);
+            await Task.WhenAll(_chargedLoadingTask, regT);
         }
 
         private void DefButton_Click(object sender, EventArgs e) {
@@ -92,21 +101,17 @@ namespace POS.UserControls {
         }
 
         private async void SaleDetails_OnSave(object sender, EventArgs e) {
-            await setCharegedTable();
+            await LoadChargedAsync();
         }
 
-        POSEntities posEnt => new POSEntities();
-
         private async Task setRegularTableByDate() {
-            Console.WriteLine("started: Regular");
 
-            if (regularSource == null)
-                regularSource = new CancellationTokenSource();
+            regularSource = new CancellationTokenSource();
 
-            using (var p = posEnt) {
+            using (var context = new POSEntities()) {
                 string type = SaleType.Regular.ToString();
 
-                IQueryable<Sale> filteredSales = p.Sales.Where(x => x.SaleType == type);
+                IQueryable<Sale> filteredSales = context.Sales.Where(x => x.SaleType == type);
 
                 int index = 0;
 
@@ -131,7 +136,7 @@ namespace POS.UserControls {
                     saleTable.InvokeIfRequired(() => { saleTable.Rows.AddRange(rows); });
                     totalSale.InvokeIfRequired(() => { totalSale.Text = string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.Total)); });
 
-                    Console.WriteLine("finished: Regular");
+                    //Console.WriteLine("finished: Regular");
                 }
                 catch {
                     regularSource.Dispose();
@@ -162,178 +167,89 @@ namespace POS.UserControls {
             });
 
             regularSource.Token.ThrowIfCancellationRequested();
-
             return rows.ToArray();
         }
 
-        private async Task setCharegedTable() {
-            Console.WriteLine("started: Charged");
+        private async Task LoadChargedAsync() {
+            chargedSource = new CancellationTokenSource();
+            var token = chargedSource.Token;
 
-            if (chargedSource == null)
-                chargedSource = new CancellationTokenSource();
+            try {
+                using (var context = new POSEntities()) {
 
-            using (var p = posEnt) {
-                chargedTable.InvokeIfRequired(() => { chargedTable.Rows.Clear(); });
+                    var chargedSales = await GetChargedSalesAsync(context, token);
 
-                IEnumerable<Sale> sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
+                    if (!chargedSales.Any())
+                        return;
 
-                int status = 0;
-
-                saleStatus.InvokeIfRequired(() => status = saleStatus.SelectedIndex);
-                switch (status) {
-                    case 0:
-                        break;
-                    case 1:
-                        sales = sales.Where(x => x.Remaining > 0);
-                        break;
-                    case 2:
-                        sales = sales.Where(x => x.Remaining <= 0);
-                        break;
-                    default:
-                        break;
+                    await AddRowsAsync(chargedSales, token);
                 }
+            }
+            catch (OperationCanceledException) {
 
-                try {
-                    var rows = await createChargedRow(sales);
-
-                    chargedTable.InvokeIfRequired(() => { chargedTable.Rows.AddRange(rows); });
-
-                    Console.WriteLine("finished: Charged");
-                }
-                catch {
-                    chargedSource.Dispose();
-                    chargedSource = null;
-                }
+            }
+            finally {
+                chargedSource.Dispose();
+                chargedSource = null;
             }
         }
 
-        private async Task<DataGridViewRow[]> createChargedRow(IEnumerable<Sale> sale) {
-            var rows = new List<DataGridViewRow>();
+        DataGridViewRow CreateChargedRow(Sale sale) {
+
+            var row = new DataGridViewRow();
+
+            row.DefaultCellStyle.ForeColor = sale.FullyPaid ? Color.DarkGreen : sale.AmountRecieved == 0 ? Color.DarkRed : Color.Black;
+
+            row.CreateCells(chargedTable,
+                sale.Id,
+                sale.Customer.Name,
+                sale.Date.Value.ToString("MMM d, yyyy hh:mm tt"),
+                string.Format("₱ {0:n}", sale.Total),
+                string.Format("₱ {0:n}", sale.AmountRecieved),
+                string.Format("₱ {0:n}", sale.Remaining),
+                sale.Login?.Name ?? "--",
+                sale.FullyPaid
+            );
+
+            return row;
+
+        }
+
+        private async Task AddRowsAsync(IEnumerable<Sale> sale, CancellationToken token) {
+
+            chargedTable.Rows.Clear();
+
             await Task.Run(() => {
                 try {
                     foreach (var i in sale) {
-                        var row = new DataGridViewRow();
+                        var row = CreateChargedRow(i);
 
-                        if (!i.FullyPaid && i.AmountRecieved == 0)
-                            row.DefaultCellStyle.ForeColor = Color.DarkRed;
+                        token.ThrowIfCancellationRequested();
 
-                        else if (i.FullyPaid)
-                            row.DefaultCellStyle.ForeColor = Color.DarkGreen;
-
-                        row.CreateCells(chargedTable,
-                            i.Id,
-                            i.Customer.Name,
-                            i.Date.Value.ToString("MMM d, yyyy hh:mm tt"),
-                            string.Format("₱ {0:n}", i.Total),
-                            string.Format("₱ {0:n}", i.AmountRecieved),
-                            string.Format("₱ {0:n}", i.Remaining),
-                            i.Login?.Name ?? "not set",
-                            i.FullyPaid
-                        );
-
-                        //foreach (var x in sales.OrderByDescending(y => y.Id))
-                        //    chargedTable.Rows.Add(x.Id,
-                        //                          x.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
-                        //                          x.Login?.Username,
-                        //                          x.Customer.Name,
-                        //                          string.Format("₱ {0:n}", x.Total),
-                        //                          string.Format("₱ {0:n}", x.AmountRecieved),
-                        //                          string.Format("₱ {0:n}", x.Remaining),
-                        //                          x.Remaining > 0 ? false : true);
-
-                        rows.Add(row);
-
-                        chargedSource.Token.ThrowIfCancellationRequested();
+                        chargedTable.InvokeIfRequired(() => chargedTable.Rows.Add(row));
                     }
                 }
-                catch { }
+                catch (OperationCanceledException) {
+
+                }
             });
-
-            chargedSource.Token.ThrowIfCancellationRequested();
-
-            return rows.ToArray();
-        }
-        //decimal remaining(decimal recieved, decimal totalPrice)
-        //{
-        //    if (recieved > totalPrice)
-        //        return 0;
-
-        //    return totalPrice - recieved;
-        //}
-
-        private async Task searchChargeByName() {
-            chargedTable.Rows.Clear();
-
-            using (var p = new POSEntities()) {
-                IEnumerable<Sale> sales = p.Sales;
-
-                filterCharged(p, ref sales);
-
-                var r = await createChargedRow(sales);
-
-                chargedTable.Rows.AddRange(r);
-            }
-
-        }
-        bool searchMade { get; set; } = false;
-
-        private async void chargedSearchBtn_Click(object sender, EventArgs e) {
-            //var button = sender as Button;
-            if (chargedSaleSearch.Text == string.Empty || string.IsNullOrWhiteSpace(chargedSaleSearch.Text))
-                return;
-
-            searchMade = true;
-
-            await searchChargeByName();
-        }
-        private void chargedSaleSearch_TextChanged(object sender, EventArgs e) {
-            if (chargedSaleSearch.Text == string.Empty && searchMade) {
-                //using (var p = new POSEntities())
-                searchMade = false;
-                var s = setCharegedTable();
-            }
-        }
-        private void chargedSaleSearch_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter)
-                chargedSearchBtn.PerformClick();
-        }
-        private void month_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter) {
-                //using (var p = new POSEntities())
-                var s = setRegularTableByDate();
-            }
         }
 
-        public void Refresh_Callback(object sender, EventArgs e) {
-
+        public async void Refresh_Callback(object sender, EventArgs e) {
+            await LoadChargedAsync();
         }
 
-        void filterCharged(POSEntities p, ref IEnumerable<Sale> sales) {
-            sales = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString()).OrderByDescending(x => x.Date);
+        async Task<IEnumerable<Sale>> GetChargedSalesAsync(POSEntities context, CancellationToken token) {
+            var chargedSales = await context.Sales
+                .AsNoTracking()
+                .AsQueryable()
+                .Where(c => c.SaleType == SaleType.Charged.ToString())
+                .FilterCharged(statusFilter)
+                .FilterByName(keyword)
+                .OrderByDescending(c => c.Date)
+                .ToListAsync(token);
 
-            if (chargedSaleSearch.Text != string.Empty) {
-                var t = chargedSaleSearch.Text.Trim().ToLower();
-                sales = sales.Where(x => x.Customer.Name.ToLower().Contains(t));
-            }
-            if (saleStatus.Text == "Pending") {
-                sales = sales.Where(x => x.Remaining > 0);
-            }
-            else if (saleStatus.Text == "Paid") {
-                sales = sales.Where(x => x.Remaining <= 0);
-            }
-        }
-        private async void saleStatus_SelectedIndexChanged(object sender, EventArgs e) {
-            chargedTable.Rows.Clear();
-
-            using (var p = new POSEntities()) {
-                IEnumerable<Sale> sales = p.Sales;
-
-                filterCharged(p, ref sales);
-
-                var r = await createChargedRow(sales);
-
-                chargedTable.Rows.AddRange(r);
-            }
+            return chargedSales;
         }
 
         private void comboFilterType_SelectedIndexChanged(object sender, EventArgs e) {
@@ -365,17 +281,63 @@ namespace POS.UserControls {
 
         private void chargedTable_KeyDown(object sender, KeyEventArgs e) {
             if (e.KeyCode == Keys.F5) {
-                var s = setCharegedTable();
+                var s = LoadChargedAsync();
             }
         }
 
         private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
             e.SearchFound = true;
-            await searchChargeByName();
+            keyword = e.Text;
+            await StartNewChargedLoading();
         }
 
-        private void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+            keyword = string.Empty;
+            await StartNewChargedLoading();
+        }
 
+        private async void radioButton_CheckedChanged(object sender, EventArgs e) {
+            if (sender is RadioButton rb && rb.Checked) {
+
+                if (Enum.TryParse(rb.Text.Trim(), out SaleStatusFilter filter)) {
+
+                    statusFilter = filter;
+                    await StartNewChargedLoading();
+                }
+            }
+        }
+
+        async Task StartNewChargedLoading() {
+            //initiate cancellation
+            TryCancelTokenSource(chargedSource);
+
+            //wait until the laoding task is finished to avoid risidual rows 
+            await _chargedLoadingTask;
+
+            //start new laoding task
+            _chargedLoadingTask = LoadChargedAsync();
+        }
+
+        Task _chargedLoadingTask = null;
+    }
+
+    public static class SalesExtension {
+        public static IQueryable<Sale> FilterCharged(this IQueryable<Sale> sales, SaleStatusFilter filter) {
+
+            switch (filter) {
+                case SaleStatusFilter.Paid:
+                    return sales.Where(x => x.SoldItems.Sum(si => si.Quantity * (si.ItemPrice - si.Discount)) - x.AmountRecieved <= 0);
+                case SaleStatusFilter.Pending:
+                    return sales.Where(x => x.SoldItems.Sum(si => si.Quantity * (si.ItemPrice - si.Discount)) - x.AmountRecieved > 0);
+            }
+
+            return sales;
+        }
+
+        public static IQueryable<Sale> FilterByName(this IQueryable<Sale> sales, string keyword = "") {
+            if (string.IsNullOrWhiteSpace(keyword))
+                return sales;
+            return sales.Where(s => s.Customer.Name.Contains(keyword));
         }
     }
 }

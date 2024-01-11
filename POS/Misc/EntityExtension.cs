@@ -5,15 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS
-{
-    partial class Item
-    {
+namespace POS {
+    partial class Item {
         public int QuantityInInventory => this.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
-        public bool InCriticalQuantity
-        {
-            get
-            {
+        public bool InCriticalQuantity {
+            get {
                 if (this.Type != ItemType.Quantifiable.ToString() || this.CriticalQuantity == null) return false;
 
                 var q = this.QuantityInInventory;
@@ -26,28 +22,20 @@ namespace POS
         }
     }
 
-    partial class Sale
-    {
+    partial class Sale {
         /// <summary>
         /// grand total of the sale
         /// </summary>
-        public decimal Total => this.SoldItems.Select(x => x.Quantity * (x.ItemPrice - x.Discount ?? 0)).DefaultIfEmpty(0).Sum();
+        public decimal Total => SoldItems.Sum(x => x.Quantity * (x.ItemPrice - x.Discount));
 
         /// <summary>
         /// used as the actual gained money
         /// </summary>
-        public decimal TotalGained => AmountRecieved > Total ? Total : AmountRecieved ?? 0;
+        public decimal TotalGained => AmountRecieved > Total ? Total : AmountRecieved;
         /// <summary>
         /// remaining to be paid
         /// </summary>
-        public decimal Remaining
-        {
-            get
-            {
-                decimal r = Total - AmountRecieved ?? 0;
-                return r < 0 ? 0 : r;
-            }
-        }
+        public decimal Remaining => (Total - AmountRecieved) < 0 ? 0 : Total - AmountRecieved;
         /// <summary>
         /// is it fully paid?
         /// </summary>

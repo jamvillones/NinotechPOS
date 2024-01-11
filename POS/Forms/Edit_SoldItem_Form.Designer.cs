@@ -24,9 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,15 +49,6 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(521, 46);
             this.panel1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(5, 40);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(511, 1);
-            this.panel2.TabIndex = 0;
             // 
             // numericUpDown1
             // 
@@ -88,6 +79,15 @@
             this.label1.Size = new System.Drawing.Size(34, 18);
             this.label1.TabIndex = 2;
             this.label1.Text = "Price:";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(5, 40);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(511, 1);
+            this.panel2.TabIndex = 0;
             // 
             // panel3
             // 

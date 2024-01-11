@@ -23,16 +23,17 @@ namespace POS
     
         public int Id { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
-        public Nullable<decimal> AmountRecieved { get; set; }
+        public Nullable<int> CustomerId { get; set; }
+        public decimal AmountRecieved { get; set; }
         public string SaleType { get; set; }
         public Nullable<int> UserId { get; set; }
-        public Nullable<int> CustomerId { get; set; }
+        public decimal Discount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChargedPayRecord> ChargedPayRecords { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual Login Login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SoldItem> SoldItems { get; set; }
-        public virtual Login Login { get; set; }
     }
 }

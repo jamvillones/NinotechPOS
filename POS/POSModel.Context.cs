@@ -9,7 +9,6 @@
 
 namespace POS
 {
-    using Connections;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -19,7 +18,6 @@ namespace POS
         public POSEntities()
             : base("name=POSEntities")
         {
-            this.ChangeDatabase();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -29,13 +27,13 @@ namespace POS
     
         public virtual DbSet<ChargedPayRecord> ChargedPayRecords { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Sale> Sales { get; set; }
-        public virtual DbSet<SoldItem> SoldItems { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<InventoryItem> InventoryItems { get; set; }
         public virtual DbSet<StockinHistory> StockinHistories { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<SoldItem> SoldItems { get; set; }
+        public virtual DbSet<Sale> Sales { get; set; }
     }
 }
