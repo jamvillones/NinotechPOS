@@ -243,11 +243,17 @@ namespace POS.Forms {
                 }
                 else {
                     var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.ProductId == stockin.ProductId);
-                    if (invItem != null) {
+                    if (invItem != null || invItem.Quantity >= stockin.Quantity) {
                         invItem.Quantity -= (int)stockin.Quantity;
+                        if (invItem.Quantity <= 0)
+                            context.InventoryItems.Remove(invItem);
                     }
                     else {
-                        MessageBox.Show("This stockin cannot be undone!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning); return;
+                        MessageBox.Show(
+                            "The amount of stock-in you are trying to revoke exceeds the current stock quantity. Please make sure to undo the correct stockin entry.",
+                            "Stockin Correction Terminated.",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning); return;
                     }
                 }
 
