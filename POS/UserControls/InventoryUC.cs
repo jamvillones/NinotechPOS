@@ -68,7 +68,7 @@ namespace POS.UserControls {
                 return;
 
             var isPlural = criticalItemNames.Count > 1;
-            notifyIcon.BalloonTipTitle = (isPlural ? "These " : "This") + (isPlural ? "items" : "item") + " " + (isPlural ? "are" : "is") + " in critical quantity!";
+            notifyIcon.BalloonTipTitle = (isPlural ? "These " : "This ") + (isPlural ? "items" : "item") + " " + (isPlural ? "are" : "is") + " in critical quantity!";
 
             foreach (var i in criticalItemNames)
                 notifyIcon.BalloonTipText += i + "\n";
@@ -509,6 +509,11 @@ namespace POS.UserControls {
                 await initItemsTableAsync();
 
             criticalIsShowing = !criticalIsShowing;
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
