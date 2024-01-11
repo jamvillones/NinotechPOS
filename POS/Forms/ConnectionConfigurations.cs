@@ -34,7 +34,7 @@ namespace POS
                 {
                     try
                     {
-                        context.ChangeDatabase(dataSource, portName, id, password);
+                        context.ChangeDatabase(dataSource, portName, id, password, checkBox1.Checked);
                         label1.InvokeIfRequired(() => label1.Text = "processing...");
                         bool cond = context.Database.Exists();
 
@@ -77,6 +77,7 @@ namespace POS
         {
             var settings = Properties.Settings.Default;
 
+            settings.IsLocalConnection = checkBox1.Checked;
             settings.DataSource = dataSource;
             settings.PortName = portName;
             settings.UserId = id;
@@ -86,9 +87,9 @@ namespace POS
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            button2.Enabled = !(string.IsNullOrWhiteSpace(dataSource) || 
-                                string.IsNullOrWhiteSpace(portName) || 
-                                string.IsNullOrWhiteSpace(id) || 
+            button2.Enabled = !(string.IsNullOrWhiteSpace(dataSource) ||
+                                string.IsNullOrWhiteSpace(portName) ||
+                                string.IsNullOrWhiteSpace(id) ||
                                 string.IsNullOrWhiteSpace(password));
         }
 
@@ -100,6 +101,14 @@ namespace POS
             portName = settings.PortName;
             id = settings.UserId;
             password = settings.Password;
+            checkBox1.Checked = settings.IsLocalConnection;
+
+            textBox1.Enabled = textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = !checkBox1.Checked;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox1.Enabled = textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = !checkBox1.Checked;
         }
     }
 }

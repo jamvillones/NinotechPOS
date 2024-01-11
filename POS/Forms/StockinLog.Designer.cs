@@ -80,16 +80,17 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.histTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.histTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.histTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.histTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.histTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.histTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.histTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.histTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.histTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -106,22 +107,23 @@
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(5);
             dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.histTable.DefaultCellStyle = dataGridViewCellStyle11;
             this.histTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.histTable.EnableHeadersVisualStyles = false;
-            this.histTable.GridColor = System.Drawing.Color.Black;
-            this.histTable.Location = new System.Drawing.Point(10, 95);
+            this.histTable.GridColor = System.Drawing.Color.DarkGray;
+            this.histTable.Location = new System.Drawing.Point(20, 117);
             this.histTable.MultiSelect = false;
             this.histTable.Name = "histTable";
             this.histTable.ReadOnly = true;
             this.histTable.RowHeadersVisible = false;
             this.histTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.histTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.histTable.Size = new System.Drawing.Size(850, 344);
+            this.histTable.Size = new System.Drawing.Size(830, 312);
             this.histTable.StandardTab = true;
             this.histTable.TabIndex = 2;
             this.histTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.histTable_CellMouseDoubleClick);
@@ -131,16 +133,16 @@
             this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.Column9.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Column9.HeaderText = "Id";
+            this.Column9.HeaderText = "ID";
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
-            this.Column9.Width = 41;
+            this.Column9.Width = 52;
             // 
             // Column1
             // 
             dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.Column1.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column1.HeaderText = "Date";
+            this.Column1.HeaderText = "DATE";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             // 
@@ -148,7 +150,7 @@
             // 
             dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.Column7.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column7.HeaderText = "User";
+            this.Column7.HeaderText = "USER";
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
             // 
@@ -156,7 +158,7 @@
             // 
             dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.Column2.DefaultCellStyle = dataGridViewCellStyle6;
-            this.Column2.HeaderText = "Name";
+            this.Column2.HeaderText = "NAME";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             // 
@@ -164,7 +166,7 @@
             // 
             dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.Column6.DefaultCellStyle = dataGridViewCellStyle7;
-            this.Column6.HeaderText = "Serial Number";
+            this.Column6.HeaderText = "SERIAL NUMBER";
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
             // 
@@ -174,7 +176,7 @@
             dataGridViewCellStyle8.NullValue = null;
             dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.Column4.DefaultCellStyle = dataGridViewCellStyle8;
-            this.Column4.HeaderText = "Quantity";
+            this.Column4.HeaderText = "QUANTITY";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             // 
@@ -184,28 +186,27 @@
             dataGridViewCellStyle9.NullValue = null;
             dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.Column3.DefaultCellStyle = dataGridViewCellStyle9;
-            this.Column3.HeaderText = "Cost";
+            this.Column3.HeaderText = "COST";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
             // 
             // Column5
             // 
             this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column5.HeaderText = "Supplier";
+            this.Column5.HeaderText = "SUPPLIER";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             // 
             // col_removeBtn
             // 
             this.col_removeBtn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(5);
             this.col_removeBtn.DefaultCellStyle = dataGridViewCellStyle10;
             this.col_removeBtn.HeaderText = "";
             this.col_removeBtn.Name = "col_removeBtn";
             this.col_removeBtn.ReadOnly = true;
             this.col_removeBtn.ToolTipText = "double click to remove";
-            this.col_removeBtn.Width = 5;
+            this.col_removeBtn.Width = 12;
             // 
             // flowLayoutPanel2
             // 
@@ -218,10 +219,10 @@
             this.flowLayoutPanel2.Controls.Add(this.regular_Dt);
             this.flowLayoutPanel2.Controls.Add(this.dateRangeHolder);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(10, 38);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(20, 48);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(850, 44);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(830, 44);
             this.flowLayoutPanel2.TabIndex = 9;
             // 
             // radioButton1
@@ -356,17 +357,17 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(10, 439);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 429);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(850, 33);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(830, 33);
             this.flowLayoutPanel1.TabIndex = 10;
             // 
             // _totalCost
             // 
             this._totalCost.AutoSize = true;
             this._totalCost.ForeColor = System.Drawing.SystemColors.Highlight;
-            this._totalCost.Location = new System.Drawing.Point(803, 10);
+            this._totalCost.Location = new System.Drawing.Point(783, 10);
             this._totalCost.Name = "_totalCost";
             this._totalCost.Size = new System.Drawing.Size(44, 13);
             this._totalCost.TabIndex = 1;
@@ -376,7 +377,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(739, 10);
+            this.label2.Location = new System.Drawing.Point(719, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 0;
@@ -384,13 +385,14 @@
             // 
             // label3
             // 
+            this.label3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Location = new System.Drawing.Point(10, 82);
+            this.label3.Location = new System.Drawing.Point(20, 92);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(850, 13);
+            this.label3.Size = new System.Drawing.Size(830, 25);
             this.label3.TabIndex = 11;
             this.label3.Text = "**double click \'undo\' button on each entry to undo stockin";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // searchControl1
             // 
@@ -398,7 +400,7 @@
             this.searchControl1.BackColor = System.Drawing.Color.White;
             this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchControl1.Location = new System.Drawing.Point(10, 10);
+            this.searchControl1.Location = new System.Drawing.Point(20, 20);
             this.searchControl1.MaximumSize = new System.Drawing.Size(360, 28);
             this.searchControl1.MinimumSize = new System.Drawing.Size(2, 28);
             this.searchControl1.Name = "searchControl1";
@@ -421,7 +423,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "StockinLog";
-            this.Padding = new System.Windows.Forms.Padding(10);
+            this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stockin History";

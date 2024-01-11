@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using POS.Misc;
 namespace POS.Forms
 {
-    public partial class TransactionHistoryForm : Form
+    public partial class PaymentsForm : Form
     {
         Sale currentSale;
         public void SetId(int id)
@@ -29,9 +29,14 @@ namespace POS.Forms
                 }
             }
         }
-        public TransactionHistoryForm()
+        public PaymentsForm()
         {
             InitializeComponent();
+        }
+
+        private void recHistBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

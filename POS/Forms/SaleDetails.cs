@@ -48,7 +48,7 @@ namespace POS.Forms {
 
                 if (sale.SaleType == SaleType.Charged.ToString() || sale.AmountRecieved >= sale.Total) {
                     remainGroup.Visible = false;
-                    addPaymentGroup.Visible = false;
+                    //addPaymentGroup.Visible = false;
                     return;
                 }
             }
@@ -57,31 +57,31 @@ namespace POS.Forms {
             remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
         }
         void addPayment() {
-            if (paymentNum.Value == 0)
-                return;
+            //if (paymentNum.Value == 0)
+            //    return;
 
-            if (MessageBox.Show("Are you sure you want to add payment?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return;
+            //if (MessageBox.Show("Are you sure you want to add payment?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            //    return;
 
-            using (var p = new POSEntities()) {
-                var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
-                s.AmountRecieved += paymentNum.Value;
+            //using (var p = new POSEntities()) {
+            //    var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
+            //    s.AmountRecieved += paymentNum.Value;
 
-                amountRecieved.Text = string.Format("₱ {0:n}", s.AmountRecieved);
-                remaining.Text = string.Format("₱ {0:n}", s.Remaining);
+            //    amountRecieved.Text = string.Format("₱ {0:n}", s.AmountRecieved);
+            //    remaining.Text = string.Format("₱ {0:n}", s.Remaining);
 
-                var transaction = new ChargedPayRecord();
-                transaction.Sale = s;
-                transaction.Username = currentLogin.Username;
-                transaction.TransactionTime = DateTime.Now;
-                transaction.AmountPayed = paymentNum.Value;
+            //    var transaction = new ChargedPayRecord();
+            //    transaction.Sale = s;
+            //    transaction.Username = currentLogin.Username;
+            //    transaction.TransactionTime = DateTime.Now;
+            //    transaction.AmountPayed = paymentNum.Value;
 
-                p.ChargedPayRecords.Add(transaction);
-                p.SaveChanges();
-                OnSave?.Invoke(this, null);
+            //    p.ChargedPayRecords.Add(transaction);
+            //    p.SaveChanges();
+            //    OnSave?.Invoke(this, null);
 
-                MessageBox.Show(s.AmountRecieved < s.Total ? "Payment added." : "Amount fully Paid.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            //    MessageBox.Show(s.AmountRecieved < s.Total ? "Payment added." : "Amount fully Paid.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
         }
 
         private void addPaymentButton_Click(object sender, EventArgs e) {
@@ -89,7 +89,7 @@ namespace POS.Forms {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            using (var ts = new TransactionHistoryForm()) {
+            using (var ts = new PaymentsForm()) {
                 ts.SetId(sale.Id);
                 ts.ShowDialog();
             }

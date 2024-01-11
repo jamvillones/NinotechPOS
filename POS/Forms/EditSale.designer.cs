@@ -45,11 +45,11 @@
             this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -82,11 +82,11 @@
             this.col_Id,
             this.col_Name,
             this.col_Serial,
+            this.col_Supplier,
             this.col_Qty,
             this.col_Price,
             this.col_Discount,
             this.col_Total,
-            this.col_Supplier,
             this.Column9});
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
@@ -98,6 +98,7 @@
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle8;
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.DarkGray;
             this.itemsTable.Location = new System.Drawing.Point(20, 33);
             this.itemsTable.MultiSelect = false;
@@ -116,13 +117,13 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(594, 0);
+            this.button1.Location = new System.Drawing.Point(694, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.MaximumSize = new System.Drawing.Size(300, 35);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(250, 35);
+            this.button1.Size = new System.Drawing.Size(150, 35);
             this.button1.TabIndex = 20;
             this.button1.Text = "Add Sold Item";
             this.button1.UseVisualStyleBackColor = false;
@@ -166,57 +167,58 @@
             this.col_Id.HeaderText = "Id";
             this.col_Id.Name = "col_Id";
             this.col_Id.Visible = false;
-            this.col_Id.Width = 27;
+            this.col_Id.Width = 26;
             // 
             // col_Name
             // 
-            this.col_Name.HeaderText = "Name";
+            this.col_Name.HeaderText = "NAME";
             this.col_Name.Name = "col_Name";
             // 
             // col_Serial
             // 
-            this.col_Serial.HeaderText = "Serial";
+            this.col_Serial.HeaderText = "SERIAL";
             this.col_Serial.Name = "col_Serial";
-            // 
-            // col_Qty
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            this.col_Qty.DefaultCellStyle = dataGridViewCellStyle3;
-            this.col_Qty.HeaderText = "Qty";
-            this.col_Qty.Name = "col_Qty";
-            // 
-            // col_Price
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.col_Price.DefaultCellStyle = dataGridViewCellStyle4;
-            this.col_Price.HeaderText = "Price";
-            this.col_Price.Name = "col_Price";
-            // 
-            // col_Discount
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.col_Discount.DefaultCellStyle = dataGridViewCellStyle5;
-            this.col_Discount.HeaderText = "Discount";
-            this.col_Discount.Name = "col_Discount";
-            // 
-            // col_Total
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.col_Total.DefaultCellStyle = dataGridViewCellStyle6;
-            this.col_Total.HeaderText = "Total";
-            this.col_Total.Name = "col_Total";
             // 
             // col_Supplier
             // 
             this.col_Supplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_Supplier.DefaultCellStyle = dataGridViewCellStyle7;
-            this.col_Supplier.HeaderText = "Supplier";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_Supplier.DefaultCellStyle = dataGridViewCellStyle3;
+            this.col_Supplier.HeaderText = "SUPPLIER";
             this.col_Supplier.Name = "col_Supplier";
+            this.col_Supplier.Visible = false;
+            // 
+            // col_Qty
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = null;
+            this.col_Qty.DefaultCellStyle = dataGridViewCellStyle4;
+            this.col_Qty.HeaderText = "QUANTITY";
+            this.col_Qty.Name = "col_Qty";
+            // 
+            // col_Price
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.col_Price.DefaultCellStyle = dataGridViewCellStyle5;
+            this.col_Price.HeaderText = "PRICE";
+            this.col_Price.Name = "col_Price";
+            // 
+            // col_Discount
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.col_Discount.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col_Discount.HeaderText = "DISCOUNT";
+            this.col_Discount.Name = "col_Discount";
+            // 
+            // col_Total
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.col_Total.DefaultCellStyle = dataGridViewCellStyle7;
+            this.col_Total.HeaderText = "TOTAL";
+            this.col_Total.Name = "col_Total";
             // 
             // Column9
             // 
@@ -260,11 +262,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Serial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Discount;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Total;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_Supplier;
         private System.Windows.Forms.DataGridViewButtonColumn Column9;
     }
 }

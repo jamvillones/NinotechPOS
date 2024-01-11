@@ -321,11 +321,11 @@
     <Compile Include="Forms\SupplierForm.designer.cs">
       <DependentUpon>SupplierForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TransactionHistoryForm.cs">
+    <Compile Include="Forms\PaymentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TransactionHistoryForm.Designer.cs">
-      <DependentUpon>TransactionHistoryForm.cs</DependentUpon>
+    <Compile Include="Forms\PaymentsForm.Designer.cs">
+      <DependentUpon>PaymentsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ViewItem.cs">
       <SubType>Form</SubType>
@@ -545,8 +545,8 @@
     <EmbeddedResource Include="Forms\SupplierForm.resx">
       <DependentUpon>SupplierForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TransactionHistoryForm.resx">
-      <DependentUpon>TransactionHistoryForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\PaymentsForm.resx">
+      <DependentUpon>PaymentsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ViewItem.resx">
       <DependentUpon>ViewItem.cs</DependentUpon>

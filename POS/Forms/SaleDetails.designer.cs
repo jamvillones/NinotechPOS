@@ -37,7 +37,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaleDetails));
-            this.itemsPanel = new System.Windows.Forms.Panel();
             this.itemsTable = new System.Windows.Forms.DataGridView();
             this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serialCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,8 +51,6 @@
             this.soldTo = new System.Windows.Forms.TextBox();
             this.total = new System.Windows.Forms.TextBox();
             this.amountRecieved = new System.Windows.Forms.TextBox();
-            this.paymentNum = new System.Windows.Forms.NumericUpDown();
-            this.addPaymentButton = new System.Windows.Forms.Button();
             this.remaining = new System.Windows.Forms.TextBox();
             this.recHistBtn = new System.Windows.Forms.Button();
             this.soldBy = new System.Windows.Forms.TextBox();
@@ -68,9 +65,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.addPaymentGroup = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -80,52 +74,36 @@
             this.panel9 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.itemsPanel.SuspendLayout();
+            this.panel7 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.addPaymentGroup.SuspendLayout();
             this.panel5.SuspendLayout();
             this.remainGroup.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // itemsPanel
-            // 
-            this.itemsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.itemsPanel.BackColor = System.Drawing.Color.White;
-            this.itemsPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.itemsPanel.Controls.Add(this.itemsTable);
-            this.itemsPanel.Location = new System.Drawing.Point(12, 84);
-            this.itemsPanel.Name = "itemsPanel";
-            this.itemsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.itemsPanel.Size = new System.Drawing.Size(860, 354);
-            this.itemsPanel.TabIndex = 2;
             // 
             // itemsTable
             // 
             this.itemsTable.AllowUserToAddRows = false;
             this.itemsTable.AllowUserToDeleteRows = false;
             this.itemsTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.itemsTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.itemsTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.itemsTable.BackgroundColor = System.Drawing.Color.White;
+            this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.itemsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
@@ -146,21 +124,21 @@
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle8;
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.DarkGray;
-            this.itemsTable.Location = new System.Drawing.Point(5, 5);
+            this.itemsTable.Location = new System.Drawing.Point(0, 0);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.itemsTable.Size = new System.Drawing.Size(848, 342);
+            this.itemsTable.Size = new System.Drawing.Size(844, 370);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
             // 
@@ -243,129 +221,91 @@
             // soldTo
             // 
             this.soldTo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.soldTo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.soldTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.soldTo.Location = new System.Drawing.Point(0, 13);
+            this.soldTo.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.soldTo.Location = new System.Drawing.Point(0, 15);
             this.soldTo.Name = "soldTo";
             this.soldTo.ReadOnly = true;
-            this.soldTo.Size = new System.Drawing.Size(461, 13);
+            this.soldTo.Size = new System.Drawing.Size(303, 13);
             this.soldTo.TabIndex = 0;
             this.soldTo.TabStop = false;
-            this.soldTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.soldTo.Text = "Lerom Ipsum";
+            this.soldTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // total
             // 
             this.total.BackColor = System.Drawing.SystemColors.Control;
             this.total.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.total.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.total.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.total.Location = new System.Drawing.Point(0, 19);
-            this.total.Multiline = true;
+            this.total.Location = new System.Drawing.Point(0, 15);
             this.total.Name = "total";
             this.total.ReadOnly = true;
-            this.total.Size = new System.Drawing.Size(150, 20);
+            this.total.Size = new System.Drawing.Size(200, 13);
             this.total.TabIndex = 0;
             this.total.TabStop = false;
-            this.total.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.total.Text = "Lorem Ipsum";
+            this.total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // amountRecieved
             // 
             this.amountRecieved.BackColor = System.Drawing.SystemColors.Control;
             this.amountRecieved.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.amountRecieved.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.amountRecieved.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.amountRecieved.Location = new System.Drawing.Point(0, 19);
-            this.amountRecieved.Multiline = true;
+            this.amountRecieved.Location = new System.Drawing.Point(0, 15);
             this.amountRecieved.Name = "amountRecieved";
             this.amountRecieved.ReadOnly = true;
-            this.amountRecieved.Size = new System.Drawing.Size(150, 20);
+            this.amountRecieved.Size = new System.Drawing.Size(200, 13);
             this.amountRecieved.TabIndex = 0;
             this.amountRecieved.TabStop = false;
-            this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // paymentNum
-            // 
-            this.paymentNum.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.paymentNum.BackColor = System.Drawing.SystemColors.Control;
-            this.paymentNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.paymentNum.DecimalPlaces = 2;
-            this.paymentNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentNum.Location = new System.Drawing.Point(3, 19);
-            this.paymentNum.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.paymentNum.Maximum = new decimal(new int[] {
-            1410065407,
-            2,
-            0,
-            0});
-            this.paymentNum.Name = "paymentNum";
-            this.paymentNum.Size = new System.Drawing.Size(118, 17);
-            this.paymentNum.TabIndex = 2;
-            this.paymentNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.paymentNum.ThousandsSeparator = true;
-            this.paymentNum.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            this.paymentNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.paymentNum_KeyDown);
-            // 
-            // addPaymentButton
-            // 
-            this.addPaymentButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addPaymentButton.BackColor = System.Drawing.Color.Transparent;
-            this.addPaymentButton.FlatAppearance.BorderSize = 0;
-            this.addPaymentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addPaymentButton.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addPaymentButton.Location = new System.Drawing.Point(126, 16);
-            this.addPaymentButton.Name = "addPaymentButton";
-            this.addPaymentButton.Size = new System.Drawing.Size(20, 20);
-            this.addPaymentButton.TabIndex = 1;
-            this.addPaymentButton.Text = "+";
-            this.addPaymentButton.UseVisualStyleBackColor = false;
-            this.addPaymentButton.Click += new System.EventHandler(this.addPaymentButton_Click);
+            this.amountRecieved.Text = "Lorem Ipsum";
+            this.amountRecieved.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // remaining
             // 
             this.remaining.BackColor = System.Drawing.SystemColors.Control;
             this.remaining.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.remaining.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.remaining.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.remaining.Location = new System.Drawing.Point(0, 19);
-            this.remaining.Multiline = true;
+            this.remaining.Location = new System.Drawing.Point(0, 15);
             this.remaining.Name = "remaining";
             this.remaining.ReadOnly = true;
-            this.remaining.Size = new System.Drawing.Size(150, 20);
+            this.remaining.Size = new System.Drawing.Size(200, 13);
             this.remaining.TabIndex = 0;
             this.remaining.TabStop = false;
-            this.remaining.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.remaining.Text = "Lorem Ipsum";
+            this.remaining.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // recHistBtn
             // 
-            this.recHistBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.recHistBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.recHistBtn.Location = new System.Drawing.Point(479, 13);
+            this.recHistBtn.Location = new System.Drawing.Point(468, 0);
+            this.recHistBtn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.recHistBtn.Name = "recHistBtn";
             this.recHistBtn.Size = new System.Drawing.Size(150, 35);
             this.recHistBtn.TabIndex = 16;
-            this.recHistBtn.Text = "Show Payment History";
+            this.recHistBtn.Text = "Payments";
             this.recHistBtn.UseVisualStyleBackColor = false;
             this.recHistBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // soldBy
             // 
             this.soldBy.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.soldBy.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.soldBy.Location = new System.Drawing.Point(0, 13);
+            this.soldBy.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.soldBy.Location = new System.Drawing.Point(0, 15);
             this.soldBy.Name = "soldBy";
             this.soldBy.ReadOnly = true;
-            this.soldBy.Size = new System.Drawing.Size(461, 13);
+            this.soldBy.Size = new System.Drawing.Size(303, 13);
             this.soldBy.TabIndex = 0;
             this.soldBy.TabStop = false;
-            this.soldBy.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.soldBy.Text = "Lorem Ipsum";
+            this.soldBy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // voidBtn
             // 
-            this.voidBtn.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.voidBtn.BackColor = System.Drawing.Color.RosyBrown;
             this.voidBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.voidBtn.ForeColor = System.Drawing.Color.Black;
-            this.voidBtn.Location = new System.Drawing.Point(11, 13);
-            this.voidBtn.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.voidBtn.Location = new System.Drawing.Point(0, 0);
+            this.voidBtn.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.voidBtn.Name = "voidBtn";
             this.voidBtn.Size = new System.Drawing.Size(150, 35);
             this.voidBtn.TabIndex = 17;
@@ -375,9 +315,10 @@
             // 
             // editItemsBtn
             // 
-            this.editItemsBtn.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.editItemsBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.editItemsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.editItemsBtn.Location = new System.Drawing.Point(167, 13);
+            this.editItemsBtn.Location = new System.Drawing.Point(156, 0);
+            this.editItemsBtn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.editItemsBtn.Name = "editItemsBtn";
             this.editItemsBtn.Size = new System.Drawing.Size(150, 35);
             this.editItemsBtn.TabIndex = 17;
@@ -388,13 +329,15 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(323, 13);
+            this.button2.Location = new System.Drawing.Point(312, 0);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 35);
             this.button2.TabIndex = 21;
             this.button2.Text = "Print Receipt";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // doc
@@ -410,21 +353,19 @@
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.recHistBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 500);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 506);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(11, 10, 0, 10);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(884, 61);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(844, 35);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // panel1
             // 
-            this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel1.Controls.Add(this.soldTo);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(20, 23);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(461, 30);
+            this.panel1.Size = new System.Drawing.Size(303, 29);
             this.panel1.TabIndex = 19;
             // 
             // label2
@@ -441,9 +382,9 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 29);
+            this.panel2.Location = new System.Drawing.Point(0, 28);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(461, 1);
+            this.panel2.Size = new System.Drawing.Size(303, 1);
             this.panel2.TabIndex = 0;
             // 
             // panel3
@@ -452,9 +393,9 @@
             this.panel3.Controls.Add(this.soldBy);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Location = new System.Drawing.Point(12, 48);
+            this.panel3.Location = new System.Drawing.Point(20, 58);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(461, 30);
+            this.panel3.Size = new System.Drawing.Size(303, 29);
             this.panel3.TabIndex = 20;
             // 
             // label3
@@ -471,59 +412,21 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.Black;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 29);
+            this.panel4.Location = new System.Drawing.Point(0, 28);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(461, 1);
+            this.panel4.Size = new System.Drawing.Size(303, 1);
             this.panel4.TabIndex = 0;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.AutoSize = true;
-            this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel2.Controls.Add(this.addPaymentGroup);
-            this.flowLayoutPanel2.Controls.Add(this.panel5);
-            this.flowLayoutPanel2.Controls.Add(this.remainGroup);
-            this.flowLayoutPanel2.Controls.Add(this.panel9);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 444);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(11, 5, 0, 5);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(884, 56);
-            this.flowLayoutPanel2.TabIndex = 3;
-            // 
-            // addPaymentGroup
-            // 
-            this.addPaymentGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.addPaymentGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.addPaymentGroup.Controls.Add(this.addPaymentButton);
-            this.addPaymentGroup.Controls.Add(this.paymentNum);
-            this.addPaymentGroup.Controls.Add(this.label7);
-            this.addPaymentGroup.Location = new System.Drawing.Point(720, 8);
-            this.addPaymentGroup.Name = "addPaymentGroup";
-            this.addPaymentGroup.Size = new System.Drawing.Size(150, 40);
-            this.addPaymentGroup.TabIndex = 22;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Add Payment:";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel5
             // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel5.Controls.Add(this.amountRecieved);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.panel6);
-            this.panel5.Location = new System.Drawing.Point(564, 8);
+            this.panel5.Location = new System.Drawing.Point(664, 23);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(150, 40);
+            this.panel5.Size = new System.Drawing.Size(200, 29);
             this.panel5.TabIndex = 21;
             // 
             // label4
@@ -541,21 +444,22 @@
             // 
             this.panel6.BackColor = System.Drawing.Color.Black;
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 39);
+            this.panel6.Location = new System.Drawing.Point(0, 28);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(150, 1);
+            this.panel6.Size = new System.Drawing.Size(200, 1);
             this.panel6.TabIndex = 0;
             // 
             // remainGroup
             // 
+            this.remainGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.remainGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.remainGroup.BackColor = System.Drawing.SystemColors.Control;
             this.remainGroup.Controls.Add(this.remaining);
             this.remainGroup.Controls.Add(this.label5);
             this.remainGroup.Controls.Add(this.panel8);
-            this.remainGroup.Location = new System.Drawing.Point(408, 8);
+            this.remainGroup.Location = new System.Drawing.Point(664, 93);
             this.remainGroup.Name = "remainGroup";
-            this.remainGroup.Size = new System.Drawing.Size(150, 40);
+            this.remainGroup.Size = new System.Drawing.Size(200, 29);
             this.remainGroup.TabIndex = 22;
             // 
             // label5
@@ -573,22 +477,22 @@
             // 
             this.panel8.BackColor = System.Drawing.Color.Black;
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 39);
+            this.panel8.Location = new System.Drawing.Point(0, 28);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(150, 1);
+            this.panel8.Size = new System.Drawing.Size(200, 1);
             this.panel8.TabIndex = 0;
             // 
             // panel9
             // 
+            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel9.BackColor = System.Drawing.SystemColors.Control;
             this.panel9.Controls.Add(this.total);
             this.panel9.Controls.Add(this.label6);
             this.panel9.Controls.Add(this.panel10);
-            this.panel9.Location = new System.Drawing.Point(252, 8);
-            this.panel9.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.panel9.Location = new System.Drawing.Point(664, 58);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(150, 40);
+            this.panel9.Size = new System.Drawing.Size(200, 29);
             this.panel9.TabIndex = 22;
             // 
             // label6
@@ -606,61 +510,67 @@
             // 
             this.panel10.BackColor = System.Drawing.Color.Black;
             this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel10.Location = new System.Drawing.Point(0, 39);
+            this.panel10.Location = new System.Drawing.Point(0, 28);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(150, 1);
+            this.panel10.Size = new System.Drawing.Size(200, 1);
             this.panel10.TabIndex = 0;
+            // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel7.Controls.Add(this.itemsTable);
+            this.panel7.Location = new System.Drawing.Point(20, 130);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(844, 370);
+            this.panel7.TabIndex = 22;
             // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 561);
-            this.Controls.Add(this.flowLayoutPanel2);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.itemsPanel);
+            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.remainGroup);
+            this.Controls.Add(this.panel9);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "SaleDetails";
+            this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sale";
             this.Load += new System.EventHandler(this.SaleDetails_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleDetails_KeyDown);
-            this.itemsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.addPaymentGroup.ResumeLayout(false);
-            this.addPaymentGroup.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.remainGroup.ResumeLayout(false);
             this.remainGroup.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel itemsPanel;
         private System.Windows.Forms.DataGridView itemsTable;
         private System.Windows.Forms.TextBox soldTo;
         private System.Windows.Forms.TextBox total;
         private System.Windows.Forms.TextBox amountRecieved;
-        private System.Windows.Forms.Button addPaymentButton;
-        private System.Windows.Forms.NumericUpDown paymentNum;
         private System.Windows.Forms.TextBox remaining;
         private System.Windows.Forms.Button recHistBtn;
         private System.Windows.Forms.TextBox soldBy;
@@ -685,7 +595,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel6;
@@ -695,7 +604,6 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Panel addPaymentGroup;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panel7;
     }
 }

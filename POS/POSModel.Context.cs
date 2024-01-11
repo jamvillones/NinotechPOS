@@ -12,19 +12,22 @@ namespace POS
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using Connections;
+
+
     public partial class POSEntities : DbContext
     {
         public POSEntities()
             : base("name=POSEntities")
         {
+            this.ChangeDatabase();
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<ChargedPayRecord> ChargedPayRecords { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Login> Logins { get; set; }

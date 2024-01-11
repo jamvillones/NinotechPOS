@@ -25,9 +25,19 @@ namespace Connections
                 // init the sqlbuilder with the full EF connectionstring cargo
                 var sqlCnxStringBuilder = new SqlConnectionStringBuilder(entityCnxStringBuilder.ProviderConnectionString);
 
-                sqlCnxStringBuilder.DataSource = settins.DataSource + "," + settins.PortName;
-                sqlCnxStringBuilder.UserID = settins.UserId;
-                sqlCnxStringBuilder.Password = settins.Password;
+                if (settins.IsLocalConnection)
+                {
+                    string machineName = System.Environment.MachineName;
+                    sqlCnxStringBuilder.DataSource = machineName + "\\SQLEXPRESS";
+                    sqlCnxStringBuilder.TrustServerCertificate = true;
+                    sqlCnxStringBuilder.IntegratedSecurity = true;
+                }
+                else
+                {
+                    sqlCnxStringBuilder.DataSource = settins.DataSource + "," + settins.PortName;
+                    sqlCnxStringBuilder.UserID = settins.UserId;
+                    sqlCnxStringBuilder.Password = settins.Password;
+                }
 
                 // now flip the properties that were changed
                 source.Database.Connection.ConnectionString
@@ -40,11 +50,11 @@ namespace Connections
             }
         }
 
-        public static void ChangeDatabase(this DbContext source, string dataSource, string portName, string id, string pass)
+        public static void ChangeDatabase(this DbContext source, string dataSource, string portName, string id, string pass, bool isLocalConnection = true)
         {
             try
             {
-                var settins = POS.Properties.Settings.Default;
+                //var settings = POS.Properties.Settings.Default;
                 // use the const name if it's not null, otherwise
                 // using the convention of connection string = EF contextname
                 // grab the type name and we're done
@@ -56,9 +66,19 @@ namespace Connections
                 // init the sqlbuilder with the full EF connectionstring cargo
                 var sqlCnxStringBuilder = new SqlConnectionStringBuilder(entityCnxStringBuilder.ProviderConnectionString);
 
-                sqlCnxStringBuilder.DataSource = dataSource + "," + portName;
-                sqlCnxStringBuilder.UserID = id;
-                sqlCnxStringBuilder.Password = pass;
+                if (isLocalConnection)
+                {
+                    string machineName = System.Environment.MachineName;
+                    sqlCnxStringBuilder.DataSource = machineName + "\\SQLEXPRESS";
+                    sqlCnxStringBuilder.TrustServerCertificate = true;
+                    sqlCnxStringBuilder.IntegratedSecurity = true;
+                }
+                else
+                {
+                    sqlCnxStringBuilder.DataSource = dataSource + "," + portName;
+                    sqlCnxStringBuilder.UserID = id;
+                    sqlCnxStringBuilder.Password = pass;
+                }
 
                 //// set the integrated security status
                 //sqlCnxStringBuilder.IntegratedSecurity = false;
@@ -112,7 +132,7 @@ namespace Connections
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception.Message);               
+                Console.WriteLine(exception.Message);
             }
             finally
             {
