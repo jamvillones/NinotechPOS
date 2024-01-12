@@ -426,7 +426,7 @@
             this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Stockin History";
+            this.Text = "Stockin Log";
             this.Load += new System.EventHandler(this.StockinLog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.histTable)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);

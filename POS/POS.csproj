@@ -153,12 +153,6 @@
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Misc\DataListHolder.cs" />
-    <Compile Include="EditSaleDetails.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditSaleDetails.Designer.cs">
-      <DependentUpon>EditSaleDetails.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\CustomerTransactionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -421,9 +415,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ConnectionConfigurations.resx">
       <DependentUpon>ConnectionConfigurations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EditSaleDetails.resx">
-      <DependentUpon>EditSaleDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Create_Supplier_Form.resx">
       <DependentUpon>Create_Supplier_Form.cs</DependentUpon>

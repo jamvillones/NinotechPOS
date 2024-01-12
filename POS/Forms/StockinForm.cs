@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,34 +31,51 @@ namespace POS.Forms
         {
             InitializeComponent();
         }
-
-        private async Task SetTable()
+        DataGridViewRow CreateProductRow(Product product) => itemsTable.CreateRow(
+            product.Id,
+            product.Item.Barcode,
+            product.Item.Name,
+            product.Cost,
+            product.Supplier.Name);
+        bool IsLoadingData = false;
+        private async Task LoadDataAsync()
         {
-            itemsTable.InvokeIfRequired(() => { itemsTable.Rows.Clear(); });
+            //itemsTable.InvokeIfRequired(() => { itemsTable.Rows.Clear(); });
 
-            await Task.Run(() =>
+
+            //loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = true; });
+            searchControl.InvokeIfRequired(() => { searchControl.Enabled = false; });
+            IsLoadingData = true;
+            using (var context = new POSEntities())
             {
-                loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = true; });
-                searchControl.InvokeIfRequired(() => { searchControl.Enabled = false; });
 
-                using (var p = new POSEntities())
+                var products = await context.Products.AsNoTracking().AsQueryable()
+                .Where(x => x.Item.Type == ItemType.Quantifiable.ToString())
+                //.Select(y => itemsTable.CreateRow(y.Item?.Barcode, y.Item.Name, y.Cost, y.Supplier?.Name))
+                .ToListAsync();
+
+
+                if (products.Count > 0)
                 {
-                    IEnumerable<Product> prod = p.Products;
-                    var rows = prod.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).Select(y => itemsTable.CreateRow(y.Item?.Barcode, y.Item.Name, y.Cost, y.Supplier?.Name)).ToArray();
-
-
-                    itemsTable.InvokeIfRequired(() =>
+                    await Task.Run(() =>
                     {
-                        if (itemsTable.IsDisposed || itemsTable.Disposing)
-                            return;
-
-                        itemsTable.Rows.AddRange(rows);
+                        var rows = products.Select(CreateProductRow).ToArray();
+                        itemsTable.InvokeIfRequired(() => itemsTable.Rows.AddRange(rows));
                     });
                 }
+                //itemsTable.InvokeIfRequired(() =>
+                //{
+                //    if (itemsTable.IsDisposed || itemsTable.Disposing)
+                //        return;
 
-                loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = false; });
-                searchControl.InvokeIfRequired(() => { searchControl.Enabled = true; });
-            });
+                //    itemsTable.Rows.AddRange(rows);
+                //});
+            }
+            IsLoadingData = false;
+
+            //loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = false; });
+            searchControl.InvokeIfRequired(() => { searchControl.Enabled = true; });
+
 
         }
 
@@ -72,40 +90,29 @@ namespace POS.Forms
         private async void StockinForm_Load(object sender, EventArgs e)
         {
             createItemBtn.Enabled = currLogin.CanEditItem;
-            setAutoComplete();
 
-            var init = SetTable();
-
-            await init;
+            await LoadDataAsync();
         }
+
+        string CurrentProductBarcode => itemsTable.SelectedCells[col_barcode.Index].Value.ToString();
+        string CurrentProductName => itemsTable.SelectedCells[col_name.Index].Value.ToString();
+        decimal CurrentProductCost => (decimal)itemsTable.SelectedCells[col_cost.Index].Value;
+
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
         {
-            if (itemsTable.DataGridViewCurrentRowIndex() == -1)
-                return;
-            using (var p = new POSEntities())
-            {
-                /// get the current row
-                var currentRow = itemsTable.Rows[itemsTable.DataGridViewCurrentRowIndex()];
-                ///get the supplier name based on current row
-                string supplierName = currentRow.Cells[3].Value.ToString();
-                ///get the barcode based on current row
-                string barc = currentRow.Cells[0].Value.ToString();
+            if (itemsTable.RowCount <= 0) return;
 
-                selectedProduct = p.Products.FirstOrDefault(x => x.Supplier.Name == supplierName && x.ItemId == barc);
-                itemName.Text = selectedProduct.Item.Name;
-                cost.Text = selectedProduct.Cost.ToString();
-                supplier.Text = selectedProduct.Supplier.Name;
-                barcode.Text = selectedProduct.ItemId;
-            }
+            itemName.Text = CurrentProductBarcode + " - " + CurrentProductName;
             serialNumber.Text = string.Empty;
-            //this.ActiveControl = serialNumber;
+            this.ActiveControl = serialNumber;
         }
 
         private void quantity_ValueChanged(object sender, EventArgs e)
         {
             //cost.Text = (quantity.Value * item.SellingPrice).ToString();
         }
+
         bool alreadyInTable(string id, string supplier, out int index)
         {
             string b, s;
@@ -132,7 +139,7 @@ namespace POS.Forms
         }
         private void addBtn_Click(object sender, EventArgs e)
         {
-            addItem();
+            AddProduct();
             this.ActiveControl = searchControl.firstControl;
             //Console.WriteLine(ActiveControl.Name);
         }
@@ -202,16 +209,19 @@ namespace POS.Forms
             }
         }
 
+        int SelectedId => (int)itemsTable.SelectedCells[0].Value;
+
         bool serialAlreadyTaken()
         {
             using (var p = new POSEntities())
             {
-                if (p.InventoryItems.Any(x => x.SerialNumber == serialNumber.Text && x.Product.Item.Barcode == barcode.Text))
+                if (p.InventoryItems.Any(x => x.SerialNumber == serialNumber.Text))
                 {
                     MessageBox.Show("Serial number already in inventory.");
                     return true;
                 }
             }
+
             for (int i = 0; i < inventoryTable.RowCount; i++)
             {
                 if (serialNumber.Text == inventoryTable.Rows[i].Cells[1].Value.ToString())
@@ -225,40 +235,40 @@ namespace POS.Forms
 
         Product selectedProduct;
 
-        void addItem()
+        void AddProduct()
         {
             ///check if the item to be added has serial
-            if (!string.IsNullOrEmpty(serialNumber.Text))
-            {
-                if (serialAlreadyTaken())
-                {
-                    return;
-                }
-            }
-            else
-            {
-                ///if not then check if the item to be added is already in the table, if yes just edit quantitty
-                int index;
-                if (alreadyInTable(barcode.Text, supplier.Text, out index))
-                {
-                    var currentQuant = Convert.ToInt32(inventoryTable.Rows[index].Cells[3].Value);
-                    inventoryTable.Rows[index].Cells[3].Value = currentQuant + quantity.Value;
-                    inventoryTable.Rows[index].Cells[5].Value = (currentQuant + quantity.Value) * Convert.ToDecimal(cost.Text);
-                    return;
-                }
-            }
-            ///else, add the item
-            Decimal totalCost = quantity.Value * Convert.ToDecimal(cost.Text);
-            inventoryTable.Rows.Add(barcode.Text, serialNumber.Text, itemName.Text, quantity.Value, cost.Text, totalCost.ToString(), supplier.Text);
+            //    if (!string.IsNullOrEmpty(serialNumber.Text))
+            //    {
+            //        if (serialAlreadyTaken())
+            //        {
+            //            return;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        ///if not then check if the item to be added is already in the table, if yes just edit quantitty
+            //        int index;
+            //        if (alreadyInTable(barcode.Text, supplier.Text, out index))
+            //        {
+            //            var currentQuant = Convert.ToInt32(inventoryTable.Rows[index].Cells[3].Value);
+            //            inventoryTable.Rows[index].Cells[3].Value = currentQuant + quantity.Value;
+            //            inventoryTable.Rows[index].Cells[5].Value = (currentQuant + quantity.Value) * Convert.ToDecimal(cost.Text);
+            //            return;
+            //        }
+            //    }
+            //    ///else, add the item
+            //    Decimal totalCost = quantity.Value * Convert.ToDecimal(cost.Text);
+            //    inventoryTable.Rows.Add(barcode.Text, serialNumber.Text, itemName.Text, quantity.Value, cost.Text, totalCost.ToString(), supplier.Text);
 
-            serialNumber.Text = string.Empty;
+            //    serialNumber.Text = string.Empty;
         }
 
         private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex == -1)
                 return;
-            addItem();
+            AddProduct();
         }
 
         private void removeBtn_Click(object sender, EventArgs e)
@@ -316,7 +326,7 @@ namespace POS.Forms
         private void Additem_OnSave(object sender, EventArgs e)
         {
             setAutoComplete();
-            var init = SetTable();
+            var init = LoadDataAsync();
         }
 
         private void searchControl1_OnSearch(object sender, SearchEventArgs e)
@@ -349,14 +359,14 @@ namespace POS.Forms
 
         private void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
-            var t = SetTable();
+            var t = LoadDataAsync();
         }
 
         private void serialNumber_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && barcode.Text != string.Empty)
+            if (e.KeyCode == Keys.Enter && !string.IsNullOrWhiteSpace(serialNumber.Text))
             {
-                addItem();
+                AddProduct();
             }
         }
     }
