@@ -21,7 +21,7 @@ namespace POS.Forms
         public string Serial { get; set; }
         public string Supplier { get; set; }
         public decimal SellingPrice { get; set; }
-        public decimal discount { get; set; }
+        public decimal Discount { get; set; }
         private int q;
         public int Quantity
         {
@@ -31,7 +31,7 @@ namespace POS.Forms
             }
             set { q = value; }
         }
-        public decimal TotalPrice { get { return (Quantity * (SellingPrice - discount)); } }
+        public decimal TotalPrice { get { return (Quantity * (SellingPrice - Discount)); } }
     }
 
     public partial class MakeSale : Form
@@ -104,7 +104,7 @@ namespace POS.Forms
             {
                 var row = cartTable.Rows[i];
                 if (tempItem.Barcode == row.Cells[0].Value.ToString() &&
-                    tempItem.discount == Convert.ToDecimal(row.Cells[5].Value) &&
+                    tempItem.Discount == Convert.ToDecimal(row.Cells[5].Value) &&
                     tempItem.Supplier == row.Cells[7].Value?.ToString())
                 {
                     index = i;
@@ -244,7 +244,7 @@ namespace POS.Forms
             tempItem.Name = cRows.Cells[2].Value.ToString();
             tempItem.SellingPrice = Convert.ToDecimal(cRows.Cells[4].Value);
             tempItem.Supplier = cRows.Cells[5].Value?.ToString();
-            tempItem.discount = discount.Value;
+            tempItem.Discount = discount.Value;
 
             quantity.Value = string.IsNullOrEmpty(tempItem.Serial) ? quantity.Value : 1;
             quantity.Enabled = string.IsNullOrEmpty(tempItem.Serial) ? true : false;
@@ -346,8 +346,8 @@ namespace POS.Forms
                 tempItem.Name,
                 tempItem.Quantity,
                 tempItem.SellingPrice,
-                tempItem.discount,
-                tempItem.TotalPrice.ToString(),
+                tempItem.Discount,
+                tempItem.TotalPrice,
                 tempItem.Supplier
                 );
         }
@@ -413,7 +413,7 @@ namespace POS.Forms
         {
             tempItem.Quantity = (int)quantity.Value;
             discount.Maximum = price.Value;
-            tempItem.discount = discount.Value;
+            tempItem.Discount = discount.Value;
             tempItem.SellingPrice = price.Value;
 
             //totalPrice.Text = tempItem.TotalPrice.ToString();

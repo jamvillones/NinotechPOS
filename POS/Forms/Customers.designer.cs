@@ -171,6 +171,7 @@
             this.recHistBtn.TabIndex = 17;
             this.recHistBtn.Text = "Add Cutomer";
             this.recHistBtn.UseVisualStyleBackColor = false;
+            this.recHistBtn.Click += new System.EventHandler(this.recHistBtn_Click);
             // 
             // searchControl
             // 
@@ -182,6 +183,7 @@
             this.searchControl.MaximumSize = new System.Drawing.Size(350, 35);
             this.searchControl.MinimumSize = new System.Drawing.Size(2, 35);
             this.searchControl.Name = "searchControl";
+            this.searchControl.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
             this.searchControl.SearchedText = "";
             this.searchControl.Size = new System.Drawing.Size(350, 35);
             this.searchControl.TabIndex = 0;

@@ -122,7 +122,7 @@ namespace POS.Forms
 
         private void discount_ValueChanged(object sender, EventArgs e)
         {
-            infoHolder.discount = discount.Value;
+            infoHolder.Discount = discount.Value;
             calculateTotal();
         }
 

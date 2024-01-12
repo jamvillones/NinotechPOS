@@ -255,6 +255,23 @@ namespace POS.Forms
         {
 
         }
+
+        private void recHistBtn_Click(object sender, EventArgs e)
+        {
+            using (var customerForm = new Create_Customer_Form())
+            {
+                customerForm.OnSuccessfulCreation += CustomerForm_OnSuccessfulCreation;
+                customerForm.ShowDialog();
+            }
+        }
+
+        private void CustomerForm_OnSuccessfulCreation(object sender, object e)
+        {
+            if (e is Customer newCustomer)
+            {
+                customerTable.Rows.Add(CreateRow(newCustomer));
+            }
+        }
     }
 
     public static class CustomerQueryExtensions

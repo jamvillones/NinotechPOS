@@ -121,7 +121,7 @@ namespace POS.Forms {
 
                 newSoldItem.Quantity = calculateQuantity(e.Quantity, Inv.Quantity, out rem);
                 newSoldItem.ItemPrice = e.SellingPrice;
-                newSoldItem.Discount = e.discount;
+                newSoldItem.Discount = e.Discount;
 
                 if (rem == 0) {
                     p.InventoryItems.Remove(Inv);

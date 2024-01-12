@@ -32,36 +32,24 @@ namespace POS.UserControls
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchControl));
             this.searchBtn = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.searchText = new System.Windows.Forms.TextBox();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // searchBtn
             // 
-            this.searchBtn.BackColor = System.Drawing.Color.Transparent;
-            this.searchBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.searchBtn.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.searchBtn.BackColor = System.Drawing.SystemColors.Window;
             this.searchBtn.FlatAppearance.BorderSize = 0;
             this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
-            this.searchBtn.Location = new System.Drawing.Point(313, 0);
+            this.searchBtn.Location = new System.Drawing.Point(320, 5);
             this.searchBtn.Margin = new System.Windows.Forms.Padding(0);
             this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(35, 33);
+            this.searchBtn.Size = new System.Drawing.Size(25, 25);
             this.searchBtn.TabIndex = 1;
             this.searchBtn.TabStop = false;
             this.searchBtn.UseVisualStyleBackColor = false;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.searchText);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.panel1.Size = new System.Drawing.Size(313, 33);
-            this.panel1.TabIndex = 2;
             // 
             // searchText
             // 
@@ -69,34 +57,32 @@ namespace POS.UserControls
             this.searchText.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.searchText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchText.Location = new System.Drawing.Point(8, 9);
+            this.searchText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchText.Location = new System.Drawing.Point(13, 6);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(297, 14);
+            this.searchText.Size = new System.Drawing.Size(304, 22);
             this.searchText.TabIndex = 0;
             // 
             // SearchControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.panel1);
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.searchBtn);
-            this.MaximumSize = new System.Drawing.Size(350, 35);
+            this.Controls.Add(this.searchText);
+            this.MaximumSize = new System.Drawing.Size(350, 60);
             this.MinimumSize = new System.Drawing.Size(200, 35);
             this.Name = "SearchControl";
-            this.Size = new System.Drawing.Size(348, 33);
+            this.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.Size = new System.Drawing.Size(350, 35);
             this.Load += new System.EventHandler(this.SearchControl_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button searchBtn;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox searchText;
     }
 }
