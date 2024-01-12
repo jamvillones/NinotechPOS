@@ -342,7 +342,7 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle4.Format = "g";
+            dataGridViewCellStyle4.Format = "f";
             dataGridViewCellStyle4.NullValue = null;
             dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.Column1.DefaultCellStyle = dataGridViewCellStyle4;
