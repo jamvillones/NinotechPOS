@@ -46,26 +46,16 @@
             this.loginPrivilegesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editLoginDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.tabHoldersPanel = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.inventoryTab = new POS.UserControls.InventoryUC();
             this.reportTab = new POS.UserControls.ReportUC();
             this.sideButtonsPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
-            this.splitContainer.Panel1.SuspendLayout();
-            this.splitContainer.Panel2.SuspendLayout();
-            this.splitContainer.SuspendLayout();
             this.tabHoldersPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -180,7 +170,7 @@
             this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userButton.Image = ((System.Drawing.Image)(resources.GetObject("userButton.Image")));
             this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userButton.Location = new System.Drawing.Point(745, 0);
+            this.userButton.Location = new System.Drawing.Point(865, 0);
             this.userButton.Margin = new System.Windows.Forms.Padding(0);
             this.userButton.Name = "userButton";
             this.userButton.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
@@ -202,13 +192,10 @@
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton2,
             this.toolStripButton1,
-            this.toolStripSeparator4,
             this.toolStripButton5,
             this.toolStripButton4,
-            this.toolStripButton2,
-            this.toolStripSeparator3,
-            this.toolStripButton6});
-            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStripButton2});
+            this.toolStrip.Location = new System.Drawing.Point(120, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -221,9 +208,9 @@
             // 
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loginsToolStripMenuItem,
             this.customersToolStripMenuItem,
-            this.suppliersToolStripMenuItem,
-            this.loginsToolStripMenuItem});
+            this.suppliersToolStripMenuItem});
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
@@ -295,11 +282,6 @@
             this.toolStripButton1.Text = "Stockin Log";
             this.toolStripButton1.Click += new System.EventHandler(this.stockinLog_Click);
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -334,88 +316,16 @@
             this.toolStripButton2.Text = "Receipt Printer Settings";
             this.toolStripButton2.Click += new System.EventHandler(this.receiptConfig_Click);
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.toolStripButton6.Size = new System.Drawing.Size(57, 22);
-            this.toolStripButton6.Text = "Note";
-            this.toolStripButton6.ToolTipText = "Show/Hide Notes";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
-            // 
-            // splitContainer
-            // 
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer.Location = new System.Drawing.Point(120, 0);
-            this.splitContainer.Name = "splitContainer";
-            // 
-            // splitContainer.Panel1
-            // 
-            this.splitContainer.Panel1.Controls.Add(this.userButton);
-            this.splitContainer.Panel1.Controls.Add(this.tabHoldersPanel);
-            this.splitContainer.Panel1.Controls.Add(this.toolStrip);
-            this.splitContainer.Panel1MinSize = 0;
-            // 
-            // splitContainer.Panel2
-            // 
-            this.splitContainer.Panel2.Controls.Add(this.textBox1);
-            this.splitContainer.Panel2.Controls.Add(this.label1);
-            this.splitContainer.Panel2.Padding = new System.Windows.Forms.Padding(5);
-            this.splitContainer.Panel2Collapsed = true;
-            this.splitContainer.Panel2MinSize = 0;
-            this.splitContainer.Size = new System.Drawing.Size(864, 591);
-            this.splitContainer.SplitterDistance = 839;
-            this.splitContainer.SplitterWidth = 3;
-            this.splitContainer.TabIndex = 4;
-            // 
             // tabHoldersPanel
             // 
             this.tabHoldersPanel.Controls.Add(this.inventoryTab);
             this.tabHoldersPanel.Controls.Add(this.reportTab);
             this.tabHoldersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabHoldersPanel.Location = new System.Drawing.Point(0, 25);
+            this.tabHoldersPanel.Location = new System.Drawing.Point(120, 25);
             this.tabHoldersPanel.Name = "tabHoldersPanel";
-            this.tabHoldersPanel.Padding = new System.Windows.Forms.Padding(20);
+            this.tabHoldersPanel.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
             this.tabHoldersPanel.Size = new System.Drawing.Size(864, 566);
             this.tabHoldersPanel.TabIndex = 3;
-            // 
-            // textBox1
-            // 
-            this.textBox1.AcceptsReturn = true;
-            this.textBox1.AcceptsTab = true;
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.HideSelection = false;
-            this.textBox1.Location = new System.Drawing.Point(5, 30);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.textBox1.Size = new System.Drawing.Size(86, 65);
-            this.textBox1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(5, 5);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(5);
-            this.label1.Size = new System.Drawing.Size(86, 25);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Note";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // notifyIcon1
             // 
@@ -427,7 +337,7 @@
             this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inventoryTab.Location = new System.Drawing.Point(20, 20);
             this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Size = new System.Drawing.Size(824, 526);
+            this.inventoryTab.Size = new System.Drawing.Size(824, 546);
             this.inventoryTab.TabIndex = 2;
             // 
             // reportTab
@@ -435,7 +345,7 @@
             this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportTab.Location = new System.Drawing.Point(20, 20);
             this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(824, 526);
+            this.reportTab.Size = new System.Drawing.Size(824, 546);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
             // 
@@ -444,7 +354,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 591);
-            this.Controls.Add(this.splitContainer);
+            this.Controls.Add(this.userButton);
+            this.Controls.Add(this.tabHoldersPanel);
+            this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.sideButtonsPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -460,14 +372,9 @@
             this.sideButtonsPanel.ResumeLayout(false);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
-            this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel1.PerformLayout();
-            this.splitContainer.Panel2.ResumeLayout(false);
-            this.splitContainer.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
-            this.splitContainer.ResumeLayout(false);
             this.tabHoldersPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -480,20 +387,14 @@
        // private UserControls.InventoryUC inventoryTab;
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.Panel tabHoldersPanel;
         private UserControls.InventoryUC inventoryTab;
         private UserControls.ReportUC reportTab;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
         private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;

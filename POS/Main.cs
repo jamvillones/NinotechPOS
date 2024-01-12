@@ -48,6 +48,8 @@ namespace POS
 
             //MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             //Location = Screen.FromHandle(this.Handle).WorkingArea.Location;
+
+
         }
 
         /// <summary>
@@ -58,7 +60,7 @@ namespace POS
             var cl = currLogin;
 
             userButton.InvokeIfRequired(() => { userButton.Text = "   " + cl.Name ?? "user"; });
-            textBox1.InvokeIfRequired(() => textBox1.Text = Properties.Settings.Default.Note);
+            //textBox1.InvokeIfRequired(() => textBox1.Text = Properties.Settings.Default.Note);
 
             toolStrip.InvokeIfRequired(() =>
             {
@@ -119,7 +121,7 @@ namespace POS
         Button prevButton;
 
         Color selectedButtonColor =
-            Color.FromArgb(240,240,240);
+            Color.FromArgb(240, 240, 240);
         Color normalButtonColor =
             Color.Transparent;
 
@@ -234,9 +236,9 @@ namespace POS
                 }
 
 
-            string n = textBox1.Text.Trim();
-            Properties.Settings.Default.Note = n == string.Empty ? null : n;
-            Properties.Settings.Default.Save();
+            //string n = textBox1.Text.Trim();
+            //Properties.Settings.Default.Note = n == string.Empty ? null : n;
+            //Properties.Settings.Default.Save();
 
 
             CancelLoadings(inventoryTab);
@@ -260,7 +262,7 @@ namespace POS
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            splitContainer.Panel2Collapsed = !splitContainer.Panel2Collapsed;
+            //splitContainer.Panel2Collapsed = !splitContainer.Panel2Collapsed;
         }
 
         int showedWidth = 115;
@@ -272,6 +274,11 @@ namespace POS
             s.Width = s.Width == showedWidth ? collapsedWidth : showedWidth;
 
             //s.Visible = false;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

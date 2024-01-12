@@ -35,11 +35,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.saleTable = new System.Windows.Forms.DataGridView();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.regularSalesTab = new System.Windows.Forms.TabPage();
             this.totalSale = new System.Windows.Forms.Label();
@@ -61,9 +56,13 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             this.searchControl2 = new POS.UserControls.SearchControl();
+            this.searchControl1 = new POS.UserControls.SearchControl();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.saleTable)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.regularSalesTab.SuspendLayout();
@@ -108,54 +107,19 @@
             this.saleTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.saleTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.saleTable.EnableHeadersVisualStyles = false;
-            this.saleTable.Location = new System.Drawing.Point(10, 55);
+            this.saleTable.Location = new System.Drawing.Point(10, 106);
             this.saleTable.MultiSelect = false;
             this.saleTable.Name = "saleTable";
             this.saleTable.ReadOnly = true;
             this.saleTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.saleTable.RowHeadersVisible = false;
             this.saleTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.saleTable.Size = new System.Drawing.Size(759, 409);
+            this.saleTable.Size = new System.Drawing.Size(759, 383);
             this.saleTable.StandardTab = true;
             this.saleTable.TabIndex = 1;
             this.saleTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.saleTable_CellContentClick);
             this.saleTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.saleTable_CellMouseDoubleClick);
             this.saleTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.saleTable_KeyDown);
-            // 
-            // Column8
-            // 
-            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column8.HeaderText = "ID";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 45;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "DATE";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "BY";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "CUSTOMER";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column3.HeaderText = "TOTAL";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 67;
             // 
             // tabControl1
             // 
@@ -173,9 +137,9 @@
             // 
             this.regularSalesTab.BackColor = System.Drawing.Color.White;
             this.regularSalesTab.Controls.Add(this.saleTable);
-            this.regularSalesTab.Controls.Add(this.panel2);
             this.regularSalesTab.Controls.Add(this.totalSale);
             this.regularSalesTab.Controls.Add(this.flowLayoutPanel3);
+            this.regularSalesTab.Controls.Add(this.searchControl2);
             this.regularSalesTab.Location = new System.Drawing.Point(4, 22);
             this.regularSalesTab.Name = "regularSalesTab";
             this.regularSalesTab.Padding = new System.Windows.Forms.Padding(10);
@@ -185,34 +149,33 @@
             // 
             // totalSale
             // 
-            this.totalSale.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.totalSale.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.totalSale.Dock = System.Windows.Forms.DockStyle.Top;
             this.totalSale.ForeColor = System.Drawing.Color.Black;
-            this.totalSale.Location = new System.Drawing.Point(10, 464);
+            this.totalSale.Location = new System.Drawing.Point(10, 86);
             this.totalSale.Name = "totalSale";
-            this.totalSale.Size = new System.Drawing.Size(759, 25);
+            this.totalSale.Size = new System.Drawing.Size(759, 20);
             this.totalSale.TabIndex = 7;
             this.totalSale.Text = "Total: P 1,000.00";
-            this.totalSale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.totalSale.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // flowLayoutPanel3
             // 
-            this.flowLayoutPanel3.Controls.Add(this.searchControl2);
+            this.flowLayoutPanel3.AutoSize = true;
             this.flowLayoutPanel3.Controls.Add(this.dtFilter);
             this.flowLayoutPanel3.Controls.Add(this.comboFilterType);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(10, 10);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(10, 45);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(759, 35);
+            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(759, 41);
             this.flowLayoutPanel3.TabIndex = 16;
             // 
             // dtFilter
             // 
             this.dtFilter.CustomFormat = "MMMM d, yyyy";
             this.dtFilter.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFilter.Location = new System.Drawing.Point(360, 7);
-            this.dtFilter.Margin = new System.Windows.Forms.Padding(10, 7, 0, 0);
+            this.dtFilter.Location = new System.Drawing.Point(0, 10);
+            this.dtFilter.Margin = new System.Windows.Forms.Padding(0);
             this.dtFilter.Name = "dtFilter";
             this.dtFilter.Size = new System.Drawing.Size(139, 20);
             this.dtFilter.TabIndex = 0;
@@ -225,10 +188,10 @@
             "Daily",
             "Monthly",
             "Yearly"});
-            this.comboFilterType.Location = new System.Drawing.Point(509, 7);
-            this.comboFilterType.Margin = new System.Windows.Forms.Padding(10, 7, 0, 0);
+            this.comboFilterType.Location = new System.Drawing.Point(149, 10);
+            this.comboFilterType.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.comboFilterType.Name = "comboFilterType";
-            this.comboFilterType.Size = new System.Drawing.Size(140, 21);
+            this.comboFilterType.Size = new System.Drawing.Size(201, 21);
             this.comboFilterType.TabIndex = 1;
             // 
             // chargedPage
@@ -415,13 +378,20 @@
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // panel2
+            // searchControl2
             // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(10, 45);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(759, 10);
-            this.panel2.TabIndex = 17;
+            this.searchControl2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl2.BackColor = System.Drawing.Color.White;
+            this.searchControl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchControl2.Location = new System.Drawing.Point(10, 10);
+            this.searchControl2.Margin = new System.Windows.Forms.Padding(0);
+            this.searchControl2.MaximumSize = new System.Drawing.Size(350, 35);
+            this.searchControl2.MinimumSize = new System.Drawing.Size(350, 35);
+            this.searchControl2.Name = "searchControl2";
+            this.searchControl2.SearchedText = "";
+            this.searchControl2.Size = new System.Drawing.Size(350, 35);
+            this.searchControl2.TabIndex = 14;
             // 
             // searchControl1
             // 
@@ -439,19 +409,38 @@
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
-            // searchControl2
+            // Column8
             // 
-            this.searchControl2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl2.BackColor = System.Drawing.Color.White;
-            this.searchControl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl2.Location = new System.Drawing.Point(0, 0);
-            this.searchControl2.Margin = new System.Windows.Forms.Padding(0);
-            this.searchControl2.MaximumSize = new System.Drawing.Size(350, 35);
-            this.searchControl2.MinimumSize = new System.Drawing.Size(350, 35);
-            this.searchControl2.Name = "searchControl2";
-            this.searchControl2.SearchedText = "";
-            this.searchControl2.Size = new System.Drawing.Size(350, 35);
-            this.searchControl2.TabIndex = 14;
+            this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column8.HeaderText = "ID";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 45;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "DATE";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "BY";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "CUSTOMER";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.HeaderText = "TOTAL";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // ReportUC
             // 
@@ -464,6 +453,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.saleTable)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.regularSalesTab.ResumeLayout(false);
+            this.regularSalesTab.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.chargedPage.ResumeLayout(false);
             this.chargedPage.PerformLayout();
@@ -485,11 +475,6 @@
         private System.Windows.Forms.DataGridView chargedTable;
         private System.Windows.Forms.ComboBox comboFilterType;
         private System.Windows.Forms.DateTimePicker dtFilter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private SearchControl searchControl1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.RadioButton radioButton1;
@@ -505,7 +490,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.Panel panel2;
         private SearchControl searchControl2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }

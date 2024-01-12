@@ -228,7 +228,7 @@ namespace POS.UserControls
                     .DefaultIfEmpty(0)
                     .Sum();
 
-                totalPriceTxt.InvokeIfRequired(() => { totalPriceTxt.Text = "Total Inventory Value: " + string.Format("₱ {0:n}", totalInventoryValue); });
+                totalPriceTxt.InvokeIfRequired(() => { totalPriceTxt.Text = string.Format("₱ {0:n}", totalInventoryValue); });
 
                 try
                 {
@@ -279,7 +279,7 @@ namespace POS.UserControls
                         ct.ThrowIfCancellationRequested();
                     }
 
-                    criticalLabel.InvokeIfRequired(() => criticalLabel.Text = criticalQtyCounter.ToString());
+                    //criticalLabel.InvokeIfRequired(() => criticalLabel.Text = criticalQtyCounter.ToString());
                 }
                 catch
                 {
@@ -586,7 +586,7 @@ namespace POS.UserControls
             {
                 _critShowing = value;
 
-                criticalLabel.ForeColor = _critShowing ? Color.Blue : Color.Maroon;
+                //criticalLabel.ForeColor = _critShowing ? Color.Blue : Color.Maroon;
             }
         }
 
