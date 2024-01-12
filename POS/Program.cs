@@ -1,10 +1,7 @@
 ﻿using OfficeOpenXml;
 using POS.Misc;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS
@@ -23,19 +20,12 @@ namespace POS
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             bool backup = false;
-            bool signedOut = false;
-
             UserManager.instance = new UserManager();
 
-            /// prompt connection initialization before going to login
-            //if (Connections.ContextTools.ConnectionNotSet)
-            //    Application.Run(new ConnectionConfigurations());
-
-
+            bool signedOut;
             do
             {
                 signedOut = false;
-
                 var login = new Forms.LoginForm();
                 Application.Run(login);
 
@@ -67,8 +57,6 @@ namespace POS
                     Console.WriteLine(ex.Message);
                 }
             }
-
-            //Application.Run(new VisualSellForm());
         }
     }
 }

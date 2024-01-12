@@ -116,14 +116,14 @@
             this.histTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.histTable.EnableHeadersVisualStyles = false;
             this.histTable.GridColor = System.Drawing.Color.DarkGray;
-            this.histTable.Location = new System.Drawing.Point(20, 117);
+            this.histTable.Location = new System.Drawing.Point(20, 124);
             this.histTable.MultiSelect = false;
             this.histTable.Name = "histTable";
             this.histTable.ReadOnly = true;
             this.histTable.RowHeadersVisible = false;
             this.histTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.histTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.histTable.Size = new System.Drawing.Size(830, 312);
+            this.histTable.Size = new System.Drawing.Size(830, 305);
             this.histTable.StandardTab = true;
             this.histTable.TabIndex = 2;
             this.histTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.histTable_CellMouseDoubleClick);
@@ -219,7 +219,7 @@
             this.flowLayoutPanel2.Controls.Add(this.regular_Dt);
             this.flowLayoutPanel2.Controls.Add(this.dateRangeHolder);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(20, 48);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(20, 55);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
             this.flowLayoutPanel2.Size = new System.Drawing.Size(830, 44);
@@ -387,7 +387,7 @@
             // 
             this.label3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Location = new System.Drawing.Point(20, 92);
+            this.label3.Location = new System.Drawing.Point(20, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(830, 25);
             this.label3.TabIndex = 11;
@@ -401,11 +401,11 @@
             this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchControl1.Location = new System.Drawing.Point(20, 20);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(360, 28);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(2, 28);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(350, 35);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(350, 35);
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(360, 28);
+            this.searchControl1.Size = new System.Drawing.Size(350, 35);
             this.searchControl1.TabIndex = 3;
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);

@@ -20,7 +20,9 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                customerNameTxt.Text = p.Customers.FirstOrDefault(x => x.Id == id)?.Name;
+                //customerNameTxt.Text = p.Customers.FirstOrDefault(x => x.Id == id)?.Name;
+
+                this.Text = this.Text + " - " + p.Customers.FirstOrDefault(c => c.Id == id)?.Name ?? "Walk-in";
                 var tr = p.Sales.Where(x => x.CustomerId == id);
                 if (tr.Count() == 0)
                 {
@@ -47,6 +49,11 @@ namespace POS.Forms
                 saledetails.SetId((int)(transactionsTable.Rows[e.RowIndex].Cells[0].Value));
                 saledetails.ShowDialog();
             }
+        }
+
+        private void CustomerTransactionsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

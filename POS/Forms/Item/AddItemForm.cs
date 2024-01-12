@@ -173,9 +173,9 @@ namespace POS.Forms
                 if (p.Suppliers.FirstOrDefault(x => x.Name == supplierOption.Text) == null)
                 {
                     MessageBox.Show("Supplier not found.");
-                    using (var supplier = new SupplierForm())
+                    using (var supplier = new Suppliers())
                     {
-                        supplier.OnSave += Supplier_OnSave;
+                        //supplier.OnSave += Supplier_OnSave;
                         supplier.ShowDialog();
                     }
                     this.ActiveControl = supplierOption;
@@ -220,9 +220,9 @@ namespace POS.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            using (var supp = new SupplierForm())
+            using (var supp = new Suppliers())
             {
-                supp.OnSave += Supp_OnSave;
+                //supp.OnSave += Supp_OnSave;
                 supp.ShowDialog();
             }
         }

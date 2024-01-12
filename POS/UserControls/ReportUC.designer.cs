@@ -43,8 +43,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.regularSalesTab = new System.Windows.Forms.TabPage();
             this.totalSale = new System.Windows.Forms.Label();
-            this.comboFilterType = new System.Windows.Forms.ComboBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.dtFilter = new System.Windows.Forms.DateTimePicker();
+            this.comboFilterType = new System.Windows.Forms.ComboBox();
             this.chargedPage = new System.Windows.Forms.TabPage();
             this.chargedTable = new System.Windows.Forms.DataGridView();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,21 +57,21 @@
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.searchControl1 = new POS.UserControls.SearchControl();
+            this.searchControl2 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.saleTable)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.regularSalesTab.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             this.chargedPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chargedTable)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // saleTable
@@ -79,17 +80,15 @@
             this.saleTable.AllowUserToDeleteRows = false;
             this.saleTable.AllowUserToResizeRows = false;
             this.saleTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.saleTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.saleTable.BackgroundColor = System.Drawing.Color.White;
             this.saleTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.saleTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.saleTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.saleTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.saleTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -102,22 +101,24 @@
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.saleTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.saleTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.saleTable.EnableHeadersVisualStyles = false;
-            this.saleTable.Location = new System.Drawing.Point(10, 67);
+            this.saleTable.Location = new System.Drawing.Point(10, 55);
             this.saleTable.MultiSelect = false;
             this.saleTable.Name = "saleTable";
             this.saleTable.ReadOnly = true;
             this.saleTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.saleTable.RowHeadersVisible = false;
             this.saleTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.saleTable.Size = new System.Drawing.Size(723, 371);
+            this.saleTable.Size = new System.Drawing.Size(759, 409);
             this.saleTable.StandardTab = true;
             this.saleTable.TabIndex = 1;
+            this.saleTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.saleTable_CellContentClick);
             this.saleTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.saleTable_CellMouseDoubleClick);
             this.saleTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.saleTable_KeyDown);
             // 
@@ -127,7 +128,7 @@
             this.Column8.HeaderText = "ID";
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
-            this.Column8.Width = 40;
+            this.Column8.Width = 45;
             // 
             // Column1
             // 
@@ -154,74 +155,81 @@
             this.Column3.HeaderText = "TOTAL";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
-            this.Column3.Width = 62;
+            this.Column3.Width = 67;
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.regularSalesTab);
             this.tabControl1.Controls.Add(this.chargedPage);
-            this.tabControl1.Location = new System.Drawing.Point(18, 33);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(10);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(751, 474);
+            this.tabControl1.Size = new System.Drawing.Size(787, 525);
             this.tabControl1.TabIndex = 3;
             // 
             // regularSalesTab
             // 
             this.regularSalesTab.BackColor = System.Drawing.Color.White;
             this.regularSalesTab.Controls.Add(this.saleTable);
+            this.regularSalesTab.Controls.Add(this.panel2);
             this.regularSalesTab.Controls.Add(this.totalSale);
             this.regularSalesTab.Controls.Add(this.flowLayoutPanel3);
             this.regularSalesTab.Location = new System.Drawing.Point(4, 22);
             this.regularSalesTab.Name = "regularSalesTab";
             this.regularSalesTab.Padding = new System.Windows.Forms.Padding(10);
-            this.regularSalesTab.Size = new System.Drawing.Size(743, 448);
+            this.regularSalesTab.Size = new System.Drawing.Size(779, 499);
             this.regularSalesTab.TabIndex = 0;
             this.regularSalesTab.Text = "REGULAR";
             // 
             // totalSale
             // 
-            this.totalSale.AutoSize = true;
-            this.totalSale.Dock = System.Windows.Forms.DockStyle.Top;
-            this.totalSale.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalSale.Location = new System.Drawing.Point(10, 32);
+            this.totalSale.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.totalSale.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.totalSale.ForeColor = System.Drawing.Color.Black;
+            this.totalSale.Location = new System.Drawing.Point(10, 464);
             this.totalSale.Name = "totalSale";
-            this.totalSale.Padding = new System.Windows.Forms.Padding(0, 10, 10, 10);
-            this.totalSale.Size = new System.Drawing.Size(24, 35);
+            this.totalSale.Size = new System.Drawing.Size(759, 25);
             this.totalSale.TabIndex = 7;
-            this.totalSale.Text = "0";
-            this.totalSale.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.totalSale.Text = "Total: P 1,000.00";
+            this.totalSale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.searchControl2);
+            this.flowLayoutPanel3.Controls.Add(this.dtFilter);
+            this.flowLayoutPanel3.Controls.Add(this.comboFilterType);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(10, 10);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(759, 35);
+            this.flowLayoutPanel3.TabIndex = 16;
+            // 
+            // dtFilter
+            // 
+            this.dtFilter.CustomFormat = "MMMM d, yyyy";
+            this.dtFilter.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtFilter.Location = new System.Drawing.Point(360, 7);
+            this.dtFilter.Margin = new System.Windows.Forms.Padding(10, 7, 0, 0);
+            this.dtFilter.Name = "dtFilter";
+            this.dtFilter.Size = new System.Drawing.Size(139, 20);
+            this.dtFilter.TabIndex = 0;
             // 
             // comboFilterType
             // 
             this.comboFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboFilterType.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboFilterType.FormattingEnabled = true;
             this.comboFilterType.Items.AddRange(new object[] {
             "Daily",
             "Monthly",
             "Yearly"});
-            this.comboFilterType.Location = new System.Drawing.Point(360, 0);
-            this.comboFilterType.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.comboFilterType.Location = new System.Drawing.Point(509, 7);
+            this.comboFilterType.Margin = new System.Windows.Forms.Padding(10, 7, 0, 0);
             this.comboFilterType.Name = "comboFilterType";
-            this.comboFilterType.Size = new System.Drawing.Size(140, 23);
+            this.comboFilterType.Size = new System.Drawing.Size(140, 21);
             this.comboFilterType.TabIndex = 1;
-            // 
-            // dtFilter
-            // 
-            this.dtFilter.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtFilter.CustomFormat = "MMMM d, yyyy";
-            this.dtFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtFilter.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFilter.Location = new System.Drawing.Point(0, 0);
-            this.dtFilter.Margin = new System.Windows.Forms.Padding(0);
-            this.dtFilter.Name = "dtFilter";
-            this.dtFilter.Size = new System.Drawing.Size(350, 22);
-            this.dtFilter.TabIndex = 0;
             // 
             // chargedPage
             // 
@@ -231,7 +239,7 @@
             this.chargedPage.Location = new System.Drawing.Point(4, 22);
             this.chargedPage.Name = "chargedPage";
             this.chargedPage.Padding = new System.Windows.Forms.Padding(10);
-            this.chargedPage.Size = new System.Drawing.Size(743, 448);
+            this.chargedPage.Size = new System.Drawing.Size(779, 499);
             this.chargedPage.TabIndex = 1;
             this.chargedPage.Text = "CHARGED";
             this.chargedPage.UseVisualStyleBackColor = true;
@@ -242,7 +250,7 @@
             this.chargedTable.AllowUserToDeleteRows = false;
             this.chargedTable.AllowUserToResizeRows = false;
             this.chargedTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.chargedTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.chargedTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.chargedTable.BackgroundColor = System.Drawing.Color.White;
             this.chargedTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.chargedTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
@@ -275,14 +283,14 @@
             this.chargedTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.chargedTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chargedTable.EnableHeadersVisualStyles = false;
-            this.chargedTable.Location = new System.Drawing.Point(10, 44);
+            this.chargedTable.Location = new System.Drawing.Point(10, 55);
             this.chargedTable.MultiSelect = false;
             this.chargedTable.Name = "chargedTable";
             this.chargedTable.ReadOnly = true;
             this.chargedTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.chargedTable.RowHeadersVisible = false;
             this.chargedTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.chargedTable.Size = new System.Drawing.Size(723, 394);
+            this.chargedTable.Size = new System.Drawing.Size(759, 434);
             this.chargedTable.StandardTab = true;
             this.chargedTable.TabIndex = 1;
             this.chargedTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.saleTable_CellMouseDoubleClick);
@@ -340,9 +348,9 @@
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(10, 34);
+            this.panel1.Location = new System.Drawing.Point(10, 45);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(723, 10);
+            this.panel1.Size = new System.Drawing.Size(759, 10);
             this.panel1.TabIndex = 16;
             // 
             // flowLayoutPanel2
@@ -353,24 +361,8 @@
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(10, 10);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(723, 24);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(759, 35);
             this.flowLayoutPanel2.TabIndex = 15;
-            // 
-            // searchControl1
-            // 
-            this.searchControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl1.BackColor = System.Drawing.Color.White;
-            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl1.Location = new System.Drawing.Point(0, 0);
-            this.searchControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(9999, 28);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(219, 22);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(350, 24);
-            this.searchControl1.TabIndex = 13;
-            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // flowLayoutPanel1
             // 
@@ -379,8 +371,8 @@
             this.flowLayoutPanel1.Controls.Add(this.radioButton2);
             this.flowLayoutPanel1.Controls.Add(this.radioButton3);
             this.flowLayoutPanel1.Controls.Add(this.radioButton1);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(360, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(360, 6);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(10, 6, 0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(185, 23);
             this.flowLayoutPanel1.TabIndex = 14;
@@ -423,34 +415,48 @@
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
-            // label1
+            // panel2
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(343, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "TRANSACTIONS";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(10, 45);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(759, 10);
+            this.panel2.TabIndex = 17;
             // 
-            // flowLayoutPanel3
+            // searchControl1
             // 
-            this.flowLayoutPanel3.AutoSize = true;
-            this.flowLayoutPanel3.Controls.Add(this.dtFilter);
-            this.flowLayoutPanel3.Controls.Add(this.comboFilterType);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(10, 10);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(723, 22);
-            this.flowLayoutPanel3.TabIndex = 16;
+            this.searchControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl1.BackColor = System.Drawing.Color.White;
+            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl1.Location = new System.Drawing.Point(0, 0);
+            this.searchControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(350, 35);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(350, 35);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.SearchedText = "";
+            this.searchControl1.Size = new System.Drawing.Size(350, 35);
+            this.searchControl1.TabIndex = 13;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            // 
+            // searchControl2
+            // 
+            this.searchControl2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl2.BackColor = System.Drawing.Color.White;
+            this.searchControl2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl2.Location = new System.Drawing.Point(0, 0);
+            this.searchControl2.Margin = new System.Windows.Forms.Padding(0);
+            this.searchControl2.MaximumSize = new System.Drawing.Size(350, 35);
+            this.searchControl2.MinimumSize = new System.Drawing.Size(350, 35);
+            this.searchControl2.Name = "searchControl2";
+            this.searchControl2.SearchedText = "";
+            this.searchControl2.Size = new System.Drawing.Size(350, 35);
+            this.searchControl2.TabIndex = 14;
             // 
             // ReportUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
             this.Name = "ReportUC";
             this.Size = new System.Drawing.Size(787, 525);
@@ -458,7 +464,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.saleTable)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.regularSalesTab.ResumeLayout(false);
-            this.regularSalesTab.PerformLayout();
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.chargedPage.ResumeLayout(false);
             this.chargedPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chargedTable)).EndInit();
@@ -466,9 +472,7 @@
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -479,7 +483,6 @@
         private System.Windows.Forms.Label totalSale;
         private System.Windows.Forms.TabPage chargedPage;
         private System.Windows.Forms.DataGridView chargedTable;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboFilterType;
         private System.Windows.Forms.DateTimePicker dtFilter;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
@@ -502,5 +505,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.Panel panel2;
+        private SearchControl searchControl2;
     }
 }

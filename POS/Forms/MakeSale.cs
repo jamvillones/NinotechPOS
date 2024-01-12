@@ -421,7 +421,7 @@ namespace POS.Forms
 
         private void addCustomerBtn_Click(object sender, EventArgs e)
         {
-            using (var createCustomer = new CreateCustomerProfile())
+            using (var createCustomer = new Customers())
             {
                 createCustomer.OnSave += CreateCustomer_OnSave;
                 if (createCustomer.ShowDialog() == DialogResult.OK)
@@ -651,7 +651,7 @@ namespace POS.Forms
                 {
                     if (MessageBox.Show("Customer is not found in database?\nWould you like to register it to proceed? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        using (var createCustomer = new CreateCustomerProfile(soldTo.Text))
+                        using (var createCustomer = new Customers(soldTo.Text))
                         {
                             createCustomer.OnSave += CreateCustomer_OnSave;
                             if (createCustomer.ShowDialog() == DialogResult.OK)

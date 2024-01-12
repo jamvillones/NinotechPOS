@@ -54,7 +54,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icons8_cash_register.ico</ApplicationIcon>
+    <ApplicationIcon>icons8_cash_register_color.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>21AE8317BA6A16265F5B62CBFDA45D709D6D1897</ManifestCertificateThumbprint>
@@ -67,6 +67,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>POS.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -110,6 +113,12 @@
     <Compile Include="Forms\ConnectionConfigurations.Designer.cs">
       <DependentUpon>ConnectionConfigurations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Create_Supplier_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Create_Supplier_Form.Designer.cs">
+      <DependentUpon>Create_Supplier_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Edit_SoldItem_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,23 +159,11 @@
     <Compile Include="EditSaleDetails.Designer.cs">
       <DependentUpon>EditSaleDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ConsoleSell.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ConsoleSell.Designer.cs">
-      <DependentUpon>ConsoleSell.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\CustomerTransactionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\CustomerTransactionsForm.Designer.cs">
       <DependentUpon>CustomerTransactionsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ItemSaleSetupForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ItemSaleSetupForm.Designer.cs">
-      <DependentUpon>ItemSaleSetupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ItemVariationsForm.cs">
       <SubType>Form</SubType>
@@ -179,12 +176,6 @@
     </Compile>
     <Compile Include="Forms\AdvancedSearchForm.Designer.cs">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ModifyCartDetails.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ModifyCartDetails.Designer.cs">
-      <DependentUpon>ModifyCartDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PrintInventory.cs">
       <SubType>Form</SubType>
@@ -261,11 +252,11 @@
     <Compile Include="Forms\ChangePass.designer.cs">
       <DependentUpon>ChangePass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CreateCustomerProfile.cs">
+    <Compile Include="Forms\Customers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CreateCustomerProfile.designer.cs">
-      <DependentUpon>CreateCustomerProfile.cs</DependentUpon>
+    <Compile Include="Forms\Customers.designer.cs">
+      <DependentUpon>Customers.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CreateLogin.cs">
       <SubType>Form</SubType>
@@ -315,11 +306,11 @@
     <Compile Include="Forms\StockinForm.designer.cs">
       <DependentUpon>StockinForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SupplierForm.cs">
+    <Compile Include="Forms\Suppliers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SupplierForm.designer.cs">
-      <DependentUpon>SupplierForm.cs</DependentUpon>
+    <Compile Include="Forms\Suppliers.designer.cs">
+      <DependentUpon>Suppliers.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PaymentsForm.cs">
       <SubType>Form</SubType>
@@ -391,12 +382,6 @@
       <DependentUpon>SaleReprint.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\SearchHandler.cs" />
-    <Compile Include="SellItem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SellItem.Designer.cs">
-      <DependentUpon>SellItem.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ShiftSummaryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -419,18 +404,6 @@
     <Compile Include="UserControls\InventoryUC.Designer.cs">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ItemBoxHolder.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ItemBoxHolder.Designer.cs">
-      <DependentUpon>ItemBoxHolder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Keypad.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\Keypad.Designer.cs">
-      <DependentUpon>Keypad.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\ReportUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -443,12 +416,6 @@
     <Compile Include="UserControls\SearchControl.designer.cs">
       <DependentUpon>SearchControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="VisualSellForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VisualSellForm.Designer.cs">
-      <DependentUpon>VisualSellForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Checkout.resx">
       <DependentUpon>Checkout.cs</DependentUpon>
     </EmbeddedResource>
@@ -458,8 +425,8 @@
     <EmbeddedResource Include="EditSaleDetails.resx">
       <DependentUpon>EditSaleDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ConsoleSell.resx">
-      <DependentUpon>ConsoleSell.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Create_Supplier_Form.resx">
+      <DependentUpon>Create_Supplier_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomerTransactionsForm.resx">
       <DependentUpon>CustomerTransactionsForm.cs</DependentUpon>
@@ -467,17 +434,11 @@
     <EmbeddedResource Include="Forms\Edit_SoldItem_Form.resx">
       <DependentUpon>Edit_SoldItem_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ItemSaleSetupForm.resx">
-      <DependentUpon>ItemSaleSetupForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemVariationsForm.resx">
       <DependentUpon>ItemVariationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdvancedSearchForm.resx">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModifyCartDetails.resx">
-      <DependentUpon>ModifyCartDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PrintInventory.resx">
       <DependentUpon>PrintInventory.cs</DependentUpon>
@@ -515,8 +476,8 @@
     <EmbeddedResource Include="Forms\ChangePass.resx">
       <DependentUpon>ChangePass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CreateCustomerProfile.resx">
-      <DependentUpon>CreateCustomerProfile.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Customers.resx">
+      <DependentUpon>Customers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreateLogin.resx">
       <DependentUpon>CreateLogin.cs</DependentUpon>
@@ -542,8 +503,8 @@
     <EmbeddedResource Include="Forms\StockinForm.resx">
       <DependentUpon>StockinForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SupplierForm.resx">
-      <DependentUpon>SupplierForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Suppliers.resx">
+      <DependentUpon>Suppliers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PaymentsForm.resx">
       <DependentUpon>PaymentsForm.cs</DependentUpon>
@@ -576,29 +537,17 @@
     <EmbeddedResource Include="SaleReprint.resx">
       <DependentUpon>SaleReprint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SellItem.resx">
-      <DependentUpon>SellItem.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ShiftSummaryForm.resx">
       <DependentUpon>ShiftSummaryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ItemBoxHolder.resx">
-      <DependentUpon>ItemBoxHolder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\Keypad.resx">
-      <DependentUpon>Keypad.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ReportUC.resx">
       <DependentUpon>ReportUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\SearchControl.resx">
       <DependentUpon>SearchControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VisualSellForm.resx">
-      <DependentUpon>VisualSellForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>
@@ -623,7 +572,7 @@
     <None Include="uiTesting_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icons8_cash_register.ico" />
+    <Content Include="icons8_cash_register_color.ico" />
     <Content Include="POSModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>POSModel.edmx</DependentUpon>

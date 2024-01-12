@@ -144,9 +144,9 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
             this.label2.Location = new System.Drawing.Point(5, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.Size = new System.Drawing.Size(52, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Discount";
+            this.label2.Text = "Discount:";
             // 
             // panel4
             // 
@@ -235,7 +235,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(377, 23);
             this.label5.TabIndex = 2;
-            this.label5.Text = "[NAME]";
+            this.label5.Text = "Lorem Ipsum";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
@@ -277,7 +277,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(377, 23);
             this.label6.TabIndex = 2;
-            this.label6.Text = "[NAME]";
+            this.label6.Text = "Lorem Ipsum";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7

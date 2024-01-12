@@ -43,7 +43,7 @@ namespace POS.Forms
                 using (var p = new POSEntities())
                 {
                     IEnumerable<Product> prod = p.Products;
-                    var rows = prod.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).Select(y => itemsTable.createRow(y.Item?.Barcode, y.Item.Name, y.Cost, y.Supplier?.Name)).ToArray();
+                    var rows = prod.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).Select(y => itemsTable.CreateRow(y.Item?.Barcode, y.Item.Name, y.Cost, y.Supplier?.Name)).ToArray();
 
 
                     itemsTable.InvokeIfRequired(() =>

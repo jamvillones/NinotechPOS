@@ -94,8 +94,8 @@ namespace POS.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var supplier = new SupplierForm();
-            supplier.OnSave += Supplier_OnSave;
+            var supplier = new Suppliers();
+            //supplier.OnSave += Supplier_OnSave;
             supplier.ShowDialog();
         }
 

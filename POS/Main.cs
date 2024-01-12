@@ -17,34 +17,37 @@ namespace POS
     public partial class Main : Form, IMainWindow
     {
 
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
+        //public const int WM_NCLBUTTONDOWN = 0xA1;
+        //public const int HT_CAPTION = 0x2;
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
+        //[System.Runtime.InteropServices.DllImport("user32.dll")]
+        //public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        //[System.Runtime.InteropServices.DllImport("user32.dll")]
+        //public static extern bool ReleaseCapture();
 
         private void Form1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (e.Clicks == 2)
-            {
-                this.WindowState = WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
-                return;
-            }
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
+            //if (e.Clicks == 2)
+            //{
+            //    this.WindowState = WindowState == FormWindowState.Maximized ? FormWindowState.Normal : FormWindowState.Maximized;
+            //    return;
+            //}
+            //if (e.Button == MouseButtons.Left)
+            //{
+            //    ReleaseCapture();
+            //    SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            //}
         }
 
         public Main()
         {
             InitializeComponent();
 
-            MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
-            Location = Screen.FromHandle(this.Handle).WorkingArea.Location;
+            prevButton = inventoryBtn;
+            prevButton.BackColor = selectedButtonColor;
+
+            //MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            //Location = Screen.FromHandle(this.Handle).WorkingArea.Location;
         }
 
         /// <summary>
@@ -54,15 +57,15 @@ namespace POS
         {
             var cl = currLogin;
 
-            userButton.InvokeIfRequired(() => { userButton.Text = cl.Name ?? "user"; });
+            userButton.InvokeIfRequired(() => { userButton.Text = "   " + cl.Name ?? "user"; });
             textBox1.InvokeIfRequired(() => textBox1.Text = Properties.Settings.Default.Note);
 
             toolStrip.InvokeIfRequired(() =>
             {
-                addNewLoginToolStripMenuItem1.Enabled = cl.Username == "admin";
-                loginPrivilegesToolStripMenuItem1.Enabled = cl.Username == "admin";
-                addNewSupplierToolstripbuttn.Enabled = cl.CanEditSupplier;
-                toolStripButton3.Enabled = cl.CanStockIn;
+                //addNewLoginToolStripMenuItem1.Enabled = cl.Username == "admin";
+                //loginPrivilegesToolStripMenuItem1.Enabled = cl.Username == "admin";
+                //addNewSupplierToolstripbuttn.Enabled = cl.CanEditSupplier;
+                //toolStripButton3.Enabled = cl.CanStockIn;
             });
 
         }
@@ -82,11 +85,8 @@ namespace POS
                 init
                 );
 
-            
+
             Console.WriteLine("===== Form Initialized =====");
-            //isLoading = false;
-            //if (isClosing)
-            //    this.Close();
         }
 
         void setChangingColorsBtn(params Button[] buttons)
@@ -107,21 +107,21 @@ namespace POS
 
         private void buttonColorChangeCallback(object sender, EventArgs e)
         {
-            if (prevButton == null)
-            {
-                prevButton = inventoryBtn;
-                prevButton.BackColor = selectedButtonColor;
-            }
-
             prevButton.BackColor = normalButtonColor;
-            var b = (Button)sender;
-            b.BackColor = selectedButtonColor;
-            prevButton = b;
+
+            var button = sender as Button;
+
+            button.BackColor = selectedButtonColor;
+            prevButton = button;
+            marker.Top = button.Top + 20;
         }
 
         Button prevButton;
-        Color selectedButtonColor = Color.Gray;
-        Color normalButtonColor = Color.FromArgb(64, 64, 64);
+
+        Color selectedButtonColor =
+            Color.FromArgb(240,240,240);
+        Color normalButtonColor =
+            Color.Transparent;
 
         private void inventoryBtn_Click(object sender, EventArgs e)
         {
@@ -181,11 +181,11 @@ namespace POS
 
         private void openSupplier_Click(object sender, EventArgs e)
         {
-            OpenDialog<SupplierForm>();
+            OpenDialog<Suppliers>();
         }
         private void createCustomer_Click(object sender, EventArgs e)
         {
-            OpenDialog<CreateCustomerProfile>();
+            OpenDialog<Customers>();
         }
         private void stockinLog_Click(object sender, EventArgs e)
         {
@@ -253,7 +253,7 @@ namespace POS
             {
                 if (shiftSum.ShowDialog() == DialogResult.OK)
                 {
-                   
+
                 }
             }
         }
