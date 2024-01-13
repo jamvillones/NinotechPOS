@@ -11,6 +11,7 @@ using POS.Forms;
 using POS.Misc;
 using System.Threading;
 using System.Data.Entity;
+using OfficeOpenXml.Drawing.Controls;
 
 namespace POS.UserControls
 {
@@ -165,14 +166,27 @@ namespace POS.UserControls
 
             var dgt = (DataGridView)sender;
 
-            using (var View = new ViewItem())
+            var qty = dgt[quantityCol.Index, e.RowIndex].Value as int?;
+
+            var barcode = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+
+            ShowInventoryInfo(barcode, qty);
+        }
+
+        void ShowInventoryInfo(string barcode, int? quantity)
+        {
+            if (quantity == 0 || quantity is null) return;
+            using (var View = new InventoryItemView(barcode))
             {
-                View.SetItemId(dgt.Rows[e.RowIndex].Cells[0].Value.ToString());
+                //View.SetItemId();
                 View.ShowDialog();
             }
+
         }
 
         string selectedBarcode => itemsTable.SelectedCells[0].Value.ToString();
+        int? selectedQty => itemsTable.SelectedCells[quantityCol.Index].Value as int?;
 
         private void addItemBtn_Click(object sender, EventArgs e)
         {
@@ -222,24 +236,18 @@ namespace POS.UserControls
 
             using (var context = new POSEntities())
             {
-                decimal totalInventoryValue = context.InventoryItems.AsNoTracking()
+                decimal totalInventoryValue = await context.InventoryItems.AsNoTracking()
                     .Where(y => y.Product.Item.Type == ItemType.Quantifiable.ToString())
                     .Select(x => x.Quantity * x.Product.Item.SellingPrice)
                     .DefaultIfEmpty(0)
-                    .Sum();
+                    .SumAsync();
 
-                totalPriceTxt.InvokeIfRequired(() => { totalPriceTxt.Text = string.Format("₱ {0:n}", totalInventoryValue); });
+                totalPriceTxt.InvokeIfRequired(() => totalPriceTxt.Text = totalInventoryValue.ToString("C2"));
 
                 try
                 {
                     var items = await context.Items.AsNoTracking().ToListAsync();
                     var rows = await CreateItemRowsAsync(items, token);
-
-                    //itemsTable.InvokeIfRequired(() =>
-                    //{
-                    //    itemsTable.Rows.AddRange(rows);
-                    //    itemsTable.SelectionChanged += itemsTable_SelectionChanged;
-                    //});
 
                     itemsTable.Rows.AddRange(rows);
 
@@ -269,17 +277,14 @@ namespace POS.UserControls
             {
                 try
                 {
-                    criticalQtyCounter = 0;
-                    criticalItemNames = new List<string>();
-                    ///criticalLabel.InvokeIfRequired(() => criticalLabel.Text = "0");
+                    //criticalQtyCounter = 0;
+                    //criticalItemNames = new List<string>();
+
                     foreach (var i in items)
                     {
-                        rows.Add(createItemRow(i));
-
+                        rows.Add(CreateRow(i));
                         ct.ThrowIfCancellationRequested();
                     }
-
-                    //criticalLabel.InvokeIfRequired(() => criticalLabel.Text = criticalQtyCounter.ToString());
                 }
                 catch
                 {
@@ -305,38 +310,33 @@ namespace POS.UserControls
         //    return false;
         //}
 
-        List<string> criticalItemNames { get; set; } = new List<string>();
-        int criticalQtyCounter = 0;
-        DataGridViewRow createItemRow(Item x)
+
+        DataGridViewRow CreateRow(Item x)
         {
             var row = new DataGridViewRow();
-            string q = getItemQuantityString(x);
+
+            Nullable<int> quantity = x.Type == ItemType.Software.ToString() || x.Type == ItemType.Service.ToString() ? default(int?) : x.QuantityInInventory;
 
             if (x.InCriticalQuantity)
             {
                 row.DefaultCellStyle.BackColor = Color.IndianRed;
                 row.DefaultCellStyle.ForeColor = Color.White;
-                criticalQtyCounter++;
-
-                criticalItemNames.Add(x.Name + " (" + x.QuantityInInventory + ") ");
             }
-
-            switch (q)
+            else if (quantity == 0)
             {
-                case "EMPTY":
-                    row.DefaultCellStyle.ForeColor = Color.Maroon;
-                    break;
-
-                case "INFINITE":
-                    row.DefaultCellStyle.ForeColor = Color.DarkGreen;
-                    break;
+                row.DefaultCellStyle.ForeColor = Color.Gray;
             }
+            else if (quantity is null)
+            {
+                row.DefaultCellStyle.ForeColor = Color.DarkGreen;
+            }
+
 
             row.CreateCells(itemsTable,
                  x.Barcode,
                  x.Name,
-                 q,
-                 string.Format("₱ {0:n}", x.SellingPrice),
+                 quantity,
+                 x.SellingPrice,
                  x.Type
                 );
 
@@ -414,7 +414,7 @@ namespace POS.UserControls
             {
                 itemsTable.Rows.Clear();
 
-                var rows = items.Select(createItemRow).ToArray();
+                var rows = items.Select(CreateRow).ToArray();
 
                 itemsTable.Rows.AddRange(rows);
             });
@@ -546,14 +546,16 @@ namespace POS.UserControls
 
         private void viewStockBtn_Click(object sender, EventArgs e)
         {
-            if (itemsTable.RowCount == 0)
+            if (itemsTable.SelectedCells.Count < 0)
                 return;
 
-            using (var inventoryView = new InventoryItemView())
-            {
-                inventoryView.SetItemId(selectedBarcode);
-                inventoryView.ShowDialog();
-            }
+            ShowInventoryInfo(selectedBarcode, selectedQty);
+
+            //using (var inventoryView = new InventoryItemView(selectedBarcode))
+            //{
+            //    //inventoryView.SetItemId(selectedBarcode);
+            //    inventoryView.ShowDialog();
+            //}
         }
 
         //private async void button2_Click_1(object sender, EventArgs e)

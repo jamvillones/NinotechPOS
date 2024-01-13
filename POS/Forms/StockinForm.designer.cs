@@ -63,7 +63,6 @@
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.addBtn = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.searchControl = new POS.UserControls.SearchControl();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -76,7 +75,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this._grandTotalTxt = new System.Windows.Forms.Label();
             this._messageLabel = new System.Windows.Forms.Label();
+            this.searchControl = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
@@ -147,14 +148,14 @@
             this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.inventoryTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inventoryTable.EnableHeadersVisualStyles = false;
-            this.inventoryTable.Location = new System.Drawing.Point(0, 0);
+            this.inventoryTable.Location = new System.Drawing.Point(0, 40);
             this.inventoryTable.MultiSelect = false;
             this.inventoryTable.Name = "inventoryTable";
             this.inventoryTable.ReadOnly = true;
             this.inventoryTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.inventoryTable.RowHeadersVisible = false;
             this.inventoryTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.inventoryTable.Size = new System.Drawing.Size(425, 407);
+            this.inventoryTable.Size = new System.Drawing.Size(425, 367);
             this.inventoryTable.StandardTab = true;
             this.inventoryTable.TabIndex = 4;
             this.inventoryTable.TabStop = false;
@@ -325,10 +326,10 @@
             this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.createItemBtn.Location = new System.Drawing.Point(356, 0);
             this.createItemBtn.Name = "createItemBtn";
-            this.createItemBtn.Size = new System.Drawing.Size(141, 35);
+            this.createItemBtn.Size = new System.Drawing.Size(140, 35);
             this.createItemBtn.TabIndex = 1;
             this.createItemBtn.TabStop = false;
-            this.createItemBtn.Text = "CREATE ITEM";
+            this.createItemBtn.Text = "Create Item";
             this.createItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.toolTip.SetToolTip(this.createItemBtn, "Create Item");
             this.createItemBtn.UseVisualStyleBackColor = false;
@@ -415,23 +416,6 @@
             this.toolTip.InitialDelay = 300;
             this.toolTip.ReshowDelay = 100;
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
-            // searchControl
-            // 
-            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl.BackColor = System.Drawing.Color.White;
-            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl.Location = new System.Drawing.Point(0, 0);
-            this.searchControl.MaximumSize = new System.Drawing.Size(350, 35);
-            this.searchControl.MinimumSize = new System.Drawing.Size(350, 35);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.searchControl.SearchedText = "";
-            this.searchControl.Size = new System.Drawing.Size(350, 35);
-            this.searchControl.TabIndex = 0;
-            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // panel6
             // 
@@ -546,6 +530,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.inventoryTable);
+            this.splitContainer1.Panel2.Controls.Add(this._grandTotalTxt);
             this.splitContainer1.Panel2.Controls.Add(this.stockinBtn);
             this.splitContainer1.Size = new System.Drawing.Size(944, 444);
             this.splitContainer1.SplitterDistance = 497;
@@ -574,6 +559,19 @@
             this.panel5.Size = new System.Drawing.Size(944, 60);
             this.panel5.TabIndex = 4;
             // 
+            // _grandTotalTxt
+            // 
+            this._grandTotalTxt.BackColor = System.Drawing.SystemColors.ControlDark;
+            this._grandTotalTxt.Dock = System.Windows.Forms.DockStyle.Top;
+            this._grandTotalTxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._grandTotalTxt.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._grandTotalTxt.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this._grandTotalTxt.Location = new System.Drawing.Point(0, 0);
+            this._grandTotalTxt.Name = "_grandTotalTxt";
+            this._grandTotalTxt.Size = new System.Drawing.Size(425, 40);
+            this._grandTotalTxt.TabIndex = 3;
+            this._grandTotalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // _messageLabel
             // 
             this._messageLabel.AutoSize = true;
@@ -582,6 +580,23 @@
             this._messageLabel.Name = "_messageLabel";
             this._messageLabel.Size = new System.Drawing.Size(0, 13);
             this._messageLabel.TabIndex = 2;
+            // 
+            // searchControl
+            // 
+            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl.BackColor = System.Drawing.Color.White;
+            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl.Location = new System.Drawing.Point(0, 0);
+            this.searchControl.MaximumSize = new System.Drawing.Size(350, 35);
+            this.searchControl.MinimumSize = new System.Drawing.Size(350, 35);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.searchControl.SearchedText = "";
+            this.searchControl.Size = new System.Drawing.Size(350, 35);
+            this.searchControl.TabIndex = 0;
+            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // StockinForm
             // 
@@ -658,5 +673,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Supplier;
         private System.Windows.Forms.DataGridViewButtonColumn col_remove;
+        private System.Windows.Forms.Label _grandTotalTxt;
     }
 }

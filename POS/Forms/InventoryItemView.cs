@@ -1,11 +1,7 @@
-﻿using POS.Misc;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,225 +9,48 @@ namespace POS.Forms
 {
     public partial class InventoryItemView : Form
     {
-        Login currlogin;
-        bool changesDone = false;
-        public event EventHandler OnSave;
-        public InventoryItemView()
+        public InventoryItemView(string barcode)
         {
             InitializeComponent();
-            currlogin = UserManager.instance.currentLogin;
-            Column1.ReadOnly = !currlogin.CanEditInventory;
-            Column4.ReadOnly = !currlogin.CanEditInventory;
-            removeBtn.Visible = currlogin.CanEditInventory;
-
-
+            _barcode = barcode;
         }
-        public void SetItemId(string barcode)
+        string _barcode;
+
+        DataGridViewRow CreateRow(InventoryItem item) => invTable.CreateRow(
+            item.Id,
+            item.SerialNumber,
+            item.Quantity,
+            item.Product.Supplier.Name
+            );
+
+        private async void InventoryItemView_Load(object sender, EventArgs e)
         {
-            using (var p = new POSEntities())
+            using (var context = new POSEntities())
             {
-                var invItem = p.InventoryItems.Where(x => x.Product.Item.Barcode == barcode);
+                var item = await context.Items.FirstOrDefaultAsync(x => x.Barcode == _barcode);
 
-                var item = p.Items.FirstOrDefault(x => x.Barcode == barcode);
-                barcodeField.Text = item.Barcode;
-                itemName.Text = item.Name;
-               // sellingPrice.Text = string.Format("₱ {0:n}", item.SellingPrice);
-
-                //var invItem = p.InventoryItems.Where(x => x.Product.Item.Barcode == item.Barcode);
-                quantity.Text = invItem.Select(x => x.Quantity).DefaultIfEmpty(0).Sum().ToString();
-                //int counter = 0;
-                foreach (var i in invItem)
+                var invItems = await context.InventoryItems.AsNoTracking().AsQueryable().Where(x => x.Product.Item.Barcode == _barcode).ToListAsync();
+                this.Text = this.Text + " - " + item.Name + " (" + invItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0") + ")";
+                await Task.Run(() =>
                 {
-                    //counter++;
-                    invTable.Rows.Add(i.Id, i.SerialNumber, i.Quantity == 0 ? "Infinite" : i.Quantity.ToString(), i.Product.Supplier.Name, "Stockin Log");
-                }
+                    foreach (var inv in invItems)
+                        invTable.InvokeIfRequired(() => invTable.Rows.Add(CreateRow(inv)));
+                });
             }
         }
 
-        InventoryItem target;
-        private void invTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        private void invTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (!UserManager.instance.currentLogin.CanEditProduct)
-            {
-                e.Cancel = true;
-                return;
-            }
-            var dgt = sender as DataGridView;
-            int quantity = 0;
-            int id = (int)(dgt.Rows[e.RowIndex].Cells[0].Value);
+            if (e.RowIndex == -1) return;
 
-            if (int.TryParse(dgt.Rows[e.RowIndex].Cells[2].Value.ToString(), out quantity))
-            {
-                ///if serial
-                var serial = dgt.Rows[e.RowIndex].Cells[1].Value?.ToString();
-                /////items without serial
-                bool con1 = e.ColumnIndex == 1 && quantity == 1;
-                bool con2 = e.ColumnIndex == 2 && serial == null;
-                //bool con3 = e.ColumnIndex == 1 && string.IsNullOrEmpty(serial) && quantity == 1;
-                //if (serial == null && quantity != 1)
-                //{
-                if (con1 || con2)
-                {
-                    using (var p = new POSEntities())
-                    {
-                        target = p.InventoryItems.FirstOrDefault(x => x.Id == id);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show(!con1 ? "Changing quantity of item with serial number is not allowed." : "Serial cannot be set if item quantity is more than one.", "Edit prohibited", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    e.Cancel = true;
-                    return;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Item with infinite quantity cannot be edited");
-                e.Cancel = true;
-            }
-
-        }
-
-        private void invTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            var dgt = sender as DataGridView;
-            if (e.ColumnIndex == 1)
-            {
-                if (dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() == target.SerialNumber)
-                {
-                    return;
-                }
-                using (var p = new POSEntities())
-                {
-                    if (MessageBox.Show("Are you sure you want to save new Serial?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                    {
-                        dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.SerialNumber;
-                    }
-                    else
-                    {
-                        var t = p.InventoryItems.FirstOrDefault(x => x.Id == target.Id);
-                        string s = string.IsNullOrEmpty(dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString()) ? null : dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
-                        t.SerialNumber = s;
-                        p.SaveChanges();
-                        //OnSave?.Invoke(this, null);
-                        changesDone = true;
-                        MessageBox.Show("Serial successfully updated");
-                    }
-                }
-            }
-            else if (e.ColumnIndex == 2)
-            {
-
-                int newQuantity = 0;
-                if (dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value==null)
-                {
-                    dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.Quantity;
-                    MessageBox.Show("Invalid Input.");
-                    return;
-                }
-                
-                if (int.TryParse(dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out newQuantity))
-                {
-                    if(newQuantity == 0)
-                    {
-                        dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.Quantity;
-                        MessageBox.Show("Invalid Input.");
-                        return;
-                    }
-
-                    if (newQuantity == target.Quantity)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        using (var p = new POSEntities())
-                        {
-                            if (MessageBox.Show("Are you sure you want to save new Quantity?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                            {
-                                dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.Quantity;
-                            }
-                            else
-                            {
-                                var t = p.InventoryItems.FirstOrDefault(x => x.Id == target.Id);
-                                t.Quantity = newQuantity;
-                                p.SaveChanges();
-                                changesDone = true;
-                                ///OnSave?.Invoke(this, null);
-                                MessageBox.Show("Quantity successfully updated");
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    dgt.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = target.Quantity;
-                    MessageBox.Show("Invalid Input.");
-                }
-            }
-
-        }
-        bool RemoveInventoryItem()
-        {
-            if (invTable.RowCount == 0 || !currlogin.CanEditInventory) return false;
-            var cells = invTable.SelectedCells;
-            if (cells[2].Value.ToString() == "Infinite")
-            {
-                return false;
-            }
-            if (MessageBox.Show("Are you sure you want to remove this from inventory? This action cannot be undone.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
-            {
-
-                var id = (int)(cells[0].Value);
-                //string b = barcodeField.Text;
-                //string s = cells[3].Value.ToString();
-                using (var p = new POSEntities())
-                {
-
-                    var i = p.InventoryItems.FirstOrDefault(x => x.Id == id);
-                    p.InventoryItems.Remove(i);
-
-                    p.SaveChanges();
-
-                }
-                // OnSave.Invoke(this, null);
-                changesDone = true;
-                MessageBox.Show("Successfully removed from inventory");
-                return true;
-            }
-            return false;
-        }
-        private void removeBtn_Click(object sender, EventArgs e)
-        {
-            if (RemoveInventoryItem())
-                invTable.Rows.RemoveAt(invTable.SelectedCells[0].RowIndex);
-        }
-
-        private void invTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-        {
-            //if (RemoveInventoryItem() == false)
-            //    e.Cancel = true;
-        }
-
-        private void invTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex != 4) return;
             var table = sender as DataGridView;
+            //var qty = table[col_qty.Index, e.RowIndex].Value as int?;
+            //if (qty == 0 || qty is null) return;
+
             using (InventoryStockinLog log = new InventoryStockinLog((int)(table.Rows[e.RowIndex].Cells[0].Value)))
             {
                 log.ShowDialog();
             }
-        }
-
-        private void InventoryItemView_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void InventoryItemView_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (changesDone)
-                OnSave?.Invoke(this, null);
         }
     }
 }
