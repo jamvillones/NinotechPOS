@@ -165,7 +165,7 @@ namespace POS.Forms {
 
         private void editItemsBtn_Click(object sender, EventArgs e) {
 
-            this.Close();
+            //this.Close();
 
             using (var editsolditems = new EditSale(sale.Id)) {
                 editsolditems.ShowDialog();
