@@ -209,14 +209,15 @@ namespace POS.Forms {
                 details.TransactBy = UserManager.instance.currentLogin.Name ?? "User";
                 details.Tendered = sale.AmountRecieved;
 
-                for (int i = 0; i < itemsTable.RowCount; i++)
-
+                foreach (var soldItem in sale.SoldItems) {
                     details.Additem(
-                        itemsTable[nameCol.Index, i].Value.ToString(),
-                        itemsTable[serialCol.Index, i].Value.ToString(),
-                        (int)itemsTable[qtyCol.Index, i].Value,
-                        (decimal)itemsTable[priceCol.Index, i].Value,
-                        (decimal)itemsTable[discountCol.Index, i].Value);
+                        soldItem.Product.Item.Name,
+                        soldItem.SerialNumber,
+                        soldItem.Quantity,
+                        soldItem.ItemPrice,
+                        soldItem.Discount
+                        );
+                }
 
                 e.FormatReciept(printAction, details);
             }
