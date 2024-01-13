@@ -31,11 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockinForm));
             this.stockinBtn = new System.Windows.Forms.Button();
             this.inventoryTable = new System.Windows.Forms.DataGridView();
@@ -71,7 +74,9 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this._messageLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
@@ -82,7 +87,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // stockinBtn
@@ -90,12 +95,12 @@
             this.stockinBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.stockinBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.stockinBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.stockinBtn.Location = new System.Drawing.Point(0, 408);
+            this.stockinBtn.Location = new System.Drawing.Point(0, 407);
             this.stockinBtn.Name = "stockinBtn";
-            this.stockinBtn.Size = new System.Drawing.Size(424, 35);
+            this.stockinBtn.Size = new System.Drawing.Size(425, 35);
             this.stockinBtn.TabIndex = 4;
             this.stockinBtn.TabStop = false;
-            this.stockinBtn.Text = "STOCK IN (CTRL+ENTER)";
+            this.stockinBtn.Text = "Stock In [ Ctrl+Enter ]";
             this.toolTip.SetToolTip(this.stockinBtn, "(ctrl+Enter) to stock in");
             this.stockinBtn.UseVisualStyleBackColor = false;
             this.stockinBtn.Click += new System.EventHandler(this.stockinBtn_Click);
@@ -103,22 +108,20 @@
             // inventoryTable
             // 
             this.inventoryTable.AllowUserToAddRows = false;
-            this.inventoryTable.AllowUserToDeleteRows = false;
-            this.inventoryTable.AllowUserToResizeColumns = false;
             this.inventoryTable.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             this.inventoryTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.inventoryTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.inventoryTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            this.inventoryTable.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.inventoryTable.BackgroundColor = System.Drawing.Color.White;
             this.inventoryTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.inventoryTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.inventoryTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.inventoryTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
@@ -133,15 +136,15 @@
             this.col_Inventory_Total,
             this.col_Inventory_Supplier,
             this.col_remove});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.inventoryTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inventoryTable.EnableHeadersVisualStyles = false;
             this.inventoryTable.Location = new System.Drawing.Point(0, 0);
@@ -151,10 +154,11 @@
             this.inventoryTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.inventoryTable.RowHeadersVisible = false;
             this.inventoryTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.inventoryTable.Size = new System.Drawing.Size(424, 408);
+            this.inventoryTable.Size = new System.Drawing.Size(425, 407);
             this.inventoryTable.StandardTab = true;
             this.inventoryTable.TabIndex = 4;
             this.inventoryTable.TabStop = false;
+            this.inventoryTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.inventoryTable_CellMouseDoubleClick);
             // 
             // col_Inventory_Id
             // 
@@ -184,18 +188,27 @@
             // 
             // col_Inventory_Qty
             // 
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.col_Inventory_Qty.DefaultCellStyle = dataGridViewCellStyle3;
             this.col_Inventory_Qty.HeaderText = "QTY";
             this.col_Inventory_Qty.Name = "col_Inventory_Qty";
             this.col_Inventory_Qty.ReadOnly = true;
             // 
             // col_Inventory_Cost
             // 
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.col_Inventory_Cost.DefaultCellStyle = dataGridViewCellStyle4;
             this.col_Inventory_Cost.HeaderText = "COST";
             this.col_Inventory_Cost.Name = "col_Inventory_Cost";
             this.col_Inventory_Cost.ReadOnly = true;
             // 
             // col_Inventory_Total
             // 
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.col_Inventory_Total.DefaultCellStyle = dataGridViewCellStyle5;
             this.col_Inventory_Total.HeaderText = "TOTAL";
             this.col_Inventory_Total.Name = "col_Inventory_Total";
             this.col_Inventory_Total.ReadOnly = true;
@@ -213,6 +226,7 @@
             this.col_remove.HeaderText = "";
             this.col_remove.Name = "col_remove";
             this.col_remove.ReadOnly = true;
+            this.col_remove.Text = "Remove";
             this.col_remove.UseColumnTextForButtonValue = true;
             this.col_remove.Width = 12;
             // 
@@ -221,21 +235,21 @@
             this.itemsTable.AllowUserToAddRows = false;
             this.itemsTable.AllowUserToDeleteRows = false;
             this.itemsTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.itemsTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.itemsTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.itemsTable.BackgroundColor = System.Drawing.Color.White;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Id,
@@ -243,25 +257,25 @@
             this.col_name,
             this.col_cost,
             this.col_supplier});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle10;
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
-            this.itemsTable.Location = new System.Drawing.Point(0, 120);
+            this.itemsTable.Location = new System.Drawing.Point(0, 155);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(500, 288);
+            this.itemsTable.Size = new System.Drawing.Size(495, 252);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 6;
             this.itemsTable.TabStop = false;
@@ -290,9 +304,9 @@
             // 
             // col_cost
             // 
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.col_cost.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Format = "C2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.col_cost.DefaultCellStyle = dataGridViewCellStyle9;
             this.col_cost.HeaderText = "COST";
             this.col_cost.Name = "col_cost";
             this.col_cost.ReadOnly = true;
@@ -309,7 +323,7 @@
             this.createItemBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.createItemBtn.FlatAppearance.BorderSize = 0;
             this.createItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.createItemBtn.Location = new System.Drawing.Point(359, 3);
+            this.createItemBtn.Location = new System.Drawing.Point(356, 0);
             this.createItemBtn.Name = "createItemBtn";
             this.createItemBtn.Size = new System.Drawing.Size(141, 35);
             this.createItemBtn.TabIndex = 1;
@@ -326,9 +340,11 @@
             this.serialNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.serialNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.serialNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.serialNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.serialNumber.Location = new System.Drawing.Point(0, 18);
+            this.serialNumber.MaxLength = 50;
             this.serialNumber.Name = "serialNumber";
-            this.serialNumber.Size = new System.Drawing.Size(500, 13);
+            this.serialNumber.Size = new System.Drawing.Size(495, 14);
             this.serialNumber.TabIndex = 0;
             this.serialNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip.SetToolTip(this.serialNumber, "(f2) to focus serial number");
@@ -341,11 +357,11 @@
             this.itemName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemName.Dock = System.Windows.Forms.DockStyle.Top;
             this.itemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.itemName.ForeColor = System.Drawing.Color.Blue;
             this.itemName.Location = new System.Drawing.Point(0, 18);
             this.itemName.Name = "itemName";
             this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(500, 13);
+            this.itemName.Size = new System.Drawing.Size(495, 13);
             this.itemName.TabIndex = 0;
             this.itemName.TabStop = false;
             this.itemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -355,6 +371,7 @@
             this.quantity.BackColor = System.Drawing.SystemColors.Control;
             this.quantity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.quantity.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.quantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quantity.Location = new System.Drawing.Point(0, 18);
             this.quantity.Maximum = new decimal(new int[] {
             1000000,
@@ -367,7 +384,7 @@
             0,
             0});
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(500, 16);
+            this.quantity.Size = new System.Drawing.Size(495, 17);
             this.quantity.TabIndex = 0;
             this.quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip.SetToolTip(this.quantity, "(f3) to focus quantity");
@@ -376,16 +393,15 @@
             0,
             0,
             0});
-            this.quantity.ValueChanged += new System.EventHandler(this.quantity_ValueChanged);
             // 
             // addBtn
             // 
             this.addBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.addBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addBtn.Location = new System.Drawing.Point(0, 408);
+            this.addBtn.Location = new System.Drawing.Point(0, 407);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(500, 35);
+            this.addBtn.Size = new System.Drawing.Size(495, 35);
             this.addBtn.TabIndex = 3;
             this.addBtn.TabStop = false;
             this.addBtn.Text = "ADD (SHIFT+ENTER)";
@@ -405,10 +421,11 @@
             this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.searchControl.BackColor = System.Drawing.Color.White;
             this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl.Location = new System.Drawing.Point(3, 3);
+            this.searchControl.Location = new System.Drawing.Point(0, 0);
             this.searchControl.MaximumSize = new System.Drawing.Size(350, 35);
             this.searchControl.MinimumSize = new System.Drawing.Size(350, 35);
             this.searchControl.Name = "searchControl";
+            this.searchControl.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
             this.searchControl.SearchedText = "";
             this.searchControl.Size = new System.Drawing.Size(350, 35);
             this.searchControl.TabIndex = 0;
@@ -422,19 +439,19 @@
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.label5);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 40);
+            this.panel6.Location = new System.Drawing.Point(0, 45);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.panel6.Size = new System.Drawing.Size(500, 40);
+            this.panel6.Size = new System.Drawing.Size(495, 45);
             this.panel6.TabIndex = 7;
             // 
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.Black;
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 34);
+            this.panel7.Location = new System.Drawing.Point(0, 39);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(500, 1);
+            this.panel7.Size = new System.Drawing.Size(495, 1);
             this.panel7.TabIndex = 1;
             // 
             // label5
@@ -453,19 +470,19 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 80);
+            this.panel1.Location = new System.Drawing.Point(0, 90);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.panel1.Size = new System.Drawing.Size(500, 40);
+            this.panel1.Size = new System.Drawing.Size(495, 45);
             this.panel1.TabIndex = 8;
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 34);
+            this.panel2.Location = new System.Drawing.Point(0, 39);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(500, 1);
+            this.panel2.Size = new System.Drawing.Size(495, 1);
             this.panel2.TabIndex = 1;
             // 
             // label6
@@ -487,16 +504,16 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.panel3.Size = new System.Drawing.Size(500, 40);
+            this.panel3.Size = new System.Drawing.Size(495, 45);
             this.panel3.TabIndex = 9;
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Black;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 34);
+            this.panel4.Location = new System.Drawing.Point(0, 39);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(500, 1);
+            this.panel4.Size = new System.Drawing.Size(495, 1);
             this.panel4.TabIndex = 1;
             // 
             // label7
@@ -511,14 +528,16 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.Location = new System.Drawing.Point(20, 81);
+            this.splitContainer1.Location = new System.Drawing.Point(20, 80);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.itemsTable);
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.panel6);
             this.splitContainer1.Panel1.Controls.Add(this.panel3);
@@ -528,23 +547,41 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.inventoryTable);
             this.splitContainer1.Panel2.Controls.Add(this.stockinBtn);
-            this.splitContainer1.Size = new System.Drawing.Size(944, 443);
-            this.splitContainer1.SplitterDistance = 500;
+            this.splitContainer1.Size = new System.Drawing.Size(944, 444);
+            this.splitContainer1.SplitterDistance = 497;
             this.splitContainer1.SplitterWidth = 20;
             this.splitContainer1.TabIndex = 3;
             // 
-            // flowLayoutPanel1
+            // label1
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.searchControl);
-            this.flowLayoutPanel1.Controls.Add(this.createItemBtn);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 20);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(944, 61);
-            this.flowLayoutPanel1.TabIndex = 4;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.ForeColor = System.Drawing.Color.SeaGreen;
+            this.label1.Location = new System.Drawing.Point(0, 135);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.label1.Size = new System.Drawing.Size(495, 20);
+            this.label1.TabIndex = 10;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this._messageLabel);
+            this.panel5.Controls.Add(this.searchControl);
+            this.panel5.Controls.Add(this.createItemBtn);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(20, 20);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(944, 60);
+            this.panel5.TabIndex = 4;
+            // 
+            // _messageLabel
+            // 
+            this._messageLabel.AutoSize = true;
+            this._messageLabel.ForeColor = System.Drawing.Color.Maroon;
+            this._messageLabel.Location = new System.Drawing.Point(0, 38);
+            this._messageLabel.Name = "_messageLabel";
+            this._messageLabel.Size = new System.Drawing.Size(0, 13);
+            this._messageLabel.TabIndex = 2;
             // 
             // StockinForm
             // 
@@ -552,7 +589,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 544);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.panel5);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimizeBox = false;
@@ -577,9 +614,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -604,12 +641,14 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_supplier;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label _messageLabel;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Serial;

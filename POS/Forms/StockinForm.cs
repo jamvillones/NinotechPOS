@@ -1,288 +1,271 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using POS.Misc;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using POS.Misc;
 
-namespace POS.Forms
-{
-    public partial class StockinForm : Form
-    {
-        List<Product> productsToImport = new List<Product>();
-        /// <summary>
-        /// the event fired 
-        /// </summary>
+namespace POS.Forms {
+    public partial class StockinForm : Form {
 
-        Login currLogin
-        {
-            get
-            {
-                return UserManager.instance.currentLogin;
-            }
-        }
+        Login CurrLogin => UserManager.instance.currentLogin;
 
-        public StockinForm()
-        {
+        public StockinForm() {
             InitializeComponent();
+
+            inventoryTable.AutoGenerateColumns = false;
+            col_Inventory_Id.DataPropertyName = nameof(ToStockinViewModel.ProductId);
+            col_Inventory_Serial.DataPropertyName = nameof(ToStockinViewModel.Serial);
+            col_Inventory_Name.DataPropertyName = nameof(ToStockinViewModel.ProductName);
+            col_Inventory_Qty.DataPropertyName = nameof(ToStockinViewModel.Quantity);
+            col_Inventory_Cost.DataPropertyName = nameof(ToStockinViewModel.Cost);
+            col_Inventory_Total.DataPropertyName = nameof(ToStockinViewModel.Total);
+            col_Inventory_Supplier.DataPropertyName = nameof(ToStockinViewModel.SupplierName);
+
+            inventoryTable.DataSource = ToStockins;
         }
+
         DataGridViewRow CreateProductRow(Product product) => itemsTable.CreateRow(
             product.Id,
             product.Item.Barcode,
             product.Item.Name,
             product.Cost,
             product.Supplier.Name);
-        bool IsLoadingData = false;
-        private async Task LoadDataAsync()
-        {
-            //itemsTable.InvokeIfRequired(() => { itemsTable.Rows.Clear(); });
 
+        //bool IsLoadingData = false;
+        private async Task<bool> LoadDataAsync() {
 
-            //loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = true; });
-            searchControl.InvokeIfRequired(() => { searchControl.Enabled = false; });
-            IsLoadingData = true;
-            using (var context = new POSEntities())
-            {
+            bool entriesFound = false;
 
-                var products = await context.Products.AsNoTracking().AsQueryable()
-                .Where(x => x.Item.Type == ItemType.Quantifiable.ToString())
-                //.Select(y => itemsTable.CreateRow(y.Item?.Barcode, y.Item.Name, y.Cost, y.Supplier?.Name))
-                .ToListAsync();
+            using (var context = new POSEntities()) {
 
+                var products = await context.Products
+                    .AsNoTracking()
+                    .AsQueryable()
+                        .Include(p => p.Item)
+                    .Where(x => x.Item.Type == ItemType.Quantifiable.ToString())
+                    .ApplySearch(keyword)
+                    .ToListAsync();
 
-                if (products.Count > 0)
-                {
-                    await Task.Run(() =>
-                    {
-                        var rows = products.Select(CreateProductRow).ToArray();
+                entriesFound = products.Count > 0;
+
+                if (entriesFound) {
+
+                    itemsTable.Rows.Clear();
+
+                    await Task.Run(() => {
+                        var rows = products
+                        .Select(CreateProductRow)
+                        .ToArray();
+
                         itemsTable.InvokeIfRequired(() => itemsTable.Rows.AddRange(rows));
                     });
                 }
-                //itemsTable.InvokeIfRequired(() =>
-                //{
-                //    if (itemsTable.IsDisposed || itemsTable.Disposing)
-                //        return;
 
-                //    itemsTable.Rows.AddRange(rows);
-                //});
+                label1.Text = itemsTable.RowCount.ToString("N0") + " entries";
             }
-            IsLoadingData = false;
-
-            //loadingLabelItem.InvokeIfRequired(() => { loadingLabelItem.Visible = false; });
-            searchControl.InvokeIfRequired(() => { searchControl.Enabled = true; });
-
-
+            return entriesFound;
         }
 
-        void setAutoComplete()
-        {
-            using (var p = new POSEntities())
-            {
+        void setAutoComplete() {
+            using (var p = new POSEntities()) {
                 searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).GroupBy(y => y.Item.Name).Select(a => a.Key).ToArray());
             }
         }
 
-        private async void StockinForm_Load(object sender, EventArgs e)
-        {
-            createItemBtn.Enabled = currLogin.CanEditItem;
+        private async void StockinForm_Load(object sender, EventArgs e) {
+            createItemBtn.Enabled = CurrLogin.CanEditItem;
 
             await LoadDataAsync();
         }
 
         string CurrentProductBarcode => itemsTable.SelectedCells[col_barcode.Index].Value.ToString();
+        int CurrentProductId => (int)itemsTable.SelectedCells[col_Id.Index].Value;
         string CurrentProductName => itemsTable.SelectedCells[col_name.Index].Value.ToString();
+        string CurrentProductSupplier => itemsTable.SelectedCells[col_supplier.Index].Value.ToString();
         decimal CurrentProductCost => (decimal)itemsTable.SelectedCells[col_cost.Index].Value;
 
-
-        private void itemsTable_SelectionChanged(object sender, EventArgs e)
-        {
-            if (itemsTable.RowCount <= 0) return;
+        private void itemsTable_SelectionChanged(object sender, EventArgs e) {
+            if (itemsTable.SelectedCells.Count <= 0) return;
 
             itemName.Text = CurrentProductBarcode + " - " + CurrentProductName;
             serialNumber.Text = string.Empty;
-            this.ActiveControl = serialNumber;
         }
 
-        private void quantity_ValueChanged(object sender, EventArgs e)
-        {
-            //cost.Text = (quantity.Value * item.SellingPrice).ToString();
+        bool AlreadyInTable(int id, out ToStockinViewModel stockinEntry) {
+
+            stockinEntry = ToStockins
+                .Where(t => string.IsNullOrWhiteSpace(t.Serial))
+                .FirstOrDefault(stockin => stockin.ProductId == id);
+
+            return stockinEntry != null;
         }
 
-        bool alreadyInTable(string id, string supplier, out int index)
-        {
-            string b, s;
-            for (int i = 0; i < inventoryTable.RowCount; i++)
-            {
-
-                b = inventoryTable.Rows[i].Cells[0].Value.ToString();
-                s = inventoryTable.Rows[i].Cells[6].Value.ToString();
-                if (b == id && s == supplier && inventoryTable.Rows[i].Cells[1].Value.ToString() == string.Empty)
-                {
-                    index = i;
-                    return true;
-                }
-            }
-            index = -1;
-            return false;
-        }
-        Item getItemById(string id)
-        {
-            using (var p = new POSEntities())
-            {
-                return p.Items.FirstOrDefault(x => x.Barcode == id);
-            }
-        }
-        private void addBtn_Click(object sender, EventArgs e)
-        {
+        private void addBtn_Click(object sender, EventArgs e) {
             AddProduct();
             this.ActiveControl = searchControl.firstControl;
-            //Console.WriteLine(ActiveControl.Name);
         }
 
-        private void stockinBtn_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to stock these items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
-            {
+        private async void stockinBtn_Click(object sender, EventArgs e) {
+            if (ToStockins.Count <= 0) return;
+
+            if (MessageBox.Show("Are you sure you want to stock these items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
                 return;
             }
-            using (var p = new POSEntities())
-            {
-                Product product;
-                for (int i = 0; i < inventoryTable.RowCount; i++)
-                {
-                    var itemId = inventoryTable.Rows[i].Cells[0].Value.ToString();
-                    var suppName = inventoryTable.Rows[i].Cells[6].Value.ToString();
-                    var serialNum = inventoryTable.Rows[i].Cells[1].Value.ToString();
-                    var q = Convert.ToInt32((inventoryTable.Rows[i].Cells[3].Value.ToString()));
-                    product = p.Products.FirstOrDefault(x => x.ItemId == itemId && x.Supplier.Name == suppName);
+            using (var context = new POSEntities()) {
 
+                foreach (var s in ToStockins) {
+
+                    int productId = s.ProductId;
+                    string serialNum = s.Serial;
+                    int quantity = s.Quantity;
+
+                    var product = await context.Products.FirstOrDefaultAsync(x => x.Id == productId);
 
                     InventoryItem it = new InventoryItem();
-                    //Console.WriteLine(it.Id);
-                    if (string.IsNullOrEmpty(serialNum))
-                    {
-                        it = p.InventoryItems.FirstOrDefault(x => x.Product.Id == product.Id && x.SerialNumber == null);
-                        if (it == null)
-                        {
-                            it = new InventoryItem();
+
+                    ///add as stacking qty
+                    if (string.IsNullOrEmpty(serialNum)) {
+                        it = await context.InventoryItems.FirstOrDefaultAsync(x => x.Product.Id == product.Id && x.SerialNumber == null);
+
+                        ///item is not yet added
+                        if (it is null) {
                             it.Product = product;
-                            it.Quantity = q;
-                            p.InventoryItems.Add(it);
+                            it.Quantity = quantity;
+                            context.InventoryItems.Add(it);
                         }
-                        else
-                        {
-                            it.Quantity += q;
-                        }
+                        ///increment the qty
+                        else it.Quantity += quantity;
                     }
-                    else
-                    {
-                        it = new InventoryItem();
+
+                    ///add as with serial
+                    else {
                         it.Product = product;
-                        it.Quantity = q;
+                        it.Quantity = quantity;
                         it.SerialNumber = serialNum;
-                        p.InventoryItems.Add(it);
+                        context.InventoryItems.Add(it);
                     }
 
-                    var stockinHist = new StockinHistory();
+                    var stockinHist = new StockinHistory {
+                        ProductId = product.Id,
+                        ItemName = it.Product.Item.Name,
+                        Cost = it.Product.Cost,
+                        Supplier = it.Product.Supplier.Name,
+                        Date = DateTime.Now,
+                        Quantity = quantity,
+                        SerialNumber = it.SerialNumber,
+                        LoginUsername = context.Logins.FirstOrDefault(x => x.Username == CurrLogin.Username).Username
+                    };
 
-                    stockinHist.ProductId = product.Id;
-                    stockinHist.ItemName = it.Product.Item.Name;
-                    stockinHist.Cost = it.Product.Cost;
-                    stockinHist.Supplier = it.Product.Supplier.Name;
-                    stockinHist.Date = DateTime.Now;
-                    stockinHist.Quantity = q;
-                    stockinHist.SerialNumber = it.SerialNumber;
-                    stockinHist.LoginUsername = p.Logins.FirstOrDefault(x => x.Username == currLogin.Username).Username;
-
-                    p.StockinHistories.Add(stockinHist);
+                    context.StockinHistories.Add(stockinHist);
                 }
 
-                p.SaveChanges();
+                await context.SaveChangesAsync();
 
-                MessageBox.Show("Saved.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Stockin Succesful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
             }
         }
 
-        int SelectedId => (int)itemsTable.SelectedCells[0].Value;
-
-        bool serialAlreadyTaken()
-        {
-            using (var p = new POSEntities())
-            {
-                if (p.InventoryItems.Any(x => x.SerialNumber == serialNumber.Text))
-                {
-                    MessageBox.Show("Serial number already in inventory.");
+        bool SerialAlreadyTaken(string serial) {
+            using (var p = new POSEntities()) {
+                if (p.InventoryItems.Any(x => x.SerialNumber == serial)) {
+                    MessageBox.Show("Serial number already in inventory.", "Serial Number Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return true;
                 }
             }
 
-            for (int i = 0; i < inventoryTable.RowCount; i++)
-            {
-                if (serialNumber.Text == inventoryTable.Rows[i].Cells[1].Value.ToString())
-                {
-                    MessageBox.Show("Serial number already on the list.");
+            for (int i = 0; i < inventoryTable.RowCount; i++) {
+                if (serial == inventoryTable.Rows[i].Cells[col_Inventory_Serial.Index].Value?.ToString()) {
+                    MessageBox.Show("Serial number already on the list.", "Serial Number Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return true;
                 }
             }
             return false;
         }
 
-        Product selectedProduct;
+        void AddProduct() {
 
-        void AddProduct()
-        {
-            ///check if the item to be added has serial
-            //    if (!string.IsNullOrEmpty(serialNumber.Text))
-            //    {
-            //        if (serialAlreadyTaken())
-            //        {
-            //            return;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        ///if not then check if the item to be added is already in the table, if yes just edit quantitty
-            //        int index;
-            //        if (alreadyInTable(barcode.Text, supplier.Text, out index))
-            //        {
-            //            var currentQuant = Convert.ToInt32(inventoryTable.Rows[index].Cells[3].Value);
-            //            inventoryTable.Rows[index].Cells[3].Value = currentQuant + quantity.Value;
-            //            inventoryTable.Rows[index].Cells[5].Value = (currentQuant + quantity.Value) * Convert.ToDecimal(cost.Text);
-            //            return;
-            //        }
-            //    }
-            //    ///else, add the item
-            //    Decimal totalCost = quantity.Value * Convert.ToDecimal(cost.Text);
-            //    inventoryTable.Rows.Add(barcode.Text, serialNumber.Text, itemName.Text, quantity.Value, cost.Text, totalCost.ToString(), supplier.Text);
+            var serial = serialNumber.Text.Trim();
+            var qty = (int)quantity.Value;
+            /// check if the item to be added has serial 
+            if (!string.IsNullOrEmpty(serialNumber.Text)) {
+                /// check if its already registered
+                if (SerialAlreadyTaken(serial))
+                    return;
+            }
+            else {
+                ///if not then check if the item to be added is already in the table, if yes just increment qty
+                if (AlreadyInTable(CurrentProductId, out ToStockinViewModel already)) {
 
-            //    serialNumber.Text = string.Empty;
+                    already.Quantity += qty;
+                    UpdateGrandTotal();
+                    return;
+                }
+            }
+            ///else, add the item
+            ToStockins.Add(new ToStockinViewModel() {
+                ProductId = CurrentProductId,
+                SupplierName = CurrentProductSupplier,
+                ProductName = CurrentProductName,
+                Serial = serial,
+                Quantity = qty,
+                Cost = CurrentProductCost
+
+            });
+
+            UpdateGrandTotal();
+            serialNumber.Text = string.Empty;
         }
 
-        private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex == -1)
-                return;
-            AddProduct();
+        BindingList<ToStockinViewModel> ToStockins = new BindingList<ToStockinViewModel>();
+
+        private class ToStockinViewModel : INotifyPropertyChanged {
+            private int quantity;
+
+            public ToStockinViewModel() {
+
+            }
+
+            public string ProductName { get; set; }
+            public string SupplierName { get; set; }
+            public int ProductId { get; set; }
+            public string Serial { get; set; }
+            public int Quantity {
+                get => quantity; set {
+                    quantity = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Quantity)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Total)));
+                }
+            }
+            public decimal Cost { get; set; }
+            public decimal Total => Quantity * Cost;
+
+            public event PropertyChangedEventHandler PropertyChanged;
         }
 
-        private void removeBtn_Click(object sender, EventArgs e)
-        {
-            if (inventoryTable.RowCount == 0)
-                return;
-            int index = inventoryTable.CurrentCell.RowIndex;
-            inventoryTable.Rows.RemoveAt(index);
+        private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            //if (e.RowIndex == -1)
+            //    return;
+            //AddProduct();
         }
 
-        private void serialNumber_TextChanged(object sender, EventArgs e)
-        {
-            if (serialNumber.Text.Count() != 0)
-            {
+        //private void removeBtn_Click(object sender, EventArgs e) {
+        //    if (inventoryTable.RowCount == 0)
+        //        return;
+        //    int index = inventoryTable.CurrentCell.RowIndex;
+        //    inventoryTable.Rows.RemoveAt(index);
+        //}
+
+        /// <summary>
+        /// this ensures that when there is serial number supplied, the quantity will be 1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void serialNumber_TextChanged(object sender, EventArgs e) {
+            if (serialNumber.Text.Count() != 0) {
                 quantity.Value = 1;
                 quantity.Enabled = false;
                 return;
@@ -290,16 +273,18 @@ namespace POS.Forms
             quantity.Enabled = true;
         }
 
-        private void StockinForm_KeyDown(object sender, KeyEventArgs e)
-        {
+        /// <summary>
+        /// key shortcuts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StockinForm_KeyDown(object sender, KeyEventArgs e) {
 
-            if (e.Shift && e.KeyCode == Keys.Enter)
-            {
+            if (e.Shift && e.KeyCode == Keys.Enter) {
                 addBtn.PerformClick();
                 e.SuppressKeyPress = true;
             }
-            if (e.Control && e.KeyCode == Keys.Enter)
-            {
+            if (e.Control && e.KeyCode == Keys.Enter) {
                 // Do what you want here
                 stockinBtn.PerformClick();
                 e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
@@ -314,60 +299,74 @@ namespace POS.Forms
                 this.ActiveControl = quantity;
         }
 
-        private void createItemBtn_Click(object sender, EventArgs e)
-        {
-            using (var additem = new AddItemForm())
-            {
+        private void createItemBtn_Click(object sender, EventArgs e) {
+            using (var additem = new AddItemForm()) {
                 additem.OnSave += Additem_OnSave;
                 additem.ShowDialog();
             }
         }
 
-        private void Additem_OnSave(object sender, EventArgs e)
-        {
+
+        /// <summary>
+        /// triggers after a successful addition of item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void Additem_OnSave(object sender, EventArgs e) {
             setAutoComplete();
-            var init = LoadDataAsync();
+            await LoadDataAsync();
         }
 
-        private void searchControl1_OnSearch(object sender, SearchEventArgs e)
-        {
-            using (var p = new POSEntities())
-            {
-                var products = p.Products.Where(x => x.Item.Barcode == e.Text && x.Item.Type == ItemType.Quantifiable.ToString());
-                if (products.Count() == 0)
-                {
-                    products = p.Products.Where(x => x.Item.Name.Contains(e.Text) && x.Item.Type == ItemType.Quantifiable.ToString());
-                    if (products.Count() == 0)
-                    {
-                        if (MessageBox.Show("Would you like to create an item?", "Item not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            createItemBtn.PerformClick();
-                        }
-
-                        return;
-                    }
-                }
-
-                itemsTable.Rows.Clear();
-                e.SearchFound = true;
-                foreach (var i in products)
-                {
-                    itemsTable.Rows.Add(i.ItemId, i.Item.Name, i.Cost, i.Supplier.Name);
-                }
-            }
+        private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
+            keyword = e.Text;
+            e.SearchFound = await LoadDataAsync();
+            _messageLabel.Text = e.SearchFound ? "" : "**Results Not Found!";
         }
 
-        private void searchControl1_OnTextEmpty(object sender, EventArgs e)
-        {
-            var t = LoadDataAsync();
+        string keyword = string.Empty;
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+            keyword = string.Empty;
+            await LoadDataAsync();
         }
 
-        private void serialNumber_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrWhiteSpace(serialNumber.Text))
-            {
+
+        /// <summary>
+        /// used for when the scanner hits enter after scans
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void serialNumber_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter && !string.IsNullOrWhiteSpace(serialNumber.Text)) {
                 AddProduct();
             }
+        }
+
+        private void inventoryTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.RowIndex == -1 || e.RowIndex != col_remove.Index)
+                return;
+            //if (MessageBox.Show("Are yo") == DialogResult.Cancel)
+            //    return;
+            ToStockins.RemoveAt(e.RowIndex);
+
+            UpdateGrandTotal();
+        }
+
+        void UpdateGrandTotal() {
+            stockinBtn.Text = "Stock In [ Ctrl+Enter ] " + ToStockins
+                .Select(t => t.Quantity * t.Cost)
+                .DefaultIfEmpty(0)
+                .Sum()
+                .ToString("C2");
+        }
+    }
+
+    public static class StockinQueryExtensions {
+        public static IQueryable<Product> ApplySearch(this IQueryable<Product> products, string keyword) {
+
+            if (string.IsNullOrWhiteSpace(keyword))
+                return products;
+
+            return products.Where(p => p.Item.Barcode == keyword || p.Item.Name.Contains(keyword));
         }
     }
 }

@@ -40,7 +40,7 @@ namespace POS.Forms
             ///MessageBox.Show("Login failed!","", MessageBoxButtons.OK, MessageBoxIcon.Error);
             ///
             System.Media.SystemSounds.Hand.Play();
-            label2.Text = "LOG IN FAILED!";
+            label2.Text = "Log In Failed!";
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
