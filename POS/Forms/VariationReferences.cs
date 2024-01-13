@@ -64,9 +64,9 @@ namespace POS.Forms
 
         private void soldTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            using (var details = new SaleDetails())
+            using (var details = new SaleDetails((int)soldTable.SelectedCells[0].Value))
             {
-                details.SetId((int)soldTable.SelectedCells[0].Value);
+                //details.SetId();
                 details.ShowDialog();
             }
 

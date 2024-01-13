@@ -108,9 +108,9 @@ namespace POS.UserControls
                     return;
                 }
 
-            using (var saleDetails = new SaleDetails())
+            using (var saleDetails = new SaleDetails(index))
             {
-                saleDetails.SetId(index);
+                //saleDetails.SetId(index);
                 saleDetails.OnSave += SaleDetails_OnSave;
                 saleDetails.ShowDialog();
             }

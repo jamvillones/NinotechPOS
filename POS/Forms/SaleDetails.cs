@@ -1,61 +1,52 @@
 ﻿using POS.Misc;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Security.Policy;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
 namespace POS.Forms {
     public partial class SaleDetails : Form {
-        public SaleDetails() {
+        //public SaleDetails() {
+        //    InitializeComponent();
+        //}
+
+        public SaleDetails(int id) {
             InitializeComponent();
+            _saleId = id;
+
+            voidBtn.Visible = currentLogin.CanVoidSale;
+            editItemsBtn.Visible = currentLogin.CanVoidSale;
+
+            var settings = Properties.Settings.Default;
+
+            if (!string.IsNullOrEmpty(settings.ReceiptPrinter))
+                doc.PrinterSettings.PrinterName = settings.ReceiptPrinter;
         }
 
         Login currentLogin => Misc.UserManager.instance.currentLogin;
+
+        private int _saleId;
+
         Sale sale;
 
         public event EventHandler OnSave;
-        public void SetId(int id) {
-            using (var p = new POSEntities()) {
-                sale = p.Sales.FirstOrDefault(x => x.Id == id);
-                soldBy.Text = sale.Login?.Name ?? sale.Login?.Username;
-                soldTo.Text = sale.Customer.Name + " - " + sale.Customer.ContactDetails + " - " + sale.Customer.Address;
 
-                this.Text = this.Text + " - " + sale.Id.ToString() + " (" + sale.Date.Value.ToString("MMM d, yyyy hh:mm tt") + " - " + sale.SaleType + ")";
+        DataGridViewRow CreateRow(SoldItem soldItem) => itemsTable.CreateRow(
+            soldItem.Product.Item.Name,
+            soldItem.SerialNumber,
+            soldItem.Product.Supplier.Name,
+            soldItem.Quantity,
+            soldItem.ItemPrice,
+            soldItem.Discount,
+            soldItem.Quantity * (soldItem.ItemPrice - soldItem.Discount)
+            );
 
-                //SaleId.Text = sale.Id.ToString();
-                //address.Text = sale.Customer.Address;
-                //contact.Text = sale.Customer.ContactDetails;
-                //saleType.Text = sale.SaleType;
-                //Datetext.Text = sale.Date.Value.ToString("MMMM dd, yyyy hh:mm tt");
-
-                var soldItems = sale.SoldItems;
-                foreach (var x in soldItems.OrderBy(x => x.Product.Item.Name)) {
-                    itemsTable.Rows.Add(x.Product.Item.Name,
-                                        x.SerialNumber ?? "--",
-                                        x.Product.Supplier?.Name,
-                                        x.Quantity,
-                                        string.Format("₱ {0:n}", x.ItemPrice),
-                                        string.Format("₱ {0:n}", x.Discount),
-                                        string.Format("₱ {0:n}", (x.Quantity * (x.ItemPrice - x.Discount))),
-                                        x.Quantity, x.ItemPrice, x.Discount);
-                }
-
-                total.Text = string.Format("₱ {0:n}", sale.Total);
-                amountRecieved.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
-                recHistBtn.Visible = p.ChargedPayRecords.FirstOrDefault(x => x.Sale.Id == sale.Id) != null ? true : false;
-
-                if (sale.SaleType == SaleType.Charged.ToString() || sale.AmountRecieved >= sale.Total) {
-                    remainGroup.Visible = false;
-                    //addPaymentGroup.Visible = false;
-                    return;
-                }
-            }
-
-
-            remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
-        }
         void addPayment() {
             //if (paymentNum.Value == 0)
             //    return;
@@ -96,7 +87,7 @@ namespace POS.Forms {
         }
 
         private void voidBtn_Click(object sender, EventArgs e) {
-            if (MessageBox.Show("All sold items that is associated with this sale will be stocked and this sale will be removed", "Are you sure you want to void this sale?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            if (MessageBox.Show("All sold items that is associated with this sale will be re-stocked and this sale will be removed", "Are you sure you want to void this sale?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                 return;
 
             using (var p = new POSEntities()) {
@@ -111,6 +102,7 @@ namespace POS.Forms {
                 p.SaveChanges();
             }
         }
+
         void addBackToInventory(params int[] id) {
             using (var p = new POSEntities()) {
                 foreach (var i in id) {
@@ -144,13 +136,35 @@ namespace POS.Forms {
 
         }
 
-        private void SaleDetails_Load(object sender, EventArgs e) {
-            voidBtn.Visible = currentLogin.CanVoidSale;
-            editItemsBtn.Visible = currentLogin.CanVoidSale;
+        private async void SaleDetails_Load(object sender, EventArgs e) {
+            using (var p = new POSEntities()) {
 
-            var settings = Properties.Settings.Default;
-            if (!string.IsNullOrEmpty(settings.ReceiptPrinter))
-                doc.PrinterSettings.PrinterName = settings.ReceiptPrinter;
+                sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
+
+                soldBy.Text = sale.Login?.Name ?? sale.Login?.Username;
+                soldTo.Text = sale.Customer.Name + " - " + sale.Customer.ContactDetails + " - " + sale.Customer.Address;
+
+                this.Text = this.Text + " - " + sale.Id.ToString() + " (" + sale.Date.Value.ToString("MMM d, yyyy hh:mm tt") + " - " + sale.SaleType + ")";
+
+                var soldItems = await GetSoldItemsAsync(p);
+
+                await Task.Run(() => {
+                    foreach (var soldItem in soldItems) {
+                        itemsTable.InvokeIfRequired(() => itemsTable.Rows.Add(CreateRow(soldItem)));
+                    }
+                });
+
+                total.Text = sale.Total.ToString("C2");
+                amountRecieved.Text = sale.AmountRecieved.ToString("C2");
+
+                if (sale.SaleType == SaleType.Charged.ToString() || sale.AmountRecieved >= sale.Total) {
+                    remainGroup.Visible = false;
+                    return;
+                }
+            }
+
+            remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
+
         }
 
         private void editItemsBtn_Click(object sender, EventArgs e) {
@@ -181,6 +195,7 @@ namespace POS.Forms {
             OpenPrint();
         }
         PrintAction printAction;
+
         private void button2_Click(object sender, EventArgs e) {
             try {
                 doc.Print();
@@ -202,15 +217,62 @@ namespace POS.Forms {
                 details.Additem(
                     itemsTable[nameCol.Index, i].Value.ToString(),
                     itemsTable[serialCol.Index, i].Value.ToString(),
-                    (int)itemsTable[actualQty.Index, i].Value,
-                    (decimal)itemsTable[actualPrice.Index, i].Value,
-                    (decimal)itemsTable[actualDiscount.Index, i].Value);
+                    (int)itemsTable[qtyCol.Index, i].Value,
+                    (decimal)itemsTable[priceCol.Index, i].Value,
+                    (decimal)itemsTable[discountCol.Index, i].Value);
 
             e.FormatReciept(printAction, details);
         }
 
         private void doc_BeginPrint(object sender, PrintEventArgs e) {
             printAction = e.PrintAction;
-        }       
+        }
+
+        public async Task<List<SoldItem>> GetSoldItemsAsync(POSEntities context) {
+            return await context.SoldItems
+                .AsNoTracking()
+                .AsQueryable()
+                .Where(so => so.SaleId == _saleId)
+                .ToListAsync();
+        }
+
+        async Task<bool> LoadDataAsync() {
+            bool isNotEmpty = false;
+            using (var context = new POSEntities()) {
+
+                var soldItems = context.SoldItems.AsNoTracking().AsQueryable()
+                    .Where(so => so.SaleId == _saleId);
+
+                soldItems = string.IsNullOrWhiteSpace(keyword) ?
+                    soldItems :
+                    soldItems.Where(so => so.SerialNumber == keyword || so.Product.Item.Name.Contains(keyword));
+
+                var result = await soldItems.ToListAsync();
+                isNotEmpty = result.Count > 0;
+
+                if (isNotEmpty) {
+
+                    itemsTable.Rows.Clear();
+                    await Task.Run(() => {
+                        foreach (var s in result)
+                            itemsTable.InvokeIfRequired(() => itemsTable.Rows.Add(CreateRow(s)));
+                    });
+                }
+            }
+            return isNotEmpty;
+        }
+        string keyword = string.Empty;
+
+        private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
+            keyword = e.Text.Trim();
+            e.SearchFound = await LoadDataAsync();
+
+            _messageLabel.Text = e.SearchFound ? "" : "**No Results Found.";
+        }
+
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+            keyword = string.Empty;
+            await LoadDataAsync();
+        }
     }
 }
