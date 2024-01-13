@@ -32,7 +32,7 @@ namespace POS.Forms {
 
         private int _saleId;
 
-        Sale sale;
+        //Sale sale;
 
         public event EventHandler OnSave;
 
@@ -80,7 +80,7 @@ namespace POS.Forms {
 
         private void button1_Click(object sender, EventArgs e) {
             using (var ts = new PaymentsForm()) {
-                ts.SetId(sale.Id);
+                ts.SetId(_saleId);
                 ts.ShowDialog();
             }
         }
@@ -91,7 +91,7 @@ namespace POS.Forms {
 
             using (var p = new POSEntities()) {
                 //get the reference of the sale
-                var s = p.Sales.FirstOrDefault(x => x.Id == sale.Id);
+                var s = p.Sales.FirstOrDefault(x => x.Id == _saleId);
                 //get the solditems of this sale and restock them
 
                 addBackToInventory(p.SoldItems.Where(x => x.SaleId == s.Id).Select(x => x.Id).ToArray());
@@ -137,7 +137,7 @@ namespace POS.Forms {
 
         private async void SaleDetails_Load(object sender, EventArgs e) {
             using (var p = new POSEntities()) {
-                sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
+                var sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
 
                 soldBy.Text = sale.Login?.Name ?? sale.Login?.Username;
                 soldTo.Text = sale.Customer.Name + " - " + sale.Customer.ContactDetails + " - " + sale.Customer.Address;
@@ -159,15 +159,15 @@ namespace POS.Forms {
                     remainGroup.Visible = false;
                     return;
                 }
+                remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
             }
-            remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
         }
 
         private void editItemsBtn_Click(object sender, EventArgs e) {
 
             //this.Close();
 
-            using (var editsolditems = new EditSale(sale.Id)) {
+            using (var editsolditems = new EditSale(_saleId)) {
                 editsolditems.ShowDialog();
             }
         }
@@ -179,7 +179,7 @@ namespace POS.Forms {
 
         void OpenPrint() {
             using (var reprint = new SaleReprint()) {
-                if (reprint.SetId(sale.Id))
+                if (reprint.SetId(_saleId))
                     reprint.ShowDialog();
             }
         }
@@ -199,23 +199,27 @@ namespace POS.Forms {
             }
         }
 
-        private void doc_PrintPage(object sender, PrintPageEventArgs e) {
-            ReceiptDetails details = new ReceiptDetails();
-            details.ControlNumber = sale.Id.ToString();
-            details.CustomerName = soldTo.Text;
-            details.TransactBy = UserManager.instance.currentLogin.Name ?? "User";
-            details.Tendered = sale.AmountRecieved;
+        private async void doc_PrintPage(object sender, PrintPageEventArgs e) {
+            using (var context = new POSEntities()) {
+                var sale = await context.Sales.FirstOrDefaultAsync();
 
-            for (int i = 0; i < itemsTable.RowCount; i++)
+                ReceiptDetails details = new ReceiptDetails();
+                details.ControlNumber = sale.Id.ToString();
+                details.CustomerName = soldTo.Text;
+                details.TransactBy = UserManager.instance.currentLogin.Name ?? "User";
+                details.Tendered = sale.AmountRecieved;
 
-                details.Additem(
-                    itemsTable[nameCol.Index, i].Value.ToString(),
-                    itemsTable[serialCol.Index, i].Value.ToString(),
-                    (int)itemsTable[qtyCol.Index, i].Value,
-                    (decimal)itemsTable[priceCol.Index, i].Value,
-                    (decimal)itemsTable[discountCol.Index, i].Value);
+                for (int i = 0; i < itemsTable.RowCount; i++)
 
-            e.FormatReciept(printAction, details);
+                    details.Additem(
+                        itemsTable[nameCol.Index, i].Value.ToString(),
+                        itemsTable[serialCol.Index, i].Value.ToString(),
+                        (int)itemsTable[qtyCol.Index, i].Value,
+                        (decimal)itemsTable[priceCol.Index, i].Value,
+                        (decimal)itemsTable[discountCol.Index, i].Value);
+
+                e.FormatReciept(printAction, details);
+            }
         }
 
         private void doc_BeginPrint(object sender, PrintEventArgs e) {
