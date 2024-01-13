@@ -5,7 +5,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Drawing.Printing;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,8 +19,8 @@ namespace POS.Forms {
             InitializeComponent();
             _saleId = id;
 
-            voidBtn.Visible = currentLogin.CanVoidSale;
-            editItemsBtn.Visible = currentLogin.CanVoidSale;
+            voidBtn.Visible = CurrentLogin.CanVoidSale;
+            editItemsBtn.Visible = CurrentLogin.CanVoidSale;
 
             var settings = Properties.Settings.Default;
 
@@ -29,7 +28,7 @@ namespace POS.Forms {
                 doc.PrinterSettings.PrinterName = settings.ReceiptPrinter;
         }
 
-        Login currentLogin => Misc.UserManager.instance.currentLogin;
+        Login CurrentLogin => UserManager.instance.currentLogin;
 
         private int _saleId;
 
@@ -138,7 +137,6 @@ namespace POS.Forms {
 
         private async void SaleDetails_Load(object sender, EventArgs e) {
             using (var p = new POSEntities()) {
-
                 sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
 
                 soldBy.Text = sale.Login?.Name ?? sale.Login?.Username;
@@ -162,9 +160,7 @@ namespace POS.Forms {
                     return;
                 }
             }
-
             remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
-
         }
 
         private void editItemsBtn_Click(object sender, EventArgs e) {
@@ -177,11 +173,8 @@ namespace POS.Forms {
         }
 
         private void SaleDetails_KeyDown(object sender, KeyEventArgs e) {
-            if (e.Control) {
-                if (e.KeyCode == Keys.P) {
-                    OpenPrint();
-                }
-            }
+            if (e.Control && e.KeyCode == Keys.P)
+                OpenPrint();
         }
 
         void OpenPrint() {
@@ -194,6 +187,7 @@ namespace POS.Forms {
         private void button1_Click_1(object sender, EventArgs e) {
             OpenPrint();
         }
+
         PrintAction printAction;
 
         private void button2_Click(object sender, EventArgs e) {
