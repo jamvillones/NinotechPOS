@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace POS.Forms {
-    public partial class SaleDetails : Form {
+namespace POS.Forms
+{
+    public partial class SaleDetails : Form
+    {
         //public SaleDetails() {
         //    InitializeComponent();
         //}
 
-        public SaleDetails(int id) {
+        public SaleDetails(int id)
+        {
             InitializeComponent();
             _saleId = id;
 
@@ -46,7 +49,8 @@ namespace POS.Forms {
             soldItem.Quantity * (soldItem.ItemPrice - soldItem.Discount)
             );
 
-        void addPayment() {
+        void addPayment()
+        {
             //if (paymentNum.Value == 0)
             //    return;
 
@@ -74,22 +78,27 @@ namespace POS.Forms {
             //}
         }
 
-        private void addPaymentButton_Click(object sender, EventArgs e) {
+        private void addPaymentButton_Click(object sender, EventArgs e)
+        {
             addPayment();
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            using (var ts = new PaymentsForm()) {
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var ts = new PaymentsForm())
+            {
                 ts.SetId(_saleId);
                 ts.ShowDialog();
             }
         }
 
-        private void voidBtn_Click(object sender, EventArgs e) {
+        private void voidBtn_Click(object sender, EventArgs e)
+        {
             if (MessageBox.Show("All sold items that is associated with this sale will be re-stocked and this sale will be removed", "Are you sure you want to void this sale?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                 return;
 
-            using (var p = new POSEntities()) {
+            using (var p = new POSEntities())
+            {
                 //get the reference of the sale
                 var s = p.Sales.FirstOrDefault(x => x.Id == _saleId);
                 //get the solditems of this sale and restock them
@@ -102,25 +111,32 @@ namespace POS.Forms {
             }
         }
 
-        void addBackToInventory(params int[] id) {
-            using (var p = new POSEntities()) {
-                foreach (var i in id) {
+        void addBackToInventory(params int[] id)
+        {
+            using (var p = new POSEntities())
+            {
+                foreach (var i in id)
+                {
                     var soldItem = p.SoldItems.FirstOrDefault(x => x.Id == i);
 
-                    if (!string.IsNullOrEmpty(soldItem.SerialNumber)) {
+                    if (!string.IsNullOrEmpty(soldItem.SerialNumber))
+                    {
                         var inv = new InventoryItem();
                         inv.Product = soldItem.Product;
                         inv.Quantity = 1;
                         inv.SerialNumber = soldItem.SerialNumber;
                         p.InventoryItems.Add(inv);
                     }
-                    else {
+                    else
+                    {
                         var inv = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == null && x.Product.Id == soldItem.ProductId);
-                        if (inv != null) {
+                        if (inv != null)
+                        {
                             if (inv.Quantity != 0)
                                 inv.Quantity += soldItem.Quantity;
                         }
-                        else {
+                        else
+                        {
                             var temp = new InventoryItem();
                             temp.Product = soldItem.Product;
                             temp.Quantity = soldItem.Quantity;
@@ -135,8 +151,10 @@ namespace POS.Forms {
 
         }
 
-        private async void SaleDetails_Load(object sender, EventArgs e) {
-            using (var p = new POSEntities()) {
+        private async void SaleDetails_Load(object sender, EventArgs e)
+        {
+            using (var p = new POSEntities())
+            {
                 var sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
 
                 soldBy.Text = sale.Login?.Name ?? sale.Login?.Username;
@@ -146,8 +164,10 @@ namespace POS.Forms {
 
                 var soldItems = await GetSoldItemsAsync(p);
 
-                await Task.Run(() => {
-                    foreach (var soldItem in soldItems) {
+                await Task.Run(() =>
+                {
+                    foreach (var soldItem in soldItems)
+                    {
                         itemsTable.InvokeIfRequired(() => itemsTable.Rows.Add(CreateRow(soldItem)));
                     }
                 });
@@ -155,7 +175,8 @@ namespace POS.Forms {
                 total.Text = sale.Total.ToString("C2");
                 amountRecieved.Text = sale.AmountRecieved.ToString("C2");
 
-                if (sale.SaleType == SaleType.Charged.ToString() || sale.AmountRecieved >= sale.Total) {
+                if (sale.SaleType == SaleType.Charged.ToString() || sale.AmountRecieved >= sale.Total)
+                {
                     remainGroup.Visible = false;
                     return;
                 }
@@ -163,45 +184,56 @@ namespace POS.Forms {
             }
         }
 
-        private void editItemsBtn_Click(object sender, EventArgs e) {
+        private void editItemsBtn_Click(object sender, EventArgs e)
+        {
 
             //this.Close();
 
-            using (var editsolditems = new EditSale(_saleId)) {
+            using (var editsolditems = new EditSale(_saleId))
+            {
                 editsolditems.ShowDialog();
             }
         }
 
-        private void SaleDetails_KeyDown(object sender, KeyEventArgs e) {
+        private void SaleDetails_KeyDown(object sender, KeyEventArgs e)
+        {
             if (e.Control && e.KeyCode == Keys.P)
                 OpenPrint();
         }
 
-        void OpenPrint() {
-            using (var reprint = new SaleReprint()) {
+        void OpenPrint()
+        {
+            using (var reprint = new SaleReprint())
+            {
                 if (reprint.SetId(_saleId))
                     reprint.ShowDialog();
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e) {
+        private void button1_Click_1(object sender, EventArgs e)
+        {
             OpenPrint();
         }
 
         PrintAction printAction;
 
-        private void button2_Click(object sender, EventArgs e) {
-            try {
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 doc.Print();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private async void doc_PrintPage(object sender, PrintPageEventArgs e) {
-            using (var context = new POSEntities()) {
-                var sale = await context.Sales.FirstOrDefaultAsync();
+        private void doc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            using (var context = new POSEntities())
+            {
+                var sale = context.Sales.FirstOrDefault(x => x.Id == _saleId);
 
                 ReceiptDetails details = new ReceiptDetails();
                 details.ControlNumber = sale.Id.ToString();
@@ -209,7 +241,8 @@ namespace POS.Forms {
                 details.TransactBy = UserManager.instance.currentLogin.Name ?? "User";
                 details.Tendered = sale.AmountRecieved;
 
-                foreach (var soldItem in sale.SoldItems) {
+                foreach (var soldItem in sale.SoldItems)
+                {
                     details.Additem(
                         soldItem.Product.Item.Name,
                         soldItem.SerialNumber,
@@ -223,11 +256,13 @@ namespace POS.Forms {
             }
         }
 
-        private void doc_BeginPrint(object sender, PrintEventArgs e) {
+        private void doc_BeginPrint(object sender, PrintEventArgs e)
+        {
             printAction = e.PrintAction;
         }
 
-        public async Task<List<SoldItem>> GetSoldItemsAsync(POSEntities context) {
+        public async Task<List<SoldItem>> GetSoldItemsAsync(POSEntities context)
+        {
             return await context.SoldItems
                 .AsNoTracking()
                 .AsQueryable()
@@ -235,9 +270,11 @@ namespace POS.Forms {
                 .ToListAsync();
         }
 
-        async Task<bool> LoadDataAsync() {
+        async Task<bool> LoadDataAsync()
+        {
             bool isNotEmpty = false;
-            using (var context = new POSEntities()) {
+            using (var context = new POSEntities())
+            {
 
                 var soldItems = context.SoldItems.AsNoTracking().AsQueryable()
                     .Where(so => so.SaleId == _saleId);
@@ -249,10 +286,12 @@ namespace POS.Forms {
                 var result = await soldItems.ToListAsync();
                 isNotEmpty = result.Count > 0;
 
-                if (isNotEmpty) {
+                if (isNotEmpty)
+                {
 
                     itemsTable.Rows.Clear();
-                    await Task.Run(() => {
+                    await Task.Run(() =>
+                    {
                         foreach (var s in result)
                             itemsTable.InvokeIfRequired(() => itemsTable.Rows.Add(CreateRow(s)));
                     });
@@ -262,14 +301,16 @@ namespace POS.Forms {
         }
         string keyword = string.Empty;
 
-        private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
+        private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
+        {
             keyword = e.Text.Trim();
             e.SearchFound = await LoadDataAsync();
 
             _messageLabel.Text = e.SearchFound ? "" : "**No Results Found.";
         }
 
-        private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
+        {
             keyword = string.Empty;
             await LoadDataAsync();
         }

@@ -103,6 +103,7 @@ namespace POS.Misc
 
 
                 int currentY = colRect.Bottom + 2;
+
                 foreach (var i in details.Items)
                 {
                     var size = graphics.MeasureString(i.Name + (i.Serial != null ? "\nSN: " + i.Serial : ""), titleFont, area.Width);
@@ -146,6 +147,7 @@ namespace POS.Misc
 
                     currentY += length + 2;
                 }
+
                 graphics.DrawLine(bluePen, new Point(0, contentsRect.Bottom), new Point(area.Width, contentsRect.Bottom));
 
                 string b2 = details.GrandTotal.ToMoneyFormat() + "\n" +
