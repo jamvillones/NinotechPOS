@@ -53,7 +53,7 @@ namespace POS.Forms
             {
                 var i = p.InventoryItems.FirstOrDefault(x => x.Id == id);
 
-                infoHolder.Barcode = i.Product.Item.Barcode;
+                infoHolder.Barcode = i.Product.Item.Id;
                 infoHolder.Name = i.Product.Item.Name;
                 infoHolder.Supplier = i.Product.Supplier?.Name;
                 infoHolder.SellingPrice = i.Product.Item.SellingPrice;
@@ -131,7 +131,7 @@ namespace POS.Forms
 
             using (var p = new POSEntities())
             {
-                var searchedItems = p.InventoryItems.Where(x => x.Product.Item.Barcode == e.Text);
+                var searchedItems = p.InventoryItems.Where(x => x.Product.Item.Id == e.Text);
 
                 if (searchedItems.Count() == 0)
                 {
@@ -144,7 +144,7 @@ namespace POS.Forms
                 e.SearchFound = true;
                 itemTables.Rows.Clear();
                 foreach (var i in searchedItems)
-                    itemTables.Rows.Add(i.Id, i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
+                    itemTables.Rows.Add(i.Id, i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Id, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
 
             }
         }
@@ -157,7 +157,7 @@ namespace POS.Forms
                 foreach (var i in p.InventoryItems)
                     itemTables.Rows.Add(
                         i.Id, i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(),
-                        i.Product.Item.Barcode,
+                        i.Product.Item.Id,
                         i.SerialNumber,
                         i.Product.Item.Name,
                         i.Product.Supplier?.Name);

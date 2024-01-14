@@ -26,7 +26,7 @@ namespace POS.Forms
                     return;
                 }
                 Id = prod.Id;
-                barcode.Text = prod.Item.Barcode;
+                barcode.Text = prod.Item.Id;
                 itemName.Text = prod.Item.Name;
                 supplier.Text = prod.Supplier?.Name;
                 cost.Text = prod.Cost.ToString();
@@ -34,7 +34,7 @@ namespace POS.Forms
                 var refInv = p.InventoryItems.Where(x => x.Product.Id == prod.Id);
                 foreach (var i in refInv)
                 {
-                    inventoryTable.Rows.Add(i.Product.Item.Barcode,
+                    inventoryTable.Rows.Add(i.Product.Item.Id,
                                             i.Product.Item.Name,
                                             i.SerialNumber,
                                             i.Quantity,

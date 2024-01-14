@@ -31,7 +31,7 @@ namespace POS.Forms
             using (var context = new POSEntities())
             {
                 var hist = await context.StockinHistories
-                    .Where(x => x.Product.Item.Barcode == _barcode)
+                    .Where(x => x.Product.Item.Id == _barcode)
                     .OrderByDescending(x => x.Date)
                 .ToListAsync();
 

@@ -18,22 +18,22 @@ namespace POS
         public Product()
         {
             this.InventoryItems = new HashSet<InventoryItem>();
-            this.StockinHistories = new HashSet<StockinHistory>();
             this.SoldItems = new HashSet<SoldItem>();
+            this.StockinHistories = new HashSet<StockinHistory>();
         }
     
         public int Id { get; set; }
         public string ItemId { get; set; }
         public Nullable<int> SupplierId { get; set; }
-        public Nullable<decimal> Cost { get; set; }
+        public decimal Cost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InventoryItem> InventoryItems { get; set; }
         public virtual Item Item { get; set; }
         public virtual Supplier Supplier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StockinHistory> StockinHistories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SoldItem> SoldItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockinHistory> StockinHistories { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace POS.Forms
             InitializeComponent();
             using (var p = new POSEntities())
             {
-                target = p.Items.FirstOrDefault(x => x.Barcode == barcode);
+                target = p.Items.FirstOrDefault(x => x.Id == barcode);
             }
             this.Disposed += AddProductForm_Disposed;
         }
@@ -40,15 +40,15 @@ namespace POS.Forms
 
         private void AddProductForm_Load(object sender, EventArgs e)
         {
-            barcode.Text = target.Barcode;
+            barcode.Text = target.Id;
             itemName.Text = target.Name;
             //cost.Value = target.DefaultCost;
             refBtn.Enabled = UserManager.instance.currentLogin.CanEditProduct;
 
             using (var p = new POSEntities())
             {
-                supplier.Items.AddRange(p.Suppliers.Where(x => x.Products.FirstOrDefault(y => y.Item.Barcode == target.Barcode) == null).Select(x => x.Name).ToArray());
-                foreach (var i in p.Products.Where(x => x.Item.Barcode == target.Barcode))
+                supplier.Items.AddRange(p.Suppliers.Where(x => x.Products.FirstOrDefault(y => y.Item.Id == target.Id) == null).Select(x => x.Name).ToArray());
+                foreach (var i in p.Products.Where(x => x.Item.Id == target.Id))
                 {
                     varTable.Rows.Add(i.Id, i.Supplier?.Name, i.Cost, "Delete");
                 }
@@ -73,7 +73,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 var newVariation = new Product();
-                newVariation.Item = p.Items.FirstOrDefault(x => x.Barcode == target.Barcode);
+                newVariation.Item = p.Items.FirstOrDefault(x => x.Id == target.Id);
                 newVariation.Supplier = p.Suppliers.FirstOrDefault(x => x.Name == supplier.Text);
                 newVariation.Cost = cost.Value;
 
@@ -105,7 +105,7 @@ namespace POS.Forms
             {
                 supplier.Items.Clear();
 
-                foreach (var x in p.Suppliers.Where(x => x.Products.FirstOrDefault(y => y.Item.Barcode == target.Barcode) == null))
+                foreach (var x in p.Suppliers.Where(x => x.Products.FirstOrDefault(y => y.Item.Id == target.Id) == null))
                     supplier.Items.Add(x.Name);
             }
         }
@@ -164,7 +164,7 @@ namespace POS.Forms
 
             using (var p = new POSEntities())
             {
-                Product variation = p.Products.FirstOrDefault(x => x.Item.Barcode == target.Barcode && x.Supplier.Name == s && x.Cost == (decimal)c);
+                Product variation = p.Products.FirstOrDefault(x => x.Item.Id == target.Id && x.Supplier.Name == s && x.Cost == (decimal)c);
 
                 var solditemwiththisproduct = p.SoldItems.Where(x => x.Product.Id == variation.Id);
                 var inv = p.InventoryItems.Where(x => x.Product.Id == variation.Id);

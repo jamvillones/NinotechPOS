@@ -13,6 +13,7 @@ using System.Threading;
 using System.Data.Entity;
 using OfficeOpenXml.Drawing.Controls;
 using System.Runtime.InteropServices.WindowsRuntime;
+using POS.Forms.ItemRegistration;
 
 namespace POS.UserControls
 {
@@ -279,7 +280,7 @@ namespace POS.UserControls
 
 
             row.CreateCells(itemsTable,
-                 x.Barcode,
+                 x.Id,
                  x.Name,
                  quantity,
                  x.SellingPrice,
@@ -289,7 +290,7 @@ namespace POS.UserControls
             return row;
         }
 
-        private void editBtn_Click(object sender, EventArgs e)
+        private async void editBtn_Click(object sender, EventArgs e)
         {
             if (itemsTable.RowCount <= 0)
             {
@@ -297,11 +298,19 @@ namespace POS.UserControls
                 return;
             }
 
-            using (var editItem = new EditItemForm())
+            //using (var editItem = new EditItemForm())
+            //{
+            //    editItem.OnSave += Onsave_Callback;
+            //    editItem.GetBarcode(SelectedBarcode);
+            //    editItem.ShowDialog();
+            //}
+
+            using (var editForm = new Create_Item_Form())
             {
-                editItem.OnSave += Onsave_Callback;
-                editItem.GetBarcode(SelectedBarcode);
-                editItem.ShowDialog();
+                using (var context = new POSEntities())
+                    editForm.Item = await context.Items.FirstOrDefaultAsync(i => i.Barcode == SelectedBarcode);
+
+                editForm.ShowDialog();
             }
         }
 
@@ -351,7 +360,7 @@ namespace POS.UserControls
             using (var p = new POSEntities())
             {
                 var selected = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex].Cells[0].Value.ToString();
-                var i = p.Items.FirstOrDefault(x => x.Barcode == selected);
+                var i = p.Items.FirstOrDefault(x => x.Id == selected);
                 p.Items.Remove(i);
                 p.SaveChanges();
             }
@@ -398,13 +407,17 @@ namespace POS.UserControls
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
-            using (var p = new POSEntities())
+            try
             {
-                var i = p.Items.FirstOrDefault(x => x.Barcode == SelectedBarcode);
-                p.Items.Remove(i);
-                p.SaveChanges();
+                using (var p = new POSEntities())
+                {
+                    var i = p.Items.FirstOrDefault(x => x.Id == SelectedBarcode);
+                    p.Items.Remove(i);
+                    p.SaveChanges();
+                }
+                itemsTable.Rows.RemoveAt(e.RowIndex);
             }
-            itemsTable.Rows.RemoveAt(e.RowIndex);
+            catch (Exception ex) { }
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -496,7 +509,7 @@ namespace POS.UserControls
             if (string.IsNullOrWhiteSpace(keyword))
                 return items;
 
-            return items.Where(i => i.Barcode == keyword || i.Name.Contains(keyword));
+            return items.Where(i => i.Id == keyword || i.Name.Contains(keyword));
         }
     }
 }

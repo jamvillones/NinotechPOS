@@ -29,9 +29,9 @@ namespace POS.Forms
         {
             using (var context = new POSEntities())
             {
-                var item = await context.Items.FirstOrDefaultAsync(x => x.Barcode == _barcode);
+                var item = await context.Items.FirstOrDefaultAsync(x => x.Id == _barcode);
 
-                var invItems = await context.InventoryItems.AsNoTracking().AsQueryable().Where(x => x.Product.Item.Barcode == _barcode).ToListAsync();
+                var invItems = await context.InventoryItems.AsNoTracking().AsQueryable().Where(x => x.Product.Item.Id == _barcode).ToListAsync();
                 this.Text = this.Text + " - " + item.Name + " (" + invItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0") + ")";
                 await Task.Run(() =>
                 {

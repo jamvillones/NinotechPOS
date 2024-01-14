@@ -34,7 +34,7 @@ namespace POS.Forms
                 foreach (var i in t)
                 {
                     varTable.Rows.Add(i.Id,
-                                      i.Item.Barcode,
+                                      i.Item.Id,
                                       i.Item.Name,
                                       i.Supplier.Name,
                                       i.Cost);

@@ -28,7 +28,7 @@ namespace POS.Forms
             Item item;
             using (var p = new POSEntities())
             {
-                item = p.Items.FirstOrDefault(x => x.Barcode == barcode.Text);
+                item = p.Items.FirstOrDefault(x => x.Id == barcode.Text);
                 ImageBox.Image = POS.Misc.ImageDatabaseConverter.byteArrayToImage(item.SampleImage);
             }
 
@@ -54,7 +54,7 @@ namespace POS.Forms
             {
                 using (var p = new POS.POSEntities())
                 {
-                    var item = p.Items.FirstOrDefault(x => x.Barcode == barcode.Text);
+                    var item = p.Items.FirstOrDefault(x => x.Id == barcode.Text);
                     item.Name = name.Text;
                     item.SellingPrice = sellingPrice.Value;
                     item.Department = dept;

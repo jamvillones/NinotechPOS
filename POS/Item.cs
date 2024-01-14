@@ -20,7 +20,7 @@ namespace POS
             this.Products = new HashSet<Product>();
         }
     
-        public string Barcode { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public decimal SellingPrice { get; set; }
         public string Department { get; set; }
@@ -28,6 +28,7 @@ namespace POS
         public byte[] SampleImage { get; set; }
         public string Type { get; set; }
         public Nullable<int> CriticalQuantity { get; set; }
+        public string Barcode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

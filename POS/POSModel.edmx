@@ -35,9 +35,9 @@
         </EntityType>
         <EntityType Name="Item">
           <Key>
-            <PropertyRef Name="Barcode" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Barcode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SellingPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Department" Type="nvarchar" MaxLength="50" />
@@ -45,6 +45,7 @@
           <Property Name="SampleImage" Type="image" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="CriticalQuantity" Type="int" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -68,7 +69,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemId" Type="nvarchar" MaxLength="50" />
           <Property Name="SupplierId" Type="int" />
-          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Cost" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -131,11 +132,13 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Item">
-          <End Role="Item" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="Item" Type="Self.Item" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Item">
-              <PropertyRef Name="Barcode" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="ItemId" />
@@ -221,7 +224,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StockinHistory_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StockinHistory" Type="Self.StockinHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -312,29 +317,8 @@
           <EntitySet Name="Suppliers" EntityType="POSModel.Supplier" />
           <EntitySet Name="InventoryItems" EntityType="POSModel.InventoryItem" />
           <EntitySet Name="StockinHistories" EntityType="POSModel.StockinHistory" />
-          <EntitySet Name="Items" EntityType="POSModel.Item" />
-          <EntitySet Name="Products" EntityType="POSModel.Product" />
-          <AssociationSet Name="FK_Product_ProductBySupplier" Association="POSModel.FK_Product_ProductBySupplier">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="InventoryItem" EntitySet="InventoryItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Item" Association="POSModel.FK_Product_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductBySupplier_Supplier" Association="POSModel.FK_ProductBySupplier_Supplier">
-            <End Role="Supplier" EntitySet="Suppliers" />
-            <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StockinHistory_Product" Association="POSModel.FK_StockinHistory_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="StockinHistory" EntitySet="StockinHistories" />
-          </AssociationSet>
           <EntitySet Name="SoldItems" EntityType="POSModel.SoldItem" />
-          <AssociationSet Name="FK_SoldItem_Product" Association="POSModel.FK_SoldItem_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="SoldItem" EntitySet="SoldItems" />
-          </AssociationSet>
+          <EntitySet Name="Items" EntityType="POSModel.Item" />
           <EntitySet Name="Sales" EntityType="POSModel.Sale" />
           <AssociationSet Name="FK_ChargedPayRecord_ChargedPayRecord" Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord">
             <End Role="Sale" EntitySet="Sales" />
@@ -351,6 +335,27 @@
           <AssociationSet Name="FK_SoldItem_Sale" Association="POSModel.FK_SoldItem_Sale">
             <End Role="Sale" EntitySet="Sales" />
             <End Role="SoldItem" EntitySet="SoldItems" />
+          </AssociationSet>
+          <EntitySet Name="Products" EntityType="POSModel.Product" />
+          <AssociationSet Name="FK_Product_ProductBySupplier" Association="POSModel.FK_Product_ProductBySupplier">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="InventoryItem" EntitySet="InventoryItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Item" Association="POSModel.FK_Product_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBySupplier_Supplier" Association="POSModel.FK_ProductBySupplier_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SoldItem_Product" Association="POSModel.FK_SoldItem_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SoldItem" EntitySet="SoldItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockinHistory_Product" Association="POSModel.FK_StockinHistory_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="StockinHistory" EntitySet="StockinHistories" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Login">
@@ -403,84 +408,6 @@
           <Property Name="ProductId" Type="Int32" />
           <NavigationProperty Name="Product" Relationship="POSModel.FK_StockinHistory_Product" FromRole="StockinHistory" ToRole="Product" />
         </EntityType>
-        <EntityType Name="Item">
-          <Key>
-            <PropertyRef Name="Barcode" />
-          </Key>
-          <Property Name="Barcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="SampleImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CriticalQuantity" Type="Int32" />
-          <NavigationProperty Name="Products" Relationship="POSModel.FK_Product_Item" FromRole="Item" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SupplierId" Type="Int32" />
-          <Property Name="Cost" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="InventoryItems" Relationship="POSModel.FK_Product_ProductBySupplier" FromRole="Product" ToRole="InventoryItem" />
-          <NavigationProperty Name="Item" Relationship="POSModel.FK_Product_Item" FromRole="Product" ToRole="Item" />
-          <NavigationProperty Name="Supplier" Relationship="POSModel.FK_ProductBySupplier_Supplier" FromRole="Product" ToRole="Supplier" />
-          <NavigationProperty Name="StockinHistories" Relationship="POSModel.FK_StockinHistory_Product" FromRole="Product" ToRole="StockinHistory" />
-          <NavigationProperty Name="SoldItems" Relationship="POSModel.FK_SoldItem_Product" FromRole="Product" ToRole="SoldItem" />
-        </EntityType>
-        <Association Name="FK_Product_ProductBySupplier">
-          <End Type="POSModel.Product" Role="Product" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="POSModel.InventoryItem" Role="InventoryItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InventoryItem">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Item">
-          <End Type="POSModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="POSModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="Barcode" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="ItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductBySupplier_Supplier">
-          <End Type="POSModel.Supplier" Role="Supplier" Multiplicity="0..1" />
-          <End Type="POSModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supplier">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="SupplierId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StockinHistory_Product">
-          <End Type="POSModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="POSModel.StockinHistory" Role="StockinHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StockinHistory">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SoldItem">
           <Key>
             <PropertyRef Name="Id" />
@@ -492,23 +419,24 @@
           <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Discount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="POSModel.FK_SoldItem_Product" FromRole="SoldItem" ToRole="Product" />
           <NavigationProperty Name="Sale" Relationship="POSModel.FK_SoldItem_Sale" FromRole="SoldItem" ToRole="Sale" />
+          <NavigationProperty Name="Product" Relationship="POSModel.FK_SoldItem_Product" FromRole="SoldItem" ToRole="Product" />
         </EntityType>
-        <Association Name="FK_SoldItem_Product">
-          <End Type="POSModel.Product" Role="Product" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="POSModel.SoldItem" Role="SoldItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SoldItem">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SampleImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CriticalQuantity" Type="Int32" />
+          <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="POSModel.FK_Product_Item" FromRole="Item" ToRole="Product" />
+        </EntityType>
         <EntityType Name="Sale">
           <Key>
             <PropertyRef Name="Id" />
@@ -574,6 +502,88 @@
             </Principal>
             <Dependent Role="SoldItem">
               <PropertyRef Name="SaleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="InventoryItems" Relationship="POSModel.FK_Product_ProductBySupplier" FromRole="Product" ToRole="InventoryItem" />
+          <NavigationProperty Name="Item" Relationship="POSModel.FK_Product_Item" FromRole="Product" ToRole="Item" />
+          <NavigationProperty Name="Supplier" Relationship="POSModel.FK_ProductBySupplier_Supplier" FromRole="Product" ToRole="Supplier" />
+          <NavigationProperty Name="SoldItems" Relationship="POSModel.FK_SoldItem_Product" FromRole="Product" ToRole="SoldItem" />
+          <NavigationProperty Name="StockinHistories" Relationship="POSModel.FK_StockinHistory_Product" FromRole="Product" ToRole="StockinHistory" />
+        </EntityType>
+        <Association Name="FK_Product_ProductBySupplier">
+          <End Type="POSModel.Product" Role="Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="POSModel.InventoryItem" Role="InventoryItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryItem">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Item">
+          <End Type="POSModel.Item" Role="Item" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="POSModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBySupplier_Supplier">
+          <End Type="POSModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="POSModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SoldItem_Product">
+          <End Type="POSModel.Product" Role="Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="POSModel.SoldItem" Role="SoldItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SoldItem">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockinHistory_Product">
+          <End Type="POSModel.Product" Role="Product" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="POSModel.StockinHistory" Role="StockinHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockinHistory">
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -654,30 +664,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="POSModel.Item">
-              <MappingFragment StoreEntitySet="Item">
-                <ScalarProperty Name="CriticalQuantity" ColumnName="CriticalQuantity" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="SampleImage" ColumnName="SampleImage" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="POSModel.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
-                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SoldItems">
             <EntityTypeMapping TypeName="POSModel.SoldItem">
               <MappingFragment StoreEntitySet="SoldItem">
@@ -691,6 +677,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="POSModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="CriticalQuantity" ColumnName="CriticalQuantity" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SampleImage" ColumnName="SampleImage" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Sales">
             <EntityTypeMapping TypeName="POSModel.Sale">
               <MappingFragment StoreEntitySet="Sale">
@@ -700,6 +701,16 @@
                 <ScalarProperty Name="AmountRecieved" ColumnName="AmountRecieved" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="POSModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -32,7 +32,7 @@ namespace POS.Forms
 
         DataGridViewRow CreateProductRow(Product product) => itemsTable.CreateRow(
             product.Id,
-            product.Item.Barcode,
+            product.Item.Id,
             product.Item.Name,
             product.Cost,
             product.Supplier.Name);
@@ -428,7 +428,7 @@ namespace POS.Forms
             if (string.IsNullOrWhiteSpace(keyword))
                 return products;
 
-            return products.Where(p => p.Item.Barcode == keyword || p.Item.Name.Contains(keyword));
+            return products.Where(p => p.Item.Id == keyword || p.Item.Name.Contains(keyword));
         }
     }
 }

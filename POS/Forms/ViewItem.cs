@@ -23,8 +23,8 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                item = p.Items.FirstOrDefault(x => x.Barcode == Id);
-                barcode.Text = item.Barcode;
+                item = p.Items.FirstOrDefault(x => x.Id == Id);
+                barcode.Text = item.Id;
                 itemName.Text = item.Name;
                 sellingPrice.Text = string.Format("₱ {0:n}", item.SellingPrice);
                 itemType.Text = item.Type;
@@ -34,14 +34,14 @@ namespace POS.Forms
                 textBox1.Text = item.CriticalQuantity?.ToString() ?? "*Not set";
 
                 ImageBox.Image = Misc.ImageDatabaseConverter.byteArrayToImage(item.SampleImage);
-                var stock = p.InventoryItems.Where(x => x.Product.Item.Barcode == item.Barcode);
+                var stock = p.InventoryItems.Where(x => x.Product.Item.Id == item.Id);
                 foreach (var i in stock)
                 {
                     stockTable.Rows.Add(i.SerialNumber, i.Quantity, i.Product.Supplier?.Name);
                 }
                 groupBox9.Text = groupBox9.Text + " - " + stock.Select(x => x.Quantity).DefaultIfEmpty(0).Sum().ToString();
 
-                var variations = p.Products.Where(x => x.ItemId == item.Barcode);
+                var variations = p.Products.Where(x => x.ItemId == item.Id);
                 variationsTable.Rows.Clear();
                 foreach (var x in variations)
                     variationsTable.Rows.Add(x.Supplier?.Name, x.Cost);

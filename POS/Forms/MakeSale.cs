@@ -163,7 +163,7 @@ namespace POS.Forms
                     s.Quantity = Convert.ToInt32(cartColumns[3].Value);
                     s.ItemPrice = Convert.ToDecimal(cartColumns[4].Value);
 
-                    s.Product = p.Products.FirstOrDefault(x => x.Item.Barcode == itemId && x.Supplier.Name == itemSupp);
+                    s.Product = p.Products.FirstOrDefault(x => x.Item.Id == itemId && x.Supplier.Name == itemSupp);
                     //s.ItemName = cartColumns[2].Value.ToString();
                     //s.ItemSupplier = itemSupp;
                     ///Console.WriteLine(newSale.Id);
@@ -553,7 +553,7 @@ namespace POS.Forms
 
             using (var p = new POSEntities())
             {
-                var items = p.InventoryItems.Where(x => x.Product.Item.Barcode == e.Text);
+                var items = p.InventoryItems.Where(x => x.Product.Item.Id == e.Text);
 
                 if (items.Count() == 0)
                 {
@@ -565,7 +565,7 @@ namespace POS.Forms
                 }
 
                 var filtered = items.AsEnumerable().Where(x => !cartContent.Any(y =>
-                    (string)y.Cells[0].Value == x.Product.Item.Barcode &&
+                    (string)y.Cells[0].Value == x.Product.Item.Id &&
                     (string)y.Cells[1].Value == x.SerialNumber &&
                     (string)y.Cells[7].Value == x.Product.Supplier.Name &&
                     (int)y.Cells[3].Value >= x.Quantity
@@ -585,13 +585,13 @@ namespace POS.Forms
                 foreach (var i in filtered)
                 {
                     var j = cartContent.FirstOrDefault(x => inCart.Any(y =>
-                     (string)y.Cells[0].Value == i.Product.Item.Barcode &&
+                     (string)y.Cells[0].Value == i.Product.Item.Id &&
                      (string)y.Cells[1].Value == i.SerialNumber &&
                      (string)y.Cells[7].Value == i.Product.Supplier.Name));
 
                     int newQuant = i.Quantity - (j == null ? 0 : (int)j.Cells[3].Value);
 
-                    itemsTable.Rows.Add(i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier?.Name);
+                    itemsTable.Rows.Add(i.Product.Item.Id, i.SerialNumber, i.Product.Item.Name, i.Quantity == 0 ? "Infinite" : newQuant.ToString(), i.Product.Item.SellingPrice, i.Product.Supplier?.Name);
                 }
             }
         }

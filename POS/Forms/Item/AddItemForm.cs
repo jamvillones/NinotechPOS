@@ -44,7 +44,7 @@ namespace POS.Forms
             }
             using (var p = new POSEntities())
             {
-                var i = p.Items.FirstOrDefault(x => x.Barcode == barcode.Text);
+                var i = p.Items.FirstOrDefault(x => x.Id == barcode.Text);
                 if (i != null)
                 {
                     this.ActiveControl = barcode;
@@ -89,7 +89,7 @@ namespace POS.Forms
                 using (var p = new POSEntities())
                 {
                     var item = new Item();
-                    item.Barcode = barcode.Text;
+                    item.Id = barcode.Text;
                     item.Name = name.Text;
 
                     item.SellingPrice = sellingPrice.Value;
@@ -131,7 +131,7 @@ namespace POS.Forms
                         foreach (DataGridViewRow i in variationTable.Rows)
                         {
                             var prod = new Product();
-                            prod.ItemId = item.Barcode;
+                            prod.ItemId = item.Id;
                             string s = i.Cells[0].Value.ToString();
                             prod.Supplier = p.Suppliers.FirstOrDefault(x => x.Name == s);
                             prod.Cost = Convert.ToDecimal(i.Cells[1].Value);

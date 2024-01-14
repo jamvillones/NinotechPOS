@@ -38,7 +38,7 @@ namespace POS.Misc {
             var selectedRow = dataGridView.Rows[index];
             string Value = Convert.ToString(selectedRow.Cells[0].Value);
             using (var p = new POSEntities()) {
-                item = p.Items.FirstOrDefault(x => x.Barcode == Value);
+                item = p.Items.FirstOrDefault(x => x.Id == Value);
             }
             return item;
         }
@@ -52,7 +52,7 @@ namespace POS.Misc {
             Item item;
             string barcode = dgt.Rows[dgt.CurrentCell.RowIndex].Cells["Barcode"].Value.ToString();
             using (var p = new POSEntities()) {
-                item = p.Items.FirstOrDefault(x => x.Barcode == barcode);
+                item = p.Items.FirstOrDefault(x => x.Id == barcode);
                 return item;
             }
         }
