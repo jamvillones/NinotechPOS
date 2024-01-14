@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,26 +13,39 @@ namespace POS.Forms
 {
     public partial class InventoryStockinLog : Form
     {
-        int id;
-        public InventoryStockinLog(int id)
+        string id;
+        public InventoryStockinLog(string barcode)
         {
             InitializeComponent();
-            this.id = id;
+            id = barcode;
         }
 
-       
-        private void InventoryStockinLog_Load(object sender, EventArgs e)
+
+        private async void InventoryStockinLog_Load(object sender, EventArgs e)
         {
             histTable.Rows.Clear();
 
-            using (var p = new POSEntities())
+            using (var context = new POSEntities())
             {
-                var item = p.InventoryItems.FirstOrDefault(x => x.Id == id);
-                var hist = p.StockinHistories.Where(x => x.Product.Id  == item.Product.Id);
-                foreach (var i in hist)
+                var hist = await context.StockinHistories
+                    .Where(x => x.Product.Item.Barcode == id)
+                    .OrderByDescending(x => x.Date)
+                    .ToListAsync();
+
+                await Task.Run(() =>
                 {
-                    histTable.Rows.Add(i.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"), i.LoginUsername, i.ItemName, i.SerialNumber, i.Quantity, i.Cost, i.Supplier);
-                }
+                    foreach (var i in hist)
+                        histTable.InvokeIfRequired(() =>
+                            histTable.Rows.Add(
+                             i.LoginUsername,
+                             i.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
+                             i.ItemName,
+                             i.SerialNumber,
+                             i.Supplier,
+                             i.Quantity,
+                             i.Cost));
+                });
+
             }
         }
     }

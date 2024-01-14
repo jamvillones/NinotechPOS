@@ -41,16 +41,7 @@ namespace POS.Forms
 
         private void invTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex == -1) return;
-
-            var table = sender as DataGridView;
-            //var qty = table[col_qty.Index, e.RowIndex].Value as int?;
-            //if (qty == 0 || qty is null) return;
-
-            using (InventoryStockinLog log = new InventoryStockinLog((int)(table.Rows[e.RowIndex].Cells[0].Value)))
-            {
-                log.ShowDialog();
-            }
+            
         }
     }
 }

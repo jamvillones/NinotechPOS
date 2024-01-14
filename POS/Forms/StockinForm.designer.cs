@@ -32,25 +32,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockinForm));
             this.stockinBtn = new System.Windows.Forms.Button();
             this.inventoryTable = new System.Windows.Forms.DataGridView();
-            this.col_Inventory_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Inventory_Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Inventory_Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Inventory_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Inventory_Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Inventory_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Inventory_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Inventory_Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.itemsTable = new System.Windows.Forms.DataGridView();
             this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,10 +65,19 @@
             this.label7 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
             this._grandTotalTxt = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
             this._messageLabel = new System.Windows.Forms.Label();
             this.searchControl = new POS.UserControls.SearchControl();
+            this.col_Inventory_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Inventory_Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Inventory_Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Inventory_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Inventory_Supplier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Inventory_Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Inventory_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Inventory_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_remove = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
@@ -132,10 +132,10 @@
             this.col_Inventory_Barcode,
             this.col_Inventory_Serial,
             this.col_Inventory_Name,
+            this.col_Inventory_Supplier,
             this.col_Inventory_Qty,
             this.col_Inventory_Cost,
             this.col_Inventory_Total,
-            this.col_Inventory_Supplier,
             this.col_remove});
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
@@ -160,76 +160,6 @@
             this.inventoryTable.TabIndex = 4;
             this.inventoryTable.TabStop = false;
             this.inventoryTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.inventoryTable_CellMouseDoubleClick);
-            // 
-            // col_Inventory_Id
-            // 
-            this.col_Inventory_Id.HeaderText = "ID";
-            this.col_Inventory_Id.Name = "col_Inventory_Id";
-            this.col_Inventory_Id.ReadOnly = true;
-            this.col_Inventory_Id.Visible = false;
-            // 
-            // col_Inventory_Barcode
-            // 
-            this.col_Inventory_Barcode.HeaderText = "BARCODE";
-            this.col_Inventory_Barcode.Name = "col_Inventory_Barcode";
-            this.col_Inventory_Barcode.ReadOnly = true;
-            this.col_Inventory_Barcode.Visible = false;
-            // 
-            // col_Inventory_Serial
-            // 
-            this.col_Inventory_Serial.HeaderText = "SERIAL";
-            this.col_Inventory_Serial.Name = "col_Inventory_Serial";
-            this.col_Inventory_Serial.ReadOnly = true;
-            // 
-            // col_Inventory_Name
-            // 
-            this.col_Inventory_Name.HeaderText = "NAME";
-            this.col_Inventory_Name.Name = "col_Inventory_Name";
-            this.col_Inventory_Name.ReadOnly = true;
-            // 
-            // col_Inventory_Qty
-            // 
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            this.col_Inventory_Qty.DefaultCellStyle = dataGridViewCellStyle3;
-            this.col_Inventory_Qty.HeaderText = "QTY";
-            this.col_Inventory_Qty.Name = "col_Inventory_Qty";
-            this.col_Inventory_Qty.ReadOnly = true;
-            // 
-            // col_Inventory_Cost
-            // 
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.col_Inventory_Cost.DefaultCellStyle = dataGridViewCellStyle4;
-            this.col_Inventory_Cost.HeaderText = "COST";
-            this.col_Inventory_Cost.Name = "col_Inventory_Cost";
-            this.col_Inventory_Cost.ReadOnly = true;
-            // 
-            // col_Inventory_Total
-            // 
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.col_Inventory_Total.DefaultCellStyle = dataGridViewCellStyle5;
-            this.col_Inventory_Total.HeaderText = "TOTAL";
-            this.col_Inventory_Total.Name = "col_Inventory_Total";
-            this.col_Inventory_Total.ReadOnly = true;
-            // 
-            // col_Inventory_Supplier
-            // 
-            this.col_Inventory_Supplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Inventory_Supplier.HeaderText = "SUPPLIER";
-            this.col_Inventory_Supplier.Name = "col_Inventory_Supplier";
-            this.col_Inventory_Supplier.ReadOnly = true;
-            // 
-            // col_remove
-            // 
-            this.col_remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.col_remove.HeaderText = "";
-            this.col_remove.Name = "col_remove";
-            this.col_remove.ReadOnly = true;
-            this.col_remove.Text = "Remove";
-            this.col_remove.UseColumnTextForButtonValue = true;
-            this.col_remove.Width = 12;
             // 
             // itemsTable
             // 
@@ -548,6 +478,19 @@
             this.label1.TabIndex = 10;
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
+            // _grandTotalTxt
+            // 
+            this._grandTotalTxt.BackColor = System.Drawing.SystemColors.ControlDark;
+            this._grandTotalTxt.Dock = System.Windows.Forms.DockStyle.Top;
+            this._grandTotalTxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this._grandTotalTxt.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._grandTotalTxt.ForeColor = System.Drawing.Color.Black;
+            this._grandTotalTxt.Location = new System.Drawing.Point(0, 0);
+            this._grandTotalTxt.Name = "_grandTotalTxt";
+            this._grandTotalTxt.Size = new System.Drawing.Size(425, 40);
+            this._grandTotalTxt.TabIndex = 3;
+            this._grandTotalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this._messageLabel);
@@ -558,19 +501,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(944, 60);
             this.panel5.TabIndex = 4;
-            // 
-            // _grandTotalTxt
-            // 
-            this._grandTotalTxt.BackColor = System.Drawing.SystemColors.ControlDark;
-            this._grandTotalTxt.Dock = System.Windows.Forms.DockStyle.Top;
-            this._grandTotalTxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this._grandTotalTxt.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._grandTotalTxt.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this._grandTotalTxt.Location = new System.Drawing.Point(0, 0);
-            this._grandTotalTxt.Name = "_grandTotalTxt";
-            this._grandTotalTxt.Size = new System.Drawing.Size(425, 40);
-            this._grandTotalTxt.TabIndex = 3;
-            this._grandTotalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // _messageLabel
             // 
@@ -597,6 +527,76 @@
             this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
             this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            // 
+            // col_Inventory_Id
+            // 
+            this.col_Inventory_Id.HeaderText = "ID";
+            this.col_Inventory_Id.Name = "col_Inventory_Id";
+            this.col_Inventory_Id.ReadOnly = true;
+            this.col_Inventory_Id.Visible = false;
+            // 
+            // col_Inventory_Barcode
+            // 
+            this.col_Inventory_Barcode.HeaderText = "BARCODE";
+            this.col_Inventory_Barcode.Name = "col_Inventory_Barcode";
+            this.col_Inventory_Barcode.ReadOnly = true;
+            this.col_Inventory_Barcode.Visible = false;
+            // 
+            // col_Inventory_Serial
+            // 
+            this.col_Inventory_Serial.HeaderText = "SERIAL";
+            this.col_Inventory_Serial.Name = "col_Inventory_Serial";
+            this.col_Inventory_Serial.ReadOnly = true;
+            // 
+            // col_Inventory_Name
+            // 
+            this.col_Inventory_Name.HeaderText = "NAME";
+            this.col_Inventory_Name.Name = "col_Inventory_Name";
+            this.col_Inventory_Name.ReadOnly = true;
+            // 
+            // col_Inventory_Supplier
+            // 
+            this.col_Inventory_Supplier.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Inventory_Supplier.HeaderText = "SUPPLIER";
+            this.col_Inventory_Supplier.Name = "col_Inventory_Supplier";
+            this.col_Inventory_Supplier.ReadOnly = true;
+            // 
+            // col_Inventory_Qty
+            // 
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.col_Inventory_Qty.DefaultCellStyle = dataGridViewCellStyle3;
+            this.col_Inventory_Qty.HeaderText = "QTY";
+            this.col_Inventory_Qty.Name = "col_Inventory_Qty";
+            this.col_Inventory_Qty.ReadOnly = true;
+            // 
+            // col_Inventory_Cost
+            // 
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.col_Inventory_Cost.DefaultCellStyle = dataGridViewCellStyle4;
+            this.col_Inventory_Cost.HeaderText = "COST";
+            this.col_Inventory_Cost.Name = "col_Inventory_Cost";
+            this.col_Inventory_Cost.ReadOnly = true;
+            // 
+            // col_Inventory_Total
+            // 
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.col_Inventory_Total.DefaultCellStyle = dataGridViewCellStyle5;
+            this.col_Inventory_Total.HeaderText = "TOTAL";
+            this.col_Inventory_Total.Name = "col_Inventory_Total";
+            this.col_Inventory_Total.ReadOnly = true;
+            // 
+            // col_remove
+            // 
+            this.col_remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_remove.HeaderText = "";
+            this.col_remove.Name = "col_remove";
+            this.col_remove.ReadOnly = true;
+            this.col_remove.Text = "Remove";
+            this.col_remove.UseColumnTextForButtonValue = true;
+            this.col_remove.Width = 12;
             // 
             // StockinForm
             // 
@@ -664,15 +664,15 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label _messageLabel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label _grandTotalTxt;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Total;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_Inventory_Supplier;
         private System.Windows.Forms.DataGridViewButtonColumn col_remove;
-        private System.Windows.Forms.Label _grandTotalTxt;
     }
 }
