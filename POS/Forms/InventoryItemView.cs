@@ -9,12 +9,14 @@ namespace POS.Forms
 {
     public partial class InventoryItemView : Form
     {
-        public InventoryItemView(string barcode)
+        public InventoryItemView(string barcode, string serial = "")
         {
             InitializeComponent();
             _barcode = barcode;
+            _serial = serial;
         }
         string _barcode;
+        string _serial = string.Empty;
 
         DataGridViewRow CreateRow(InventoryItem item) => invTable.CreateRow(
             item.Id,
@@ -37,11 +39,17 @@ namespace POS.Forms
                         invTable.InvokeIfRequired(() => invTable.Rows.Add(CreateRow(inv)));
                 });
             }
+
+            if (!string.IsNullOrWhiteSpace(_serial))
+            {
+                var index = invTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(row => row.Cells[Column1.Index].Value?.ToString() == _serial).Index;
+                invTable.Rows[index].Selected = true;
+            }
         }
 
         private void invTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            
+
         }
     }
 }

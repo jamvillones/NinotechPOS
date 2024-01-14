@@ -41,7 +41,7 @@
             this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col_remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.viewStockBtn = new System.Windows.Forms.Button();
             this.stockinBtn = new System.Windows.Forms.Button();
@@ -91,7 +91,6 @@
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -106,13 +105,13 @@
             this.quantityCol,
             this.priceCol,
             this.typeCol,
-            this.Column1});
+            this.col_remove});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle4;
@@ -133,7 +132,6 @@
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             this.itemsTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.itemsTable_UserDeletingRow);
-            this.itemsTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itemsTable_KeyDown);
             // 
             // barcodeCol
             // 
@@ -161,7 +159,6 @@
             // 
             // priceCol
             // 
-            this.priceCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCellStyle3.Format = "C2";
             this.priceCol.DefaultCellStyle = dataGridViewCellStyle3;
             this.priceCol.HeaderText = "PRICE";
@@ -171,19 +168,21 @@
             // 
             // typeCol
             // 
-            this.typeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.typeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.typeCol.HeaderText = "TYPE";
             this.typeCol.Name = "typeCol";
             this.typeCol.ReadOnly = true;
-            this.typeCol.Width = 68;
             // 
-            // Column1
+            // col_remove
             // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column1.HeaderText = "Critical Qty";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
+            this.col_remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_remove.HeaderText = "";
+            this.col_remove.Name = "col_remove";
+            this.col_remove.ReadOnly = true;
+            this.col_remove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_remove.Text = "Remove";
+            this.col_remove.UseColumnTextForButtonValue = true;
+            this.col_remove.Width = 11;
             // 
             // button1
             // 
@@ -485,7 +484,6 @@
             this.Name = "InventoryUC";
             this.Size = new System.Drawing.Size(774, 525);
             this.Load += new System.EventHandler(this.InventoryUC_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InventoryUC_KeyDown);
             this.tablePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
             this.contentPanel.ResumeLayout(false);
@@ -521,12 +519,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label totalPriceTxt;
+        private System.Windows.Forms.Label loadingLabelItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn barcodeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column1;
-        private System.Windows.Forms.Label loadingLabelItem;
+        private System.Windows.Forms.DataGridViewButtonColumn col_remove;
     }
 }

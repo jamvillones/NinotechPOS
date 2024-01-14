@@ -18,6 +18,11 @@ namespace POS.UserControls
 {
     public partial class InventoryUC : UserControl, Interfaces.ITab
     {
+        public InventoryUC()
+        {
+            InitializeComponent();
+        }
+
         class InventoryDetails
         {
             public string Barcode { get; set; }
@@ -26,18 +31,7 @@ namespace POS.UserControls
             public int Quantity { get; set; }
         }
 
-        //SearchHandler sh = new SearchHandler();
-
         CancellationTokenSource _cancelSource;
-
-        public InventoryUC()
-        {
-            InitializeComponent();
-
-            //sh.ReferencedTextbox = searchControl1.firstControl as TextBox;
-            //sh.OnSearch += Sh_OnSearch;
-            //sh.OnTextCleared += Sh_OnTextCleared;
-        }
 
         #region Tab functions
         public virtual async void RefreshData()
@@ -52,8 +46,6 @@ namespace POS.UserControls
         public async Task InitializeAsync()
         {
             await LoadDataAsync();
-
-            //showNotif();
         }
 
         //void showNotif()
@@ -72,8 +64,6 @@ namespace POS.UserControls
 
         public void CancelLoading()
         {
-            loadingLabelItem.Visible = false;
-
             try
             {
                 _cancelSource?.Cancel();
@@ -86,8 +76,7 @@ namespace POS.UserControls
 
         #endregion
 
-        #region Control Actions
-
+        #region Selling
         protected virtual void sellItem_Click(object sender, EventArgs e)
         {
             OpenSellForm();
@@ -107,12 +96,11 @@ namespace POS.UserControls
             sellForm.OnSave += SellForm_OnSave;
             sellForm.FormClosed += SellForm_FormClosed;
 
-            if (itemsTable.SelectedCells.Count > 0 && SelectedQty > 0 || SelectedQty != null)            
-                sellForm.SellSpecific(SelectedBarcode);            
+            if (itemsTable.SelectedCells.Count > 0 && SelectedQty > 0 || SelectedQty != null)
+                sellForm.SellSpecific(SelectedBarcode);
 
             sellForm.Show();
         }
-
         private async void SellForm_OnSave(object sender, EventArgs e)
         {
             await LoadDataAsync();
@@ -123,8 +111,8 @@ namespace POS.UserControls
             sellForm.Dispose();
             sellForm = null;
         }
-
         #endregion
+
 
         private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -144,7 +132,7 @@ namespace POS.UserControls
         void ShowInventoryInfo(string barcode, int? quantity)
         {
             if (quantity == 0 || quantity is null) return;
-            using (var View = new InventoryItemView(barcode))
+            using (var View = new InventoryItemView(barcode, _selectedSerial))
             {
                 View.ShowDialog();
             }
@@ -152,6 +140,7 @@ namespace POS.UserControls
         }
 
         string SelectedBarcode => itemsTable.SelectedCells[0].Value.ToString();
+        string SelectedName => itemsTable.SelectedCells[1].Value.ToString();
         int? SelectedQty => itemsTable.SelectedCells[quantityCol.Index].Value as int?;
 
         private void addItemBtn_Click(object sender, EventArgs e)
@@ -167,9 +156,10 @@ namespace POS.UserControls
         {
             await LoadDataAsync();
         }
-
+        string _selectedSerial = string.Empty;
         private async Task<bool> LoadDataAsync()
         {
+            _selectedSerial = string.Empty;
             isRefreshing = true;
             bool resultsFound = false;
 
@@ -182,9 +172,9 @@ namespace POS.UserControls
                     .Where(y => y.Product.Item.Type == ItemType.Quantifiable.ToString())
                     .Select(x => x.Quantity * x.Product.Item.SellingPrice)
                     .DefaultIfEmpty(0)
-                    .SumAsync();
+                    .SumAsync(token);
 
-                totalPriceTxt.InvokeIfRequired(() => totalPriceTxt.Text = totalInventoryValue.ToString("C2"));
+                totalPriceTxt.Text = totalInventoryValue.ToString("C2");
 
                 try
                 {
@@ -194,14 +184,20 @@ namespace POS.UserControls
                         .ApplySearch(keyword);
 
                     if (await rawItems.CountAsync() == 0)
+                    {
                         rawItems = context.InventoryItems
                             .AsQueryable()
                             .Where(x => x.SerialNumber == keyword)
                             .Select(x => x.Product.Item);
 
-                    var items = await rawItems.ToListAsync();
+                        _selectedSerial = rawItems.Any() ? keyword : string.Empty;
+                    }
+
+                    var items = await rawItems.ToListAsync(token);
 
                     resultsFound = items.Count > 0;
+
+                    token.ThrowIfCancellationRequested();
 
                     if (resultsFound)
                     {
@@ -211,9 +207,12 @@ namespace POS.UserControls
                         var rows = await CreateItemRowsAsync(items, token);
                         itemsTable.Rows.AddRange(rows);
                     }
-
-
-
+                    else
+                        MessageBox.Show("No Results Found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (OperationCanceledException)
+                {
+                    loadingLabelItem.Visible = false;
                 }
                 catch (Exception ex)
                 {
@@ -221,7 +220,7 @@ namespace POS.UserControls
                 }
                 finally
                 {
-                    _cancelSource.Dispose();
+                    _cancelSource?.Dispose();
                     _cancelSource = null;
                 }
             }
@@ -259,20 +258,6 @@ namespace POS.UserControls
             return rows.ToArray();
         }
 
-        //bool isInCriticalQuantity(Item x)
-        //{
-        //    if (x.Type == ItemType.Quantifiable.ToString())
-        //    {
-        //        var q = x.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
-        //        if (q == 0 || x.CriticalQuantity == null)
-        //            return false;
-
-        //        return (q <= (x.CriticalQuantity ?? 1));
-        //    }
-        //    return false;
-        //}
-
-
         DataGridViewRow CreateRow(Item x)
         {
             var row = new DataGridViewRow();
@@ -281,7 +266,6 @@ namespace POS.UserControls
 
             if (x.InCriticalQuantity)
             {
-                //row.DefaultCellStyle.BackColor = Color.IndianRed;
                 row.DefaultCellStyle.ForeColor = Color.Maroon;
             }
             else if (quantity == 0)
@@ -332,9 +316,10 @@ namespace POS.UserControls
                 variation.ShowDialog();
         }
 
-        public void Refresh_Callback(object sender, EventArgs e)
+        public async void Refresh_Callback(object sender, EventArgs e)
         {
-
+            keyword = string.Empty;
+            await LoadDataAsync();
         }
 
         void FillTable(IEnumerable<Item> items)
@@ -405,27 +390,20 @@ namespace POS.UserControls
 
         private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != 6)
-            {
-                return;
-            }
-            if (!UserManager.instance.currentLogin.CanEditItem)
-            {
-                return;
-            }
-            if (MessageBox.Show("Are you sure you want to delete the selected item?", "This will also delete items in inventory.", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
-            {
-                return;
-            }
+            if (e.ColumnIndex != col_remove.Index) return;
+            if (!UserManager.instance.currentLogin.CanEditItem) return;
+            if (MessageBox.Show(
+                "Are you sure you want to delete the selected item?",
+                "This will also delete items in inventory.",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
             using (var p = new POSEntities())
             {
-                var selected = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex].Cells[0].Value.ToString();
-                var i = p.Items.FirstOrDefault(x => x.Barcode == selected);
+                var i = p.Items.FirstOrDefault(x => x.Barcode == SelectedBarcode);
                 p.Items.Remove(i);
                 p.SaveChanges();
             }
-
             itemsTable.Rows.RemoveAt(e.RowIndex);
         }
 
@@ -444,45 +422,26 @@ namespace POS.UserControls
         {
             if (itemsTable.SelectedCells.Count < 0)
                 return;
+            InventoryStockinLog log = new InventoryStockinLog(SelectedBarcode, SelectedName);
+            log.FormClosed += FormClosed_Dispose;
+            log.Show();
 
-            var table = sender as DataGridView;
-            //var qty = table[col_qty.Index, e.RowIndex].Value as int?;
-            //if (qty == 0 || qty is null) return;
-
-            using (InventoryStockinLog log = new InventoryStockinLog(SelectedBarcode))
-            {
-                log.ShowDialog();
-            }
-
-            //ShowInventoryInfo(selectedBarcode, selectedQty);
-
-            //using (var inventoryView = new InventoryItemView(selectedBarcode))
-            //{
-            //    //inventoryView.SetItemId(selectedBarcode);
-            //    inventoryView.ShowDialog();
-            //}
         }
 
-        //private async void button2_Click_1(object sender, EventArgs e)
-        //{
-        //   //await initItemsTableAsync();
-        //}
-
-        private void InventoryUC_KeyDown(object sender, KeyEventArgs e)
+        private void FormClosed_Dispose(object sender, FormClosedEventArgs e)
         {
-        }
-
-        private void itemsTable_KeyDown(object sender, KeyEventArgs e)
-        {
-            //if (e.KeyCode == Keys.F5)
-            //    button2.PerformClick();
+            if (sender is Form form)
+                form.Dispose();
         }
 
         bool isRefreshing { get; set; } = false;
         private async void button2_Click_1(object sender, EventArgs e)
         {
             if (!isRefreshing)
+            {
+                keyword = string.Empty;
                 await LoadDataAsync();
+            }
 
         }
         bool _critShowing = false;

@@ -8,16 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace POS.Forms
 {
     public partial class InventoryStockinLog : Form
     {
-        string id;
-        public InventoryStockinLog(string barcode)
+        string _barcode;
+        string _name;
+        public InventoryStockinLog(string barcode, string name)
         {
             InitializeComponent();
-            id = barcode;
+            _barcode = barcode;
+            _name = name;
         }
 
 
@@ -28,15 +31,19 @@ namespace POS.Forms
             using (var context = new POSEntities())
             {
                 var hist = await context.StockinHistories
-                    .Where(x => x.Product.Item.Barcode == id)
+                    .Where(x => x.Product.Item.Barcode == _barcode)
                     .OrderByDescending(x => x.Date)
-                    .ToListAsync();
+                .ToListAsync();
+
+                this.Text = this.Text + " - " + _name + " - " + hist.Sum(h => h.Quantity) + " units";
+
 
                 await Task.Run(() =>
                 {
                     foreach (var i in hist)
                         histTable.InvokeIfRequired(() =>
                             histTable.Rows.Add(
+                             i.Id,
                              i.LoginUsername,
                              i.Date.Value.ToString("MMMM dd, yyyy hh:mm tt"),
                              i.ItemName,
