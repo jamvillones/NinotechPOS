@@ -90,42 +90,38 @@ namespace POS.UserControls
 
         protected virtual void sellItem_Click(object sender, EventArgs e)
         {
-            //if (itemsTable.SelectedCells.Count == 0)
-            //{
-            //    createSellForm();
-            //    return;
-            //}
-
-            //string itemQ = itemsTable.SelectedCells[quantityCol.Index].Value.ToString();
-            //string barc = itemsTable.SelectedCells[barcodeCol.Index].Value.ToString();
-
-            //if (s != null)
-            //    s.BringToFront();
-
-            //else
-            //{
-            //    createSellForm();
-            //}
-
-            //if (itemQ != "EMPTY") s.SellSpecific(barc);
+            OpenSellForm();
         }
-
-        void createSellForm()
+        MakeSale sellForm = null;
+        void OpenSellForm()
         {
-            using (var s = new MakeSale())
+            if (sellForm != null)
             {
-                s.OnSave += SellForm_OnSave;
-                s.FormClosed += S_FormClosed;
-                s.ShowDialog();
+                if (sellForm.WindowState == FormWindowState.Minimized)
+                    sellForm.WindowState = FormWindowState.Maximized;
+
+                sellForm.BringToFront();
+                return;
             }
+            sellForm = new MakeSale();
+            sellForm.OnSave += SellForm_OnSave;
+            sellForm.FormClosed += SellForm_FormClosed;
+
+            if (itemsTable.SelectedCells.Count > 0 && SelectedQty > 0 || SelectedQty != null)            
+                sellForm.SellSpecific(SelectedBarcode);            
+
+            sellForm.Show();
         }
 
-        private void S_FormClosed(object sender, FormClosedEventArgs e)
+        private async void SellForm_OnSave(object sender, EventArgs e)
         {
-            //var sell = sender as MakeSale;
-            //sell.Dispose();
+            await LoadDataAsync();
+        }
 
-            //s = null;
+        private void SellForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            sellForm.Dispose();
+            sellForm = null;
         }
 
         #endregion
@@ -341,39 +337,6 @@ namespace POS.UserControls
 
         }
 
-        private void searchBtn_Click(object sender, EventArgs e)
-        {
-            //sh.PerformSearch();
-        }
-
-
-        bool SearchItem(string s)
-        {
-            CancelLoading();
-            IEnumerable<Item> searchElements;
-
-            ///barcode
-            using (var p = new POSEntities())
-            {
-                searchElements = p.Items.Where(x => x.Barcode == s);
-
-                if (searchElements.Count() == 0)
-                    searchElements = p.Items.Where(x => x.Name.Contains(s));
-
-                if (!checkBox1.Checked)
-                    searchElements = searchElements.Where(x => x.QuantityInInventory != 0);
-
-                if (searchElements.Count() == 0)
-                {
-                    MessageBox.Show("Sorry, Product not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    return false;
-                }
-
-                FillTable(searchElements);
-                return true;
-            }
-        }
-
         void FillTable(IEnumerable<Item> items)
         {
             itemsTable.InvokeIfRequired(() =>
@@ -477,11 +440,6 @@ namespace POS.UserControls
             }
         }
 
-        private async void SellForm_OnSave(object sender, EventArgs e)
-        {
-            await LoadDataAsync();
-        }
-
         private void viewStockBtn_Click(object sender, EventArgs e)
         {
             if (itemsTable.SelectedCells.Count < 0)
@@ -534,8 +492,6 @@ namespace POS.UserControls
             set
             {
                 _critShowing = value;
-
-                //criticalLabel.ForeColor = _critShowing ? Color.Blue : Color.Maroon;
             }
         }
 
