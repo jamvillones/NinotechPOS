@@ -46,6 +46,8 @@
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="CriticalQuantity" Type="int" />
           <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsSerialRequired" Type="bit" Nullable="false" />
+          <Property Name="Tags" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -436,6 +438,8 @@
           <Property Name="CriticalQuantity" Type="Int32" />
           <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Products" Relationship="POSModel.FK_Product_Item" FromRole="Item" ToRole="Product" />
+          <Property Name="IsSerialRequired" Type="Boolean" Nullable="false" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -680,6 +684,8 @@
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="POSModel.Item">
               <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="IsSerialRequired" ColumnName="IsSerialRequired" />
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="CriticalQuantity" ColumnName="CriticalQuantity" />
                 <ScalarProperty Name="Type" ColumnName="Type" />

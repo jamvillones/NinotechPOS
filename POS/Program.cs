@@ -2,18 +2,16 @@
 using POS.Misc;
 using System;
 using System.Data.Entity;
+using System.Linq;
 using System.Windows.Forms;
 
-namespace POS
-{
-    static class Program
-    {
+namespace POS {
+    static class Program {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
-        {
+        static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -23,19 +21,18 @@ namespace POS
             UserManager.instance = new UserManager();
 
             bool signedOut;
-            do
-            {
+
+            do {
                 signedOut = false;
                 var login = new Forms.LoginForm();
                 Application.Run(login);
 
-                if (login.LoginSuccessful)
-                {
+                if (login.LoginSuccessful) {
                     login.Dispose();
+
                     backup = true;
 
                     var main = new Main();
-
                     Application.Run(main);
 
                     signedOut = main.IsSigneout;
@@ -45,15 +42,12 @@ namespace POS
             }
             while (signedOut);
 
-            if (backup)
-            {
-                try
-                {
+            if (backup) {
+                try {
                     using (var p = new POSEntities())
                         p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     Console.WriteLine(ex.Message);
                 }
             }

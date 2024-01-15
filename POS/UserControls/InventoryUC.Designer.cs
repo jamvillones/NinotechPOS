@@ -36,6 +36,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
             this.tablePanel = new System.Windows.Forms.Panel();
             this.itemsTable = new System.Windows.Forms.DataGridView();
+            this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barcodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,6 +101,7 @@
             this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.col_Id,
             this.barcodeCol,
             this.nameCol,
             this.quantityCol,
@@ -132,6 +134,13 @@
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             this.itemsTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.itemsTable_UserDeletingRow);
+            // 
+            // col_Id
+            // 
+            this.col_Id.HeaderText = "ID";
+            this.col_Id.Name = "col_Id";
+            this.col_Id.ReadOnly = true;
+            this.col_Id.Visible = false;
             // 
             // barcodeCol
             // 
@@ -520,11 +529,13 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label totalPriceTxt;
         private System.Windows.Forms.Label loadingLabelItem;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn idCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn barcodeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
         private System.Windows.Forms.DataGridViewButtonColumn col_remove;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
     }
 }

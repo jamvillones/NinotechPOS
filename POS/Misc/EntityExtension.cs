@@ -5,15 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS
-{
-    partial class Item
-    {
+namespace POS {
+    partial class Item {
         public int QuantityInInventory => this.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
-        public bool InCriticalQuantity
-        {
-            get
-            {
+        public bool InCriticalQuantity {
+            get {
                 if (this.Type != ItemType.Quantifiable.ToString() || this.CriticalQuantity == null) return false;
 
                 var q = this.QuantityInInventory;
@@ -26,8 +22,7 @@ namespace POS
         }
     }
 
-    partial class Sale
-    {
+    partial class Sale {
         /// <summary>
         /// grand total of the sale
         /// </summary>
@@ -47,8 +42,20 @@ namespace POS
         public bool FullyPaid => Remaining == 0;
     }
 
-    partial class Supplier
-    {
+    partial class Supplier {
         public override string ToString() => Name;
+    }
+
+    public static class EntityHelpers {
+        public static void SetIsSerialRequired() {
+            using (var context = new POSEntities()) {
+                var items = context.Items.AsQueryable().Where(i => i.Products.Any(p => p.StockinHistories.Any(st => st.SerialNumber != null))).ToList();
+
+                foreach (var i in items)
+                    i.IsSerialRequired = true;
+
+                context.SaveChanges();
+            }
+        }
     }
 }

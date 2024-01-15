@@ -52,9 +52,6 @@
             this.histTable.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.histTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.histTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.histTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.histTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.histTable.BackgroundColor = System.Drawing.Color.White;
@@ -88,15 +85,16 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.histTable.DefaultCellStyle = dataGridViewCellStyle4;
+            this.histTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.histTable.EnableHeadersVisualStyles = false;
-            this.histTable.Location = new System.Drawing.Point(12, 12);
+            this.histTable.Location = new System.Drawing.Point(0, 0);
             this.histTable.MultiSelect = false;
             this.histTable.Name = "histTable";
             this.histTable.ReadOnly = true;
             this.histTable.RowHeadersVisible = false;
             this.histTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.histTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.histTable.Size = new System.Drawing.Size(780, 437);
+            this.histTable.Size = new System.Drawing.Size(804, 461);
             this.histTable.StandardTab = true;
             this.histTable.TabIndex = 2;
             // 

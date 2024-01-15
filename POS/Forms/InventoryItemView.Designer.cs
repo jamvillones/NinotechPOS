@@ -73,13 +73,13 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.invTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.invTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.invTable.EnableHeadersVisualStyles = false;
-            this.invTable.Location = new System.Drawing.Point(20, 20);
+            this.invTable.Location = new System.Drawing.Point(0, 0);
             this.invTable.MultiSelect = false;
             this.invTable.Name = "invTable";
             this.invTable.ReadOnly = true;
@@ -87,7 +87,7 @@
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.invTable.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.invTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.invTable.Size = new System.Drawing.Size(544, 321);
+            this.invTable.Size = new System.Drawing.Size(584, 361);
             this.invTable.TabIndex = 4;
             this.invTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.invTable_CellMouseDoubleClick);
             // 
@@ -127,7 +127,6 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "InventoryItemView";
-            this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory  View";

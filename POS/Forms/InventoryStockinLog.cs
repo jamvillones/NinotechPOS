@@ -14,12 +14,12 @@ namespace POS.Forms
 {
     public partial class InventoryStockinLog : Form
     {
-        string _barcode;
+        string _id;
         string _name;
-        public InventoryStockinLog(string barcode, string name)
+        public InventoryStockinLog(string id, string name)
         {
             InitializeComponent();
-            _barcode = barcode;
+            _id = id;
             _name = name;
         }
 
@@ -31,7 +31,7 @@ namespace POS.Forms
             using (var context = new POSEntities())
             {
                 var hist = await context.StockinHistories
-                    .Where(x => x.Product.Item.Id == _barcode)
+                    .Where(x => x.Product.Item.Id == _id)
                     .OrderByDescending(x => x.Date)
                 .ToListAsync();
 
