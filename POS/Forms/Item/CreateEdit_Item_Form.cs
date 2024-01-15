@@ -15,8 +15,8 @@ using System.Windows.Forms;
 using static System.Windows.Forms.AxHost;
 
 namespace POS.Forms.ItemRegistration {
-    public partial class Create_Item_Form : Form {
-        public Create_Item_Form() {
+    public partial class CreateEdit_Item_Form : Form {
+        public CreateEdit_Item_Form() {
             InitializeComponent();
 
             costTable.AutoGenerateColumns = false;

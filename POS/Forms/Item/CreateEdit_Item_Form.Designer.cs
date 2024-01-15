@@ -1,6 +1,6 @@
 ﻿namespace POS.Forms.ItemRegistration
 {
-    partial class Create_Item_Form
+    partial class CreateEdit_Item_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Create_Item_Form));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateEdit_Item_Form));
             this.panel6 = new System.Windows.Forms.Panel();
             this._name = new System.Windows.Forms.TextBox();
             this.panel7 = new System.Windows.Forms.Panel();
