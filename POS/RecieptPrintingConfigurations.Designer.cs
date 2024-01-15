@@ -43,38 +43,34 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.titlelTxt);
-            this.groupBox1.Location = new System.Drawing.Point(13, 13);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(20, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(409, 42);
+            this.groupBox1.Size = new System.Drawing.Size(394, 35);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Title";
             // 
             // titlelTxt
             // 
-            this.titlelTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.titlelTxt.BackColor = System.Drawing.SystemColors.Control;
             this.titlelTxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.titlelTxt.Location = new System.Drawing.Point(7, 20);
+            this.titlelTxt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.titlelTxt.Location = new System.Drawing.Point(3, 16);
             this.titlelTxt.Name = "titlelTxt";
-            this.titlelTxt.Size = new System.Drawing.Size(396, 13);
+            this.titlelTxt.Size = new System.Drawing.Size(388, 13);
             this.titlelTxt.TabIndex = 0;
             this.titlelTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.detailsTxt);
-            this.groupBox2.Location = new System.Drawing.Point(13, 61);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(20, 55);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox2.Size = new System.Drawing.Size(409, 191);
+            this.groupBox2.Size = new System.Drawing.Size(394, 196);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Details";
@@ -87,43 +83,42 @@
             this.detailsTxt.Location = new System.Drawing.Point(10, 23);
             this.detailsTxt.Multiline = true;
             this.detailsTxt.Name = "detailsTxt";
-            this.detailsTxt.Size = new System.Drawing.Size(389, 158);
+            this.detailsTxt.Size = new System.Drawing.Size(374, 163);
             this.detailsTxt.TabIndex = 0;
             this.detailsTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.comboBox1);
-            this.groupBox3.Location = new System.Drawing.Point(13, 258);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox3.Location = new System.Drawing.Point(20, 251);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(409, 42);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(0);
+            this.groupBox3.Size = new System.Drawing.Size(394, 35);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Default Printer";
             // 
             // comboBox1
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 15);
+            this.comboBox1.Location = new System.Drawing.Point(0, 13);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(397, 21);
+            this.comboBox1.Size = new System.Drawing.Size(394, 21);
             this.comboBox1.TabIndex = 0;
             // 
             // saveBtn
             // 
-            this.saveBtn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.saveBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.saveBtn.Location = new System.Drawing.Point(142, 307);
+            this.saveBtn.Location = new System.Drawing.Point(20, 286);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(150, 23);
+            this.saveBtn.Size = new System.Drawing.Size(394, 35);
             this.saveBtn.TabIndex = 3;
-            this.saveBtn.Text = "Save";
+            this.saveBtn.Text = "SAVE";
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
@@ -132,15 +127,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 341);
-            this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Controls.Add(this.saveBtn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RecieptPrintingConfigurations";
+            this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reciept Printing Configurations";
