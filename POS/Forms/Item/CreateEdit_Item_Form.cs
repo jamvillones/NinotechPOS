@@ -14,9 +14,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.AxHost;
 
-namespace POS.Forms.ItemRegistration {
-    public partial class CreateEdit_Item_Form : Form {
-        public CreateEdit_Item_Form() {
+namespace POS.Forms.ItemRegistration
+{
+    public partial class CreateEdit_Item_Form : Form
+    {
+        public CreateEdit_Item_Form()
+        {
             InitializeComponent();
 
             costTable.AutoGenerateColumns = false;
@@ -29,16 +32,20 @@ namespace POS.Forms.ItemRegistration {
             col_Id.Visible = false;
 
             costTable.DecimalOnlyEditting(col_Value.Index);
+            _type.SelectedIndex = 0;
         }
 
         string _id = string.Empty;
 
-        private class Cost_ViewModel {
-            public Cost_ViewModel() {
+        private class Cost_ViewModel
+        {
+            public Cost_ViewModel()
+            {
 
             }
 
-            public Cost_ViewModel(Product p) {
+            public Cost_ViewModel(Product p)
+            {
                 Id = p.Id;
                 Supplier = p.Supplier;
                 Cost = p.Cost;
@@ -53,8 +60,10 @@ namespace POS.Forms.ItemRegistration {
 
         readonly BindingList<Cost_ViewModel> Costs = new BindingList<Cost_ViewModel>();
 
-        public Item Item {
-            get => new Item() {
+        public Item Item
+        {
+            get => new Item()
+            {
                 Id = _id == string.Empty ? Guid.NewGuid().ToString("N") : _id,
                 Barcode = string.IsNullOrWhiteSpace(_barcode.Text) ? null : _barcode.Text.Trim(),
                 Name = _name.Text.Trim(),
@@ -67,7 +76,8 @@ namespace POS.Forms.ItemRegistration {
                 Products = Costs.Select(c => c.ToProduct).ToArray()
 
             };
-            set {
+            set
+            {
                 this.Text = "Edit Item - " + value.Name;
                 _id = value.Id;
                 _barcode.Text = value.Barcode;
@@ -91,19 +101,22 @@ namespace POS.Forms.ItemRegistration {
             }
         }
 
-        private async void addSuppBtn_Click(object sender, EventArgs e) {
+        private async void addSuppBtn_Click(object sender, EventArgs e)
+        {
 
             Item toSave = null;
 
-            try {
-                using (var context = new POSEntities()) {
-
+            try
+            {
+                using (var context = new POSEntities())
+                {
                     var temp = Item;
 
                     if (_id == string.Empty)
                         toSave = context.Items.Add(temp);
 
-                    else {
+                    else
+                    {
                         toSave = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
                         toSave.Name = temp.Name;
                         toSave.Barcode = temp.Barcode;
@@ -113,25 +126,29 @@ namespace POS.Forms.ItemRegistration {
                         toSave.Type = temp.Type;
                         toSave.IsSerialRequired = temp.IsSerialRequired;
                         toSave.Tags = temp.Tags;
-                    }
 
-                    foreach (var cost in temp.Products) {
-                        if (cost.Id == 0)
-                            toSave.Products.Add(cost);
-                        else {
-                            var product = await context.Products.FirstOrDefaultAsync(x => x.Id == cost.Id);
-                            product.Cost = cost.Cost;
+                        foreach (var cost in temp.Products)
+                        {
+                            if (cost.Id == 0)
+                                toSave.Products.Add(cost);
+                            else
+                            {
+                                var product = await context.Products.FirstOrDefaultAsync(x => x.Id == cost.Id);
+                                product.Cost = cost.Cost;
+                            }
                         }
                     }
 
                     await context.SaveChangesAsync();
                 }
             }
-            catch (DbUpdateException ex) {
-                MessageBox.Show(ex.Message+" Cannot have duplicate barcode or name", "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            catch (DbUpdateException ex)
+            {
+                MessageBox.Show(ex.Message + " Cannot have duplicate barcode or name", "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -141,19 +158,24 @@ namespace POS.Forms.ItemRegistration {
             Tag = toSave;
         }
 
-        void DisableCostGroup() {
+        void DisableCostGroup()
+        {
             label8.Visible = false;
             panel16.Visible = false;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
 
-        private async void Create_Item_Form_Load(object sender, EventArgs e) {
+        private async void Create_Item_Form_Load(object sender, EventArgs e)
+        {
 
-            try {
-                using (var context = new POSEntities()) {
+            try
+            {
+                using (var context = new POSEntities())
+                {
 
                     var suppliers = await context.Suppliers
                         .OrderBy(s => s.Name)
@@ -165,16 +187,19 @@ namespace POS.Forms.ItemRegistration {
                     _supplierOption.AutoCompleteCustomSource.AddRange(supplierNames);
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Connection not established", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void AddCost_Click(object sender, EventArgs e) {
+        private void AddCost_Click(object sender, EventArgs e)
+        {
             if (string.IsNullOrWhiteSpace(_supplierOption.Text)) return;
             var selectedCost = Costs.FirstOrDefault(c => c.Supplier.Name.Equals(_supplierOption.Text, StringComparison.OrdinalIgnoreCase));
 
-            if (selectedCost != null) {
+            if (selectedCost != null)
+            {
                 // get the index of the duplicate cost
                 var index = costTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells[col_Supplier.Index].Value.ToString().Equals(_supplierOption.Text, StringComparison.OrdinalIgnoreCase)).Index;
 
@@ -189,7 +214,8 @@ namespace POS.Forms.ItemRegistration {
                 return;
             }
 
-            Costs.Add(new Cost_ViewModel() {
+            Costs.Add(new Cost_ViewModel()
+            {
                 Supplier = _supplierOption.SelectedItem as Supplier,
                 Cost = 0
             });
@@ -197,7 +223,8 @@ namespace POS.Forms.ItemRegistration {
             _supplierOption.SelectedItem = null;
         }
 
-        private void costTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
+        private void costTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
             var table = sender as DataGridView;
             var row = table.Rows[e.RowIndex];
             int id = (int)table[col_Id.Index, e.RowIndex].Value;
@@ -207,8 +234,10 @@ namespace POS.Forms.ItemRegistration {
             costTable.FirstDisplayedScrollingRowIndex = e.RowIndex;
         }
 
-        private void _supplierOption_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrWhiteSpace(_supplierOption.Text)) {
+        private void _supplierOption_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !string.IsNullOrWhiteSpace(_supplierOption.Text))
+            {
                 button4.PerformClick();
             }
         }
