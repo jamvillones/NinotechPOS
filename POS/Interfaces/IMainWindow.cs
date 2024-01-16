@@ -8,6 +8,6 @@ namespace POS.Interfaces
 {
     interface IMainWindow
     {
-        bool IsSigneout { get; }
+        bool IsLoggedOut { get; }
     }
 }

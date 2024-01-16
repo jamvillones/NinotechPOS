@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="8b697f4d49574b6eb0435a4fde9b7de3" Name="Diagram1">
-        <EntityTypeShape EntityType="POSModel.ChargedPayRecord" Width="2.25" PointX="1.75" PointY="3.625" IsExpanded="false" />
         <EntityTypeShape EntityType="POSModel.Customer" Width="1.5" PointX="2.5" PointY="5.125" IsExpanded="false" />
         <EntityTypeShape EntityType="POSModel.Login" Width="1.5" PointX="2.5" PointY="4.375" IsExpanded="false" />
         <EntityTypeShape EntityType="POSModel.Supplier" Width="1.5" PointX="9.625" PointY="1.75" IsExpanded="false" />
@@ -14,7 +13,6 @@
         <EntityTypeShape EntityType="POSModel.SoldItem" Width="1.5" PointX="4.875" PointY="1.75" IsExpanded="false" />
         <EntityTypeShape EntityType="POSModel.Item" Width="1.5" PointX="7.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="POSModel.Sale" Width="1.5" PointX="4.875" PointY="3.625" IsExpanded="true" />
-        <AssociationConnector Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord" />
         <AssociationConnector Association="POSModel.FK_Sale_Customer" />
         <AssociationConnector Association="POSModel.FK_Sale_Login" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Sale" />
@@ -25,6 +23,8 @@
         <AssociationConnector Association="POSModel.FK_SoldItem_Product" />
         <AssociationConnector Association="POSModel.FK_StockinHistory_Product" ManuallyRouted="false" >
         </AssociationConnector>
+        <EntityTypeShape EntityType="POSModel.ChargedPayRecord" Width="1.5" PointX="4.875" PointY="7.5" IsExpanded="false" />
+        <AssociationConnector Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

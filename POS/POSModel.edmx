@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" />
-          <Property Name="AmountPayed" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AmountPayed" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="SaleId" Type="int" />
           <Property Name="TransactionTime" Type="datetime" />
         </EntityType>
@@ -291,17 +291,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="POSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ChargedPayRecord">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AmountPayed" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SaleId" Type="Int32" />
-          <Property Name="TransactionTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Sale" Relationship="POSModel.FK_ChargedPayRecord_ChargedPayRecord" FromRole="ChargedPayRecord" ToRole="Sale" />
-        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="Id" />
@@ -313,7 +302,6 @@
           <NavigationProperty Name="Sales" Relationship="POSModel.FK_Sale_Customer" FromRole="Customer" ToRole="Sale" />
         </EntityType>
         <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ChargedPayRecords" EntityType="Self.ChargedPayRecord" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Logins" EntityType="POSModel.Login" />
           <EntitySet Name="Suppliers" EntityType="POSModel.Supplier" />
@@ -322,10 +310,6 @@
           <EntitySet Name="SoldItems" EntityType="POSModel.SoldItem" />
           <EntitySet Name="Items" EntityType="POSModel.Item" />
           <EntitySet Name="Sales" EntityType="POSModel.Sale" />
-          <AssociationSet Name="FK_ChargedPayRecord_ChargedPayRecord" Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord">
-            <End Role="Sale" EntitySet="Sales" />
-            <End Role="ChargedPayRecord" EntitySet="ChargedPayRecords" />
-          </AssociationSet>
           <AssociationSet Name="FK_Sale_Customer" Association="POSModel.FK_Sale_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Sale" EntitySet="Sales" />
@@ -358,6 +342,11 @@
           <AssociationSet Name="FK_StockinHistory_Product" Association="POSModel.FK_StockinHistory_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="StockinHistory" EntitySet="StockinHistories" />
+          </AssociationSet>
+          <EntitySet Name="ChargedPayRecords" EntityType="POSModel.ChargedPayRecord" />
+          <AssociationSet Name="FK_ChargedPayRecord_ChargedPayRecord" Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="ChargedPayRecord" EntitySet="ChargedPayRecords" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Login">
@@ -452,25 +441,11 @@
           <Property Name="SaleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int32" />
           <Property Name="Discount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="ChargedPayRecords" Relationship="POSModel.FK_ChargedPayRecord_ChargedPayRecord" FromRole="Sale" ToRole="ChargedPayRecord" />
           <NavigationProperty Name="Customer" Relationship="POSModel.FK_Sale_Customer" FromRole="Sale" ToRole="Customer" />
           <NavigationProperty Name="Login" Relationship="POSModel.FK_Sale_Login" FromRole="Sale" ToRole="Login" />
           <NavigationProperty Name="SoldItems" Relationship="POSModel.FK_SoldItem_Sale" FromRole="Sale" ToRole="SoldItem" />
+          <NavigationProperty Name="ChargedPayRecords" Relationship="POSModel.FK_ChargedPayRecord_ChargedPayRecord" FromRole="Sale" ToRole="ChargedPayRecord" />
         </EntityType>
-        <Association Name="FK_ChargedPayRecord_ChargedPayRecord">
-          <End Type="POSModel.Sale" Role="Sale" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="POSModel.ChargedPayRecord" Role="ChargedPayRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sale">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ChargedPayRecord">
-              <PropertyRef Name="SaleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Sale_Customer">
           <End Type="POSModel.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="POSModel.Sale" Role="Sale" Multiplicity="*" />
@@ -591,23 +566,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ChargedPayRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AmountPayed" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SaleId" Type="Int32" />
+          <Property Name="TransactionTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Sale" Relationship="POSModel.FK_ChargedPayRecord_ChargedPayRecord" FromRole="ChargedPayRecord" ToRole="Sale" />
+        </EntityType>
+        <Association Name="FK_ChargedPayRecord_ChargedPayRecord">
+          <End Type="POSModel.Sale" Role="Sale" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="POSModel.ChargedPayRecord" Role="ChargedPayRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChargedPayRecord">
+              <PropertyRef Name="SaleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="POSModelStoreContainer" CdmEntityContainer="POSEntities">
-          <EntitySetMapping Name="ChargedPayRecords">
-            <EntityTypeMapping TypeName="POSModel.ChargedPayRecord">
-              <MappingFragment StoreEntitySet="ChargedPayRecord">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="AmountPayed" ColumnName="AmountPayed" />
-                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
-                <ScalarProperty Name="TransactionTime" ColumnName="TransactionTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="POSModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
@@ -717,6 +706,17 @@
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChargedPayRecords">
+            <EntityTypeMapping TypeName="POSModel.ChargedPayRecord">
+              <MappingFragment StoreEntitySet="ChargedPayRecord">
+                <ScalarProperty Name="TransactionTime" ColumnName="TransactionTime" />
+                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
+                <ScalarProperty Name="AmountPayed" ColumnName="AmountPayed" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -49,7 +49,7 @@
             this.total = new System.Windows.Forms.TextBox();
             this.amountRecieved = new System.Windows.Forms.TextBox();
             this.remaining = new System.Windows.Forms.TextBox();
-            this.recHistBtn = new System.Windows.Forms.Button();
+            this.paymentsBtn = new System.Windows.Forms.Button();
             this.soldBy = new System.Windows.Forms.TextBox();
             this.voidBtn = new System.Windows.Forms.Button();
             this.editItemsBtn = new System.Windows.Forms.Button();
@@ -249,18 +249,18 @@
             this.remaining.Text = "Lorem Ipsum";
             this.remaining.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // recHistBtn
+            // paymentsBtn
             // 
-            this.recHistBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.recHistBtn.Location = new System.Drawing.Point(468, 0);
-            this.recHistBtn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.recHistBtn.Name = "recHistBtn";
-            this.recHistBtn.Size = new System.Drawing.Size(150, 35);
-            this.recHistBtn.TabIndex = 16;
-            this.recHistBtn.Text = "Payments";
-            this.recHistBtn.UseVisualStyleBackColor = false;
-            this.recHistBtn.Click += new System.EventHandler(this.button1_Click);
+            this.paymentsBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.paymentsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.paymentsBtn.Location = new System.Drawing.Point(468, 0);
+            this.paymentsBtn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.paymentsBtn.Name = "paymentsBtn";
+            this.paymentsBtn.Size = new System.Drawing.Size(150, 35);
+            this.paymentsBtn.TabIndex = 16;
+            this.paymentsBtn.Text = "Payments";
+            this.paymentsBtn.UseVisualStyleBackColor = false;
+            this.paymentsBtn.Click += new System.EventHandler(this.OpenPayments_Click);
             // 
             // soldBy
             // 
@@ -293,7 +293,7 @@
             // 
             this.editItemsBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.editItemsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.editItemsBtn.Location = new System.Drawing.Point(156, 0);
+            this.editItemsBtn.Location = new System.Drawing.Point(312, 0);
             this.editItemsBtn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.editItemsBtn.Name = "editItemsBtn";
             this.editItemsBtn.Size = new System.Drawing.Size(150, 35);
@@ -307,7 +307,7 @@
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(312, 0);
+            this.button2.Location = new System.Drawing.Point(156, 0);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 35);
@@ -325,9 +325,9 @@
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.voidBtn);
-            this.flowLayoutPanel1.Controls.Add(this.editItemsBtn);
             this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.Controls.Add(this.recHistBtn);
+            this.flowLayoutPanel1.Controls.Add(this.editItemsBtn);
+            this.flowLayoutPanel1.Controls.Add(this.paymentsBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 506);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -547,7 +547,7 @@
             this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sale";
+            this.Text = "Sale Details";
             this.Load += new System.EventHandler(this.SaleDetails_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleDetails_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
@@ -574,7 +574,7 @@
         private System.Windows.Forms.TextBox total;
         private System.Windows.Forms.TextBox amountRecieved;
         private System.Windows.Forms.TextBox remaining;
-        private System.Windows.Forms.Button recHistBtn;
+        private System.Windows.Forms.Button paymentsBtn;
         private System.Windows.Forms.TextBox soldBy;
         private System.Windows.Forms.Button voidBtn;
         private System.Windows.Forms.Button editItemsBtn;

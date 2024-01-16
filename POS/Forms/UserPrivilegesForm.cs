@@ -1,135 +1,152 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace POS.Forms
-{
-    public partial class UserPrivilegesForm : Form
-    {
-        public UserPrivilegesForm()
-        {
+namespace POS.Forms {
+    public partial class UserPrivilegesForm : Form {
+        public UserPrivilegesForm() {
             InitializeComponent();
         }
 
-        private void UserPrivilegesForm_Load(object sender, EventArgs e)
-        {
-            using (var ent = new POSEntities())
-            {
-                searchText.AutoCompleteCustomSource.AddRange(ent.Logins.Where(x => x.Username != "admin").Select(y => y.Username).ToArray());
+        private async void UserPrivilegesForm_Load(object sender, EventArgs e) {
+            await LoadDataAsync();
+        }
 
-                fillTable(ent.Logins.Where(x => x.Username != "admin"));
+        string keyword = string.Empty;
+        async Task<bool> LoadDataAsync() {
+            bool resultsNotEmpty = false;
+            try {
+                using (var context = new POSEntities()) {
+                    var logins = context.Logins
+                        .AsNoTracking()
+                        .AsQueryable()
+                        .Where(x => x.Username != "admin");
+
+                    logins = string.IsNullOrWhiteSpace(keyword) ?
+                        logins :
+                        logins.Where(l => l.Username == keyword || l.Name.Contains(keyword));
+
+                    var result = await logins.OrderBy(o => o.Username).ToListAsync();
+                    resultsNotEmpty = result.Count > 0;
+
+                    if (resultsNotEmpty) {
+                        userTable.Rows.Clear();
+
+                        await Task.Run(() => {
+                            var rows = result.Select(CreateRow).ToArray();
+                            userTable.InvokeIfRequired(() => userTable.Rows.AddRange(rows));
+                        });
+                    }
+                }
             }
+            catch { }
+            return resultsNotEmpty;
         }
-        void fillTable(IQueryable<Login> logins)
-        {
-            userTable.Rows.Clear();
-            foreach (var i in logins)
-            {
-                userTable.Rows.Add(i.Id,
-                                   i.Username,
-                                   i.CanEditItem,
-                                   i.CanEditProduct,
-                                   i.CanEditInventory,
-                                   i.CanEditSupplier,
-                                   i.CanStockIn,
-                                   i.CanVoidSale,
-                                   "Remove");
-            }
-        }
-        private void userTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+
+        DataGridViewRow CreateRow(Login login) => userTable.CreateRow(
+            login.Id,
+            login.Username,
+            login.Name,
+            login.CanEditItem,
+            login.CanEditProduct,
+            login.CanEditInventory,
+            login.CanEditSupplier,
+            login.CanStockIn,
+            login.CanVoidSale
+            );
+
+        private async void userTable_CellContentClick(object sender, DataGridViewCellEventArgs e) {
             var table = sender as DataGridView;
             var id = (int)table.SelectedCells[0].Value;
-            if ((table.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewButtonCell))
-            {
-                if(MessageBox.Show("Are you sure you want to remove this User","", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)== DialogResult.Cancel)
-                {
+
+            if (e.ColumnIndex == Column3.Index) {
+                if (MessageBox.Show(
+                    "Are you sure you want to remove this User",
+                    "",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Warning) == DialogResult.Cancel)
                     return;
+
+                try {
+
+                    using (var context = new POSEntities()) {
+                        var u = await context.Logins.FirstOrDefaultAsync(x => x.Id == id);
+                        context.Logins.Remove(u);
+                        context.SaveChanges();
+
+                        table.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
+                catch {
+                    MessageBox.Show("This user has already made transaction and cannot be deleted.", "Delete Aborted", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }
 
-                using (var t = new POSEntities())
-                {
-                    var u = t.Logins.FirstOrDefault(x => x.Id == id);
-                    t.Logins.Remove(u);
-                    t.SaveChanges();
-
-                    table.Rows.RemoveAt(e.RowIndex);
-                }
                 return;
             }
 
-            if (!(table.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewCheckBoxCell))
-            {
-                return;
-            }
+            ///ensures that the editting is being done on checkbox only
+            if (!(table.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewCheckBoxCell)) return;
 
             var check = !(bool)table.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
-            using (var ent = new POSEntities())
-            {
-                var user = ent.Logins.FirstOrDefault(x => x.Id == id);
-
-                switch (e.ColumnIndex)
-                {
-                    case 2:
-                        //user.ItemPrevileges = check;
+            using (var context = new POSEntities()) {
+                var user = await context.Logins.FirstOrDefaultAsync(x => x.Id == id);
+                switch (e.ColumnIndex) {
+                    case 3:
                         user.CanEditItem = check;
                         break;
-
-                    case 3:
-                        //user.TransactionPrevileges = check;
+                    case 4:
                         user.CanEditProduct = check;
                         break;
-
-                    case 4:
-                        //user.LoginPrevileges = check;
+                    case 5:
                         user.CanEditInventory = check;
                         break;
-                    case 5:
+                    case 6:
                         user.CanEditSupplier = check;
                         break;
-                    case 6:
+                    case 7:
                         user.CanStockIn = check;
                         break;
-                    case 7:
+                    case 8:
                         user.CanVoidSale = check;
                         break;
                 }
-                ent.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
-        private void searchText_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (searchText.Text == string.Empty)
-                    return;
-                ///process search here
-                using (var p = new POSEntities())
-                {
-                    var logins = p.Logins.Where(x => x.Username.Contains(searchText.Text) && x.Username != "admin");
-                    fillTable(logins);
-                }
-            }
+        private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e) {
+            //e.SearchFound = true;
+            keyword = e.Text;
+            e.SearchFound = await LoadDataAsync();
         }
 
-        private void searchText_TextChanged(object sender, EventArgs e)
-        {
-            if(searchText.Text == string.Empty)
-            {
-                using (var p = new POSEntities())
-                {
-                    var logins = p.Logins.Where(x => x.Username != "admin");
-                    fillTable(logins);
-                }
-            }
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+            keyword = string.Empty;
+            await LoadDataAsync();
         }
+
+        //private void searchText_KeyDown(object sender, KeyEventArgs e) {
+        //    if (e.KeyCode == Keys.Enter) {
+        //        if (searchText.Text == string.Empty)
+        //            return;
+        //        ///process search here
+        //        using (var p = new POSEntities()) {
+        //            var logins = p.Logins.Where(x => x.Username.Contains(searchText.Text) && x.Username != "admin");
+        //            fillTable(logins);
+        //        }
+        //    }
+        //}
+
+        //private void searchText_TextChanged(object sender, EventArgs e) {
+        //    if (searchText.Text == string.Empty) {
+        //        using (var p = new POSEntities()) {
+        //            var logins = p.Logins.Where(x => x.Username != "admin");
+        //            fillTable(logins);
+        //        }
+        //    }
+        //}
     }
 }

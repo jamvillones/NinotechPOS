@@ -35,7 +35,7 @@ namespace POS {
                     var main = new Main();
                     Application.Run(main);
 
-                    signedOut = main.IsSigneout;
+                    signedOut = main.IsLoggedOut;
                     main.Dispose();
                 }
                 GC.Collect();

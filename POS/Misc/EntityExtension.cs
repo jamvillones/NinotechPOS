@@ -43,7 +43,16 @@ namespace POS {
     }
 
     partial class Supplier {
-        public override string ToString() => Name;
+        public override string ToString() => Name + (string.IsNullOrWhiteSpace(ContactDetails) ? "" : " - " + ContactDetails);
+    }
+
+    partial class Customer {
+        public override string ToString() => Name +
+            (string.IsNullOrWhiteSpace(ContactDetails) ? "" : " - " + ContactDetails) +
+            (string.IsNullOrWhiteSpace(Address) ? "" : " - " + Address);
+    }
+    partial class Login {
+        public override string ToString() => string.IsNullOrWhiteSpace(Name) ? Username : Name;
     }
 
     public static class EntityHelpers {

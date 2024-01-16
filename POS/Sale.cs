@@ -17,8 +17,8 @@ namespace POS
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sale()
         {
-            this.ChargedPayRecords = new HashSet<ChargedPayRecord>();
             this.SoldItems = new HashSet<SoldItem>();
+            this.ChargedPayRecords = new HashSet<ChargedPayRecord>();
         }
     
         public int Id { get; set; }
@@ -29,11 +29,11 @@ namespace POS
         public Nullable<int> UserId { get; set; }
         public decimal Discount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChargedPayRecord> ChargedPayRecords { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Login Login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SoldItem> SoldItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChargedPayRecord> ChargedPayRecords { get; set; }
     }
 }

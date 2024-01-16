@@ -39,12 +39,12 @@
             this.userButton = new System.Windows.Forms.Button();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.loginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginPrivilegesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewLoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editLoginDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNewLoginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loginPrivilegesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editLoginDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
@@ -77,11 +77,11 @@
             // 
             // marker
             // 
-            this.marker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(31)))), ((int)(((byte)(148)))));
-            this.marker.Location = new System.Drawing.Point(112, 20);
+            this.marker.BackColor = System.Drawing.Color.Black;
+            this.marker.Location = new System.Drawing.Point(2, 10);
             this.marker.Name = "marker";
             this.marker.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.marker.Size = new System.Drawing.Size(5, 60);
+            this.marker.Size = new System.Drawing.Size(5, 80);
             this.marker.TabIndex = 5;
             // 
             // button2
@@ -129,11 +129,13 @@
             this.repBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.repBtn.FlatAppearance.BorderSize = 0;
             this.repBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.repBtn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.repBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(39)))), ((int)(((byte)(70)))));
             this.repBtn.Image = ((System.Drawing.Image)(resources.GetObject("repBtn.Image")));
             this.repBtn.Location = new System.Drawing.Point(0, 100);
             this.repBtn.Margin = new System.Windows.Forms.Padding(0);
             this.repBtn.Name = "repBtn";
+            this.repBtn.Padding = new System.Windows.Forms.Padding(10);
             this.repBtn.Size = new System.Drawing.Size(120, 100);
             this.repBtn.TabIndex = 2;
             this.repBtn.TabStop = false;
@@ -148,11 +150,13 @@
             this.inventoryBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.inventoryBtn.FlatAppearance.BorderSize = 0;
             this.inventoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.inventoryBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(39)))), ((int)(((byte)(70)))));
+            this.inventoryBtn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inventoryBtn.ForeColor = System.Drawing.Color.Black;
             this.inventoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("inventoryBtn.Image")));
             this.inventoryBtn.Location = new System.Drawing.Point(0, 0);
             this.inventoryBtn.Margin = new System.Windows.Forms.Padding(0);
             this.inventoryBtn.Name = "inventoryBtn";
+            this.inventoryBtn.Padding = new System.Windows.Forms.Padding(10);
             this.inventoryBtn.Size = new System.Drawing.Size(120, 100);
             this.inventoryBtn.TabIndex = 1;
             this.inventoryBtn.TabStop = false;
@@ -218,11 +222,46 @@
             this.toolStripDropDownButton2.Size = new System.Drawing.Size(60, 22);
             this.toolStripDropDownButton2.Text = "Edit";
             // 
+            // loginsToolStripMenuItem
+            // 
+            this.loginsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loginPrivilegesToolStripMenuItem,
+            this.addNewLoginToolStripMenuItem,
+            this.editLoginDetailsToolStripMenuItem});
+            this.loginsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("loginsToolStripMenuItem.Image")));
+            this.loginsToolStripMenuItem.Name = "loginsToolStripMenuItem";
+            this.loginsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.loginsToolStripMenuItem.Text = "Logins";
+            // 
+            // loginPrivilegesToolStripMenuItem
+            // 
+            this.loginPrivilegesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("loginPrivilegesToolStripMenuItem.Image")));
+            this.loginPrivilegesToolStripMenuItem.Name = "loginPrivilegesToolStripMenuItem";
+            this.loginPrivilegesToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.loginPrivilegesToolStripMenuItem.Text = "Login Privileges";
+            this.loginPrivilegesToolStripMenuItem.Click += new System.EventHandler(this.loginPrivilegesToolStripMenuItem_Click);
+            // 
+            // addNewLoginToolStripMenuItem
+            // 
+            this.addNewLoginToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewLoginToolStripMenuItem.Image")));
+            this.addNewLoginToolStripMenuItem.Name = "addNewLoginToolStripMenuItem";
+            this.addNewLoginToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.addNewLoginToolStripMenuItem.Text = "Add New Login";
+            this.addNewLoginToolStripMenuItem.Click += new System.EventHandler(this.addNewLoginToolStripMenuItem_Click);
+            // 
+            // editLoginDetailsToolStripMenuItem
+            // 
+            this.editLoginDetailsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editLoginDetailsToolStripMenuItem.Image")));
+            this.editLoginDetailsToolStripMenuItem.Name = "editLoginDetailsToolStripMenuItem";
+            this.editLoginDetailsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.editLoginDetailsToolStripMenuItem.Text = "Edit Login Details";
+            this.editLoginDetailsToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
+            // 
             // customersToolStripMenuItem
             // 
             this.customersToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("customersToolStripMenuItem.Image")));
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
-            this.customersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.customersToolStripMenuItem.Text = "Customers";
             this.customersToolStripMenuItem.Click += new System.EventHandler(this.createCustomer_Click);
             // 
@@ -232,44 +271,9 @@
             this.suppliersToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("suppliersToolStripMenuItem.Image")));
             this.suppliersToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
-            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.suppliersToolStripMenuItem.Text = "Suppliers";
             this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.openSupplier_Click);
-            // 
-            // loginsToolStripMenuItem
-            // 
-            this.loginsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewLoginToolStripMenuItem,
-            this.loginPrivilegesToolStripMenuItem,
-            this.editLoginDetailsToolStripMenuItem});
-            this.loginsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("loginsToolStripMenuItem.Image")));
-            this.loginsToolStripMenuItem.Name = "loginsToolStripMenuItem";
-            this.loginsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loginsToolStripMenuItem.Text = "Logins";
-            // 
-            // addNewLoginToolStripMenuItem
-            // 
-            this.addNewLoginToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewLoginToolStripMenuItem.Image")));
-            this.addNewLoginToolStripMenuItem.Name = "addNewLoginToolStripMenuItem";
-            this.addNewLoginToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addNewLoginToolStripMenuItem.Text = "Add New Login";
-            this.addNewLoginToolStripMenuItem.Click += new System.EventHandler(this.addNewLoginToolStripMenuItem_Click);
-            // 
-            // loginPrivilegesToolStripMenuItem
-            // 
-            this.loginPrivilegesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("loginPrivilegesToolStripMenuItem.Image")));
-            this.loginPrivilegesToolStripMenuItem.Name = "loginPrivilegesToolStripMenuItem";
-            this.loginPrivilegesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loginPrivilegesToolStripMenuItem.Text = "Login Privileges";
-            this.loginPrivilegesToolStripMenuItem.Click += new System.EventHandler(this.loginPrivilegesToolStripMenuItem_Click);
-            // 
-            // editLoginDetailsToolStripMenuItem
-            // 
-            this.editLoginDetailsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editLoginDetailsToolStripMenuItem.Image")));
-            this.editLoginDetailsToolStripMenuItem.Name = "editLoginDetailsToolStripMenuItem";
-            this.editLoginDetailsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.editLoginDetailsToolStripMenuItem.Text = "Edit Login Details";
-            this.editLoginDetailsToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
             // 
             // toolStripButton1
             // 
@@ -400,11 +404,11 @@
         private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loginsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addNewLoginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loginPrivilegesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editLoginDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.Panel marker;
+        private System.Windows.Forms.ToolStripMenuItem addNewLoginToolStripMenuItem;
     }
 }
 

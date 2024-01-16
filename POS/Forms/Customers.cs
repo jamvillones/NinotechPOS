@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace POS.Forms {
     public partial class Customers : Form {
-        public event EventHandler OnSave;
+        //public event EventHandler OnSave;
         public Customers() {
             InitializeComponent();
         }

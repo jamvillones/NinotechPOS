@@ -57,11 +57,12 @@
             this.supplierTable.BackgroundColor = System.Drawing.Color.White;
             this.supplierTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.supplierTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.supplierTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.supplierTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
@@ -119,7 +120,7 @@
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.Column4.HeaderText = "";
             this.Column4.Name = "Column4";
-            this.Column4.Width = 13;
+            this.Column4.Width = 12;
             // 
             // panel1
             // 
@@ -163,6 +164,7 @@
             this.searchControl1.MaximumSize = new System.Drawing.Size(350, 35);
             this.searchControl1.MinimumSize = new System.Drawing.Size(350, 35);
             this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
             this.searchControl1.SearchedText = "";
             this.searchControl1.Size = new System.Drawing.Size(350, 35);
             this.searchControl1.TabIndex = 0;

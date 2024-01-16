@@ -27,7 +27,7 @@ namespace POS.Forms {
                 var item = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
 
                 var invItems = await context.InventoryItems.AsNoTracking().AsQueryable().Where(x => x.Product.Item.Id == _id).ToListAsync();
-                this.Text = this.Text + " - " + item.Name + " ( " + invItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0") + "units )";
+                this.Text = this.Text + " - " + item.Name + " ( " + invItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0") + " units )";
                 await Task.Run(() => {
                     foreach (var inv in invItems)
                         invTable.InvokeIfRequired(() => invTable.Rows.Add(CreateRow(inv)));
