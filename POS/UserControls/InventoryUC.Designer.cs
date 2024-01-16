@@ -31,13 +31,20 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
             this.tablePanel = new System.Windows.Forms.Panel();
             this.itemsTable = new System.Windows.Forms.DataGridView();
+            this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.barcodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.viewStockBtn = new System.Windows.Forms.Button();
             this.stockinBtn = new System.Windows.Forms.Button();
@@ -57,13 +64,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.totalPriceTxt = new System.Windows.Forms.Label();
             this.loadingLabelItem = new System.Windows.Forms.Label();
-            this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.barcodeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.searchControl1 = new POS.UserControls.SearchControl();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
@@ -92,7 +92,7 @@
             this.itemsTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.itemsTable.BackgroundColor = System.Drawing.Color.White;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -138,6 +138,71 @@
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             this.itemsTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.itemsTable_UserDeletingRow);
+            // 
+            // col_Id
+            // 
+            this.col_Id.HeaderText = "ID";
+            this.col_Id.Name = "col_Id";
+            this.col_Id.ReadOnly = true;
+            this.col_Id.Visible = false;
+            // 
+            // barcodeCol
+            // 
+            this.barcodeCol.HeaderText = "BARCODE";
+            this.barcodeCol.MinimumWidth = 50;
+            this.barcodeCol.Name = "barcodeCol";
+            this.barcodeCol.ReadOnly = true;
+            // 
+            // nameCol
+            // 
+            this.nameCol.HeaderText = "NAME";
+            this.nameCol.MinimumWidth = 100;
+            this.nameCol.Name = "nameCol";
+            this.nameCol.ReadOnly = true;
+            // 
+            // quantityCol
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = "---";
+            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle2;
+            this.quantityCol.HeaderText = "QUANTITY";
+            this.quantityCol.MinimumWidth = 50;
+            this.quantityCol.Name = "quantityCol";
+            this.quantityCol.ReadOnly = true;
+            // 
+            // priceCol
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "C2";
+            this.priceCol.DefaultCellStyle = dataGridViewCellStyle3;
+            this.priceCol.HeaderText = "PRICE";
+            this.priceCol.MinimumWidth = 50;
+            this.priceCol.Name = "priceCol";
+            this.priceCol.ReadOnly = true;
+            // 
+            // typeCol
+            // 
+            this.typeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.typeCol.DefaultCellStyle = dataGridViewCellStyle4;
+            this.typeCol.HeaderText = "TYPE";
+            this.typeCol.Name = "typeCol";
+            this.typeCol.ReadOnly = true;
+            // 
+            // col_remove
+            // 
+            this.col_remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(1);
+            this.col_remove.DefaultCellStyle = dataGridViewCellStyle5;
+            this.col_remove.HeaderText = "";
+            this.col_remove.Name = "col_remove";
+            this.col_remove.ReadOnly = true;
+            this.col_remove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_remove.Text = "Remove";
+            this.col_remove.UseColumnTextForButtonValue = true;
+            this.col_remove.Width = 12;
             // 
             // button1
             // 
@@ -409,71 +474,6 @@
             this.loadingLabelItem.TabIndex = 19;
             this.loadingLabelItem.Text = "Loading...";
             this.loadingLabelItem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // col_Id
-            // 
-            this.col_Id.HeaderText = "ID";
-            this.col_Id.Name = "col_Id";
-            this.col_Id.ReadOnly = true;
-            this.col_Id.Visible = false;
-            // 
-            // barcodeCol
-            // 
-            this.barcodeCol.HeaderText = "BARCODE";
-            this.barcodeCol.MinimumWidth = 50;
-            this.barcodeCol.Name = "barcodeCol";
-            this.barcodeCol.ReadOnly = true;
-            // 
-            // nameCol
-            // 
-            this.nameCol.HeaderText = "NAME";
-            this.nameCol.MinimumWidth = 100;
-            this.nameCol.Name = "nameCol";
-            this.nameCol.ReadOnly = true;
-            // 
-            // quantityCol
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = "---";
-            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle2;
-            this.quantityCol.HeaderText = "QUANTITY";
-            this.quantityCol.MinimumWidth = 50;
-            this.quantityCol.Name = "quantityCol";
-            this.quantityCol.ReadOnly = true;
-            // 
-            // priceCol
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "C2";
-            this.priceCol.DefaultCellStyle = dataGridViewCellStyle3;
-            this.priceCol.HeaderText = "PRICE";
-            this.priceCol.MinimumWidth = 50;
-            this.priceCol.Name = "priceCol";
-            this.priceCol.ReadOnly = true;
-            // 
-            // typeCol
-            // 
-            this.typeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.typeCol.DefaultCellStyle = dataGridViewCellStyle4;
-            this.typeCol.HeaderText = "TYPE";
-            this.typeCol.Name = "typeCol";
-            this.typeCol.ReadOnly = true;
-            // 
-            // col_remove
-            // 
-            this.col_remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(1);
-            this.col_remove.DefaultCellStyle = dataGridViewCellStyle5;
-            this.col_remove.HeaderText = "";
-            this.col_remove.Name = "col_remove";
-            this.col_remove.ReadOnly = true;
-            this.col_remove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_remove.Text = "Remove";
-            this.col_remove.UseColumnTextForButtonValue = true;
-            this.col_remove.Width = 12;
             // 
             // searchControl1
             // 
