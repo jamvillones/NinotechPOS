@@ -24,10 +24,9 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 currentSale = p.Sales.FirstOrDefault(x => x.Id == id);
-                paymentNum.Maximum = currentSale.Remaining;
 
                 Text = Text + " - " + currentSale.Customer.Name;
-                total.Text = currentSale.Remaining.ToString("C2");
+                PostProcess(currentSale);
 
                 table.Rows.Clear();
                 var ts = p.ChargedPayRecords.Where(x => x.SaleId == currentSale.Id);
@@ -36,11 +35,18 @@ namespace POS.Forms
             }
         }
 
+        void PostProcess(Sale sale)
+        {
+            total.Text = sale.Remaining.ToString("C2");
+            flowLayoutPanel1.Visible = sale.Remaining > 0;
+            paymentNum.Maximum = sale.Remaining;
+        }
+
         DataGridViewRow CreateRow(ChargedPayRecord record) => table.CreateRow(
             record.Username,
             record.AmountPayed,
             record.TransactionTime.Value
-            );       
+            );
 
         private async void recHistBtn_Click(object sender, EventArgs e)
         {
@@ -65,13 +71,19 @@ namespace POS.Forms
                 var result = context.ChargedPayRecords.Add(transaction);
                 await context.SaveChangesAsync();
 
-                MessageBox.Show(sale.AmountRecieved < sale.Total ? "Payment added." : "Amount fully Paid.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 table.Rows.Add(CreateRow(result));
+
                 paymentNum.Value = 0;
-                paymentNum.Maximum = sale.Remaining;
-                total.Text = sale.Remaining.ToString("C2");
+                PostProcess(sale);
+
+                MessageBox.Show(sale.AmountRecieved < sale.Total ? "Payment added." : "Amount fully Paid.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void paymentNum_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                addPaymentBtn.PerformClick();
         }
     }
 }
