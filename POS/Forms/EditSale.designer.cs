@@ -41,7 +41,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,7 +49,7 @@
             this.col_Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.col_Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +57,6 @@
             // itemsTable
             // 
             this.itemsTable.AllowUserToAddRows = false;
-            this.itemsTable.AllowUserToDeleteRows = false;
             this.itemsTable.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -87,7 +85,7 @@
             this.col_Price,
             this.col_Discount,
             this.col_Total,
-            this.Column9});
+            this.col_Remove});
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -100,13 +98,13 @@
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.DarkGray;
-            this.itemsTable.Location = new System.Drawing.Point(20, 33);
+            this.itemsTable.Location = new System.Drawing.Point(20, 20);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(844, 463);
+            this.itemsTable.Size = new System.Drawing.Size(844, 476);
             this.itemsTable.TabIndex = 1;
             this.itemsTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.itemsTable_CellBeginEdit);
             this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
@@ -148,17 +146,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(844, 10);
             this.panel1.TabIndex = 22;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(20, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Sold Items";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // col_Id
             // 
@@ -224,15 +211,15 @@
             this.col_Total.HeaderText = "TOTAL";
             this.col_Total.Name = "col_Total";
             // 
-            // Column9
+            // col_Remove
             // 
-            this.Column9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column9.HeaderText = "";
-            this.Column9.MinimumWidth = 10;
-            this.Column9.Name = "Column9";
-            this.Column9.Text = "Return";
-            this.Column9.UseColumnTextForButtonValue = true;
-            this.Column9.Width = 10;
+            this.col_Remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_Remove.HeaderText = "";
+            this.col_Remove.MinimumWidth = 10;
+            this.col_Remove.Name = "col_Remove";
+            this.col_Remove.Text = "Return";
+            this.col_Remove.UseColumnTextForButtonValue = true;
+            this.col_Remove.Width = 10;
             // 
             // EditSale
             // 
@@ -240,7 +227,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 561);
             this.Controls.Add(this.itemsTable);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -249,7 +235,8 @@
             this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sale";
+            this.Text = "Edit Sold Item For";
+            this.Load += new System.EventHandler(this.EditSale_Load);
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -262,7 +249,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Serial;
@@ -271,6 +257,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Price;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Discount;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Total;
-        private System.Windows.Forms.DataGridViewButtonColumn Column9;
+        private System.Windows.Forms.DataGridViewButtonColumn col_Remove;
     }
 }

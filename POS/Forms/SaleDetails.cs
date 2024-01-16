@@ -217,6 +217,7 @@ namespace POS.Forms {
                 .AsNoTracking()
                 .AsQueryable()
                 .Where(so => so.SaleId == _saleId)
+                .OrderBy(o => o.Product.Item.Name)
                 .ToListAsync();
         }
 

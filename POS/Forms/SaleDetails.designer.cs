@@ -134,7 +134,7 @@
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.itemsTable.Size = new System.Drawing.Size(844, 353);
+            this.itemsTable.Size = new System.Drawing.Size(944, 403);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
             // 
@@ -329,9 +329,9 @@
             this.flowLayoutPanel1.Controls.Add(this.editItemsBtn);
             this.flowLayoutPanel1.Controls.Add(this.paymentsBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 506);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 556);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(844, 35);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(944, 35);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // panel1
@@ -400,7 +400,7 @@
             this.panel5.Controls.Add(this.amountRecieved);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.panel6);
-            this.panel5.Location = new System.Drawing.Point(664, 23);
+            this.panel5.Location = new System.Drawing.Point(764, 23);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(200, 29);
             this.panel5.TabIndex = 21;
@@ -433,7 +433,7 @@
             this.remainGroup.Controls.Add(this.remaining);
             this.remainGroup.Controls.Add(this.label5);
             this.remainGroup.Controls.Add(this.panel8);
-            this.remainGroup.Location = new System.Drawing.Point(664, 93);
+            this.remainGroup.Location = new System.Drawing.Point(764, 93);
             this.remainGroup.Name = "remainGroup";
             this.remainGroup.Size = new System.Drawing.Size(200, 29);
             this.remainGroup.TabIndex = 22;
@@ -466,7 +466,7 @@
             this.panel9.Controls.Add(this.total);
             this.panel9.Controls.Add(this.label6);
             this.panel9.Controls.Add(this.panel10);
-            this.panel9.Location = new System.Drawing.Point(664, 58);
+            this.panel9.Location = new System.Drawing.Point(764, 58);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(200, 29);
             this.panel9.TabIndex = 22;
@@ -499,7 +499,7 @@
             this.panel7.Controls.Add(this.itemsTable);
             this.panel7.Location = new System.Drawing.Point(20, 147);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(844, 353);
+            this.panel7.Size = new System.Drawing.Size(944, 403);
             this.panel7.TabIndex = 22;
             // 
             // searchControl1
@@ -530,7 +530,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 561);
+            this.ClientSize = new System.Drawing.Size(984, 611);
             this.Controls.Add(this._messageLabel);
             this.Controls.Add(this.searchControl1);
             this.Controls.Add(this.panel1);
@@ -542,7 +542,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(500, 500);
+            this.MinimumSize = new System.Drawing.Size(730, 600);
             this.Name = "SaleDetails";
             this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;

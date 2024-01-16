@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS.Forms {
@@ -12,11 +14,12 @@ namespace POS.Forms {
 
         public event EventHandler OnSave;
         Sale Sale { get; set; }
-
+        int _saleId = 0;
         public EditSale(int id) {
+            _saleId = id;
             InitializeComponent();
             InitBindings();
-            Initialize(id);
+            //Initialize(id);
         }
 
         private class SoldItemViewModel {
@@ -50,25 +53,26 @@ namespace POS.Forms {
             col_Discount.DataPropertyName = nameof(SoldItemViewModel.Discount);
             col_Total.DataPropertyName = nameof(SoldItemViewModel.Total);
             col_Supplier.DataPropertyName = nameof(SoldItemViewModel.SupplierName);
+
+            itemsTable.DataSource = SoldItems;
         }
         /// <summary>
         /// initializes the values
         /// </summary>
         /// <param name="id"></param>
-        private void Initialize(int id) {
+        private async Task Initialize(int id) {
             using (var p = new POSEntities()) {
-                Sale = p.Sales.FirstOrDefault(x => x.Id == id);
+                Sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == id);
 
                 this.Text = this.Text + " - " + id;
 
-                SoldItems = new BindingList<SoldItemViewModel>(
-                    Sale.SoldItems
+                var items = Sale.SoldItems
                     .OrderBy(x => x.Product.Item.Name)
                     .Select(s => new SoldItemViewModel(s))
-                    .ToArray());
+                    .ToArray();
 
-                itemsTable.DataSource = SoldItems;
-
+                foreach (var i in items)
+                    SoldItems.Add(i);
             }
         }
 
@@ -136,16 +140,15 @@ namespace POS.Forms {
         }
 
         private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            if (e.ColumnIndex != 8) {
-                return;
-            }
+            if (e.ColumnIndex != col_Remove.Index) return;
 
-            if (MessageBox.Show("Are you sure you want to remove this item in this sale?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel) {
-                return;
-            }
+            if (MessageBox.Show(
+                "Are you sure you want to remove this item in this sale?",
+                "", MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning) == DialogResult.Cancel) return;
+
             var table = sender as DataGridView;
             using (var p = new POSEntities()) {
-                //var id = (int)(table.Rows[e.RowIndex].Cells[0].Value);
                 var id = ((SoldItemViewModel)table.Rows[e.RowIndex].DataBoundItem).Id;
                 var soldItem = p.SoldItems.FirstOrDefault(x => x.Id == id);
 
@@ -173,7 +176,8 @@ namespace POS.Forms {
                 p.SoldItems.Remove(soldItem);
                 p.SaveChanges();
             }
-            table.Rows.RemoveAt(e.RowIndex);
+
+            SoldItems.RemoveAt(e.RowIndex);
             MessageBox.Show("Entry Removed");
         }
 
@@ -304,6 +308,10 @@ namespace POS.Forms {
                         MessageBox.Show("Discount must be less than or equal to price and cannot be Negative.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private async void EditSale_Load(object sender, EventArgs e) {
+            await Initialize(_saleId);
         }
     }
 }
