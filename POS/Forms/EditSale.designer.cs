@@ -38,9 +38,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditSale));
             this.itemsTable = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +47,10 @@
             this.col_Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Remove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -91,7 +92,7 @@
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle8;
@@ -113,40 +114,6 @@
             this.itemsTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.itemsTable_DataError);
             this.itemsTable.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.itemsTable_RowsAdded);
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(694, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.MaximumSize = new System.Drawing.Size(300, 35);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 35);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Add Sold Item";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 506);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(844, 35);
-            this.flowLayoutPanel1.TabIndex = 21;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(20, 496);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(844, 10);
-            this.panel1.TabIndex = 22;
-            // 
             // col_Id
             // 
             this.col_Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -154,7 +121,6 @@
             this.col_Id.HeaderText = "Id";
             this.col_Id.Name = "col_Id";
             this.col_Id.Visible = false;
-            this.col_Id.Width = 26;
             // 
             // col_Name
             // 
@@ -221,6 +187,54 @@
             this.col_Remove.UseColumnTextForButtonValue = true;
             this.col_Remove.Width = 10;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(694, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.MaximumSize = new System.Drawing.Size(300, 35);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(150, 35);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Add Sold Item";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 506);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(844, 35);
+            this.flowLayoutPanel1.TabIndex = 21;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(20, 496);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(844, 10);
+            this.panel1.TabIndex = 22;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Location = new System.Drawing.Point(524, 0);
+            this.button2.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
+            this.button2.MaximumSize = new System.Drawing.Size(300, 35);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(150, 35);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Save Changes";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
             // EditSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,7 +249,7 @@
             this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edit Sold Item For";
+            this.Text = "Edit Sold Items For";
             this.Load += new System.EventHandler(this.EditSale_Load);
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -258,5 +272,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Discount;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Total;
         private System.Windows.Forms.DataGridViewButtonColumn col_Remove;
+        private System.Windows.Forms.Button button2;
     }
 }

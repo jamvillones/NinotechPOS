@@ -50,10 +50,10 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tabHoldersPanel = new System.Windows.Forms.Panel();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.inventoryTab = new POS.UserControls.InventoryUC();
             this.reportTab = new POS.UserControls.ReportUC();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.sideButtonsPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.tabHoldersPanel.SuspendLayout();
@@ -78,10 +78,10 @@
             // marker
             // 
             this.marker.BackColor = System.Drawing.Color.Black;
-            this.marker.Location = new System.Drawing.Point(2, 10);
+            this.marker.Location = new System.Drawing.Point(0, 0);
             this.marker.Name = "marker";
             this.marker.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.marker.Size = new System.Drawing.Size(5, 80);
+            this.marker.Size = new System.Drawing.Size(10, 100);
             this.marker.TabIndex = 5;
             // 
             // button2
@@ -331,11 +331,6 @@
             this.tabHoldersPanel.Size = new System.Drawing.Size(864, 566);
             this.tabHoldersPanel.TabIndex = 3;
             // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
-            // 
             // inventoryTab
             // 
             this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -352,6 +347,11 @@
             this.reportTab.Size = new System.Drawing.Size(824, 546);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
             // 
             // Main
             // 

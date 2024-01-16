@@ -12,10 +12,13 @@ using POS.Forms;
 using POS.Interfaces;
 using POS.Misc;
 
-namespace POS {
-    public partial class Main : Form, IMainWindow {
+namespace POS
+{
+    public partial class Main : Form, IMainWindow
+    {
 
-        public Main() {
+        public Main()
+        {
             InitializeComponent();
 
             prevButton = inventoryBtn;
@@ -25,7 +28,8 @@ namespace POS {
         /// <summary>
         /// this handles the properties of buttons depending on login
         /// </summary>
-        private void LoadProperties() {
+        private void LoadProperties()
+        {
             var currentLogin = CurrentLogin;
 
             userButton.Text = currentLogin.ToString();
@@ -35,7 +39,8 @@ namespace POS {
             addNewLoginToolStripMenuItem.Enabled = isAdmin;
         }
 
-        private async void Main_Load(object sender, EventArgs e) {
+        private async void Main_Load(object sender, EventArgs e)
+        {
             SetButtonChangeMechansim(inventoryBtn, repBtn);
             LoadProperties();
 
@@ -47,19 +52,21 @@ namespace POS {
             Console.WriteLine("======================* Load Finished *======================");
         }
 
-        void SetButtonChangeMechansim(params Button[] buttons) {
+        void SetButtonChangeMechansim(params Button[] buttons)
+        {
             foreach (var i in buttons)
                 i.InvokeIfRequired(() => { i.Click += ButtonChangedMechanism_Calbback; });
         }
 
-        private void ButtonChangedMechanism_Calbback(object sender, EventArgs e) {
+        private void ButtonChangedMechanism_Calbback(object sender, EventArgs e)
+        {
             prevButton.BackColor = normalButtonColor;
 
             var button = sender as Button;
 
             button.BackColor = selectedButtonColor;
             prevButton = button;
-            marker.Top = button.Top + 10;
+            marker.Top = button.Top;
         }
 
         Button prevButton;
@@ -69,18 +76,22 @@ namespace POS {
         Color normalButtonColor =
             Color.Transparent;
 
-        private void inventoryBtn_Click(object sender, EventArgs e) {
+        private void inventoryBtn_Click(object sender, EventArgs e)
+        {
             inventoryTab.BringToFront();
         }
 
-        private void repBtn_Click(object sender, EventArgs e) {
+        private void repBtn_Click(object sender, EventArgs e)
+        {
             reportTab.BringToFront();
         }
-        private void Form1_KeyDown(object sender, KeyEventArgs e) {
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
 
         }
 
-        private void userButton_Click(object sender, EventArgs e) {
+        private void userButton_Click(object sender, EventArgs e)
+        {
             if (MessageBox.Show("Are you sure you want to log off?",
                 "",
                 MessageBoxButtons.OKCancel,
@@ -93,39 +104,51 @@ namespace POS {
         public bool IsLoggedOut { get; private set; } = false;
 
         #region toolstrips
-        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             OpenDialog<ChangePass>((x) => { x.SetUser(UserManager.instance.currentLogin.Username); });
         }
-        private void addNewLoginToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void addNewLoginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             OpenDialog<CreateLogin>();
         }
-        private void loginPrivilegesToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void loginPrivilegesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             OpenDialog<UserPrivilegesForm>();
         }
 
-        private void openSupplier_Click(object sender, EventArgs e) {
+        private void openSupplier_Click(object sender, EventArgs e)
+        {
             OpenDialog<Suppliers>();
         }
-        private void createCustomer_Click(object sender, EventArgs e) {
+        private void createCustomer_Click(object sender, EventArgs e)
+        {
             OpenDialog<Customers>();
         }
-        private void stockinLog_Click(object sender, EventArgs e) {
+        private void stockinLog_Click(object sender, EventArgs e)
+        {
             OpenDialog<StockinLog>();
         }
-        private void printInventory_Click(object sender, EventArgs e) {
+        private void printInventory_Click(object sender, EventArgs e)
+        {
             OpenDialog<PrintInventory>();
         }
-        private void receiptConfig_Click(object sender, EventArgs e) {
+        private void receiptConfig_Click(object sender, EventArgs e)
+        {
             OpenDialog<RecieptPrintingConfigurations>();
         }
 
-        void OpenDialog<T>() where T : Form, new() {
-            using (T f = new T()) {
+        void OpenDialog<T>() where T : Form, new()
+        {
+            using (T f = new T())
+            {
                 f.ShowDialog();
             }
         }
-        void OpenDialog<T>(Action<T> action) where T : Form, new() {
-            using (T f = new T()) {
+        void OpenDialog<T>(Action<T> action) where T : Form, new()
+        {
+            using (T f = new T())
+            {
                 action(f);
                 f.ShowDialog();
             }
@@ -134,23 +157,29 @@ namespace POS {
 
         Login CurrentLogin => UserManager.instance.currentLogin;
 
-        private void Main_FormClosing(object sender, FormClosingEventArgs e) {
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
             if (!IsLoggedOut)
-                if (MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
+                if (MessageBox.Show("Are you sure you want to quit?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+                {
                     e.Cancel = true;
                     return;
                 }
 
             CancelLoadings(inventoryTab);
         }
-        void CancelLoadings(params ITab[] tabs) {
+        void CancelLoadings(params ITab[] tabs)
+        {
             foreach (var i in tabs)
                 i.CancelLoading();
         }
 
-        private void toolStripButton4_Click(object sender, EventArgs e) {
-            using (var shiftSum = new ShiftSummaryForm()) {
-                if (shiftSum.ShowDialog() == DialogResult.OK) {
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            using (var shiftSum = new ShiftSummaryForm())
+            {
+                if (shiftSum.ShowDialog() == DialogResult.OK)
+                {
 
                 }
             }
@@ -159,7 +188,8 @@ namespace POS {
         int showedWidth = 120;
         int collapsedWidth = 10;
 
-        private void sideButtonsPanel_DoubleClick(object sender, EventArgs e) {
+        private void sideButtonsPanel_DoubleClick(object sender, EventArgs e)
+        {
             var s = sender as Panel;
 
             s.Width = s.Width == showedWidth ? collapsedWidth : showedWidth;
