@@ -242,6 +242,16 @@ namespace POS.Forms.ItemRegistration
             }
         }
 
+        private void _type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool isQuantifyable = _type.Text == ItemType.Quantifiable.ToString();
+            if (!isQuantifyable)
+            {
+                checkBox1.Checked = false;
+            }
+            checkBox1.Enabled = isQuantifyable;
+        }
+
 
 
 
