@@ -1,28 +1,39 @@
 ﻿using POS.Misc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace POS {
-    partial class Item {
-        public int QuantityInInventory => this.Products.Select(a => a.InventoryItems.Select(b => b.Quantity).DefaultIfEmpty(0).Sum()).Sum();
-        public bool InCriticalQuantity {
-            get {
-                if (this.Type != ItemType.Quantifiable.ToString() || this.CriticalQuantity == null) return false;
+namespace POS
+{
+    partial class Item
+    {
+        public int QuantityInInventory => this.Products
+            .Select(a => a.InventoryItems
+                .Select(b => b.Quantity)
+                .DefaultIfEmpty(0)
+                .Sum())
+            .Sum();
 
-                var q = this.QuantityInInventory;
+        public bool InCriticalQuantity
+        {
+            get
+            {
+                if (!IsFinite || this.CriticalQuantity == null) return false;
 
-                if (q == 0)
+                var totalQty = this.QuantityInInventory;
+
+                if (totalQty == 0)
                     return false;
 
-                return (q <= this.CriticalQuantity);
+                return (totalQty <= this.CriticalQuantity);
             }
         }
+
+        public bool IsFinite => /*Type.Equals(ItemType.Quantifiable.ToString(), StringComparison.OrdinalIgnoreCase);*/
+            this.Type == ItemType.Quantifiable.ToString();
     }
 
-    partial class Sale {
+    partial class Sale
+    {
         /// <summary>
         /// grand total of the sale
         /// </summary>
@@ -42,22 +53,33 @@ namespace POS {
         public bool FullyPaid => Remaining == 0;
     }
 
-    partial class Supplier {
+    partial class Supplier
+    {
         public override string ToString() => Name + (string.IsNullOrWhiteSpace(ContactDetails) ? "" : " - " + ContactDetails);
     }
 
-    partial class Customer {
+    partial class Customer
+    {
         public override string ToString() => Name +
             (string.IsNullOrWhiteSpace(ContactDetails) ? "" : " - " + ContactDetails) +
             (string.IsNullOrWhiteSpace(Address) ? "" : " - " + Address);
     }
-    partial class Login {
+
+    partial class Login
+    {
         public override string ToString() => string.IsNullOrWhiteSpace(Name) ? Username : Name;
     }
 
-    public static class EntityHelpers {
-        public static void SetIsSerialRequired() {
-            using (var context = new POSEntities()) {
+    public static class ContextManipulationMethods
+    {
+
+        /// <summary>
+        /// run this to set the isSerialRequired Property based on stockin entries with serial
+        /// </summary>
+        public static void SetIsSerialRequired()
+        {
+            using (var context = new POSEntities())
+            {
                 var items = context.Items.AsQueryable().Where(i => i.Products.Any(p => p.StockinHistories.Any(st => st.SerialNumber != null))).ToList();
 
                 foreach (var i in items)

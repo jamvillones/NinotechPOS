@@ -60,7 +60,6 @@
             this.col_serialReq = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.createItemBtn = new System.Windows.Forms.Button();
             this.serialNumber = new System.Windows.Forms.TextBox();
-            this.itemName = new System.Windows.Forms.TextBox();
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.addBtn = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -72,6 +71,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.itemName = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -149,14 +149,14 @@
             this.inventoryTable.DefaultCellStyle = dataGridViewCellStyle6;
             this.inventoryTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inventoryTable.EnableHeadersVisualStyles = false;
-            this.inventoryTable.Location = new System.Drawing.Point(0, 40);
+            this.inventoryTable.Location = new System.Drawing.Point(0, 43);
             this.inventoryTable.MultiSelect = false;
             this.inventoryTable.Name = "inventoryTable";
             this.inventoryTable.ReadOnly = true;
             this.inventoryTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.inventoryTable.RowHeadersVisible = false;
             this.inventoryTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.inventoryTable.Size = new System.Drawing.Size(587, 385);
+            this.inventoryTable.Size = new System.Drawing.Size(587, 382);
             this.inventoryTable.StandardTab = true;
             this.inventoryTable.TabIndex = 4;
             this.inventoryTable.TabStop = false;
@@ -271,14 +271,14 @@
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle10;
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
-            this.itemsTable.Location = new System.Drawing.Point(0, 170);
+            this.itemsTable.Location = new System.Drawing.Point(0, 190);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(348, 255);
+            this.itemsTable.Size = new System.Drawing.Size(348, 235);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 6;
             this.itemsTable.TabStop = false;
@@ -363,22 +363,6 @@
             this.serialNumber.TextChanged += new System.EventHandler(this.serialNumber_TextChanged);
             this.serialNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.serialNumber_KeyDown);
             // 
-            // itemName
-            // 
-            this.itemName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.itemName.BackColor = System.Drawing.SystemColors.Control;
-            this.itemName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.itemName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.itemName.Location = new System.Drawing.Point(7, 19);
-            this.itemName.Name = "itemName";
-            this.itemName.ReadOnly = true;
-            this.itemName.Size = new System.Drawing.Size(333, 19);
-            this.itemName.TabIndex = 0;
-            this.itemName.TabStop = false;
-            this.itemName.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // quantity
             // 
             this.quantity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -420,7 +404,7 @@
             this.addBtn.Size = new System.Drawing.Size(348, 35);
             this.addBtn.TabIndex = 3;
             this.addBtn.TabStop = false;
-            this.addBtn.Text = "ADD (SHIFT+ENTER)";
+            this.addBtn.Text = "Select [ Shift + Enter ]";
             this.toolTip.SetToolTip(this.addBtn, "(shift+Enter) to add");
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
@@ -455,7 +439,7 @@
             this.serialGroup.Controls.Add(this.panel7);
             this.serialGroup.Controls.Add(this.label5);
             this.serialGroup.Dock = System.Windows.Forms.DockStyle.Top;
-            this.serialGroup.Location = new System.Drawing.Point(0, 50);
+            this.serialGroup.Location = new System.Drawing.Point(0, 70);
             this.serialGroup.Name = "serialGroup";
             this.serialGroup.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.serialGroup.Size = new System.Drawing.Size(348, 50);
@@ -486,7 +470,7 @@
             this.qtyGroup.Controls.Add(this.panel2);
             this.qtyGroup.Controls.Add(this.label6);
             this.qtyGroup.Dock = System.Windows.Forms.DockStyle.Top;
-            this.qtyGroup.Location = new System.Drawing.Point(0, 100);
+            this.qtyGroup.Location = new System.Drawing.Point(0, 120);
             this.qtyGroup.Name = "qtyGroup";
             this.qtyGroup.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.qtyGroup.Size = new System.Drawing.Size(348, 50);
@@ -513,21 +497,34 @@
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.panel3.Controls.Add(this.itemName);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.label7);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.panel3.Size = new System.Drawing.Size(348, 50);
+            this.panel3.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.panel3.Size = new System.Drawing.Size(348, 70);
             this.panel3.TabIndex = 9;
+            // 
+            // itemName
+            // 
+            this.itemName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.itemName.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemName.Location = new System.Drawing.Point(0, 18);
+            this.itemName.Name = "itemName";
+            this.itemName.Padding = new System.Windows.Forms.Padding(5, 0, 5, 5);
+            this.itemName.Size = new System.Drawing.Size(348, 51);
+            this.itemName.TabIndex = 2;
+            this.itemName.Text = "**";
+            this.itemName.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Black;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 44);
+            this.panel4.Location = new System.Drawing.Point(0, 69);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(348, 1);
             this.panel4.TabIndex = 1;
@@ -573,7 +570,7 @@
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.ForeColor = System.Drawing.Color.SeaGreen;
-            this.label1.Location = new System.Drawing.Point(0, 150);
+            this.label1.Location = new System.Drawing.Point(0, 170);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label1.Size = new System.Drawing.Size(348, 20);
@@ -589,7 +586,7 @@
             this._grandTotalTxt.ForeColor = System.Drawing.Color.Black;
             this._grandTotalTxt.Location = new System.Drawing.Point(0, 0);
             this._grandTotalTxt.Name = "_grandTotalTxt";
-            this._grandTotalTxt.Size = new System.Drawing.Size(587, 40);
+            this._grandTotalTxt.Size = new System.Drawing.Size(587, 43);
             this._grandTotalTxt.TabIndex = 3;
             this._grandTotalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -654,7 +651,6 @@
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button stockinBtn;
         private System.Windows.Forms.DataGridView inventoryTable;
-        private System.Windows.Forms.TextBox itemName;
         private System.Windows.Forms.NumericUpDown quantity;
         private System.Windows.Forms.DataGridView itemsTable;
         private System.Windows.Forms.TextBox serialNumber;
@@ -690,5 +686,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_supplier;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_cost;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_serialReq;
+        private System.Windows.Forms.Label itemName;
     }
 }
