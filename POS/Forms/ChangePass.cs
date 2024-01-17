@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,47 +8,97 @@ namespace POS.Forms
 {
     public partial class ChangePass : Form
     {
-        Login currentUser;
+        int _id = 0;
         public ChangePass()
         {
             InitializeComponent();
+            this.Text = "Create New Login";
+            currUser.ReadOnly = false;
+            panel5.Visible = panel9.Visible = false;
+        }
 
-            //newPassword.Validated += Helper.TextBoxTrimSpaces;
-            //confirmPassword.Validated += Helper.TextBoxTrimSpaces;
-            //currPassword.Validated += Helper.TextBoxTrimSpaces;
-        }
-        public void SetUser(string u)
+        public ChangePass(int id)
         {
-            using (var eb = new POSEntities())
+            InitializeComponent();
+            _id = id;
+        }
+
+        private async void ConfirmBtn_Click(object sender, EventArgs e)
+        {
+            if (_id != 0)
             {
-                var user = eb.Logins.FirstOrDefault(x => x.Username == u);
-                currentUser = user;
-                currUser.Text = user.Username;
-                nameTxt.Text = user.Name;
-                currPassword.Text = user.Password;
-            }
-        }
-        bool canSave()
-        {
-            return currPassword.Text != string.Empty;
-        }
-        private void ConfirmBtn_Click(object sender, EventArgs e)
-        {
-            if (!canSave())
+                await Edit();
                 return;
+            }
 
-            using (var eb = new POSEntities())
+            await Create();
+        }
+        async Task Edit()
+        {
+            using (var context = new POSEntities())
             {
-                var u = eb.Logins.FirstOrDefault(x => x.Username == currentUser.Username);
+                var u = await context.Logins.FirstOrDefaultAsync(x => x.Id == _id);
+
+                if (passwordTxtBx.Text != u.Password)
+                {
+                    MessageBox.Show("Incorrect Password. If you cannot remember your current password, please contact administrator for assistance!", "Change Aborted", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (u != null)
                 {
-                    u.Password = currPassword.Text;
-                    if (!string.IsNullOrWhiteSpace(nameTxt.Text))
-                        u.Name = nameTxt.Text.Trim();
+                    if (!string.IsNullOrEmpty(newPasswordTxt.Text))
+                    {
+                        if (newPasswordTxt.Text == comfirmPasswordTxt.Text)
+                            u.Password = newPasswordTxt.Text;
+                        else
+                            MessageBox.Show("New Password and Confim Password did not match.", "Change Password Unsuccessful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    u.Name = string.IsNullOrWhiteSpace(nameTxtBx.Text) ? null : nameTxtBx.Text.Trim();
                 }
-                eb.SaveChanges();
-                MessageBox.Show("Successfully changed.");
-                this.Close();
+
+                await context.SaveChangesAsync();
+                Tag = u;
+            }
+
+            MessageBox.Show("Successfully changed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult = DialogResult.OK;
+        }
+
+        async Task Create()
+        {
+            if (string.IsNullOrEmpty(passwordTxtBx.Text) || string.IsNullOrWhiteSpace(currUser.Text))
+                return;
+
+            using (var context = new POSEntities())
+            {
+                var newUser = new Login()
+                {
+                    Username = currUser.Text.Trim(),
+                    Name = string.IsNullOrWhiteSpace(nameTxtBx.Text) ? null : nameTxtBx.Text.Trim(),
+                    Password = passwordTxtBx.Text
+                };
+
+                context.Logins.Add(newUser);
+                await context.SaveChangesAsync();
+            }
+
+            MessageBox.Show("Successfully Added.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult = DialogResult.OK;
+        }
+
+        private void ChangePass_Load(object sender, EventArgs e)
+        {
+            if (_id != 0)
+            {
+
+                using (var context = new POSEntities())
+                {
+                    var user = context.Logins.FirstOrDefault(x => x.Id == _id);
+                    currUser.Text = user.Username;
+                    nameTxtBx.Text = user.Name;
+                }
             }
         }
     }

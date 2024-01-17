@@ -50,10 +50,10 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tabHoldersPanel = new System.Windows.Forms.Panel();
-            this.inventoryTab = new POS.UserControls.InventoryUC();
-            this.reportTab = new POS.UserControls.ReportUC();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.inventoryTab = new POS.UserControls.InventoryUC();
+            this.reportTab = new POS.UserControls.ReportUC();
             this.sideButtonsPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.tabHoldersPanel.SuspendLayout();
@@ -81,7 +81,7 @@
             this.marker.Location = new System.Drawing.Point(0, 0);
             this.marker.Name = "marker";
             this.marker.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.marker.Size = new System.Drawing.Size(10, 100);
+            this.marker.Size = new System.Drawing.Size(2, 100);
             this.marker.TabIndex = 5;
             // 
             // button2
@@ -129,8 +129,7 @@
             this.repBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.repBtn.FlatAppearance.BorderSize = 0;
             this.repBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.repBtn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.repBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(39)))), ((int)(((byte)(70)))));
+            this.repBtn.ForeColor = System.Drawing.Color.Black;
             this.repBtn.Image = ((System.Drawing.Image)(resources.GetObject("repBtn.Image")));
             this.repBtn.Location = new System.Drawing.Point(0, 100);
             this.repBtn.Margin = new System.Windows.Forms.Padding(0);
@@ -139,7 +138,7 @@
             this.repBtn.Size = new System.Drawing.Size(120, 100);
             this.repBtn.TabIndex = 2;
             this.repBtn.TabStop = false;
-            this.repBtn.Text = "\r\nTRANSACTIONS";
+            this.repBtn.Text = "\r\nTransactions";
             this.repBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.repBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.repBtn.UseVisualStyleBackColor = true;
@@ -150,7 +149,6 @@
             this.inventoryBtn.Dock = System.Windows.Forms.DockStyle.Top;
             this.inventoryBtn.FlatAppearance.BorderSize = 0;
             this.inventoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.inventoryBtn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inventoryBtn.ForeColor = System.Drawing.Color.Black;
             this.inventoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("inventoryBtn.Image")));
             this.inventoryBtn.Location = new System.Drawing.Point(0, 0);
@@ -160,7 +158,7 @@
             this.inventoryBtn.Size = new System.Drawing.Size(120, 100);
             this.inventoryBtn.TabIndex = 1;
             this.inventoryBtn.TabStop = false;
-            this.inventoryBtn.Text = "\r\nPRODUCTS";
+            this.inventoryBtn.Text = "\r\nProducts";
             this.inventoryBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.inventoryBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.inventoryBtn.UseVisualStyleBackColor = false;
@@ -237,7 +235,7 @@
             // 
             this.loginPrivilegesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("loginPrivilegesToolStripMenuItem.Image")));
             this.loginPrivilegesToolStripMenuItem.Name = "loginPrivilegesToolStripMenuItem";
-            this.loginPrivilegesToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.loginPrivilegesToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.loginPrivilegesToolStripMenuItem.Text = "Login Privileges";
             this.loginPrivilegesToolStripMenuItem.Click += new System.EventHandler(this.loginPrivilegesToolStripMenuItem_Click);
             // 
@@ -245,16 +243,16 @@
             // 
             this.addNewLoginToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewLoginToolStripMenuItem.Image")));
             this.addNewLoginToolStripMenuItem.Name = "addNewLoginToolStripMenuItem";
-            this.addNewLoginToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.addNewLoginToolStripMenuItem.Text = "Add New Login";
+            this.addNewLoginToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.addNewLoginToolStripMenuItem.Text = "Create New Login";
             this.addNewLoginToolStripMenuItem.Click += new System.EventHandler(this.addNewLoginToolStripMenuItem_Click);
             // 
             // editLoginDetailsToolStripMenuItem
             // 
             this.editLoginDetailsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editLoginDetailsToolStripMenuItem.Image")));
             this.editLoginDetailsToolStripMenuItem.Name = "editLoginDetailsToolStripMenuItem";
-            this.editLoginDetailsToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
-            this.editLoginDetailsToolStripMenuItem.Text = "Edit Login Details";
+            this.editLoginDetailsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.editLoginDetailsToolStripMenuItem.Text = "Change Login Details";
             this.editLoginDetailsToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
             // 
             // customersToolStripMenuItem
@@ -331,6 +329,11 @@
             this.tabHoldersPanel.Size = new System.Drawing.Size(864, 566);
             this.tabHoldersPanel.TabIndex = 3;
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
             // inventoryTab
             // 
             this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -347,11 +350,6 @@
             this.reportTab.Size = new System.Drawing.Size(824, 546);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
-            // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
             // 
             // Main
             // 

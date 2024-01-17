@@ -108,8 +108,9 @@
             this.itemsTable.Size = new System.Drawing.Size(844, 476);
             this.itemsTable.TabIndex = 1;
             this.itemsTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.itemsTable_CellBeginEdit);
-            this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
+            this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ItemsTable_CellContentClick);
             this.itemsTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellEndEdit);
+            this.itemsTable.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellValidated);
             this.itemsTable.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.itemsTable_CellValidating);
             this.itemsTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.itemsTable_DataError);
             this.itemsTable.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.itemsTable_RowsAdded);

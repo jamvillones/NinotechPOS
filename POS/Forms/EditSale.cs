@@ -214,7 +214,7 @@ namespace POS.Forms
 
         }
 
-        private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void ItemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex != col_Remove.Index) return;
 
@@ -223,43 +223,43 @@ namespace POS.Forms
                 "", MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
-            //var table = sender as DataGridView;
-            //using (var p = new POSEntities())
-            //{
-            //    var id = ((SoldItemViewModel)table.Rows[e.RowIndex].DataBoundItem).Id;
-            //    var soldItem = p.SoldItems.FirstOrDefault(x => x.Id == id);
+            var table = sender as DataGridView;
+            using (var context = new POSEntities())
+            {
+                var id = ((SoldItemViewModel)table.Rows[e.RowIndex].DataBoundItem).Id;
+                var soldItem = context.SoldItems.FirstOrDefault(x => x.Id == id);
 
-            //    if (!string.IsNullOrEmpty(soldItem.SerialNumber))
-            //    {
-            //        var inv = new InventoryItem();
-            //        inv.Product = soldItem.Product;
-            //        inv.Quantity = 1;
-            //        inv.SerialNumber = soldItem.SerialNumber;
-            //        p.InventoryItems.Add(inv);
-            //    }
-            //    else
-            //    {
-            //        var inv = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == null && x.Product.Id == soldItem.ProductId);
-            //        if (inv != null)
-            //        {
-            //            if (inv.Quantity != 0)
-            //                inv.Quantity += soldItem.Quantity;
-            //        }
-            //        else
-            //        {
-            //            var temp = new InventoryItem();
-            //            temp.Product = soldItem.Product;
-            //            temp.Quantity = soldItem.Quantity;
-            //            p.InventoryItems.Add(temp);
-            //        }
-            //    }
+                if (!string.IsNullOrEmpty(soldItem.SerialNumber))
+                {
+                    var inv = new InventoryItem();
+                    inv.Product = soldItem.Product;
+                    inv.Quantity = 1;
+                    inv.SerialNumber = soldItem.SerialNumber;
+                    context.InventoryItems.Add(inv);
+                }
+                else
+                {
+                    var inv = context.InventoryItems.FirstOrDefault(x => x.SerialNumber == null && x.Product.Id == soldItem.ProductId);
+                    if (inv != null)
+                    {
+                        if (inv.Quantity != 0)
+                            inv.Quantity += soldItem.Quantity;
+                    }
+                    else
+                    {
+                        var temp = new InventoryItem();
+                        temp.Product = soldItem.Product;
+                        temp.Quantity = soldItem.Quantity;
+                        context.InventoryItems.Add(temp);
+                    }
+                }
+                context.SoldItems.Remove(soldItem);
+                context.SaveChanges();
+            }
 
-            //    p.SoldItems.Remove(soldItem);
-            //    p.SaveChanges();
-            //}
+            await Task.Delay(200);
 
             SoldItems.RemoveAt(e.RowIndex);
-            MessageBox.Show("Entry Removed");
         }
 
         private void itemsTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -362,6 +362,32 @@ namespace POS.Forms
         private async void EditSale_Load(object sender, EventArgs e)
         {
             await Initialize(_saleId);
+        }
+        public bool ChangesMade { get; private set; } = false;
+        private async void itemsTable_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            var table = sender as DataGridView;
+
+            try
+            {
+                using (var context = new POSEntities())
+                {
+                    var soldItem = ((SoldItemViewModel)table.Rows[e.RowIndex].DataBoundItem);
+                    var targetSoldItem = await context.SoldItems.FirstOrDefaultAsync(x => x.Id == soldItem.Id);
+                    if (e.ColumnIndex == col_Discount.Index)
+                        targetSoldItem.Discount = soldItem.Discount;
+
+                    else if (e.ColumnIndex == col_Price.Index)
+                        targetSoldItem.ItemPrice = soldItem.Price;
+                    await context.SaveChangesAsync();
+                }
+
+                ChangesMade = true;
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

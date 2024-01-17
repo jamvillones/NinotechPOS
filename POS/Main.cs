@@ -106,11 +106,26 @@ namespace POS
         #region toolstrips
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenDialog<ChangePass>((x) => { x.SetUser(UserManager.instance.currentLogin.Username); });
+            using (var changeDetails = new ChangePass(UserManager.instance.currentLogin.Id))
+            {
+                if (changeDetails.ShowDialog() == DialogResult.OK)
+                {
+                    var result = (Login)changeDetails.Tag;
+                    userButton.Text = result.ToString();
+                }
+            }
         }
         private void addNewLoginToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenDialog<CreateLogin>();
+            //OpenDialog<CreateLogin>();
+            using (var changeDetails = new ChangePass())
+            {
+                if (changeDetails.ShowDialog() == DialogResult.OK)
+                {
+                    //var result = (Login)changeDetails.Tag;
+                    //userButton.Text = result.ToString();
+                }
+            }
         }
         private void loginPrivilegesToolStripMenuItem_Click(object sender, EventArgs e)
         {
