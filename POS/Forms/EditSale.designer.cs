@@ -49,8 +49,8 @@
             this.col_Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -214,6 +214,19 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(844, 35);
             this.flowLayoutPanel1.TabIndex = 21;
             // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Location = new System.Drawing.Point(534, 0);
+            this.button2.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.button2.MaximumSize = new System.Drawing.Size(300, 35);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(150, 35);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Save Changes";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -221,19 +234,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(844, 10);
             this.panel1.TabIndex = 22;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(524, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.button2.MaximumSize = new System.Drawing.Size(300, 35);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 35);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "Save Changes";
-            this.button2.UseVisualStyleBackColor = false;
             // 
             // EditSale
             // 
