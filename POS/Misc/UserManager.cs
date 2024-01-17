@@ -12,6 +12,7 @@ namespace POS.Misc
     {
         public static UserManager instance;
         public Login currentLogin { get; private set; }
+        public bool IsAdmin => currentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
 
         public bool Login(string username, string password)
         {
@@ -27,7 +28,7 @@ namespace POS.Misc
                 }
                 catch
                 {
-                   // MessageBox.Show("Cannot connect to database.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    // MessageBox.Show("Cannot connect to database.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             return false;

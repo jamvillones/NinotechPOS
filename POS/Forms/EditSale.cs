@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
@@ -10,23 +11,21 @@ namespace POS.Forms
 {
     public partial class EditSale : Form
     {
-        //Login currentLogin => Misc.UserManager.instance.currentLogin;
 
         BindingList<SoldItemViewModel> SoldItems = new BindingList<SoldItemViewModel>();
-
         public event EventHandler OnSave;
-        Sale Sale { get; set; }
         int _saleId = 0;
         public EditSale(int id)
         {
             _saleId = id;
             InitializeComponent();
             InitBindings();
-            //Initialize(id);
+
             itemsTable.DecimalOnlyEditting(HandleEdittingTextbox);
             itemsTable.CellBeginEdit += ItemsTable_CellBeginEdit;
             itemsTable.CellEndEdit += ItemsTable_CellEndEdit;
 
+            col_Price.ReadOnly = col_Discount.ReadOnly = !UserManager.instance.IsAdmin;
         }
 
         private void ItemsTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -126,11 +125,11 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                Sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == id);
+                var sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == id);
 
                 this.Text = this.Text + " - " + id;
 
-                var items = Sale.SoldItems
+                var items = sale.SoldItems
                     .OrderBy(x => x.Product.Item.Name)
                     .Select(s => new SoldItemViewModel(s))
                     .ToArray();
@@ -172,7 +171,7 @@ namespace POS.Forms
 
             using (var p = new POSEntities())
             {
-                var targetSale = p.Sales.FirstOrDefault(x => x.Id == Sale.Id);
+                var targetSale = p.Sales.FirstOrDefault(x => x.Id == _saleId);
 
                 var newSoldItem = new SoldItem();
 
@@ -183,7 +182,7 @@ namespace POS.Forms
                 else
                     Inv = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Name == e.Name && x.Product.Supplier.Name == e.Supplier);
 
-                newSoldItem.SaleId = Sale.Id;
+                newSoldItem.SaleId = _saleId;
                 newSoldItem.Product = p.Products.FirstOrDefault(x => x.Item.Name == e.Name && x.Supplier.Name == e.Supplier);
                 newSoldItem.SerialNumber = e.Serial;
                 int rem = -1;
