@@ -142,10 +142,14 @@ namespace POS.Forms.ItemRegistration
                     await context.SaveChangesAsync();
                 }
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
-                MessageBox.Show(ex.Message + " Cannot have duplicate barcode or name", "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show(
+                    "Barcode or Name is already taken.",
+                    "Save failed",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    ); return;
             }
             catch (Exception ex)
             {
