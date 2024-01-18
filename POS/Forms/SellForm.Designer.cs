@@ -329,9 +329,9 @@
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(357, 0);
+            this.button1.Location = new System.Drawing.Point(360, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(192, 35);
+            this.button1.Size = new System.Drawing.Size(190, 35);
             this.button1.TabIndex = 2;
             this.button1.Text = "Advanced [F1]";
             this.button1.UseVisualStyleBackColor = false;
@@ -339,7 +339,6 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.button2);
@@ -360,10 +359,10 @@
             this.panel4.Controls.Add(this._customerOption);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 298);
+            this.panel4.Location = new System.Drawing.Point(0, 300);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.panel4.Size = new System.Drawing.Size(402, 50);
+            this.panel4.Size = new System.Drawing.Size(404, 50);
             this.panel4.TabIndex = 5;
             // 
             // _customerOption
@@ -377,7 +376,7 @@
             this._customerOption.FormattingEnabled = true;
             this._customerOption.Location = new System.Drawing.Point(10, 18);
             this._customerOption.Name = "_customerOption";
-            this._customerOption.Size = new System.Drawing.Size(382, 32);
+            this._customerOption.Size = new System.Drawing.Size(384, 32);
             this._customerOption.TabIndex = 1;
             // 
             // label1
@@ -398,10 +397,10 @@
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.checkBox1.ForeColor = System.Drawing.Color.Navy;
-            this.checkBox1.Location = new System.Drawing.Point(0, 348);
+            this.checkBox1.Location = new System.Drawing.Point(0, 350);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.checkBox1.Size = new System.Drawing.Size(402, 27);
+            this.checkBox1.Size = new System.Drawing.Size(404, 27);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.TabStop = false;
             this.checkBox1.Text = "Print Reciept";
@@ -413,9 +412,9 @@
             this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(0, 375);
+            this.button2.Location = new System.Drawing.Point(0, 377);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(402, 50);
+            this.button2.Size = new System.Drawing.Size(404, 50);
             this.button2.TabIndex = 7;
             this.button2.Text = "Checkout";
             this.button2.UseVisualStyleBackColor = false;
@@ -429,7 +428,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 150);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(402, 50);
+            this.panel7.Size = new System.Drawing.Size(404, 50);
             this.panel7.TabIndex = 4;
             // 
             // changeTxt
@@ -440,7 +439,7 @@
             this.changeTxt.Location = new System.Drawing.Point(0, 13);
             this.changeTxt.Name = "changeTxt";
             this.changeTxt.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
-            this.changeTxt.Size = new System.Drawing.Size(400, 35);
+            this.changeTxt.Size = new System.Drawing.Size(402, 35);
             this.changeTxt.TabIndex = 2;
             this.changeTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -465,7 +464,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 100);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(402, 50);
+            this.panel8.Size = new System.Drawing.Size(404, 50);
             this.panel8.TabIndex = 3;
             // 
             // button3
@@ -495,7 +494,7 @@
             0,
             0});
             this.tendered.Name = "tendered";
-            this.tendered.Size = new System.Drawing.Size(230, 25);
+            this.tendered.Size = new System.Drawing.Size(232, 25);
             this.tendered.TabIndex = 1;
             this.tendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tendered.ThousandsSeparator = true;
@@ -523,7 +522,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 50);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(402, 50);
+            this.panel6.Size = new System.Drawing.Size(404, 50);
             this.panel6.TabIndex = 2;
             // 
             // button4
@@ -553,7 +552,7 @@
             0,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(230, 25);
+            this.discount.Size = new System.Drawing.Size(232, 25);
             this.discount.TabIndex = 1;
             this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discount.ThousandsSeparator = true;
@@ -580,7 +579,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(402, 50);
+            this.panel9.Size = new System.Drawing.Size(404, 50);
             this.panel9.TabIndex = 1;
             // 
             // grandTotalTxt
@@ -591,7 +590,7 @@
             this.grandTotalTxt.Location = new System.Drawing.Point(0, 13);
             this.grandTotalTxt.Name = "grandTotalTxt";
             this.grandTotalTxt.Padding = new System.Windows.Forms.Padding(5);
-            this.grandTotalTxt.Size = new System.Drawing.Size(400, 35);
+            this.grandTotalTxt.Size = new System.Drawing.Size(402, 35);
             this.grandTotalTxt.TabIndex = 2;
             this.grandTotalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -612,7 +611,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(402, 425);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(404, 427);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // menuStrip1
