@@ -339,13 +339,13 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Controls.Add(this.panel7);
+            this.panel2.Controls.Add(this.panel9);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.panel7);
             this.panel2.Controls.Add(this.panel8);
             this.panel2.Controls.Add(this.panel6);
-            this.panel2.Controls.Add(this.panel9);
             this.panel2.Controls.Add(this.flowLayoutPanel1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -462,7 +462,7 @@
             this.panel8.Controls.Add(this.tendered);
             this.panel8.Controls.Add(this.label7);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel8.Location = new System.Drawing.Point(0, 100);
+            this.panel8.Location = new System.Drawing.Point(0, 50);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(404, 50);
             this.panel8.TabIndex = 3;
@@ -520,7 +520,7 @@
             this.panel6.Controls.Add(this.discount);
             this.panel6.Controls.Add(this.label3);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 50);
+            this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(404, 50);
             this.panel6.TabIndex = 2;
@@ -577,7 +577,7 @@
             this.panel9.Controls.Add(this.grandTotalTxt);
             this.panel9.Controls.Add(this.label5);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Location = new System.Drawing.Point(0, 100);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(404, 50);
             this.panel9.TabIndex = 1;
