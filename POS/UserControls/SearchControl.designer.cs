@@ -42,7 +42,7 @@ namespace POS.UserControls
             this.searchBtn.FlatAppearance.BorderSize = 0;
             this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
-            this.searchBtn.Location = new System.Drawing.Point(320, 5);
+            this.searchBtn.Location = new System.Drawing.Point(318, 4);
             this.searchBtn.Margin = new System.Windows.Forms.Padding(0);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(25, 25);
@@ -58,9 +58,9 @@ namespace POS.UserControls
             this.searchText.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.searchText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchText.Location = new System.Drawing.Point(13, 6);
+            this.searchText.Location = new System.Drawing.Point(5, 5);
             this.searchText.Name = "searchText";
-            this.searchText.Size = new System.Drawing.Size(304, 22);
+            this.searchText.Size = new System.Drawing.Size(310, 22);
             this.searchText.TabIndex = 0;
             // 
             // SearchControl
@@ -68,13 +68,14 @@ namespace POS.UserControls
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.searchBtn);
             this.Controls.Add(this.searchText);
             this.MaximumSize = new System.Drawing.Size(350, 60);
             this.MinimumSize = new System.Drawing.Size(200, 35);
             this.Name = "SearchControl";
-            this.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.Size = new System.Drawing.Size(350, 35);
+            this.Padding = new System.Windows.Forms.Padding(5);
+            this.Size = new System.Drawing.Size(348, 33);
             this.Load += new System.EventHandler(this.SearchControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
