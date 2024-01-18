@@ -130,12 +130,12 @@ namespace POS.Misc
                     contentsRect.X = area.Width / 4;
 
                     //graphics.DrawRectangle(bluePen, contentsRect);
-                    graphics.DrawString(i.Price.ToMoneyFormat(), font, Brushes.Black, contentsRect, farAlignment);
+                    graphics.DrawString(i.Price.ToCurrency(), font, Brushes.Black, contentsRect, farAlignment);
 
                     contentsRect.X = (area.Width / 4) * 2;
 
                     //graphics.DrawRectangle(bluePen, contentsRect);
-                    graphics.DrawString("-" + i.Discount.ToMoneyFormat(), font, Brushes.Black, contentsRect, farAlignment);
+                    graphics.DrawString("-" + i.Discount.ToCurrency(), font, Brushes.Black, contentsRect, farAlignment);
 
                     contentsRect.X = (area.Width / 4) * 3;
                     contentsRect.Width = area.Width - contentsRect.X;
@@ -143,16 +143,16 @@ namespace POS.Misc
                     //Console.WriteLine(contentsRect.X + " , " + contentsRect.Width);
 
                     //graphics.DrawRectangle(bluePen, contentsRect);
-                    graphics.DrawString(i.Total.ToMoneyFormat(), font, Brushes.Black, contentsRect, farAlignment);
+                    graphics.DrawString(i.Total.ToCurrency(), font, Brushes.Black, contentsRect, farAlignment);
 
                     currentY += length + 2;
                 }
 
                 graphics.DrawLine(bluePen, new Point(0, contentsRect.Bottom), new Point(area.Width, contentsRect.Bottom));
 
-                string b2 = details.GrandTotal.ToMoneyFormat() + "\n" +
-                            details.Tendered.ToMoneyFormat() + "\n" +
-                            details.Change.ToMoneyFormat();
+                string b2 = details.GrandTotal.ToCurrency() + "\n" +
+                            details.Tendered.ToCurrency() + "\n" +
+                            details.Change.ToCurrency();
 
                 var b2Size = graphics.MeasureString(b2, titleFont, area.Width, farAlignment);
                 var b2Rect = new Rectangle(area.Width - (int)Math.Floor(b2Size.Width),
@@ -203,7 +203,7 @@ namespace POS.Misc
 
             public int BiggestLength(Graphics g, int width, Font f)
             {
-                return Helper.LongestWord(g, f, width, Quantity.ToString() + "x", Price.ToMoneyFormat(), Discount.ToMoneyFormat(), Total.ToMoneyFormat());
+                return Helper.LongestWord(g, f, width, Quantity.ToString() + "x", Price.ToCurrency(), Discount.ToCurrency(), Total.ToCurrency());
             }
         }
 

@@ -9,6 +9,11 @@ using System.Windows.Forms;
 
 namespace POS.Misc {
     public static class Helper {
+        public static string EmptyIfNull(this string s) {
+            return string.IsNullOrWhiteSpace(s) ? null : s.Trim();
+        }
+
+
         public static List<T> GetContainedControls<T>(this Control control) where T : Control {
             List<T> temp = new List<T>();
             foreach (var i in control.Controls) {
@@ -84,8 +89,11 @@ namespace POS.Misc {
         public static int LongestWord(Graphics g, Font f, int width, params string[] words) {
             return (int)words.Select(x => g.MeasureString(x, f, width).Height).DefaultIfEmpty(0).Max();
         }
-        public static string ToMoneyFormat(this decimal money) {
-            return string.Format("₱{0:N2}", money);
-        }
+
+
+        public static string ToCurrency(this decimal d) => d.ToString("C2");
+        //public static string ToCurrency(this decimal money) {
+        //    return string.Format("₱{0:N2}", money);
+        //}
     }
 }
