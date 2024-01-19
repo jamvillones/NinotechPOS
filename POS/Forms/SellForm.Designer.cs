@@ -52,6 +52,7 @@
             this.totalTxt = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.searchControl1 = new POS.UserControls.SearchControl();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -80,7 +81,6 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -310,16 +310,32 @@
             this.panel11.Size = new System.Drawing.Size(500, 50);
             this.panel11.TabIndex = 23;
             // 
+            // searchControl1
+            // 
+            this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
+            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl1.Location = new System.Drawing.Point(0, 0);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(650, 50);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(2, 35);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.searchControl1.SearchedText = "";
+            this.searchControl1.Size = new System.Drawing.Size(300, 50);
+            this.searchControl1.TabIndex = 1;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(310, 0);
+            this.button1.Location = new System.Drawing.Point(306, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(190, 50);
+            this.button1.Size = new System.Drawing.Size(194, 50);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Advanced [F1]";
+            this.button1.Text = "Modify Discount";
             this.button1.UseVisualStyleBackColor = false;
             // 
             // panel2
@@ -335,7 +351,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(454, 527);
+            this.panel2.Size = new System.Drawing.Size(460, 527);
             this.panel2.TabIndex = 1;
             // 
             // panel7
@@ -347,7 +363,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 150);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(454, 50);
+            this.panel7.Size = new System.Drawing.Size(460, 50);
             this.panel7.TabIndex = 4;
             // 
             // changeTxt
@@ -359,7 +375,7 @@
             this.changeTxt.Name = "changeTxt";
             this.changeTxt.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.changeTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.changeTxt.Size = new System.Drawing.Size(452, 35);
+            this.changeTxt.Size = new System.Drawing.Size(458, 35);
             this.changeTxt.TabIndex = 2;
             this.changeTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -383,7 +399,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 100);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(454, 50);
+            this.panel9.Size = new System.Drawing.Size(460, 50);
             this.panel9.TabIndex = 1;
             // 
             // grandTotalTxt
@@ -394,7 +410,7 @@
             this.grandTotalTxt.Location = new System.Drawing.Point(0, 13);
             this.grandTotalTxt.Name = "grandTotalTxt";
             this.grandTotalTxt.Padding = new System.Windows.Forms.Padding(5);
-            this.grandTotalTxt.Size = new System.Drawing.Size(452, 35);
+            this.grandTotalTxt.Size = new System.Drawing.Size(458, 35);
             this.grandTotalTxt.TabIndex = 2;
             this.grandTotalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -417,7 +433,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 400);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(454, 50);
+            this.panel4.Size = new System.Drawing.Size(460, 50);
             this.panel4.TabIndex = 5;
             // 
             // _customerOption
@@ -431,7 +447,7 @@
             this._customerOption.FormattingEnabled = true;
             this._customerOption.Location = new System.Drawing.Point(0, 18);
             this._customerOption.Name = "_customerOption";
-            this._customerOption.Size = new System.Drawing.Size(454, 32);
+            this._customerOption.Size = new System.Drawing.Size(460, 32);
             this._customerOption.TabIndex = 1;
             this._customerOption.Validated += new System.EventHandler(this._customerOption_Validated);
             // 
@@ -456,7 +472,7 @@
             this.checkBox1.Location = new System.Drawing.Point(0, 450);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.checkBox1.Size = new System.Drawing.Size(454, 27);
+            this.checkBox1.Size = new System.Drawing.Size(460, 27);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.TabStop = false;
             this.checkBox1.Text = "Print Reciept";
@@ -470,7 +486,7 @@
             this.button2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(0, 477);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(454, 50);
+            this.button2.Size = new System.Drawing.Size(460, 50);
             this.button2.TabIndex = 7;
             this.button2.Text = "Checkout";
             this.button2.UseVisualStyleBackColor = false;
@@ -485,7 +501,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 50);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(454, 50);
+            this.panel8.Size = new System.Drawing.Size(460, 50);
             this.panel8.TabIndex = 3;
             // 
             // button3
@@ -515,7 +531,7 @@
             0,
             0});
             this.tendered.Name = "tendered";
-            this.tendered.Size = new System.Drawing.Size(289, 30);
+            this.tendered.Size = new System.Drawing.Size(295, 30);
             this.tendered.TabIndex = 1;
             this.tendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tendered.ThousandsSeparator = true;
@@ -544,7 +560,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(454, 50);
+            this.panel6.Size = new System.Drawing.Size(460, 50);
             this.panel6.TabIndex = 2;
             // 
             // button4
@@ -574,7 +590,7 @@
             0,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(289, 30);
+            this.discount.Size = new System.Drawing.Size(295, 30);
             this.discount.TabIndex = 1;
             this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discount.ThousandsSeparator = true;
@@ -643,22 +659,6 @@
             this.sessionToolStripMenuItem.Name = "sessionToolStripMenuItem";
             this.sessionToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.sessionToolStripMenuItem.Text = "Session";
-            // 
-            // searchControl1
-            // 
-            this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
-            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl1.Location = new System.Drawing.Point(0, 0);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(650, 50);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(2, 35);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(300, 50);
-            this.searchControl1.TabIndex = 1;
-            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             // 
             // SellForm
             // 

@@ -81,31 +81,19 @@ namespace POS.UserControls
         {
             OpenSellForm();
         }
-        Form sellForm = null;
+        SellForm sellForm = null;
         void OpenSellForm()
         {
-            //if (sellForm != null)
-            //{
-            //    if (sellForm.WindowState == FormWindowState.Minimized)
-            //        sellForm.WindowState = FormWindowState.Maximized;
-
-            //    sellForm.BringToFront();
-            //    return;
-            //}
-            //sellForm = new MakeSale();
-            //sellForm.OnSave += SellForm_OnSave;
-            //sellForm.FormClosed += SellForm_FormClosed;
-
-            //if (itemsTable.SelectedCells.Count > 0 && SelectedQty > 0 || SelectedQty != null)
-            //    sellForm.SellSpecific(SelectedId);
-
-            //sellForm.Show();
 
             if (sellForm != null)
             {
                 if (sellForm.WindowState == FormWindowState.Minimized)
                     sellForm.WindowState = FormWindowState.Maximized;
+
                 sellForm.BringToFront();
+
+                var searchKeyword = SelectedBarcode.IsEmpty() ? SelectedName : SelectedBarcode;
+                sellForm.SetSearchKeyword(searchKeyword);
                 return;
             }
 
@@ -153,6 +141,8 @@ namespace POS.UserControls
 
         string SelectedId => itemsTable.SelectedCells[col_Id.Index].Value.ToString();
         string SelectedName => itemsTable.SelectedCells[nameCol.Index].Value.ToString();
+        string SelectedBarcode => itemsTable.SelectedCells[barcodeCol.Index].Value?.ToString();
+
         int? SelectedQty => itemsTable.SelectedCells[quantityCol.Index].Value as int?;
 
         private void addItemBtn_Click(object sender, EventArgs e)

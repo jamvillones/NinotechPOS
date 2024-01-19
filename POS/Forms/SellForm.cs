@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -18,6 +19,11 @@ namespace POS.Forms
 
             SetBindings();
             FormatValues();
+        }
+
+        public void SetSearchKeyword(string keyword)
+        {
+            searchControl1.firstControl.Text = keyword;
         }
 
         private void SetBindings()
@@ -292,7 +298,6 @@ namespace POS.Forms
 
         bool GetQtyAndKeywordFromString(string raw, out int qty, out string keyword)
         {
-
             qty = 1;
             keyword = string.Empty;
             var splitted = raw.Split('*');
