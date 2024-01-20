@@ -406,5 +406,138 @@ namespace POS.Forms
                 }
             }
         }
+
+        bool ValidateCheckout()
+        {
+            if (CartItems.Count == 0)
+                return false;
+
+            if (_customerOption.SelectedItem == null)
+            {
+                if (
+                    _customerOption.Text.IsEmpty() &&
+                    MessageBox.Show(
+                    "Customer will be set to walkin. Are you sure you want to continue?", "Customer is not set",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.Cancel) return false;
+                else
+                {
+                    if (
+                    MessageBox.Show("Customer will be added automatically with the details provided when you proceed.\n\nYou can change it out later in the Customers List.",
+                    "Customer is not yet registered.",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.Cancel) return false;
+                }
+            }
+
+            return true;
+        }
+
+        private async void checkout_Click(object sender, EventArgs e)
+        {
+            if (!ValidateCheckout()) return;
+
+            using (var context = new POSEntities())
+            {
+                var newSale = new Sale()
+                {
+                    Customer = (Customer)_customerOption.SelectedItem,
+                    Date = DateTime.Now,
+                    UserId = UserManager.instance.currentLogin.Id,
+                    AmountRecieved = tendered.Value > grandtTotal ? grandtTotal : tendered.Value,
+                    Discount = discount.Value,
+                    SaleType = tendered.Value < grandtTotal ? SaleType.Charged.ToString() : SaleType.Regular.ToString()
+                };
+
+                context.Sales.Add(newSale);
+
+                foreach (var entry in CartItems)
+                {
+                    var item = await context.Items.FirstOrDefaultAsync(x => x.Id == entry.Id);
+                    SoldItem newSoldItem = null;
+                    if (item.IsFinite)
+                    {
+                        if (item.IsSerialRequired)
+                        {
+                            var inv = await context.InventoryItems.FirstOrDefaultAsync(x => x.SerialNumber == entry.Serial);
+
+                            newSoldItem = new SoldItem()
+                            {
+                                Product = inv.Product,
+                                SerialNumber = entry.Serial,
+                                Quantity = entry.Quantity,
+                                ItemPrice = entry.Price,
+                                Discount = entry.Discount,
+                            };
+                            context.SoldItems.Add(newSoldItem);
+                            context.InventoryItems.Remove(inv);
+                        }
+                        else
+                        {
+                            var invItems = await context.InventoryItems
+                                .Where(x => x.Product.ItemId == entry.Id)
+                                .OrderBy(o => o.Quantity)
+                                .ToListAsync();
+
+                            int entryTotal = entry.Quantity;
+
+                            foreach (var i in invItems)
+                            {
+                                if (entryTotal - i.Quantity < 0)
+                                {
+                                    context.SoldItems.Add(
+                                        new SoldItem()
+                                        {
+                                            ProductId = i.ProductId,
+                                            Quantity = entryTotal,
+                                            ItemPrice = entry.Price,
+                                            Discount = entry.Discount,
+
+                                        });
+
+                                    i.Quantity -= entryTotal;
+                                    break;
+                                }
+                                else
+                                {
+                                    entryTotal -= i.Quantity;
+                                    newSoldItem = new SoldItem()
+                                    {
+                                        ProductId = i.ProductId,
+                                        Quantity = i.Quantity,
+                                        ItemPrice = entry.Price,
+                                        Discount = entry.Discount,
+
+                                    };
+                                    context.SoldItems.Add(newSoldItem);
+                                    context.InventoryItems.Remove(i);
+
+                                    if (entryTotal == 0)
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        context.SoldItems.Add(
+                            new SoldItem()
+                            {
+                                ProductId = item.Products.First().Id,
+                                Quantity = entry.Quantity,
+                                ItemPrice = entry.Price,
+                                Discount = entry.Discount,
+                            });
+                    }
+                }
+                await context.SaveChangesAsync();
+            }
+
+
+            MessageBox.Show(
+                   "Saved!", "",
+                   MessageBoxButtons.OKCancel,
+                   MessageBoxIcon.Question);
+        }
     }
 }
