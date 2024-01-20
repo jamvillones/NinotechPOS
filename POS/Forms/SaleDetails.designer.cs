@@ -471,7 +471,7 @@
             this.panel9.Controls.Add(this.amountDue);
             this.panel9.Controls.Add(this.label6);
             this.panel9.Controls.Add(this.panel10);
-            this.panel9.Location = new System.Drawing.Point(614, 23);
+            this.panel9.Location = new System.Drawing.Point(614, 58);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(350, 29);
             this.panel9.TabIndex = 22;
@@ -528,7 +528,7 @@
             this.panel7.Controls.Add(this.discount);
             this.panel7.Controls.Add(this.label1);
             this.panel7.Controls.Add(this.panel11);
-            this.panel7.Location = new System.Drawing.Point(614, 58);
+            this.panel7.Location = new System.Drawing.Point(614, 23);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(350, 29);
             this.panel7.TabIndex = 24;

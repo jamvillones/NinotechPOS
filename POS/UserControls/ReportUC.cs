@@ -130,7 +130,7 @@ namespace POS.UserControls
             {
                 string type = SaleType.Regular.ToString();
 
-                IQueryable<Sale> filteredSales = context.Sales.Where(x => x.SaleType == type);
+                IQueryable<Sale> filteredSales = context.Sales.AsNoTracking().AsQueryable().OrderByDescending(s => s.Date).Where(x => x.SaleType == type);
 
                 int index = 0;
 
@@ -151,13 +151,13 @@ namespace POS.UserControls
 
                 try
                 {
-                    saleTable.InvokeIfRequired(() => { saleTable.Rows.Clear(); });
+                    //saleTable.InvokeIfRequired(() => { saleTable.Rows.Clear(); });
+                    saleTable.Rows.Clear();
                     var rows = await createRegularRow(filteredSales);
-
-                    saleTable.InvokeIfRequired(() => { saleTable.Rows.AddRange(rows); });
-                    totalSale.InvokeIfRequired(() => { totalSale.Text = "Total: " + string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.AmountDue)); });
-
-                    //Console.WriteLine("finished: Regular");
+                    //saleTable.InvokeIfRequired(() => { saleTable.Rows.AddRange(rows); });
+                    //totalSale.InvokeIfRequired(() => { totalSale.Text = "Total: " + string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.AmountDue)); });
+                    saleTable.Rows.AddRange(rows);
+                    totalSale.Text = "Total: " + filteredSales.ToArray().Sum(x => x.AmountDue).ToCurrency();
                 }
                 catch
                 {
