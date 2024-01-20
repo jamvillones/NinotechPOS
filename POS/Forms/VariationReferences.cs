@@ -50,7 +50,7 @@ namespace POS.Forms
                         i.Date.Value.ToString("MMMM, dd yyyy hh:mm tt"),
                         i.Customer.Name,
                         i.Login.Username,
-                        string.Format("₱ {0:n}", i.Total)
+                        string.Format("₱ {0:n}", i.AmountDue)
                         );
                 }
 

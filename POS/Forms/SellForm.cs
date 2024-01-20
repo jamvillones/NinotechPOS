@@ -1,5 +1,6 @@
 ﻿using POS.Misc;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
@@ -53,6 +54,8 @@ namespace POS.Forms
                         foreach (var c in customers)
                             _customerOption.InvokeIfRequired(() => _customerOption.Items.Add(c));
                     });
+
+                    _customerOption.SelectedItem = customers.FirstOrDefault(x => x.Name.Equals("walkin", StringComparison.OrdinalIgnoreCase));
 
                 }
             }
@@ -433,6 +436,27 @@ namespace POS.Forms
             return true;
         }
 
+        bool IsAllValuesEqual(decimal[] priceList, out decimal value)
+        {
+            value = 0;
+            if (priceList.Length == 0) return false;
+
+            var initialValue = priceList.First();
+
+            if (priceList.All(item => item == initialValue))
+            {
+                value = initialValue;
+                return true;
+            }
+            return false;
+        }
+
+        void Reset()
+        {
+            CartItems.Clear();
+            tendered.Value = discount.Value = 0;
+        }
+
         private async void checkout_Click(object sender, EventArgs e)
         {
             if (!ValidateCheckout()) return;
@@ -533,11 +557,61 @@ namespace POS.Forms
                 await context.SaveChangesAsync();
             }
 
-
             MessageBox.Show(
                    "Saved!", "",
                    MessageBoxButtons.OKCancel,
-                   MessageBoxIcon.Question);
+                   MessageBoxIcon.Information);
+
+            Reset();
+        }
+
+        IEnumerable<Cart_Item_ViewModel> SelectedItemInCart => cartTable.SelectedRows.Cast<DataGridViewRow>().Select(row => (Cart_Item_ViewModel)row.DataBoundItem);
+
+
+        private void cartTable_SelectionChanged(object sender, EventArgs e)
+        {
+            if (cartTable.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            var selected = SelectedItemInCart;
+            priceBtn.Enabled = IsAllValuesEqual(selected.Select(s => s.Price).ToArray(), out priceToChange);
+            discBtn.Enabled = IsAllValuesEqual(selected.Select(s => s.Discount).ToArray(), out discountToChange);
+        }
+        decimal priceToChange;
+        decimal discountToChange;
+        private void priceBtn_Click(object sender, EventArgs e)
+        {
+            using (var editDecimalForm = new EditDecimalValue(priceToChange))
+            {
+                editDecimalForm.Text = "Edit Price - " + priceToChange.ToCurrency();
+                if (editDecimalForm.ShowDialog() == DialogResult.OK)
+                {
+                    var selected = SelectedItemInCart;
+                    foreach (var s in selected)
+                        s.Price = (decimal)editDecimalForm.Tag;
+                    FormatValues();
+                }
+            }
+        }
+
+        private void discBtn_Click(object sender, EventArgs e)
+        {
+            using (var editDecimalForm = new EditDecimalValue(discountToChange))
+            {
+                editDecimalForm.Text = "Edit Discount - " + discountToChange.ToCurrency();
+                if (editDecimalForm.ShowDialog() == DialogResult.OK)
+                {
+                    var selected = SelectedItemInCart;
+                    foreach (var s in selected)
+                    {
+                        var newDiscount = (decimal)editDecimalForm.Tag;
+                        s.Discount = newDiscount > s.Price ? s.Price : newDiscount;
+                    }
+                    FormatValues();
+                }
+            }
         }
     }
 }

@@ -37,16 +37,17 @@ namespace POS
         /// <summary>
         /// grand total of the sale
         /// </summary>
+        public decimal AmountDue => Total - Discount;
         public decimal Total => SoldItems.Sum(x => x.Quantity * (x.ItemPrice - x.Discount));
 
         /// <summary>
         /// used as the actual gained money
         /// </summary>
-        public decimal TotalGained => AmountRecieved > Total ? Total : AmountRecieved;
+        public decimal TotalGained => AmountRecieved > AmountDue ? AmountDue : AmountRecieved;
         /// <summary>
         /// remaining to be paid
         /// </summary>
-        public decimal Remaining => (Total - AmountRecieved) < 0 ? 0 : Total - AmountRecieved;
+        public decimal Remaining => (AmountDue - AmountRecieved) < 0 ? 0 : AmountDue - AmountRecieved;
         /// <summary>
         /// is it fully paid?
         /// </summary>

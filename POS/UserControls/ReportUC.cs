@@ -155,7 +155,7 @@ namespace POS.UserControls
                     var rows = await createRegularRow(filteredSales);
 
                     saleTable.InvokeIfRequired(() => { saleTable.Rows.AddRange(rows); });
-                    totalSale.InvokeIfRequired(() => { totalSale.Text = "Total: " + string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.Total)); });
+                    totalSale.InvokeIfRequired(() => { totalSale.Text = "Total: " + string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.AmountDue)); });
 
                     //Console.WriteLine("finished: Regular");
                 }
@@ -182,7 +182,7 @@ namespace POS.UserControls
                         row.Cells[1].Value = i.Date.Value.ToString("MMM d, yyyy hh:mm: tt");
                         row.Cells[2].Value = i.Login?.Name ?? "not set";
                         row.Cells[3].Value = i.Customer.Name;
-                        row.Cells[4].Value = string.Format("₱ {0:n}", i.Total);
+                        row.Cells[4].Value = string.Format("₱ {0:n}", i.AmountDue);
 
                         rows.Add(row);
 
@@ -236,7 +236,7 @@ namespace POS.UserControls
                 sale.Id,
                 sale.Customer.Name,
                 sale.Date.Value.ToString("MMM d, yyyy hh:mm tt"),
-                string.Format("₱ {0:n}", sale.Total),
+                string.Format("₱ {0:n}", sale.AmountDue),
                 string.Format("₱ {0:n}", sale.AmountRecieved),
                 string.Format("₱ {0:n}", sale.Remaining),
                 sale.Login?.Name ?? "--",

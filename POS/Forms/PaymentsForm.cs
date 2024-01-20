@@ -70,7 +70,7 @@ namespace POS.Forms {
 
                 table.Rows.Add(CreateRow(result));
 
-                MessageBox.Show(sale.AmountRecieved < sale.Total ? "Payment added." : "Amount fully Paid.",
+                MessageBox.Show(sale.AmountRecieved < sale.AmountDue ? "Payment added." : "Amount fully Paid.",
                     "",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);

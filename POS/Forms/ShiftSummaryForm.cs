@@ -125,7 +125,7 @@ namespace POS
                             salesTable.InvokeIfRequired(() => salesTable.Rows.Add(i.Id,
                                                                                   i.Customer.Name,
                                                                                   i.Login.Username,
-                                                                                  i.Total));
+                                                                                  i.AmountDue));
                         }
                     }
                     catch

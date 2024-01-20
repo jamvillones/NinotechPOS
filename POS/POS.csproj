@@ -125,11 +125,11 @@
     <Compile Include="Forms\Create_Supplier_Form.Designer.cs">
       <DependentUpon>Create_Supplier_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Edit_SoldItem_Form.cs">
+    <Compile Include="Forms\EditDecimalValue.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Edit_SoldItem_Form.Designer.cs">
-      <DependentUpon>Edit_SoldItem_Form.cs</DependentUpon>
+    <Compile Include="Forms\EditDecimalValue.Designer.cs">
+      <DependentUpon>EditDecimalValue.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Item\CreateEdit_Item_Form.cs">
       <SubType>Form</SubType>
@@ -443,8 +443,8 @@
     <EmbeddedResource Include="Forms\CustomerTransactionsForm.resx">
       <DependentUpon>CustomerTransactionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Edit_SoldItem_Form.resx">
-      <DependentUpon>Edit_SoldItem_Form.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\EditDecimalValue.resx">
+      <DependentUpon>EditDecimalValue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemVariationsForm.resx">
       <DependentUpon>ItemVariationsForm.cs</DependentUpon>

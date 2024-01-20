@@ -46,7 +46,7 @@
             this.discountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.soldTo = new System.Windows.Forms.TextBox();
-            this.total = new System.Windows.Forms.TextBox();
+            this.amountDue = new System.Windows.Forms.TextBox();
             this.amountRecieved = new System.Windows.Forms.TextBox();
             this.remaining = new System.Windows.Forms.TextBox();
             this.paymentsBtn = new System.Windows.Forms.Button();
@@ -71,9 +71,13 @@
             this.panel9 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
             this.searchControl1 = new POS.UserControls.SearchControl();
             this._messageLabel = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.discount = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.total = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -91,10 +95,12 @@
             this.itemsTable.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.itemsTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.itemsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.itemsTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.itemsTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.itemsTable.BackgroundColor = System.Drawing.Color.White;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.itemsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -124,17 +130,16 @@
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.DarkBlue;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle8;
-            this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.DarkGray;
-            this.itemsTable.Location = new System.Drawing.Point(0, 0);
+            this.itemsTable.Location = new System.Drawing.Point(20, 177);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.itemsTable.Size = new System.Drawing.Size(944, 403);
+            this.itemsTable.Size = new System.Drawing.Size(944, 357);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
             // 
@@ -201,25 +206,25 @@
             this.soldTo.Location = new System.Drawing.Point(0, 15);
             this.soldTo.Name = "soldTo";
             this.soldTo.ReadOnly = true;
-            this.soldTo.Size = new System.Drawing.Size(462, 13);
+            this.soldTo.Size = new System.Drawing.Size(350, 13);
             this.soldTo.TabIndex = 0;
             this.soldTo.TabStop = false;
             this.soldTo.Text = "Lerom Ipsum";
             this.soldTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // total
+            // amountDue
             // 
-            this.total.BackColor = System.Drawing.SystemColors.Control;
-            this.total.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.total.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.total.Location = new System.Drawing.Point(0, 15);
-            this.total.Name = "total";
-            this.total.ReadOnly = true;
-            this.total.Size = new System.Drawing.Size(200, 13);
-            this.total.TabIndex = 0;
-            this.total.TabStop = false;
-            this.total.Text = "Lorem Ipsum";
-            this.total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.amountDue.BackColor = System.Drawing.SystemColors.Control;
+            this.amountDue.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.amountDue.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.amountDue.Location = new System.Drawing.Point(0, 15);
+            this.amountDue.Name = "amountDue";
+            this.amountDue.ReadOnly = true;
+            this.amountDue.Size = new System.Drawing.Size(350, 13);
+            this.amountDue.TabIndex = 0;
+            this.amountDue.TabStop = false;
+            this.amountDue.Text = "Lorem Ipsum";
+            this.amountDue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // amountRecieved
             // 
@@ -229,7 +234,7 @@
             this.amountRecieved.Location = new System.Drawing.Point(0, 15);
             this.amountRecieved.Name = "amountRecieved";
             this.amountRecieved.ReadOnly = true;
-            this.amountRecieved.Size = new System.Drawing.Size(200, 13);
+            this.amountRecieved.Size = new System.Drawing.Size(350, 13);
             this.amountRecieved.TabIndex = 0;
             this.amountRecieved.TabStop = false;
             this.amountRecieved.Text = "Lorem Ipsum";
@@ -243,7 +248,7 @@
             this.remaining.Location = new System.Drawing.Point(0, 15);
             this.remaining.Name = "remaining";
             this.remaining.ReadOnly = true;
-            this.remaining.Size = new System.Drawing.Size(200, 13);
+            this.remaining.Size = new System.Drawing.Size(350, 13);
             this.remaining.TabIndex = 0;
             this.remaining.TabStop = false;
             this.remaining.Text = "Lorem Ipsum";
@@ -269,7 +274,7 @@
             this.soldBy.Location = new System.Drawing.Point(0, 15);
             this.soldBy.Name = "soldBy";
             this.soldBy.ReadOnly = true;
-            this.soldBy.Size = new System.Drawing.Size(462, 13);
+            this.soldBy.Size = new System.Drawing.Size(350, 13);
             this.soldBy.TabIndex = 0;
             this.soldBy.TabStop = false;
             this.soldBy.Text = "Lorem Ipsum";
@@ -341,7 +346,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(20, 23);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(462, 29);
+            this.panel1.Size = new System.Drawing.Size(350, 29);
             this.panel1.TabIndex = 19;
             // 
             // label2
@@ -360,7 +365,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 28);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(462, 1);
+            this.panel2.Size = new System.Drawing.Size(350, 1);
             this.panel2.TabIndex = 0;
             // 
             // panel3
@@ -371,7 +376,7 @@
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Location = new System.Drawing.Point(20, 58);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(462, 29);
+            this.panel3.Size = new System.Drawing.Size(350, 29);
             this.panel3.TabIndex = 20;
             // 
             // label3
@@ -390,7 +395,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 28);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(462, 1);
+            this.panel4.Size = new System.Drawing.Size(350, 1);
             this.panel4.TabIndex = 0;
             // 
             // panel5
@@ -400,9 +405,9 @@
             this.panel5.Controls.Add(this.amountRecieved);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.panel6);
-            this.panel5.Location = new System.Drawing.Point(764, 23);
+            this.panel5.Location = new System.Drawing.Point(614, 93);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(200, 29);
+            this.panel5.Size = new System.Drawing.Size(350, 29);
             this.panel5.TabIndex = 21;
             // 
             // label4
@@ -422,7 +427,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel6.Location = new System.Drawing.Point(0, 28);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(200, 1);
+            this.panel6.Size = new System.Drawing.Size(350, 1);
             this.panel6.TabIndex = 0;
             // 
             // remainGroup
@@ -433,9 +438,9 @@
             this.remainGroup.Controls.Add(this.remaining);
             this.remainGroup.Controls.Add(this.label5);
             this.remainGroup.Controls.Add(this.panel8);
-            this.remainGroup.Location = new System.Drawing.Point(764, 93);
+            this.remainGroup.Location = new System.Drawing.Point(614, 128);
             this.remainGroup.Name = "remainGroup";
-            this.remainGroup.Size = new System.Drawing.Size(200, 29);
+            this.remainGroup.Size = new System.Drawing.Size(350, 29);
             this.remainGroup.TabIndex = 22;
             // 
             // label5
@@ -455,7 +460,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel8.Location = new System.Drawing.Point(0, 28);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(200, 1);
+            this.panel8.Size = new System.Drawing.Size(350, 1);
             this.panel8.TabIndex = 0;
             // 
             // panel9
@@ -463,12 +468,12 @@
             this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel9.BackColor = System.Drawing.SystemColors.Control;
-            this.panel9.Controls.Add(this.total);
+            this.panel9.Controls.Add(this.amountDue);
             this.panel9.Controls.Add(this.label6);
             this.panel9.Controls.Add(this.panel10);
-            this.panel9.Location = new System.Drawing.Point(764, 58);
+            this.panel9.Location = new System.Drawing.Point(614, 23);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(200, 29);
+            this.panel9.Size = new System.Drawing.Size(350, 29);
             this.panel9.TabIndex = 22;
             // 
             // label6
@@ -477,9 +482,9 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Top;
             this.label6.Location = new System.Drawing.Point(0, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.Size = new System.Drawing.Size(69, 13);
             this.label6.TabIndex = 1;
-            this.label6.Text = "Grand Total:";
+            this.label6.Text = "Amount Due:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel10
@@ -488,25 +493,14 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel10.Location = new System.Drawing.Point(0, 28);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(200, 1);
+            this.panel10.Size = new System.Drawing.Size(350, 1);
             this.panel10.TabIndex = 0;
-            // 
-            // panel7
-            // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel7.Controls.Add(this.itemsTable);
-            this.panel7.Location = new System.Drawing.Point(20, 147);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(944, 403);
-            this.panel7.TabIndex = 22;
             // 
             // searchControl1
             // 
             this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
             this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl1.Location = new System.Drawing.Point(20, 106);
+            this.searchControl1.Location = new System.Drawing.Point(20, 122);
             this.searchControl1.MaximumSize = new System.Drawing.Size(350, 60);
             this.searchControl1.MinimumSize = new System.Drawing.Size(200, 35);
             this.searchControl1.Name = "searchControl1";
@@ -526,15 +520,74 @@
             this._messageLabel.Size = new System.Drawing.Size(0, 13);
             this._messageLabel.TabIndex = 2;
             // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel7.BackColor = System.Drawing.SystemColors.Control;
+            this.panel7.Controls.Add(this.discount);
+            this.panel7.Controls.Add(this.label1);
+            this.panel7.Controls.Add(this.panel11);
+            this.panel7.Location = new System.Drawing.Point(614, 58);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(350, 29);
+            this.panel7.TabIndex = 24;
+            // 
+            // discount
+            // 
+            this.discount.BackColor = System.Drawing.SystemColors.Control;
+            this.discount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.discount.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.discount.Location = new System.Drawing.Point(0, 15);
+            this.discount.Name = "discount";
+            this.discount.ReadOnly = true;
+            this.discount.Size = new System.Drawing.Size(350, 13);
+            this.discount.TabIndex = 0;
+            this.discount.TabStop = false;
+            this.discount.Text = "Lorem Ipsum";
+            this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Discount:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.Black;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel11.Location = new System.Drawing.Point(0, 28);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(350, 1);
+            this.panel11.TabIndex = 0;
+            // 
+            // total
+            // 
+            this.total.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.total.ForeColor = System.Drawing.Color.Blue;
+            this.total.Location = new System.Drawing.Point(20, 536);
+            this.total.Name = "total";
+            this.total.Size = new System.Drawing.Size(944, 20);
+            this.total.TabIndex = 25;
+            this.total.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 611);
+            this.Controls.Add(this.total);
+            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.itemsTable);
             this.Controls.Add(this._messageLabel);
             this.Controls.Add(this.searchControl1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.remainGroup);
@@ -563,6 +616,7 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -571,7 +625,7 @@
         #endregion
         private System.Windows.Forms.DataGridView itemsTable;
         private System.Windows.Forms.TextBox soldTo;
-        private System.Windows.Forms.TextBox total;
+        private System.Windows.Forms.TextBox amountDue;
         private System.Windows.Forms.TextBox amountRecieved;
         private System.Windows.Forms.TextBox remaining;
         private System.Windows.Forms.Button paymentsBtn;
@@ -596,7 +650,6 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Panel panel7;
         private UserControls.SearchControl searchControl1;
         private System.Windows.Forms.Label _messageLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
@@ -606,5 +659,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn discountCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalCol;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.TextBox discount;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label total;
     }
 }

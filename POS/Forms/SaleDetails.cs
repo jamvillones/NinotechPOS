@@ -156,15 +156,17 @@ namespace POS.Forms
                     }
                 });
 
-                total.Text = sale.Total.ToString("C2");
-                amountRecieved.Text = sale.AmountRecieved.ToString("C2");
+                discount.Text = sale.Discount.ToCurrency();
+                amountDue.Text = sale.AmountDue.ToCurrency();
+                amountRecieved.Text = sale.AmountRecieved.ToCurrency();
+                total.Text = sale.Total.ToCurrency();
+                remaining.Text = (sale.AmountDue - sale.AmountRecieved).ToCurrency();
 
-                if (isCharged || sale.AmountRecieved >= sale.Total)
-                {
-                    remainGroup.Visible = false;
-                    return;
-                }
-                remaining.Text = string.Format("₱ {0:n}", (sale.Total - sale.AmountRecieved));
+                //if (isCharged || sale.AmountRecieved >= sale.Total)
+                //{
+                //    remainGroup.Visible = false;
+                //    return;
+                //}
             }
         }
 
@@ -177,7 +179,7 @@ namespace POS.Forms
                 if (editsolditems.ChangesMade)
                 {
                     await LoadDataAsync();
-                    total.Text = itemsTable.Rows.Cast<DataGridViewRow>()
+                    amountDue.Text = itemsTable.Rows.Cast<DataGridViewRow>()
                        .Select(row => (int)(row.Cells[qtyCol.Index].Value) * ((decimal)(row.Cells[priceCol.Index].Value) - (decimal)(row.Cells[discountCol.Index].Value)))
                        .Sum()
                        .ToString("C2");
