@@ -74,23 +74,8 @@ namespace POS.UserControls
         public async Task InitializeAsync()
         {
             _chargedLoadingTask = LoadChargedAsync();
-            var regT = setRegularTableByDate();
-
-            //var setOther = Task.Run(() => {
-            //    using (var p = new POSEntities()) {
-            //        IEnumerable<Sale> charged = p.Sales.Where(x => x.SaleType == SaleType.Charged.ToString());
-            //        decimal total = charged.Select(x => x.Remaining).DefaultIfEmpty(0).Sum();
-
-            //        //toBeSettledTxt.InvokeIfRequired(() => { toBeSettledTxt.Text = string.Format("P {0:n}", total); });
-            //    }
-            //});
-
+            var regT = SetRegularTableByDate();
             await Task.WhenAll(_chargedLoadingTask, regT);
-        }
-
-        private void DefButton_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void saleTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -121,7 +106,7 @@ namespace POS.UserControls
             await LoadChargedAsync();
         }
 
-        private async Task setRegularTableByDate()
+        private async Task SetRegularTableByDate()
         {
 
             regularSource = new CancellationTokenSource();
@@ -153,7 +138,7 @@ namespace POS.UserControls
                 {
                     //saleTable.InvokeIfRequired(() => { saleTable.Rows.Clear(); });
                     saleTable.Rows.Clear();
-                    var rows = await createRegularRow(filteredSales);
+                    var rows = await CreateRegularRow(filteredSales);
                     //saleTable.InvokeIfRequired(() => { saleTable.Rows.AddRange(rows); });
                     //totalSale.InvokeIfRequired(() => { totalSale.Text = "Total: " + string.Format("₱ {0:n}", filteredSales.ToArray().Sum(x => x.AmountDue)); });
                     saleTable.Rows.AddRange(rows);
@@ -166,7 +151,8 @@ namespace POS.UserControls
                 }
             }
         }
-        private async Task<DataGridViewRow[]> createRegularRow(IEnumerable<Sale> sales)
+
+        private async Task<DataGridViewRow[]> CreateRegularRow(IEnumerable<Sale> sales)
         {
             var rows = new List<DataGridViewRow>();
 
@@ -180,9 +166,9 @@ namespace POS.UserControls
                         row.CreateCells(saleTable);
                         row.Cells[0].Value = i.Id;
                         row.Cells[1].Value = i.Date.Value.ToString("MMM d, yyyy hh:mm: tt");
-                        row.Cells[2].Value = i.Login?.Name ?? "not set";
-                        row.Cells[3].Value = i.Customer.Name;
-                        row.Cells[4].Value = string.Format("₱ {0:n}", i.AmountDue);
+                        row.Cells[2].Value = i.Login.ToString();
+                        row.Cells[3].Value = i.Customer.ToString();
+                        row.Cells[4].Value = i.AmountDue;
 
                         rows.Add(row);
 
@@ -307,19 +293,19 @@ namespace POS.UserControls
                     break;
             }
 
-            var s = setRegularTableByDate();
+            var s = SetRegularTableByDate();
         }
 
         private void dtFilter_ValueChanged(object sender, EventArgs e)
         {
-            var s = setRegularTableByDate();
+            var s = SetRegularTableByDate();
         }
 
         private void saleTable_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
             {
-                var s = setRegularTableByDate();
+                var s = SetRegularTableByDate();
             }
         }
 
