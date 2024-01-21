@@ -267,7 +267,7 @@
             this.editQtyBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.editQtyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editQtyBtn.Location = new System.Drawing.Point(0, 5);
-            this.editQtyBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.editQtyBtn.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.editQtyBtn.Name = "editQtyBtn";
             this.editQtyBtn.Size = new System.Drawing.Size(149, 30);
             this.editQtyBtn.TabIndex = 10;
@@ -282,8 +282,8 @@
             this.priceBtn.Enabled = false;
             this.priceBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.priceBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.priceBtn.Location = new System.Drawing.Point(149, 5);
-            this.priceBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.priceBtn.Location = new System.Drawing.Point(154, 5);
+            this.priceBtn.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.priceBtn.Name = "priceBtn";
             this.priceBtn.Size = new System.Drawing.Size(149, 30);
             this.priceBtn.TabIndex = 8;
@@ -298,8 +298,8 @@
             this.discBtn.Enabled = false;
             this.discBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.discBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.discBtn.Location = new System.Drawing.Point(298, 5);
-            this.discBtn.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.discBtn.Location = new System.Drawing.Point(308, 5);
+            this.discBtn.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.discBtn.Name = "discBtn";
             this.discBtn.Size = new System.Drawing.Size(149, 30);
             this.discBtn.TabIndex = 9;
@@ -574,14 +574,14 @@
             this.tendered.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tendered.DecimalPlaces = 2;
             this.tendered.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tendered.Location = new System.Drawing.Point(154, 15);
+            this.tendered.Location = new System.Drawing.Point(158, 15);
             this.tendered.Maximum = new decimal(new int[] {
             -402653185,
             -1613725636,
             54210108,
             0});
             this.tendered.Name = "tendered";
-            this.tendered.Size = new System.Drawing.Size(234, 30);
+            this.tendered.Size = new System.Drawing.Size(227, 30);
             this.tendered.TabIndex = 1;
             this.tendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tendered.ThousandsSeparator = true;
@@ -635,14 +635,14 @@
             this.discount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.discount.DecimalPlaces = 2;
             this.discount.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
-            this.discount.Location = new System.Drawing.Point(154, 15);
+            this.discount.Location = new System.Drawing.Point(158, 15);
             this.discount.Maximum = new decimal(new int[] {
             -402653185,
             -1613725636,
             54210108,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(234, 30);
+            this.discount.Size = new System.Drawing.Size(227, 30);
             this.discount.TabIndex = 5;
             this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discount.ThousandsSeparator = true;
@@ -682,7 +682,7 @@
             this.textBox1.ForeColor = System.Drawing.Color.Blue;
             this.textBox1.Location = new System.Drawing.Point(5, 16);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(383, 27);
+            this.textBox1.Size = new System.Drawing.Size(380, 27);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "0000000000";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
