@@ -691,5 +691,20 @@ namespace POS.Forms
                 }
             }
         }
+
+        private void chooseItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var itemView = new ItemListForm())
+            {
+                if (itemView.ShowDialog() == DialogResult.OK)
+                {
+                    SetSearchKeyword(itemView.Tag.ToString());
+                }
+            }
+        }
     }
 }

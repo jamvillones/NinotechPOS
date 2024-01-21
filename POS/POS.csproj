@@ -131,6 +131,12 @@
     <Compile Include="Forms\EditDecimalValue.Designer.cs">
       <DependentUpon>EditDecimalValue.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ItemListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ItemListForm.Designer.cs">
+      <DependentUpon>ItemListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Item\CreateEdit_Item_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -445,6 +451,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditDecimalValue.resx">
       <DependentUpon>EditDecimalValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ItemListForm.resx">
+      <DependentUpon>ItemListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemVariationsForm.resx">
       <DependentUpon>ItemVariationsForm.cs</DependentUpon>
