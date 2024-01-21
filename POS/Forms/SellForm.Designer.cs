@@ -47,6 +47,7 @@
             this.col_Discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_SubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.editQtyBtn = new System.Windows.Forms.Button();
             this.priceBtn = new System.Windows.Forms.Button();
             this.discBtn = new System.Windows.Forms.Button();
             this.loadingTxt = new System.Windows.Forms.Label();
@@ -66,7 +67,7 @@
             this._customerOption = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.checkoutBtn = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.tendered = new System.Windows.Forms.NumericUpDown();
@@ -80,11 +81,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quantityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.priceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.discountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printDoc = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -124,7 +130,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2MinSize = 400;
             this.splitContainer1.Size = new System.Drawing.Size(964, 527);
-            this.splitContainer1.SplitterDistance = 547;
+            this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -139,7 +145,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(547, 527);
+            this.panel1.Size = new System.Drawing.Size(500, 527);
             this.panel1.TabIndex = 0;
             // 
             // cartTable
@@ -187,7 +193,7 @@
             this.cartTable.RowHeadersVisible = false;
             this.cartTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.cartTable.ShowCellToolTips = false;
-            this.cartTable.Size = new System.Drawing.Size(547, 353);
+            this.cartTable.Size = new System.Drawing.Size(500, 373);
             this.cartTable.StandardTab = true;
             this.cartTable.TabIndex = 3;
             this.cartTable.TabStop = false;
@@ -256,26 +262,44 @@
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel1.Controls.Add(this.editQtyBtn);
             this.flowLayoutPanel1.Controls.Add(this.priceBtn);
             this.flowLayoutPanel1.Controls.Add(this.discBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 427);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 447);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(547, 50);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(500, 30);
             this.flowLayoutPanel1.TabIndex = 24;
+            // 
+            // editQtyBtn
+            // 
+            this.editQtyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.editQtyBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.editQtyBtn.Enabled = false;
+            this.editQtyBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.editQtyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editQtyBtn.Location = new System.Drawing.Point(0, 0);
+            this.editQtyBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.editQtyBtn.Name = "editQtyBtn";
+            this.editQtyBtn.Size = new System.Drawing.Size(149, 30);
+            this.editQtyBtn.TabIndex = 10;
+            this.editQtyBtn.Text = "Edit Quantity";
+            this.editQtyBtn.UseVisualStyleBackColor = false;
+            this.editQtyBtn.Click += new System.EventHandler(this.editQtyBtn_Click);
             // 
             // priceBtn
             // 
             this.priceBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.priceBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.priceBtn.Enabled = false;
+            this.priceBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.priceBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.priceBtn.Location = new System.Drawing.Point(0, 10);
-            this.priceBtn.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.priceBtn.Location = new System.Drawing.Point(149, 0);
+            this.priceBtn.Margin = new System.Windows.Forms.Padding(0);
             this.priceBtn.Name = "priceBtn";
-            this.priceBtn.Size = new System.Drawing.Size(100, 30);
+            this.priceBtn.Size = new System.Drawing.Size(149, 30);
             this.priceBtn.TabIndex = 8;
-            this.priceBtn.Text = "Modify Price";
+            this.priceBtn.Text = "Edit Price";
             this.priceBtn.UseVisualStyleBackColor = false;
             this.priceBtn.Click += new System.EventHandler(this.priceBtn_Click);
             // 
@@ -283,13 +307,15 @@
             // 
             this.discBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.discBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.discBtn.Enabled = false;
+            this.discBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.discBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.discBtn.Location = new System.Drawing.Point(110, 10);
+            this.discBtn.Location = new System.Drawing.Point(298, 0);
             this.discBtn.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.discBtn.Name = "discBtn";
-            this.discBtn.Size = new System.Drawing.Size(100, 30);
+            this.discBtn.Size = new System.Drawing.Size(149, 30);
             this.discBtn.TabIndex = 9;
-            this.discBtn.Text = "Modify Discount";
+            this.discBtn.Text = "Edit Discount";
             this.discBtn.UseVisualStyleBackColor = false;
             this.discBtn.Click += new System.EventHandler(this.discBtn_Click);
             // 
@@ -315,7 +341,7 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel10.Location = new System.Drawing.Point(0, 477);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(547, 50);
+            this.panel10.Size = new System.Drawing.Size(500, 50);
             this.panel10.TabIndex = 4;
             // 
             // totalTxt
@@ -326,7 +352,7 @@
             this.totalTxt.Location = new System.Drawing.Point(0, 13);
             this.totalTxt.Name = "totalTxt";
             this.totalTxt.Padding = new System.Windows.Forms.Padding(5);
-            this.totalTxt.Size = new System.Drawing.Size(545, 35);
+            this.totalTxt.Size = new System.Drawing.Size(498, 35);
             this.totalTxt.TabIndex = 2;
             this.totalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -347,7 +373,7 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(547, 50);
+            this.panel11.Size = new System.Drawing.Size(500, 50);
             this.panel11.TabIndex = 23;
             // 
             // searchControl1
@@ -362,7 +388,7 @@
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
             this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(347, 50);
+            this.searchControl1.Size = new System.Drawing.Size(300, 50);
             this.searchControl1.TabIndex = 1;
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             // 
@@ -374,14 +400,14 @@
             this.panel2.Controls.Add(this.panel9);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.checkBox1);
-            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.checkoutBtn);
             this.panel2.Controls.Add(this.panel8);
             this.panel2.Controls.Add(this.panel6);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(407, 527);
+            this.panel2.Size = new System.Drawing.Size(454, 527);
             this.panel2.TabIndex = 1;
             // 
             // panel7
@@ -393,7 +419,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 200);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(405, 50);
+            this.panel7.Size = new System.Drawing.Size(452, 50);
             this.panel7.TabIndex = 4;
             // 
             // changeTxt
@@ -405,7 +431,7 @@
             this.changeTxt.Name = "changeTxt";
             this.changeTxt.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.changeTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.changeTxt.Size = new System.Drawing.Size(403, 35);
+            this.changeTxt.Size = new System.Drawing.Size(450, 35);
             this.changeTxt.TabIndex = 2;
             this.changeTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -429,7 +455,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 150);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(405, 50);
+            this.panel9.Size = new System.Drawing.Size(452, 50);
             this.panel9.TabIndex = 1;
             // 
             // grandTotalTxt
@@ -440,7 +466,7 @@
             this.grandTotalTxt.Location = new System.Drawing.Point(0, 13);
             this.grandTotalTxt.Name = "grandTotalTxt";
             this.grandTotalTxt.Padding = new System.Windows.Forms.Padding(5);
-            this.grandTotalTxt.Size = new System.Drawing.Size(403, 35);
+            this.grandTotalTxt.Size = new System.Drawing.Size(450, 35);
             this.grandTotalTxt.TabIndex = 2;
             this.grandTotalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -464,7 +490,7 @@
             this.panel4.Location = new System.Drawing.Point(0, 398);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.panel4.Size = new System.Drawing.Size(405, 50);
+            this.panel4.Size = new System.Drawing.Size(452, 50);
             this.panel4.TabIndex = 5;
             // 
             // _customerOption
@@ -478,7 +504,7 @@
             this._customerOption.FormattingEnabled = true;
             this._customerOption.Location = new System.Drawing.Point(5, 18);
             this._customerOption.Name = "_customerOption";
-            this._customerOption.Size = new System.Drawing.Size(395, 32);
+            this._customerOption.Size = new System.Drawing.Size(442, 32);
             this._customerOption.TabIndex = 1;
             this._customerOption.Validated += new System.EventHandler(this._customerOption_Validated);
             // 
@@ -503,25 +529,26 @@
             this.checkBox1.Location = new System.Drawing.Point(0, 448);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.checkBox1.Size = new System.Drawing.Size(405, 27);
+            this.checkBox1.Size = new System.Drawing.Size(452, 27);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.TabStop = false;
             this.checkBox1.Text = "Print Reciept";
             this.checkBox1.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // checkoutBtn
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(0, 475);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(405, 50);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Checkout";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.checkout_Click);
+            this.checkoutBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.checkoutBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.checkoutBtn.Enabled = false;
+            this.checkoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkoutBtn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkoutBtn.Location = new System.Drawing.Point(0, 475);
+            this.checkoutBtn.Name = "checkoutBtn";
+            this.checkoutBtn.Size = new System.Drawing.Size(452, 50);
+            this.checkoutBtn.TabIndex = 7;
+            this.checkoutBtn.Text = "Checkout";
+            this.checkoutBtn.UseVisualStyleBackColor = false;
+            this.checkoutBtn.Click += new System.EventHandler(this.checkout_Click);
             // 
             // panel8
             // 
@@ -533,7 +560,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 100);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(405, 50);
+            this.panel8.Size = new System.Drawing.Size(452, 50);
             this.panel8.TabIndex = 3;
             // 
             // button3
@@ -559,12 +586,12 @@
             this.tendered.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
             this.tendered.Location = new System.Drawing.Point(154, 15);
             this.tendered.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
+            -402653185,
+            -1613725636,
+            54210108,
             0});
             this.tendered.Name = "tendered";
-            this.tendered.Size = new System.Drawing.Size(240, 30);
+            this.tendered.Size = new System.Drawing.Size(287, 30);
             this.tendered.TabIndex = 1;
             this.tendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tendered.ThousandsSeparator = true;
@@ -593,7 +620,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 50);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(405, 50);
+            this.panel6.Size = new System.Drawing.Size(452, 50);
             this.panel6.TabIndex = 2;
             // 
             // button4
@@ -619,12 +646,12 @@
             this.discount.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
             this.discount.Location = new System.Drawing.Point(154, 15);
             this.discount.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
+            -402653185,
+            -1613725636,
+            54210108,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(240, 30);
+            this.discount.Size = new System.Drawing.Size(287, 30);
             this.discount.TabIndex = 1;
             this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discount.ThousandsSeparator = true;
@@ -652,7 +679,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(405, 50);
+            this.panel3.Size = new System.Drawing.Size(452, 50);
             this.panel3.TabIndex = 8;
             // 
             // textBox1
@@ -664,7 +691,7 @@
             this.textBox1.ForeColor = System.Drawing.Color.Blue;
             this.textBox1.Location = new System.Drawing.Point(5, 16);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(389, 27);
+            this.textBox1.Size = new System.Drawing.Size(436, 27);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "00001-00002";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -685,10 +712,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.viewToolStripMenuItem,
-            this.toolsToolStripMenuItem,
-            this.windowToolStripMenuItem,
-            this.sessionToolStripMenuItem});
+            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(10, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(964, 24);
@@ -697,39 +721,80 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.itemsToolStripMenuItem,
+            this.customersToolStripMenuItem,
+            this.suppliersToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.fileToolStripMenuItem.Text = "View";
+            // 
+            // itemsToolStripMenuItem
+            // 
+            this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
+            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.itemsToolStripMenuItem.Text = "Items";
+            // 
+            // customersToolStripMenuItem
+            // 
+            this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
+            this.customersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.customersToolStripMenuItem.Text = "Customers";
+            // 
+            // suppliersToolStripMenuItem
+            // 
+            this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
+            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.suppliersToolStripMenuItem.Text = "Suppliers";
             // 
             // editToolStripMenuItem
             // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quantityToolStripMenuItem,
+            this.priceToolStripMenuItem,
+            this.discountToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
+            // quantityToolStripMenuItem
+            // 
+            this.quantityToolStripMenuItem.Name = "quantityToolStripMenuItem";
+            this.quantityToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.quantityToolStripMenuItem.Text = "Quantity";
+            // 
+            // priceToolStripMenuItem
+            // 
+            this.priceToolStripMenuItem.Name = "priceToolStripMenuItem";
+            this.priceToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.priceToolStripMenuItem.Text = "Price";
+            // 
+            // discountToolStripMenuItem
+            // 
+            this.discountToolStripMenuItem.Name = "discountToolStripMenuItem";
+            this.discountToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.discountToolStripMenuItem.Text = "Discount";
+            // 
             // viewToolStripMenuItem
             // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.removeSelectedToolStripMenuItem,
+            this.removeAllToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
+            this.viewToolStripMenuItem.Text = "Remove";
             // 
-            // toolsToolStripMenuItem
+            // removeSelectedToolStripMenuItem
             // 
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.toolsToolStripMenuItem.Text = "Tools";
+            this.removeSelectedToolStripMenuItem.Name = "removeSelectedToolStripMenuItem";
+            this.removeSelectedToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.removeSelectedToolStripMenuItem.Text = "Remove Selected";
             // 
-            // windowToolStripMenuItem
+            // removeAllToolStripMenuItem
             // 
-            this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            this.windowToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.windowToolStripMenuItem.Text = "Window";
-            // 
-            // sessionToolStripMenuItem
-            // 
-            this.sessionToolStripMenuItem.Name = "sessionToolStripMenuItem";
-            this.sessionToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.sessionToolStripMenuItem.Text = "Session";
+            this.removeAllToolStripMenuItem.Name = "removeAllToolStripMenuItem";
+            this.removeAllToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.removeAllToolStripMenuItem.Text = "Remove All";
             // 
             // printDoc
             // 
@@ -805,14 +870,11 @@
         private System.Windows.Forms.NumericUpDown tendered;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button checkoutBtn;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sessionToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Serial;
@@ -838,5 +900,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Drawing.Printing.PrintDocument printDoc;
+        private System.Windows.Forms.Button editQtyBtn;
+        private System.Windows.Forms.ToolStripMenuItem quantityToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem priceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem discountToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
     }
 }

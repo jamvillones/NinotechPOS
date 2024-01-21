@@ -12,12 +12,18 @@ namespace POS.Forms
 {
     public partial class EditDecimalValue : Form
     {
-        public EditDecimalValue(decimal initialValue, decimal maxValue = 999999999)
+        public EditDecimalValue(decimal initialValue, decimal maxValue = 999999999, bool isIntOnly = false)
         {
             InitializeComponent();
             numericUpDown1.Value = initialValue;
             numericUpDown1.Maximum = maxValue;
+            if (isIntOnly)
+            {
+                numericUpDown1.DecimalPlaces = 0; numericUpDown1.Minimum = 1;
+            }
         }
+
+        //public bool IsIntOnly { get; set; }
 
         private void button2_Click(object sender, EventArgs e)
         {

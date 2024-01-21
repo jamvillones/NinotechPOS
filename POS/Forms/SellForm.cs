@@ -331,6 +331,7 @@ namespace POS.Forms
         {
             OnTotalChanges();
             FormatValues();
+            checkoutBtn.Enabled = cartTable.Rows.Count > 0;
         }
 
         private void tendered_ValueChanged(object sender, EventArgs e)
@@ -398,6 +399,14 @@ namespace POS.Forms
         private void cartTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             FormatValues();
+
+            if (cartTable.Rows.Count == 0)
+            {
+                discBtn.Enabled = editQtyBtn.Enabled = priceBtn.Enabled = false;
+            }
+
+            checkoutBtn.Enabled = cartTable.Rows.Count > 0;
+
         }
 
         private void upDown_Validated(object sender, EventArgs e)
@@ -455,6 +464,7 @@ namespace POS.Forms
         void Reset()
         {
             CartItems.Clear();
+
             tendered.Value = discount.Value = 0;
         }
 
@@ -582,7 +592,7 @@ namespace POS.Forms
         Sale ToPrint = null;
         IEnumerable<Cart_Item_ViewModel> SelectedItemInCart => cartTable.SelectedRows.Cast<DataGridViewRow>().Select(row => (Cart_Item_ViewModel)row.DataBoundItem);
 
-
+        string SelectedSerial => ((Cart_Item_ViewModel)cartTable.SelectedRows[0].DataBoundItem).Serial;
         private void cartTable_SelectionChanged(object sender, EventArgs e)
         {
             if (cartTable.SelectedRows.Count == 0)
@@ -591,6 +601,7 @@ namespace POS.Forms
             }
 
             var selected = SelectedItemInCart;
+            editQtyBtn.Enabled = cartTable.SelectedRows.Count == 1 && SelectedSerial.IsEmpty();
             priceBtn.Enabled = IsAllValuesEqual(selected.Select(s => s.Price).ToArray(), out priceToChange);
             discBtn.Enabled = IsAllValuesEqual(selected.Select(s => s.Discount).ToArray(), out discountToChange);
         }
@@ -656,6 +667,29 @@ namespace POS.Forms
 
             e.FormatReciept(printAction, details);
             ToPrint = null;
+        }
+
+        private async void editQtyBtn_Click(object sender, EventArgs e)
+        {
+            var selected = SelectedItemInCart.First();
+            int initialQty = selected.Quantity;
+            int maxQty = 0;
+
+            using (var context = new POSEntities())
+            {
+                var item = await context.Items.AsNoTracking().FirstOrDefaultAsync(x => x.Id == selected.Id);
+                maxQty = !item.IsFinite ? 999999999 : item.QuantityInInventory;
+            }
+
+            using (var editDecimalForm = new EditDecimalValue(initialQty, maxQty, true))
+            {
+                editDecimalForm.Text = "Edit Qty - " + initialQty;
+                if (editDecimalForm.ShowDialog() == DialogResult.OK)
+                {
+                    selected.Quantity = (int)((decimal)editDecimalForm.Tag);
+                    FormatValues();
+                }
+            }
         }
     }
 }
