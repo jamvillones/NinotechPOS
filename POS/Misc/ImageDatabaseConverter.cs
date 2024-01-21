@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS.Misc
 {
     public static class ImageDatabaseConverter
     {
-        public static byte[] imageToByteArray(System.Drawing.Image imageIn)
+        public static byte[] ToByteArray(this System.Drawing.Image imageIn)
         {
             if (imageIn == null)
-                return null;
-            MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-            return ms.ToArray();
+                return null;            
+
+            ImageConverter _imageConverter = new ImageConverter();
+            byte[] xByte = (byte[])_imageConverter.ConvertTo(imageIn, typeof(byte[]));
+            return xByte;
         }
-        public static Image byteArrayToImage(byte[] byteArrayIn)
+        public static Image ToImage(this byte[] byteArrayIn)
         {
             if (byteArrayIn == null)
                 return null;
+
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
             return returnImage;

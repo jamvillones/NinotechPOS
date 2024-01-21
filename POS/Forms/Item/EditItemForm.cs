@@ -29,7 +29,7 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 item = p.Items.FirstOrDefault(x => x.Id == barcode.Text);
-                ImageBox.Image = POS.Misc.ImageDatabaseConverter.byteArrayToImage(item.SampleImage);
+                ImageBox.Image = POS.Misc.ImageDatabaseConverter.ToImage(item.SampleImage);
             }
 
             name.Text = item.Name;
@@ -67,7 +67,7 @@ namespace POS.Forms
 
                     if (ImageBox.Image != null)
                     {
-                        item.SampleImage = Misc.ImageDatabaseConverter.imageToByteArray(ImageBox.Image);
+                        item.SampleImage = Misc.ImageDatabaseConverter.ToByteArray(ImageBox.Image);
                     }
                     else
                         item.SampleImage = null;

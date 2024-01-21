@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Security.Permissions;
 using System.Threading.Tasks;
@@ -466,14 +467,14 @@ namespace POS.Forms
                 var newSale = new Sale()
                 {
                     Customer = (Customer)_customerOption.SelectedItem,
+                    Login = await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.currentLogin.Id),
                     Date = DateTime.Now,
-                    UserId = UserManager.instance.currentLogin.Id,
                     AmountRecieved = tendered.Value > grandtTotal ? grandtTotal : tendered.Value,
                     Discount = discount.Value,
                     SaleType = tendered.Value < grandtTotal ? SaleType.Charged.ToString() : SaleType.Regular.ToString()
                 };
 
-                context.Sales.Add(newSale);
+                ToPrint = context.Sales.Add(newSale);
 
                 foreach (var entry in CartItems)
                 {
@@ -562,9 +563,23 @@ namespace POS.Forms
                    MessageBoxButtons.OKCancel,
                    MessageBoxIcon.Information);
 
+
+            if (checkBox1.Checked)
+            {
+                try
+                {
+                    printDoc.Print();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Printing failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
             Reset();
         }
 
+        Sale ToPrint = null;
         IEnumerable<Cart_Item_ViewModel> SelectedItemInCart => cartTable.SelectedRows.Cast<DataGridViewRow>().Select(row => (Cart_Item_ViewModel)row.DataBoundItem);
 
 
@@ -612,6 +627,35 @@ namespace POS.Forms
                     FormatValues();
                 }
             }
+        }
+
+        PrintAction printAction;
+
+        private void printDoc_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            printAction = e.PrintAction;
+        }
+
+        private void printDoc_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            ReceiptDetails details = new ReceiptDetails();
+
+            details.ControlNumber = ToPrint.Id.ToString();
+            details.CustomerName = ToPrint.Customer.ToString();
+            details.TransactBy = ToPrint.Login.ToString();
+            details.Tendered = ToPrint.AmountRecieved;
+
+            foreach (var item in CartItems)
+                details.Additem(
+                    item.Name,
+                    item.Serial,
+                    item.Quantity,
+                    item.Price,
+                    item.Discount
+                    );
+
+            e.FormatReciept(printAction, details);
+            ToPrint = null;
         }
     }
 }

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using POS.Misc;
+using System;
 using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using POS.Misc;
 
 namespace POS.Forms
 {
@@ -104,7 +97,7 @@ namespace POS.Forms
 
                     if (ImageBox.Image != null)
                     {
-                        item.SampleImage = ImageDatabaseConverter.imageToByteArray(ImageBox.Image);
+                        item.SampleImage = ImageDatabaseConverter.ToByteArray(ImageBox.Image);
                     }
                     else
                         item.SampleImage = null;

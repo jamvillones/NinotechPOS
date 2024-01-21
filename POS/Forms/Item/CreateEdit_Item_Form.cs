@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -73,8 +74,8 @@ namespace POS.Forms.ItemRegistration
                 Type = _type.SelectedItem.ToString(),
                 IsSerialRequired = checkBox1.Checked,
                 Tags = string.IsNullOrWhiteSpace(_tags.Text) ? null : _tags.Text.Trim(',', ' '),
-                Products = Costs.Select(c => c.ToProduct).ToArray()
-
+                Products = Costs.Select(c => c.ToProduct).ToList(),
+                SampleImage = pictureBox1.Image.ToByteArray()
             };
             set
             {
@@ -87,12 +88,13 @@ namespace POS.Forms.ItemRegistration
                 _description.Text = value.Details;
                 _tags.Text = value.Tags;
                 _type.SelectedItem = value.Type;
+                pictureBox1.Image = value.SampleImage.ToImage();
 
                 checkBox1.Checked = value.IsSerialRequired;
                 checkBox1.Enabled = false;
 
                 if (value.Type != ItemType.Quantifiable.ToString())
-                    DisableCostGroup();
+                    ToggleCostGroup();
 
                 _type.Enabled = _id == string.Empty;
 
@@ -101,23 +103,31 @@ namespace POS.Forms.ItemRegistration
             }
         }
 
+        /// <summary>
+        /// determines wether we need to update the image field to avoid unnecessary saving
+        /// </summary>
+        bool IsImageChanged = false;
         private async void addSuppBtn_Click(object sender, EventArgs e)
         {
-
-            Item toSave = null;
-
             try
             {
+                //Item toSave = null;
                 using (var context = new POSEntities())
                 {
                     var temp = Item;
 
                     if (_id == string.Empty)
-                        toSave = context.Items.Add(temp);
+                    {
+                        if (!temp.IsFinite)
+                            temp.Products.Add(new Product() { Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none") });
+
+                        var toSave = context.Items.Add(temp);
+                        Tag = toSave;
+                    }
 
                     else
                     {
-                        toSave = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
+                        var toSave = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
                         toSave.Name = temp.Name;
                         toSave.Barcode = temp.Barcode;
                         toSave.SellingPrice = temp.SellingPrice;
@@ -127,17 +137,39 @@ namespace POS.Forms.ItemRegistration
                         toSave.IsSerialRequired = temp.IsSerialRequired;
                         toSave.Tags = temp.Tags;
 
-                        foreach (var cost in temp.Products)
+                        if (IsImageChanged)
+                            toSave.SampleImage = temp.SampleImage;
+
+                        if (toSave.IsFinite)
                         {
-                            if (cost.Id == 0)
-                                toSave.Products.Add(cost);
-                            else
+                            //delete removed items
+                            var toRemove = await context.Products.Where(x => x.ItemId == _id).ToListAsync();
+                            foreach (var entry in toRemove)
+                                if (!temp.Products.Any(t => t.Id == entry.Id))
+                                    context.Products.Remove(entry);
+
+                            ///add those with 0 id and edit otherwise
+                            foreach (var cost in temp.Products)
                             {
-                                var product = await context.Products.FirstOrDefaultAsync(x => x.Id == cost.Id);
-                                product.Cost = cost.Cost;
+                                if (cost.Id == 0)
+                                    toSave.Products.Add(cost);
+                                else
+                                {
+                                    var product = await context.Products.FirstOrDefaultAsync(x => x.Id == cost.Id);
+                                    product.Cost = cost.Cost;
+                                }
                             }
                         }
+                        Tag = toSave;
                     }
+
+                    //if (!toSave.IsFinite)
+                    //{
+                    //    toSave.Products.Add(new Product()
+                    //    {
+                    //        Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none")
+                    //    });
+                    //}
 
                     await context.SaveChangesAsync();
                 }
@@ -159,13 +191,12 @@ namespace POS.Forms.ItemRegistration
 
             MessageBox.Show("Save successful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DialogResult = DialogResult.OK;
-            Tag = toSave;
         }
 
-        void DisableCostGroup()
+        void ToggleCostGroup(bool value = false)
         {
-            label8.Visible = false;
-            panel16.Visible = false;
+            label8.Visible = value;
+            panel16.Visible = value;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -250,10 +281,38 @@ namespace POS.Forms.ItemRegistration
         {
             bool isQuantifyable = _type.Text == ItemType.Quantifiable.ToString();
             if (!isQuantifyable)
-            {
                 checkBox1.Checked = false;
-            }
+
             checkBox1.Enabled = isQuantifyable;
+            ToggleCostGroup(isQuantifyable);
+            _criticalQty.Enabled = isQuantifyable;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to remove this image?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
+            if (pictureBox1.Image != null)
+            {
+                IsImageChanged = true;
+                pictureBox1.Image = null;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            openFileDialog.Filter = "Image Files(*.jpg; *.jpeg;*.png)|*.jpg; *.jpeg; *.png";
+            DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                try
+                {
+                    pictureBox1.Image = new Bitmap(openFileDialog.FileName);
+                    IsImageChanged = true;
+                }
+                catch (IOException)
+                {
+                }
+            }
         }
 
 

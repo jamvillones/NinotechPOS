@@ -33,7 +33,7 @@ namespace POS.Forms
                 details.Text = item.Details ?? "*Not set";
                 textBox1.Text = item.CriticalQuantity?.ToString() ?? "*Not set";
 
-                ImageBox.Image = Misc.ImageDatabaseConverter.byteArrayToImage(item.SampleImage);
+                ImageBox.Image = Misc.ImageDatabaseConverter.ToImage(item.SampleImage);
                 var stock = p.InventoryItems.Where(x => x.Product.Item.Id == item.Id);
                 foreach (var i in stock)
                 {
