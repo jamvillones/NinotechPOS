@@ -7,8 +7,6 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS.Forms {
@@ -18,7 +16,6 @@ namespace POS.Forms {
         }
 
         private async void PrintInventory_Load(object sender, EventArgs e) {
-            // flowLayoutPanel1.Enabled = false;
             worker.RunWorkerAsync();
 
             using (var context = new POSEntities()) {
@@ -33,7 +30,7 @@ namespace POS.Forms {
                      y.Product.Item.Id,
                      y.SerialNumber,
                      y.Product.Item.Name,
-                     y.Product.Item.IsFinite ? y.Quantity.ToString("N2") : "--"))
+                     y.Product.Item.IsFinite ? y.Quantity.ToString("N0") : "--"))
                     .ToList();
             }
         }
@@ -230,7 +227,6 @@ namespace POS.Forms {
 
         private void trackBar1_Scroll(object sender, EventArgs e) {
             var value = (double)trackBar1.Value / 100;
-            // Console.WriteLine(value);
             printPreviewControl1.Zoom = value;
         }
 
