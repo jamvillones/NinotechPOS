@@ -322,7 +322,7 @@
             this.addVariationsBtn.Text = "     View Sale";
             this.addVariationsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.addVariationsBtn.UseVisualStyleBackColor = false;
-            this.addVariationsBtn.Click += new System.EventHandler(this.addVariationsBtn_Click);
+            this.addVariationsBtn.Click += new System.EventHandler(this.ShodSoldItemsForItem_Click);
             // 
             // button2
             // 

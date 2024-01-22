@@ -1,6 +1,5 @@
 ﻿using POS.Misc;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
@@ -8,17 +7,11 @@ using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.AxHost;
 
 namespace POS.Forms.ItemRegistration {
     public partial class CreateEdit_Item_Form : Form {
-        public CreateEdit_Item_Form() {
+        public CreateEdit_Item_Form(string id = "") {
             InitializeComponent();
 
             costTable.AutoGenerateColumns = false;
@@ -32,6 +25,8 @@ namespace POS.Forms.ItemRegistration {
 
             costTable.DecimalOnlyEditting(col_Value.Index);
             _type.SelectedIndex = 0;
+
+            _id = id;
         }
 
         string _id = string.Empty;
@@ -56,7 +51,7 @@ namespace POS.Forms.ItemRegistration {
 
         readonly BindingList<Cost_ViewModel> Costs = new BindingList<Cost_ViewModel>();
 
-        public Item Item {
+        private Item Item {
             get => new Item() {
                 Id = _id == string.Empty ? Guid.NewGuid().ToString("N") : _id,
                 Barcode = string.IsNullOrWhiteSpace(_barcode.Text) ? null : _barcode.Text.Trim(),
@@ -101,11 +96,8 @@ namespace POS.Forms.ItemRegistration {
         bool IsImageChanged = false;
 
         private async void addSuppBtn_Click(object sender, EventArgs e) {
-            //if (_supplierOption.Text.IsEmpty())
-            //    return;
 
             try {
-                //Item toSave = null;
                 using (var context = new POSEntities()) {
 
                     var temp = Item;
@@ -150,16 +142,7 @@ namespace POS.Forms.ItemRegistration {
                             }
                         }
                         Tag = toSave;
-                    }
-
-                    //if (!toSave.IsFinite)
-                    //{
-                    //    toSave.Products.Add(new Product()
-                    //    {
-                    //        Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none")
-                    //    });
-                    //}
-
+                    }                    
                     await context.SaveChangesAsync();
                 }
             }
@@ -185,10 +168,6 @@ namespace POS.Forms.ItemRegistration {
             panel16.Visible = value;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
-
-        }
-
         private async void Create_Item_Form_Load(object sender, EventArgs e) {
             try {
                 using (var context = new POSEntities()) {
@@ -198,10 +177,16 @@ namespace POS.Forms.ItemRegistration {
                         .ToListAsync();
 
                     _supplierOption.Items.AddRange(suppliers.ToArray());
+
+                    if (!_id.IsEmpty())
+                        Item = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
                 }
+
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Connection not established", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                this.Close();
             }
         }
 
@@ -300,37 +285,53 @@ namespace POS.Forms.ItemRegistration {
             }
         }
 
+        private async void cancelBtn_Click(object sender, EventArgs e) {
+            if (MessageBox.Show(
+                "Are you sure you want to cancel changes?",
+                "",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
+            if (_id == string.Empty) {
+                _name.Text = string.Empty;
+                _barcode.Text = string.Empty;
+                _type.SelectedIndex = 0;
+                checkBox1.Checked = false;
+                _price.Value = 0;
+                _criticalQty.Value = 0;
+                _tags.Text = string.Empty;
+                _description.Text = string.Empty;
 
+                Costs.Clear();
+                pictureBox1.Image = null;
 
-        //private void costTable_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e) {
-        //    var table = sender as DataGridView;
-        //    if (e.Control is TextBox t) {
-        //        t.Validating += costEditting_TextBox_Validating;
+                return;
+            }
 
-        //        t.Text = costTable[
-        //            table.SelectedCells[0].ColumnIndex,
-        //            table.SelectedCells[0].RowIndex]
-        //            .Value.ToString();
-        //    }
-        //}
+            Item currentItem = null;
 
-        //private void costEditting_TextBox_Validating(object sender, CancelEventArgs e) {
+            using (var context = new POSEntities()) {
+                currentItem = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
 
-        //    var textbox = sender as TextBox;
-        //    textbox.KeyPress += (s, args) => {
-        //        if (s is TextBox t) {
+                if (currentItem != null) {
 
-        //            if (!char.IsControl(args.KeyChar) && !char.IsDigit(args.KeyChar) && (args.KeyChar != '.')) {
-        //                args.Handled = true;
-        //            }
+                    _id = currentItem.Id;
+                    _barcode.Text = currentItem.Barcode;
+                    _name.Text = currentItem.Name;
+                    _price.Value = currentItem.SellingPrice;
+                    _criticalQty.Value = currentItem.CriticalQuantity ?? 0;
+                    _description.Text = currentItem.Details;
+                    _tags.Text = currentItem.Tags;
+                    _type.SelectedItem = currentItem.Type;
+                    pictureBox1.Image = currentItem.SampleImage.ToImage();
 
-        //            // only allow one decimal point
-        //            if ((args.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1)) {
-        //                args.Handled = true;
-        //            }
-        //        }
-        //    };
-        //}
+                    checkBox1.Checked = currentItem.IsSerialRequired;
+
+                    Costs.Clear();
+                    foreach (var p in currentItem.Products)
+                        Costs.Add(new Cost_ViewModel(p));
+                }
+            }
+        }
     }
 }
