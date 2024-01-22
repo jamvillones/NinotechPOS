@@ -7,24 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace POS
-{
+namespace POS {
+    using Connections;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
-    public partial class POSEntities : DbContext
-    {
+
+    public partial class POSEntities : DbContext {
         public POSEntities()
-            : base("name=POSEntities")
-        {
+            : base("name=POSEntities") {
+            this.ChangeDatabase();
         }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }

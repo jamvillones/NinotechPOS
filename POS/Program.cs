@@ -20,6 +20,8 @@ namespace POS {
             bool backup = false;
             UserManager.instance = new UserManager();
 
+            //ContextManipulationMethods.SetIsSerialRequired();
+
             bool signedOut;
 
             do {
