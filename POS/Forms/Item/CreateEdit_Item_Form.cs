@@ -142,7 +142,7 @@ namespace POS.Forms.ItemRegistration {
                             }
                         }
                         Tag = toSave;
-                    }                    
+                    }
                     await context.SaveChangesAsync();
                 }
             }
@@ -293,6 +293,7 @@ namespace POS.Forms.ItemRegistration {
                 MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
             if (_id == string.Empty) {
+                //adding
                 _name.Text = string.Empty;
                 _barcode.Text = string.Empty;
                 _type.SelectedIndex = 0;
@@ -307,11 +308,9 @@ namespace POS.Forms.ItemRegistration {
 
                 return;
             }
-
-            Item currentItem = null;
-
+            ///editing
             using (var context = new POSEntities()) {
-                currentItem = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
+                var currentItem = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
 
                 if (currentItem != null) {
 
