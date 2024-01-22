@@ -626,7 +626,7 @@
             this._supplierOption.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._supplierOption.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this._supplierOption.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this._supplierOption.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this._supplierOption.BackColor = System.Drawing.Color.White;
             this._supplierOption.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._supplierOption.FormattingEnabled = true;

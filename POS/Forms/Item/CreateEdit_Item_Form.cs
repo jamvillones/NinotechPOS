@@ -9,18 +9,16 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.AxHost;
 
-namespace POS.Forms.ItemRegistration
-{
-    public partial class CreateEdit_Item_Form : Form
-    {
-        public CreateEdit_Item_Form()
-        {
+namespace POS.Forms.ItemRegistration {
+    public partial class CreateEdit_Item_Form : Form {
+        public CreateEdit_Item_Form() {
             InitializeComponent();
 
             costTable.AutoGenerateColumns = false;
@@ -38,15 +36,12 @@ namespace POS.Forms.ItemRegistration
 
         string _id = string.Empty;
 
-        private class Cost_ViewModel
-        {
-            public Cost_ViewModel()
-            {
+        private class Cost_ViewModel {
+            public Cost_ViewModel() {
 
             }
 
-            public Cost_ViewModel(Product p)
-            {
+            public Cost_ViewModel(Product p) {
                 Id = p.Id;
                 Supplier = p.Supplier;
                 Cost = p.Cost;
@@ -61,10 +56,8 @@ namespace POS.Forms.ItemRegistration
 
         readonly BindingList<Cost_ViewModel> Costs = new BindingList<Cost_ViewModel>();
 
-        public Item Item
-        {
-            get => new Item()
-            {
+        public Item Item {
+            get => new Item() {
                 Id = _id == string.Empty ? Guid.NewGuid().ToString("N") : _id,
                 Barcode = string.IsNullOrWhiteSpace(_barcode.Text) ? null : _barcode.Text.Trim(),
                 Name = _name.Text.Trim(),
@@ -77,8 +70,7 @@ namespace POS.Forms.ItemRegistration
                 Products = Costs.Select(c => c.ToProduct).ToList(),
                 SampleImage = pictureBox1.Image.ToByteArray()
             };
-            set
-            {
+            set {
                 this.Text = "Edit Item - " + value.Name;
                 _id = value.Id;
                 _barcode.Text = value.Barcode;
@@ -107,17 +99,18 @@ namespace POS.Forms.ItemRegistration
         /// determines wether we need to update the image field to avoid unnecessary saving
         /// </summary>
         bool IsImageChanged = false;
-        private async void addSuppBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
+
+        private async void addSuppBtn_Click(object sender, EventArgs e) {
+            //if (_supplierOption.Text.IsEmpty())
+            //    return;
+
+            try {
                 //Item toSave = null;
-                using (var context = new POSEntities())
-                {
+                using (var context = new POSEntities()) {
+
                     var temp = Item;
 
-                    if (_id == string.Empty)
-                    {
+                    if (_id == string.Empty) {
                         if (!temp.IsFinite)
                             temp.Products.Add(new Product() { Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none") });
 
@@ -125,8 +118,7 @@ namespace POS.Forms.ItemRegistration
                         Tag = toSave;
                     }
 
-                    else
-                    {
+                    else {
                         var toSave = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
                         toSave.Name = temp.Name;
                         toSave.Barcode = temp.Barcode;
@@ -140,8 +132,7 @@ namespace POS.Forms.ItemRegistration
                         if (IsImageChanged)
                             toSave.SampleImage = temp.SampleImage;
 
-                        if (toSave.IsFinite)
-                        {
+                        if (toSave.IsFinite) {
                             //delete removed items
                             var toRemove = await context.Products.Where(x => x.ItemId == _id).ToListAsync();
                             foreach (var entry in toRemove)
@@ -149,12 +140,10 @@ namespace POS.Forms.ItemRegistration
                                     context.Products.Remove(entry);
 
                             ///add those with 0 id and edit otherwise
-                            foreach (var cost in temp.Products)
-                            {
+                            foreach (var cost in temp.Products) {
                                 if (cost.Id == 0)
                                     toSave.Products.Add(cost);
-                                else
-                                {
+                                else {
                                     var product = await context.Products.FirstOrDefaultAsync(x => x.Id == cost.Id);
                                     product.Cost = cost.Cost;
                                 }
@@ -174,8 +163,7 @@ namespace POS.Forms.ItemRegistration
                     await context.SaveChangesAsync();
                 }
             }
-            catch (DbUpdateException)
-            {
+            catch (DbUpdateException) {
                 MessageBox.Show(
                     "Barcode or Name is already taken.",
                     "Save failed",
@@ -183,8 +171,7 @@ namespace POS.Forms.ItemRegistration
                     MessageBoxIcon.Error
                     ); return;
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -193,48 +180,56 @@ namespace POS.Forms.ItemRegistration
             DialogResult = DialogResult.OK;
         }
 
-        void ToggleCostGroup(bool value = false)
-        {
+        void ToggleCostGroup(bool value = false) {
             label8.Visible = value;
             panel16.Visible = value;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
 
         }
 
-        private async void Create_Item_Form_Load(object sender, EventArgs e)
-        {
-
-            try
-            {
-                using (var context = new POSEntities())
-                {
+        private async void Create_Item_Form_Load(object sender, EventArgs e) {
+            try {
+                using (var context = new POSEntities()) {
 
                     var suppliers = await context.Suppliers
                         .OrderBy(s => s.Name)
                         .ToListAsync();
 
-                    var supplierNames = suppliers.Select(p => p.Name).ToArray();
-
                     _supplierOption.Items.AddRange(suppliers.ToArray());
-                    _supplierOption.AutoCompleteCustomSource.AddRange(supplierNames);
                 }
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Connection not established", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void AddCost_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(_supplierOption.Text)) return;
+        private async void AddCost_Click(object sender, EventArgs e) {
+            if (_supplierOption.Text.IsEmpty()) return;
+
+            if (_supplierOption.SelectedItem == null) {
+
+                if (MessageBox.Show(
+                    "Supplier might not be registered yet. Do want to add this and continue?",
+                    "",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question
+                    ) == DialogResult.Cancel) return;
+
+                using (var context = new POSEntities()) {
+
+                    var newSupplier = context.Suppliers.Add(new Supplier() { Name = _supplierOption.Text.Trim() });
+                    await context.SaveChangesAsync();
+
+                    _supplierOption.Items.Add(newSupplier);
+                    _supplierOption.SelectedItem = newSupplier;
+                }
+            }
+
             var selectedCost = Costs.FirstOrDefault(c => c.Supplier.Name.Equals(_supplierOption.Text, StringComparison.OrdinalIgnoreCase));
 
-            if (selectedCost != null)
-            {
+            if (selectedCost != null) {
                 // get the index of the duplicate cost
                 var index = costTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells[col_Supplier.Index].Value.ToString().Equals(_supplierOption.Text, StringComparison.OrdinalIgnoreCase)).Index;
 
@@ -249,8 +244,7 @@ namespace POS.Forms.ItemRegistration
                 return;
             }
 
-            Costs.Add(new Cost_ViewModel()
-            {
+            Costs.Add(new Cost_ViewModel() {
                 Supplier = _supplierOption.SelectedItem as Supplier,
                 Cost = 0
             });
@@ -258,8 +252,7 @@ namespace POS.Forms.ItemRegistration
             _supplierOption.SelectedItem = null;
         }
 
-        private void costTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
+        private void costTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
             var table = sender as DataGridView;
             var row = table.Rows[e.RowIndex];
             int id = (int)table[col_Id.Index, e.RowIndex].Value;
@@ -269,16 +262,13 @@ namespace POS.Forms.ItemRegistration
             costTable.FirstDisplayedScrollingRowIndex = e.RowIndex;
         }
 
-        private void _supplierOption_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrWhiteSpace(_supplierOption.Text))
-            {
+        private void _supplierOption_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter && !string.IsNullOrWhiteSpace(_supplierOption.Text)) {
                 button4.PerformClick();
             }
         }
 
-        private void _type_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void _type_SelectedIndexChanged(object sender, EventArgs e) {
             bool isQuantifyable = _type.Text == ItemType.Quantifiable.ToString();
             if (!isQuantifyable)
                 checkBox1.Checked = false;
@@ -288,29 +278,24 @@ namespace POS.Forms.ItemRegistration
             _criticalQty.Enabled = isQuantifyable;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
+        private void button3_Click(object sender, EventArgs e) {
             if (MessageBox.Show("Are you sure you want to remove this image?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
-            if (pictureBox1.Image != null)
-            {
+            if (pictureBox1.Image != null) {
                 IsImageChanged = true;
                 pictureBox1.Image = null;
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
+        private void button5_Click(object sender, EventArgs e) {
             openFileDialog.Filter = "Image Files(*.jpg; *.jpeg;*.png)|*.jpg; *.jpeg; *.png";
             DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
             if (result == DialogResult.OK) // Test result.
             {
-                try
-                {
+                try {
                     pictureBox1.Image = new Bitmap(openFileDialog.FileName);
                     IsImageChanged = true;
                 }
-                catch (IOException)
-                {
+                catch (IOException) {
                 }
             }
         }

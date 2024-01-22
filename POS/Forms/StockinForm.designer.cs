@@ -100,7 +100,7 @@
             this.stockinBtn.Location = new System.Drawing.Point(0, 425);
             this.stockinBtn.Name = "stockinBtn";
             this.stockinBtn.Size = new System.Drawing.Size(587, 35);
-            this.stockinBtn.TabIndex = 4;
+            this.stockinBtn.TabIndex = 5;
             this.stockinBtn.TabStop = false;
             this.stockinBtn.Text = "Stock In [ Ctrl+Enter ]";
             this.toolTip.SetToolTip(this.stockinBtn, "(ctrl+Enter) to stock in");
@@ -157,9 +157,7 @@
             this.inventoryTable.RowHeadersVisible = false;
             this.inventoryTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.inventoryTable.Size = new System.Drawing.Size(587, 382);
-            this.inventoryTable.StandardTab = true;
             this.inventoryTable.TabIndex = 4;
-            this.inventoryTable.TabStop = false;
             this.inventoryTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.inventoryTable_CellMouseDoubleClick);
             // 
             // col_Inventory_Id
@@ -279,9 +277,7 @@
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.itemsTable.Size = new System.Drawing.Size(348, 235);
-            this.itemsTable.StandardTab = true;
-            this.itemsTable.TabIndex = 6;
-            this.itemsTable.TabStop = false;
+            this.itemsTable.TabIndex = 4;
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             // 
@@ -337,7 +333,6 @@
             this.createItemBtn.Name = "createItemBtn";
             this.createItemBtn.Size = new System.Drawing.Size(140, 35);
             this.createItemBtn.TabIndex = 1;
-            this.createItemBtn.TabStop = false;
             this.createItemBtn.Text = "Create Item";
             this.createItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.toolTip.SetToolTip(this.createItemBtn, "Create Item");
@@ -402,7 +397,7 @@
             this.addBtn.Location = new System.Drawing.Point(0, 425);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(348, 35);
-            this.addBtn.TabIndex = 3;
+            this.addBtn.TabIndex = 5;
             this.addBtn.TabStop = false;
             this.addBtn.Text = "Select [ Shift + Enter ]";
             this.toolTip.SetToolTip(this.addBtn, "(shift+Enter) to add");
@@ -443,7 +438,7 @@
             this.serialGroup.Name = "serialGroup";
             this.serialGroup.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.serialGroup.Size = new System.Drawing.Size(348, 50);
-            this.serialGroup.TabIndex = 7;
+            this.serialGroup.TabIndex = 2;
             // 
             // panel7
             // 
@@ -474,7 +469,7 @@
             this.qtyGroup.Name = "qtyGroup";
             this.qtyGroup.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.qtyGroup.Size = new System.Drawing.Size(348, 50);
-            this.qtyGroup.TabIndex = 8;
+            this.qtyGroup.TabIndex = 3;
             // 
             // panel2
             // 
@@ -564,7 +559,8 @@
             this.splitContainer1.Size = new System.Drawing.Size(944, 462);
             this.splitContainer1.SplitterDistance = 350;
             this.splitContainer1.SplitterWidth = 5;
-            this.splitContainer1.TabIndex = 3;
+            this.splitContainer1.TabIndex = 2;
+            this.splitContainer1.TabStop = false;
             // 
             // label1
             // 
@@ -598,7 +594,7 @@
             this.panel5.Location = new System.Drawing.Point(20, 20);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(944, 42);
-            this.panel5.TabIndex = 4;
+            this.panel5.TabIndex = 1;
             // 
             // _messageLabel
             // 
