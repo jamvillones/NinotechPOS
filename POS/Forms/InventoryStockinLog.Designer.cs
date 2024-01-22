@@ -121,6 +121,7 @@
             this.Column2.HeaderText = "NAME";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
+            this.Column2.Visible = false;
             // 
             // Column6
             // 
