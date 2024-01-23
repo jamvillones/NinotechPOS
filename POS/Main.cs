@@ -24,6 +24,8 @@ namespace POS {
 
             notifyIcon1.BalloonTipTitle = title;
             notifyIcon1.BalloonTipText = details;
+            notifyIcon1.BalloonTipIcon = icon;
+
             notifyIcon1.ShowBalloonTip(2);
         }
 
@@ -78,7 +80,7 @@ namespace POS {
                         builder.AppendLine(c.Name + " - " + c.QuantityInInventory + " units");
                     }
 
-                    NotificationHandler.Instance.ShowTooltip("Items in Critical Qty:", builder.ToString(), ToolTipIcon.Warning);
+                    NotificationHandler.Instance.ShowTooltip("Items in Critical Qty (" + crits.Count + "): ", builder.ToString(), ToolTipIcon.Warning);
                 }
             }
             catch (Exception) {
