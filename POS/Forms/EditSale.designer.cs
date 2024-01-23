@@ -49,7 +49,6 @@
             this.col_Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -207,26 +206,12 @@
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 506);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(844, 35);
             this.flowLayoutPanel1.TabIndex = 21;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(534, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.button2.MaximumSize = new System.Drawing.Size(300, 35);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 35);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "Save Changes";
-            this.button2.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
@@ -273,6 +258,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Discount;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Total;
         private System.Windows.Forms.DataGridViewButtonColumn col_Remove;
-        private System.Windows.Forms.Button button2;
     }
 }
