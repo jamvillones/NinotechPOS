@@ -164,6 +164,7 @@
     <Compile Include="ItemCartDetailsEdit.Designer.cs">
       <DependentUpon>ItemCartDetailsEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Misc\NotificationHandler.cs" />
     <Compile Include="Misc\Tools.cs" />
     <Compile Include="NewCartDetails.cs" />
     <Compile Include="Product.cs">

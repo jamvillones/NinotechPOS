@@ -64,7 +64,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.totalPriceTxt = new System.Windows.Forms.Label();
             this.loadingLabelItem = new System.Windows.Forms.Label();
-            this.searchControl1 = new POS.UserControls.SearchControl();
+            this.searchBar = new POS.UserControls.SearchControl();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.contentPanel.SuspendLayout();
@@ -133,6 +133,7 @@
             this.itemsTable.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.itemsTable.Size = new System.Drawing.Size(621, 443);
+            this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 6;
             this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
@@ -475,22 +476,22 @@
             this.loadingLabelItem.Text = "Loading...";
             this.loadingLabelItem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // searchControl1
+            // searchBar
             // 
-            this.searchControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl1.BackColor = System.Drawing.Color.White;
-            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchControl1.Location = new System.Drawing.Point(0, 17);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(350, 35);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(219, 35);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(350, 35);
-            this.searchControl1.TabIndex = 13;
-            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            this.searchBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchBar.BackColor = System.Drawing.Color.White;
+            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchBar.Location = new System.Drawing.Point(0, 17);
+            this.searchBar.MaximumSize = new System.Drawing.Size(350, 35);
+            this.searchBar.MinimumSize = new System.Drawing.Size(219, 35);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.searchBar.SearchedText = "";
+            this.searchBar.Size = new System.Drawing.Size(350, 35);
+            this.searchBar.TabIndex = 1;
+            this.searchBar.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchBar.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // InventoryUC
             // 
@@ -498,7 +499,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.searchControl1);
+            this.Controls.Add(this.searchBar);
             this.Controls.Add(this.checkBox1);
             this.Name = "InventoryUC";
             this.Size = new System.Drawing.Size(774, 525);
@@ -531,7 +532,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         protected System.Windows.Forms.Button button2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private SearchControl searchControl1;
+        private SearchControl searchBar;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel9;

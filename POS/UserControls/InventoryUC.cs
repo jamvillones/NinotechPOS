@@ -1,19 +1,15 @@
-﻿using System;
+﻿using POS.Forms;
+using POS.Forms.ItemRegistration;
+using POS.Misc;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using POS.Forms;
-using POS.Misc;
-using System.Threading;
-using System.Data.Entity;
-using OfficeOpenXml.Drawing.Controls;
-using System.Runtime.InteropServices.WindowsRuntime;
-using POS.Forms.ItemRegistration;
 
 namespace POS.UserControls {
     public partial class InventoryUC : UserControl, Interfaces.ITab {
@@ -21,30 +17,16 @@ namespace POS.UserControls {
             InitializeComponent();
         }
 
-        //class InventoryDetails {
-        //    public string Barcode { get; set; }
-        //    public string Name { get; set; }
-        //    public decimal SellingPrice { get; set; }
-        //    public int Quantity { get; set; }
-        //}
-
         CancellationTokenSource _cancelSource;
 
         #region Tab functions
-        public virtual async void RefreshData() {
-            await LoadDataAsync();
-        }
-
+        public virtual async void RefreshData() => await LoadDataAsync();
         public virtual Button EnterButton() => null;
+        public virtual Control FirstControl() => searchBar.firstControl;
+        public async Task InitializeAsync() => await LoadDataAsync();
+        #endregion
 
-        public virtual Control FirstControl() => searchControl1.firstControl;
-
-        public async Task InitializeAsync() {
-            await LoadDataAsync();
-        }
-
-        //void showNotif()
-        //{
+        //void showNotif() {
         //    if (criticalItemNames.Count == 0)
         //        return;
 
@@ -66,7 +48,6 @@ namespace POS.UserControls {
             }
         }
 
-        #endregion
 
         #region Selling
         protected virtual void sellItem_Click(object sender, EventArgs e) {
