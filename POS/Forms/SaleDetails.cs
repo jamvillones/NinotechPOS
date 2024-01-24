@@ -144,7 +144,7 @@ namespace POS.Forms
                 soldBy.Text = sale.Login.ToString();
                 soldTo.Text = sale.Customer.ToString();
 
-                editItemsBtn.Visible = isCharged;
+                //editItemsBtn.Visible = isCharged;
                 paymentsBtn.Visible = isCharged;
 
                 var soldItems = await GetSoldItemsAsync(p);

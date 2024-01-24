@@ -329,10 +329,10 @@ namespace POS.UserControls {
             try {
                 var currLogin = UserManager.instance.currentLogin;
 
-                addVariationsBtn.Enabled = currLogin.CanEditProduct;
+                //addVariationsBtn.Enabled = currLogin.CanEditProduct;
                 addItemBtn.Enabled = currLogin.CanEditItem;
                 editItemBtn.Enabled = currLogin.CanEditItem;
-                stockinBtn.Enabled = currLogin.CanStockIn;
+                //stockinBtn.Enabled = currLogin.CanStockIn;
 
             }
             catch {
@@ -350,7 +350,7 @@ namespace POS.UserControls {
 
             viewStockBtn.Enabled = isItemQuantifyable;
             editItemBtn.Enabled = currLogin.CanEditProduct;
-            addVariationsBtn.Enabled = isItemQuantifyable && currLogin.CanEditProduct;
+            //addVariationsBtn.Enabled = isItemQuantifyable && currLogin.CanEditProduct;
         }
 
         private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e) {
