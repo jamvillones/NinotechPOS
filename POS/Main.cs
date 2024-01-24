@@ -1,6 +1,7 @@
 ﻿using POS.Forms;
 using POS.Interfaces;
 using POS.Misc;
+using POS.UserControls;
 using System;
 using System.Data.Entity;
 using System.Drawing;
@@ -58,20 +59,7 @@ namespace POS {
         async Task GetCriticalQty() {
             try {
                 using (var context = new POSEntities()) {
-                    var crits = await context.Items
-                        .Where(item => item.CriticalQuantity > 0 && item.Type == ItemType.Quantifiable.ToString())
-                        .Where(i => i.Products
-                                    .Select(a => a.InventoryItems
-                                        .Select(b => b.Quantity)
-                                        .DefaultIfEmpty(0)
-                                        .Sum())
-                                    .Sum() > 0)
-                        .Where(i => i.Products
-                                    .Select(a => a.InventoryItems
-                                        .Select(b => b.Quantity)
-                                        .DefaultIfEmpty(0)
-                                        .Sum())
-                                    .Sum() <= i.CriticalQuantity)
+                    var crits = await context.Items.IsInCriticalQty()
                         .ToListAsync();
 
                     var builder = new StringBuilder();

@@ -11,7 +11,7 @@ namespace POS.Misc
 {
     public static class Helper
     {
-        public static string EmptyIfNull(this string s)
+        public static string NullIfEmpty(this string s)
         {
             return string.IsNullOrWhiteSpace(s) ? null : s.Trim();
         }

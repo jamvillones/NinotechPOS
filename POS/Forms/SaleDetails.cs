@@ -142,7 +142,7 @@ namespace POS.Forms
                 bool isCharged = sale.SaleType.Equals(SaleType.Charged.ToString(), StringComparison.OrdinalIgnoreCase);
 
                 soldBy.Text = sale.Login.ToString();
-                soldTo.Text = sale.Customer.ToString();
+                soldTo.Text = sale.Customer?.ToString();
 
                 //editItemsBtn.Visible = isCharged;
                 paymentsBtn.Visible = isCharged;

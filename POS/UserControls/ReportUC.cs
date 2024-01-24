@@ -188,7 +188,7 @@ namespace POS.UserControls {
 
             row.CreateCells(chargedTable,
                 sale.Id,
-                sale.Customer.ToString(),
+                sale.Customer?.ToString(),
                 sale.Date.Value,
                 sale.AmountDue,
                 sale.AmountRecieved,

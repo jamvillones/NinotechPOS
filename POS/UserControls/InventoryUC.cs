@@ -12,10 +12,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS.UserControls {
+    public enum ItemFilter { All, Available, InCriticalQty, Empty }
     public partial class InventoryUC : UserControl, Interfaces.ITab {
         public InventoryUC() {
             InitializeComponent();
         }
+
+        ItemFilter currentItemFilter = ItemFilter.All;
 
         CancellationTokenSource _cancelSource;
 
@@ -162,6 +165,7 @@ namespace POS.UserControls {
                     var rawItems = context.Items
                         .AsNoTracking()
                         .AsQueryable()
+                        .ApplyFilter(currentItemFilter)
                         .ApplySearch(keyword);
 
                     if (await rawItems.CountAsync() == 0) {
@@ -416,7 +420,6 @@ namespace POS.UserControls {
                 await Task.Run(() => {
                     using (var c = new POSEntities()) {
                         IEnumerable<Item> critItems = c.Items.AsEnumerable().Where(x => x.InCriticalQuantity);
-                        Console.WriteLine(critItems.Count());
 
                         FillTable(critItems);
                     }
@@ -427,18 +430,27 @@ namespace POS.UserControls {
             criticalIsShowing = !criticalIsShowing;
         }
 
+        string keyword = string.Empty;
         private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
-            if (e.SameSearch)
-                return;
-
+            CancelLoading();
             keyword = e.Text.Trim();
             e.SearchFound = await LoadDataAsync();
         }
-
-        string keyword = string.Empty;
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
             keyword = string.Empty;
             await LoadDataAsync();
+        }
+
+        private async void radioButton1_CheckedChanged(object sender, EventArgs e) {
+            if (sender is RadioButton rb && rb.Checked) {
+                if (int.TryParse(rb.Tag.ToString(), out int value)) {
+
+                    ItemFilter filter = (ItemFilter)value;
+                    currentItemFilter = filter;
+                    CancelLoading();
+                    await LoadDataAsync();
+                }
+            }
         }
     }
     public static class ItemsQueryExtension {
@@ -447,6 +459,55 @@ namespace POS.UserControls {
                 return items;
 
             return items.Where(i => i.Barcode == keyword || i.Name.Contains(keyword) || i.Tags.Contains(keyword));
+        }
+
+        public static IQueryable<Item> IsInCriticalQty(this IQueryable<Item> items) {
+            return items.Where(item => item.CriticalQuantity > 0 && item.Type == ItemType.Quantifiable.ToString())
+                        .Where(i => i.Products
+                                    .Select(a => a.InventoryItems
+                                        .Select(b => b.Quantity)
+                                        .DefaultIfEmpty(0)
+                                        .Sum())
+                                    .Sum() > 0)
+                        .Where(i => i.Products
+                                    .Select(a => a.InventoryItems
+                                        .Select(b => b.Quantity)
+                                        .DefaultIfEmpty(0)
+                                        .Sum())
+                                    .Sum() <= i.CriticalQuantity);
+        }
+
+        public static IQueryable<Item> IsAvailable(this IQueryable<Item> items) {
+            return items.Where(item => item.Type == ItemType.Quantifiable.ToString())
+                        .Where(i => i.Products
+                                    .Select(a => a.InventoryItems
+                                        .Select(b => b.Quantity)
+                                        .DefaultIfEmpty(0)
+                                        .Sum())
+                                    .Sum() > 0);
+        }
+
+        public static IQueryable<Item> IsEmpty(this IQueryable<Item> items) {
+            return items.Where(item => item.Type == ItemType.Quantifiable.ToString())
+                        .Where(i => i.Products
+                                    .Select(a => a.InventoryItems
+                                        .Select(b => b.Quantity)
+                                        .DefaultIfEmpty(0)
+                                        .Sum())
+                                    .Sum() <= 0);
+        }
+
+        public static IQueryable<Item> ApplyFilter(this IQueryable<Item> items, ItemFilter filter) {
+            switch (filter) {
+                case ItemFilter.Available:
+                    return items.IsAvailable();
+                case ItemFilter.InCriticalQty:
+                    return items.IsInCriticalQty();
+                case ItemFilter.Empty:
+                    return items.IsEmpty();
+            }
+
+            return items;
         }
     }
 }
