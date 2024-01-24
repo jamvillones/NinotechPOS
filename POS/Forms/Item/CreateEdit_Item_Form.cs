@@ -95,11 +95,14 @@ namespace POS.Forms.ItemRegistration {
         /// </summary>
         bool IsImageChanged = false;
 
-        private async void addSuppBtn_Click(object sender, EventArgs e) {
+        private async void SaveBtn_Click(object sender, EventArgs e) {
+            if (Costs.Count <= 0) {
+                MessageBox.Show("Cost cannot be empty!", "Saving aborted", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             try {
                 using (var context = new POSEntities()) {
-
                     var temp = Item;
 
                     if (_id == string.Empty) {
