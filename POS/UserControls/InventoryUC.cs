@@ -101,13 +101,33 @@ namespace POS.UserControls
             if (e.RowIndex == -1)
                 return;
 
+            if (e.ColumnIndex == col_remove.Index)
+            {
+
+                if (!UserManager.instance.currentLogin.CanEditItem) return;
+                if (MessageBox.Show(
+                    "Are you sure you want to delete the selected item?",
+                    "This will also delete items in inventory.",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Warning) == DialogResult.Cancel) return;
+
+                try
+                {
+                    using (var p = new POSEntities())
+                    {
+                        var i = p.Items.FirstOrDefault(x => x.Id == SelectedId);
+                        p.Items.Remove(i);
+                        p.SaveChanges();
+                    }
+                    itemsTable.Rows.RemoveAt(e.RowIndex);
+                }
+                catch (Exception) { }
+                return;
+            }
+
             var dgt = (DataGridView)sender;
-
             var qty = dgt[quantityCol.Index, e.RowIndex].Value as int?;
-
             var barcode = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
-
-
             ShowInventoryInfo(barcode, qty);
         }
 
@@ -411,25 +431,7 @@ namespace POS.UserControls
 
         private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != col_remove.Index) return;
-            if (!UserManager.instance.currentLogin.CanEditItem) return;
-            if (MessageBox.Show(
-                "Are you sure you want to delete the selected item?",
-                "This will also delete items in inventory.",
-                MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
-            try
-            {
-                using (var p = new POSEntities())
-                {
-                    var i = p.Items.FirstOrDefault(x => x.Id == SelectedId);
-                    p.Items.Remove(i);
-                    p.SaveChanges();
-                }
-                itemsTable.Rows.RemoveAt(e.RowIndex);
-            }
-            catch (Exception) { }
         }
 
         private async void button2_Click(object sender, EventArgs e)
