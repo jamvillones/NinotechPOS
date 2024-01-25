@@ -68,14 +68,14 @@ namespace POS.Forms
 
         }
 
-        private async Task LoadDataAsync()
+        private async Task<bool> LoadDataAsync()
         {
 
             TryCancelCurrentOperation();
 
             CancelSource = new CancellationTokenSource();
             var token = CancelSource.Token;
-
+            bool ResultsFound = false;
             try
             {
 
@@ -93,26 +93,37 @@ namespace POS.Forms
 
                     var finalResult = await stockins.ToListAsync();
 
-                    histTable.InvokeIfRequired(() => histTable.Rows.Clear());
+                    histTable.Rows.Clear();
 
-                    var rows = finalResult
-                        .Select(CreateRow)
-                        .ToArray();
+                    ResultsFound = finalResult.Count > 0;
 
-                    token.ThrowIfCancellationRequested();
+                    if (ResultsFound)
+                    {
+                        token.ThrowIfCancellationRequested();
 
-                    histTable.InvokeIfRequired(() => histTable.Rows.AddRange(rows));
-                    _totalCost.Text = string.Format("₱ {0:n}", finalResult.Select(x => x.Cost * x.Quantity).Sum());
+                        await Task.Run(() =>
+                        {
+                            foreach (var row in finalResult)
+                            {
+                                if (token.IsCancellationRequested) break;
+                                histTable.InvokeIfRequired(() => histTable.Rows.Add(CreateRow(row)));
+                            }
+                        });
+
+                        _totalCost.Text = string.Format("₱ {0:n}", finalResult.Select(x => x.Cost * x.Quantity).Sum());
+                    }
                 }
             }
             catch (OperationCanceledException)
             {
-
+                return false;
             }
             finally
             {
                 CancelSource.Dispose();
             }
+
+            return ResultsFound;
         }
 
         private DataGridViewRow CreateRow(StockinHistory stockinHistory)
@@ -137,15 +148,12 @@ namespace POS.Forms
         private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
         {
             keyword = e.Text;
+            bool found = await LoadDataAsync();
+            //e.SearchFound = await LoadDataAsync();
 
-            await LoadDataAsync();
-
-            e.SearchFound = true;
-
-            if (histTable.RowCount == 0)
+            if (!found)
             {
-                MessageBox.Show("No entries found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                MessageBox.Show("No Entries Found", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
