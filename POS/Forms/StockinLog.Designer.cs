@@ -84,6 +84,7 @@
             this.histTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.histTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.histTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.histTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.histTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -122,7 +123,7 @@
             this.histTable.ReadOnly = true;
             this.histTable.RowHeadersVisible = false;
             this.histTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.histTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.histTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.histTable.Size = new System.Drawing.Size(830, 305);
             this.histTable.StandardTab = true;
             this.histTable.TabIndex = 2;

@@ -53,7 +53,7 @@
             this.invTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.invTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.invTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.invTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.invTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.invTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -86,7 +86,7 @@
             this.invTable.RowHeadersVisible = false;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.invTable.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.invTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.invTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.invTable.Size = new System.Drawing.Size(584, 361);
             this.invTable.TabIndex = 4;
             this.invTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.invTable_CellMouseDoubleClick);
