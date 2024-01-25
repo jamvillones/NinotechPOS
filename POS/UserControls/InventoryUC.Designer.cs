@@ -67,6 +67,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.totalPriceTxt = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.itemCount = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.loadingLabelItem = new System.Windows.Forms.Label();
             this.searchBar = new POS.UserControls.SearchControl();
             this.tablePanel.SuspendLayout();
@@ -507,6 +510,9 @@
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Controls.Add(this.totalPriceTxt);
+            this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.flowLayoutPanel1.Controls.Add(this.itemCount);
+            this.flowLayoutPanel1.Controls.Add(this.label3);
             this.flowLayoutPanel1.Controls.Add(this.loadingLabelItem);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -520,7 +526,7 @@
             // 
             this.totalPriceTxt.AutoSize = true;
             this.totalPriceTxt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.totalPriceTxt.ForeColor = System.Drawing.Color.Black;
+            this.totalPriceTxt.ForeColor = System.Drawing.Color.Blue;
             this.totalPriceTxt.Location = new System.Drawing.Point(733, 5);
             this.totalPriceTxt.Name = "totalPriceTxt";
             this.totalPriceTxt.Size = new System.Drawing.Size(38, 13);
@@ -528,11 +534,48 @@
             this.totalPriceTxt.Text = "₱ 0.00";
             this.totalPriceTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(616, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Total Inventory Value:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // itemCount
+            // 
+            this.itemCount.AutoSize = true;
+            this.itemCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.itemCount.ForeColor = System.Drawing.Color.Blue;
+            this.itemCount.Location = new System.Drawing.Point(580, 5);
+            this.itemCount.Margin = new System.Windows.Forms.Padding(3, 0, 20, 0);
+            this.itemCount.Name = "itemCount";
+            this.itemCount.Size = new System.Drawing.Size(13, 13);
+            this.itemCount.TabIndex = 21;
+            this.itemCount.Text = "0";
+            this.itemCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(485, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 13);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Number Of Items:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // loadingLabelItem
             // 
             this.loadingLabelItem.AutoSize = true;
             this.loadingLabelItem.ForeColor = System.Drawing.Color.Blue;
-            this.loadingLabelItem.Location = new System.Drawing.Point(656, 5);
+            this.loadingLabelItem.Location = new System.Drawing.Point(408, 5);
             this.loadingLabelItem.Margin = new System.Windows.Forms.Padding(3, 0, 20, 0);
             this.loadingLabelItem.Name = "loadingLabelItem";
             this.loadingLabelItem.Size = new System.Drawing.Size(54, 13);
@@ -618,5 +661,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
         private System.Windows.Forms.DataGridViewButtonColumn col_remove;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label itemCount;
+        private System.Windows.Forms.Label label3;
     }
 }

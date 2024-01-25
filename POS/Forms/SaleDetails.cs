@@ -93,7 +93,9 @@ namespace POS.Forms
                    "",
                    MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
-            this.Close();
+
+            DialogResult = DialogResult.OK;
+            //this.Close();
         }
 
         async Task AddBackToInventory(POSEntities context, params int[] id)

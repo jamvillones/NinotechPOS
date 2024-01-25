@@ -11,10 +11,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace POS.UserControls {
+namespace POS.UserControls
+{
     public enum ItemFilter { All, Available, InCriticalQty, Empty }
-    public partial class InventoryUC : UserControl, Interfaces.ITab {
-        public InventoryUC() {
+    public partial class InventoryUC : UserControl, Interfaces.ITab
+    {
+        public InventoryUC()
+        {
             InitializeComponent();
         }
 
@@ -42,24 +45,30 @@ namespace POS.UserControls {
         //    notifyIcon.ShowBalloonTip(2);
         //}
 
-        public void CancelLoading() {
-            try {
+        public void CancelLoading()
+        {
+            try
+            {
                 _cancelSource?.Cancel();
             }
-            catch (ObjectDisposedException) {
+            catch (ObjectDisposedException)
+            {
 
             }
         }
 
 
         #region Selling
-        protected virtual void sellItem_Click(object sender, EventArgs e) {
+        protected virtual void sellItem_Click(object sender, EventArgs e)
+        {
             OpenSellForm();
         }
         SellForm sellForm = null;
-        void OpenSellForm() {
+        void OpenSellForm()
+        {
 
-            if (sellForm != null) {
+            if (sellForm != null)
+            {
                 if (sellForm.WindowState == FormWindowState.Minimized)
                     sellForm.WindowState = FormWindowState.Maximized;
 
@@ -74,18 +83,21 @@ namespace POS.UserControls {
             sellForm.FormClosed += SellForm_FormClosed;
             sellForm.Show();
         }
-        private async void SellForm_OnSave(object sender, EventArgs e) {
+        private async void SellForm_OnSave(object sender, EventArgs e)
+        {
             await LoadDataAsync();
         }
 
-        private void SellForm_FormClosed(object sender, FormClosedEventArgs e) {
+        private void SellForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
             sellForm.Dispose();
             sellForm = null;
         }
         #endregion
 
 
-        private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+        private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
             if (e.RowIndex == -1)
                 return;
 
@@ -99,9 +111,11 @@ namespace POS.UserControls {
             ShowInventoryInfo(barcode, qty);
         }
 
-        void ShowInventoryInfo(string barcode, int? quantity) {
+        void ShowInventoryInfo(string barcode, int? quantity)
+        {
             if (quantity == 0 || quantity is null) return;
-            using (var View = new InventoryItemView(barcode, _selectedSerial)) {
+            using (var View = new InventoryItemView(barcode, _selectedSerial))
+            {
                 View.ShowDialog();
             }
 
@@ -113,16 +127,19 @@ namespace POS.UserControls {
 
         int? SelectedQty => itemsTable.SelectedCells[quantityCol.Index].Value as int?;
 
-        private void addItemBtn_Click(object sender, EventArgs e) {
+        private void addItemBtn_Click(object sender, EventArgs e)
+        {
             //using (var addItem = new AddItemForm()) {
             //    addItem.OnSave += Onsave_Callback;
             //    addItem.ShowDialog();
             //}
 
-            using (var form = new CreateEdit_Item_Form()) {
+            using (var form = new CreateEdit_Item_Form())
+            {
 
 
-                if (form.ShowDialog() == DialogResult.OK) {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
                     var item = form.Tag as Item;
                     itemsTable.Rows.Add(CreateRow(item));
 
@@ -140,11 +157,13 @@ namespace POS.UserControls {
             }
         }
 
-        private async void Onsave_Callback(object sender, EventArgs e) {
+        private async void Onsave_Callback(object sender, EventArgs e)
+        {
             await LoadDataAsync();
         }
         string _selectedSerial = string.Empty;
-        private async Task<bool> LoadDataAsync() {
+        private async Task<bool> LoadDataAsync()
+        {
             _selectedSerial = string.Empty;
             isRefreshing = true;
             bool resultsFound = false;
@@ -152,7 +171,8 @@ namespace POS.UserControls {
             _cancelSource = new CancellationTokenSource();
             var token = _cancelSource.Token;
 
-            using (var context = new POSEntities()) {
+            using (var context = new POSEntities())
+            {
                 decimal totalInventoryValue = await context.InventoryItems.AsNoTracking()
                     .Where(y => y.Product.Item.Type == ItemType.Quantifiable.ToString())
                     .Select(x => x.Quantity * x.Product.Item.SellingPrice)
@@ -161,14 +181,16 @@ namespace POS.UserControls {
 
                 totalPriceTxt.Text = totalInventoryValue.ToString("C2");
 
-                try {
+                try
+                {
                     var rawItems = context.Items
                         .AsNoTracking()
                         .AsQueryable()
                         .ApplyFilter(currentItemFilter)
                         .ApplySearch(keyword);
 
-                    if (await rawItems.CountAsync() == 0) {
+                    if (await rawItems.CountAsync() == 0)
+                    {
                         rawItems = context.InventoryItems
                             .AsQueryable()
                             .Where(x => x.SerialNumber == keyword)
@@ -179,11 +201,14 @@ namespace POS.UserControls {
 
                     var items = await rawItems.ToListAsync(token);
 
+                    itemCount.Text = items.Count.ToString("N0");
+
                     resultsFound = items.Count > 0;
 
                     token.ThrowIfCancellationRequested();
 
-                    if (resultsFound) {
+                    if (resultsFound)
+                    {
                         loadingLabelItem.Visible = true;
 
                         itemsTable.Rows.Clear();
@@ -193,13 +218,16 @@ namespace POS.UserControls {
                     else
                         MessageBox.Show("No Results Found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                catch (OperationCanceledException) {
+                catch (OperationCanceledException)
+                {
                     loadingLabelItem.Visible = false;
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message, "Connection Not Established!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                finally {
+                finally
+                {
                     _cancelSource?.Dispose();
                     _cancelSource = null;
                 }
@@ -210,18 +238,23 @@ namespace POS.UserControls {
             return resultsFound;
         }
 
-        private async Task<DataGridViewRow[]> CreateItemRowsAsync(IEnumerable<Item> items, CancellationToken ct) {
+        private async Task<DataGridViewRow[]> CreateItemRowsAsync(IEnumerable<Item> items, CancellationToken ct)
+        {
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
 
-            await Task.Run(() => {
-                try {
+            await Task.Run(() =>
+            {
+                try
+                {
 
-                    foreach (var i in items) {
+                    foreach (var i in items)
+                    {
                         rows.Add(CreateRow(i));
                         ct.ThrowIfCancellationRequested();
                     }
                 }
-                catch {
+                catch
+                {
 
                 }
             });
@@ -231,18 +264,22 @@ namespace POS.UserControls {
             return rows.ToArray();
         }
 
-        DataGridViewRow CreateRow(Item x) {
+        DataGridViewRow CreateRow(Item x)
+        {
             var row = new DataGridViewRow();
 
             Nullable<int> quantity = x.Type == ItemType.Software.ToString() || x.Type == ItemType.Service.ToString() ? default(int?) : x.QuantityInInventory;
 
-            if (x.InCriticalQuantity) {
+            if (x.InCriticalQuantity)
+            {
                 row.DefaultCellStyle.ForeColor = Color.Maroon;
             }
-            else if (quantity == 0) {
+            else if (quantity == 0)
+            {
                 row.DefaultCellStyle.ForeColor = Color.Gray;
             }
-            else if (quantity is null) {
+            else if (quantity is null)
+            {
                 row.DefaultCellStyle.ForeColor = Color.DarkGreen;
             }
 
@@ -258,16 +295,20 @@ namespace POS.UserControls {
             return row;
         }
 
-        private void editBtn_Click(object sender, EventArgs e) {
-            if (itemsTable.RowCount <= 0) {
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            if (itemsTable.RowCount <= 0)
+            {
                 MessageBox.Show("You do not have an item.");
                 return;
             }
 
-            using (var editForm = new CreateEdit_Item_Form(SelectedId)) {
+            using (var editForm = new CreateEdit_Item_Form(SelectedId))
+            {
 
 
-                if (editForm.ShowDialog() == DialogResult.OK) {
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
                     var x = editForm.Tag as Item;
 
                     var row = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex];
@@ -284,24 +325,29 @@ namespace POS.UserControls {
             }
         }
 
-        private void ShodSoldItemsForItem_Click(object sender, EventArgs e) {
+        private void ShodSoldItemsForItem_Click(object sender, EventArgs e)
+        {
 
             if (itemsTable.SelectedRows.Count == 0)
                 return;
 
-            using (var variation = new ItemSoldItemsForm(SelectedId)) {
+            using (var variation = new ItemSoldItemsForm(SelectedId))
+            {
                 variation.Text += SelectedName;
                 variation.ShowDialog();
             }
         }
 
-        public async void Refresh_Callback(object sender, EventArgs e) {
+        public async void Refresh_Callback(object sender, EventArgs e)
+        {
             keyword = string.Empty;
             await LoadDataAsync();
         }
 
-        void FillTable(IEnumerable<Item> items) {
-            itemsTable.InvokeIfRequired(() => {
+        void FillTable(IEnumerable<Item> items)
+        {
+            itemsTable.InvokeIfRequired(() =>
+            {
                 itemsTable.Rows.Clear();
 
                 var rows = items.Select(CreateRow).ToArray();
@@ -311,17 +357,21 @@ namespace POS.UserControls {
 
         }
 
-        private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
-            if (!UserManager.instance.currentLogin.CanEditItem) {
+        private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if (!UserManager.instance.currentLogin.CanEditItem)
+            {
                 e.Cancel = true;
                 return;
             }
-            if (MessageBox.Show("Are you sure you want to delete the selected item?", "This will also delete items in inventory.", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel) {
+            if (MessageBox.Show("Are you sure you want to delete the selected item?", "This will also delete items in inventory.", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+            {
                 e.Cancel = true;
                 return;
             }
 
-            using (var p = new POSEntities()) {
+            using (var p = new POSEntities())
+            {
                 var selected = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex].Cells[0].Value.ToString();
                 var i = p.Items.FirstOrDefault(x => x.Id == selected);
                 p.Items.Remove(i);
@@ -329,8 +379,10 @@ namespace POS.UserControls {
             }
         }
 
-        private void InventoryUC_Load(object sender, EventArgs e) {
-            try {
+        private void InventoryUC_Load(object sender, EventArgs e)
+        {
+            try
+            {
                 var currLogin = UserManager.instance.currentLogin;
 
                 //addVariationsBtn.Enabled = currLogin.CanEditProduct;
@@ -339,12 +391,14 @@ namespace POS.UserControls {
                 //stockinBtn.Enabled = currLogin.CanStockIn;
 
             }
-            catch {
+            catch
+            {
 
             }
         }
 
-        private void itemsTable_SelectionChanged(object sender, EventArgs e) {
+        private void itemsTable_SelectionChanged(object sender, EventArgs e)
+        {
             if (itemsTable.SelectedCells.Count == 0)
                 return;
 
@@ -357,7 +411,8 @@ namespace POS.UserControls {
             //addVariationsBtn.Enabled = isItemQuantifyable && currLogin.CanEditProduct;
         }
 
-        private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+        private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
             if (e.ColumnIndex != col_remove.Index) return;
             if (!UserManager.instance.currentLogin.CanEditItem) return;
             if (MessageBox.Show(
@@ -366,8 +421,10 @@ namespace POS.UserControls {
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
-            try {
-                using (var p = new POSEntities()) {
+            try
+            {
+                using (var p = new POSEntities())
+                {
                     var i = p.Items.FirstOrDefault(x => x.Id == SelectedId);
                     p.Items.Remove(i);
                     p.SaveChanges();
@@ -377,15 +434,19 @@ namespace POS.UserControls {
             catch (Exception) { }
         }
 
-        private async void button2_Click(object sender, EventArgs e) {
-            using (var s = new StockinForm()) {
-                if (s.ShowDialog() == DialogResult.OK) {
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            using (var s = new StockinForm())
+            {
+                if (s.ShowDialog() == DialogResult.OK)
+                {
                     await LoadDataAsync();
                 }
             }
         }
 
-        private void viewStockBtn_Click(object sender, EventArgs e) {
+        private void viewStockBtn_Click(object sender, EventArgs e)
+        {
             if (itemsTable.SelectedCells.Count < 0)
                 return;
             InventoryStockinLog log = new InventoryStockinLog(SelectedId, SelectedName);
@@ -394,31 +455,39 @@ namespace POS.UserControls {
 
         }
 
-        private void FormClosed_Dispose(object sender, FormClosedEventArgs e) {
+        private void FormClosed_Dispose(object sender, FormClosedEventArgs e)
+        {
             if (sender is Form form)
                 form.Dispose();
         }
 
         bool isRefreshing { get; set; } = false;
-        private async void button2_Click_1(object sender, EventArgs e) {
-            if (!isRefreshing) {
+        private async void button2_Click_1(object sender, EventArgs e)
+        {
+            if (!isRefreshing)
+            {
                 keyword = string.Empty;
                 await LoadDataAsync();
             }
 
         }
         bool _critShowing = false;
-        bool criticalIsShowing {
+        bool criticalIsShowing
+        {
             get => _critShowing;
-            set {
+            set
+            {
                 _critShowing = value;
             }
         }
 
-        private async void criticalLabel_Click(object sender, EventArgs e) {
+        private async void criticalLabel_Click(object sender, EventArgs e)
+        {
             if (!criticalIsShowing)
-                await Task.Run(() => {
-                    using (var c = new POSEntities()) {
+                await Task.Run(() =>
+                {
+                    using (var c = new POSEntities())
+                    {
                         IEnumerable<Item> critItems = c.Items.AsEnumerable().Where(x => x.InCriticalQuantity);
 
                         FillTable(critItems);
@@ -431,19 +500,24 @@ namespace POS.UserControls {
         }
 
         string keyword = string.Empty;
-        private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
+        private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
+        {
             CancelLoading();
             keyword = e.Text.Trim();
             e.SearchFound = await LoadDataAsync();
         }
-        private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
+        {
             keyword = string.Empty;
             await LoadDataAsync();
         }
 
-        private async void radioButton1_CheckedChanged(object sender, EventArgs e) {
-            if (sender is RadioButton rb && rb.Checked) {
-                if (int.TryParse(rb.Tag.ToString(), out int value)) {
+        private async void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton rb && rb.Checked)
+            {
+                if (int.TryParse(rb.Tag.ToString(), out int value))
+                {
 
                     ItemFilter filter = (ItemFilter)value;
                     currentItemFilter = filter;
@@ -453,15 +527,18 @@ namespace POS.UserControls {
             }
         }
     }
-    public static class ItemsQueryExtension {
-        public static IQueryable<Item> ApplySearch(this IQueryable<Item> items, string keyword) {
+    public static class ItemsQueryExtension
+    {
+        public static IQueryable<Item> ApplySearch(this IQueryable<Item> items, string keyword)
+        {
             if (string.IsNullOrWhiteSpace(keyword))
                 return items;
 
             return items.Where(i => i.Barcode == keyword || i.Name.Contains(keyword) || i.Tags.Contains(keyword));
         }
 
-        public static IQueryable<Item> IsInCriticalQty(this IQueryable<Item> items) {
+        public static IQueryable<Item> IsInCriticalQty(this IQueryable<Item> items)
+        {
             return items.Where(item => item.CriticalQuantity > 0 && item.Type == ItemType.Quantifiable.ToString())
                         .Where(i => i.Products
                                     .Select(a => a.InventoryItems
@@ -477,7 +554,8 @@ namespace POS.UserControls {
                                     .Sum() <= i.CriticalQuantity);
         }
 
-        public static IQueryable<Item> IsAvailable(this IQueryable<Item> items) {
+        public static IQueryable<Item> IsAvailable(this IQueryable<Item> items)
+        {
             return items.Where(item => item.Type == ItemType.Quantifiable.ToString())
                         .Where(i => i.Products
                                     .Select(a => a.InventoryItems
@@ -487,7 +565,8 @@ namespace POS.UserControls {
                                     .Sum() > 0);
         }
 
-        public static IQueryable<Item> IsEmpty(this IQueryable<Item> items) {
+        public static IQueryable<Item> IsEmpty(this IQueryable<Item> items)
+        {
             return items.Where(item => item.Type == ItemType.Quantifiable.ToString())
                         .Where(i => i.Products
                                     .Select(a => a.InventoryItems
@@ -497,8 +576,10 @@ namespace POS.UserControls {
                                     .Sum() <= 0);
         }
 
-        public static IQueryable<Item> ApplyFilter(this IQueryable<Item> items, ItemFilter filter) {
-            switch (filter) {
+        public static IQueryable<Item> ApplyFilter(this IQueryable<Item> items, ItemFilter filter)
+        {
+            switch (filter)
+            {
                 case ItemFilter.Available:
                     return items.IsAvailable();
                 case ItemFilter.InCriticalQty:
