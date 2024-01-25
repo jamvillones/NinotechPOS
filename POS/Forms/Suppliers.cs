@@ -163,6 +163,9 @@ namespace POS.Forms
         {
             _keyword = e.Text.Trim();
             e.SearchFound = await LoadDataAsync();
+
+            if (!e.SearchFound)
+                MessageBox.Show("No Entries Found!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         string _keyword = string.Empty;
@@ -176,7 +179,10 @@ namespace POS.Forms
         {
             using (var context = new POSEntities())
             {
-                var suppliers = await context.Suppliers.AsNoTracking().AsQueryable().ApplySearch(_keyword).ToListAsync();
+                var suppliers = await context.Suppliers.AsNoTracking().AsQueryable()
+                    .Where(s => s.Name != "none")
+                    .ApplySearch(_keyword)
+                    .ToListAsync();
 
                 if (suppliers.Count > 0)
                 {

@@ -86,22 +86,20 @@ namespace POS.UserControls
             var table = (DataGridView)sender;
             int index = (int)(table.SelectedCells[0].Value);
 
+            ///check if the entry is still available
             using (var context = new POSEntities())
                 if (!context.Sales.Any(x => x.Id == index))
                 {
-                    MessageBox.Show("Sale removed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Sale Removed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     table.Rows.RemoveAt(e.RowIndex);
                     return;
                 }
 
             using (var saleDetails = new SaleDetails(index))
             {
-                //saleDetails.SetId(index);
-                //saleDetails.OnSave += SaleDetails_OnSave;
+                ///the result is okay when the sale is voided, thus entry on the table must also be removed
                 if (saleDetails.ShowDialog() == DialogResult.OK)
-                {
                     table.Rows.RemoveAt(e.RowIndex);
-                }
             }
         }
 

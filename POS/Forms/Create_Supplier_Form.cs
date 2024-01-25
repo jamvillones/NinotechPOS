@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -31,6 +32,12 @@ namespace POS.Forms
             if (!ValidationSuccessfull)
                 return;
 
+            if (supplierName.Text.Trim().Equals("none", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("This Name is Reserved for Non-Finite Items (Services and Software)", "Name Not Allowed!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
             using (var context = new POSEntities())
             {
                 if (context.Suppliers.FirstOrDefault(s => s.Name == SupplierName) != null)
@@ -55,6 +62,6 @@ namespace POS.Forms
             }
         }
 
-        bool ValidationSuccessfull => !string.IsNullOrWhiteSpace(SupplierName);
+        bool ValidationSuccessfull => !supplierName.Text.IsEmpty();
     }
 }

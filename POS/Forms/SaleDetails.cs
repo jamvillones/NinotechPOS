@@ -33,11 +33,7 @@ namespace POS.Forms
 
         Login CurrentLogin => UserManager.instance.currentLogin;
 
-        private int _saleId;
-
-        //Sale sale;
-
-        public event EventHandler OnSave;
+        private readonly int _saleId;
 
         DataGridViewRow CreateRow(SoldItem soldItem) => itemsTable.CreateRow(
             soldItem.Product.Item.Name,
