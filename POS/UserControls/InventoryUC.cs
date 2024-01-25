@@ -215,8 +215,6 @@ namespace POS.UserControls
                         var rows = await CreateItemRowsAsync(items, token);
                         itemsTable.Rows.AddRange(rows);
                     }
-                    else
-                        MessageBox.Show("No Results Found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (OperationCanceledException)
                 {
@@ -505,6 +503,8 @@ namespace POS.UserControls
             CancelLoading();
             keyword = e.Text.Trim();
             e.SearchFound = await LoadDataAsync();
+            if (!e.SearchFound)
+                MessageBox.Show("No Entries Found!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
