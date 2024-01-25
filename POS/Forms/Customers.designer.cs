@@ -36,8 +36,8 @@
             this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_transact = new System.Windows.Forms.DataGridViewButtonColumn();
             this.col_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_del = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -72,8 +72,8 @@
             this.col_id,
             this.col_transact,
             this.col_name,
-            this.col_address,
             this.col_contact,
+            this.col_address,
             this.col_del});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
@@ -123,16 +123,16 @@
             this.col_name.HeaderText = "CUSTOMER NAME";
             this.col_name.Name = "col_name";
             // 
-            // col_address
-            // 
-            this.col_address.HeaderText = "ADDRESS";
-            this.col_address.Name = "col_address";
-            // 
             // col_contact
             // 
             this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.col_contact.HeaderText = "CONTACT DETAILS";
             this.col_contact.Name = "col_contact";
+            // 
+            // col_address
+            // 
+            this.col_address.HeaderText = "ADDRESS";
+            this.col_address.Name = "col_address";
             // 
             // col_del
             // 
@@ -223,8 +223,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
         private System.Windows.Forms.DataGridViewButtonColumn col_transact;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_address;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_contact;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_address;
         private System.Windows.Forms.DataGridViewButtonColumn col_del;
     }
 }
