@@ -63,7 +63,6 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.totalPriceTxt = new System.Windows.Forms.Label();
@@ -90,7 +89,7 @@
             this.tablePanel.Location = new System.Drawing.Point(150, 0);
             this.tablePanel.Margin = new System.Windows.Forms.Padding(5);
             this.tablePanel.Name = "tablePanel";
-            this.tablePanel.Size = new System.Drawing.Size(622, 448);
+            this.tablePanel.Size = new System.Drawing.Size(622, 465);
             this.tablePanel.TabIndex = 13;
             // 
             // itemsTable
@@ -140,7 +139,7 @@
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(622, 425);
+            this.itemsTable.Size = new System.Drawing.Size(622, 442);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 6;
             this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
@@ -429,9 +428,9 @@
             this.contentPanel.Controls.Add(this.tablePanel);
             this.contentPanel.Controls.Add(this.panel6);
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 75);
+            this.contentPanel.Location = new System.Drawing.Point(0, 58);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(774, 450);
+            this.contentPanel.Size = new System.Drawing.Size(774, 467);
             this.contentPanel.TabIndex = 6;
             // 
             // panel6
@@ -448,7 +447,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(150, 448);
+            this.panel6.Size = new System.Drawing.Size(150, 465);
             this.panel6.TabIndex = 12;
             // 
             // panel1
@@ -489,22 +488,6 @@
             this.panel9.Size = new System.Drawing.Size(120, 1);
             this.panel9.TabIndex = 12;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.checkBox1.Location = new System.Drawing.Point(0, 0);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(774, 17);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Include Emtpy In Search Results";
-            this.toolTip1.SetToolTip(this.checkBox1, "Search should include empty");
-            this.checkBox1.UseVisualStyleBackColor = false;
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
@@ -516,7 +499,7 @@
             this.flowLayoutPanel1.Controls.Add(this.loadingLabelItem);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 52);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 35);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(774, 23);
@@ -589,7 +572,7 @@
             this.searchBar.BackColor = System.Drawing.Color.White;
             this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchBar.Location = new System.Drawing.Point(0, 17);
+            this.searchBar.Location = new System.Drawing.Point(0, 0);
             this.searchBar.MaximumSize = new System.Drawing.Size(350, 35);
             this.searchBar.MinimumSize = new System.Drawing.Size(219, 35);
             this.searchBar.Name = "searchBar";
@@ -607,7 +590,6 @@
             this.Controls.Add(this.contentPanel);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.searchBar);
-            this.Controls.Add(this.checkBox1);
             this.Name = "InventoryUC";
             this.Size = new System.Drawing.Size(774, 525);
             this.Load += new System.EventHandler(this.InventoryUC_Load);
@@ -637,7 +619,6 @@
         protected System.Windows.Forms.Button stockinBtn;
         private System.Windows.Forms.Panel contentPanel;
         protected System.Windows.Forms.Button viewStockBtn;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ToolTip toolTip1;
         protected System.Windows.Forms.Button button2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

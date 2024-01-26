@@ -335,5 +335,10 @@ namespace POS.Forms.ItemRegistration {
                 }
             }
         }
+
+        private void CreateEdit_Item_Form_KeyDown(object sender, KeyEventArgs e) {
+            if (e.Control && e.KeyCode == Keys.S)
+                saveBtn.PerformClick();
+        }
     }
 }

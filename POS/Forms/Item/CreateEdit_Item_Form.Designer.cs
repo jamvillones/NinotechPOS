@@ -57,7 +57,7 @@
             this._description = new System.Windows.Forms.TextBox();
             this.panel14 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.addSuppBtn = new System.Windows.Forms.Button();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -408,27 +408,27 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Notes:";
             // 
-            // addSuppBtn
+            // saveBtn
             // 
-            this.addSuppBtn.AutoSize = true;
-            this.addSuppBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.addSuppBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addSuppBtn.Location = new System.Drawing.Point(0, 0);
-            this.addSuppBtn.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.addSuppBtn.MaximumSize = new System.Drawing.Size(150, 35);
-            this.addSuppBtn.MinimumSize = new System.Drawing.Size(150, 35);
-            this.addSuppBtn.Name = "addSuppBtn";
-            this.addSuppBtn.Size = new System.Drawing.Size(150, 35);
-            this.addSuppBtn.TabIndex = 11;
-            this.addSuppBtn.TabStop = false;
-            this.addSuppBtn.Text = "Save";
-            this.addSuppBtn.UseVisualStyleBackColor = false;
-            this.addSuppBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            this.saveBtn.AutoSize = true;
+            this.saveBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.saveBtn.Location = new System.Drawing.Point(0, 0);
+            this.saveBtn.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
+            this.saveBtn.MaximumSize = new System.Drawing.Size(150, 35);
+            this.saveBtn.MinimumSize = new System.Drawing.Size(150, 35);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(150, 35);
+            this.saveBtn.TabIndex = 11;
+            this.saveBtn.TabStop = false;
+            this.saveBtn.Text = "Save";
+            this.saveBtn.UseVisualStyleBackColor = false;
+            this.saveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Controls.Add(this.addSuppBtn);
+            this.flowLayoutPanel1.Controls.Add(this.saveBtn);
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 406);
@@ -669,6 +669,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Item";
             this.Load += new System.EventHandler(this.Create_Item_Form_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CreateEdit_Item_Form_KeyDown);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -718,7 +719,7 @@
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button addSuppBtn;
+        private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridView costTable;
