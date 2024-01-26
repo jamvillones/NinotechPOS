@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -54,16 +55,16 @@ namespace POS.Forms.ItemRegistration {
         private Item Item {
             get => new Item() {
                 Id = _id == string.Empty ? Guid.NewGuid().ToString("N") : _id,
-                Barcode = string.IsNullOrWhiteSpace(_barcode.Text) ? null : _barcode.Text.Trim(),
-                Name = _name.Text.Trim(),
+                Barcode = _barcode.Text.NullIfEmpty(),
+                Name = _name.Text.NullIfEmpty(),
                 SellingPrice = _price.Value,
                 CriticalQuantity = (int?)_criticalQty.Value,
-                Details = string.IsNullOrWhiteSpace(_description.Text) ? null : _description.Text.Trim(),
                 Type = _type.SelectedItem.ToString(),
                 IsSerialRequired = checkBox1.Checked,
+                Details = _description.Text.NullIfEmpty(),
                 Tags = string.IsNullOrWhiteSpace(_tags.Text) ? null : _tags.Text.Trim(',', ' '),
                 Products = Costs.Select(c => c.ToProduct).ToList(),
-                SampleImage = pictureBox1.Image.ToByteArray()
+                SampleImage = pictureBox.Image.ToByteArray()
             };
             set {
                 this.Text = "Edit Item - " + value.Name;
@@ -75,7 +76,7 @@ namespace POS.Forms.ItemRegistration {
                 _description.Text = value.Details;
                 _tags.Text = value.Tags;
                 _type.SelectedItem = value.Type;
-                pictureBox1.Image = value.SampleImage.ToImage();
+                pictureBox.Image = value.SampleImage.ToImage();
 
                 checkBox1.Checked = value.IsSerialRequired;
                 checkBox1.Enabled = false;
@@ -96,9 +97,14 @@ namespace POS.Forms.ItemRegistration {
         bool IsImageChanged = false;
 
         private async void SaveBtn_Click(object sender, EventArgs e) {
+
             if (Costs.Count <= 0) {
-                MessageBox.Show("Cost cannot be empty!", "Saving aborted", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                if (MessageBox.Show(
+                    "Items without Cost cannot be restocked. Are you sure you intend to leave it empty?", 
+                    "Cost Is Empty",
+                    MessageBoxButtons.OKCancel, 
+                    MessageBoxIcon.Warning) == DialogResult.Cancel)
+                    return;
             }
 
             try {
@@ -156,6 +162,10 @@ namespace POS.Forms.ItemRegistration {
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     ); return;
+            }
+            catch (DbEntityValidationException) {
+                MessageBox.Show("Item Name cannot be empty!", "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -268,9 +278,9 @@ namespace POS.Forms.ItemRegistration {
 
         private void button3_Click(object sender, EventArgs e) {
             if (MessageBox.Show("Are you sure you want to remove this image?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
-            if (pictureBox1.Image != null) {
+            if (pictureBox.Image != null) {
                 IsImageChanged = true;
-                pictureBox1.Image = null;
+                pictureBox.Image = null;
             }
         }
 
@@ -280,7 +290,7 @@ namespace POS.Forms.ItemRegistration {
             if (result == DialogResult.OK) // Test result.
             {
                 try {
-                    pictureBox1.Image = new Bitmap(openFileDialog.FileName);
+                    pictureBox.Image = new Bitmap(openFileDialog.FileName);
                     IsImageChanged = true;
                 }
                 catch (IOException) {
@@ -307,7 +317,7 @@ namespace POS.Forms.ItemRegistration {
                 _description.Text = string.Empty;
 
                 Costs.Clear();
-                pictureBox1.Image = null;
+                pictureBox.Image = null;
 
                 return;
             }
@@ -325,7 +335,7 @@ namespace POS.Forms.ItemRegistration {
                     _description.Text = currentItem.Details;
                     _tags.Text = currentItem.Tags;
                     _type.SelectedItem = currentItem.Type;
-                    pictureBox1.Image = currentItem.SampleImage.ToImage();
+                    pictureBox.Image = currentItem.SampleImage.ToImage();
 
                     checkBox1.Checked = currentItem.IsSerialRequired;
 
