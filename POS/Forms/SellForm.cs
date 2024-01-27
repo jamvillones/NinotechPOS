@@ -9,25 +9,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace POS.Forms
-{
-    public partial class SellForm : Form
-    {
-        public SellForm()
-        {
+namespace POS.Forms {
+    public partial class SellForm : Form {
+        public SellForm() {
             InitializeComponent();
 
             SetBindings();
             FormatValues();
         }
 
-        public void SetSearchKeyword(string keyword)
-        {
+        public void SetSearchKeyword(string keyword) {
             searchControl1.firstControl.Text = keyword;
         }
 
-        private void SetBindings()
-        {
+        private void SetBindings() {
             cartTable.AutoGenerateColumns = false;
             col_Barcode.DataPropertyName = nameof(Cart_Item_ViewModel.Id);
             col_Name.DataPropertyName = nameof(Cart_Item_ViewModel.Name);
@@ -38,57 +33,60 @@ namespace POS.Forms
             col_SubTotal.DataPropertyName = nameof(Cart_Item_ViewModel.SubTotal);
             cartTable.DataSource = CartItems;
 
-            _customerOption.DisplayMember = nameof(Customer.Name);
+            //_customerOption.DisplayMember = nameof(Customer.Name);
         }
 
-        private async void SellForm_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                using (var context = new POSEntities())
-                {
-                    var customers = await context.Customers.AsQueryable().AsNoTracking().OrderBy(o => o.Name).ToListAsync();
-                    await Task.Run(() =>
-                    {
-                        foreach (var c in customers)
-                            _customerOption.InvokeIfRequired(() => _customerOption.Items.Add(c));
-                    });
+        private Customer _customer;
 
-                    _customerOption.SelectedItem = customers.FirstOrDefault(x => x.Name.Equals("walkin", StringComparison.OrdinalIgnoreCase));
+        public Customer Customer {
+            get { return _customer; }
+            set {
+                _customer = value;
+                customerTxt.Text = _customer.ToString();
+            }
+        }
+
+
+        private async void SellForm_Load(object sender, EventArgs e) {
+            try {
+                using (var context = new POSEntities()) {
+
+                    Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "walkin");
+                    //var customers = await context.Customers.AsQueryable().AsNoTracking().OrderBy(o => o.Name).ToListAsync();
+                    //await Task.Run(() => {
+                    //    foreach (var c in customers)
+                    //        _customerOption.InvokeIfRequired(() => _customerOption.Items.Add(c));
+                    //});
+
+                    //_customerOption.SelectedItem = customers.FirstOrDefault(x => x.Name.Equals("walkin", StringComparison.OrdinalIgnoreCase));
 
                 }
             }
-            catch (Exception)
-            {
+            catch (Exception) {
 
             }
         }
 
         private BindingList<Cart_Item_ViewModel> CartItems = new BindingList<Cart_Item_ViewModel>();
 
-        private class Cart_Item_ViewModel : INotifyPropertyChanged
-        {
+        private class Cart_Item_ViewModel : INotifyPropertyChanged {
             public string Id { get; set; }
             public string Name { get; set; }
             public string Serial { get; set; }
 
             private int _quantity;
-            public int Quantity
-            {
+            public int Quantity {
                 get { return _quantity; }
-                set
-                {
+                set {
                     _quantity = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Quantity)));
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SubTotal)));
                 }
             }
             private decimal _price;
-            public decimal Price
-            {
+            public decimal Price {
                 get { return _price; }
-                set
-                {
+                set {
                     _price = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Price)));
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SubTotal)));
@@ -98,11 +96,9 @@ namespace POS.Forms
 
             public event PropertyChangedEventHandler PropertyChanged;
 
-            public decimal Discount
-            {
+            public decimal Discount {
                 get { return _discount; }
-                set
-                {
+                set {
                     _discount = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Discount)));
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SubTotal)));
@@ -111,30 +107,25 @@ namespace POS.Forms
             public decimal SubTotal => Quantity * (Price - Discount);
         }
 
-        private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
-        {
+        private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e) {
             loadingTxt.Text = "Searching...";
             await Task.Delay(100);
 
             string serial = string.Empty;
 
-            if (!GetQtyAndKeywordFromString(e.Text, out int qty, out string keyword))
-            {
+            if (!GetQtyAndKeywordFromString(e.Text, out int qty, out string keyword)) {
                 MessageBox.Show("Keyword must be formatted in [number]*[barcode|serial number]", "Parsing Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            try
-            {
-                using (var context = new POSEntities())
-                {
+            try {
+                using (var context = new POSEntities()) {
                     var selectedItem = await context.Items
                         .AsNoTracking()
                         .AsQueryable()
                         .FirstOrDefaultAsync(i => i.Barcode == keyword || i.Name == keyword);
 
-                    if (selectedItem != null && !selectedItem.IsFinite)
-                    {
+                    if (selectedItem != null && !selectedItem.IsFinite) {
                         TryAddInfinite(selectedItem.Id, selectedItem.Name, qty, selectedItem.SellingPrice);
                         loadingTxt.Text = string.Empty;
                         return;
@@ -142,12 +133,10 @@ namespace POS.Forms
 
                     int maxQty = 0;
 
-                    if (selectedItem != null)
-                    {
+                    if (selectedItem != null) {
                         maxQty = selectedItem.QuantityInInventory;
 
-                        if (maxQty <= 0)
-                        {
+                        if (maxQty <= 0) {
                             //loadingTxt.Text = "ITEM IS EMPTY";
                             await Task.Delay(100);
                             notifyIcon1.ShowBalloonTip(1, "Item is Empty!", selectedItem.Name, ToolTipIcon.Warning);
@@ -155,12 +144,10 @@ namespace POS.Forms
                             return;
                         }
 
-                        if (selectedItem.IsSerialRequired)
-                        {
+                        if (selectedItem.IsSerialRequired) {
                             int repeats = qty <= maxQty ? qty : maxQty;
                             qty = 1;
-                            for (int i = 0; i < repeats; i++)
-                            {
+                            for (int i = 0; i < repeats; i++) {
                                 var takenSerialNumbers = CartItems.Select(x => x.Serial).ToArray();
 
                                 serial = (await context.InventoryItems.AsNoTracking().AsQueryable()
@@ -168,8 +155,7 @@ namespace POS.Forms
                                     .Where(x => x.Product.Item.Id == selectedItem.Id)
                                     .FirstAsync())?.SerialNumber;
 
-                                CartItems.Add(new Cart_Item_ViewModel()
-                                {
+                                CartItems.Add(new Cart_Item_ViewModel() {
                                     Id = selectedItem.Id,
                                     Name = selectedItem.Name,
                                     Serial = serial,
@@ -184,24 +170,21 @@ namespace POS.Forms
                         }
 
                     }
-                    else
-                    {
+                    else {
                         var invItem = await context
                             .InventoryItems
                             .AsNoTracking()
                             .AsQueryable()
                             .FirstOrDefaultAsync(i => i.SerialNumber == keyword);
 
-                        if (invItem != null && CartItems.All(c => c.Serial != invItem.SerialNumber))
-                        {
+                        if (invItem != null && CartItems.All(c => c.Serial != invItem.SerialNumber)) {
                             qty = 1;
                             serial = invItem.SerialNumber;
                             selectedItem = invItem.Product.Item;
                         }
                     }
 
-                    if (selectedItem is null)
-                    {
+                    if (selectedItem is null) {
                         //loadingTxt.Text = "ITEM NOT FOUND!";
                         await Task.Delay(100);
                         notifyIcon1.ShowBalloonTip(1, "Item not found", "Please make sure that the item is already added to the records.", ToolTipIcon.Error);
@@ -216,10 +199,8 @@ namespace POS.Forms
 
                 }
             }
-            catch (Exception ex)
-            {
-                if (ex.Message == "Sequence contains no elements")
-                {
+            catch (Exception ex) {
+                if (ex.Message == "Sequence contains no elements") {
                     await Task.Delay(100);
                     notifyIcon1.ShowBalloonTip(1, "Item is at maximum quantity", "All Items for this entry is already in cart.", ToolTipIcon.Warning);
                     loadingTxt.Text = string.Empty;
@@ -228,10 +209,8 @@ namespace POS.Forms
             }
         }
 
-        void AddWithSerial(string id, string name, string serial, decimal price, decimal discount = 0)
-        {
-            CartItems.Add(new Cart_Item_ViewModel()
-            {
+        void AddWithSerial(string id, string name, string serial, decimal price, decimal discount = 0) {
+            CartItems.Add(new Cart_Item_ViewModel() {
                 Id = id,
                 Name = name,
                 Serial = serial,
@@ -241,14 +220,11 @@ namespace POS.Forms
             });
             loadingTxt.Text = string.Empty;
         }
-        void TryAddInfinite(string id, string name, int qty, decimal price, decimal discount = 0)
-        {
+        void TryAddInfinite(string id, string name, int qty, decimal price, decimal discount = 0) {
 
-            if (CartItems.Count > 0 && CartItems.Any(c => c.Id == id))
-            {
+            if (CartItems.Count > 0 && CartItems.Any(c => c.Id == id)) {
                 var already = CartItems.FirstOrDefault(c => c.Id == id);
-                if (already != null)
-                {
+                if (already != null) {
                     already.Quantity += qty;
                     OnTotalChanges();
                     FormatValues();
@@ -257,8 +233,7 @@ namespace POS.Forms
                 }
             }
 
-            CartItems.Add(new Cart_Item_ViewModel()
-            {
+            CartItems.Add(new Cart_Item_ViewModel() {
                 Id = id,
                 Name = name,
                 Serial = string.Empty,
@@ -269,16 +244,12 @@ namespace POS.Forms
             loadingTxt.Text = string.Empty;
         }
 
-        void TryAdd(string id, string name, int qty, int maxQty, decimal price, decimal discount = 0)
-        {
+        void TryAdd(string id, string name, int qty, int maxQty, decimal price, decimal discount = 0) {
 
-            if (CartItems.Count > 0 && CartItems.Any(c => c.Id == id))
-            {
+            if (CartItems.Count > 0 && CartItems.Any(c => c.Id == id)) {
                 var already = CartItems.FirstOrDefault(c => c.Id == id);
-                if (already != null)
-                {
-                    if (already.Quantity >= maxQty)
-                    {
+                if (already != null) {
+                    if (already.Quantity >= maxQty) {
                         notifyIcon1.ShowBalloonTip(1, "Item is at maximum quantity", "All Items for this entry is already in cart.", ToolTipIcon.Warning);
                         loadingTxt.Text = string.Empty;
                         return;
@@ -292,8 +263,7 @@ namespace POS.Forms
                 }
             }
 
-            CartItems.Add(new Cart_Item_ViewModel()
-            {
+            CartItems.Add(new Cart_Item_ViewModel() {
                 Id = id,
                 Name = name,
                 Serial = string.Empty,
@@ -304,30 +274,24 @@ namespace POS.Forms
             loadingTxt.Text = string.Empty;
         }
 
-        void OnTotalChanges()
-        {
+        void OnTotalChanges() {
             discount.Maximum = total;
         }
 
-        bool GetQtyAndKeywordFromString(string raw, out int qty, out string keyword)
-        {
+        bool GetQtyAndKeywordFromString(string raw, out int qty, out string keyword) {
             qty = 1;
             keyword = string.Empty;
             var splitted = raw.Split('*');
 
-            if (splitted.Length == 2)
-            {
-                if (int.TryParse(splitted[0], out qty))
-                {
+            if (splitted.Length == 2) {
+                if (int.TryParse(splitted[0], out qty)) {
                     keyword = splitted[1];
                 }
-                else
-                {
+                else {
                     return false;
                 }
             }
-            else
-            {
+            else {
                 keyword = raw;
             }
             return true;
@@ -336,81 +300,69 @@ namespace POS.Forms
         decimal total => CartItems.Select(c => c.SubTotal).Sum();
         decimal grandtTotal => total - discount.Value;
 
-        private void cartTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
+        private void cartTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e) {
             OnTotalChanges();
             FormatValues();
             checkoutBtn.Enabled = cartTable.Rows.Count > 0;
         }
 
-        private void tendered_ValueChanged(object sender, EventArgs e)
-        {
+        private void tendered_ValueChanged(object sender, EventArgs e) {
             FormatValues();
         }
 
-        private void discount_ValueChanged(object sender, EventArgs e)
-        {
+        private void discount_ValueChanged(object sender, EventArgs e) {
             FormatValues();
         }
 
-        void FormatValues()
-        {
+        void FormatValues() {
             this.totalTxt.Text = total.ToCurrency();
             this.grandTotalTxt.Text = grandtTotal.ToCurrency();
             this.changeTxt.Text = (tendered.Value - grandtTotal).ToCurrency();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
+        private void button3_Click(object sender, EventArgs e) {
             tendered.Value = grandtTotal;
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
+        private void button4_Click(object sender, EventArgs e) {
             discount.Value = total;
             tendered.Value = 0;
         }
 
-        private async void _customerOption_Validated(object sender, EventArgs e)
-        {
-            if (_customerOption.Text.IsEmpty())
-                return;
-            ///the option is not yet in the valid list
-            if (_customerOption.SelectedItem == null &&
-                MessageBox.Show("Customer is not yet registered. Would you like to register?",
-                "",
-                MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Question) == DialogResult.OK)
-            {
-                var details = _customerOption.Text.Split('/').ToArray();
-                var cust_Name = details[0];
-                var cust_contact = details.Length == 2 || details.Length == 3 ? details[1] : null;
-                var cust_address = details.Length == 3 ? details[2] : null;
+        private async void _customerOption_Validated(object sender, EventArgs e) {
+            //if (_customerOption.Text.IsEmpty())
+            //    return;
+            /////the option is not yet in the valid list
+            //if (_customerOption.SelectedItem == null &&
+            //    MessageBox.Show("Customer is not yet registered. Would you like to register?",
+            //    "",
+            //    MessageBoxButtons.OKCancel,
+            //    MessageBoxIcon.Question) == DialogResult.OK) {
+            //    var details = _customerOption.Text.Split('/').ToArray();
+            //    var cust_Name = details[0];
+            //    var cust_contact = details.Length == 2 || details.Length == 3 ? details[1] : null;
+            //    var cust_address = details.Length == 3 ? details[2] : null;
 
-                var addCustomer = new Customer()
-                {
-                    Name = cust_Name.Trim(),
-                    ContactDetails = cust_contact.NullIfEmpty(),
-                    Address = cust_address.NullIfEmpty()
-                };
+            //    var addCustomer = new Customer() {
+            //        Name = cust_Name.Trim(),
+            //        ContactDetails = cust_contact.NullIfEmpty(),
+            //        Address = cust_address.NullIfEmpty()
+            //    };
 
-                using (var context = new POSEntities())
-                {
-                    var result = context.Customers.Add(addCustomer);
-                    await context.SaveChangesAsync();
+            //    using (var context = new POSEntities()) {
+            //        var result = context.Customers.Add(addCustomer);
+            //        await context.SaveChangesAsync();
 
-                    _customerOption.Items.Add(result);
-                    _customerOption.SelectedItem = result;
-                }
-            }
+            //        _customerOption.Items.Add(result);
+            //        _customerOption.SelectedItem = result;
+            //    }
+            //}
         }
 
-        private void cartTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
+        private void cartTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) {
             FormatValues();
 
-            if (cartTable.Rows.Count == 0)
-            {
+            if (cartTable.Rows.Count == 0) {
                 discBtn.Enabled = editQtyBtn.Enabled = priceBtn.Enabled = false;
             }
 
@@ -418,74 +370,69 @@ namespace POS.Forms
 
         }
 
-        private void upDown_Validated(object sender, EventArgs e)
-        {
-            if (sender is NumericUpDown updown)
-            {
-                if (updown.Text.IsEmpty())
-                {
+        private void upDown_Validated(object sender, EventArgs e) {
+            if (sender is NumericUpDown updown) {
+                if (updown.Text.IsEmpty()) {
                     updown.Value = 0;
                 }
             }
         }
 
-        bool ValidateCheckout()
-        {
-            if (CartItems.Count == 0)
-                return false;
+        bool ValidateCheckout() => CartItems.Count > 0;
+        //{
+        //if (CartItems.Count == 0)
+        //    return false;
 
-            if (_customerOption.SelectedItem == null)
-            {
-                if (
-                    _customerOption.Text.IsEmpty() &&
-                    MessageBox.Show(
-                    "Customer will be set to walkin. Are you sure you want to continue?", "Customer is not set",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question) == DialogResult.Cancel) return false;
-                else
-                {
-                    if (
-                    MessageBox.Show("Customer will be added automatically with the details provided when you proceed.\n\nYou can change it out later in the Customers List.",
-                    "Customer is not yet registered.",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question) == DialogResult.Cancel) return false;
-                }
-            }
+        //if (_customerOption.SelectedItem == null) {
+        //    if (
+        //        _customerOption.Text.IsEmpty() &&
+        //        MessageBox.Show(
+        //        "Customer will be set to walkin. Are you sure you want to continue?", "Customer is not set",
+        //        MessageBoxButtons.OKCancel,
+        //        MessageBoxIcon.Question) == DialogResult.Cancel) return false;
+        //    else {
+        //        if (
+        //        MessageBox.Show("Customer will be added automatically with the details provided when you proceed.\n\nYou can change it out later in the Customers List.",
+        //        "Customer is not yet registered.",
+        //        MessageBoxButtons.OKCancel,
+        //        MessageBoxIcon.Question) == DialogResult.Cancel) return false;
+        //    }
+        //}
 
-            return true;
-        }
+        //return true;
 
-        bool IsAllValuesEqual(decimal[] priceList, out decimal value)
-        {
+        //return CartItems.Count > 0;
+        //}
+
+        bool IsAllValuesEqual(decimal[] priceList, out decimal value) {
             value = 0;
             if (priceList.Length == 0) return false;
 
             var initialValue = priceList.First();
 
-            if (priceList.All(item => item == initialValue))
-            {
+            if (priceList.All(item => item == initialValue)) {
                 value = initialValue;
                 return true;
             }
             return false;
         }
 
-        void Reset()
-        {
+        async Task Reset() {
             CartItems.Clear();
-
             tendered.Value = discount.Value = 0;
+
+            customerTxt.Text = "loading...";
+            using (var context = new POSEntities()) {
+                Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "walkin");
+            }
         }
 
-        private async void checkout_Click(object sender, EventArgs e)
-        {
+        private async void checkout_Click(object sender, EventArgs e) {
             if (!ValidateCheckout()) return;
 
-            using (var context = new POSEntities())
-            {
-                var newSale = new Sale()
-                {
-                    Customer = (Customer)_customerOption.SelectedItem,
+            using (var context = new POSEntities()) {
+                var newSale = new Sale() {
+                    Customer = await context.Customers.FirstOrDefaultAsync(c => c.Id == Customer.Id),
                     Login = await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.currentLogin.Id),
                     Date = DateTime.Now,
                     AmountRecieved = tendered.Value > grandtTotal ? grandtTotal : tendered.Value,
@@ -495,18 +442,14 @@ namespace POS.Forms
 
                 ToPrint = context.Sales.Add(newSale);
 
-                foreach (var entry in CartItems)
-                {
+                foreach (var entry in CartItems) {
                     var item = await context.Items.FirstOrDefaultAsync(x => x.Id == entry.Id);
                     SoldItem newSoldItem = null;
-                    if (item.IsFinite)
-                    {
-                        if (item.IsSerialRequired)
-                        {
+                    if (item.IsFinite) {
+                        if (item.IsSerialRequired) {
                             var inv = await context.InventoryItems.FirstOrDefaultAsync(x => x.SerialNumber == entry.Serial);
 
-                            newSoldItem = new SoldItem()
-                            {
+                            newSoldItem = new SoldItem() {
                                 Product = inv.Product,
                                 SerialNumber = entry.Serial,
                                 Quantity = entry.Quantity,
@@ -516,8 +459,7 @@ namespace POS.Forms
                             context.SoldItems.Add(newSoldItem);
                             context.InventoryItems.Remove(inv);
                         }
-                        else
-                        {
+                        else {
                             var invItems = await context.InventoryItems
                                 .Where(x => x.Product.ItemId == entry.Id)
                                 .OrderBy(o => o.Quantity)
@@ -525,13 +467,10 @@ namespace POS.Forms
 
                             int entryTotal = entry.Quantity;
 
-                            foreach (var i in invItems)
-                            {
-                                if (entryTotal - i.Quantity < 0)
-                                {
+                            foreach (var i in invItems) {
+                                if (entryTotal - i.Quantity < 0) {
                                     context.SoldItems.Add(
-                                        new SoldItem()
-                                        {
+                                        new SoldItem() {
                                             ProductId = i.ProductId,
                                             Quantity = entryTotal,
                                             ItemPrice = entry.Price,
@@ -542,11 +481,9 @@ namespace POS.Forms
                                     i.Quantity -= entryTotal;
                                     break;
                                 }
-                                else
-                                {
+                                else {
                                     entryTotal -= i.Quantity;
-                                    newSoldItem = new SoldItem()
-                                    {
+                                    newSoldItem = new SoldItem() {
                                         ProductId = i.ProductId,
                                         Quantity = i.Quantity,
                                         ItemPrice = entry.Price,
@@ -562,11 +499,9 @@ namespace POS.Forms
                             }
                         }
                     }
-                    else
-                    {
+                    else {
                         context.SoldItems.Add(
-                            new SoldItem()
-                            {
+                            new SoldItem() {
                                 ProductId = item.Products.First().Id,
                                 Quantity = entry.Quantity,
                                 ItemPrice = entry.Price,
@@ -583,29 +518,24 @@ namespace POS.Forms
             //       MessageBoxButtons.OKCancel,
             //       MessageBoxIcon.Information);
 
-            if (checkBox1.Checked)
-            {
-                try
-                {
+            if (checkBox1.Checked) {
+                try {
                     printDoc.Print();
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     MessageBox.Show(ex.Message, "Printing failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
-            Reset();
+            await Reset();
         }
 
         Sale ToPrint = null;
         IEnumerable<Cart_Item_ViewModel> SelectedItemInCart => cartTable.SelectedRows.Cast<DataGridViewRow>().Select(row => (Cart_Item_ViewModel)row.DataBoundItem);
 
         string SelectedSerial => ((Cart_Item_ViewModel)cartTable.SelectedRows[0].DataBoundItem).Serial;
-        private void cartTable_SelectionChanged(object sender, EventArgs e)
-        {
-            if (cartTable.SelectedRows.Count == 0)
-            {
+        private void cartTable_SelectionChanged(object sender, EventArgs e) {
+            if (cartTable.SelectedRows.Count == 0) {
                 return;
             }
 
@@ -616,13 +546,10 @@ namespace POS.Forms
         }
         decimal priceToChange;
         decimal discountToChange;
-        private void priceBtn_Click(object sender, EventArgs e)
-        {
-            using (var editDecimalForm = new EditDecimalValue(priceToChange))
-            {
+        private void priceBtn_Click(object sender, EventArgs e) {
+            using (var editDecimalForm = new EditDecimalValue(priceToChange)) {
                 editDecimalForm.Text = "Edit Price - " + priceToChange.ToCurrency();
-                if (editDecimalForm.ShowDialog() == DialogResult.OK)
-                {
+                if (editDecimalForm.ShowDialog() == DialogResult.OK) {
                     var selected = SelectedItemInCart;
                     foreach (var s in selected)
                         s.Price = (decimal)editDecimalForm.Tag;
@@ -631,16 +558,12 @@ namespace POS.Forms
             }
         }
 
-        private void discBtn_Click(object sender, EventArgs e)
-        {
-            using (var editDecimalForm = new EditDecimalValue(discountToChange))
-            {
+        private void discBtn_Click(object sender, EventArgs e) {
+            using (var editDecimalForm = new EditDecimalValue(discountToChange)) {
                 editDecimalForm.Text = "Edit Discount - " + discountToChange.ToCurrency();
-                if (editDecimalForm.ShowDialog() == DialogResult.OK)
-                {
+                if (editDecimalForm.ShowDialog() == DialogResult.OK) {
                     var selected = SelectedItemInCart;
-                    foreach (var s in selected)
-                    {
+                    foreach (var s in selected) {
                         var newDiscount = (decimal)editDecimalForm.Tag;
                         s.Discount = newDiscount > s.Price ? s.Price : newDiscount;
                     }
@@ -651,13 +574,11 @@ namespace POS.Forms
 
         PrintAction printAction;
 
-        private void printDoc_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
+        private void printDoc_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e) {
             printAction = e.PrintAction;
         }
 
-        private void printDoc_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
+        private void printDoc_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e) {
             ReceiptDetails details = new ReceiptDetails();
 
             details.ControlNumber = ToPrint.Id.ToString();
@@ -678,38 +599,44 @@ namespace POS.Forms
             ToPrint = null;
         }
 
-        private async void editQtyBtn_Click(object sender, EventArgs e)
-        {
+        private async void editQtyBtn_Click(object sender, EventArgs e) {
             var selected = SelectedItemInCart.First();
             int initialQty = selected.Quantity;
             int maxQty = 0;
 
-            using (var context = new POSEntities())
-            {
+            using (var context = new POSEntities()) {
                 var item = await context.Items.AsNoTracking().FirstOrDefaultAsync(x => x.Id == selected.Id);
                 maxQty = !item.IsFinite ? 999999999 : item.QuantityInInventory;
             }
 
-            using (var editDecimalForm = new EditDecimalValue(initialQty, maxQty, true))
-            {
+            using (var editDecimalForm = new EditDecimalValue(initialQty, maxQty, true)) {
                 editDecimalForm.Text = "Edit Qty - " + initialQty;
-                if (editDecimalForm.ShowDialog() == DialogResult.OK)
-                {
+                if (editDecimalForm.ShowDialog() == DialogResult.OK) {
                     selected.Quantity = (int)((decimal)editDecimalForm.Tag);
                     FormatValues();
                 }
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (var itemView = new ItemListForm())
-            {
-                if (itemView.ShowDialog() == DialogResult.OK)
-                {
+        private void button1_Click(object sender, EventArgs e) {
+            using (var itemView = new ItemListForm()) {
+                if (itemView.ShowDialog() == DialogResult.OK) {
                     SetSearchKeyword(itemView.Tag.ToString());
                 }
             }
+        }
+
+        private void changeCustomer_Click(object sender, EventArgs e) {
+            using (var customersForm = new Customers()) {
+                customersForm.OnSelected += CustomersForm_OnSave;
+                customersForm.ShowDialog();
+            }
+        }
+
+        private void CustomersForm_OnSave(object sender, Customer e) {
+            Customer = e;
+            var form = sender as Form;
+            form.Close();
         }
     }
 }

@@ -91,7 +91,6 @@
             this.customerTable.MultiSelect = false;
             this.customerTable.Name = "customerTable";
             this.customerTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.customerTable.RowHeadersVisible = false;
             this.customerTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.customerTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.customerTable.Size = new System.Drawing.Size(664, 311);
@@ -100,6 +99,7 @@
             this.customerTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.customerTable_CellBeginEdit);
             this.customerTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellContentClick);
             this.customerTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellEndEdit);
+            this.customerTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.customerTable_CellMouseDoubleClick);
             this.customerTable.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellValidated);
             this.customerTable.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.customerTable_CellValidating);
             // 

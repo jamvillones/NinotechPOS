@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SellForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -66,7 +66,8 @@
             this.grandTotalTxt = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this._customerOption = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.customerTxt = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkoutBtn = new System.Windows.Forms.Button();
@@ -83,6 +84,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.printDoc = new System.Drawing.Printing.PrintDocument();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -120,7 +122,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2MinSize = 400;
             this.splitContainer1.Size = new System.Drawing.Size(964, 541);
-            this.splitContainer1.SplitterDistance = 500;
+            this.splitContainer1.SplitterDistance = 516;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -135,26 +137,26 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(500, 541);
+            this.panel1.Size = new System.Drawing.Size(516, 541);
             this.panel1.TabIndex = 0;
             // 
             // cartTable
             // 
             this.cartTable.AllowUserToAddRows = false;
             this.cartTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.cartTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            this.cartTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.cartTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.cartTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.cartTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.cartTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cartTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.cartTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cartTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Barcode,
@@ -164,15 +166,15 @@
             this.col_Price,
             this.col_Discount,
             this.col_SubTotal});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.cartTable.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.cartTable.DefaultCellStyle = dataGridViewCellStyle14;
             this.cartTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cartTable.EnableHeadersVisualStyles = false;
             this.cartTable.Location = new System.Drawing.Point(0, 74);
@@ -182,7 +184,7 @@
             this.cartTable.RowHeadersVisible = false;
             this.cartTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.cartTable.ShowCellToolTips = false;
-            this.cartTable.Size = new System.Drawing.Size(500, 377);
+            this.cartTable.Size = new System.Drawing.Size(516, 377);
             this.cartTable.StandardTab = true;
             this.cartTable.TabIndex = 2;
             this.cartTable.TabStop = false;
@@ -211,28 +213,28 @@
             // 
             // col_Qty
             // 
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_Qty.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Format = "N0";
+            dataGridViewCellStyle10.NullValue = null;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_Qty.DefaultCellStyle = dataGridViewCellStyle10;
             this.col_Qty.HeaderText = "QTY";
             this.col_Qty.Name = "col_Qty";
             this.col_Qty.ReadOnly = true;
             // 
             // col_Price
             // 
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.col_Price.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.col_Price.DefaultCellStyle = dataGridViewCellStyle11;
             this.col_Price.HeaderText = "PRICE";
             this.col_Price.Name = "col_Price";
             this.col_Price.ReadOnly = true;
             // 
             // col_Discount
             // 
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.col_Discount.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Format = "C2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.col_Discount.DefaultCellStyle = dataGridViewCellStyle12;
             this.col_Discount.HeaderText = "DISC";
             this.col_Discount.Name = "col_Discount";
             this.col_Discount.ReadOnly = true;
@@ -240,9 +242,9 @@
             // col_SubTotal
             // 
             this.col_SubTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.col_SubTotal.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.Format = "C2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.col_SubTotal.DefaultCellStyle = dataGridViewCellStyle13;
             this.col_SubTotal.HeaderText = "SUBTOTAL";
             this.col_SubTotal.Name = "col_SubTotal";
             this.col_SubTotal.ReadOnly = true;
@@ -258,7 +260,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 451);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(500, 40);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(516, 40);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // editQtyBtn
@@ -331,7 +333,7 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel10.Location = new System.Drawing.Point(0, 491);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(500, 50);
+            this.panel10.Size = new System.Drawing.Size(516, 50);
             this.panel10.TabIndex = 4;
             // 
             // totalTxt
@@ -343,7 +345,7 @@
             this.totalTxt.Location = new System.Drawing.Point(0, 13);
             this.totalTxt.Name = "totalTxt";
             this.totalTxt.Padding = new System.Windows.Forms.Padding(5);
-            this.totalTxt.Size = new System.Drawing.Size(498, 35);
+            this.totalTxt.Size = new System.Drawing.Size(514, 35);
             this.totalTxt.TabIndex = 2;
             this.totalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -365,7 +367,7 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(500, 50);
+            this.panel11.Size = new System.Drawing.Size(516, 50);
             this.panel11.TabIndex = 1;
             // 
             // button1
@@ -374,7 +376,7 @@
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(310, 0);
+            this.button1.Location = new System.Drawing.Point(326, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(190, 50);
@@ -395,7 +397,7 @@
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
             this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(300, 50);
+            this.searchControl1.Size = new System.Drawing.Size(316, 50);
             this.searchControl1.TabIndex = 1;
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             // 
@@ -414,7 +416,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(460, 541);
+            this.panel2.Size = new System.Drawing.Size(438, 541);
             this.panel2.TabIndex = 1;
             // 
             // panel7
@@ -426,7 +428,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 200);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(458, 50);
+            this.panel7.Size = new System.Drawing.Size(436, 50);
             this.panel7.TabIndex = 4;
             // 
             // changeTxt
@@ -438,8 +440,9 @@
             this.changeTxt.Name = "changeTxt";
             this.changeTxt.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.changeTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.changeTxt.Size = new System.Drawing.Size(456, 35);
+            this.changeTxt.Size = new System.Drawing.Size(434, 35);
             this.changeTxt.TabIndex = 2;
+            this.changeTxt.Text = "0.00";
             this.changeTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label4
@@ -462,7 +465,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 150);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(458, 50);
+            this.panel9.Size = new System.Drawing.Size(436, 50);
             this.panel9.TabIndex = 1;
             // 
             // grandTotalTxt
@@ -473,8 +476,9 @@
             this.grandTotalTxt.Location = new System.Drawing.Point(0, 13);
             this.grandTotalTxt.Name = "grandTotalTxt";
             this.grandTotalTxt.Padding = new System.Windows.Forms.Padding(5);
-            this.grandTotalTxt.Size = new System.Drawing.Size(456, 35);
+            this.grandTotalTxt.Size = new System.Drawing.Size(434, 35);
             this.grandTotalTxt.TabIndex = 2;
+            this.grandTotalTxt.Text = "0.00";
             this.grandTotalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5
@@ -490,30 +494,47 @@
             // 
             // panel4
             // 
-            this.panel4.BackColor = System.Drawing.SystemColors.Control;
-            this.panel4.Controls.Add(this._customerOption);
+            this.panel4.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.button2);
+            this.panel4.Controls.Add(this.customerTxt);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 412);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.panel4.Size = new System.Drawing.Size(458, 50);
+            this.panel4.Size = new System.Drawing.Size(436, 50);
             this.panel4.TabIndex = 7;
             // 
-            // _customerOption
+            // button2
             // 
-            this._customerOption.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this._customerOption.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this._customerOption.BackColor = System.Drawing.Color.White;
-            this._customerOption.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._customerOption.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this._customerOption.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._customerOption.FormattingEnabled = true;
-            this._customerOption.Location = new System.Drawing.Point(5, 18);
-            this._customerOption.Name = "_customerOption";
-            this._customerOption.Size = new System.Drawing.Size(448, 32);
-            this._customerOption.TabIndex = 1;
-            this._customerOption.Validated += new System.EventHandler(this._customerOption_Validated);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Location = new System.Drawing.Point(399, 13);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(30, 30);
+            this.button2.TabIndex = 4;
+            this.button2.TabStop = false;
+            this.toolTip1.SetToolTip(this.button2, "Change Customer");
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.changeCustomer_Click);
+            // 
+            // customerTxt
+            // 
+            this.customerTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.customerTxt.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.customerTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerTxt.ForeColor = System.Drawing.Color.Blue;
+            this.customerTxt.Location = new System.Drawing.Point(5, 13);
+            this.customerTxt.Name = "customerTxt";
+            this.customerTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.customerTxt.Size = new System.Drawing.Size(388, 30);
+            this.customerTxt.TabIndex = 3;
+            this.customerTxt.Text = "loading...";
+            this.customerTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -536,7 +557,7 @@
             this.checkBox1.Location = new System.Drawing.Point(0, 462);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.checkBox1.Size = new System.Drawing.Size(458, 27);
+            this.checkBox1.Size = new System.Drawing.Size(436, 27);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.TabStop = false;
             this.checkBox1.Text = "Print Reciept";
@@ -547,13 +568,14 @@
             this.checkoutBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.checkoutBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.checkoutBtn.Enabled = false;
+            this.checkoutBtn.FlatAppearance.BorderSize = 3;
             this.checkoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkoutBtn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkoutBtn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutBtn.Location = new System.Drawing.Point(0, 489);
             this.checkoutBtn.Name = "checkoutBtn";
-            this.checkoutBtn.Size = new System.Drawing.Size(458, 50);
+            this.checkoutBtn.Size = new System.Drawing.Size(436, 50);
             this.checkoutBtn.TabIndex = 8;
-            this.checkoutBtn.Text = "Checkout";
+            this.checkoutBtn.Text = "CHECKOUT";
             this.checkoutBtn.UseVisualStyleBackColor = false;
             this.checkoutBtn.Click += new System.EventHandler(this.checkout_Click);
             // 
@@ -567,7 +589,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 100);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(458, 50);
+            this.panel8.Size = new System.Drawing.Size(436, 50);
             this.panel8.TabIndex = 6;
             // 
             // button3
@@ -575,7 +597,7 @@
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(3, 15);
+            this.button3.Location = new System.Drawing.Point(4, 15);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(149, 30);
             this.button3.TabIndex = 2;
@@ -592,14 +614,14 @@
             this.tendered.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tendered.DecimalPlaces = 2;
             this.tendered.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tendered.Location = new System.Drawing.Point(158, 15);
+            this.tendered.Location = new System.Drawing.Point(157, 15);
             this.tendered.Maximum = new decimal(new int[] {
             -402653185,
             -1613725636,
             54210108,
             0});
             this.tendered.Name = "tendered";
-            this.tendered.Size = new System.Drawing.Size(286, 30);
+            this.tendered.Size = new System.Drawing.Size(265, 30);
             this.tendered.TabIndex = 1;
             this.tendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tendered.ThousandsSeparator = true;
@@ -628,7 +650,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 50);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(458, 50);
+            this.panel6.Size = new System.Drawing.Size(436, 50);
             this.panel6.TabIndex = 5;
             // 
             // button4
@@ -636,7 +658,7 @@
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button4.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button4.Location = new System.Drawing.Point(3, 15);
+            this.button4.Location = new System.Drawing.Point(4, 15);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(149, 30);
             this.button4.TabIndex = 3;
@@ -653,14 +675,14 @@
             this.discount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.discount.DecimalPlaces = 2;
             this.discount.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
-            this.discount.Location = new System.Drawing.Point(158, 15);
+            this.discount.Location = new System.Drawing.Point(157, 15);
             this.discount.Maximum = new decimal(new int[] {
             -402653185,
             -1613725636,
             54210108,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(286, 30);
+            this.discount.Size = new System.Drawing.Size(265, 30);
             this.discount.TabIndex = 5;
             this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discount.ThousandsSeparator = true;
@@ -688,7 +710,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(458, 50);
+            this.panel3.Size = new System.Drawing.Size(436, 50);
             this.panel3.TabIndex = 4;
             // 
             // textBox1
@@ -700,7 +722,7 @@
             this.textBox1.ForeColor = System.Drawing.Color.Blue;
             this.textBox1.Location = new System.Drawing.Point(5, 16);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(439, 27);
+            this.textBox1.Size = new System.Drawing.Size(417, 27);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "0000000000";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -784,7 +806,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox _customerOption;
         private System.Windows.Forms.Label changeTxt;
         private System.Windows.Forms.NumericUpDown discount;
         private System.Windows.Forms.Panel panel8;
@@ -820,5 +841,8 @@
         private System.Windows.Forms.Button editQtyBtn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.Label customerTxt;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

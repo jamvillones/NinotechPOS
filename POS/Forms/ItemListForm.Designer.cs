@@ -42,8 +42,8 @@
             this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.searchControl1 = new POS.UserControls.SearchControl();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,7 +89,7 @@
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.itemsTable.Location = new System.Drawing.Point(20, 75);
+            this.itemsTable.Location = new System.Drawing.Point(20, 78);
             this.itemsTable.Margin = new System.Windows.Forms.Padding(2);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
@@ -97,7 +97,7 @@
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(760, 355);
+            this.itemsTable.Size = new System.Drawing.Size(760, 352);
             this.itemsTable.TabIndex = 1;
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
             this.itemsTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itemsTable_KeyDown);
@@ -153,14 +153,6 @@
             this.typeCol.Name = "typeCol";
             this.typeCol.ReadOnly = true;
             // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(20, 55);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(760, 20);
-            this.panel1.TabIndex = 9;
-            // 
             // searchControl1
             // 
             this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
@@ -177,13 +169,26 @@
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl_OnSearch);
             this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl_OnTextEmpty);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.ForeColor = System.Drawing.Color.Blue;
+            this.label1.Location = new System.Drawing.Point(20, 55);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label1.Size = new System.Drawing.Size(454, 23);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "**Double click item to select its barcode. If the barcode is empty, name will be " +
+    "selected instead.";
+            // 
             // ItemListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.itemsTable);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.searchControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
@@ -193,6 +198,7 @@
             this.Load += new System.EventHandler(this.ItemListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -200,12 +206,12 @@
 
         protected System.Windows.Forms.DataGridView itemsTable;
         private UserControls.SearchControl searchControl1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn barcodeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
+        private System.Windows.Forms.Label label1;
     }
 }
