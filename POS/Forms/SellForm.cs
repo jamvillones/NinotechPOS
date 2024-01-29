@@ -32,8 +32,6 @@ namespace POS.Forms {
             col_Discount.DataPropertyName = nameof(Cart_Item_ViewModel.Discount);
             col_SubTotal.DataPropertyName = nameof(Cart_Item_ViewModel.SubTotal);
             cartTable.DataSource = CartItems;
-
-            //_customerOption.DisplayMember = nameof(Customer.Name);
         }
 
         private Customer _customer;
@@ -55,15 +53,6 @@ namespace POS.Forms {
 
                     var item = await context.Items.ToListAsync();
                     searchControl1.SetAutoComplete(item.Select(x => x.Name).ToArray());
-
-                    //var customers = await context.Customers.AsQueryable().AsNoTracking().OrderBy(o => o.Name).ToListAsync();
-                    //await Task.Run(() => {
-                    //    foreach (var c in customers)
-                    //        _customerOption.InvokeIfRequired(() => _customerOption.Items.Add(c));
-                    //});
-
-                    //_customerOption.SelectedItem = customers.FirstOrDefault(x => x.Name.Equals("walkin", StringComparison.OrdinalIgnoreCase));
-
                 }
             }
             catch (Exception) {

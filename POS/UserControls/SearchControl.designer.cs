@@ -32,7 +32,7 @@ namespace POS.UserControls
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchControl));
             this.searchBtn = new System.Windows.Forms.Button();
-            this.searchText = new System.Windows.Forms.TextBox();
+            this.searchText = new KeywordAutoCompleteTextBox();
             this.SuspendLayout();
             // 
             // searchBtn
@@ -84,6 +84,6 @@ namespace POS.UserControls
 
         #endregion
         private System.Windows.Forms.Button searchBtn;
-        private System.Windows.Forms.TextBox searchText;
+        private KeywordAutoCompleteTextBox searchText;
     }
 }
