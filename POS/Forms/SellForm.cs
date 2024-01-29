@@ -52,6 +52,10 @@ namespace POS.Forms {
                 using (var context = new POSEntities()) {
 
                     Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "walkin");
+
+                    var item = await context.Items.ToListAsync();
+                    searchControl1.SetAutoComplete(item.Select(x => x.Name).ToArray());
+
                     //var customers = await context.Customers.AsQueryable().AsNoTracking().OrderBy(o => o.Name).ToListAsync();
                     //await Task.Run(() => {
                     //    foreach (var c in customers)
@@ -379,30 +383,6 @@ namespace POS.Forms {
         }
 
         bool ValidateCheckout() => CartItems.Count > 0;
-        //{
-        //if (CartItems.Count == 0)
-        //    return false;
-
-        //if (_customerOption.SelectedItem == null) {
-        //    if (
-        //        _customerOption.Text.IsEmpty() &&
-        //        MessageBox.Show(
-        //        "Customer will be set to walkin. Are you sure you want to continue?", "Customer is not set",
-        //        MessageBoxButtons.OKCancel,
-        //        MessageBoxIcon.Question) == DialogResult.Cancel) return false;
-        //    else {
-        //        if (
-        //        MessageBox.Show("Customer will be added automatically with the details provided when you proceed.\n\nYou can change it out later in the Customers List.",
-        //        "Customer is not yet registered.",
-        //        MessageBoxButtons.OKCancel,
-        //        MessageBoxIcon.Question) == DialogResult.Cancel) return false;
-        //    }
-        //}
-
-        //return true;
-
-        //return CartItems.Count > 0;
-        //}
 
         bool IsAllValuesEqual(decimal[] priceList, out decimal value) {
             value = 0;
