@@ -51,7 +51,7 @@ namespace POS.Forms {
 
                     Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "walkin");
 
-                    var item = await context.Items.ToListAsync();
+                    var item = await context.Items.OrderBy(i => i.Name).ToListAsync();
                     searchControl1.SetAutoComplete(item.Select(x => x.Name).ToArray());
                 }
             }
@@ -510,6 +510,7 @@ namespace POS.Forms {
 
             var selected = SelectedItemInCart;
             editQtyBtn.Enabled = cartTable.SelectedRows.Count == 1 && SelectedSerial.IsEmpty();
+
             priceBtn.Enabled = IsAllValuesEqual(selected.Select(s => s.Price).ToArray(), out priceToChange);
             discBtn.Enabled = IsAllValuesEqual(selected.Select(s => s.Discount).ToArray(), out discountToChange);
         }
