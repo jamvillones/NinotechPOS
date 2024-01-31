@@ -57,7 +57,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.changeTxt = new System.Windows.Forms.Label();
@@ -85,6 +84,7 @@
             this.printDoc = new System.Drawing.Printing.PrintDocument();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -122,7 +122,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2MinSize = 400;
             this.splitContainer1.Size = new System.Drawing.Size(964, 541);
-            this.splitContainer1.SplitterDistance = 544;
+            this.splitContainer1.SplitterDistance = 531;
             this.splitContainer1.SplitterWidth = 20;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -137,7 +137,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(544, 541);
+            this.panel1.Size = new System.Drawing.Size(531, 541);
             this.panel1.TabIndex = 0;
             // 
             // cartTable
@@ -184,7 +184,7 @@
             this.cartTable.RowHeadersVisible = false;
             this.cartTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.cartTable.ShowCellToolTips = false;
-            this.cartTable.Size = new System.Drawing.Size(544, 377);
+            this.cartTable.Size = new System.Drawing.Size(531, 357);
             this.cartTable.StandardTab = true;
             this.cartTable.TabIndex = 2;
             this.cartTable.TabStop = false;
@@ -257,10 +257,10 @@
             this.flowLayoutPanel1.Controls.Add(this.priceBtn);
             this.flowLayoutPanel1.Controls.Add(this.discBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 451);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 431);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(544, 40);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(531, 60);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // editQtyBtn
@@ -269,11 +269,13 @@
             this.editQtyBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.editQtyBtn.Enabled = false;
             this.editQtyBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.editQtyBtn.FlatAppearance.BorderSize = 2;
             this.editQtyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editQtyBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editQtyBtn.Location = new System.Drawing.Point(0, 5);
             this.editQtyBtn.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.editQtyBtn.Name = "editQtyBtn";
-            this.editQtyBtn.Size = new System.Drawing.Size(149, 30);
+            this.editQtyBtn.Size = new System.Drawing.Size(149, 50);
             this.editQtyBtn.TabIndex = 10;
             this.editQtyBtn.Text = "Edit Quantity";
             this.editQtyBtn.UseVisualStyleBackColor = false;
@@ -285,11 +287,13 @@
             this.priceBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.priceBtn.Enabled = false;
             this.priceBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.priceBtn.FlatAppearance.BorderSize = 2;
             this.priceBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.priceBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.priceBtn.Location = new System.Drawing.Point(154, 5);
             this.priceBtn.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.priceBtn.Name = "priceBtn";
-            this.priceBtn.Size = new System.Drawing.Size(149, 30);
+            this.priceBtn.Size = new System.Drawing.Size(149, 50);
             this.priceBtn.TabIndex = 8;
             this.priceBtn.Text = "Edit Price";
             this.priceBtn.UseVisualStyleBackColor = false;
@@ -301,11 +305,13 @@
             this.discBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.discBtn.Enabled = false;
             this.discBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.discBtn.FlatAppearance.BorderSize = 2;
             this.discBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.discBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.discBtn.Location = new System.Drawing.Point(308, 5);
             this.discBtn.Margin = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.discBtn.Name = "discBtn";
-            this.discBtn.Size = new System.Drawing.Size(149, 30);
+            this.discBtn.Size = new System.Drawing.Size(149, 50);
             this.discBtn.TabIndex = 9;
             this.discBtn.Text = "Edit Discount";
             this.discBtn.UseVisualStyleBackColor = false;
@@ -333,7 +339,7 @@
             this.panel10.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel10.Location = new System.Drawing.Point(0, 491);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(544, 50);
+            this.panel10.Size = new System.Drawing.Size(531, 50);
             this.panel10.TabIndex = 4;
             // 
             // totalTxt
@@ -345,7 +351,7 @@
             this.totalTxt.Location = new System.Drawing.Point(0, 13);
             this.totalTxt.Name = "totalTxt";
             this.totalTxt.Padding = new System.Windows.Forms.Padding(5);
-            this.totalTxt.Size = new System.Drawing.Size(542, 35);
+            this.totalTxt.Size = new System.Drawing.Size(529, 35);
             this.totalTxt.TabIndex = 2;
             this.totalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -367,7 +373,7 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(544, 50);
+            this.panel11.Size = new System.Drawing.Size(531, 50);
             this.panel11.TabIndex = 1;
             // 
             // button1
@@ -376,35 +382,20 @@
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(354, 0);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(341, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(190, 50);
             this.button1.TabIndex = 2;
             this.button1.Text = "Choose Item";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // searchControl1
-            // 
-            this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
-            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl1.Location = new System.Drawing.Point(0, 0);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(650, 50);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(2, 35);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(344, 50);
-            this.searchControl1.TabIndex = 1;
-            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.panel7);
             this.panel2.Controls.Add(this.panel9);
             this.panel2.Controls.Add(this.panel4);
@@ -416,31 +407,31 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(400, 541);
+            this.panel2.Size = new System.Drawing.Size(413, 541);
             this.panel2.TabIndex = 1;
             // 
             // panel7
             // 
-            this.panel7.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panel7.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.changeTxt);
             this.panel7.Controls.Add(this.label4);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 200);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(398, 50);
+            this.panel7.Size = new System.Drawing.Size(413, 50);
             this.panel7.TabIndex = 4;
             // 
             // changeTxt
             // 
             this.changeTxt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.changeTxt.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
-            this.changeTxt.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.changeTxt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.changeTxt.Location = new System.Drawing.Point(0, 13);
             this.changeTxt.Name = "changeTxt";
             this.changeTxt.Padding = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.changeTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.changeTxt.Size = new System.Drawing.Size(396, 35);
+            this.changeTxt.Size = new System.Drawing.Size(411, 35);
             this.changeTxt.TabIndex = 2;
             this.changeTxt.Text = "0.00";
             this.changeTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -449,7 +440,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.ForeColor = System.Drawing.Color.Navy;
+            this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
@@ -465,7 +456,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 150);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(398, 50);
+            this.panel9.Size = new System.Drawing.Size(413, 50);
             this.panel9.TabIndex = 1;
             // 
             // grandTotalTxt
@@ -476,7 +467,7 @@
             this.grandTotalTxt.Location = new System.Drawing.Point(0, 13);
             this.grandTotalTxt.Name = "grandTotalTxt";
             this.grandTotalTxt.Padding = new System.Windows.Forms.Padding(5);
-            this.grandTotalTxt.Size = new System.Drawing.Size(396, 35);
+            this.grandTotalTxt.Size = new System.Drawing.Size(411, 35);
             this.grandTotalTxt.TabIndex = 2;
             this.grandTotalTxt.Text = "0.00";
             this.grandTotalTxt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -500,10 +491,10 @@
             this.panel4.Controls.Add(this.customerTxt);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 412);
+            this.panel4.Location = new System.Drawing.Point(0, 414);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.panel4.Size = new System.Drawing.Size(398, 50);
+            this.panel4.Size = new System.Drawing.Size(413, 50);
             this.panel4.TabIndex = 7;
             // 
             // button2
@@ -512,7 +503,7 @@
             this.button2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(361, 13);
+            this.button2.Location = new System.Drawing.Point(376, 13);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(30, 30);
             this.button2.TabIndex = 4;
@@ -531,7 +522,7 @@
             this.customerTxt.Location = new System.Drawing.Point(5, 13);
             this.customerTxt.Name = "customerTxt";
             this.customerTxt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.customerTxt.Size = new System.Drawing.Size(350, 30);
+            this.customerTxt.Size = new System.Drawing.Size(365, 30);
             this.customerTxt.TabIndex = 3;
             this.customerTxt.Text = "loading...";
             this.customerTxt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -554,10 +545,10 @@
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.checkBox1.ForeColor = System.Drawing.Color.Navy;
-            this.checkBox1.Location = new System.Drawing.Point(0, 462);
+            this.checkBox1.Location = new System.Drawing.Point(0, 464);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
-            this.checkBox1.Size = new System.Drawing.Size(398, 27);
+            this.checkBox1.Size = new System.Drawing.Size(413, 27);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.TabStop = false;
             this.checkBox1.Text = "Print Reciept";
@@ -570,10 +561,10 @@
             this.checkoutBtn.Enabled = false;
             this.checkoutBtn.FlatAppearance.BorderSize = 3;
             this.checkoutBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkoutBtn.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkoutBtn.Location = new System.Drawing.Point(0, 489);
+            this.checkoutBtn.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkoutBtn.Location = new System.Drawing.Point(0, 491);
             this.checkoutBtn.Name = "checkoutBtn";
-            this.checkoutBtn.Size = new System.Drawing.Size(398, 50);
+            this.checkoutBtn.Size = new System.Drawing.Size(413, 50);
             this.checkoutBtn.TabIndex = 8;
             this.checkoutBtn.Text = "CHECKOUT";
             this.checkoutBtn.UseVisualStyleBackColor = false;
@@ -589,7 +580,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel8.Location = new System.Drawing.Point(0, 100);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(398, 50);
+            this.panel8.Size = new System.Drawing.Size(413, 50);
             this.panel8.TabIndex = 6;
             // 
             // button3
@@ -599,7 +590,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Location = new System.Drawing.Point(4, 15);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(149, 30);
+            this.button3.Size = new System.Drawing.Size(100, 30);
             this.button3.TabIndex = 2;
             this.button3.TabStop = false;
             this.button3.Text = "Exact Amount";
@@ -614,14 +605,15 @@
             this.tendered.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tendered.DecimalPlaces = 2;
             this.tendered.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
-            this.tendered.Location = new System.Drawing.Point(157, 15);
+            this.tendered.ForeColor = System.Drawing.Color.Green;
+            this.tendered.Location = new System.Drawing.Point(110, 15);
             this.tendered.Maximum = new decimal(new int[] {
             -402653185,
             -1613725636,
             54210108,
             0});
             this.tendered.Name = "tendered";
-            this.tendered.Size = new System.Drawing.Size(227, 30);
+            this.tendered.Size = new System.Drawing.Size(289, 30);
             this.tendered.TabIndex = 1;
             this.tendered.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tendered.ThousandsSeparator = true;
@@ -650,7 +642,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 50);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(398, 50);
+            this.panel6.Size = new System.Drawing.Size(413, 50);
             this.panel6.TabIndex = 5;
             // 
             // button4
@@ -660,7 +652,7 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button4.Location = new System.Drawing.Point(4, 15);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(149, 30);
+            this.button4.Size = new System.Drawing.Size(100, 30);
             this.button4.TabIndex = 3;
             this.button4.TabStop = false;
             this.button4.Text = "Full Discount";
@@ -675,14 +667,15 @@
             this.discount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.discount.DecimalPlaces = 2;
             this.discount.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold);
-            this.discount.Location = new System.Drawing.Point(157, 15);
+            this.discount.ForeColor = System.Drawing.Color.Green;
+            this.discount.Location = new System.Drawing.Point(110, 15);
             this.discount.Maximum = new decimal(new int[] {
             -402653185,
             -1613725636,
             54210108,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(227, 30);
+            this.discount.Size = new System.Drawing.Size(289, 30);
             this.discount.TabIndex = 5;
             this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discount.ThousandsSeparator = true;
@@ -710,7 +703,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(398, 50);
+            this.panel3.Size = new System.Drawing.Size(413, 50);
             this.panel3.TabIndex = 4;
             // 
             // textBox1
@@ -722,7 +715,7 @@
             this.textBox1.ForeColor = System.Drawing.Color.Blue;
             this.textBox1.Location = new System.Drawing.Point(5, 16);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(379, 27);
+            this.textBox1.Size = new System.Drawing.Size(394, 27);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "0000000000";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -748,6 +741,22 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Sell";
             this.notifyIcon1.Visible = true;
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
+            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl1.Location = new System.Drawing.Point(0, 0);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(650, 50);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(2, 35);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.searchControl1.SearchedText = "";
+            this.searchControl1.Size = new System.Drawing.Size(331, 50);
+            this.searchControl1.TabIndex = 1;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             // 
             // SellForm
             // 

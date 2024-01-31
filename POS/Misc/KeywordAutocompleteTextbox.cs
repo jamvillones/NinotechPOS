@@ -24,11 +24,15 @@ namespace test {
             // _listBox
             // 
             this._listBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._listBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._listBox.Location = new System.Drawing.Point(0, 0);
             this._listBox.Name = "_listBox";
             this._listBox.Size = new System.Drawing.Size(120, 96);
-            this._listBox.Font = this.Font;
             this._listBox.TabIndex = 0;
+            // 
+            // KeywordAutoCompleteTextBox
+            // 
+            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.KeywordAutoCompleteTextBox_PreviewKeyDown);
             this.ResumeLayout(false);
 
         }
@@ -91,22 +95,26 @@ namespace test {
         }
 
         private void this_KeyUp(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Tab) {
+                if (_listBox.Visible) {
+                    Text = _listBox.SelectedItem.ToString();
+                    ResetListBox();
+                    _formerValue = Text;
+                    this.Select(this.Text.Length, 0);
+                    e.Handled = true;
+                }
+                return;
+            }
             UpdateListBox();
         }
 
         private void this_KeyDown(object sender, KeyEventArgs e) {
             switch (e.KeyCode) {
-                case Keys.Enter:
-                case Keys.Tab: {
-                        if (_listBox.Visible) {
-                            Text = _listBox.SelectedItem.ToString();
-                            ResetListBox();
-                            _formerValue = Text;
-                            this.Select(this.Text.Length, 0);
-                            e.Handled = true;
-                        }
-                        break;
-                    }
+                //case Keys.Enter:
+                //case Keys.Tab: {
+
+                //        break;
+                //    }
                 case Keys.Down: {
                         if ((_listBox.Visible) && (_listBox.SelectedIndex < _listBox.Items.Count - 1))
                             _listBox.SelectedIndex++;
@@ -122,18 +130,26 @@ namespace test {
                 case Keys.Escape:
                     ResetListBox();
                     break;
-
-
             }
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter && _listBox.Visible) {
+                Text = _listBox.SelectedItem.ToString();
+                ResetListBox();
+                _formerValue = Text;
+                this.Select(this.Text.Length, 0);
+
+                e.Handled = true;
+            }
+            else
+                base.OnKeyDown(e);
         }
 
         protected override bool IsInputKey(Keys keyData) {
             switch (keyData) {
                 case Keys.Tab:
-                    if (_listBox.Visible)
-                        return true;
-                    else
-                        return false;
+                    return _listBox.Visible;
                 default:
                     return base.IsInputKey(keyData);
             }
@@ -192,5 +208,8 @@ namespace test {
             }
         }
 
+        private void KeywordAutoCompleteTextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e) {
+
+        }
     }
 }
