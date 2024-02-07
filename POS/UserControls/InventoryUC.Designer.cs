@@ -90,7 +90,7 @@
             this.tablePanel.Location = new System.Drawing.Point(150, 0);
             this.tablePanel.Margin = new System.Windows.Forms.Padding(5);
             this.tablePanel.Name = "tablePanel";
-            this.tablePanel.Size = new System.Drawing.Size(622, 448);
+            this.tablePanel.Size = new System.Drawing.Size(622, 443);
             this.tablePanel.TabIndex = 13;
             // 
             // itemsTable
@@ -140,7 +140,7 @@
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(622, 425);
+            this.itemsTable.Size = new System.Drawing.Size(622, 420);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 6;
             this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
@@ -429,9 +429,9 @@
             this.contentPanel.Controls.Add(this.tablePanel);
             this.contentPanel.Controls.Add(this.panel6);
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 75);
+            this.contentPanel.Location = new System.Drawing.Point(0, 80);
             this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(774, 450);
+            this.contentPanel.Size = new System.Drawing.Size(774, 445);
             this.contentPanel.TabIndex = 6;
             // 
             // panel6
@@ -448,7 +448,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(150, 448);
+            this.panel6.Size = new System.Drawing.Size(150, 443);
             this.panel6.TabIndex = 12;
             // 
             // panel1
@@ -500,7 +500,7 @@
             this.flowLayoutPanel1.Controls.Add(this.loadingLabelItem);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 52);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 57);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(774, 23);
@@ -574,12 +574,12 @@
             this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchBar.Location = new System.Drawing.Point(0, 17);
-            this.searchBar.MaximumSize = new System.Drawing.Size(350, 35);
-            this.searchBar.MinimumSize = new System.Drawing.Size(219, 35);
+            this.searchBar.MaximumSize = new System.Drawing.Size(450, 35);
+            this.searchBar.MinimumSize = new System.Drawing.Size(200, 40);
             this.searchBar.Name = "searchBar";
             this.searchBar.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
             this.searchBar.SearchedText = "";
-            this.searchBar.Size = new System.Drawing.Size(350, 35);
+            this.searchBar.Size = new System.Drawing.Size(450, 40);
             this.searchBar.TabIndex = 1;
             this.searchBar.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchBar.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);

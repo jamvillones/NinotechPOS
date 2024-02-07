@@ -436,12 +436,13 @@ namespace POS.UserControls {
         string keyword = string.Empty;
         private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
             CancelLoading();
-            keyword = e.Text.Trim();
 
             if (trackItemCheckbox.Checked) {
                 await TrackItemAsync(e.Text);
                 return;
             }
+
+            keyword = e.Text.Trim();
             e.SearchFound = await LoadDataAsync();
         }
 
@@ -453,7 +454,7 @@ namespace POS.UserControls {
                         .FirstOrDefaultAsync(i => i.SerialNumber == serialNumber);
 
                     if (inventoryItem != null) {
-                        using (var inventoryView = new InventoryItemView(inventoryItem.Product.Item.Barcode)) {
+                        using (var inventoryView = new InventoryItemView(inventoryItem.Product.Item.Barcode, serialNumber)) {
                             if (inventoryView.ShowDialog() == DialogResult.OK) {
 
                             }

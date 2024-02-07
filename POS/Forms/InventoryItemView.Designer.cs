@@ -86,7 +86,7 @@
             this.invTable.RowHeadersVisible = false;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.invTable.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.invTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.invTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.invTable.Size = new System.Drawing.Size(584, 361);
             this.invTable.TabIndex = 4;
             this.invTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.invTable_CellMouseDoubleClick);
