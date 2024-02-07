@@ -1,4 +1,5 @@
-﻿using POS.Forms;
+﻿using OfficeOpenXml.ConditionalFormatting;
+using POS.Forms;
 using POS.Forms.ItemRegistration;
 using POS.Misc;
 using System;
@@ -8,6 +9,7 @@ using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -119,7 +121,7 @@ namespace POS.UserControls {
 
         void ShowInventoryInfo(string barcode, int? quantity) {
             if (quantity == 0 || quantity is null) return;
-            using (var View = new InventoryItemView(barcode, _selectedSerial)) {
+            using (var View = new InventoryItemView(barcode)) {
                 View.ShowDialog();
             }
 
@@ -161,9 +163,9 @@ namespace POS.UserControls {
         private async void Onsave_Callback(object sender, EventArgs e) {
             await LoadDataAsync();
         }
-        string _selectedSerial = string.Empty;
+        //string _selectedSerial = string.Empty;
         private async Task<bool> LoadDataAsync() {
-            _selectedSerial = string.Empty;
+            //_selectedSerial = string.Empty;
             isRefreshing = true;
             bool resultsFound = false;
 
@@ -186,14 +188,14 @@ namespace POS.UserControls {
                         .ApplyFilter(currentItemFilter)
                         .ApplySearch(keyword);
 
-                    if (await rawItems.CountAsync() == 0) {
-                        rawItems = context.InventoryItems
-                            .AsQueryable()
-                            .Where(x => x.SerialNumber == keyword)
-                            .Select(x => x.Product.Item);
+                    //if (await rawItems.CountAsync() == 0) {
+                    //    rawItems = context.InventoryItems
+                    //        .AsQueryable()
+                    //        .Where(x => x.SerialNumber == keyword)
+                    //        .Select(x => x.Product.Item);
+                    //_selectedSerial = rawItems.Any() ? keyword : string.Empty;
 
-                        _selectedSerial = rawItems.Any() ? keyword : string.Empty;
-                    }
+                    //}
 
                     var items = await rawItems.ToListAsync(token);
                     itemCount.Text = items.Count.ToString("N0");
@@ -435,9 +437,49 @@ namespace POS.UserControls {
         private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
             CancelLoading();
             keyword = e.Text.Trim();
+
+            if (trackItemCheckbox.Checked) {
+                await TrackItemAsync(e.Text);
+                return;
+            }
             e.SearchFound = await LoadDataAsync();
-            //if (!e.SearchFound)
-            //    MessageBox.Show("No Entries Found!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        async Task TrackItemAsync(string serialNumber) {
+            try {
+                using (var context = new POSEntities()) {
+
+                    var inventoryItem = await context.InventoryItems.AsNoTracking()
+                        .FirstOrDefaultAsync(i => i.SerialNumber == serialNumber);
+
+                    if (inventoryItem != null) {
+                        using (var inventoryView = new InventoryItemView(inventoryItem.Product.Item.Barcode)) {
+                            if (inventoryView.ShowDialog() == DialogResult.OK) {
+
+                            }
+                        }
+                        return;
+                    }
+
+                    var soldItem = await context.SoldItems.AsNoTracking()
+                        .FirstOrDefaultAsync(s => s.SerialNumber == serialNumber);
+
+                    if (soldItem != null) {
+                        using (var saleDetails = new SaleDetails(soldItem.Sale.Id)) {
+                            ///the result is okay when the sale is voided, thus entry on the table must also be removed
+                            if (saleDetails.ShowDialog() == DialogResult.OK) {
+
+                            }
+                        }
+                        return;
+                    }
+
+                    MessageBox.Show("Item Not Found!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch {
+
+            }
         }
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
             keyword = string.Empty;
