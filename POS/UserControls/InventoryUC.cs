@@ -179,7 +179,7 @@ namespace POS.UserControls {
                     .DefaultIfEmpty(0)
                     .SumAsync(token);
 
-                totalPriceTxt.Text = totalInventoryValue.ToString("C2");
+                totalPriceTxt.Text = totalInventoryValue.ToCurrency();
 
                 try {
                     var rawItems = context.Items
@@ -187,15 +187,6 @@ namespace POS.UserControls {
                         .AsQueryable()
                         .ApplyFilter(currentItemFilter)
                         .ApplySearch(keyword);
-
-                    //if (await rawItems.CountAsync() == 0) {
-                    //    rawItems = context.InventoryItems
-                    //        .AsQueryable()
-                    //        .Where(x => x.SerialNumber == keyword)
-                    //        .Select(x => x.Product.Item);
-                    //_selectedSerial = rawItems.Any() ? keyword : string.Empty;
-
-                    //}
 
                     var items = await rawItems.ToListAsync(token);
                     itemCount.Text = items.Count.ToString("N0");
