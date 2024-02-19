@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateEdit_Item_Form));
             this.panel6 = new System.Windows.Forms.Panel();
             this._name = new System.Windows.Forms.TextBox();
@@ -112,7 +112,7 @@
             this._name.BackColor = System.Drawing.SystemColors.Control;
             this._name.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this._name.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._name.ForeColor = System.Drawing.Color.Blue;
+            this._name.ForeColor = System.Drawing.Color.Black;
             this._name.Location = new System.Drawing.Point(11, 16);
             this._name.MaxLength = 50;
             this._name.Name = "_name";
@@ -132,7 +132,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label3.ForeColor = System.Drawing.Color.Gray;
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 13);
@@ -147,7 +147,7 @@
             this._barcode.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this._barcode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this._barcode.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._barcode.ForeColor = System.Drawing.Color.Blue;
+            this._barcode.ForeColor = System.Drawing.Color.Black;
             this._barcode.Location = new System.Drawing.Point(11, 16);
             this._barcode.MaxLength = 50;
             this._barcode.Name = "_barcode";
@@ -181,7 +181,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label1.ForeColor = System.Drawing.Color.Gray;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
@@ -210,7 +210,7 @@
             this._price.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this._price.DecimalPlaces = 2;
             this._price.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._price.ForeColor = System.Drawing.Color.Blue;
+            this._price.ForeColor = System.Drawing.Color.Black;
             this._price.Location = new System.Drawing.Point(11, 15);
             this._price.Maximum = new decimal(new int[] {
             999999999,
@@ -235,7 +235,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label2.ForeColor = System.Drawing.Color.Gray;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 13);
@@ -263,7 +263,7 @@
             this._criticalQty.BackColor = System.Drawing.SystemColors.Control;
             this._criticalQty.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this._criticalQty.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._criticalQty.ForeColor = System.Drawing.Color.Blue;
+            this._criticalQty.ForeColor = System.Drawing.Color.Black;
             this._criticalQty.Location = new System.Drawing.Point(11, 15);
             this._criticalQty.Maximum = new decimal(new int[] {
             999999999,
@@ -288,7 +288,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label4.ForeColor = System.Drawing.Color.Gray;
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
@@ -325,7 +325,7 @@
             this._tags.BackColor = System.Drawing.SystemColors.Control;
             this._tags.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this._tags.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._tags.ForeColor = System.Drawing.Color.Blue;
+            this._tags.ForeColor = System.Drawing.Color.Black;
             this._tags.Location = new System.Drawing.Point(11, 16);
             this._tags.MaxLength = 300;
             this._tags.Name = "_tags";
@@ -336,7 +336,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label5.ForeColor = System.Drawing.Color.Gray;
             this.label5.Location = new System.Drawing.Point(0, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
@@ -348,7 +348,7 @@
             this._type.BackColor = System.Drawing.SystemColors.Control;
             this._type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._type.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._type.ForeColor = System.Drawing.Color.Blue;
+            this._type.ForeColor = System.Drawing.Color.Black;
             this._type.FormattingEnabled = true;
             this._type.Items.AddRange(new object[] {
             "Quantifiable",
@@ -381,7 +381,7 @@
             this._description.BackColor = System.Drawing.SystemColors.Control;
             this._description.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this._description.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this._description.ForeColor = System.Drawing.Color.Blue;
+            this._description.ForeColor = System.Drawing.Color.Black;
             this._description.Location = new System.Drawing.Point(11, 16);
             this._description.MaxLength = 300;
             this._description.Name = "_description";
@@ -401,7 +401,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label7.ForeColor = System.Drawing.Color.Gray;
             this.label7.Location = new System.Drawing.Point(0, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(38, 13);
@@ -449,13 +449,13 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
-            // pictureBox1
+            // pictureBox
             // 
             this.pictureBox.BackColor = System.Drawing.Color.White;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox.Name = "pictureBox1";
+            this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(310, 149);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 14;
@@ -470,26 +470,26 @@
             this.costTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.costTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.costTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.costTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.costTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.costTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.costTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Id,
             this.col_Supplier,
             this.col_Value});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.costTable.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.costTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.costTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.costTable.EnableHeadersVisualStyles = false;
             this.costTable.Location = new System.Drawing.Point(0, 0);
@@ -517,9 +517,9 @@
             // 
             // col_Value
             // 
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.col_Value.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.col_Value.DefaultCellStyle = dataGridViewCellStyle2;
             this.col_Value.HeaderText = "VALUE";
             this.col_Value.Name = "col_Value";
             // 
@@ -560,7 +560,7 @@
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
             this.checkBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.checkBox1.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox1.ForeColor = System.Drawing.Color.Black;
             this.checkBox1.Location = new System.Drawing.Point(352, 164);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(137, 17);

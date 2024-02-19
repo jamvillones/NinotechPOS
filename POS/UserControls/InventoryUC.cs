@@ -1,5 +1,4 @@
-﻿using OfficeOpenXml.ConditionalFormatting;
-using POS.Forms;
+﻿using POS.Forms;
 using POS.Forms.ItemRegistration;
 using POS.Misc;
 using System;
@@ -9,7 +8,6 @@ using System.Data.Entity;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,19 +29,6 @@ namespace POS.UserControls {
         public virtual Control FirstControl() => searchBar.firstControl;
         public async Task InitializeAsync() => await LoadDataAsync();
         #endregion
-
-        //void showNotif() {
-        //    if (criticalItemNames.Count == 0)
-        //        return;
-
-        //    var isPlural = criticalItemNames.Count > 1;
-        //    notifyIcon.BalloonTipTitle = (isPlural ? "These " : "This ") + (isPlural ? "items" : "item") + " " + (isPlural ? "are" : "is") + " in critical quantity!";
-
-        //    foreach (var i in criticalItemNames)
-        //        notifyIcon.BalloonTipText += i + "\n";
-
-        //    notifyIcon.ShowBalloonTip(2);
-        //}
 
         public void CancelLoading() {
             try {
@@ -134,28 +119,10 @@ namespace POS.UserControls {
         int? SelectedQty => itemsTable.SelectedCells[quantityCol.Index].Value as int?;
 
         private void addItemBtn_Click(object sender, EventArgs e) {
-            //using (var addItem = new AddItemForm()) {
-            //    addItem.OnSave += Onsave_Callback;
-            //    addItem.ShowDialog();
-            //}
-
             using (var form = new CreateEdit_Item_Form()) {
-
-
                 if (form.ShowDialog() == DialogResult.OK) {
                     var item = form.Tag as Item;
                     itemsTable.Rows.Add(CreateRow(item));
-
-                    //var row = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex];
-                    ////int? quantity = x.Type == ItemType.Software.ToString() || x.Type == ItemType.Service.ToString() ? default(int?) : x.QuantityInInventory;
-                    //row.SetValues(
-                    //    x.Id,
-                    //    x.Barcode,
-                    //    x.Name,
-                    //    row.Cells[quantityCol.Index].Value,
-                    //    x.SellingPrice,
-                    //    x.Type);
-
                 }
             }
         }
@@ -276,7 +243,6 @@ namespace POS.UserControls {
 
             using (var editForm = new CreateEdit_Item_Form(SelectedId)) {
 
-
                 if (editForm.ShowDialog() == DialogResult.OK) {
                     var x = editForm.Tag as Item;
 
@@ -343,10 +309,8 @@ namespace POS.UserControls {
             try {
                 var currLogin = UserManager.instance.currentLogin;
 
-                //addVariationsBtn.Enabled = currLogin.CanEditProduct;
                 addItemBtn.Enabled = currLogin.CanEditItem;
                 editItemBtn.Enabled = currLogin.CanEditItem;
-                //stockinBtn.Enabled = currLogin.CanStockIn;
 
             }
             catch {
@@ -364,7 +328,6 @@ namespace POS.UserControls {
 
             viewStockBtn.Enabled = isItemQuantifyable;
             editItemBtn.Enabled = currLogin.CanEditProduct;
-            //addVariationsBtn.Enabled = isItemQuantifyable && currLogin.CanEditProduct;
         }
 
         private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -458,7 +421,6 @@ namespace POS.UserControls {
 
                     if (soldItem != null) {
                         using (var saleDetails = new SaleDetails(soldItem.Sale.Id)) {
-                            ///the result is okay when the sale is voided, thus entry on the table must also be removed
                             if (saleDetails.ShowDialog() == DialogResult.OK) {
 
                             }
