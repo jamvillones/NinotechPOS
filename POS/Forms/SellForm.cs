@@ -278,14 +278,14 @@ namespace POS.Forms {
 
             if (splitted.Length == 2) {
                 if (int.TryParse(splitted[0], out qty)) {
-                    keyword = splitted[1];
+                    keyword = splitted[1].Trim();
                 }
                 else {
                     return false;
                 }
             }
             else {
-                keyword = raw;
+                keyword = raw.Trim();
             }
             return true;
         }
