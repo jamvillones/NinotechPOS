@@ -23,6 +23,7 @@ namespace POS.Forms {
                 var entries = await context.InventoryItems
                     .AsNoTracking()
                     .AsQueryable()
+                    .Where(inv => inv.Product.Item.Type == ItemType.Quantifiable.ToString())
                     .OrderBy(x => x.Product.Item.Name)
                     .ToListAsync();
 
@@ -30,7 +31,10 @@ namespace POS.Forms {
                      y.Product.Item.Id,
                      y.SerialNumber,
                      y.Product.Item.Name,
-                     y.Product.Item.IsFinite ? y.Quantity.ToString("N0") : "--"))
+                     y.Quantity.ToString("N0"),
+                     y.Product.Cost.ToCurrency(),
+                     (y.Quantity * y.Product.Cost).ToCurrency()
+                     ))
                     .ToList();
             }
         }
@@ -86,12 +90,12 @@ namespace POS.Forms {
             g.DrawString("Barcode", columnFont, Brushes.Black, colRect, centerFormat);
 
             colRect.X = colRect.Right;
-            colRect.Width = area.Width * 2 / 9;
+            colRect.Width = area.Width * 1 / 9;
             g.DrawRectangle(gridPen, colRect);
             g.DrawString("Serial Number", columnFont, Brushes.Black, colRect, centerFormat);
 
             colRect.X = colRect.Right;
-            colRect.Width = area.Width * 4 / 9;
+            colRect.Width = area.Width * 3 / 9;
             g.DrawRectangle(gridPen, colRect);
             g.DrawString("Name", columnFont, Brushes.Black, colRect, centerFormat);
 
@@ -99,6 +103,16 @@ namespace POS.Forms {
             colRect.Width = area.Width * 1 / 9;
             g.DrawRectangle(gridPen, colRect);
             g.DrawString("Quantity", columnFont, Brushes.Black, colRect, centerFormat);
+
+            colRect.X = colRect.Right;
+            colRect.Width = area.Width * 1 / 9;
+            g.DrawRectangle(gridPen, colRect);
+            g.DrawString("Cost", columnFont, Brushes.Black, colRect, centerFormat);
+
+            colRect.X = colRect.Right;
+            colRect.Width = area.Width * 1 / 9;
+            g.DrawRectangle(gridPen, colRect);
+            g.DrawString("Total", columnFont, Brushes.Black, colRect, centerFormat);
 
             colRect.X = colRect.Right;
             colRect.Width = area.Width * 1 / 9;
@@ -132,13 +146,13 @@ namespace POS.Forms {
                 g.DrawString(i[0].ToString(), contentFont, Brushes.Black, stringHolderRect);
 
                 stringHolderRect.X = stringHolderRect.Right;
-                stringHolderRect.Width = area.Width * 2 / 9;
+                stringHolderRect.Width = area.Width * 1 / 9;
 
                 g.DrawRectangle(gridPen, stringHolderRect);
                 g.DrawString(i[1]?.ToString(), contentFont, Brushes.Black, stringHolderRect);
 
                 stringHolderRect.X = stringHolderRect.Right;
-                stringHolderRect.Width = area.Width * 4 / 9;
+                stringHolderRect.Width = area.Width * 3 / 9;
                 stringHolderRect.Y = yStart;
                 stringHolderRect.Height = max;
                 g.DrawRectangle(gridPen, stringHolderRect);
@@ -149,6 +163,18 @@ namespace POS.Forms {
 
                 g.DrawRectangle(gridPen, stringHolderRect);
                 g.DrawString(i[3].ToString(), contentFont, Brushes.Black, stringHolderRect, farFormat);
+
+                stringHolderRect.X = stringHolderRect.Right;
+                stringHolderRect.Width = area.Width * 1 / 9;
+
+                g.DrawRectangle(gridPen, stringHolderRect);
+                g.DrawString(i[4].ToString(), contentFont, Brushes.Black, stringHolderRect, farFormat);
+
+                stringHolderRect.X = stringHolderRect.Right;
+                stringHolderRect.Width = area.Width * 1 / 9;
+
+                g.DrawRectangle(gridPen, stringHolderRect);
+                g.DrawString(i[5].ToString(), contentFont, Brushes.Black, stringHolderRect, farFormat);
 
                 stringHolderRect.X = stringHolderRect.Right;
                 stringHolderRect.Width = area.Width * 1 / 9;

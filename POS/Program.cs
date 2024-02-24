@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using POS.Forms;
 using POS.Misc;
 using System;
 using System.Data.Entity;
@@ -17,10 +18,10 @@ namespace POS {
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
+            //Application.Run(new Inventory_TimeStamp());
+
             bool backup = false;
             UserManager.instance = new UserManager();
-
-            //ContextManipulationMethods.SetIsSerialRequired();
 
             bool signedOut;
 

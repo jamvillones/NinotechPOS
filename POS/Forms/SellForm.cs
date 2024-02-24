@@ -399,6 +399,10 @@ namespace POS.Forms {
         private async void checkout_Click(object sender, EventArgs e) {
             if (!ValidateCheckout()) return;
 
+            var button = sender as Button;
+            button.Text = "Processing...";
+            button.Enabled = false;
+
             using (var context = new POSEntities()) {
                 var newSale = new Sale() {
                     Customer = await context.Customers.FirstOrDefaultAsync(c => c.Id == Customer.Id),
@@ -479,6 +483,7 @@ namespace POS.Forms {
                     }
                 }
                 await context.SaveChangesAsync();
+
                 notifyIcon1.ShowBalloonTip(1, newSale.SaleType.ToString().ToUpper() + " SALE", newSale.Customer?.ToString() + " - " + newSale.AmountDue.ToCurrency(), ToolTipIcon.Info);
             }
 
@@ -497,6 +502,9 @@ namespace POS.Forms {
             }
 
             await Reset();
+
+            button.Text = "CHECKOUT";
+            button.Enabled = true;
         }
 
         Sale ToPrint = null;

@@ -225,6 +225,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Print Inventory";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PrintInventory_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PrintInventory_KeyDown);
             this.flowLayoutPanel1.ResumeLayout(false);

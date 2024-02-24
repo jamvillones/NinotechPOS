@@ -221,5 +221,11 @@ namespace POS {
             this.Activate();
             this.BringToFront();
         }
+
+        private void toolStripButton3_Click(object sender, EventArgs e) {
+            using (var snapshot = new Inventory_TimeStamp()) {
+                snapshot.ShowDialog();
+            }
+        }
     }
 }
