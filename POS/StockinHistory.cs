@@ -19,7 +19,7 @@ namespace POS
         public string ItemName { get; set; }
         public Nullable<decimal> Cost { get; set; }
         public string Supplier { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public int Quantity { get; set; }
         public string SerialNumber { get; set; }
         public string LoginUsername { get; set; }
         public Nullable<int> ProductId { get; set; }
