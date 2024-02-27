@@ -34,8 +34,10 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.TotalLabel = new System.Windows.Forms.Label();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_ItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -62,8 +64,10 @@
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column3,
             this.col_ItemName,
             this.col_Qty,
+            this.Column4,
             this.Column1,
             this.Column2});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -120,15 +124,21 @@
             this.panel3.Size = new System.Drawing.Size(780, 10);
             this.panel3.TabIndex = 4;
             // 
-            // label1
+            // TotalLabel
             // 
             this.TotalLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TotalLabel.Location = new System.Drawing.Point(10, 427);
-            this.TotalLabel.Name = "label1";
+            this.TotalLabel.Name = "TotalLabel";
             this.TotalLabel.Size = new System.Drawing.Size(780, 13);
             this.TotalLabel.TabIndex = 5;
             this.TotalLabel.Text = "Total: 0.00";
             this.TotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "ProductId";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // col_ItemName
             // 
@@ -141,6 +151,12 @@
             this.col_Qty.HeaderText = "Quantity";
             this.col_Qty.Name = "col_Qty";
             this.col_Qty.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Inventory Qty";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Column1
             // 
@@ -188,8 +204,10 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label TotalLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_ItemName;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Qty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }

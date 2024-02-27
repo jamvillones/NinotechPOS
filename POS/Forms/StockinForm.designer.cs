@@ -78,6 +78,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this._grandTotalTxt = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this._messageLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
@@ -588,6 +589,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.dateTimePicker1);
             this.panel5.Controls.Add(this.searchControl);
             this.panel5.Controls.Add(this.createItemBtn);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
@@ -595,6 +597,18 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(944, 42);
             this.panel5.TabIndex = 1;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker1.Checked = false;
+            this.dateTimePicker1.CustomFormat = "MMMM d, yyyy";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(744, 7);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowCheckBox = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 2;
             // 
             // _messageLabel
             // 
@@ -683,5 +697,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_cost;
         private System.Windows.Forms.DataGridViewCheckBoxColumn col_serialReq;
         private System.Windows.Forms.Label itemName;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

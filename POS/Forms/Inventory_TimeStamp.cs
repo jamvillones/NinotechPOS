@@ -13,8 +13,10 @@ namespace POS.Forms {
         }
 
         private class InventoryTimeStamp {
+            public int ProductId { get; set; }
             public string Name { get; set; }
             public int Qty { get; set; }
+            public int InventoryQty { get; set; }
             public decimal Cost { get; set; } = 0;
             public decimal TotalCost => Qty * Cost;
         }
@@ -32,9 +34,11 @@ namespace POS.Forms {
                     .AsQueryable()
                     .Where(i => i.Item.Type == ItemType.Quantifiable.ToString())
                     .Select(i => new InventoryTimeStamp() {
+                        ProductId = i.Id,
                         Name = i.Item.Name + " - " + i.Supplier.Name,
                         Qty = i.StockinHistories.Where(s => s.Date <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum() -
                               i.SoldItems.Where(s => s.Sale.Date <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
+                        InventoryQty = i.InventoryItems.Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
                         Cost = i.Cost
                     })
                     .ToListAsync();
@@ -43,8 +47,10 @@ namespace POS.Forms {
                 dataGridView1.Rows.Clear();
                 foreach (var item in items)
                     dataGridView1.Rows.Add(
+                        item.ProductId,
                         item.Name,
                         item.Qty,
+                        item.InventoryQty,
                         item.Cost,
                         item.TotalCost
                         );

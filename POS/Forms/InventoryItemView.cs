@@ -1,6 +1,8 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -9,8 +11,13 @@ namespace POS.Forms {
     public partial class InventoryItemView : Form {
         public InventoryItemView(string id, string serial = "") {
             InitializeComponent();
+
             _id = id;
             _serial = serial;
+
+            bool isAdmin = UserManager.instance.currentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
+            invTable.AllowUserToDeleteRows = isAdmin;
+            col_qty.ReadOnly = !isAdmin;
         }
         string _id;
         string _serial = string.Empty;
@@ -44,6 +51,30 @@ namespace POS.Forms {
 
         private void invTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
 
+        }
+
+        private async void invTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
+            if (MessageBox.Show("Are you sure you want to remove this entry?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel) {
+                e.Cancel = true;
+                return;
+            }
+            var id = (int)e.Row.Cells[0].Value;
+            try {
+
+                using (var context = new POSEntities()) {
+                    var inventoryItemToDelete = await context.InventoryItems.FirstOrDefaultAsync(x => x.Id == id);
+
+                    context.InventoryItems.Remove(inventoryItemToDelete);
+
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void invTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e) {
         }
     }
 }

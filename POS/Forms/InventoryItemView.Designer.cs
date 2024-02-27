@@ -82,7 +82,6 @@
             this.invTable.Location = new System.Drawing.Point(0, 0);
             this.invTable.MultiSelect = false;
             this.invTable.Name = "invTable";
-            this.invTable.ReadOnly = true;
             this.invTable.RowHeadersVisible = false;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.invTable.RowsDefaultCellStyle = dataGridViewCellStyle4;
@@ -90,6 +89,8 @@
             this.invTable.Size = new System.Drawing.Size(584, 361);
             this.invTable.TabIndex = 4;
             this.invTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.invTable_CellMouseDoubleClick);
+            this.invTable.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.invTable_RowsRemoved);
+            this.invTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.invTable_UserDeletingRow);
             // 
             // Column3
             // 
@@ -108,7 +109,6 @@
             // 
             this.col_qty.HeaderText = "QUANTITY";
             this.col_qty.Name = "col_qty";
-            this.col_qty.ReadOnly = true;
             // 
             // Column2
             // 

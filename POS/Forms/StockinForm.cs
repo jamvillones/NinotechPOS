@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.Remoting.Contexts;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -144,9 +145,9 @@ namespace POS.Forms {
         private async void stockinBtn_Click(object sender, EventArgs e) {
             if (ToStockins.Count <= 0) return;
 
-            if (MessageBox.Show("Are you sure you want to stock these items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
+            if (MessageBox.Show("Are you sure you want to stock these items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 return;
-            }
+
             using (var context = new POSEntities()) {
 
                 foreach (var s in ToStockins) {
@@ -154,31 +155,9 @@ namespace POS.Forms {
                     string serialNum = s.Serial;
                     int quantity = s.Quantity;
 
-                    ///add as stacking qty
-                    if (string.IsNullOrEmpty(serialNum)) {
-                        var it = await context.InventoryItems.FirstOrDefaultAsync(x => x.Product.Id == productId && x.SerialNumber == null);
-
-                        ///item is not yet added
-                        if (it is null) {
-                            it = new InventoryItem() {
-                                ProductId = productId,
-                                Quantity = quantity,
-                            };
-
-                            context.InventoryItems.Add(it);
-                        }
-                        ///increment the qty
-                        else it.Quantity += quantity;
-                    }
-                    ///add as with serial
-                    else {
-                        var it = new InventoryItem() {
-                            ProductId = productId,
-                            Quantity = quantity,
-                            SerialNumber = serialNum
-                        };
-
-                        context.InventoryItems.Add(it);
+                    /// date picker is checked, it means the stockin is only a correction and must not change the inventory values
+                    if (!dateTimePicker1.Checked) {
+                        await AddToInventory(context, serialNum, productId, quantity);
                     }
 
                     var product = await context.Products.FirstOrDefaultAsync(x => x.Id == productId);
@@ -190,7 +169,7 @@ namespace POS.Forms {
                         Supplier = product.Supplier.Name,
                         Quantity = quantity,
                         SerialNumber = string.IsNullOrWhiteSpace(serialNum) ? null : serialNum,
-                        Date = DateTime.Now,
+                        Date = dateTimePicker1.Checked ? dateTimePicker1.Value.Date : DateTime.Now,
                         LoginUsername = context.Logins.FirstOrDefault(x => x.Username == CurrLogin.Username).Username
                     };
 
@@ -198,9 +177,37 @@ namespace POS.Forms {
                 }
 
                 await context.SaveChangesAsync();
-
                 MessageBox.Show("Stockin Succesful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
+            }
+        }
+
+        async Task AddToInventory(POSEntities context, string serialNum, int productId, int quantity) {
+            ///add as stacking qty
+            if (string.IsNullOrEmpty(serialNum)) {
+                var it = await context.InventoryItems.FirstOrDefaultAsync(x => x.Product.Id == productId && x.SerialNumber == null);
+
+                ///item is not yet added
+                if (it is null) {
+                    it = new InventoryItem() {
+                        ProductId = productId,
+                        Quantity = quantity,
+                    };
+
+                    context.InventoryItems.Add(it);
+                }
+                ///increment the qty
+                else it.Quantity += quantity;
+            }
+            ///add as with serial
+            else {
+                var it = new InventoryItem() {
+                    ProductId = productId,
+                    Quantity = quantity,
+                    SerialNumber = serialNum
+                };
+
+                context.InventoryItems.Add(it);
             }
         }
 
