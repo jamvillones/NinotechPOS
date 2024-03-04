@@ -223,7 +223,7 @@ namespace POS {
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e) {
-            using (var snapshot = new Inventory_TimeStamp()) {
+            using (var snapshot = new InventoryTimeStamp_Form()) {
                 snapshot.ShowDialog();
             }
         }

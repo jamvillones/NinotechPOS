@@ -27,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>151</ApplicationRevision>
+    <ApplicationRevision>152</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -131,11 +131,11 @@
     <Compile Include="Forms\EditDecimalValue.Designer.cs">
       <DependentUpon>EditDecimalValue.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Inventory_TimeStamp.cs">
+    <Compile Include="Forms\InventoryTimeStamp_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Inventory_TimeStamp.Designer.cs">
-      <DependentUpon>Inventory_TimeStamp.cs</DependentUpon>
+    <Compile Include="Forms\InventoryTimeStamp_Form.Designer.cs">
+      <DependentUpon>InventoryTimeStamp_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ItemListForm.cs">
       <SubType>Form</SubType>
@@ -465,8 +465,8 @@
     <EmbeddedResource Include="Forms\EditDecimalValue.resx">
       <DependentUpon>EditDecimalValue.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Inventory_TimeStamp.resx">
-      <DependentUpon>Inventory_TimeStamp.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\InventoryTimeStamp_Form.resx">
+      <DependentUpon>InventoryTimeStamp_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemListForm.resx">
       <DependentUpon>ItemListForm.cs</DependentUpon>
