@@ -27,7 +27,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>152</ApplicationRevision>
+    <ApplicationRevision>154</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -96,6 +96,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -429,6 +430,18 @@
     <Compile Include="Supplier.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\InventorySnapshot_Graph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\InventorySnapshot_Graph.Designer.cs">
+      <DependentUpon>InventorySnapshot_Graph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\InventorySnapshot_Items.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\InventorySnapshot_Items.Designer.cs">
+      <DependentUpon>InventorySnapshot_Items.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\InventoryUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -585,6 +598,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ShiftSummaryForm.resx">
       <DependentUpon>ShiftSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\InventorySnapshot_Graph.resx">
+      <DependentUpon>InventorySnapshot_Graph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\InventorySnapshot_Items.resx">
+      <DependentUpon>InventorySnapshot_Items.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\InventoryUC.resx">
       <DependentUpon>InventoryUC.cs</DependentUpon>

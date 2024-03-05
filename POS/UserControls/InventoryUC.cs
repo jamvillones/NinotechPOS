@@ -451,6 +451,12 @@ namespace POS.UserControls {
                 }
             }
         }
+
+        private void button3_Click(object sender, EventArgs e) {
+            using (var snapshot = new InventoryTimeStamp_Form()) {
+                snapshot.ShowDialog();
+            }
+        }
     }
     public static class ItemsQueryExtension {
         public static IQueryable<Item> ApplySearch(this IQueryable<Item> items, string keyword) {

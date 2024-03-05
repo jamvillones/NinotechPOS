@@ -38,10 +38,10 @@
             this.inventoryBtn = new System.Windows.Forms.Button();
             this.userButton = new System.Windows.Forms.Button();
             this.tabHoldersPanel = new System.Windows.Forms.Panel();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.inventoryTab = new POS.UserControls.InventoryUC();
             this.reportTab = new POS.UserControls.ReportUC();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.loginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginPrivilegesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +54,6 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.sideButtonsPanel.SuspendLayout();
             this.tabHoldersPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -198,13 +197,6 @@
             this.tabHoldersPanel.Size = new System.Drawing.Size(864, 566);
             this.tabHoldersPanel.TabIndex = 3;
             // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "POS";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
-            // 
             // inventoryTab
             // 
             this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -221,6 +213,13 @@
             this.reportTab.Size = new System.Drawing.Size(824, 546);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "POS";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // toolStripDropDownButton2
             // 
@@ -344,8 +343,7 @@
             this.toolStripButton1,
             this.toolStripButton5,
             this.toolStripButton4,
-            this.toolStripButton2,
-            this.toolStripButton3});
+            this.toolStripButton2});
             this.toolStrip.Location = new System.Drawing.Point(120, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
@@ -354,16 +352,6 @@
             this.toolStrip.Size = new System.Drawing.Size(864, 25);
             this.toolStrip.TabIndex = 3;
             this.toolStrip.Text = "toolStrip";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(113, 22);
-            this.toolStripButton3.Text = "Inventory Snapshot";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // Main
             // 
@@ -420,7 +408,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
     }
 }
 
