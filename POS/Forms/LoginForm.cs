@@ -31,6 +31,8 @@ namespace POS.Forms {
         }
 
         private void LoginForm_Load(object sender, EventArgs e) {
+            var settings = Properties.Settings.Default;
+            this.Text = "POS-Login: " + (settings.IsLocalConnection ? "localHost" : settings.DataSource);
             TryConnect();
         }
 

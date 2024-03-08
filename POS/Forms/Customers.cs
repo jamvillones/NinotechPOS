@@ -2,7 +2,6 @@
 using System;
 using System.Data;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,58 +12,16 @@ namespace POS.Forms {
     public partial class Customers : Form {
 
         public event EventHandler<Customer> OnSelected;
+        public Customers(bool isSelecting) {
+            InitializeComponent();
+            _isSelecting = isSelecting;
+        }
+
         public Customers() {
             InitializeComponent();
         }
 
-
-        //bool canSave()
-        //{
-        //    if (string.IsNullOrEmpty(name.Text.Trim()))
-        //    {
-        //        MessageBox.Show("Name cannot be empty.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return false;
-        //    }
-        //    using (var p = new POSEntities())
-        //    {
-        //        var c = p.Customers.FirstOrDefault(x => x.Name == name.Text);
-        //        if (c != null)
-        //        {
-        //            MessageBox.Show("Name already taken.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //            return false;
-        //        }
-        //    }
-        //    return true;
-        //}
-
-        //private void saveBtn_Click(object sender, EventArgs e)
-        //{
-        //    if (!canSave())
-        //        return;
-
-        //    using (var p = new POSEntities())
-        //    {
-        //        var add = address.Text.Trim();
-        //        var cont = contact.Text.Trim();
-
-        //        Customer c = new Customer();
-
-        //        c.Name = name.Text.Trim();
-
-        //        c.Address = add == string.Empty ? null : add;
-        //        c.ContactDetails = cont == string.Empty ? null : cont;
-
-        //        p.Customers.Add(c);
-        //        p.SaveChanges();
-
-        //        OnSave?.Invoke(this, null);
-        //    }
-
-        //    this.Tag = name.Text.Trim();
-        //    DialogResult = DialogResult.OK;
-
-        //    this.Close();
-        //}
+        bool _isSelecting = false;
 
         private async void CreateCustomerProfile_Load(object sender, EventArgs e) {
             await LoadDataAsync();
@@ -255,6 +212,19 @@ namespace POS.Forms {
         }
 
         private void CustomerForm_OnSuccessfulCreation(object sender, object e) {
+            if (_isSelecting && MessageBox.Show("Would you like to select the newly added Customer?",
+                                                "",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question) == DialogResult.Yes) {
+
+                var newlyAddedCustomer = (Customer)e;
+                OnSelected?.Invoke(this, newlyAddedCustomer);
+
+                if (sender is Form createForm)
+                    createForm.Close();
+
+                return;
+            }
             if (e is Customer newCustomer) {
                 customerTable.Rows.Add(CreateRow(newCustomer));
             }

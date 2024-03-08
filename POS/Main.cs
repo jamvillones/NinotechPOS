@@ -5,7 +5,6 @@ using POS.UserControls;
 using System;
 using System.Data.Entity;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,6 +36,9 @@ namespace POS {
             var currentLogin = CurrentLogin;
 
             userButton.Text = currentLogin.ToString();
+            var settings = Properties.Settings.Default;
+
+            this.Text = "POS - " + (settings.IsLocalConnection ? "localConnection" : settings.DataSource);
 
             bool isAdmin = currentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
             loginPrivilegesToolStripMenuItem.Enabled = isAdmin;
