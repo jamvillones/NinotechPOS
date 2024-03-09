@@ -9,34 +9,61 @@ using System.Windows.Forms;
 
 
 namespace POS.Forms {
-    public partial class Customers : Form {
+    public partial class Customers_ListForm : Form {
 
         public event EventHandler<Customer> OnSelected;
-        public Customers(bool isSelecting) {
+        public Customers_ListForm(bool isSelecting) {
             InitializeComponent();
             _isSelecting = isSelecting;
         }
 
-        public Customers() {
+        public Customers_ListForm() {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// used for customer picking mode. automatically selecting customer upon register if true.
+        /// </summary>
         bool _isSelecting = false;
 
         private async void CreateCustomerProfile_Load(object sender, EventArgs e) {
-            await LoadDataAsync();
+            await Task.WhenAll(
+                SetAutoComplete_Async(),
+                LoadData_Async()
+                );
+        }
+
+        async Task<string[]> GetAutoComplete_Async() {
+            try {
+                using (var context = new POSEntities()) {
+                    return await context.Customers
+                        .AsNoTracking()
+                        .AsQueryable()
+                        .Select(x => x.Name)
+                        .ToArrayAsync();
+                }
+            }
+            catch {
+                return Array.Empty<string>();
+            }
+        }
+
+        async Task SetAutoComplete_Async() {
+            var names = await GetAutoComplete_Async();
+            searchControl.SetAutoComplete(names);
         }
         string _keyWord = string.Empty;
         private async void searchControl_OnSearch(object sender, Misc.SearchEventArgs e) {
+            _keyWord = e.Text;
 
-            _keyWord = e.Text.Trim();
             TryCancelLoading();
 
-            e.SearchFound = await LoadDataAsync();
+            e.SearchFound = await LoadData_Async();
             if (!e.SearchFound)
-                MessageBox.Show("Entries Not Found", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No Entries Found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        //return wether an actual task is cancelled
         bool TryCancelLoading() {
             try {
                 tokenSource?.Cancel();
@@ -49,11 +76,13 @@ namespace POS.Forms {
 
         CancellationTokenSource tokenSource = null;
 
-        async Task<bool> LoadDataAsync() {
+        async Task<bool> LoadData_Async() {
 
             tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
+
             try {
+                loadingLabel.Text = "loading...";
                 using (var context = new POSEntities()) {
                     var customers = await context.Customers
                         .AsNoTracking()
@@ -68,30 +97,25 @@ namespace POS.Forms {
                         customerTable.Rows.Clear();
 
                         await Task.Run(() => {
-
                             foreach (var customer in customers) {
                                 if (token.IsCancellationRequested) break;
                                 customerTable.InvokeIfRequired(() => customerTable.Rows.Add(CreateRow(customer)));
                             }
-
                         });
 
                         return true;
                     }
-
                 }
             }
-            catch (OperationCanceledException) {
-
-            }
+            catch (OperationCanceledException) { }
+            catch { }
             finally {
                 tokenSource?.Dispose();
+                loadingLabel.Text = string.Empty;
             }
 
             return false;
         }
-
-
 
         DataGridViewRow CreateRow(Customer c) => customerTable.CreateRow(
             c.Id,
@@ -105,7 +129,7 @@ namespace POS.Forms {
 
         private async void searchControl_OnTextEmpty(object sender, EventArgs e) {
             _keyWord = string.Empty;
-            await LoadDataAsync();
+            await LoadData_Async();
         }
 
         void DeleteCustomer(int rowIndex) {
@@ -140,12 +164,11 @@ namespace POS.Forms {
                         ct.ShowDialog();
                     else
                         MessageBox.Show("No Transactions Found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 }
             }
         }
 
-        string lastValue = "";
+        string lastValue = string.Empty;
         private void customerTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
             var table = sender as DataGridView;
             lastValue = table[e.ColumnIndex, e.RowIndex].Value?.ToString();
@@ -193,7 +216,6 @@ namespace POS.Forms {
                 e.Cancel = true;
                 MessageBox.Show("Length cannot exceed 50 characters!", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
-                //customerTable[e.ColumnIndex, e.RowIndex].ErrorText = "character length cannot be more then 50";
             }
             if (e.ColumnIndex == col_name.Index)
                 e.Cancel = string.IsNullOrWhiteSpace(name);

@@ -26,5 +26,10 @@ namespace POS.Forms {
 
             await Task.WhenAll(inventorySnapshot_Items1.Initialize_Async(), inventorySnapshot_Graph1.Initialize_Async());
         }
+
+        private void InventoryTimeStamp_Form_FormClosing(object sender, FormClosingEventArgs e) {
+            inventorySnapshot_Graph1.TryCancel();
+            inventorySnapshot_Items1.TryCancel();
+        }
     }
 }

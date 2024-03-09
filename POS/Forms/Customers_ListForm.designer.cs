@@ -1,6 +1,6 @@
 ﻿namespace POS.Forms
 {
-    partial class Customers
+    partial class Customers_ListForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customers));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customers_ListForm));
             this.customerTable = new System.Windows.Forms.DataGridView();
             this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_transact = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -40,10 +40,12 @@
             this.col_address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_del = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.loadingLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.recHistBtn = new System.Windows.Forms.Button();
             this.searchControl = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.customerTable)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // customerTable
@@ -143,11 +145,22 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.loadingLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(20, 55);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(664, 20);
             this.panel1.TabIndex = 2;
+            // 
+            // loadingLabel
+            // 
+            this.loadingLabel.AutoSize = true;
+            this.loadingLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.loadingLabel.ForeColor = System.Drawing.Color.Blue;
+            this.loadingLabel.Location = new System.Drawing.Point(0, 7);
+            this.loadingLabel.Name = "loadingLabel";
+            this.loadingLabel.Size = new System.Drawing.Size(0, 13);
+            this.loadingLabel.TabIndex = 0;
             // 
             // panel2
             // 
@@ -210,6 +223,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Customers_FormClosing);
             this.Load += new System.EventHandler(this.CreateCustomerProfile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customerTable)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -226,5 +241,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_contact;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_address;
         private System.Windows.Forms.DataGridViewButtonColumn col_del;
+        private System.Windows.Forms.Label loadingLabel;
     }
 }

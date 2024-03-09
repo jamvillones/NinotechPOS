@@ -156,7 +156,7 @@ namespace POS {
             OpenDialog<Suppliers>();
         }
         private void createCustomer_Click(object sender, EventArgs e) {
-            OpenDialog<Customers>();
+            OpenDialog<Customers_ListForm>();
         }
         private void stockinLog_Click(object sender, EventArgs e) {
             OpenDialog<StockinLog>();

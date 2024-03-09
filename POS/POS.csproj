@@ -284,11 +284,11 @@
     <Compile Include="Forms\ChangePass.designer.cs">
       <DependentUpon>ChangePass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Customers.cs">
+    <Compile Include="Forms\Customers_ListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Customers.designer.cs">
-      <DependentUpon>Customers.cs</DependentUpon>
+    <Compile Include="Forms\Customers_ListForm.designer.cs">
+      <DependentUpon>Customers_ListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CreateLogin.cs">
       <SubType>Form</SubType>
@@ -535,8 +535,8 @@
     <EmbeddedResource Include="Forms\ChangePass.resx">
       <DependentUpon>ChangePass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Customers.resx">
-      <DependentUpon>Customers.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Customers_ListForm.resx">
+      <DependentUpon>Customers_ListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreateLogin.resx">
       <DependentUpon>CreateLogin.cs</DependentUpon>

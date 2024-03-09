@@ -367,7 +367,7 @@ namespace POS.Forms {
         }
 
         private void addCustomerBtn_Click(object sender, EventArgs e) {
-            using (var createCustomer = new Customers()) {
+            using (var createCustomer = new Customers_ListForm()) {
                 //createCustomer.OnSave += CreateCustomer_OnSave;
                 if (createCustomer.ShowDialog() == DialogResult.OK) {
                     var text = (string)createCustomer.Tag;

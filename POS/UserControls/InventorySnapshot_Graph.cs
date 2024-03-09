@@ -1,21 +1,13 @@
-﻿using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
-using POS.Misc;
+﻿using POS.Misc;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
-using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using System.Windows.Input;
 
 namespace POS.UserControls {
     public partial class InventorySnapshot_Graph : UserControl, ILoadable {
@@ -44,6 +36,7 @@ namespace POS.UserControls {
 
             source = new CancellationTokenSource();
             var token = source.Token;
+
             int selectedYear = dateTimePicker1.Value.Year;
             int selectedMonth = dateTimePicker1.Value.Month;
 
@@ -116,19 +109,6 @@ namespace POS.UserControls {
             .SumAsync(cancelToken);
         }
 
-        void TryCancel() {
-            try { source?.Cancel(); }
-            catch (ObjectDisposedException) {
-
-            }
-        }
-
-        private async void numericUpDown1_ValueChanged(object sender, EventArgs e) {
-            TryCancel();
-
-            await Initialize_Async();
-        }
-
         private async void radioButton1_CheckedChanged(object sender, EventArgs e) {
             if (sender is RadioButton rb && rb.Checked) {
                 dateTimePicker1.CustomFormat = "yyyy";
@@ -141,10 +121,17 @@ namespace POS.UserControls {
 
         private async void radioButton2_CheckedChanged(object sender, EventArgs e) {
             if (sender is RadioButton rb && rb.Checked) {
-                dateTimePicker1.CustomFormat = "MMM yyyy";
+                dateTimePicker1.CustomFormat = "MMMM yyyy";
 
                 TryCancel();
                 await Initialize_Async();
+            }
+        }
+
+        public void TryCancel() {
+            try { source?.Cancel(); }
+            catch (ObjectDisposedException) {
+
             }
         }
     }

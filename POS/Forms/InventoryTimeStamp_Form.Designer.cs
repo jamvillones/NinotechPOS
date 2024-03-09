@@ -122,6 +122,7 @@
             this.Name = "InventoryTimeStamp_Form";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Inventory Time Table";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InventoryTimeStamp_Form_FormClosing);
             this.Load += new System.EventHandler(this.InventoryTimeStamp_Form_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();

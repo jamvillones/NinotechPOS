@@ -5,11 +5,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 public interface ILoadable {
     Task Initialize_Async();
+    void TryCancel();
 }
 
 namespace POS.UserControls {
@@ -39,42 +41,49 @@ namespace POS.UserControls {
         }
 
         private async Task LoadAsync() {
-            using (var context = new POSEntities()) {
-                var items = await context.Products
-                    .AsNoTracking()
-                    .AsQueryable()
-                    .Where(i => i.Item.Type == ItemType.Quantifiable.ToString())
-                    .ApplySearch(keyword)
-                    .Select(i => new InventoryTimeStamp() {
-                        ProductId = i.Id,
-                        Name = i.Item.Name + " - " + i.Supplier.Name,
-                        Qty = i.StockinHistories.Where(s => s.Date <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum() -
-                              i.SoldItems.Where(s => s.Sale.Date <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
-                        InventoryQty = i.InventoryItems.Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
-                        Cost = i.Cost
-                    })
-                    .ToListAsync();
+            CancellationTokenSource = new CancellationTokenSource();
+            var token = CancellationTokenSource.Token;
+            try {
+                using (var context = new POSEntities()) {
+                    var items = await context.Products
+                        .AsNoTracking()
+                        .AsQueryable()
+                        .Where(i => i.Item.Type == ItemType.Quantifiable.ToString())
+                        .ApplySearch(keyword)
+                        .Select(i => new InventoryTimeStamp() {
+                            ProductId = i.Id,
+                            Name = i.Item.Name + " - " + i.Supplier.Name,
+                            Qty = i.StockinHistories.Where(s => s.Date <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum() -
+                                  i.SoldItems.Where(s => s.Sale.Date <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
+                            InventoryQty = i.InventoryItems.Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
+                            Cost = i.Cost
+                        })
+                        .ToListAsync(token);
 
-                if (items.Count > 0) {
+                    token.ThrowIfCancellationRequested();
+                    if (items.Count > 0) {
 
-                    TotalLabel.Text = items.Sum(i => i.TotalCost).ToCurrency();
+                        TotalLabel.Text = items.Sum(i => i.TotalCost).ToCurrency();
 
-                    dataGridView.Rows.Clear();
-                    foreach (var item in items) {
-                        var createdRow = CreateRow(item);
+                        dataGridView.Rows.Clear();
+                        foreach (var item in items) {
+                            if (token.IsCancellationRequested)
+                                break;
+                            var createdRow = CreateRow(item);
+                            dataGridView.Rows.Add(createdRow);
+                        }
 
-                        //if (item.Qty < item.InventoryQty)
-                        //    createdRow.DefaultCellStyle.ForeColor = Color.Maroon;
-                        //else if (item.Qty > item.InventoryQty)
-                        //    createdRow.DefaultCellStyle.ForeColor = Color.Blue;
-
-                        dataGridView.Rows.Add(createdRow);
+                        return;
                     }
 
-                    return;
+                    MessageBox.Show("No Entries Found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            catch (OperationCanceledException) {
 
-                MessageBox.Show("No Entries Found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            finally {
+                CancellationTokenSource?.Dispose();
             }
         }
 
@@ -165,6 +174,16 @@ namespace POS.UserControls {
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
             keyword = string.Empty;
             await LoadAsync();
+        }
+
+        CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+        public void TryCancel() {
+            try {
+                CancellationTokenSource?.Cancel();
+            }
+            catch (ObjectDisposedException) {
+
+            }
         }
     }
 }
