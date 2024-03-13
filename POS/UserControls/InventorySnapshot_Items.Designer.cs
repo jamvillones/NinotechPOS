@@ -29,19 +29,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.itemsPanel = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.TotalLabel = new System.Windows.Forms.Label();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_ItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.TotalLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.searchControl1 = new POS.UserControls.SearchControl();
             this.itemsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panel3.SuspendLayout();
@@ -49,13 +48,12 @@
             // 
             // itemsPanel
             // 
+            this.itemsPanel.Controls.Add(this.dateTimePicker1);
             this.itemsPanel.Controls.Add(this.dataGridView);
             this.itemsPanel.Controls.Add(this.panel3);
             this.itemsPanel.Controls.Add(this.button1);
             this.itemsPanel.Controls.Add(this.panel4);
             this.itemsPanel.Controls.Add(this.searchControl1);
-            this.itemsPanel.Controls.Add(this.panel2);
-            this.itemsPanel.Controls.Add(this.dateTimePicker1);
             this.itemsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsPanel.Location = new System.Drawing.Point(0, 0);
             this.itemsPanel.Name = "itemsPanel";
@@ -99,90 +97,13 @@
             this.dataGridView.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.EnableHeadersVisualStyles = false;
-            this.dataGridView.Location = new System.Drawing.Point(0, 75);
+            this.dataGridView.Location = new System.Drawing.Point(0, 45);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(800, 280);
+            this.dataGridView.Size = new System.Drawing.Size(800, 310);
             this.dataGridView.TabIndex = 14;
-            // 
-            // panel3
-            // 
-            this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel3.Controls.Add(this.TotalLabel);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 355);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(800, 15);
-            this.panel3.TabIndex = 12;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(0, 370);
-            this.button1.MaximumSize = new System.Drawing.Size(200, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 30);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Balance Entries";
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // panel4
-            // 
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 65);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(800, 10);
-            this.panel4.TabIndex = 11;
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 20);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 10);
-            this.panel2.TabIndex = 4;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CustomFormat = "MMMM d,yyyy";
-            this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(0, 0);
-            this.dateTimePicker1.MaximumSize = new System.Drawing.Size(350, 50);
-            this.dateTimePicker1.MinimumSize = new System.Drawing.Size(350, 4);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(350, 20);
-            this.dateTimePicker1.TabIndex = 16;
-            // 
-            // TotalLabel
-            // 
-            this.TotalLabel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TotalLabel.ForeColor = System.Drawing.Color.Blue;
-            this.TotalLabel.Location = new System.Drawing.Point(375, 0);
-            this.TotalLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.TotalLabel.Name = "TotalLabel";
-            this.TotalLabel.Size = new System.Drawing.Size(425, 15);
-            this.TotalLabel.TabIndex = 17;
-            this.TotalLabel.Text = "0.00";
-            this.TotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // searchControl1
-            // 
-            this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
-            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchControl1.Location = new System.Drawing.Point(0, 30);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(350, 60);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(200, 35);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Padding = new System.Windows.Forms.Padding(5);
-            this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(350, 35);
-            this.searchControl1.TabIndex = 10;
             // 
             // Column3
             // 
@@ -226,6 +147,74 @@
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             // 
+            // panel3
+            // 
+            this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel3.Controls.Add(this.TotalLabel);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 355);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(800, 15);
+            this.panel3.TabIndex = 12;
+            // 
+            // TotalLabel
+            // 
+            this.TotalLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.TotalLabel.ForeColor = System.Drawing.Color.Blue;
+            this.TotalLabel.Location = new System.Drawing.Point(375, 0);
+            this.TotalLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.TotalLabel.Name = "TotalLabel";
+            this.TotalLabel.Size = new System.Drawing.Size(425, 15);
+            this.TotalLabel.TabIndex = 17;
+            this.TotalLabel.Text = "0.00";
+            this.TotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(0, 370);
+            this.button1.MaximumSize = new System.Drawing.Size(200, 30);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(200, 30);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Balance Entries";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 35);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(800, 10);
+            this.panel4.TabIndex = 11;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker1.CustomFormat = "MMMM d,yyyy";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(629, 15);
+            this.dateTimePicker1.MaximumSize = new System.Drawing.Size(350, 50);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(170, 20);
+            this.dateTimePicker1.TabIndex = 16;
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
+            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchControl1.Location = new System.Drawing.Point(0, 0);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(350, 60);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(200, 35);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Padding = new System.Windows.Forms.Padding(5);
+            this.searchControl1.SearchedText = "";
+            this.searchControl1.Size = new System.Drawing.Size(350, 35);
+            this.searchControl1.TabIndex = 10;
+            // 
             // InventorySnapshot_Items
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -248,7 +237,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel4;
         private SearchControl searchControl1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label TotalLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;

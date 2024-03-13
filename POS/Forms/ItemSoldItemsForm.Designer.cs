@@ -94,7 +94,7 @@
             // 
             // Column8
             // 
-            dataGridViewCellStyle2.Format = "g";
+            dataGridViewCellStyle2.Format = "MMMM d, yyyy h:mm tt";
             dataGridViewCellStyle2.NullValue = null;
             this.Column8.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column8.HeaderText = "DATE";
