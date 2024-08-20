@@ -211,6 +211,7 @@
             this.soldTo.TabStop = false;
             this.soldTo.Text = "Lerom Ipsum";
             this.soldTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.soldTo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.soldTo_MouseDoubleClick);
             // 
             // amountDue
             // 

@@ -279,5 +279,14 @@ namespace POS.Forms {
 
 
         }
+
+        private void soldTo_MouseDoubleClick(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Left) {
+                var customerChangingForm = new ChangeCustomerForm(_saleId);
+                if (customerChangingForm.ShowDialog() == DialogResult.OK) {
+                    soldTo.Text = ((Customer)customerChangingForm.Tag)?.ToString();
+                }
+            }
+        }
     }
 }

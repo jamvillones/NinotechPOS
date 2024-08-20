@@ -28,7 +28,7 @@ namespace POS.Forms {
                     .ToListAsync();
 
                 datas = entries.Select(y => new DataListHolder(
-                     y.Product.Item.Id,
+                     y.Product.Item.Barcode,
                      y.SerialNumber,
                      y.Product.Item.Name,
                      y.Quantity.ToString("N0"),
@@ -125,9 +125,13 @@ namespace POS.Forms {
             while (index < datas.Count) {
                 var i = datas[index];
 
-                //decimal total = (int)i[2] * ((decimal)i[3] - (decimal)i[4]);
+                List<int> heights = new List<int>();
 
-                var max = i.Items.Select(x => (int)g.MeasureString(x?.ToString() ?? string.Empty, contentFont, area.Width * 4 / 9).Height).Max();
+                heights.Add((int)g.MeasureString(i.Items[0]?.ToString() ?? string.Empty, contentFont, area.Width * 1 / 9).Height);
+                heights.Add((int)g.MeasureString(i.Items[1]?.ToString() ?? string.Empty, contentFont, area.Width * 1 / 9).Height);
+                heights.Add((int)g.MeasureString(i.Items[2]?.ToString() ?? string.Empty, contentFont, area.Width * 3 / 9).Height);
+
+                var max = heights.Max();
 
                 if (yStart + max > area.Height) {
                     e.HasMorePages = true;
@@ -143,7 +147,7 @@ namespace POS.Forms {
                 stringHolderRect.Height = max;
 
                 g.DrawRectangle(gridPen, stringHolderRect);
-                g.DrawString(i[0].ToString(), contentFont, Brushes.Black, stringHolderRect);
+                g.DrawString(i[0]?.ToString()??"", contentFont, Brushes.Black, stringHolderRect);
 
                 stringHolderRect.X = stringHolderRect.Right;
                 stringHolderRect.Width = area.Width * 1 / 9;
@@ -192,6 +196,7 @@ namespace POS.Forms {
         void drawLines(RectangleF p, Graphics g, int xDivision) {
             Pen linePen = new Pen(Brushes.Blue);
             for (int i = 1; i < xDivision; i++) {
+
                 int x = ((int)p.Width / xDivision) * i;
                 Point start = new Point(x, 0);
                 Point end = new Point(x, (int)p.Height);

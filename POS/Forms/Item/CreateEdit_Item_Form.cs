@@ -98,11 +98,11 @@ namespace POS.Forms.ItemRegistration {
 
         private async void SaveBtn_Click(object sender, EventArgs e) {
 
-            if (Costs.Count <= 0) {
+            if (Costs.Count <= 0 && Item.IsFinite) {
                 if (MessageBox.Show(
-                    "Items without Cost cannot be restocked. Are you sure you intend to leave it empty?", 
+                    "Items without Cost cannot be restocked. Are you sure you intend to leave it empty?",
                     "Cost Is Empty",
-                    MessageBoxButtons.OKCancel, 
+                    MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Warning) == DialogResult.Cancel)
                     return;
             }
@@ -112,10 +112,15 @@ namespace POS.Forms.ItemRegistration {
                     var temp = Item;
 
                     if (_id == string.Empty) {
-                        if (!temp.IsFinite)
-                            temp.Products.Add(new Product() { Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none") });
+                        if (!temp.IsFinite) {
+                            var newProduct = new Product() { Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none") };
+                            temp.Products.Add(newProduct);
+                            context.InventoryItems.Add(new InventoryItem() { Product = newProduct });
+                        }
 
                         var toSave = context.Items.Add(temp);
+
+
                         Tag = toSave;
                     }
 
@@ -150,6 +155,7 @@ namespace POS.Forms.ItemRegistration {
                                 }
                             }
                         }
+
                         Tag = toSave;
                     }
                     await context.SaveChangesAsync();
