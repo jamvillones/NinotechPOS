@@ -132,7 +132,7 @@ namespace POS {
 
         #region toolstrips
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e) {
-            using (var changeDetails = new ChangePass(UserManager.instance.currentLogin.Id)) {
+            using (var changeDetails = new ChangePass(UserManager.instance.CurrentLogin.Id)) {
                 if (changeDetails.ShowDialog() == DialogResult.OK) {
                     var result = (Login)changeDetails.Tag;
                     userButton.Text = result.ToString();
@@ -181,7 +181,7 @@ namespace POS {
         }
         #endregion
 
-        Login CurrentLogin => UserManager.instance.currentLogin;
+        Login CurrentLogin => UserManager.instance.CurrentLogin;
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e) {
             if (!IsLoggedOut)

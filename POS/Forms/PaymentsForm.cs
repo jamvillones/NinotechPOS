@@ -61,7 +61,7 @@ namespace POS.Forms {
 
                 var transaction = new ChargedPayRecord();
                 transaction.Sale = sale;
-                transaction.Username = UserManager.instance.currentLogin.Username;
+                transaction.Username = UserManager.instance.CurrentLogin.Username;
                 transaction.TransactionTime = DateTime.Now;
                 transaction.AmountPayed = paymentNum.Value;
 

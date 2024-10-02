@@ -46,7 +46,7 @@ namespace POS.Forms
                 foreach (var x in variations)
                     variationsTable.Rows.Add(x.Supplier?.Name, x.Cost);
 
-                variationsTable.Columns[1].ReadOnly = UserManager.instance?.currentLogin.CanEditProduct ?? false ? false : true;
+                variationsTable.Columns[1].ReadOnly = UserManager.instance?.CurrentLogin.CanEditProduct ?? false ? false : true;
             }
         }
 

@@ -81,7 +81,7 @@ namespace POS.Forms {
             Graphics g = e.Graphics;
             Rectangle pageNumberRect = new Rectangle(0, 0, area.Width, 40);
             farFormat.Alignment = StringAlignment.Far;
-            g.DrawString("Date Printed: " + DateTime.Now.ToString("MMM/d/yyyy hh:mm tt").ToUpper() + "\nUser: " + UserManager.instance.currentLogin.Username, contentFont, Brushes.Black, pageNumberRect);
+            g.DrawString("Date Printed: " + DateTime.Now.ToString("MMM/d/yyyy hh:mm tt").ToUpper() + "\nUser: " + UserManager.instance.CurrentLogin.Username, contentFont, Brushes.Black, pageNumberRect);
             g.DrawString("Page: " + pageCount, contentFont, Brushes.Black, pageNumberRect, farFormat);
             int colHeight = (int)g.MeasureString("Item Name", contentFont).Height;
 

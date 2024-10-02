@@ -43,7 +43,7 @@ namespace POS.Forms
             barcode.Text = target.Id;
             itemName.Text = target.Name;
             //cost.Value = target.DefaultCost;
-            refBtn.Enabled = UserManager.instance.currentLogin.CanEditProduct;
+            refBtn.Enabled = UserManager.instance.CurrentLogin.CanEditProduct;
 
             using (var p = new POSEntities())
             {
@@ -114,7 +114,7 @@ namespace POS.Forms
         {
             get
             {
-                return UserManager.instance.currentLogin;
+                return UserManager.instance.CurrentLogin;
             }
         }
 

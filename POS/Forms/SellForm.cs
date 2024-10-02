@@ -406,7 +406,7 @@ namespace POS.Forms {
             using (var context = new POSEntities()) {
                 var newSale = new Sale() {
                     Customer = await context.Customers.FirstOrDefaultAsync(c => c.Id == Customer.Id),
-                    Login = await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.currentLogin.Id),
+                    Login = await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.CurrentLogin.Id),
                     Date = DateTime.Now,
                     AmountRecieved = tendered.Value > grandtTotal ? grandtTotal : tendered.Value,
                     Discount = discount.Value,

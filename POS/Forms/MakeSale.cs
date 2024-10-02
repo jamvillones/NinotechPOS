@@ -116,7 +116,7 @@ namespace POS.Forms {
             using (var p = new POSEntities()) {
                 Sale newSale = new Sale();
 
-                string username = UserManager.instance.currentLogin.Username;
+                string username = UserManager.instance.CurrentLogin.Username;
                 newSale.Login = p.Logins.FirstOrDefault(x => x.Username == username);
 
                 Customer customer = p.Customers.FirstOrDefault(x => x.Name == soldTo.Text);
@@ -540,7 +540,7 @@ namespace POS.Forms {
             ReceiptDetails details = new ReceiptDetails();
             details.ControlNumber = saleId.ToString();
             details.CustomerName = soldTo.Text;
-            details.TransactBy = UserManager.instance.currentLogin.Username;
+            details.TransactBy = UserManager.instance.CurrentLogin.Username;
             details.Tendered = amountRecieved.Value;
 
             for (int i = 0; i < cartTable.RowCount; i++)

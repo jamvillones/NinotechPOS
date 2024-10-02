@@ -47,7 +47,7 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Cost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_removeBtn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -102,7 +102,7 @@
             this.Column2,
             this.Column6,
             this.Column4,
-            this.Column3,
+            this.col_Cost,
             this.Column5,
             this.col_removeBtn});
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -183,15 +183,15 @@
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
             // 
-            // Column3
+            // col_Cost
             // 
             dataGridViewCellStyle9.Format = "C2";
             dataGridViewCellStyle9.NullValue = null;
             dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle9;
-            this.Column3.HeaderText = "COST";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
+            this.col_Cost.DefaultCellStyle = dataGridViewCellStyle9;
+            this.col_Cost.HeaderText = "COST";
+            this.col_Cost.Name = "col_Cost";
+            this.col_Cost.ReadOnly = true;
             // 
             // Column5
             // 
@@ -468,7 +468,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Cost;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewButtonColumn col_removeBtn;
     }

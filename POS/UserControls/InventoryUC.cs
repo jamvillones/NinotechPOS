@@ -79,7 +79,7 @@ namespace POS.UserControls {
 
             if (e.ColumnIndex == col_remove.Index) {
 
-                if (!UserManager.instance.currentLogin.CanEditItem) return;
+                if (!UserManager.instance.CurrentLogin.CanEditItem) return;
                 if (MessageBox.Show(
                     "Are you sure you want to delete the selected item?",
                     "This will also delete items in inventory.",
@@ -288,7 +288,7 @@ namespace POS.UserControls {
         }
 
         private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) {
-            if (!UserManager.instance.currentLogin.CanEditItem) {
+            if (!UserManager.instance.CurrentLogin.CanEditItem) {
                 e.Cancel = true;
                 return;
             }
@@ -307,7 +307,7 @@ namespace POS.UserControls {
 
         private void InventoryUC_Load(object sender, EventArgs e) {
             try {
-                var currLogin = UserManager.instance.currentLogin;
+                var currLogin = UserManager.instance.CurrentLogin;
 
                 addItemBtn.Enabled = currLogin.CanEditItem;
                 editItemBtn.Enabled = currLogin.CanEditItem;
@@ -322,7 +322,7 @@ namespace POS.UserControls {
             if (itemsTable.SelectedCells.Count == 0)
                 return;
 
-            var currLogin = UserManager.instance.currentLogin;
+            var currLogin = UserManager.instance.CurrentLogin;
             var type = itemsTable.SelectedCells[5].Value?.ToString();
             bool isItemQuantifyable = type == ItemType.Quantifiable.ToString();
 

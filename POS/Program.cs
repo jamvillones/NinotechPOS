@@ -18,8 +18,6 @@ namespace POS {
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            //Application.Run(new Inventory_TimeStamp());
-
             bool backup = false;
             UserManager.instance = new UserManager();
 

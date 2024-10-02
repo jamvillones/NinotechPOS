@@ -28,7 +28,7 @@ namespace POS.Forms {
                 doc.PrinterSettings.PrinterName = settings.ReceiptPrinter;
         }
 
-        Login CurrentLogin => UserManager.instance.currentLogin;
+        Login CurrentLogin => UserManager.instance.CurrentLogin;
 
         private readonly int _saleId;
 
@@ -207,7 +207,7 @@ namespace POS.Forms {
                 ReceiptDetails details = new ReceiptDetails();
                 details.ControlNumber = sale.Id.ToString();
                 details.CustomerName = soldTo.Text;
-                details.TransactBy = UserManager.instance.currentLogin.Name ?? "User";
+                details.TransactBy = UserManager.instance.CurrentLogin.Name ?? "User";
                 details.Tendered = sale.AmountRecieved;
 
                 foreach (var soldItem in sale.SoldItems) {

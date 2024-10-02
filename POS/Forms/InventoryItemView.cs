@@ -15,7 +15,7 @@ namespace POS.Forms {
             _id = id;
             _serial = serial;
 
-            bool isAdmin = UserManager.instance.currentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
+            bool isAdmin = UserManager.instance.CurrentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
             invTable.AllowUserToDeleteRows = isAdmin;
             col_qty.ReadOnly = !isAdmin;
         }

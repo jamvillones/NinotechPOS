@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace POS.Forms {
     public partial class StockinForm : Form {
 
-        Login CurrLogin => UserManager.instance.currentLogin;
+        Login CurrLogin => UserManager.instance.CurrentLogin;
 
         public StockinForm() {
             InitializeComponent();
