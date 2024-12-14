@@ -7,9 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace POS.Forms {
-    public partial class StockinLog : Form {
-        public StockinLog() {
+namespace POS.Forms
+{
+    public partial class StockinLog : Form
+    {
+        public StockinLog()
+        {
             InitializeComponent();
 
             regular_Dt.MaxDate = DateTime.Now;
@@ -38,17 +41,21 @@ namespace POS.Forms {
             await LoadDataAsync();
 
 
-        bool TryCancelCurrentOperation() {
-            try {
+        bool TryCancelCurrentOperation()
+        {
+            try
+            {
                 CancelSource?.Cancel();
                 return true;
             }
-            catch (ObjectDisposedException) {
+            catch (ObjectDisposedException)
+            {
                 return false;
             }
         }
 
-        private async Task<bool> LoadDataAsync() {
+        private async Task<bool> LoadDataAsync()
+        {
 
             TryCancelCurrentOperation();
 
@@ -56,8 +63,10 @@ namespace POS.Forms {
             var token = CancelSource.Token;
 
             bool ResultsFound = false;
-            try {
-                using (var p = new POSEntities()) {
+            try
+            {
+                using (var p = new POSEntities())
+                {
                     var stockins = p.StockinHistories
                         .AsNoTracking()
                         .FilterByKeyword(keyword)
@@ -74,11 +83,14 @@ namespace POS.Forms {
 
                     ResultsFound = finalResult.Count > 0;
 
-                    if (ResultsFound) {
+                    if (ResultsFound)
+                    {
                         token.ThrowIfCancellationRequested();
 
-                        await Task.Run(() => {
-                            foreach (var row in finalResult) {
+                        await Task.Run(() =>
+                        {
+                            foreach (var row in finalResult)
+                            {
                                 if (token.IsCancellationRequested) break;
                                 histTable.InvokeIfRequired(() => histTable.Rows.Add(CreateRow(row)));
                             }
@@ -88,17 +100,20 @@ namespace POS.Forms {
                     }
                 }
             }
-            catch (OperationCanceledException) {
+            catch (OperationCanceledException)
+            {
                 return false;
             }
-            finally {
+            finally
+            {
                 CancelSource.Dispose();
             }
 
             return ResultsFound;
         }
 
-        private DataGridViewRow CreateRow(StockinHistory stockinHistory) {
+        private DataGridViewRow CreateRow(StockinHistory stockinHistory)
+        {
             var row = new DataGridViewRow();
 
             row.CreateCells(histTable,
@@ -116,27 +131,33 @@ namespace POS.Forms {
             return row;
         }
 
-        private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e) {
+        private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
+        {
             keyword = e.Text;
             bool found = await LoadDataAsync();
             //e.SearchFound = await LoadDataAsync();
 
-            if (!found) {
+            if (!found)
+            {
                 MessageBox.Show("No Entries Found", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
+        {
             keyword = string.Empty;
             await LoadDataAsync();
         }
 
-        private async void datePicker_ValueChanged(object sender, EventArgs e) {
+        private async void datePicker_ValueChanged(object sender, EventArgs e)
+        {
             await LoadDataAsync();
         }
 
-        private async void all_CheckedChanged(object sender, EventArgs e) {
-            if (sender is RadioButton rb && rb.Checked) {
+        private async void all_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton rb && rb.Checked)
+            {
 
                 filterMode = DateFilterMode.All;
                 regular_Dt.Visible = false;
@@ -145,8 +166,10 @@ namespace POS.Forms {
             }
         }
 
-        private async void annually_CheckedChanged(object sender, EventArgs e) {
-            if (sender is RadioButton rb && rb.Checked) {
+        private async void annually_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton rb && rb.Checked)
+            {
                 filterMode = DateFilterMode.Annually;
                 regular_Dt.CustomFormat = "yyyy";
                 regular_Dt.Visible = true;
@@ -155,8 +178,10 @@ namespace POS.Forms {
             }
         }
 
-        private async void monthly_CheckedChanged(object sender, EventArgs e) {
-            if (sender is RadioButton rb && rb.Checked) {
+        private async void monthly_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton rb && rb.Checked)
+            {
                 filterMode = DateFilterMode.Monthly;
                 regular_Dt.CustomFormat = "MMM yyyy";
                 regular_Dt.Visible = true;
@@ -165,8 +190,10 @@ namespace POS.Forms {
             }
         }
 
-        private async void daily_CheckedChanged(object sender, EventArgs e) {
-            if (sender is RadioButton rb && rb.Checked) {
+        private async void daily_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton rb && rb.Checked)
+            {
                 filterMode = DateFilterMode.Daily;
                 regular_Dt.CustomFormat = "MMM d, yyyy";
                 regular_Dt.Visible = true;
@@ -175,9 +202,12 @@ namespace POS.Forms {
             }
         }
 
-        private async void dateRange_CheckedChanged(object sender, EventArgs e) {
-            if (sender is RadioButton rb) {
-                if (rb.Checked) {
+        private async void dateRange_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton rb)
+            {
+                if (rb.Checked)
+                {
                     regular_Dt.Visible = false;
                     dateRangeHolder.Visible = true;
 
@@ -189,7 +219,8 @@ namespace POS.Forms {
         }
 
         bool preventFrom = false;
-        private async void range_to_Dt_ValueChanged(object sender, EventArgs e) {
+        private async void range_to_Dt_ValueChanged(object sender, EventArgs e)
+        {
             ///this makes sure that the from event doesnt trigger a load
             preventFrom = true;
             range_from_Dt.MaxDate = range_to_Dt.Value.Date;
@@ -198,37 +229,43 @@ namespace POS.Forms {
             await LoadDataAsync();
         }
 
-        private async void range_from_Dt_ValueChanged(object sender, EventArgs e) {
+        private async void range_from_Dt_ValueChanged(object sender, EventArgs e)
+        {
             if (preventFrom)
                 return;
 
             await LoadDataAsync();
         }
 
-        void ShowStockinFailedMessage() {
+        void ShowStockinFailedMessage()
+        {
             MessageBox.Show("The amount of stock-in you are trying to revoke exceeds the current stock quantity. Please make sure to undo the correct stockin entry.",
                             "Stockin Correction Terminated.",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning);
         }
 
-        private async void histTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+        private async void histTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
             if (e.RowIndex == -1)
                 return;
 
-            if (e.ColumnIndex == col_removeBtn.Index) {
+            if (e.ColumnIndex == col_removeBtn.Index)
+            {
                 await UndoStockinForEntry(histTable.GetSelectedId());
                 return;
             }
 
-            if (e.ColumnIndex == col_Cost.Index) {
+            if (e.ColumnIndex == col_Cost.Index)
+            {
                 if (!UserManager.instance.IsAdmin)
                     return;
 
                 decimal oldCost = (decimal)histTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 decimal newCost = 0;
 
-                using (var costForm = new EditCostForm(oldCost)) {
+                using (var costForm = new EditCostForm(oldCost))
+                {
                     if (costForm.ShowDialog() == DialogResult.OK)
                         newCost = costForm.Cost;
                     else
@@ -243,10 +280,12 @@ namespace POS.Forms {
             }
         }
 
-        async Task UndoStockinForEntry(int _id) {
+        async Task UndoStockinForEntry(int _id)
+        {
             var login = UserManager.instance.CurrentLogin;
 
-            if (!login.CanEditInventory) {
+            if (!login.CanEditInventory)
+            {
                 MessageBox.Show("You do not have permission to undo stockin.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
@@ -255,29 +294,36 @@ namespace POS.Forms {
 
             var id = _id;
 
-            using (var context = new POSEntities()) {
+            using (var context = new POSEntities())
+            {
                 var stockin = await context.StockinHistories.FirstOrDefaultAsync(x => x.Id == id);
 
                 ///with serial
-                if (!string.IsNullOrWhiteSpace(stockin.SerialNumber)) {
+                if (!string.IsNullOrWhiteSpace(stockin.SerialNumber))
+                {
                     var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.SerialNumber == stockin.SerialNumber);
-                    if (invItem != null) {
+                    if (invItem != null)
+                    {
                         context.InventoryItems.Remove(invItem);
                     }
-                    else {
+                    else
+                    {
                         ShowStockinFailedMessage();
                         return;
                     }
                 }
-                else {
+                else
+                {
                     var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.ProductId == stockin.ProductId);
 
-                    if (invItem != null || invItem.Quantity >= stockin.Quantity) {
+                    if (invItem != null || invItem.Quantity >= stockin.Quantity)
+                    {
                         invItem.Quantity -= (int)stockin.Quantity;
                         if (invItem.Quantity <= 0)
                             context.InventoryItems.Remove(invItem);
                     }
-                    else {
+                    else
+                    {
                         ShowStockinFailedMessage();
                         return;
                     }
@@ -292,28 +338,35 @@ namespace POS.Forms {
             histTable.Rows.RemoveAt(histTable.DataGridViewCurrentRowIndex());
         }
 
-        async Task ChangeCostForStockinEntry(int _id, decimal updatedCost) {
+        async Task ChangeCostForStockinEntry(int _id, decimal updatedCost)
+        {
 
-            try {
-                using (var context = new POSEntities()) {
+            try
+            {
+                using (var context = new POSEntities())
+                {
                     var entity = await context.StockinHistories.FirstOrDefaultAsync(x => x.Id == _id);
                     entity.Cost = updatedCost;
                     await context.SaveChangesAsync();
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
 
-    public static class StockinExtension {
+    public static class StockinExtension
+    {
         public static IQueryable<StockinHistory> FilterByDate(
             this IQueryable<StockinHistory> stockins,
             DateTime dateSelected,
-            DateFilterMode filterMode) {
+            DateFilterMode filterMode)
+        {
 
-            switch (filterMode) {
+            switch (filterMode)
+            {
                 case DateFilterMode.Daily:
                     return stockins.Where(s => s.Date.Value.Year == dateSelected.Year &&
                                               s.Date.Value.Month == dateSelected.Month &&
@@ -337,12 +390,13 @@ namespace POS.Forms {
 
         public static IQueryable<StockinHistory> FilterByKeyword(
             this IQueryable<StockinHistory> stockins,
-            string keyword = "") {
+            string keyword = "")
+        {
 
             if (string.IsNullOrWhiteSpace(keyword))
                 return stockins;
 
-            return stockins.Where(s => s.ItemName.Contains(keyword) || s.SerialNumber == keyword);
+            return stockins.Where(s => s.ItemName.Contains(keyword) || s.SerialNumber.Contains(keyword));
         }
     }
 }
