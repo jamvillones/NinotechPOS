@@ -203,7 +203,7 @@
             this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl_OnSearch);
             this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl_OnTextEmpty);
             // 
-            // Customers
+            // Customers_ListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -215,7 +215,7 @@
             this.Controls.Add(this.searchControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
-            this.Name = "Customers";
+            this.Name = "Customers_ListForm";
             this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

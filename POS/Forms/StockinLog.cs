@@ -387,7 +387,6 @@ namespace POS.Forms
            DateTime from,
            DateTime to) => stockins.Where(s => s.Date >= from && s.Date <= to);
 
-
         public static IQueryable<StockinHistory> FilterByKeyword(
             this IQueryable<StockinHistory> stockins,
             string keyword = "")

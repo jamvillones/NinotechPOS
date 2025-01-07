@@ -8,16 +8,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace POS.Forms {
-    public partial class Customers_ListForm : Form {
+namespace POS.Forms
+{
+    public partial class Customers_ListForm : Form
+    {
 
         public event EventHandler<Customer> OnSelected;
-        public Customers_ListForm(bool isSelecting) {
+        public Customers_ListForm(bool isSelecting)
+        {
             InitializeComponent();
             _isSelecting = isSelecting;
         }
 
-        public Customers_ListForm() {
+        public Customers_ListForm()
+        {
             InitializeComponent();
         }
 
@@ -26,16 +30,20 @@ namespace POS.Forms {
         /// </summary>
         bool _isSelecting = false;
 
-        private async void CreateCustomerProfile_Load(object sender, EventArgs e) {
+        private async void CreateCustomerProfile_Load(object sender, EventArgs e)
+        {
             await Task.WhenAll(
                 SetAutoComplete_Async(),
                 LoadData_Async()
                 );
         }
 
-        async Task<string[]> GetAutoComplete_Async() {
-            try {
-                using (var context = new POSEntities()) {
+        async Task<string[]> GetAutoComplete_Async()
+        {
+            try
+            {
+                using (var context = new POSEntities())
+                {
                     return await context.Customers
                         .AsNoTracking()
                         .AsQueryable()
@@ -43,17 +51,21 @@ namespace POS.Forms {
                         .ToArrayAsync();
                 }
             }
-            catch {
+            catch
+            {
                 return Array.Empty<string>();
             }
         }
 
-        async Task SetAutoComplete_Async() {
+        async Task SetAutoComplete_Async()
+        {
             var names = await GetAutoComplete_Async();
+
             searchControl.SetAutoComplete(names);
         }
         string _keyWord = string.Empty;
-        private async void searchControl_OnSearch(object sender, Misc.SearchEventArgs e) {
+        private async void searchControl_OnSearch(object sender, Misc.SearchEventArgs e)
+        {
             _keyWord = e.Text;
 
             TryCancelLoading();
@@ -64,26 +76,32 @@ namespace POS.Forms {
         }
 
         //return wether an actual task is cancelled
-        bool TryCancelLoading() {
-            try {
+        bool TryCancelLoading()
+        {
+            try
+            {
                 tokenSource?.Cancel();
                 return true;
             }
-            catch (ObjectDisposedException) {
+            catch (ObjectDisposedException)
+            {
                 return false;
             }
         }
 
         CancellationTokenSource tokenSource = null;
 
-        async Task<bool> LoadData_Async() {
+        async Task<bool> LoadData_Async()
+        {
 
             tokenSource = new CancellationTokenSource();
             var token = tokenSource.Token;
 
-            try {
+            try
+            {
                 loadingLabel.Text = "loading...";
-                using (var context = new POSEntities()) {
+                using (var context = new POSEntities())
+                {
                     var customers = await context.Customers
                         .AsNoTracking()
                         .AsQueryable()
@@ -93,11 +111,14 @@ namespace POS.Forms {
 
                     token.ThrowIfCancellationRequested();
 
-                    if (customers.Count > 0) {
+                    if (customers.Count > 0)
+                    {
                         customerTable.Rows.Clear();
 
-                        await Task.Run(() => {
-                            foreach (var customer in customers) {
+                        await Task.Run(() =>
+                        {
+                            foreach (var customer in customers)
+                            {
                                 if (token.IsCancellationRequested) break;
                                 customerTable.InvokeIfRequired(() => customerTable.Rows.Add(CreateRow(customer)));
                             }
@@ -109,7 +130,8 @@ namespace POS.Forms {
             }
             catch (OperationCanceledException) { }
             catch { }
-            finally {
+            finally
+            {
                 tokenSource?.Dispose();
                 loadingLabel.Text = string.Empty;
             }
@@ -127,25 +149,30 @@ namespace POS.Forms {
             );
 
 
-        private async void searchControl_OnTextEmpty(object sender, EventArgs e) {
+        private async void searchControl_OnTextEmpty(object sender, EventArgs e)
+        {
             _keyWord = string.Empty;
             await LoadData_Async();
         }
 
-        void DeleteCustomer(int rowIndex) {
+        void DeleteCustomer(int rowIndex)
+        {
             if (MessageBox.Show("Are you sure you want to delete this customer?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
                 return;
 
             var table = customerTable;
             var id = (int)(table.Rows[rowIndex].Cells[0].Value);
 
-            using (var p = new POSEntities()) {
+            using (var p = new POSEntities())
+            {
                 var customerToBeDeleted = p.Customers.FirstOrDefault(x => x.Id == id);
-                if (customerToBeDeleted.Sales.Count > 0) {
+                if (customerToBeDeleted.Sales.Count > 0)
+                {
                     MessageBox.Show("This customer already made transactions and cannot be deleted!", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     return;
                 }
-                if (customerToBeDeleted != null) {
+                if (customerToBeDeleted != null)
+                {
                     p.Customers.Remove(customerToBeDeleted);
                     p.SaveChanges();
                 }
@@ -154,12 +181,16 @@ namespace POS.Forms {
             table.Rows.RemoveAt(rowIndex);
         }
 
-        private void customerTable_CellContentClick(object sender, DataGridViewCellEventArgs e) {
-            if (e.ColumnIndex == col_del.Index) {
+        private void customerTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == col_del.Index)
+            {
                 DeleteCustomer(e.RowIndex);
             }
-            if (e.ColumnIndex == col_transact.Index) {
-                using (var ct = new CustomerTransactionsForm()) {
+            if (e.ColumnIndex == col_transact.Index)
+            {
+                using (var ct = new CustomerTransactionsForm())
+                {
                     if (ct.SetId((int)(customerTable.Rows[e.RowIndex].Cells[0].Value)))
                         ct.ShowDialog();
                     else
@@ -169,12 +200,14 @@ namespace POS.Forms {
         }
 
         string lastValue = string.Empty;
-        private void customerTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e) {
+        private void customerTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
             var table = sender as DataGridView;
             lastValue = table[e.ColumnIndex, e.RowIndex].Value?.ToString();
         }
 
-        private void customerTable_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
+        private void customerTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
             var table = sender as DataGridView;
 
             var id = (int)table[0, e.RowIndex].Value;
@@ -185,13 +218,15 @@ namespace POS.Forms {
             if (newValue == lastValue)
                 return;
 
-            if (MessageBox.Show("Are you sure you want to edit this item?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) {
+            if (MessageBox.Show("Are you sure you want to edit this item?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+            {
                 table[e.ColumnIndex, e.RowIndex].Value = lastValue;
                 lastValue = "";
                 return;
             }
 
-            using (var context = new POSEntities()) {
+            using (var context = new POSEntities())
+            {
                 var target = context.Customers.FirstOrDefault(x => x.Id == id);
 
                 if (e.ColumnIndex == col_name.Index)
@@ -207,12 +242,14 @@ namespace POS.Forms {
             }
         }
 
-        private void customerTable_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) {
+        private void customerTable_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
             var name = e.FormattedValue.ToString().Trim();
 
             bool limitExceeded = name.Length > 50;
 
-            if (limitExceeded) {
+            if (limitExceeded)
+            {
                 e.Cancel = true;
                 MessageBox.Show("Length cannot exceed 50 characters!", "", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
@@ -222,22 +259,27 @@ namespace POS.Forms {
 
         }
 
-        private void customerTable_CellValidated(object sender, DataGridViewCellEventArgs e) {
+        private void customerTable_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
 
-        private void recHistBtn_Click(object sender, EventArgs e) {
-            using (var customerForm = new Create_Customer_Form()) {
+        private void recHistBtn_Click(object sender, EventArgs e)
+        {
+            using (var customerForm = new Create_Customer_Form())
+            {
                 customerForm.OnSuccessfulCreation += CustomerForm_OnSuccessfulCreation;
                 customerForm.ShowDialog();
             }
         }
 
-        private void CustomerForm_OnSuccessfulCreation(object sender, object e) {
+        private void CustomerForm_OnSuccessfulCreation(object sender, object e)
+        {
             if (_isSelecting && MessageBox.Show("Would you like to select the newly added Customer?",
                                                 "",
                                                 MessageBoxButtons.YesNo,
-                                                MessageBoxIcon.Question) == DialogResult.Yes) {
+                                                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
 
                 var newlyAddedCustomer = (Customer)e;
                 OnSelected?.Invoke(this, newlyAddedCustomer);
@@ -247,16 +289,19 @@ namespace POS.Forms {
 
                 return;
             }
-            if (e is Customer newCustomer) {
+            if (e is Customer newCustomer)
+            {
                 customerTable.Rows.Add(CreateRow(newCustomer));
             }
         }
 
-        private void Customers_FormClosing(object sender, FormClosingEventArgs e) {
+        private void Customers_FormClosing(object sender, FormClosingEventArgs e)
+        {
             TryCancelLoading();
         }
 
-        private async void customerTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+        private async void customerTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
             if (e.RowIndex == -1) return;
             if (e.ColumnIndex != -1) return;
 
@@ -264,16 +309,20 @@ namespace POS.Forms {
 
             var id = (int)customerTable.SelectedCells[col_id.Index].Value;
 
-            try {
-                using (var context = new POSEntities()) {
+            try
+            {
+                using (var context = new POSEntities())
+                {
                     Selected = await context.Customers.FirstOrDefaultAsync(x => x.Id == id);
                 }
-                if (Selected is null) {
+                if (Selected is null)
+                {
                     MessageBox.Show("Customer might be removed", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
-            catch {
+            catch
+            {
 
             }
 
@@ -281,8 +330,10 @@ namespace POS.Forms {
         }
     }
 
-    public static class CustomerQueryExtensions {
-        public static IQueryable<Customer> ApplySearch(this IQueryable<Customer> customers, string keyword) {
+    public static class CustomerQueryExtensions
+    {
+        public static IQueryable<Customer> ApplySearch(this IQueryable<Customer> customers, string keyword)
+        {
 
             if (keyword.IsEmpty())
                 return customers;
