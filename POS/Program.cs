@@ -4,6 +4,7 @@ using POS.Misc;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace POS {
@@ -15,8 +16,12 @@ namespace POS {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+
+            /*test for showing the installation path*/
+            //string installPath = Assembly.GetExecutingAssembly().Location;
+            //MessageBox.Show(installPath);
 
             bool backup = false;
             UserManager.instance = new UserManager();

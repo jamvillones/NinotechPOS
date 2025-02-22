@@ -31,9 +31,9 @@ namespace POS.Forms {
 
         private async void InventoryItemView_Load(object sender, EventArgs e) {
             using (var context = new POSEntities()) {
-                var item = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
 
                 var invItems = await context.InventoryItems.AsNoTracking().AsQueryable().Where(x => x.Product.Item.Id == _id).ToListAsync();
+                var item = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
                 this.Text = this.Text + " - " + item.Name + " ( " + invItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0") + " units )";
                 await Task.Run(() => {
                     foreach (var inv in invItems)

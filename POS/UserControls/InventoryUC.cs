@@ -408,7 +408,7 @@ namespace POS.UserControls {
                         .FirstOrDefaultAsync(i => i.SerialNumber == serialNumber);
 
                     if (inventoryItem != null) {
-                        using (var inventoryView = new InventoryItemView(inventoryItem.Product.Item.Barcode, serialNumber)) {
+                        using (var inventoryView = new InventoryItemView(inventoryItem.Product.Item.Id, serialNumber)) {
                             if (inventoryView.ShowDialog() == DialogResult.OK) {
 
                             }
