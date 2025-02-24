@@ -7,33 +7,39 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace POS {
-    static class Program {
+namespace POS
+{
+    static class Program
+    {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main() {
+        static void Main()
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-
-            /*test for showing the installation path*/
-            //string installPath = Assembly.GetExecutingAssembly().Location;
-            //MessageBox.Show(installPath);
+            //test for showing the installation path
+            /*
+             * string installPath = Assembly.GetExecutingAssembly().Location;
+            MessageBox.Show(installPath);
+            */
 
             bool backup = false;
             UserManager.instance = new UserManager();
 
             bool signedOut;
 
-            do {
+            do
+            {
                 signedOut = false;
-                var login = new Forms.LoginForm();
+                var login = new LoginForm();
                 Application.Run(login);
 
-                if (login.LoginSuccessful) {
+                if (login.LoginSuccessful)
+                {
                     login.Dispose();
 
                     backup = true;
@@ -48,12 +54,14 @@ namespace POS {
             }
             while (signedOut);
 
-            if (backup) {
-                try {
-                    using (var p = new POSEntities())
-                        p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
+            if (backup)
+            {
+                try
+                {
+                    using (var p = new POSEntities()) p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
                 }
-                catch (Exception ex) {
+                catch (Exception ex)
+                {
                     Console.WriteLine(ex.Message);
                 }
             }
