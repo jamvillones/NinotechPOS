@@ -54,7 +54,6 @@ namespace POS.UserControls
         SellForm sellForm = null;
         void OpenSellForm()
         {
-
             if (sellForm != null)
             {
                 if (sellForm.WindowState == FormWindowState.Minimized)
@@ -82,7 +81,6 @@ namespace POS.UserControls
             sellForm = null;
         }
         #endregion
-
 
         private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
@@ -126,7 +124,6 @@ namespace POS.UserControls
             {
                 View.ShowDialog();
             }
-
         }
 
         string SelectedId => itemsTable.SelectedCells[col_Id.Index].Value.ToString();
@@ -145,11 +142,6 @@ namespace POS.UserControls
             }
         }
 
-        private async void Onsave_Callback(object sender, EventArgs e)
-        {
-            await LoadDataAsync();
-        }
-
         //string _selectedSerial = string.Empty;
         private async Task<bool> LoadDataAsync()
         {
@@ -160,9 +152,9 @@ namespace POS.UserControls
             _cancelSource = new CancellationTokenSource();
             var token = _cancelSource.Token;
 
-            using (var context = new POSEntities())
+            try
             {
-                try
+                using (var context = new POSEntities())
                 {
                     decimal totalInventoryValue = await context.InventoryItems.AsNoTracking()
                         .Where(y => y.Product.Item.Type == ItemType.Quantifiable.ToString())
@@ -197,18 +189,18 @@ namespace POS.UserControls
                         MessageBox.Show("No Results Found for these Entry!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                catch (OperationCanceledException)
-                {
-                    loadingLabelItem.Visible = false;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Connection Not Established!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    _cancelSource?.Dispose();
-                }
+            }
+            catch (OperationCanceledException)
+            {
+                loadingLabelItem.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Connection Not Established!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                _cancelSource?.Dispose();
             }
 
             loadingLabelItem.Visible = false;
@@ -279,10 +271,8 @@ namespace POS.UserControls
 
             try
             {
-
                 using (var editForm = new CreateEdit_Item_Form(SelectedId))
                 {
-
                     if (editForm.ShowDialog() == DialogResult.OK)
                     {
                         var x = editForm.Tag as Item;
@@ -295,8 +285,8 @@ namespace POS.UserControls
                             x.Name,
                             row.Cells[quantityCol.Index].Value,
                             x.SellingPrice,
-                            x.Type);
-
+                            x.Type
+                        );
                     }
                 }
             }

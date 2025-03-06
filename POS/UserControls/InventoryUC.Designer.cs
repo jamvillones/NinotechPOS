@@ -104,7 +104,7 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.Black;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(1, 25);
+            this.panel3.Location = new System.Drawing.Point(1, 23);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1127, 1);
             this.panel3.TabIndex = 9;
@@ -113,9 +113,9 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 25);
+            this.panel2.Location = new System.Drawing.Point(0, 23);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1, 613);
+            this.panel2.Size = new System.Drawing.Size(1, 615);
             this.panel2.TabIndex = 8;
             // 
             // itemsTable
@@ -158,7 +158,7 @@
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.itemsTable.Location = new System.Drawing.Point(0, 25);
+            this.itemsTable.Location = new System.Drawing.Point(0, 23);
             this.itemsTable.Margin = new System.Windows.Forms.Padding(2);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
@@ -166,7 +166,7 @@
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(1128, 613);
+            this.itemsTable.Size = new System.Drawing.Size(1128, 615);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 6;
             this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
@@ -252,18 +252,17 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1128, 25);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1128, 23);
             this.flowLayoutPanel2.TabIndex = 7;
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton1.Location = new System.Drawing.Point(8, 3);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(38, 19);
+            this.radioButton1.Size = new System.Drawing.Size(36, 17);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Tag = "0";
@@ -274,11 +273,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(69, 3);
+            this.radioButton2.Location = new System.Drawing.Point(67, 3);
             this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(74, 19);
+            this.radioButton2.Size = new System.Drawing.Size(68, 17);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.Tag = "1";
             this.radioButton2.Text = "Available";
@@ -288,11 +286,10 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton3.Location = new System.Drawing.Point(166, 3);
+            this.radioButton3.Location = new System.Drawing.Point(158, 3);
             this.radioButton3.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(95, 19);
+            this.radioButton3.Size = new System.Drawing.Size(87, 17);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.Tag = "2";
             this.radioButton3.Text = "In Critical Qty";
@@ -302,11 +299,10 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton4.Location = new System.Drawing.Point(284, 3);
+            this.radioButton4.Location = new System.Drawing.Point(268, 3);
             this.radioButton4.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(59, 19);
+            this.radioButton4.Size = new System.Drawing.Size(54, 17);
             this.radioButton4.TabIndex = 3;
             this.radioButton4.Tag = "3";
             this.radioButton4.Text = "Empty";
