@@ -45,12 +45,12 @@ namespace POS.UserControls
             }
         }
 
-
         #region Selling
         protected virtual void sellItem_Click(object sender, EventArgs e)
         {
             OpenSellForm();
         }
+
         SellForm sellForm = null;
         void OpenSellForm()
         {
@@ -208,7 +208,6 @@ namespace POS.UserControls
                 finally
                 {
                     _cancelSource?.Dispose();
-                    //_cancelSource = null;
                 }
             }
 
