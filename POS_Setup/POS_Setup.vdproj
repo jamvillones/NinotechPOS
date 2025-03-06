@@ -82,12 +82,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2FD74A8545CE55D1DBAB995E2AD21B18"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_0D8A0D8A94C8489F85EB49191793A959"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -127,6 +121,12 @@
         "OwnerKey" = "8:_DB29C9683786BE5B2ACF03DA3A27F87B"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2FD74A8545CE55D1DBAB995E2AD21B18"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -145,6 +145,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -161,6 +177,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -483,22 +515,22 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Niñotech POS"
-        "ProductCode" = "8:{4D53AC22-3FBA-4E6C-A572-1197B06DB5FD}"
-        "PackageCode" = "8:{F7A69492-71B1-4A32-A5B9-0889D44C652C}"
+        "ProductCode" = "8:{A43F7C25-AB8F-4C79-AA19-6F72320D0691}"
+        "PackageCode" = "8:{15EF9335-ED34-467C-87E0-526E2AEA6F41}"
         "UpgradeCode" = "8:{A5499E8B-6ED5-4E19-B05A-1B37663684CA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.163"
+        "ProductVersion" = "8:1.0.165"
         "Manufacturer" = "8:Niñotech"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:Niñotech POS"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Jamil Villones"
-        "Keywords" = "8:"
+        "Keywords" = "8:pos"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:_04E44EF682FC43CBBC927123127175FC"

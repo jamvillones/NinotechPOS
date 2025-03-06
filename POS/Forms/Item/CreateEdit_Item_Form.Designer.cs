@@ -75,6 +75,9 @@
             this._supplierOption = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.departmentOption = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -196,7 +199,7 @@
             this.panel3.Controls.Add(this._price);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(352, 200);
+            this.panel3.Location = new System.Drawing.Point(352, 209);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(462, 35);
@@ -250,7 +253,7 @@
             this.panel5.Controls.Add(this._criticalQty);
             this.panel5.Controls.Add(this.panel8);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(352, 252);
+            this.panel5.Location = new System.Drawing.Point(352, 261);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(462, 35);
@@ -303,7 +306,7 @@
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Controls.Add(this._tags);
             this.panel9.Controls.Add(this.label5);
-            this.panel9.Location = new System.Drawing.Point(352, 304);
+            this.panel9.Location = new System.Drawing.Point(352, 313);
             this.panel9.Margin = new System.Windows.Forms.Padding(0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(462, 35);
@@ -354,9 +357,9 @@
             "Quantifiable",
             "Service",
             "Software"});
-            this._type.Location = new System.Drawing.Point(352, 124);
+            this._type.Location = new System.Drawing.Point(352, 133);
             this._type.Name = "_type";
-            this._type.Size = new System.Drawing.Size(137, 23);
+            this._type.Size = new System.Drawing.Size(161, 23);
             this._type.TabIndex = 6;
             this._type.SelectedIndexChanged += new System.EventHandler(this._type_SelectedIndexChanged);
             // 
@@ -368,7 +371,7 @@
             this.panel13.Controls.Add(this._description);
             this.panel13.Controls.Add(this.panel14);
             this.panel13.Controls.Add(this.label7);
-            this.panel13.Location = new System.Drawing.Point(352, 356);
+            this.panel13.Location = new System.Drawing.Point(352, 365);
             this.panel13.Margin = new System.Windows.Forms.Padding(0);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(462, 35);
@@ -431,7 +434,7 @@
             this.flowLayoutPanel1.Controls.Add(this.saveBtn);
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 406);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 420);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(794, 35);
             this.flowLayoutPanel1.TabIndex = 14;
@@ -497,7 +500,7 @@
             this.costTable.Name = "costTable";
             this.costTable.RowHeadersVisible = false;
             this.costTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.costTable.Size = new System.Drawing.Size(308, 167);
+            this.costTable.Size = new System.Drawing.Size(308, 176);
             this.costTable.StandardTab = true;
             this.costTable.TabIndex = 1;
             this.costTable.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.costTable_RowsAdded);
@@ -561,7 +564,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.BackColor = System.Drawing.SystemColors.Control;
             this.checkBox1.ForeColor = System.Drawing.Color.Black;
-            this.checkBox1.Location = new System.Drawing.Point(352, 164);
+            this.checkBox1.Location = new System.Drawing.Point(352, 173);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(137, 17);
             this.checkBox1.TabIndex = 7;
@@ -603,7 +606,7 @@
             this.panel16.Controls.Add(this.panel17);
             this.panel16.Location = new System.Drawing.Point(20, 189);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(310, 202);
+            this.panel16.Size = new System.Drawing.Size(310, 211);
             this.panel16.TabIndex = 13;
             // 
             // panel17
@@ -612,7 +615,7 @@
             this.panel17.Controls.Add(this._supplierOption);
             this.panel17.Controls.Add(this.button4);
             this.panel17.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel17.Location = new System.Drawing.Point(0, 167);
+            this.panel17.Location = new System.Drawing.Point(0, 176);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(308, 33);
             this.panel17.TabIndex = 15;
@@ -643,11 +646,41 @@
             this.label8.TabIndex = 17;
             this.label8.Text = "Costs:";
             // 
+            // departmentOption
+            // 
+            this.departmentOption.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.departmentOption.FormattingEnabled = true;
+            this.departmentOption.Location = new System.Drawing.Point(526, 133);
+            this.departmentOption.Name = "departmentOption";
+            this.departmentOption.Size = new System.Drawing.Size(161, 23);
+            this.departmentOption.TabIndex = 18;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(349, 119);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Type";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(523, 119);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(62, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Department";
+            // 
             // CreateEdit_Item_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 461);
+            this.ClientSize = new System.Drawing.Size(834, 475);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.departmentOption);
             this.Controls.Add(this._type);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.panel16);
@@ -742,5 +775,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Value;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox departmentOption;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label9;
     }
 }

@@ -27,7 +27,7 @@ namespace POS
             MessageBox.Show(installPath);
             */
 
-            bool backup = false;
+            bool performBackup = false;
             UserManager.instance = new UserManager();
 
             bool signedOut;
@@ -42,7 +42,7 @@ namespace POS
                 {
                     login.Dispose();
 
-                    backup = true;
+                    performBackup = true;
 
                     var main = new Main();
                     Application.Run(main);
@@ -54,7 +54,8 @@ namespace POS
             }
             while (signedOut);
 
-            if (backup)
+            //#if !DEBUG
+            if (performBackup)
             {
                 try
                 {
@@ -65,6 +66,7 @@ namespace POS
                     Console.WriteLine(ex.Message);
                 }
             }
+            //#endif
         }
     }
 }

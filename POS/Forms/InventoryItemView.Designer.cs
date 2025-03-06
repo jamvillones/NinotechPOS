@@ -38,6 +38,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.invTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,14 +80,14 @@
             this.invTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.invTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.invTable.EnableHeadersVisualStyles = false;
-            this.invTable.Location = new System.Drawing.Point(0, 0);
+            this.invTable.Location = new System.Drawing.Point(20, 20);
             this.invTable.MultiSelect = false;
             this.invTable.Name = "invTable";
             this.invTable.RowHeadersVisible = false;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.invTable.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.invTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.invTable.Size = new System.Drawing.Size(584, 361);
+            this.invTable.Size = new System.Drawing.Size(1224, 601);
             this.invTable.TabIndex = 4;
             this.invTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.invTable_CellMouseDoubleClick);
             this.invTable.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.invTable_RowsRemoved);
@@ -117,16 +118,32 @@
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(20, 621);
+            this.button1.MaximumSize = new System.Drawing.Size(250, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(250, 40);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "View Item Details";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.ViewItemDetails_Click);
+            // 
             // InventoryItemView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 361);
+            this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.invTable);
+            this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "InventoryItemView";
+            this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory  View";
@@ -142,5 +159,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Button button1;
     }
 }

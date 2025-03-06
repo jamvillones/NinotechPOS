@@ -34,10 +34,12 @@
             this.marker = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.suppliersBtn = new System.Windows.Forms.Button();
+            this.customersBtn = new System.Windows.Forms.Button();
             this.repBtn = new System.Windows.Forms.Button();
             this.inventoryBtn = new System.Windows.Forms.Button();
             this.userButton = new System.Windows.Forms.Button();
-            this.tabHoldersPanel = new System.Windows.Forms.Panel();
+            this.tabsHolderPanel = new System.Windows.Forms.Panel();
             this.inventoryTab = new POS.UserControls.InventoryUC();
             this.reportTab = new POS.UserControls.ReportUC();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
@@ -55,7 +57,7 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.sideButtonsPanel.SuspendLayout();
-            this.tabHoldersPanel.SuspendLayout();
+            this.tabsHolderPanel.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +67,8 @@
             this.sideButtonsPanel.Controls.Add(this.marker);
             this.sideButtonsPanel.Controls.Add(this.button2);
             this.sideButtonsPanel.Controls.Add(this.button1);
+            this.sideButtonsPanel.Controls.Add(this.suppliersBtn);
+            this.sideButtonsPanel.Controls.Add(this.customersBtn);
             this.sideButtonsPanel.Controls.Add(this.repBtn);
             this.sideButtonsPanel.Controls.Add(this.inventoryBtn);
             this.sideButtonsPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -81,7 +85,7 @@
             this.marker.Location = new System.Drawing.Point(0, 0);
             this.marker.Name = "marker";
             this.marker.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.marker.Size = new System.Drawing.Size(2, 100);
+            this.marker.Size = new System.Drawing.Size(3, 80);
             this.marker.TabIndex = 5;
             // 
             // button2
@@ -91,7 +95,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(0, 300);
+            this.button2.Location = new System.Drawing.Point(0, 420);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 100);
@@ -111,7 +115,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(0, 200);
+            this.button1.Location = new System.Drawing.Point(0, 320);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 100);
@@ -124,6 +128,47 @@
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.createCustomer_Click);
             // 
+            // suppliersBtn
+            // 
+            this.suppliersBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.suppliersBtn.FlatAppearance.BorderSize = 0;
+            this.suppliersBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.suppliersBtn.ForeColor = System.Drawing.Color.Black;
+            this.suppliersBtn.Image = ((System.Drawing.Image)(resources.GetObject("suppliersBtn.Image")));
+            this.suppliersBtn.Location = new System.Drawing.Point(0, 240);
+            this.suppliersBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.suppliersBtn.Name = "suppliersBtn";
+            this.suppliersBtn.Padding = new System.Windows.Forms.Padding(10);
+            this.suppliersBtn.Size = new System.Drawing.Size(120, 80);
+            this.suppliersBtn.TabIndex = 7;
+            this.suppliersBtn.TabStop = false;
+            this.suppliersBtn.Text = "\r\nSuppliers";
+            this.suppliersBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.suppliersBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.suppliersBtn.UseVisualStyleBackColor = true;
+            this.suppliersBtn.Visible = false;
+            // 
+            // customersBtn
+            // 
+            this.customersBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.customersBtn.FlatAppearance.BorderSize = 0;
+            this.customersBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customersBtn.ForeColor = System.Drawing.Color.Black;
+            this.customersBtn.Image = ((System.Drawing.Image)(resources.GetObject("customersBtn.Image")));
+            this.customersBtn.Location = new System.Drawing.Point(0, 160);
+            this.customersBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.customersBtn.Name = "customersBtn";
+            this.customersBtn.Padding = new System.Windows.Forms.Padding(10);
+            this.customersBtn.Size = new System.Drawing.Size(120, 80);
+            this.customersBtn.TabIndex = 6;
+            this.customersBtn.TabStop = false;
+            this.customersBtn.Text = "\r\nCustomers";
+            this.customersBtn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.customersBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.customersBtn.UseVisualStyleBackColor = true;
+            this.customersBtn.Visible = false;
+            this.customersBtn.Click += new System.EventHandler(this.button3_Click);
+            // 
             // repBtn
             // 
             this.repBtn.Dock = System.Windows.Forms.DockStyle.Top;
@@ -131,11 +176,11 @@
             this.repBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.repBtn.ForeColor = System.Drawing.Color.Black;
             this.repBtn.Image = ((System.Drawing.Image)(resources.GetObject("repBtn.Image")));
-            this.repBtn.Location = new System.Drawing.Point(0, 100);
+            this.repBtn.Location = new System.Drawing.Point(0, 80);
             this.repBtn.Margin = new System.Windows.Forms.Padding(0);
             this.repBtn.Name = "repBtn";
             this.repBtn.Padding = new System.Windows.Forms.Padding(10);
-            this.repBtn.Size = new System.Drawing.Size(120, 100);
+            this.repBtn.Size = new System.Drawing.Size(120, 80);
             this.repBtn.TabIndex = 2;
             this.repBtn.TabStop = false;
             this.repBtn.Text = "\r\nTransactions";
@@ -155,7 +200,7 @@
             this.inventoryBtn.Margin = new System.Windows.Forms.Padding(0);
             this.inventoryBtn.Name = "inventoryBtn";
             this.inventoryBtn.Padding = new System.Windows.Forms.Padding(10);
-            this.inventoryBtn.Size = new System.Drawing.Size(120, 100);
+            this.inventoryBtn.Size = new System.Drawing.Size(120, 80);
             this.inventoryBtn.TabIndex = 1;
             this.inventoryBtn.TabStop = false;
             this.inventoryBtn.Text = "\r\nProducts";
@@ -186,16 +231,16 @@
             this.userButton.UseVisualStyleBackColor = false;
             this.userButton.Click += new System.EventHandler(this.userButton_Click);
             // 
-            // tabHoldersPanel
+            // tabsHolderPanel
             // 
-            this.tabHoldersPanel.Controls.Add(this.inventoryTab);
-            this.tabHoldersPanel.Controls.Add(this.reportTab);
-            this.tabHoldersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabHoldersPanel.Location = new System.Drawing.Point(120, 25);
-            this.tabHoldersPanel.Name = "tabHoldersPanel";
-            this.tabHoldersPanel.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
-            this.tabHoldersPanel.Size = new System.Drawing.Size(864, 566);
-            this.tabHoldersPanel.TabIndex = 3;
+            this.tabsHolderPanel.Controls.Add(this.inventoryTab);
+            this.tabsHolderPanel.Controls.Add(this.reportTab);
+            this.tabsHolderPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabsHolderPanel.Location = new System.Drawing.Point(120, 25);
+            this.tabsHolderPanel.Name = "tabsHolderPanel";
+            this.tabsHolderPanel.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
+            this.tabsHolderPanel.Size = new System.Drawing.Size(864, 566);
+            this.tabsHolderPanel.TabIndex = 3;
             // 
             // inventoryTab
             // 
@@ -243,7 +288,7 @@
             this.editLoginDetailsToolStripMenuItem});
             this.loginsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("loginsToolStripMenuItem.Image")));
             this.loginsToolStripMenuItem.Name = "loginsToolStripMenuItem";
-            this.loginsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loginsToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.loginsToolStripMenuItem.Text = "Logins";
             // 
             // loginPrivilegesToolStripMenuItem
@@ -274,7 +319,7 @@
             // 
             this.customersToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("customersToolStripMenuItem.Image")));
             this.customersToolStripMenuItem.Name = "customersToolStripMenuItem";
-            this.customersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.customersToolStripMenuItem.Text = "Customers";
             this.customersToolStripMenuItem.Click += new System.EventHandler(this.createCustomer_Click);
             // 
@@ -284,7 +329,7 @@
             this.suppliersToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("suppliersToolStripMenuItem.Image")));
             this.suppliersToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
-            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.suppliersToolStripMenuItem.Text = "Suppliers";
             this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.openSupplier_Click);
             // 
@@ -359,7 +404,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 591);
             this.Controls.Add(this.userButton);
-            this.Controls.Add(this.tabHoldersPanel);
+            this.Controls.Add(this.tabsHolderPanel);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.sideButtonsPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -374,7 +419,7 @@
             this.Load += new System.EventHandler(this.Main_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.sideButtonsPanel.ResumeLayout(false);
-            this.tabHoldersPanel.ResumeLayout(false);
+            this.tabsHolderPanel.ResumeLayout(false);
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -388,7 +433,7 @@
         private System.Windows.Forms.Button inventoryBtn;
         private System.Windows.Forms.Button repBtn;
         private System.Windows.Forms.Button userButton;
-        private System.Windows.Forms.Panel tabHoldersPanel;
+        private System.Windows.Forms.Panel tabsHolderPanel;
         private UserControls.InventoryUC inventoryTab;
         private UserControls.ReportUC reportTab;
         private System.Windows.Forms.ToolTip toolTip;
@@ -408,6 +453,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.Button customersBtn;
+        private System.Windows.Forms.Button suppliersBtn;
     }
 }
 

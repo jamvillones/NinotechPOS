@@ -404,12 +404,6 @@
     <Compile Include="RecieptPrintingConfigurations.Designer.cs">
       <DependentUpon>RecieptPrintingConfigurations.cs</DependentUpon>
     </Compile>
-    <Compile Include="RecieptTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RecieptTest.Designer.cs">
-      <DependentUpon>RecieptTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="Sale.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
@@ -435,6 +429,12 @@
     <Compile Include="SaleSummary\FilteredSaleModel.cs" />
     <Compile Include="Supplier.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Customers_UserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Customers_UserControl.Designer.cs">
+      <DependentUpon>Customers_UserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\InventorySnapshot_Graph.cs">
       <SubType>UserControl</SubType>
@@ -599,14 +599,14 @@
     <EmbeddedResource Include="RecieptPrintingConfigurations.resx">
       <DependentUpon>RecieptPrintingConfigurations.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RecieptTest.resx">
-      <DependentUpon>RecieptTest.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SaleReprint.resx">
       <DependentUpon>SaleReprint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ShiftSummaryForm.resx">
       <DependentUpon>ShiftSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Customers_UserControl.resx">
+      <DependentUpon>Customers_UserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\InventorySnapshot_Graph.resx">
       <DependentUpon>InventorySnapshot_Graph.cs</DependentUpon>
