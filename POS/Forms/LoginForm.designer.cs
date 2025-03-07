@@ -53,9 +53,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.username.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.username.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.username.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.username.BackColor = System.Drawing.SystemColors.Control;
             this.username.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.username.ForeColor = System.Drawing.Color.White;
+            this.username.ForeColor = System.Drawing.Color.Black;
             this.username.Location = new System.Drawing.Point(101, 193);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(189, 13);
@@ -82,9 +82,9 @@
             // 
             this.password.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.password.BackColor = System.Drawing.SystemColors.Control;
             this.password.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.password.ForeColor = System.Drawing.Color.White;
+            this.password.ForeColor = System.Drawing.Color.Black;
             this.password.Location = new System.Drawing.Point(101, 229);
             this.password.Name = "password";
             this.password.PasswordChar = '●';
@@ -98,7 +98,7 @@
             this.loginBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.loginBtn.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.loginBtn.FlatAppearance.BorderSize = 0;
-            this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.loginBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginBtn.ForeColor = System.Drawing.Color.White;
             this.loginBtn.Location = new System.Drawing.Point(60, 292);
@@ -123,10 +123,10 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.Location = new System.Drawing.Point(60, 214);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 2);
+            this.panel1.Size = new System.Drawing.Size(230, 1);
             this.panel1.TabIndex = 6;
             // 
             // pictureBox2
@@ -135,6 +135,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(60, 189);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
             // 
@@ -144,15 +145,16 @@
             this.pictureBox3.Location = new System.Drawing.Point(60, 225);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(20, 20);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.Location = new System.Drawing.Point(60, 251);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(230, 2);
+            this.panel2.Size = new System.Drawing.Size(230, 1);
             this.panel2.TabIndex = 8;
             // 
             // label2
@@ -170,7 +172,7 @@
             this.AcceptButton = this.loginBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(61)))), ((int)(((byte)(61)))), ((int)(((byte)(61)))));
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(350, 511);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox3);

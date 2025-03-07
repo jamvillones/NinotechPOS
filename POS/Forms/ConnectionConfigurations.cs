@@ -28,35 +28,34 @@ namespace POS
 
         private async void button2_Click(object sender, EventArgs e)
         {
+            var button = sender as Button;
+            button.Text = "Connecting...";
             await Task.Run(() =>
             {
-                using (var context = new POSEntities())
+                try
                 {
-                    try
+                    using (var context = new POSEntities())
                     {
                         context.ChangeDatabase(dataSource, portName, id, password, checkBox1.Checked);
-                        label1.InvokeIfRequired(() => label1.Text = "processing...");
-                        bool cond = context.Database.Exists();
+
+                        bool databaseFound = context.Database.Exists();
 
                         tokenSource.Token.ThrowIfCancellationRequested();
 
-                        if (cond)
-                        {
+                        if (databaseFound)
                             MessageBox.Show("Connection established.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Connection failed!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        label1.InvokeIfRequired(() => label1.Text = string.Empty);
-                    }
 
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("loading cancelled. " + ex.Message);
+                        else
+                            MessageBox.Show("Connection failed!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             });
+
+            button.Text = "Test Connection";
         }
 
         private void ConnectionConfigurations_FormClosing(object sender, FormClosingEventArgs e)

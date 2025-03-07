@@ -22,7 +22,7 @@ namespace POS.UserControls
             InitializeComponent();
         }
 
-        ItemFilter currentItemFilter = ItemFilter.All;
+        ItemFilter currentItemFilter = ItemFilter.Available;
 
         CancellationTokenSource _cancelSource;
 
@@ -362,7 +362,7 @@ namespace POS.UserControls
                 using (var context = new POSEntities())
                 {
                     var departments = await context.Items.GetDepartments().ToArrayAsync();
-                    departmentOption.Items.Add("[None]");
+                    departmentOption.Items.Add(string.Empty);
                     /* this causes double loading */
                     //departmentOption.SelectedIndex = 0;
 
@@ -555,6 +555,11 @@ namespace POS.UserControls
         {
             CancelLoading();
             await LoadDataAsync();
+        }
+
+        private void trackItemCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
     public static class ItemsQueryExtension

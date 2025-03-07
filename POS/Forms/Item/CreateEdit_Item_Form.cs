@@ -216,6 +216,8 @@ namespace POS.Forms.ItemRegistration
 
         private async void Create_Item_Form_Load(object sender, EventArgs e)
         {
+            this.Enabled = false;
+
             try
             {
                 using (var context = new POSEntities())
@@ -225,10 +227,12 @@ namespace POS.Forms.ItemRegistration
                         .OrderBy(s => s.Name)
                         .ToArrayAsync();
 
-
                     _supplierOption.Items.AddRange(suppliers);
 
-                    var departments = await context.Items.GetDepartments().ToArrayAsync();
+                    var departments = await context.Items
+                        .GetDepartments()
+                        .ToArrayAsync();
+
                     departmentOption.Items.AddRange(departments);
                     departmentOption.AutoCompleteSource = AutoCompleteSource.CustomSource;
                     departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -241,9 +245,15 @@ namespace POS.Forms.ItemRegistration
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Connection not established", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                if (MessageBox.Show(ex.Message, "Connection not established", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
+                {
+                    Create_Item_Form_Load(null, EventArgs.Empty);
+                    return;
+                }
+                else
+                    this.Close();
             }
+            this.Enabled = true;
         }
 
         private async void AddCost_Click(object sender, EventArgs e)
@@ -319,13 +329,13 @@ namespace POS.Forms.ItemRegistration
 
         private void _type_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool isQuantifyable = _type.Text == ItemType.Quantifiable.ToString();
-            if (!isQuantifyable)
+            bool isEnumerable = _type.Text == ItemType.Quantifiable.ToString();
+            if (!isEnumerable)
                 checkBox1.Checked = false;
 
-            checkBox1.Enabled = isQuantifyable;
-            ToggleCostGroup(isQuantifyable);
-            _criticalQty.Enabled = isQuantifyable;
+            checkBox1.Enabled = isEnumerable;
+            ToggleCostGroup(isEnumerable);
+            _criticalQty.Enabled = isEnumerable;
         }
 
         private void button3_Click(object sender, EventArgs e)
