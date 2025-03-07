@@ -422,6 +422,13 @@ namespace POS.Forms.ItemRegistration
             if (e.Control && e.KeyCode == Keys.S)
                 saveBtn.PerformClick();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string guid = Guid.NewGuid().ToString("N").Substring(0, 12); // Shorten GUID
+
+            _barcode.Text = guid.Base36Encode();
+        }
     }
 
     public static class ItemDepartmentExtensions

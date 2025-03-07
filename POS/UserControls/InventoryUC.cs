@@ -373,10 +373,7 @@ namespace POS.UserControls
                     departmentOption.AutoCompleteCustomSource.AddRange(departments);
                 }
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
@@ -394,7 +391,30 @@ namespace POS.UserControls
 
         private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1)
+                return;
 
+            if (e.ColumnIndex == barcodeCol.Index)
+            {
+                /*
+                 get the value of the barcode
+                 then copy to clipboard
+                */
+
+                string barcodeToCopy = itemsTable[e.ColumnIndex, e.RowIndex].Value?.ToString();
+
+                if (string.IsNullOrEmpty(barcodeToCopy))
+                    return;
+
+                try
+                {
+                    Clipboard.SetText(barcodeToCopy);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
         }
 
         private async void button2_Click(object sender, EventArgs e)
