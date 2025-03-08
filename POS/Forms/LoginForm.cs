@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 namespace POS.Forms
 {
@@ -37,10 +38,23 @@ namespace POS.Forms
             label2.Text = "Log In Failed!";
         }
 
+        string GetVersion()
+        {
+            try
+            {
+                return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            catch (Exception ex)
+            {
+                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
         private void LoginForm_Load(object sender, EventArgs e)
         {
             var settings = Properties.Settings.Default;
             this.Text = "POS-Login: " + (settings.IsLocalConnection ? "localHost" : settings.DataSource);
+
+            label1.Text = "version: " + GetVersion();
             TryConnect();
         }
 
