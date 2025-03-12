@@ -55,15 +55,9 @@ namespace POS
             SetButtonChangeMechanism(inventoryBtn, repBtn, customersBtn, suppliersBtn);
             LoadProperties();
 
-            //var t = inventoryTab.InitializeAsync();
-            //var r = reportTab.InitializeAsync();
-            ////var c = GetCriticalQty();
-            ///
             await inventoryTab.InitializeAsync();
             await reportTab.InitializeAsync();
             await GetCriticalQty();
-
-            //await Task.WhenAll(t, r);
 
             Console.WriteLine("======================* Load Finished *======================");
         }
@@ -74,17 +68,17 @@ namespace POS
             {
                 using (var context = new POSEntities())
                 {
-                    var crits = await context.Items.IsInCriticalQty()
+                    var itemsInCriticalQuantity = await context.Items.IsInCriticalQty()
                         .ToListAsync();
 
                     var builder = new StringBuilder();
 
-                    foreach (var c in crits)
+                    foreach (var c in itemsInCriticalQuantity)
                     {
                         builder.AppendLine(c.Name + " - " + c.QuantityInInventory + " units");
                     }
 
-                    NotificationHandler.Instance.ShowTooltip("Items in Critical Qty (" + crits.Count + "): ", builder.ToString(), ToolTipIcon.Warning);
+                    NotificationHandler.Instance.ShowTooltip("Items in Critical Qty (" + itemsInCriticalQuantity.Count + "): ", builder.ToString(), ToolTipIcon.Warning);
                 }
             }
             catch (Exception)
