@@ -158,9 +158,8 @@ namespace POS.UserControls
                     }
                 }
             }
-            catch (OperationCanceledException operationCancelledExc)
+            catch (OperationCanceledException)
             {
-
             }
             catch (Exception ex)
             {

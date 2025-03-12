@@ -44,7 +44,7 @@ namespace POS.Forms
             {
                 return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }

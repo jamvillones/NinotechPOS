@@ -2,10 +2,9 @@
 using POS.Forms.ItemRegistration;
 using POS.Misc;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Diagnostics;
+using System.Data.Entity.Infrastructure;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -22,7 +21,7 @@ namespace POS.UserControls
             InitializeComponent();
         }
 
-        ItemFilter currentItemFilter = ItemFilter.Available;
+        ItemFilter currentItemFilter = ItemFilter.All;
 
         CancellationTokenSource _cancelSource;
 
@@ -82,7 +81,7 @@ namespace POS.UserControls
         }
         #endregion
 
-        private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private async void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex == -1)
                 return;
@@ -99,15 +98,26 @@ namespace POS.UserControls
 
                 try
                 {
-                    using (var p = new POSEntities())
+                    using (var context = new POSEntities())
                     {
-                        var i = p.Items.FirstOrDefault(x => x.Id == SelectedId);
-                        p.Items.Remove(i);
-                        p.SaveChanges();
+                        var i = await context.Items
+                            .Include(item => item.Products.Select(product => product.StockinHistories))
+                            .FirstOrDefaultAsync(x => x.Id == SelectedId);
+
+                        context.Items.Remove(i);
+                        await context.SaveChangesAsync();
                     }
                     itemsTable.Rows.RemoveAt(e.RowIndex);
                 }
-                catch (Exception) { }
+                catch (DbUpdateException ex)
+                {
+                    MessageBox.Show(ex.InnerException.Message, "Delete is aborted!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                }
+                catch
+                {
+
+                }
+
                 return;
             }
 
@@ -142,98 +152,106 @@ namespace POS.UserControls
             }
         }
 
+        /// <summary>
+        /// by setting this to false, you will reinitialize the pagination
+        /// </summary>
+        public bool IsTotalEntriesInitialized
+        {
+            get => isTotalEntriesInitialized;
+            private set
+            {
+                isTotalEntriesInitialized = value;
+
+                if (!isTotalEntriesInitialized)
+                    itemsTable.Rows.Clear();
+            }
+        }
+        private readonly Pagination pagination = new Pagination();
+
+        private async Task GetItemsThenCreateRows_Async(CancellationToken token)
+        {
+            try
+            {
+                using (var context = new POSEntities())
+                {
+                    //decimal totalInventoryValue = await context.InventoryItems.AsNoTracking()
+                    //    .Where(y => y.Product.Item.Type == ItemType.Quantifiable.ToString())
+                    //    .Select(x => x.Quantity * x.Product.Item.SellingPrice)
+                    //    .DefaultIfEmpty(0)
+                    //    .SumAsync(token);
+
+                    //totalPriceTxt.Text = totalInventoryValue.ToCurrency();
+
+                    var itemQuery = context.Items
+                                   .AsNoTracking()
+                                   .AsQueryable()
+                                   .ApplyFilter(currentItemFilter)
+                                   .ApplyDepartmentFilter(departmentOption.Text.Trim())
+                                   .ApplySearch(keyword);
+
+                    if (!IsTotalEntriesInitialized)
+                    {
+                        //get the total count of entries
+                        int totalItems = await itemQuery.CountAsync(token);
+                        totalCount.Text = totalItems.ToString();
+                        //initialize the pagination
+                        pagination.Initialize(totalItems, 100);
+                        //ensure one time initialization of pagination
+                        IsTotalEntriesInitialized = true;
+                    }
+
+                    var paginatedItems = itemQuery
+                                        .OrderBy(o => o.Name)
+                                        .Skip(pagination.Start)
+                                        .Take(pagination.PageSize);
+
+                    var task_GettingItems = paginatedItems.ToListAsync(token);
+                    var task_MinimumLoadingTime = Task.Delay(500);
+
+                    await Task.WhenAll(task_GettingItems, task_MinimumLoadingTime);
+
+                    token.ThrowIfCancellationRequested();
+                    var items = task_GettingItems.Result;
+
+                    if (items.Count > 0) itemsTable.Rows.AddRange(items.Select(CreateRow).ToArray());
+                    else MessageBox.Show("No Results Found For These Given Entries.", "Items", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         //string _selectedSerial = string.Empty;
         private async Task<bool> LoadDataAsync()
         {
-            //_selectedSerial = string.Empty;
-            isRefreshing = true;
-            bool resultsFound = false;
+            IsBusyLoading = true;
+            loadingLabelItem.Visible = true;
 
             _cancelSource = new CancellationTokenSource();
             var token = _cancelSource.Token;
 
             try
             {
-                using (var context = new POSEntities())
-                {
-                    decimal totalInventoryValue = await context.InventoryItems.AsNoTracking()
-                        .Where(y => y.Product.Item.Type == ItemType.Quantifiable.ToString())
-                        .Select(x => x.Quantity * x.Product.Item.SellingPrice)
-                        .DefaultIfEmpty(0)
-                        .SumAsync(token);
-
-                    totalPriceTxt.Text = totalInventoryValue.ToCurrency();
-
-                    var rawItems = context.Items
-                        .AsNoTracking()
-                        .AsQueryable()
-                        .ApplyFilter(currentItemFilter)
-                        .ApplyDepartmentFilter(departmentOption.Text.Trim())
-                        .ApplySearch(keyword);
-
-                    var items = await rawItems.ToListAsync(token);
-                    itemCount.Text = items.Count.ToString("N0");
-
-                    token.ThrowIfCancellationRequested();
-
-                    if (resultsFound = items.Count > 0)
-                    {
-                        loadingLabelItem.Visible = true;
-
-                        itemsTable.Rows.Clear();
-                        var rows = await CreateItemRowsAsync(items, token);
-                        itemsTable.Rows.AddRange(rows);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No Results Found for these Entry!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
+                await GetItemsThenCreateRows_Async(token);
             }
-            catch (OperationCanceledException)
-            {
-                loadingLabelItem.Visible = false;
-            }
+            catch (OperationCanceledException) { }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Connection Not Established!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Items", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 _cancelSource?.Dispose();
             }
 
+            itemCount.Text = itemsTable.RowCount.ToString("N0");
+
             loadingLabelItem.Visible = false;
-            isRefreshing = false;
-            return resultsFound;
-        }
+            IsBusyLoading = false;
 
-        private async Task<DataGridViewRow[]> CreateItemRowsAsync(IEnumerable<Item> items, CancellationToken token)
-        {
-            List<DataGridViewRow> rows = new List<DataGridViewRow>();
-
-            await Task.Run(() =>
-            {
-                try
-                {
-                    foreach (var i in items)
-                    {
-                        rows.Add(CreateRow(i));
-                        token.ThrowIfCancellationRequested();
-                    }
-                }
-                catch (TaskCanceledException)
-                {
-
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
-            });
-
-            token.ThrowIfCancellationRequested();
-            return rows.ToArray();
+            return itemsTable.RowCount > 0;
         }
 
         DataGridViewRow CreateRow(Item item)
@@ -291,9 +309,7 @@ namespace POS.UserControls
                 }
             }
             catch
-            {
-
-            }
+            { }
         }
 
         private void ShodSoldItemsForItem_Click(object sender, EventArgs e)
@@ -313,19 +329,6 @@ namespace POS.UserControls
         {
             keyword = string.Empty;
             await LoadDataAsync();
-        }
-
-        void FillTable(IEnumerable<Item> items)
-        {
-            itemsTable.InvokeIfRequired(() =>
-            {
-                itemsTable.Rows.Clear();
-
-                var rows = items.Select(CreateRow).ToArray();
-
-                itemsTable.Rows.AddRange(rows);
-            });
-
         }
 
         private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -362,15 +365,11 @@ namespace POS.UserControls
                 using (var context = new POSEntities())
                 {
                     var departments = await context.Items.GetDepartments().ToArrayAsync();
-                    departmentOption.Items.Add(string.Empty);
-                    /* this causes double loading */
-                    //departmentOption.SelectedIndex = 0;
-
-                    departmentOption.Items.AddRange(departments);
                     departmentOption.AutoCompleteSource = AutoCompleteSource.CustomSource;
                     departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                    departmentOption.AutoCompleteCustomSource.Add("[None]");
                     departmentOption.AutoCompleteCustomSource.AddRange(departments);
+                    departmentOption.Items.Add(string.Empty);
+                    departmentOption.Items.AddRange(departments);
                 }
             }
             catch { }
@@ -396,11 +395,8 @@ namespace POS.UserControls
 
             if (e.ColumnIndex == barcodeCol.Index)
             {
-                /*
-                 get the value of the barcode
-                 then copy to clipboard
-                */
-
+                //get the value of the barcode
+                //then copy to clipboard
                 string barcodeToCopy = itemsTable[e.ColumnIndex, e.RowIndex].Value?.ToString();
 
                 if (string.IsNullOrEmpty(barcodeToCopy))
@@ -410,9 +406,8 @@ namespace POS.UserControls
                 {
                     Clipboard.SetText(barcodeToCopy);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-
                 }
             }
         }
@@ -423,6 +418,8 @@ namespace POS.UserControls
             {
                 if (s.ShowDialog() == DialogResult.OK)
                 {
+                    CancelLoading();
+                    IsTotalEntriesInitialized = false;
                     await LoadDataAsync();
                 }
             }
@@ -444,16 +441,11 @@ namespace POS.UserControls
                 form.Dispose();
         }
 
-        bool isRefreshing { get; set; } = false;
-        private async void button2_Click_1(object sender, EventArgs e)
-        {
-            if (!isRefreshing)
-            {
-                keyword = string.Empty;
-                await LoadDataAsync();
-            }
+        /// <summary>
+        /// determines whether the loading is in order
+        /// </summary>
+        public bool IsBusyLoading { get; private set; } = false;
 
-        }
         bool _critShowing = false;
         bool criticalIsShowing
         {
@@ -464,25 +456,9 @@ namespace POS.UserControls
             }
         }
 
-        private async void criticalLabel_Click(object sender, EventArgs e)
-        {
-            if (!criticalIsShowing)
-                await Task.Run(() =>
-                {
-                    using (var c = new POSEntities())
-                    {
-                        IEnumerable<Item> critItems = c.Items.AsEnumerable().Where(x => x.InCriticalQuantity);
-
-                        FillTable(critItems);
-                    }
-                });
-            else
-                await LoadDataAsync();
-
-            criticalIsShowing = !criticalIsShowing;
-        }
-
         string keyword = string.Empty;
+        private bool isTotalEntriesInitialized = false;
+
         private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
         {
             CancelLoading();
@@ -494,6 +470,7 @@ namespace POS.UserControls
             }
 
             keyword = e.Text.Trim();
+            IsTotalEntriesInitialized = false;
             e.SearchFound = await LoadDataAsync();
         }
 
@@ -503,7 +480,6 @@ namespace POS.UserControls
             {
                 using (var context = new POSEntities())
                 {
-
                     var inventoryItem = await context.InventoryItems.AsNoTracking()
                         .FirstOrDefaultAsync(i => i.SerialNumber == serialNumber);
 
@@ -534,7 +510,7 @@ namespace POS.UserControls
                         return;
                     }
 
-                    MessageBox.Show("Item Not Found!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Item Not Found!", "Tracking Item", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch
@@ -545,6 +521,9 @@ namespace POS.UserControls
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
             keyword = string.Empty;
+
+            IsTotalEntriesInitialized = false;
+            CancelLoading();
             await LoadDataAsync();
         }
 
@@ -557,6 +536,8 @@ namespace POS.UserControls
 
                     ItemFilter filter = (ItemFilter)value;
                     currentItemFilter = filter;
+
+                    IsTotalEntriesInitialized = false;
                     CancelLoading();
                     await LoadDataAsync();
                 }
@@ -573,15 +554,85 @@ namespace POS.UserControls
 
         private async void departmentOption_SelectedIndexChanged(object sender, EventArgs e)
         {
+            IsTotalEntriesInitialized = false;
             CancelLoading();
             await LoadDataAsync();
         }
 
-        private void trackItemCheckbox_CheckedChanged(object sender, EventArgs e)
+        private async void itemsTable_Scroll(object sender, ScrollEventArgs e)
         {
+            if (sender is DataGridView dgv && dgv.IsScrolledToBottom())
+            {
+                if (!IsBusyLoading && pagination.CanNext)
+                {
+                    pagination.Next();
 
+                    await LoadDataAsync();
+                }
+            }
+        }
+
+        private async void button4_Click(object sender, EventArgs e)
+        {
+            using (var context = new POSEntities())
+            {
+                var departments = await context.Items.GetDepartments().ToArrayAsync();
+                departmentOption.Items.Add(string.Empty);
+                /* this causes double loading */
+                //departmentOption.SelectedIndex = 0;
+                departmentOption.Items.Clear();
+                departmentOption.AutoCompleteCustomSource.Clear();
+
+                departmentOption.Items.Add("");
+                departmentOption.Items.AddRange(departments);
+
+                departmentOption.AutoCompleteCustomSource.Add("");
+                departmentOption.AutoCompleteCustomSource.AddRange(departments);
+            }
         }
     }
+
+    public class Pagination
+    {
+        public void Initialize(int totalCount, int pageSize = 100)
+        {
+            TotalCount = totalCount;
+            PageSize = pageSize;
+            CurrentIndex = 1;
+        }
+
+        public int CurrentIndex { get; private set; } = 1;
+        public int MaxPage => TotalCount == 0 ? 1 :
+            TotalCount % PageSize > 0 ? (TotalCount / PageSize) + 1 : TotalCount / PageSize;
+
+        public int PageSize { get; private set; } = 100;
+        public int TotalCount { get; private set; } = 1000;
+
+        public int Start => PageSize * (CurrentIndex - 1);
+        public bool CanNext => CurrentIndex < MaxPage;
+
+        public int Next()
+        {
+            CurrentIndex++;
+
+            return Start;
+        }
+    }
+
+    public static partial class ControlExtensions
+    {
+        public static bool IsScrolledToBottom(this DataGridView dgv)
+        {
+            if (dgv.RowCount == 0)
+                return false;
+
+            int visibleRowCount = dgv.DisplayedRowCount(false);
+            int firstVisibleRowIndex = dgv.FirstDisplayedScrollingRowIndex;
+
+            return firstVisibleRowIndex + visibleRowCount >= dgv.RowCount;
+        }
+    }
+
     public static class ItemsQueryExtension
     {
         public static IQueryable<Item> ApplySearch(this IQueryable<Item> items, string keyword)
@@ -594,7 +645,7 @@ namespace POS.UserControls
 
         public static IQueryable<Item> ApplyDepartmentFilter(this IQueryable<Item> items, string keyword)
         {
-            if (string.IsNullOrWhiteSpace(keyword) || keyword == "[None]")
+            if (string.IsNullOrWhiteSpace(keyword))
                 return items;
 
             return items.Where(i => i.Department != null).Where(i => i.Department == keyword);

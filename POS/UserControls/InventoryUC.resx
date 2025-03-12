@@ -195,16 +195,6 @@
         AABJRU5ErkJggg==
 </value>
   </data>
-  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAQlJREFUOE+N
-        07tKA0EYhuEFEQ8oIqm9EgUFCV6BluIBC9N4CylMkVI7IUViYyeImLuJGAUVtUgtiL7vOBt2IbP6wUN2
-        /vln2ZndZBWpoRN//5157OMa3xjhBFOozBZe4aKid6wimU18wuYB2vjCGZZgGrCvlEU8w4VXmMYC6siz
-        A+ftc2vjHMGJe8xYmJBZDGGfZzLOJSw2wyidU9jXC6OYPiwehlE6+RPehVGMd7LonavSgn3dMIo5gMUH
-        uLdJ8ZDyPe9ayOPEE5zYthDjaXvqc7iB849xXMo6jn8vsxXcwuZz+Ba89jvYQDJr+IDNRS8ovvdkfPQ3
-        uMhvfA+lD+OvLOMCiX9Vlv0AWnxBSCg7El4AAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAQFJREFUOE/F
@@ -218,6 +208,15 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>10, 16</value>
   </metadata>
+  <data name="button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAALGPC/xhBQAAAMdJREFUKFOd
+        kL0OQUEQhecmOmqFzt3dq5BcER7AmxDxCMr7My8govAAahQkVOIRxKtotMfsZBqdOM3OfHP25yz9ISSB
+        MfOMq6txlHU+YTT6jJYZopDosMbalximjExrxl3WvZmI4m4BK2tVYh4Lf/sKD0NqPHcZubUqx2hnjLTH
+        6BjS3ZkrMfIFnCFVVmIgN52sJQoVngJeaYFgSCVsGwNaq2An4CaBNnqKBIq1POkQg5qNKF+iGb9CBouY
+        PtS4uArTL9NvIvoAUjBjJ4MbRYQAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>104</value>
   </metadata>

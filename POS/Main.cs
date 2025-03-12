@@ -52,14 +52,18 @@ namespace POS
 
         private async void Main_Load(object sender, EventArgs e)
         {
-            SetButtonChangeMechansim(inventoryBtn, repBtn, customersBtn, suppliersBtn);
+            SetButtonChangeMechanism(inventoryBtn, repBtn, customersBtn, suppliersBtn);
             LoadProperties();
 
-            var t = inventoryTab.InitializeAsync();
-            var r = reportTab.InitializeAsync();
-            var c = GetCriticalQty();
+            //var t = inventoryTab.InitializeAsync();
+            //var r = reportTab.InitializeAsync();
+            ////var c = GetCriticalQty();
+            ///
+            await inventoryTab.InitializeAsync();
+            await reportTab.InitializeAsync();
+            await GetCriticalQty();
 
-            await Task.WhenAll(t, r, c);
+            //await Task.WhenAll(t, r);
 
             Console.WriteLine("======================* Load Finished *======================");
         }
@@ -89,13 +93,13 @@ namespace POS
             }
         }
 
-        void SetButtonChangeMechansim(params Button[] buttons)
+        void SetButtonChangeMechanism(params Button[] buttons)
         {
             foreach (var i in buttons)
-                i.InvokeIfRequired(() => { i.Click += ButtonChangedMechanism_Calbback; });
+                i.InvokeIfRequired(() => { i.Click += ButtonChangedMechanism_Callback; });
         }
 
-        private void ButtonChangedMechanism_Calbback(object sender, EventArgs e)
+        private void ButtonChangedMechanism_Callback(object sender, EventArgs e)
         {
             prevButton.BackColor = normalButtonColor;
 

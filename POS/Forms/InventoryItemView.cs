@@ -90,35 +90,12 @@ namespace POS.Forms
 
         private void invTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
+
         }
 
         //int SelectedInventoryItemId => invTable.RowCount == 0 ? 0 : (int)(invTable[0, invTable.SelectedCells[0].ColumnIndex].Value);
-        private async void ViewItemDetails_Click(object sender, EventArgs e)
+        private void ViewItemDetails_Click(object sender, EventArgs e)
         {
-            //if (invTable.RowCount <= 0)
-            //{
-            //    MessageBox.Show("You do not have an item.");
-            //    return;
-            //}
-
-            //try
-            //{
-            //    using (var context = new POSEntities())
-            //    {
-            //        var item = await context.InventoryItems
-            //            .FirstOrDefaultAsync(x => x.Id == SelectedInventoryItemId);
-
-            //        Id = item.Product.ItemId;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-
-            //}
-
-
             using (var editForm = new CreateEdit_Item_Form(_id))
             {
 

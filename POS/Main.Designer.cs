@@ -74,7 +74,7 @@
             this.sideButtonsPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.sideButtonsPanel.Location = new System.Drawing.Point(0, 0);
             this.sideButtonsPanel.Name = "sideButtonsPanel";
-            this.sideButtonsPanel.Size = new System.Drawing.Size(120, 591);
+            this.sideButtonsPanel.Size = new System.Drawing.Size(120, 681);
             this.sideButtonsPanel.TabIndex = 0;
             this.toolTip.SetToolTip(this.sideButtonsPanel, "Double click to hide/show");
             this.sideButtonsPanel.DoubleClick += new System.EventHandler(this.sideButtonsPanel_DoubleClick);
@@ -217,7 +217,7 @@
             this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userButton.Image = ((System.Drawing.Image)(resources.GetObject("userButton.Image")));
             this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userButton.Location = new System.Drawing.Point(865, 0);
+            this.userButton.Location = new System.Drawing.Point(1145, 0);
             this.userButton.Margin = new System.Windows.Forms.Padding(0);
             this.userButton.Name = "userButton";
             this.userButton.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
@@ -239,7 +239,7 @@
             this.tabsHolderPanel.Location = new System.Drawing.Point(120, 25);
             this.tabsHolderPanel.Name = "tabsHolderPanel";
             this.tabsHolderPanel.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
-            this.tabsHolderPanel.Size = new System.Drawing.Size(864, 566);
+            this.tabsHolderPanel.Size = new System.Drawing.Size(1144, 656);
             this.tabsHolderPanel.TabIndex = 3;
             // 
             // inventoryTab
@@ -247,7 +247,7 @@
             this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inventoryTab.Location = new System.Drawing.Point(20, 20);
             this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Size = new System.Drawing.Size(824, 546);
+            this.inventoryTab.Size = new System.Drawing.Size(1104, 636);
             this.inventoryTab.TabIndex = 2;
             // 
             // reportTab
@@ -255,7 +255,7 @@
             this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportTab.Location = new System.Drawing.Point(20, 20);
             this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(824, 546);
+            this.reportTab.Size = new System.Drawing.Size(1104, 636);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
             // 
@@ -394,7 +394,7 @@
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStrip.Size = new System.Drawing.Size(864, 25);
+            this.toolStrip.Size = new System.Drawing.Size(1144, 25);
             this.toolStrip.TabIndex = 3;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -402,7 +402,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 591);
+            this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.userButton);
             this.Controls.Add(this.tabsHolderPanel);
             this.Controls.Add(this.toolStrip);

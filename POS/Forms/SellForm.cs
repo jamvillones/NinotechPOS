@@ -381,37 +381,6 @@ namespace POS.Forms
             tendered.Value = 0;
         }
 
-        private async void _customerOption_Validated(object sender, EventArgs e)
-        {
-            //if (_customerOption.Text.IsEmpty())
-            //    return;
-            /////the option is not yet in the valid list
-            //if (_customerOption.SelectedItem == null &&
-            //    MessageBox.Show("Customer is not yet registered. Would you like to register?",
-            //    "",
-            //    MessageBoxButtons.OKCancel,
-            //    MessageBoxIcon.Question) == DialogResult.OK) {
-            //    var details = _customerOption.Text.Split('/').ToArray();
-            //    var cust_Name = details[0];
-            //    var cust_contact = details.Length == 2 || details.Length == 3 ? details[1] : null;
-            //    var cust_address = details.Length == 3 ? details[2] : null;
-
-            //    var addCustomer = new Customer() {
-            //        Name = cust_Name.Trim(),
-            //        ContactDetails = cust_contact.NullIfEmpty(),
-            //        Address = cust_address.NullIfEmpty()
-            //    };
-
-            //    using (var context = new POSEntities()) {
-            //        var result = context.Customers.Add(addCustomer);
-            //        await context.SaveChangesAsync();
-
-            //        _customerOption.Items.Add(result);
-            //        _customerOption.SelectedItem = result;
-            //    }
-            //}
-        }
-
         private void cartTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             FormatValues();
