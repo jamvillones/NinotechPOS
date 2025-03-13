@@ -40,7 +40,7 @@ namespace POS.UserControls
         }
 
         CancellationTokenSource regularSource = null;
-        CancellationTokenSource chargedSource = null;
+        CancellationTokenSource chargedCancellationSource = null;
 
         string keyword = string.Empty;
         SaleStatusFilter statusFilter = SaleStatusFilter.Pending;
@@ -48,14 +48,14 @@ namespace POS.UserControls
         public void CancelLoading()
         {
             TryCancelTokenSource(regularSource);
-            TryCancelTokenSource(chargedSource);
+            TryCancelTokenSource(chargedCancellationSource);
         }
 
         public void CancelChargedLoading()
         {
             try
             {
-                chargedSource?.Cancel();
+                chargedCancellationSource?.Cancel();
             }
             catch
             {
@@ -233,8 +233,8 @@ namespace POS.UserControls
             loadingLabel.Visible = true;
             Console.WriteLine("-------Charged Loading Started: " + DateTime.Now);
 
-            chargedSource = new CancellationTokenSource();
-            var token = chargedSource.Token;
+            chargedCancellationSource = new CancellationTokenSource();
+            var token = chargedCancellationSource.Token;
 
             try
             {
@@ -273,20 +273,17 @@ namespace POS.UserControls
                         chargedTable.Rows.AddRange(chargedSales.Select(CreateChargedRow).ToArray());
                 }
             }
-            catch (TaskCanceledException)
-            {
-                Console.WriteLine("-------Charged Loading Cancelled-------");
-            }
+            catch (OperationCanceledException) { Console.WriteLine("-------Charged Loading Cancelled-------"); }
             catch { }
             finally
             {
-                chargedSource?.Dispose();
-                chargedSource = null;
+                chargedCancellationSource?.Dispose();
+                chargedCancellationSource = null;
             }
 
             loadingLabel.Visible = false;
-
             IsBusyLoading = false;
+
             itemCount.Text = chargedTable.Rows.Count.ToString();
             Console.WriteLine("-------Charged Loading Finished: " + DateTime.Now);
         }
