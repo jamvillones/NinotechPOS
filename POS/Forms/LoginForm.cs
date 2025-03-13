@@ -54,7 +54,7 @@ namespace POS.Forms
             var settings = Properties.Settings.Default;
             this.Text = "POS-Login: " + (settings.IsLocalConnection ? "localHost" : settings.DataSource);
 
-            label1.Text = "version: " + GetVersion();
+            //label1.Text = "version: " + GetVersion();
             TryConnect();
         }
 

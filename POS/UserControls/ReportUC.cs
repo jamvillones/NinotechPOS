@@ -51,6 +51,18 @@ namespace POS.UserControls
             TryCancelTokenSource(chargedSource);
         }
 
+        public void CancelChargedLoading()
+        {
+            try
+            {
+                chargedSource?.Cancel();
+            }
+            catch
+            {
+
+            }
+        }
+
         bool TryCancelTokenSource(CancellationTokenSource source)
         {
             try
@@ -199,8 +211,27 @@ namespace POS.UserControls
             return rows.ToArray();
         }
 
+        readonly Pagination pagination = new Pagination();
+        bool isOldEntries = false;
+        bool IsBusyLoading = false;
+
+        public bool IsOldEntries
+        {
+            get => isOldEntries;
+            set
+            {
+                isOldEntries = value;
+                if (!isOldEntries)
+                    chargedTable.Rows.Clear();
+
+            }
+        }
+
         private async Task LoadChargedAsync()
         {
+            IsBusyLoading = true;
+            loadingLabel.Visible = true;
+            Console.WriteLine("-------Charged Loading Started: " + DateTime.Now);
 
             chargedSource = new CancellationTokenSource();
             var token = chargedSource.Token;
@@ -209,46 +240,55 @@ namespace POS.UserControls
             {
                 using (var context = new POSEntities())
                 {
+                    var unpaginatedList = context.Sales
+                                      .AsNoTracking()
+                                      .AsQueryable()
+                                      .Where(c => c.SaleType == SaleType.Charged.ToString())
+                                      .FilterCharged(statusFilter)
+                                      .FilterByKeyword(keyword);
 
-                    var chargedSales = await context.Sales
-                       .AsNoTracking()
-                       .AsQueryable()
-                       .Where(c => c.SaleType == SaleType.Charged.ToString())
-                       .FilterCharged(statusFilter)
-                       .FilterByKeyword(keyword)
-                       .OrderByDescending(c => c.Date)
-                       .ToListAsync(token);
+                    if (!IsOldEntries)
+                    {
+                        int totalItemCount = await unpaginatedList.CountAsync(token);
+                        pagination.Initialize(totalItemCount);
+                        IsOldEntries = true;
+                    }
+
+                    var task_Loading = unpaginatedList
+                                       .OrderByDescending(c => c.Date)
+                                       .Skip(pagination.Start).Take(pagination.PageSize)
+                                       .ToListAsync(token);
+
+                    var task_minimumLoadingTime = Task.Delay(500, token);
+
+                    await Task.WhenAll(task_Loading, task_minimumLoadingTime);
+                    var chargedSales = task_Loading.Result;
 
                     token.ThrowIfCancellationRequested();
 
-                    if (!chargedSales.Any() && !string.IsNullOrWhiteSpace(keyword))
-                    {
-                        MessageBox.Show("No Results Found!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                    if (chargedSales.Count == 0 && !string.IsNullOrWhiteSpace(keyword))
+                        MessageBox.Show("No Results Found!", "Charged Sales", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    chargedTable.Rows.Clear();
-
-                    await Task.Run(() =>
-                    {
-                        foreach (var i in chargedSales)
-                        {
-                            if (token.IsCancellationRequested) break;
-                            chargedTable.InvokeIfRequired(() => chargedTable.Rows.Add(CreateChargedRow(i)));
-                        }
-                    });
-                    Debug.WriteLine("**Charged Loading Finished**");
+                    else
+                        chargedTable.Rows.AddRange(chargedSales.Select(CreateChargedRow).ToArray());
                 }
             }
-            catch (OperationCanceledException)
+            catch (TaskCanceledException)
             {
-                Debug.WriteLine("--Charged Loading Cancelled--");
+                Console.WriteLine("-------Charged Loading Cancelled-------");
             }
+            catch { }
             finally
             {
                 chargedSource?.Dispose();
                 chargedSource = null;
             }
+
+            loadingLabel.Visible = false;
+
+            IsBusyLoading = false;
+            itemCount.Text = chargedTable.Rows.Count.ToString();
+            Console.WriteLine("-------Charged Loading Finished: " + DateTime.Now);
         }
 
         DataGridViewRow CreateChargedRow(Sale sale)
@@ -320,17 +360,26 @@ namespace POS.UserControls
 
         private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
         {
-            label1.Text = "Searching...";
+            searchingIndicator.Text = "Searching...";
             e.SearchFound = true;
+
             keyword = e.Text;
-            await StartNewChargedLoading();
-            label1.Text = string.Empty;
+
+            IsOldEntries = false;
+            CancelChargedLoading();
+
+            await LoadChargedAsync();
+            searchingIndicator.Text = string.Empty;
         }
 
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
             keyword = string.Empty;
-            await StartNewChargedLoading();
+
+            IsOldEntries = false;
+            CancelChargedLoading();
+
+            await LoadChargedAsync();
         }
 
         private async void radioButton_CheckedChanged(object sender, EventArgs e)
@@ -340,19 +389,25 @@ namespace POS.UserControls
                 if (Enum.TryParse(rb.Text.Trim(), out SaleStatusFilter filter))
                 {
                     statusFilter = filter;
-                    await StartNewChargedLoading();
+
+                    IsOldEntries = false;
+                    CancelChargedLoading();
+
+                    await LoadChargedAsync();
                 }
             }
         }
 
-        async Task StartNewChargedLoading()
+        private async void chargedTable_Scroll(object sender, ScrollEventArgs e)
         {
-
-            if (TryCancelTokenSource(chargedSource))
+            if (sender is DataGridView dgv && dgv.IsScrolledToBottom())
             {
-                await Task.Delay(100);
+                if (!IsBusyLoading && pagination.CanNext)
+                {
+                    pagination.Next();
+                    await LoadChargedAsync();
+                }
             }
-            await LoadChargedAsync();
         }
     }
 
@@ -386,8 +441,10 @@ namespace POS.UserControls
         {
             if (string.IsNullOrWhiteSpace(keyword))
                 return sales;
+
             if (int.TryParse(keyword, out int id))
                 return sales.Where(s => s.Id == id);
+
             return sales.Where(s => s.Customer.Name.Contains(keyword));
         }
     }

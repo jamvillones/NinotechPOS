@@ -238,24 +238,24 @@
             this.tabsHolderPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabsHolderPanel.Location = new System.Drawing.Point(120, 25);
             this.tabsHolderPanel.Name = "tabsHolderPanel";
-            this.tabsHolderPanel.Padding = new System.Windows.Forms.Padding(20, 20, 20, 0);
+            this.tabsHolderPanel.Padding = new System.Windows.Forms.Padding(15, 15, 15, 0);
             this.tabsHolderPanel.Size = new System.Drawing.Size(1144, 656);
             this.tabsHolderPanel.TabIndex = 3;
             // 
             // inventoryTab
             // 
             this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inventoryTab.Location = new System.Drawing.Point(20, 20);
+            this.inventoryTab.Location = new System.Drawing.Point(15, 15);
             this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Size = new System.Drawing.Size(1104, 636);
+            this.inventoryTab.Size = new System.Drawing.Size(1114, 641);
             this.inventoryTab.TabIndex = 2;
             // 
             // reportTab
             // 
             this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportTab.Location = new System.Drawing.Point(20, 20);
+            this.reportTab.Location = new System.Drawing.Point(15, 15);
             this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(1104, 636);
+            this.reportTab.Size = new System.Drawing.Size(1114, 641);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
             // 
@@ -414,7 +414,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POS";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
