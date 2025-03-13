@@ -163,10 +163,10 @@
     <Compile Include="Forms\ItemSoldItemsForm.Designer.cs">
       <DependentUpon>ItemSoldItemsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Item\CreateEdit_Item_Form.cs">
+    <Compile Include="Forms\Items\CreateEdit_Item_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Item\CreateEdit_Item_Form.Designer.cs">
+    <Compile Include="Forms\Items\CreateEdit_Item_Form.Designer.cs">
       <DependentUpon>CreateEdit_Item_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SellForm.cs">
@@ -282,12 +282,6 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Item\AddItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Item\AddItemForm.designer.cs">
-      <DependentUpon>AddItemForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ChangePass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,23 +300,11 @@
     <Compile Include="Forms\CreateLogin.designer.cs">
       <DependentUpon>CreateLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Item\EditItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Item\EditItemForm.designer.cs">
-      <DependentUpon>EditItemForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\InventoryItemView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\InventoryItemView.Designer.cs">
       <DependentUpon>InventoryItemView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Item\ItemFormBase.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Item\ItemFormBase.designer.cs">
-      <DependentUpon>ItemFormBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
@@ -509,7 +491,7 @@
     <EmbeddedResource Include="Forms\AdvancedSearchForm.resx">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Item\CreateEdit_Item_Form.resx">
+    <EmbeddedResource Include="Forms\Items\CreateEdit_Item_Form.resx">
       <DependentUpon>CreateEdit_Item_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PrintInventory.resx">
@@ -542,9 +524,6 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Item\AddItemForm.resx">
-      <DependentUpon>AddItemForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChangePass.resx">
       <DependentUpon>ChangePass.cs</DependentUpon>
     </EmbeddedResource>
@@ -554,14 +533,8 @@
     <EmbeddedResource Include="Forms\CreateLogin.resx">
       <DependentUpon>CreateLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Item\EditItemForm.resx">
-      <DependentUpon>EditItemForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryItemView.resx">
       <DependentUpon>InventoryItemView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Item\ItemFormBase.resx">
-      <DependentUpon>ItemFormBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

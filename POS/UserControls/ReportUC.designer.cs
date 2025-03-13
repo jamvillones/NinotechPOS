@@ -126,7 +126,7 @@
             this.saleTable.Size = new System.Drawing.Size(759, 418);
             this.saleTable.StandardTab = true;
             this.saleTable.TabIndex = 1;
-            this.saleTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.saleTable_CellMouseDoubleClick);
+            this.saleTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ShowSale_DoubleClick);
             this.saleTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.saleTable_KeyDown);
             // 
             // Column8
@@ -301,7 +301,7 @@
             this.chargedTable.Size = new System.Drawing.Size(759, 379);
             this.chargedTable.StandardTab = true;
             this.chargedTable.TabIndex = 1;
-            this.chargedTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.saleTable_CellMouseDoubleClick);
+            this.chargedTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ShowSale_DoubleClick);
             this.chargedTable.Scroll += new System.Windows.Forms.ScrollEventHandler(this.chargedTable_Scroll);
             this.chargedTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.chargedTable_KeyDown);
             // 

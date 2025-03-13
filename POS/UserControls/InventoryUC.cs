@@ -142,6 +142,12 @@ namespace POS.UserControls
 
         private void addItemBtn_Click(object sender, EventArgs e)
         {
+            //var newItem = new Item() { Id = Guid.NewGuid().ToString("N") };
+
+            //using (var form = new Step_BasicInformation(newItem))
+            //{
+            //}
+
             using (var form = new CreateEdit_Item_Form())
             {
                 if (form.ShowDialog() == DialogResult.OK)

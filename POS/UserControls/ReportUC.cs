@@ -94,7 +94,7 @@ namespace POS.UserControls
             await Task.WhenAll(chargedLoadingTask, regularLoadingTask);
         }
 
-        private void saleTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private async void ShowSale_DoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex == -1)
                 return;
@@ -102,14 +102,13 @@ namespace POS.UserControls
             var table = (DataGridView)sender;
             int index = (int)(table.SelectedCells[0].Value);
 
-            ///check if the entry is still available
-            using (var context = new POSEntities())
-                if (!context.Sales.Any(x => x.Id == index))
-                {
-                    MessageBox.Show("Sale Removed.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    table.Rows.RemoveAt(e.RowIndex);
-                    return;
-                }
+            ///check if the entry is still available and not removed from other sources
+            if (!await IsSaleStillPresent(index))
+            {
+                MessageBox.Show("Sale Cannot Be Found", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                table.Rows.RemoveAt(e.RowIndex);
+                return;
+            }
 
             using (var saleDetails = new SaleDetails(index))
             {
@@ -117,6 +116,21 @@ namespace POS.UserControls
                 if (saleDetails.ShowDialog() == DialogResult.OK)
                     table.Rows.RemoveAt(e.RowIndex);
             }
+        }
+
+        private async Task<bool> IsSaleStillPresent(int id)
+        {
+            try
+            {
+                using (var context = new POSEntities())
+                    return await context.Sales.AnyAsync(x => x.Id == id);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return true;
         }
 
         private async void SaleDetails_OnSave(object sender, EventArgs e)
