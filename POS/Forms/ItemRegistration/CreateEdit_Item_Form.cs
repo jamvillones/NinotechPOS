@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace POS.Forms.ItemRegistration
 {
+
     public partial class CreateEdit_Item_Form : Form
     {
         public CreateEdit_Item_Form(string id = "")
@@ -35,26 +36,7 @@ namespace POS.Forms.ItemRegistration
 
         string _id = string.Empty;
 
-        private class Cost_ViewModel
-        {
-            public Cost_ViewModel()
-            {
 
-            }
-
-            public Cost_ViewModel(Product p)
-            {
-                Id = p.Id;
-                Supplier = p.Supplier;
-                Cost = p.Cost;
-            }
-
-            public int Id { get; set; } = 0;
-            public Supplier Supplier { get; set; }
-            public decimal Cost { get; set; } = 0;
-
-            public Product ToProduct => new Product() { Id = Id, SupplierId = Supplier.Id, Cost = Cost };
-        }
 
         readonly BindingList<Cost_ViewModel> Costs = new BindingList<Cost_ViewModel>();
 

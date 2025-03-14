@@ -140,22 +140,50 @@ namespace POS.UserControls
         string SelectedName => itemsTable.SelectedCells[nameCol.Index].Value.ToString();
         string SelectedBarcode => itemsTable.SelectedCells[barcodeCol.Index].Value?.ToString();
 
-        private void addItemBtn_Click(object sender, EventArgs e)
+        private async void addItemBtn_Click(object sender, EventArgs e)
         {
-            //var newItem = new Item() { Id = Guid.NewGuid().ToString("N") };
+            var newItem = new Item() { Id = Guid.NewGuid().ToString("N") };
+
+            try
+            {
+                newItem
+                    .SetBasicInfo()
+                    .AskIfSerialRequired()
+                    .SetImage()
+                    .SetCosts()
+                    .ConfirmDetailsBeforeSaving();
+
+                using (var context = new POSEntities())
+                {
+                    var item = context.Items.Add(newItem);
+                    await context.SaveChangesAsync();
+
+                    itemsTable.Rows.Add(CreateRow(item));
+                }
+
+
+            }
+            catch (OperationCanceledException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch
+            {
+
+            }
 
             //using (var form = new Step_BasicInformation(newItem))
             //{
             //}
 
-            using (var form = new CreateEdit_Item_Form())
-            {
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    var item = form.Tag as Item;
-                    itemsTable.Rows.Add(CreateRow(item));
-                }
-            }
+            //using (var form = new CreateEdit_Item_Form())
+            //{
+            //    if (form.ShowDialog() == DialogResult.OK)
+            //    {
+            //        var item = form.Tag as Item;
+            //        itemsTable.Rows.Add(CreateRow(item));
+            //    }
+            //}
         }
 
         /// <summary>
@@ -252,7 +280,6 @@ namespace POS.UserControls
                 _cancelSource?.Dispose();
             }
 
-            itemCount.Text = itemsTable.RowCount.ToString("N0");
 
             loadingLabelItem.Visible = false;
             IsBusyLoading = false;
@@ -293,29 +320,32 @@ namespace POS.UserControls
                 return;
             }
 
-            try
+            //try
+            //{
+            using (var editForm = new CreateEdit_Item_Form(SelectedId))
             {
-                using (var editForm = new CreateEdit_Item_Form(SelectedId))
+                if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    if (editForm.ShowDialog() == DialogResult.OK)
-                    {
-                        var x = editForm.Tag as Item;
+                    var x = editForm.Tag as Item;
 
-                        var row = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex];
+                    var row = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex];
 
-                        row.SetValues(
-                            x.Id,
-                            x.Barcode,
-                            x.Name,
-                            row.Cells[quantityCol.Index].Value,
-                            x.SellingPrice,
-                            x.Type
-                        );
-                    }
+                    row.SetValues(
+                        x.Id,
+                        x.Barcode,
+                        x.Name,
+                        row.Cells[quantityCol.Index].Value,
+                        x.SellingPrice,
+                        x.Type
+                    );
                 }
             }
-            catch
-            { }
+            //}
+            //catch
+            //{
+
+
+            //}
         }
 
         private void ShodSoldItemsForItem_Click(object sender, EventArgs e)
@@ -595,6 +625,15 @@ namespace POS.UserControls
                 departmentOption.AutoCompleteCustomSource.Add("");
                 departmentOption.AutoCompleteCustomSource.AddRange(departments);
             }
+        }
+
+        private void itemsTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            itemCount.Text = itemsTable.RowCount.ToString("N0");
+        }
+        private void itemsTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            itemCount.Text = itemsTable.RowCount.ToString("N0");
         }
     }
 

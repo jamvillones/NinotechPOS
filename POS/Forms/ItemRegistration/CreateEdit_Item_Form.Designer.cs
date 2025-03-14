@@ -58,8 +58,8 @@
             this._description = new System.Windows.Forms.TextBox();
             this.panel14 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.saveBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.costTable = new System.Windows.Forms.DataGridView();
@@ -72,6 +72,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.panel15 = new System.Windows.Forms.Panel();
             this.panel16 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
             this.panel17 = new System.Windows.Forms.Panel();
             this._supplierOption = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -81,7 +82,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel11 = new System.Windows.Forms.Panel();
             this.panel6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -415,6 +415,17 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Notes:";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this.saveBtn);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 420);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(794, 35);
+            this.flowLayoutPanel1.TabIndex = 14;
+            // 
             // saveBtn
             // 
             this.saveBtn.AutoSize = true;
@@ -431,17 +442,6 @@
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Controls.Add(this.saveBtn);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 420);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(794, 35);
-            this.flowLayoutPanel1.TabIndex = 14;
             // 
             // button1
             // 
@@ -614,6 +614,14 @@
             this.panel16.Size = new System.Drawing.Size(310, 211);
             this.panel16.TabIndex = 13;
             // 
+            // panel11
+            // 
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(5, 38);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(298, 8);
+            this.panel11.TabIndex = 16;
+            // 
             // panel17
             // 
             this.panel17.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -692,14 +700,6 @@
             // toolTip1
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
-            // panel11
-            // 
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel11.Location = new System.Drawing.Point(5, 38);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(298, 8);
-            this.panel11.TabIndex = 16;
             // 
             // CreateEdit_Item_Form
             // 
@@ -782,7 +782,6 @@
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.DataGridView costTable;
@@ -810,5 +809,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Button saveBtn;
     }
 }

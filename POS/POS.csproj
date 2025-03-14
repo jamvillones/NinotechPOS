@@ -157,16 +157,48 @@
     <Compile Include="Forms\ItemListForm.Designer.cs">
       <DependentUpon>ItemListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ItemRegistration\BasicInformation_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\BasicInformation_Form.Designer.cs">
+      <DependentUpon>BasicInformation_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\ConfirmNewItemDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\ConfirmNewItemDetails.Designer.cs">
+      <DependentUpon>ConfirmNewItemDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\Cost_ViewModel.cs" />
+    <Compile Include="Forms\ItemRegistration\ItemCost_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\ItemCost_Form.Designer.cs">
+      <DependentUpon>ItemCost_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\Item_Image_From.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\Item_Image_From.Designer.cs">
+      <DependentUpon>Item_Image_From.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\RequireSerialNumber_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\RequireSerialNumber_Form.Designer.cs">
+      <DependentUpon>RequireSerialNumber_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ItemRegistration\StepByStepItemCreationHelper.cs" />
     <Compile Include="Forms\ItemSoldItemsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ItemSoldItemsForm.Designer.cs">
       <DependentUpon>ItemSoldItemsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Items\CreateEdit_Item_Form.cs">
+    <Compile Include="Forms\ItemRegistration\CreateEdit_Item_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Items\CreateEdit_Item_Form.Designer.cs">
+    <Compile Include="Forms\ItemRegistration\CreateEdit_Item_Form.Designer.cs">
       <DependentUpon>CreateEdit_Item_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SellForm.cs">
@@ -482,6 +514,21 @@
     <EmbeddedResource Include="Forms\ItemListForm.resx">
       <DependentUpon>ItemListForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ItemRegistration\BasicInformation_Form.resx">
+      <DependentUpon>BasicInformation_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ItemRegistration\ConfirmNewItemDetails.resx">
+      <DependentUpon>ConfirmNewItemDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ItemRegistration\ItemCost_Form.resx">
+      <DependentUpon>ItemCost_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ItemRegistration\Item_Image_From.resx">
+      <DependentUpon>Item_Image_From.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ItemRegistration\RequireSerialNumber_Form.resx">
+      <DependentUpon>RequireSerialNumber_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemSoldItemsForm.resx">
       <DependentUpon>ItemSoldItemsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -491,7 +538,7 @@
     <EmbeddedResource Include="Forms\AdvancedSearchForm.resx">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Items\CreateEdit_Item_Form.resx">
+    <EmbeddedResource Include="Forms\ItemRegistration\CreateEdit_Item_Form.resx">
       <DependentUpon>CreateEdit_Item_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PrintInventory.resx">
