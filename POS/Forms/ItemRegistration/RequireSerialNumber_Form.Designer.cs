@@ -78,6 +78,8 @@
             this.saveBtn.BackColor = System.Drawing.SystemColors.HotTrack;
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveBtn.ForeColor = System.Drawing.Color.White;
+            this.saveBtn.Image = ((System.Drawing.Image)(resources.GetObject("saveBtn.Image")));
+            this.saveBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.saveBtn.Location = new System.Drawing.Point(0, 0);
             this.saveBtn.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.saveBtn.MaximumSize = new System.Drawing.Size(150, 35);
@@ -86,7 +88,8 @@
             this.saveBtn.Size = new System.Drawing.Size(150, 35);
             this.saveBtn.TabIndex = 12;
             this.saveBtn.TabStop = false;
-            this.saveBtn.Text = "Yes";
+            this.saveBtn.Text = "  Yes";
+            this.saveBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
@@ -95,21 +98,25 @@
             this.button1.AutoSize = true;
             this.button1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.Location = new System.Drawing.Point(170, 0);
             this.button1.Margin = new System.Windows.Forms.Padding(0);
             this.button1.MaximumSize = new System.Drawing.Size(150, 35);
             this.button1.MinimumSize = new System.Drawing.Size(150, 35);
             this.button1.Name = "button1";
-            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.button1.Size = new System.Drawing.Size(150, 35);
             this.button1.TabIndex = 13;
             this.button1.TabStop = false;
-            this.button1.Text = "No";
+            this.button1.Text = "  No";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // RequireSerialNumber_Form
             // 
+            this.AcceptButton = this.saveBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(464, 201);
@@ -117,6 +124,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RequireSerialNumber_Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

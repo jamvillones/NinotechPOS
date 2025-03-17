@@ -46,5 +46,10 @@ namespace POS.Forms.ItemRegistration
                 pictureBox.Image = null;
 
         }
+
+        private void Item_Image_From_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

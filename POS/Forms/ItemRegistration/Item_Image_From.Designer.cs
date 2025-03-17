@@ -48,9 +48,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel15.Controls.Add(this.pictureBox);
-            this.panel15.Location = new System.Drawing.Point(32, 127);
+            this.panel15.Location = new System.Drawing.Point(32, 94);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(570, 322);
+            this.panel15.Size = new System.Drawing.Size(495, 286);
             this.panel15.TabIndex = 13;
             this.panel15.TabStop = true;
             // 
@@ -61,7 +61,7 @@
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Location = new System.Drawing.Point(0, 0);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(570, 322);
+            this.pictureBox.Size = new System.Drawing.Size(495, 286);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 14;
             this.pictureBox.TabStop = false;
@@ -73,7 +73,7 @@
             this.button3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(156, 453);
+            this.button3.Location = new System.Drawing.Point(151, 379);
             this.button3.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.button3.MaximumSize = new System.Drawing.Size(150, 35);
             this.button3.Name = "button3";
@@ -91,7 +91,7 @@
             this.button5.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(32, 453);
+            this.button5.Location = new System.Drawing.Point(32, 379);
             this.button5.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.button5.MaximumSize = new System.Drawing.Size(150, 35);
             this.button5.Name = "button5";
@@ -107,7 +107,7 @@
             this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(600, 516);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(525, 449);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(0, 0);
             this.flowLayoutPanel1.TabIndex = 37;
@@ -119,15 +119,17 @@
             this.saveBtn.BackColor = System.Drawing.SystemColors.HotTrack;
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveBtn.ForeColor = System.Drawing.Color.White;
-            this.saveBtn.Location = new System.Drawing.Point(452, 506);
+            this.saveBtn.Image = ((System.Drawing.Image)(resources.GetObject("saveBtn.Image")));
+            this.saveBtn.Location = new System.Drawing.Point(377, 439);
             this.saveBtn.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.saveBtn.MaximumSize = new System.Drawing.Size(150, 35);
             this.saveBtn.MinimumSize = new System.Drawing.Size(150, 35);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(150, 35);
             this.saveBtn.TabIndex = 12;
-            this.saveBtn.TabStop = false;
-            this.saveBtn.Text = "Next Step";
+            this.saveBtn.Text = "  Next Step";
+            this.saveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.saveBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
@@ -135,7 +137,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(187, 60);
+            this.label2.Location = new System.Drawing.Point(149, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(261, 13);
             this.label2.TabIndex = 44;
@@ -148,7 +150,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label1.Location = new System.Drawing.Point(232, 30);
+            this.label1.Location = new System.Drawing.Point(194, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(171, 30);
             this.label1.TabIndex = 43;
@@ -156,9 +158,10 @@
             // 
             // Item_Image_From
             // 
+            this.AcceptButton = this.saveBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(634, 561);
+            this.ClientSize = new System.Drawing.Size(559, 494);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -168,11 +171,11 @@
             this.Controls.Add(this.button5);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(650, 600);
             this.Name = "Item_Image_From";
             this.Padding = new System.Windows.Forms.Padding(20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ninotech POS - Create Item (3/4)";
+            this.Load += new System.EventHandler(this.Item_Image_From_Load);
             this.panel15.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);

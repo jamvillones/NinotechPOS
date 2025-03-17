@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmNewItemDetails));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmNewItemDetails));
             this.label1 = new System.Windows.Forms.Label();
             this.saveBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -48,7 +48,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label1.Location = new System.Drawing.Point(90, 30);
+            this.label1.Location = new System.Drawing.Point(135, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(224, 30);
             this.label1.TabIndex = 44;
@@ -60,15 +60,20 @@
             this.saveBtn.BackColor = System.Drawing.SystemColors.HotTrack;
             this.saveBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.saveBtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.White;
-            this.saveBtn.Location = new System.Drawing.Point(20, 631);
+            this.saveBtn.Image = ((System.Drawing.Image)(resources.GetObject("saveBtn.Image")));
+            this.saveBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.saveBtn.Location = new System.Drawing.Point(20, 661);
             this.saveBtn.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.saveBtn.MinimumSize = new System.Drawing.Size(150, 35);
             this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(364, 35);
+            this.saveBtn.Size = new System.Drawing.Size(454, 50);
             this.saveBtn.TabIndex = 45;
             this.saveBtn.TabStop = false;
-            this.saveBtn.Text = "Confirm And Create";
+            this.saveBtn.Text = "  Confirm And Create";
+            this.saveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.saveBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
@@ -81,7 +86,6 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -97,12 +101,12 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Location = new System.Drawing.Point(25, 302);
+            this.dataGridView1.Location = new System.Drawing.Point(72, 310);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(355, 320);
+            this.dataGridView1.Size = new System.Drawing.Size(350, 333);
             this.dataGridView1.TabIndex = 46;
             // 
             // pictureBox1
@@ -110,25 +114,29 @@
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(25, 63);
+            this.pictureBox1.Location = new System.Drawing.Point(72, 63);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(355, 230);
+            this.pictureBox1.Size = new System.Drawing.Size(350, 230);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 47;
             this.pictureBox1.TabStop = false;
             // 
             // Property
             // 
+            this.Property.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.HotTrack;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(10);
             this.Property.DefaultCellStyle = dataGridViewCellStyle1;
             this.Property.HeaderText = "Property";
             this.Property.Name = "Property";
             this.Property.ReadOnly = true;
             this.Property.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Property.Width = 5;
             // 
             // value_Col
             // 
+            dataGridViewCellStyle2.NullValue = "N/A";
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(10);
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.value_Col.DefaultCellStyle = dataGridViewCellStyle2;
@@ -139,9 +147,10 @@
             // 
             // ConfirmNewItemDetails
             // 
+            this.AcceptButton = this.saveBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 686);
+            this.ClientSize = new System.Drawing.Size(494, 731);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.saveBtn);
@@ -154,6 +163,7 @@
             this.Padding = new System.Windows.Forms.Padding(20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Niñotech POS - Create Item";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfirmNewItemDetails_FormClosing);
             this.Load += new System.EventHandler(this.ConfirmNewItemDetails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

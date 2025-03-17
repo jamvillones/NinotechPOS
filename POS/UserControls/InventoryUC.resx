@@ -135,6 +135,9 @@
   <metadata name="col_remove.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>10, 16</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -149,12 +152,12 @@
   </data>
   <data name="viewStockBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAARFJREFUOE+V
-        0r1LAmEAx/ErFcIG54YkHCJCaHATiaKpqamgLShprKFJlyRbQmgp6C9oKBqCoFoDh8AhWySdTIQGw+YW
-        +/7uhbv0TrgvfPB5Hnju8V4MTxHs4BFNvOECCxjbDF5RxSYyyKKEPg7gWxTaWMGkFoaaRxu66Ei7eMGE
-        OfNvGV3EzJmnZ2xj1pwF944Va+jWwhJOMaWFgK6xZw3d6sihjH0tBPQA/cN/XeEEaXxjHcNN4wdz5szT
-        InpIYQNfeEIecahz3FnD0Q7xCeeBJOxfnXiJX5xhFb5toYMabnAP3cYtdPLAVoRv+mB0ut69Hk4SSu/Z
-        2SwFhOoY3gscIVT61p3NH1oIm+65YRjG2h8ufTbWyYSYdQAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAOdJREFUOE+t
+        0j1rwlAYxfFQOghFUNGpi3RyESc3B7c6WkRwdHDyU7j5CZwcdPYruIiL0l2Q7kWw4FDETdr/uXnh3pBK
+        kB74kYeQk+cS4v1Xciin9AgnI/ykpBc4UXmL+BZbA3+WV/7ozVFBO5hlAJXuLheDWVcndllvzvijSQkv
+        CaLYZR2t6Y8mM4Qfyxbl1uYn6OE3FPCJIUxU3OGIRcwrlDX2mOIbNZhsED9S6AB9vGww614HUZaIl0Jj
+        KBNo4zs+8AyTFi5IKlehaO5BJ/hCH1H0v+YTPEBbVdbmE644I1Xq6Lq87i+7TVWg7YZSnAAAAABJRU5E
+        rkJggg==
 </value>
   </data>
   <data name="stockinBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -189,34 +192,43 @@
   </data>
   <data name="addVariationsBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAHVJREFUOE9j
-        oBaYDsRHoXgrSIBUANL4H4rfgASAoASIu/DgLCCGA2wGTAPijXhwBxDDAcjZII0gfBMkQHewDIhBNoPw
-        CZAAqQAUBquBeDIQvwUJAEErEM/DgyuBGA4oNoBiL1AMKI5GihMSxUmZ4sxEJmBgAAD2Ckcn0Fa2yAAA
-        AABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAKtJREFUOE+t
+        kjEKAkEQBDcw9AIzI7nAdxj5Av2ALzM0kPuBB+aCoYGR+BDRLpw5FGdxD20otumZZmHZ9E9NRGXgUZSF
+        uoijcRNrOz1jnhXDk9gFkH8tr572Q+RFZbi/4FlReWonzMXYfO+ba4Gy5aW4Cl6WpaGgBAOByJmztyBw
+        tcJvOohtALnv8Pqd9oJwI84GPpex38nLM9EY+FwWlkt5K/NvRz1g/xel9AAZRlBlwO1v9QAAAABJRU5E
+        rkJggg==
 </value>
   </data>
   <data name="button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAQFJREFUOE/F
-        0j9LQlEcxvErkS3h0BgEEUJDo+TQ4OQ7aHFVSBAhafAVODg6Nzo4SItDk0trgyCIZLSECNIrSBH/fZ/b
-        Cc7Ve/Hm0gMfOOfHvefcc8/P2TNneEPVne2RElbourOAHOHTiKpgcoMxijhVIShZLIw6LpCGXk4hMPd4
-        xjuuofPWoIWWuEVg7qCz6eETFaz08YWYO7OSQxsd9NBEHqHzAe1aQUSFvyaJAg7cmTfnxmZC9cExppiY
-        sR1PH1whA/vzD/GIb2gRXelvtvpgAK3WgoovGOEJ2jmOIXRM3z54wCvKaECLzWD/k0vMsbMPFO2S+Bl6
-        oiv27YP/jOOsAbDROBJ3LsjtAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAMxJREFUOE+t
+        0jEOAUEUxvElotApNBIhLuAGDqBRax1Dr9BoaFxAoRWFUqfiBHoFCb2E/2dnN2Z27Qi+5Jd9u++9ZJOZ
+        4F/JoYFmBvU1ZyWPPe4f2EHzcepQo4VyBvU1p/k4+h191FMZohKWVty5Z14/Vk3dgxvvcsfUIygFFMPS
+        vzww9RrKFMuw9C8vcMIRJVxwQw2ZyyucMTHvG1xxwBbqv12eYwYdxdjUfXRNrX5iOTrnNtJuVkR9zVnn
+        /NMNU3Rn026VK3G3v0gQPADSlEZM44CTZAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAJBJREFUOE+t
+        0rENgzAQhWGXjJEWqoyQnViDBbIAQmnTJgoj0DNDRkDwv8IWgfNJETzpa3zvJBcXzkyBi0PzbG6YHZpn
+        c0Xv0PzcVBgwwfpupLl6JVIesMpbDV7okPKBVd56Y4T6KevlL1qD3mMnuyxW1vOf5Rp3POEta66e+rvE
+        I7GuS+/ukRy6sEO3/UdCWABhtVObc9NP/gAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAQ9JREFUOE+t
+        0r9LgkEAxvEbapW2qJZokLakVSEJW4SGwEGQNsFN2sxJRzf/BBEEoaA1yMF/INHFQaihQoqgpqCwwb6P
+        770v4fljqAc+3Mudj9wdZ/4rm7jC7QJa34CTIu5RsCoY29Gf0/o5nJTR9j4n2YbKGv1oXb9z8ufyJ1SY
+        R+tzyx3ErTRU0OjPZbEPJ7O2/YAQdMOnOMMBnKjcQ8JKIYwk3vGKPr7RxCqCqPz7fDWs4w1VrEB/FMML
+        SggyvW0lg2eouIUh1pDHAEFmlXXGrvdpDvGIHZxARwmiF6YL0ouSI0Qxwi6UY2gHDVxrwo/e9gVals6p
+        XOIJOahcxxf2sDS6VR3pDh+4QcQYY34ARtFPcC31n9oAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>10, 16</value>
   </metadata>
-  <data name="button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABGdBTUEAALGPC/xhBQAAAMdJREFUKFOd
-        kL0OQUEQhecmOmqFzt3dq5BcER7AmxDxCMr7My8govAAahQkVOIRxKtotMfsZBqdOM3OfHP25yz9ISSB
-        MfOMq6txlHU+YTT6jJYZopDosMbalximjExrxl3WvZmI4m4BK2tVYh4Lf/sKD0NqPHcZubUqx2hnjLTH
-        6BjS3ZkrMfIFnCFVVmIgN52sJQoVngJeaYFgSCVsGwNaq2An4CaBNnqKBIq1POkQg5qNKF+iGb9CBouY
-        PtS4uArTL9NvIvoAUjBjJ4MbRYQAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>104</value>
   </metadata>

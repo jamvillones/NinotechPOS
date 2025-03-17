@@ -158,10 +158,24 @@ namespace POS.UserControls
                     var item = context.Items.Add(newItem);
                     await context.SaveChangesAsync();
 
-                    itemsTable.Rows.Add(CreateRow(item));
+                    var dto = new ItemDTO()
+                    {
+                        Id = item.Id,
+                        Barcode = item.Barcode,
+                        Name = item.Name,
+                        SellingPrice = item.SellingPrice,
+                        Type = item.Type.ToString(),
+                        Qty = item.Products.Select(a => a.InventoryItems
+                                                        .Select(b => b.Quantity)
+                                                        .DefaultIfEmpty(0)
+                                                        .Sum()).Sum()
+                    };
+
+                    if (!Departments_Store.Departments.Any(d => d.Equals(item.Department, StringComparison.OrdinalIgnoreCase)))
+                        Departments_Store.Departments.Add(item.Department);
+
+                    itemsTable.Rows.Insert(0, CreateRow(dto));
                 }
-
-
             }
             catch (OperationCanceledException ex)
             {
@@ -229,7 +243,7 @@ namespace POS.UserControls
                         int totalItems = await itemQuery.CountAsync(token);
                         totalCount.Text = totalItems.ToString();
                         //initialize the pagination
-                        pagination.Initialize(totalItems, 100);
+                        pagination.Initialize(totalItems, 500);
                         //ensure one time initialization of pagination
                         IsTotalEntriesInitialized = true;
                     }
@@ -237,7 +251,20 @@ namespace POS.UserControls
                     var paginatedItems = itemQuery
                                         .OrderBy(o => o.Name)
                                         .Skip(pagination.Start)
-                                        .Take(pagination.PageSize);
+                                        .Take(pagination.PageSize)
+                                        .Select(i => new ItemDTO()
+                                        {
+                                            Id = i.Id,
+                                            Barcode = i.Barcode,
+                                            Name = i.Name,
+                                            SellingPrice = i.SellingPrice,
+                                            Type = i.Type,
+                                            Qty = i.Products.Select(a => a.InventoryItems
+                                                                        .Select(b => b.Quantity)
+                                                                        .DefaultIfEmpty(0)
+                                                                        .Sum())
+                                                            .Sum()
+                                        });
 
                     var task_GettingItems = paginatedItems.ToListAsync(token);
                     var task_MinimumLoadingTime = Task.Delay(500);
@@ -287,29 +314,40 @@ namespace POS.UserControls
             return itemsTable.RowCount > 0;
         }
 
-        DataGridViewRow CreateRow(Item item)
+        DataGridViewRow CreateRow(ItemDTO item)
         {
             var row = new DataGridViewRow();
 
-            int? quantity = item.IsFinite ? item.QuantityInInventory : default(int?);
-
-            if (item.InCriticalQuantity)
-                row.DefaultCellStyle.ForeColor = Color.Maroon;
-            else if (quantity == 0)
-                row.DefaultCellStyle.ForeColor = Color.Gray;
-            else if (quantity is null)
+            if (item.Type != ItemType.Quantifiable.ToString())
                 row.DefaultCellStyle.ForeColor = Color.DarkGreen;
+
+            else if (item.Qty is null)
+                row.DefaultCellStyle.ForeColor = Color.Blue;
+
+            else if (item.Qty == 0)
+                row.DefaultCellStyle.ForeColor = Color.Gray;
 
             row.CreateCells(itemsTable,
                  item.Id,
                  item.Barcode,
                  item.Name,
-                 quantity,
+                 item.Qty,
                  item.SellingPrice,
                  item.Type
                 );
 
             return row;
+        }
+
+        private class ItemDTO
+        {
+            public string Id { get; set; }
+            public string Barcode { get; set; }
+            public string Name { get; set; }
+
+            public int? Qty { get; set; }
+            public decimal SellingPrice { get; set; }
+            public string Type { get; set; }
         }
 
         private void editBtn_Click(object sender, EventArgs e)
@@ -320,32 +358,16 @@ namespace POS.UserControls
                 return;
             }
 
-            //try
-            //{
+
             using (var editForm = new CreateEdit_Item_Form(SelectedId))
             {
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    var x = editForm.Tag as Item;
+                    //var x = editForm.Tag as Item;
 
-                    var row = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex];
-
-                    row.SetValues(
-                        x.Id,
-                        x.Barcode,
-                        x.Name,
-                        row.Cells[quantityCol.Index].Value,
-                        x.SellingPrice,
-                        x.Type
-                    );
+                    //var row = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex];                    
                 }
             }
-            //}
-            //catch
-            //{
-
-
-            //}
         }
 
         private void ShodSoldItemsForItem_Click(object sender, EventArgs e)
@@ -388,27 +410,24 @@ namespace POS.UserControls
                 p.SaveChanges();
             }
         }
-
         private async void InventoryUC_Load(object sender, EventArgs e)
         {
-            try
-            {
-                var currLogin = UserManager.instance.CurrentLogin;
 
-                addItemBtn.Enabled = currLogin.CanEditItem;
-                editItemBtn.Enabled = currLogin.CanEditItem;
+            var currLogin = UserManager.instance.CurrentLogin;
 
-                using (var context = new POSEntities())
-                {
-                    var departments = await context.Items.GetDepartments().ToArrayAsync();
-                    departmentOption.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                    departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                    departmentOption.AutoCompleteCustomSource.AddRange(departments);
-                    departmentOption.Items.Add(string.Empty);
-                    departmentOption.Items.AddRange(departments);
-                }
-            }
-            catch { }
+            addItemBtn.Enabled = currLogin.CanEditItem;
+            editItemBtn.Enabled = currLogin.CanEditItem;
+
+
+            departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            departmentOption.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            await Departments_Store.LoadDepartments_Async();
+            departmentOption.DataSource = Departments_Store.Departments;
+
+            departmentOption.SelectedIndex = 0;
+            departmentOption.SelectedIndexChanged += departmentOption_SelectedIndexChanged;
+
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
@@ -591,6 +610,7 @@ namespace POS.UserControls
         private async void departmentOption_SelectedIndexChanged(object sender, EventArgs e)
         {
             IsTotalEntriesInitialized = false;
+
             CancelLoading();
             await LoadDataAsync();
         }
@@ -634,6 +654,11 @@ namespace POS.UserControls
         private void itemsTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             itemCount.Text = itemsTable.RowCount.ToString("N0");
+        }
+
+        private void tablePanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

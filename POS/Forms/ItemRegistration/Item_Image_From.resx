@@ -139,6 +139,18 @@
         lCYkUFIGCiwAu4QYDFSLkpQHEDAwAABQFnwTDZVpxAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="saveBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAGKSURBVEhL3ZXdKkRRGIaHwSicuQk/t0EOKGGiOJ6Sn5IDp4oDhbgEDpQDbsZPI/m5AwcooSzP
+        N+udvY32svcMDnjqqT3v931rNTN7r5373zjnCjiDx3iNd9Kuj3AaC2qvDwaLeItp3OC4xtKhOY+7NilO
+        cQn7sFv2KzvDKjuY1zJhaNqqtDv3jPMYHLIaLuALGpsqJUPDqO+rLD6gOBV6BzXzhiOKa6HQhldolBRn
+        hplZP+ousVVxDOFUpezcCTYrToT6ii4jyOznOkejqDiG8NDX3KKiIOpb1ccIMvvjjQNFMYT21YweRUHU
+        Z9Rswme7u4yyohjCB19znYo+LvQV0SZcd/nI3SuKIXz0NdehKOsGG2pP3eAnfiJ7GI0LRTGEv/4n13Ob
+        Ji3egmU0Em/T7z5oy3408KAZFBo9KobwFe2oGFacDA3baNgmc5h22NmBWD3s1lQKQ1PouO7Fdml3y+fj
+        eh2btEw6NE9g1hfOmMbqg0F7ZdrdtY92kD1Ju97DSWzslflHyOXeAalkBefefvxeAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="openFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

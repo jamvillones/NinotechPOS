@@ -1,7 +1,10 @@
 ﻿using POS.Misc;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace POS.Forms.ItemRegistration
 {
@@ -15,37 +18,40 @@ namespace POS.Forms.ItemRegistration
             this.item = item;
         }
 
+        List<string> RegisteredNames = new List<string>();
+        List<string> RegisteredBarcodes = new List<string>();
+
         private async void BasicInformation_Form_Load(object sender, EventArgs e)
         {
-            this.Enabled = false;
-
-            _type.SelectedIndex = 0;
-
             try
             {
                 using (var context = new POSEntities())
                 {
-                    var departments = await context.Items
-                        .AsNoTracking()
-                        .GetDepartments()
-                        .ToArrayAsync();
+                    //var departments = await context.Items
+                    //    .AsNoTracking()
+                    //    .GetDepartments()
+                    //    .ToArrayAsync();
 
-                    _departmentOption.Items.Add("");
-                    _departmentOption.Items.AddRange(departments);
-                    _departmentOption.AutoCompleteCustomSource.AddRange(departments);
+                    RegisteredNames = await context.Items.AsNoTracking().Select(i => i.Name).ToListAsync();
+                    RegisteredBarcodes = await context.Items.AsNoTracking().Where(i => i.Barcode != null).Select(i => i.Barcode).ToListAsync();
+
+                    //_departmentOption.Items.Add("");
+                    //_departmentOption.Items.AddRange(departments);
+                    //_departmentOption.AutoCompleteCustomSource.AddRange(departments);
                 }
             }
             catch (Exception)
-            {
+            { }
 
-            }
+            _departmentOption.DataSource = Departments_Store.Departments;
+            _departmentOption.SelectedIndex = 0;
+            _type.SelectedIndex = 0;
 
-            this.Enabled = true;
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            item.Barcode = _barcode.Text.Trim();
+            item.Barcode = _barcode.Text.Trim().NullIfEmpty();
             item.Name = _name.Text.Trim();
 
             item.CriticalQuantity = (int?)_criticalQty.Value;
@@ -54,6 +60,9 @@ namespace POS.Forms.ItemRegistration
             item.Department = _departmentOption.Text.NullIfEmpty();
             item.Details = _description.Text.NullIfEmpty();
             item.Tags = _tags.Text.Trim(',', ' ').NullIfEmpty();
+
+           
+
 
             DialogResult = DialogResult.OK;
         }
@@ -78,7 +87,6 @@ namespace POS.Forms.ItemRegistration
         {
             if (e.KeyCode == Keys.F4)
                 AutoGenerateBarcode();
-
         }
 
         private void _name_TextChanged(object sender, EventArgs e)
@@ -90,6 +98,38 @@ namespace POS.Forms.ItemRegistration
         {
             bool isEnumerable = _type.Text == ItemType.Quantifiable.ToString();
             _criticalQty.Enabled = isEnumerable;
+        }
+
+        private void _barcode_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var textBox = sender as System.Windows.Forms.TextBox;
+
+            if (RegisteredBarcodes.Any(name => name.Equals(textBox.Text.Trim(), StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show(
+                    "This barcode is already registered.",
+                    "Barcode Invalid",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                e.Cancel = true;
+            }
+        }
+
+        private void _name_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var textBox = sender as System.Windows.Forms.TextBox;
+
+            if (RegisteredNames.Any(name => name.Equals(textBox.Text.Trim(), StringComparison.OrdinalIgnoreCase)))
+            {
+                MessageBox.Show(
+                    "This item is already registered.",
+                    "Item Name Invalid",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                e.Cancel = true;
+            }
         }
     }
 }
