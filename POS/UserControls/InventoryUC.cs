@@ -81,45 +81,45 @@ namespace POS.UserControls
         }
         #endregion
 
-        private async void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex == -1)
                 return;
 
-            if (e.ColumnIndex == col_remove.Index)
-            {
+            //if (e.ColumnIndex == col_remove.Index)
+            //{
 
-                if (!UserManager.instance.CurrentLogin.CanEditItem) return;
-                if (MessageBox.Show(
-                    "Are you sure you want to delete the selected item?",
-                    "This will also delete items in inventory.",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Warning) == DialogResult.Cancel) return;
+            //    if (!UserManager.instance.CurrentLogin.CanEditItem) return;
+            //    if (MessageBox.Show(
+            //        "Are you sure you want to delete the selected item?",
+            //        "This will also delete items in inventory.",
+            //        MessageBoxButtons.OKCancel,
+            //        MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
-                try
-                {
-                    using (var context = new POSEntities())
-                    {
-                        var i = await context.Items
-                            .Include(item => item.Products.Select(product => product.StockinHistories))
-                            .FirstOrDefaultAsync(x => x.Id == SelectedId);
+            //    try
+            //    {
+            //        using (var context = new POSEntities())
+            //        {
+            //            var i = await context.Items
+            //                .Include(item => item.Products.Select(product => product.StockinHistories))
+            //                .FirstOrDefaultAsync(x => x.Id == SelectedId);
 
-                        context.Items.Remove(i);
-                        await context.SaveChangesAsync();
-                    }
-                    itemsTable.Rows.RemoveAt(e.RowIndex);
-                }
-                catch (DbUpdateException ex)
-                {
-                    MessageBox.Show(ex.InnerException.Message, "Delete is aborted!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                }
-                catch
-                {
+            //            context.Items.Remove(i);
+            //            await context.SaveChangesAsync();
+            //        }
+            //        itemsTable.Rows.RemoveAt(e.RowIndex);
+            //    }
+            //    catch (DbUpdateException ex)
+            //    {
+            //        MessageBox.Show(ex.InnerException.Message, "Delete is aborted!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            //    }
+            //    catch
+            //    {
 
-                }
+            //    }
 
-                return;
-            }
+            //    return;
+            //}
 
             var dgt = (DataGridView)sender;
             var qty = dgt[quantityCol.Index, e.RowIndex].Value as int?;
@@ -288,7 +288,7 @@ namespace POS.UserControls
         private async Task<bool> LoadDataAsync()
         {
             IsBusyLoading = true;
-            loadingLabelItem.Visible = true;
+            //loadingLabelItem.Visible = true;
 
             _cancelSource = new CancellationTokenSource();
             var token = _cancelSource.Token;
@@ -308,7 +308,7 @@ namespace POS.UserControls
             }
 
 
-            loadingLabelItem.Visible = false;
+            //loadingLabelItem.Visible = false;
             IsBusyLoading = false;
 
             return itemsTable.RowCount > 0;
@@ -413,34 +413,54 @@ namespace POS.UserControls
         private async void InventoryUC_Load(object sender, EventArgs e)
         {
 
-            var currLogin = UserManager.instance.CurrentLogin;
+            try
+            {
 
-            addItemBtn.Enabled = currLogin.CanEditItem;
-            editItemBtn.Enabled = currLogin.CanEditItem;
+                var currLogin = UserManager.instance.CurrentLogin;
 
+                addItemBtn.Enabled = currLogin.CanEditItem;
+                editItemBtn.Enabled = currLogin.CanEditItem;
+                stockinBtn.Enabled = currLogin.CanStockIn;
 
-            departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            departmentOption.AutoCompleteSource = AutoCompleteSource.ListItems;
+                departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                departmentOption.AutoCompleteSource = AutoCompleteSource.ListItems;
 
-            await Departments_Store.LoadDepartments_Async();
-            departmentOption.DataSource = Departments_Store.Departments;
+                await Departments_Store.LoadDepartments_Async();
+                departmentOption.DataSource = Departments_Store.Departments;
 
-            departmentOption.SelectedIndex = 0;
-            departmentOption.SelectedIndexChanged += departmentOption_SelectedIndexChanged;
+                departmentOption.SelectedIndex = 0;
+                departmentOption.SelectedIndexChanged += departmentOption_SelectedIndexChanged;
+            }
+            catch
+            {
+
+            }
 
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
         {
-            if (itemsTable.SelectedCells.Count == 0)
-                return;
-
             var currLogin = UserManager.instance.CurrentLogin;
-            var type = itemsTable.SelectedCells[5].Value?.ToString();
-            bool isEnumerable = type == ItemType.Quantifiable.ToString();
+            var selected = itemsTable.SelectedRows.Count == 0 ? "" : " [ " + itemsTable.SelectedRows.Count + " ]";
 
-            viewStockBtn.Enabled = isEnumerable;
-            editItemBtn.Enabled = currLogin.CanEditProduct;
+            bool canPerformMultipleItemAction = itemsTable.SelectedRows.Count > 0;
+            button6.Enabled = canPerformMultipleItemAction && currLogin.CanEditItem;
+            button4.Enabled = canPerformMultipleItemAction && currLogin.CanEditItem;
+
+            if (currLogin.CanEditItem)
+            {
+                button6.Text = "     Remove Items" + selected;
+                button4.Text = "     Set Department" + selected;
+            }
+
+            bool isSingleRowSelected = itemsTable.SelectedRows.Count == 1;
+
+            addVariationsBtn.Enabled = isSingleRowSelected;
+
+            editItemBtn.Enabled = currLogin.CanEditProduct && isSingleRowSelected;
+
+            bool IsEnumerable = itemsTable.SelectedRows.Count > 0 && itemsTable.SelectedCells[5].Value.ToString() == ItemType.Quantifiable.ToString();
+            viewStockBtn.Enabled = IsEnumerable && isSingleRowSelected;
         }
 
         private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -501,32 +521,26 @@ namespace POS.UserControls
         /// </summary>
         public bool IsBusyLoading { get; private set; } = false;
 
-        bool _critShowing = false;
-        bool criticalIsShowing
-        {
-            get => _critShowing;
-            set
-            {
-                _critShowing = value;
-            }
-        }
-
         string keyword = string.Empty;
         private bool isTotalEntriesInitialized = false;
 
         private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
         {
+            e.SearchFound = true;
+
             CancelLoading();
 
             if (trackItemCheckbox.Checked)
             {
                 await TrackItemAsync(e.Text);
+
                 return;
             }
 
             keyword = e.Text.Trim();
             IsTotalEntriesInitialized = false;
-            e.SearchFound = await LoadDataAsync();
+
+            await LoadDataAsync();
         }
 
         async Task TrackItemAsync(string serialNumber)
@@ -659,6 +673,89 @@ namespace POS.UserControls
         private void tablePanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            var stockinLog = new StockinLog();
+            stockinLog.ShowDialog();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            var printInventory = new PrintInventory();
+            printInventory.ShowDialog();
+        }
+
+        private async void button6_Click(object sender, EventArgs e)
+        {
+            if (itemsTable.SelectedRows.Count == 0)
+                return;
+
+            if (MessageBox.Show("Selected Items Will Be Removed From The List", "Remove Selected Items?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
+
+            var selectedRows = itemsTable.SelectedRows.Cast<DataGridViewRow>();
+
+            try
+            {
+
+                using (var context = new POSEntities())
+                {
+                    var ids = selectedRows
+                        .Select(row => row.Cells[0].Value.ToString());
+
+
+                    var toBeDeleted = await context.Items.Where(i => ids.Any(id => id == i.Id)).ToListAsync();
+
+                    context.Items.RemoveRange(toBeDeleted);
+
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            foreach (var row in selectedRows)
+                itemsTable.Rows.Remove(row);
+        }
+
+        private async void SetDepartment_Click(object sender, EventArgs e)
+        {
+            using (var departmentForm = new SetDepartment_Form())
+            {
+                if (departmentForm.ShowDialog() == DialogResult.OK)
+                {
+                    string newDepartment = departmentForm.Tag as string;
+
+                    if (!Departments_Store.Departments.Any(d => d.Equals(newDepartment, StringComparison.OrdinalIgnoreCase)) &&
+                        !string.IsNullOrWhiteSpace(newDepartment))
+                    {
+                        Departments_Store.Departments.Add(newDepartment);
+                    }
+
+                    Cursor = Cursors.WaitCursor;
+
+                    using (var context = new POSEntities())
+                    {
+                        var selectedRows = itemsTable.SelectedRows.Cast<DataGridViewRow>();
+                        var ids = selectedRows.Select(row => row.Cells[0].Value.ToString());
+
+                        var toSet = context.Items.Where(i => ids.Any(id => id == i.Id));
+
+                        foreach (var t in toSet)
+                            t.Department = newDepartment.NullIfEmpty();
+
+                        await context.SaveChangesAsync();
+                    }
+
+                    Cursor = Cursors.Default;
+
+                    MessageBox.Show("Department Changed Successfully!", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 

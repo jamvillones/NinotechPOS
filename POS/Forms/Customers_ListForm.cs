@@ -32,10 +32,8 @@ namespace POS.Forms
 
         private async void CreateCustomerProfile_Load(object sender, EventArgs e)
         {
-            await Task.WhenAll(
-                SetAutoComplete_Async(),
-                LoadData_Async()
-                );
+            await LoadData_Async();
+            await SetAutoComplete_Async();
         }
 
         async Task<string[]> GetAutoComplete_Async()
@@ -99,14 +97,21 @@ namespace POS.Forms
 
             try
             {
-                loadingLabel.Text = "loading...";
+                //loadingLabel.Text = "loading...";
                 using (var context = new POSEntities())
                 {
                     var customers = await context.Customers
                         .AsNoTracking()
                         .AsQueryable()
                         .ApplySearch(_keyWord)
-                        .OrderBy(x => x.Name)
+                        //.OrderBy(x => x.Name)
+                        .Select(c => new CustomerDTO()
+                        {
+                            Id = c.Id,
+                            Name = c.Name,
+                            ContactDetails = c.ContactDetails,
+                            Address = c.Address
+                        })
                         .ToListAsync(token);
 
                     token.ThrowIfCancellationRequested();
@@ -114,15 +119,12 @@ namespace POS.Forms
                     if (customers.Count > 0)
                     {
                         customerTable.Rows.Clear();
-
-                        await Task.Run(() =>
+                        foreach (var c in customers)
                         {
-                            foreach (var customer in customers)
-                            {
-                                if (token.IsCancellationRequested) break;
-                                customerTable.InvokeIfRequired(() => customerTable.Rows.Add(CreateRow(customer)));
-                            }
-                        });
+                            token.ThrowIfCancellationRequested();
+                            customerTable.Rows.Add(CreateRow(c));
+                            await Task.Delay(100);
+                        }
 
                         return true;
                     }
@@ -133,13 +135,21 @@ namespace POS.Forms
             finally
             {
                 tokenSource?.Dispose();
-                loadingLabel.Text = string.Empty;
+
             }
 
             return false;
         }
 
-        DataGridViewRow CreateRow(Customer c) => customerTable.CreateRow(
+        private class CustomerDTO
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Address { get; set; }
+            public string ContactDetails { get; set; }
+        }
+
+        DataGridViewRow CreateRow(CustomerDTO c) => customerTable.CreateRow(
             c.Id,
             "Transactions",
             c.Name,
@@ -152,6 +162,10 @@ namespace POS.Forms
         private async void searchControl_OnTextEmpty(object sender, EventArgs e)
         {
             _keyWord = string.Empty;
+
+            if (TryCancelLoading())
+                await Task.Delay(100);
+
             await LoadData_Async();
         }
 
@@ -291,7 +305,13 @@ namespace POS.Forms
             }
             if (e is Customer newCustomer)
             {
-                customerTable.Rows.Add(CreateRow(newCustomer));
+                var customer = new CustomerDTO()
+                {
+                    Id = newCustomer.Id,
+                    Name = newCustomer.Name,
+                    Address = newCustomer.Address
+                };
+                customerTable.Rows.Add(CreateRow(customer));
             }
         }
 
@@ -337,6 +357,8 @@ namespace POS.Forms
 
             if (keyword.IsEmpty())
                 return customers;
+
+
 
             return customers.Where(c => c.Name.Contains(keyword) || c.ContactDetails == keyword || c.Address.Contains(keyword));
         }

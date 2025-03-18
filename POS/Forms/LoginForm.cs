@@ -117,5 +117,16 @@ namespace POS.Forms
         {
             label2.Text = string.Empty;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var createLogin = new CreateLogin())
+            {
+                if (createLogin.ShowDialog() == DialogResult.OK)
+                {
+
+                }
+            }
+        }
     }
 }

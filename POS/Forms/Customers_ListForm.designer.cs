@@ -59,7 +59,7 @@
             this.customerTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.customerTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.customerTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.customerTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.customerTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.customerTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -88,14 +88,14 @@
             this.customerTable.DefaultCellStyle = dataGridViewCellStyle3;
             this.customerTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customerTable.EnableHeadersVisualStyles = false;
-            this.customerTable.GridColor = System.Drawing.Color.DarkGray;
+            this.customerTable.GridColor = System.Drawing.Color.LightGray;
             this.customerTable.Location = new System.Drawing.Point(20, 75);
             this.customerTable.MultiSelect = false;
             this.customerTable.Name = "customerTable";
             this.customerTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.customerTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.customerTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.customerTable.Size = new System.Drawing.Size(664, 311);
+            this.customerTable.Size = new System.Drawing.Size(944, 456);
             this.customerTable.StandardTab = true;
             this.customerTable.TabIndex = 1;
             this.customerTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.customerTable_CellBeginEdit);
@@ -149,7 +149,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(20, 55);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(664, 20);
+            this.panel1.Size = new System.Drawing.Size(944, 20);
             this.panel1.TabIndex = 2;
             // 
             // loadingLabel
@@ -165,9 +165,9 @@
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(20, 386);
+            this.panel2.Location = new System.Drawing.Point(20, 531);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(664, 20);
+            this.panel2.Size = new System.Drawing.Size(944, 20);
             this.panel2.TabIndex = 3;
             // 
             // recHistBtn
@@ -175,12 +175,12 @@
             this.recHistBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.recHistBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.recHistBtn.Location = new System.Drawing.Point(20, 406);
+            this.recHistBtn.Location = new System.Drawing.Point(20, 551);
             this.recHistBtn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.recHistBtn.MaximumSize = new System.Drawing.Size(150, 35);
+            this.recHistBtn.MaximumSize = new System.Drawing.Size(150, 40);
             this.recHistBtn.MinimumSize = new System.Drawing.Size(150, 35);
             this.recHistBtn.Name = "recHistBtn";
-            this.recHistBtn.Size = new System.Drawing.Size(150, 35);
+            this.recHistBtn.Size = new System.Drawing.Size(150, 40);
             this.recHistBtn.TabIndex = 17;
             this.recHistBtn.Text = "Add Cutomer";
             this.recHistBtn.UseVisualStyleBackColor = false;
@@ -207,7 +207,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 461);
+            this.ClientSize = new System.Drawing.Size(984, 611);
             this.Controls.Add(this.customerTable);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.recHistBtn);

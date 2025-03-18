@@ -56,7 +56,7 @@
             this.supplierTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.supplierTable.BackgroundColor = System.Drawing.Color.White;
             this.supplierTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.supplierTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.supplierTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.supplierTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -83,11 +83,12 @@
             this.supplierTable.DefaultCellStyle = dataGridViewCellStyle4;
             this.supplierTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.supplierTable.EnableHeadersVisualStyles = false;
+            this.supplierTable.GridColor = System.Drawing.Color.LightGray;
             this.supplierTable.Location = new System.Drawing.Point(20, 75);
             this.supplierTable.MultiSelect = false;
             this.supplierTable.Name = "supplierTable";
             this.supplierTable.RowHeadersVisible = false;
-            this.supplierTable.Size = new System.Drawing.Size(644, 311);
+            this.supplierTable.Size = new System.Drawing.Size(944, 456);
             this.supplierTable.StandardTab = true;
             this.supplierTable.TabIndex = 1;
             this.supplierTable.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.supplierTable_CellBeginEdit);
@@ -102,6 +103,7 @@
             this.id_col.HeaderText = "Id";
             this.id_col.Name = "id_col";
             this.id_col.Visible = false;
+            this.id_col.Width = 31;
             // 
             // col_suppName
             // 
@@ -127,15 +129,15 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(20, 55);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(644, 20);
+            this.panel1.Size = new System.Drawing.Size(944, 20);
             this.panel1.TabIndex = 2;
             // 
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(20, 386);
+            this.panel2.Location = new System.Drawing.Point(20, 531);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(644, 20);
+            this.panel2.Size = new System.Drawing.Size(944, 20);
             this.panel2.TabIndex = 3;
             // 
             // recHistBtn
@@ -143,12 +145,12 @@
             this.recHistBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.recHistBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.recHistBtn.Location = new System.Drawing.Point(20, 406);
+            this.recHistBtn.Location = new System.Drawing.Point(20, 551);
             this.recHistBtn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.recHistBtn.MaximumSize = new System.Drawing.Size(150, 35);
-            this.recHistBtn.MinimumSize = new System.Drawing.Size(150, 35);
+            this.recHistBtn.MinimumSize = new System.Drawing.Size(150, 40);
             this.recHistBtn.Name = "recHistBtn";
-            this.recHistBtn.Size = new System.Drawing.Size(150, 35);
+            this.recHistBtn.Size = new System.Drawing.Size(150, 40);
             this.recHistBtn.TabIndex = 18;
             this.recHistBtn.Text = "Add Supplier";
             this.recHistBtn.UseVisualStyleBackColor = false;
@@ -175,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 461);
+            this.ClientSize = new System.Drawing.Size(984, 611);
             this.Controls.Add(this.supplierTable);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

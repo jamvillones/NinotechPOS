@@ -56,15 +56,15 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 var id = (int)(dgt.Rows[e.RowIndex].Cells[0].Value);
-                var supp = p.Suppliers.FirstOrDefault(x => x.Id == id);
+                var supplier = p.Suppliers.FirstOrDefault(x => x.Id == id);
                 if (e.ColumnIndex == 1)
                 {
-                    supp.Name = dgt.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    supplier.Name = dgt.Rows[e.RowIndex].Cells[1].Value.ToString();
 
                 }
                 else if (e.ColumnIndex == 2)
                 {
-                    supp.ContactDetails = dgt.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    supplier.ContactDetails = dgt.Rows[e.RowIndex].Cells[2].Value?.ToString();
                 }
                 //OnSave?.Invoke(this, null);
                 p.SaveChanges();

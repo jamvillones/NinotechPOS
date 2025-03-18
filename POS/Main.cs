@@ -13,12 +13,11 @@ namespace POS
 {
     public partial class Main : Form, IMainWindow
     {
-
         public Main()
         {
             InitializeComponent();
 
-            prevButton = inventoryBtn;
+            prevButton = button1;
             prevButton.BackColor = selectedButtonColor;
             NotificationHandler.Instance.ShowCallback = ShowTooltip;
         }
@@ -29,7 +28,6 @@ namespace POS
             notifyIcon1.BalloonTipTitle = title;
             notifyIcon1.BalloonTipText = details;
             notifyIcon1.BalloonTipIcon = icon;
-
             notifyIcon1.ShowBalloonTip(2);
         }
 
@@ -40,24 +38,28 @@ namespace POS
         {
             var currentLogin = CurrentLogin;
 
-            userButton.Text = currentLogin.ToString();
+            userButton.Text = "  " + currentLogin.ToString();
             var settings = Properties.Settings.Default;
 
             this.Text = "POS - " + (settings.IsLocalConnection ? "localConnection" : settings.DataSource);
 
             bool isAdmin = currentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
-            loginPrivilegesToolStripMenuItem.Enabled = isAdmin;
-            addNewLoginToolStripMenuItem.Enabled = isAdmin;
+            button6.Visible = isAdmin;
+            button5.Enabled = currentLogin.CanEditSupplier;
         }
 
         private async void Main_Load(object sender, EventArgs e)
         {
-            SetButtonChangeMechanism(inventoryBtn, repBtn, customersBtn, suppliersBtn);
-            LoadProperties();
+            try
+            {
+                SetButtonChangeMechanism(button1, button2);
+                LoadProperties();
 
-            await inventoryTab.InitializeAsync();
-            await reportTab.InitializeAsync();
-            await GetCriticalQty();
+                await inventoryTab.InitializeAsync();
+                await reportTab.InitializeAsync();
+                await GetCriticalQty();
+            }
+            catch (Exception) { }
 
             Console.WriteLine("======================* Load Finished *======================");
         }
@@ -81,10 +83,7 @@ namespace POS
                     NotificationHandler.Instance.ShowTooltip("Items in Critical Qty (" + itemsInCriticalQuantity.Count + "): ", builder.ToString(), ToolTipIcon.Warning);
                 }
             }
-            catch (Exception)
-            {
-
-            }
+            catch (Exception) { }
         }
 
         void SetButtonChangeMechanism(params Button[] buttons)
@@ -101,24 +100,27 @@ namespace POS
 
             button.BackColor = selectedButtonColor;
             prevButton = button;
-            marker.Top = button.Top;
         }
 
         Button prevButton;
 
         Color selectedButtonColor =
-            Color.FromArgb(240, 240, 240);
+            Color.FromArgb(153, 180, 209);
         Color normalButtonColor =
-            Color.Transparent;
+            Color.White;
 
         private void inventoryBtn_Click(object sender, EventArgs e)
         {
+            reportTab.Enabled = false;
+            inventoryTab.Enabled = true;
             inventoryTab.BringToFront();
             TabSelected(inventoryTab);
         }
 
         private void repBtn_Click(object sender, EventArgs e)
         {
+            inventoryTab.Enabled = false;
+            reportTab.Enabled = true;
             reportTab.BringToFront();
             TabSelected(reportTab);
         }
@@ -128,20 +130,19 @@ namespace POS
             tab.FirstControl()?.Focus();
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
         private void userButton_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to log off?",
-                "",
-                MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
-            IsLoggedOut = true;
-            this.Close();
+            var editUser = new ChangePass(CurrentLogin.Id);
+
+            editUser.ShowDialog();
+            //if (MessageBox.Show("Are you sure you want to log off?",
+            //    "",
+            //    MessageBoxButtons.OKCancel,
+            //    MessageBoxIcon.Question) == DialogResult.Cancel) return;
+
+            //IsLoggedOut = true;
+            //this.Close();
         }
 
         public bool IsLoggedOut { get; private set; } = false;
@@ -203,14 +204,6 @@ namespace POS
                 f.ShowDialog();
             }
         }
-        void OpenDialog<T>(Action<T> action) where T : Form, new()
-        {
-            using (T f = new T())
-            {
-                action(f);
-                f.ShowDialog();
-            }
-        }
         #endregion
 
         Login CurrentLogin => UserManager.instance.CurrentLogin;
@@ -245,16 +238,6 @@ namespace POS
             }
         }
 
-        int showedWidth = 120;
-        int collapsedWidth = 10;
-
-        private void sideButtonsPanel_DoubleClick(object sender, EventArgs e)
-        {
-            var s = sender as Panel;
-
-            s.Width = s.Width == showedWidth ? collapsedWidth : showedWidth;
-        }
-
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
@@ -264,10 +247,45 @@ namespace POS
             this.BringToFront();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            //customers_UserControl.BringToFront();
-            //TabSelected(customers_UserControl);
+            OpenDialog<Suppliers>();
+        }
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    inventoryTab.BringToFront();
+        //}
+
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    reportTab.BringToFront();
+        //}
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            OpenDialog<Customers_ListForm>();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            OpenDialog<UserPrivilegesForm>();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenDialog<RecieptPrintingConfigurations>();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to log off?",
+               "",
+               MessageBoxButtons.OKCancel,
+               MessageBoxIcon.Question) == DialogResult.Cancel) return;
+
+            IsLoggedOut = true;
+            this.Close();
         }
     }
 }
