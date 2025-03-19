@@ -16,7 +16,7 @@ namespace POS.Misc
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static string NullIfEmpty(this string s) => string.IsNullOrWhiteSpace(s) || string.IsNullOrEmpty(s) ? null : s.Trim();
+        public static string NullIfEmpty(this string s) => string.IsNullOrWhiteSpace(s) || string.IsNullOrEmpty(s) || s.Equals("n/a", StringComparison.OrdinalIgnoreCase) ? null : s.Trim();
 
         public static string Base36Encode(this string hex)
         {

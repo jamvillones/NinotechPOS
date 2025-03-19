@@ -178,11 +178,11 @@ namespace POS
 
         private void openSupplier_Click(object sender, EventArgs e)
         {
-            OpenDialog<Suppliers>();
+            OpenDialog<Suppliers_List>();
         }
         private void createCustomer_Click(object sender, EventArgs e)
         {
-            OpenDialog<Customers_ListForm>();
+            OpenDialog<Customers_List>();
         }
         private void stockinLog_Click(object sender, EventArgs e)
         {
@@ -249,7 +249,7 @@ namespace POS
 
         private void button5_Click(object sender, EventArgs e)
         {
-            OpenDialog<Suppliers>();
+            OpenDialog<Suppliers_List>();
         }
 
         //private void button1_Click(object sender, EventArgs e)
@@ -264,7 +264,7 @@ namespace POS
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            OpenDialog<Customers_ListForm>();
+            OpenDialog<Customers_List>();
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace POS.Forms
 {
-    public partial class Customers_ListForm : Form
+    public partial class Customers_List : Form
     {
 
         public event EventHandler<Customer> OnSelected;
-        public Customers_ListForm(bool isSelecting)
+        public Customers_List(bool isSelecting)
         {
             InitializeComponent();
             _isSelecting = isSelecting;
         }
 
-        public Customers_ListForm()
+        public Customers_List()
         {
             InitializeComponent();
         }
@@ -73,7 +73,7 @@ namespace POS.Forms
                 MessageBox.Show("No Entries Found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        //return wether an actual task is cancelled
+        //return whether an actual task is cancelled
         bool TryCancelLoading()
         {
             try
@@ -123,7 +123,7 @@ namespace POS.Forms
                         {
                             token.ThrowIfCancellationRequested();
                             customerTable.Rows.Add(CreateRow(c));
-                            await Task.Delay(100);
+                            await Task.Delay(1);
                         }
 
                         return true;
@@ -151,11 +151,11 @@ namespace POS.Forms
 
         DataGridViewRow CreateRow(CustomerDTO c) => customerTable.CreateRow(
             c.Id,
-            "Transactions",
+            null,
             c.Name,
             c.ContactDetails,
             c.Address,
-            "Remove"
+            null
             );
 
 
@@ -220,13 +220,12 @@ namespace POS.Forms
             lastValue = table[e.ColumnIndex, e.RowIndex].Value?.ToString();
         }
 
-        private void customerTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private async void customerTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var table = sender as DataGridView;
-
             var id = (int)table[0, e.RowIndex].Value;
 
-            var newValue = table[e.ColumnIndex, e.RowIndex].Value?.ToString().Trim();
+            var newValue = table[e.ColumnIndex, e.RowIndex].Value?.ToString().Trim().NullIfEmpty();
             table[e.ColumnIndex, e.RowIndex].Value = newValue;
 
             if (newValue == lastValue)
@@ -241,18 +240,18 @@ namespace POS.Forms
 
             using (var context = new POSEntities())
             {
-                var target = context.Customers.FirstOrDefault(x => x.Id == id);
+                var target = await context.Customers.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (e.ColumnIndex == col_name.Index)
                     target.Name = newValue;
 
                 else if (e.ColumnIndex == col_address.Index)
-                    target.Address = string.IsNullOrWhiteSpace(newValue) ? null : newValue;
+                    target.Address = newValue;
 
                 else if (e.ColumnIndex == col_contact.Index)
-                    target.ContactDetails = string.IsNullOrWhiteSpace(newValue) ? null : newValue;
+                    target.ContactDetails = newValue;
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 

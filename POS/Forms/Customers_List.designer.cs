@@ -1,6 +1,6 @@
 ﻿namespace POS.Forms
 {
-    partial class Customers_ListForm
+    partial class Customers_List
     {
         /// <summary>
         /// Required designer variable.
@@ -29,21 +29,25 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customers_ListForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customers_List));
             this.customerTable = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.loadingLabel = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.recHistBtn = new System.Windows.Forms.Button();
+            this.searchControl = new POS.UserControls.SearchControl();
             this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_transact = new System.Windows.Forms.DataGridViewButtonColumn();
             this.col_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_del = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.loadingLabel = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.recHistBtn = new System.Windows.Forms.Button();
-            this.searchControl = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.customerTable)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,22 +57,19 @@
             this.customerTable.AllowUserToAddRows = false;
             this.customerTable.AllowUserToDeleteRows = false;
             this.customerTable.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            this.customerTable.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.customerTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.customerTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.customerTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.customerTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.customerTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.customerTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.customerTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.customerTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.customerTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.customerTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_id,
@@ -77,15 +78,15 @@
             this.col_contact,
             this.col_address,
             this.col_del});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.InactiveCaption;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.customerTable.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.customerTable.DefaultCellStyle = dataGridViewCellStyle7;
             this.customerTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customerTable.EnableHeadersVisualStyles = false;
             this.customerTable.GridColor = System.Drawing.Color.LightGray;
@@ -104,44 +105,6 @@
             this.customerTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.customerTable_CellMouseDoubleClick);
             this.customerTable.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellValidated);
             this.customerTable.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.customerTable_CellValidating);
-            // 
-            // col_id
-            // 
-            this.col_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.col_id.HeaderText = "Id";
-            this.col_id.Name = "col_id";
-            this.col_id.ReadOnly = true;
-            this.col_id.Visible = false;
-            // 
-            // col_transact
-            // 
-            this.col_transact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.col_transact.HeaderText = "";
-            this.col_transact.Name = "col_transact";
-            this.col_transact.Width = 12;
-            // 
-            // col_name
-            // 
-            this.col_name.HeaderText = "CUSTOMER NAME";
-            this.col_name.Name = "col_name";
-            // 
-            // col_contact
-            // 
-            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_contact.HeaderText = "CONTACT DETAILS";
-            this.col_contact.Name = "col_contact";
-            // 
-            // col_address
-            // 
-            this.col_address.HeaderText = "ADDRESS";
-            this.col_address.Name = "col_address";
-            // 
-            // col_del
-            // 
-            this.col_del.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.col_del.HeaderText = "";
-            this.col_del.Name = "col_del";
-            this.col_del.Width = 12;
             // 
             // panel1
             // 
@@ -177,10 +140,10 @@
             this.recHistBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.recHistBtn.Location = new System.Drawing.Point(20, 551);
             this.recHistBtn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.recHistBtn.MaximumSize = new System.Drawing.Size(150, 40);
+            this.recHistBtn.MaximumSize = new System.Drawing.Size(250, 40);
             this.recHistBtn.MinimumSize = new System.Drawing.Size(150, 35);
             this.recHistBtn.Name = "recHistBtn";
-            this.recHistBtn.Size = new System.Drawing.Size(150, 40);
+            this.recHistBtn.Size = new System.Drawing.Size(250, 40);
             this.recHistBtn.TabIndex = 17;
             this.recHistBtn.Text = "Add Cutomer";
             this.recHistBtn.UseVisualStyleBackColor = false;
@@ -203,7 +166,64 @@
             this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl_OnSearch);
             this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl_OnTextEmpty);
             // 
-            // Customers_ListForm
+            // col_id
+            // 
+            this.col_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_id.HeaderText = "Id";
+            this.col_id.Name = "col_id";
+            this.col_id.ReadOnly = true;
+            this.col_id.Visible = false;
+            this.col_id.Width = 50;
+            // 
+            // col_transact
+            // 
+            this.col_transact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            this.col_transact.DefaultCellStyle = dataGridViewCellStyle2;
+            this.col_transact.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.col_transact.HeaderText = "";
+            this.col_transact.Name = "col_transact";
+            this.col_transact.Text = "TRANSACTIONS";
+            this.col_transact.UseColumnTextForButtonValue = true;
+            this.col_transact.Width = 12;
+            // 
+            // col_name
+            // 
+            dataGridViewCellStyle3.NullValue = "N/A";
+            this.col_name.DefaultCellStyle = dataGridViewCellStyle3;
+            this.col_name.HeaderText = "Name";
+            this.col_name.Name = "col_name";
+            // 
+            // col_contact
+            // 
+            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.NullValue = "N/A";
+            this.col_contact.DefaultCellStyle = dataGridViewCellStyle4;
+            this.col_contact.HeaderText = "Contact Details";
+            this.col_contact.Name = "col_contact";
+            // 
+            // col_address
+            // 
+            dataGridViewCellStyle5.NullValue = "N/A";
+            this.col_address.DefaultCellStyle = dataGridViewCellStyle5;
+            this.col_address.HeaderText = "Address";
+            this.col_address.Name = "col_address";
+            // 
+            // col_del
+            // 
+            this.col_del.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
+            this.col_del.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col_del.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.col_del.HeaderText = "";
+            this.col_del.Name = "col_del";
+            this.col_del.Text = "REMOVE";
+            this.col_del.UseColumnTextForButtonValue = true;
+            this.col_del.Width = 12;
+            // 
+            // Customers_List
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -215,7 +235,7 @@
             this.Controls.Add(this.searchControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
-            this.Name = "Customers_ListForm";
+            this.Name = "Customers_List";
             this.Padding = new System.Windows.Forms.Padding(20);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -235,12 +255,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button recHistBtn;
+        private System.Windows.Forms.Label loadingLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
         private System.Windows.Forms.DataGridViewButtonColumn col_transact;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_contact;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_address;
         private System.Windows.Forms.DataGridViewButtonColumn col_del;
-        private System.Windows.Forms.Label loadingLabel;
     }
 }

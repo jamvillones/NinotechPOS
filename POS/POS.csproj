@@ -328,11 +328,11 @@
     <Compile Include="Forms\ChangePass.designer.cs">
       <DependentUpon>ChangePass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Customers_ListForm.cs">
+    <Compile Include="Forms\Customers_List.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Customers_ListForm.designer.cs">
-      <DependentUpon>Customers_ListForm.cs</DependentUpon>
+    <Compile Include="Forms\Customers_List.designer.cs">
+      <DependentUpon>Customers_List.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CreateLogin.cs">
       <SubType>Form</SubType>
@@ -364,11 +364,11 @@
     <Compile Include="Forms\StockinForm.designer.cs">
       <DependentUpon>StockinForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Suppliers.cs">
+    <Compile Include="Forms\Suppliers_List.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Suppliers.designer.cs">
-      <DependentUpon>Suppliers.cs</DependentUpon>
+    <Compile Include="Forms\Suppliers_List.designer.cs">
+      <DependentUpon>Suppliers_List.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PaymentsForm.cs">
       <SubType>Form</SubType>
@@ -579,8 +579,8 @@
     <EmbeddedResource Include="Forms\ChangePass.resx">
       <DependentUpon>ChangePass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Customers_ListForm.resx">
-      <DependentUpon>Customers_ListForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Customers_List.resx">
+      <DependentUpon>Customers_List.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreateLogin.resx">
       <DependentUpon>CreateLogin.cs</DependentUpon>
@@ -597,8 +597,8 @@
     <EmbeddedResource Include="Forms\StockinForm.resx">
       <DependentUpon>StockinForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Suppliers.resx">
-      <DependentUpon>Suppliers.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Suppliers_List.resx">
+      <DependentUpon>Suppliers_List.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PaymentsForm.resx">
       <DependentUpon>PaymentsForm.cs</DependentUpon>

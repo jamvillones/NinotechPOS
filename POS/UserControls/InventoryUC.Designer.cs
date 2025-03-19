@@ -237,7 +237,6 @@
             this.col_remove.Text = "❌";
             this.col_remove.UseColumnTextForButtonValue = true;
             this.col_remove.Visible = false;
-            this.col_remove.Width = 40;
             // 
             // panel5
             // 
@@ -373,6 +372,7 @@
             // 
             this.viewStockBtn.BackColor = System.Drawing.Color.White;
             this.viewStockBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.viewStockBtn.Enabled = false;
             this.viewStockBtn.FlatAppearance.BorderSize = 0;
             this.viewStockBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.viewStockBtn.Image = ((System.Drawing.Image)(resources.GetObject("viewStockBtn.Image")));
@@ -433,6 +433,7 @@
             // 
             this.editItemBtn.BackColor = System.Drawing.Color.White;
             this.editItemBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.editItemBtn.Enabled = false;
             this.editItemBtn.FlatAppearance.BorderSize = 0;
             this.editItemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editItemBtn.Image = ((System.Drawing.Image)(resources.GetObject("editItemBtn.Image")));
@@ -453,6 +454,7 @@
             // 
             this.addVariationsBtn.BackColor = System.Drawing.Color.White;
             this.addVariationsBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.addVariationsBtn.Enabled = false;
             this.addVariationsBtn.FlatAppearance.BorderSize = 0;
             this.addVariationsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addVariationsBtn.Image = ((System.Drawing.Image)(resources.GetObject("addVariationsBtn.Image")));
@@ -585,6 +587,7 @@
             // 
             this.button6.BackColor = System.Drawing.Color.White;
             this.button6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button6.Enabled = false;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
@@ -605,6 +608,7 @@
             // 
             this.button4.BackColor = System.Drawing.Color.White;
             this.button4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button4.Enabled = false;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));

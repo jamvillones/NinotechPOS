@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,16 +7,17 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS.Forms
 {
-    public partial class Suppliers : Form
+    public partial class Suppliers_List : Form
     {
         ///List<Supplier> suppliers = new List<Supplier>();
         //public event EventHandler OnSave;
-        public Suppliers()
+        public Suppliers_List()
         {
             InitializeComponent();
         }
@@ -43,33 +45,37 @@ namespace POS.Forms
                 targetSupplier = p.Suppliers.FirstOrDefault(x => x.Id == id);
             }
         }
-        private void supplierTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private async void supplierTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             var dgt = (DataGridView)sender;
-            var current = dgt.CurrentCell.Value.ToString();
-            ///name
-            if ((e.ColumnIndex == 1 && current == targetSupplier.Name) ||
-                (e.ColumnIndex == 2 && current == targetSupplier.ContactDetails))
+            var newValue = dgt.CurrentCell.Value?.ToString().Trim().NullIfEmpty();
+
+            ///make sure to terminate the save when changes values are not changed
+            if ((e.ColumnIndex == col_suppName.Index && newValue == targetSupplier.Name) ||
+                (e.ColumnIndex == col_contact.Index && newValue == targetSupplier.ContactDetails))
+                return;
+
+            var id = (int)(dgt.Rows[e.RowIndex].Cells[0].Value);
+
+            try
             {
+                using (var p = new POSEntities())
+                {
+                    var supplier = await p.Suppliers.FirstOrDefaultAsync(x => x.Id == id);
+
+                    if (e.ColumnIndex == col_suppName.Index) supplier.Name = newValue;
+                    else if (e.ColumnIndex == col_contact.Index) supplier.ContactDetails = newValue;
+
+                    await p.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Edit Not Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            using (var p = new POSEntities())
-            {
-                var id = (int)(dgt.Rows[e.RowIndex].Cells[0].Value);
-                var supplier = p.Suppliers.FirstOrDefault(x => x.Id == id);
-                if (e.ColumnIndex == 1)
-                {
-                    supplier.Name = dgt.Rows[e.RowIndex].Cells[1].Value.ToString();
 
-                }
-                else if (e.ColumnIndex == 2)
-                {
-                    supplier.ContactDetails = dgt.Rows[e.RowIndex].Cells[2].Value?.ToString();
-                }
-                //OnSave?.Invoke(this, null);
-                p.SaveChanges();
-                MessageBox.Show("Edit saved");
-            }
+            MessageBox.Show("Edit Saved", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
 
@@ -162,6 +168,7 @@ namespace POS.Forms
         private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
         {
             _keyword = e.Text.Trim();
+            TryCancel();
             e.SearchFound = await LoadDataAsync();
 
             if (!e.SearchFound)
@@ -172,29 +179,67 @@ namespace POS.Forms
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
             _keyword = string.Empty;
+            TryCancel();
             await LoadDataAsync();
+        }
+
+        private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+
+        void TryCancel()
+        {
+            try
+            {
+                cancellationTokenSource?.Cancel();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
         }
 
         private async Task<bool> LoadDataAsync()
         {
-            using (var context = new POSEntities())
+            cancellationTokenSource = new CancellationTokenSource();
+            var token = cancellationTokenSource.Token;
+
+            try
             {
-                var suppliers = await context.Suppliers.AsNoTracking().AsQueryable()
-                    .Where(s => s.Name != "none")
-                    .ApplySearch(_keyword)
-                    .ToListAsync();
-
-                if (suppliers.Count > 0)
+                using (var context = new POSEntities())
                 {
-                    supplierTable.Rows.Clear();
+                    var suppliers = await context.Suppliers.AsNoTracking().AsQueryable()
+                        .Where(s => s.Name != "none")
+                        .ApplySearch(_keyword)
+                        .ToListAsync(token);
 
-                    foreach (var supplier in suppliers)
-                        supplierTable.Rows.Add(CreateRow(supplier));
+                    token.ThrowIfCancellationRequested();
 
-                    return true;
+                    if (suppliers.Count > 0)
+                    {
+                        supplierTable.Rows.Clear();
+
+                        foreach (var supplier in suppliers)
+                        {
+                            supplierTable.Rows.Add(CreateRow(supplier));
+                            token.ThrowIfCancellationRequested();
+                            await Task.Delay(1, token);
+                        }
+
+                        return true;
+                    }
+
                 }
+            }
+
+            catch (OperationCanceledException)
+            {
 
             }
+            catch
+            {
+
+            }
+
+
             return false;
         }
 
@@ -210,6 +255,11 @@ namespace POS.Forms
                     supplierTable.Rows.Add(CreateRow(newSupplier));
                 }
             }
+        }
+
+        private void Suppliers_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TryCancel();
         }
     }
 

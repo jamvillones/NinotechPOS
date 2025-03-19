@@ -688,7 +688,7 @@ namespace POS.Forms
 
         private void changeCustomer_Click(object sender, EventArgs e)
         {
-            using (var customersForm = new Customers_ListForm(true))
+            using (var customersForm = new Customers_List(true))
             {
                 customersForm.OnSelected += CustomersForm_OnSave;
                 customersForm.ShowDialog();

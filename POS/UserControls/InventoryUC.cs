@@ -352,9 +352,11 @@ namespace POS.UserControls
 
         private void editBtn_Click(object sender, EventArgs e)
         {
+            var btn = sender as Button;
             if (itemsTable.RowCount <= 0)
             {
-                MessageBox.Show("You do not have an item.");
+                MessageBox.Show("You do not have an item.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btn.Enabled = false;
                 return;
             }
 
