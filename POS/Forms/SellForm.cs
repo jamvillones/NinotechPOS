@@ -47,7 +47,7 @@ namespace POS.Forms
             set
             {
                 _customer = value;
-                customerTxt.Text = _customer.ToString();
+                customerTxt.Text = _customer?.ToString() ?? "Walk-In";
             }
         }
 
@@ -59,7 +59,7 @@ namespace POS.Forms
                 using (var context = new POSEntities())
                 {
 
-                    Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "walkin");
+                    Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "Walk-In");
 
                     var item = await context.Items.OrderBy(i => i.Name).ToListAsync();
                     searchControl1.SetAutoComplete(item.Select(x => x.Name).ToArray());
@@ -341,7 +341,7 @@ namespace POS.Forms
         }
 
         decimal total => CartItems.Select(c => c.SubTotal).Sum();
-        decimal grandtTotal => total - discount.Value;
+        decimal grandTotal => total - discount.Value;
 
         private void cartTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
@@ -363,8 +363,8 @@ namespace POS.Forms
         void FormatValues()
         {
             this.totalTxt.Text = total.ToCurrency();
-            this.grandTotalTxt.Text = grandtTotal.ToCurrency();
-            this.changeTxt.Text = (tendered.Value - grandtTotal).ToCurrency();
+            this.grandTotalTxt.Text = grandTotal.ToCurrency();
+            this.changeTxt.Text = (tendered.Value - grandTotal).ToCurrency();
 
             itemcountLabel.Text = cartTable.RowCount.ToString();
 
@@ -372,7 +372,7 @@ namespace POS.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            tendered.Value = grandtTotal;
+            tendered.Value = grandTotal;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -428,9 +428,17 @@ namespace POS.Forms
             tendered.Value = discount.Value = 0;
 
             customerTxt.Text = "loading...";
-            using (var context = new POSEntities())
+            try
             {
-                Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "walkin");
+
+                using (var context = new POSEntities())
+                {
+                    Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "Walk-In");
+                }
+            }
+            catch
+            {
+
             }
         }
 
@@ -448,12 +456,12 @@ namespace POS.Forms
                 {
                     var newSale = new Sale()
                     {
-                        Customer = await context.Customers.FirstOrDefaultAsync(c => c.Id == Customer.Id),
+                        Customer = Customer is null ? new Customer() { Name = "Walk-In" } : await context.Customers.FirstOrDefaultAsync(c => c.Id == Customer.Id),
                         Login = await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.CurrentLogin.Id),
                         Date = DateTime.Now,
-                        AmountRecieved = tendered.Value > grandtTotal ? grandtTotal : tendered.Value,
+                        AmountRecieved = tendered.Value > grandTotal ? grandTotal : tendered.Value,
                         Discount = discount.Value,
-                        SaleType = tendered.Value < grandtTotal ? SaleType.Charged.ToString() : SaleType.Regular.ToString()
+                        SaleType = tendered.Value < grandTotal ? SaleType.Charged.ToString() : SaleType.Regular.ToString()
                     };
 
                     ToPrint = context.Sales.Add(newSale);
@@ -545,7 +553,6 @@ namespace POS.Forms
             catch (Exception)
             {
 
-                throw;
             }
 
             //MessageBox.Show(

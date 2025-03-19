@@ -171,20 +171,22 @@ namespace POS.UserControls
                                                         .Sum()).Sum()
                     };
 
-                    if (!Departments_Store.Departments.Any(d => d.Equals(item.Department, StringComparison.OrdinalIgnoreCase)))
-                        Departments_Store.Departments.Add(item.Department);
 
                     itemsTable.Rows.Insert(0, CreateRow(dto));
+
+                    //if (!Departments_Store.Departments.Any(d => d.Equals(item.Department, StringComparison.OrdinalIgnoreCase)))
+                    //    Departments_Store.Departments.Add(item.Department);
+                    Departments_Store.AddNewDepartment(item.Department);
                 }
             }
             catch (OperationCanceledException ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            catch
-            {
+            //catch
+            //{
 
-            }
+            //}
 
             //using (var form = new Step_BasicInformation(newItem))
             //{
@@ -365,9 +367,8 @@ namespace POS.UserControls
             {
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
-                    //var x = editForm.Tag as Item;
-
-                    //var row = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex];                    
+                    var x = editForm.Tag as Item;
+                    Departments_Store.AddNewDepartment(x.Department);
                 }
             }
         }
@@ -391,26 +392,38 @@ namespace POS.UserControls
             await LoadDataAsync();
         }
 
-        private void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-        {
-            if (!UserManager.instance.CurrentLogin.CanEditItem)
-            {
-                e.Cancel = true;
-                return;
-            }
-            if (MessageBox.Show("Are you sure you want to delete the selected item?", "This will also delete items in inventory.", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-                return;
-            }
 
-            using (var p = new POSEntities())
-            {
-                var selected = itemsTable.Rows[itemsTable.SelectedCells[0].RowIndex].Cells[0].Value.ToString();
-                var i = p.Items.FirstOrDefault(x => x.Id == selected);
-                p.Items.Remove(i);
-                p.SaveChanges();
-            }
+
+        private async void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            //if (!UserManager.instance.CurrentLogin.CanEditItem)
+            //{
+            //    e.Cancel = true;
+            //    return;
+            //}
+
+
+            //var table = sender as DataGridView;
+            //var selectedRows = table.SelectedRows.Cast<DataGridViewRow>();
+            //var selectedIds = selectedRows.Select(row => row.Cells[0].Value.ToString());
+
+            //try
+            //{
+            //    using (var context = new POSEntities())
+            //    {
+            //        var toBeRemoved = context.Items.Include(i => i.Products.Select(p => p.StockinHistories))
+            //            .Where(i => selectedIds.Any(s => s == i.Id));
+
+            //        context.Items.RemoveRange(toBeRemoved);
+
+            //        await context.SaveChangesAsync();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    e.Cancel = true;
+            //    MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
         }
         private async void InventoryUC_Load(object sender, EventArgs e)
         {
@@ -669,6 +682,7 @@ namespace POS.UserControls
         }
         private void itemsTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
+
             itemCount.Text = itemsTable.RowCount.ToString("N0");
         }
 
@@ -691,37 +705,7 @@ namespace POS.UserControls
 
         private async void button6_Click(object sender, EventArgs e)
         {
-            if (itemsTable.SelectedRows.Count == 0)
-                return;
-
-            if (MessageBox.Show("Selected Items Will Be Removed From The List", "Remove Selected Items?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
-
-            var selectedRows = itemsTable.SelectedRows.Cast<DataGridViewRow>();
-
-            try
-            {
-
-                using (var context = new POSEntities())
-                {
-                    var ids = selectedRows
-                        .Select(row => row.Cells[0].Value.ToString());
-
-
-                    var toBeDeleted = await context.Items.Where(i => ids.Any(id => id == i.Id)).ToListAsync();
-
-                    context.Items.RemoveRange(toBeDeleted);
-
-                    await context.SaveChangesAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            foreach (var row in selectedRows)
-                itemsTable.Rows.Remove(row);
+            await DeleteSelectedRows();
         }
 
         private async void SetDepartment_Click(object sender, EventArgs e)
@@ -731,12 +715,7 @@ namespace POS.UserControls
                 if (departmentForm.ShowDialog() == DialogResult.OK)
                 {
                     string newDepartment = departmentForm.Tag as string;
-
-                    if (!Departments_Store.Departments.Any(d => d.Equals(newDepartment, StringComparison.OrdinalIgnoreCase)) &&
-                        !string.IsNullOrWhiteSpace(newDepartment))
-                    {
-                        Departments_Store.Departments.Add(newDepartment);
-                    }
+                    Departments_Store.AddNewDepartment(newDepartment);
 
                     Cursor = Cursors.WaitCursor;
 
@@ -759,7 +738,59 @@ namespace POS.UserControls
                 }
             }
         }
+
+        private async void itemsTable_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Delete)
+                return;
+
+            e.Handled = true;
+
+            await DeleteSelectedRows();
+        }
+
+        async Task DeleteSelectedRows()
+        {
+            var currLogin = UserManager.instance.CurrentLogin;
+
+            if (!currLogin.CanEditItem)
+                return;
+
+            if (itemsTable.SelectedRows.Count == 0)
+                return;
+
+            if (MessageBox.Show("Selected Items Will Be Removed From The List", "Remove Selected Items?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
+
+            var selectedRows = itemsTable.SelectedRows.Cast<DataGridViewRow>();
+
+            try
+            {
+
+                using (var context = new POSEntities())
+                {
+                    var ids = selectedRows
+                        .Select(row => row.Cells[0].Value.ToString());
+
+
+                    var toBeDeleted = context.Items
+                        //.Include(i => i.Products.Select(p => p.StockinHistories))
+                        .Where(i => ids.Any(id => id == i.Id));
+
+                    context.Items.RemoveRange(toBeDeleted);
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("One of the selected Item is already in stock. Undo the restock first before deleting.", "Remove Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            foreach (var row in selectedRows)
+                itemsTable.Rows.Remove(row);
+        }
     }
+
 
     public class Pagination
     {

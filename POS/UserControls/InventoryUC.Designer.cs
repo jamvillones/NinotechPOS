@@ -53,7 +53,6 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.departmentOption = new System.Windows.Forms.ComboBox();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.viewStockBtn = new System.Windows.Forms.Button();
@@ -94,7 +93,6 @@
             // 
             this.tablePanel.Controls.Add(this.itemsTable);
             this.tablePanel.Controls.Add(this.panel5);
-            this.tablePanel.Controls.Add(this.panel3);
             this.tablePanel.Controls.Add(this.panel2);
             this.tablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePanel.Location = new System.Drawing.Point(180, 0);
@@ -144,14 +142,14 @@
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.LightGray;
-            this.itemsTable.Location = new System.Drawing.Point(1, 40);
+            this.itemsTable.Location = new System.Drawing.Point(1, 39);
             this.itemsTable.Margin = new System.Windows.Forms.Padding(2);
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(872, 598);
+            this.itemsTable.Size = new System.Drawing.Size(872, 599);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 3;
             this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
@@ -161,6 +159,7 @@
             this.itemsTable.Scroll += new System.Windows.Forms.ScrollEventHandler(this.itemsTable_Scroll);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             this.itemsTable.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.itemsTable_UserDeletingRow);
+            this.itemsTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itemsTable_KeyDown);
             // 
             // col_Id
             // 
@@ -237,13 +236,14 @@
             this.col_remove.Text = "❌";
             this.col_remove.UseColumnTextForButtonValue = true;
             this.col_remove.Visible = false;
+            this.col_remove.Width = 40;
             // 
             // panel5
             // 
             this.panel5.Controls.Add(this.flowLayoutPanel2);
             this.panel5.Controls.Add(this.departmentOption);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(1, 1);
+            this.panel5.Location = new System.Drawing.Point(1, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(872, 39);
@@ -324,20 +324,11 @@
             this.departmentOption.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.departmentOption.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.departmentOption.FormattingEnabled = true;
-            this.departmentOption.Location = new System.Drawing.Point(581, 7);
+            this.departmentOption.Location = new System.Drawing.Point(685, 7);
             this.departmentOption.Name = "departmentOption";
-            this.departmentOption.Size = new System.Drawing.Size(285, 25);
+            this.departmentOption.Size = new System.Drawing.Size(180, 25);
             this.departmentOption.TabIndex = 6;
             this.toolTip1.SetToolTip(this.departmentOption, "Filter By Department");
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(1, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(872, 1);
-            this.panel3.TabIndex = 9;
             // 
             // panel2
             // 
@@ -783,7 +774,6 @@
         private System.Windows.Forms.CheckBox trackItemCheckbox;
         protected System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ComboBox departmentOption;
         private System.Windows.Forms.Label totalCount;
         protected System.Windows.Forms.Button button2;

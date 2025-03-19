@@ -45,6 +45,8 @@ namespace POS.Forms
                     return await context.Customers
                         .AsNoTracking()
                         .AsQueryable()
+                        .Where(x => x.Name != "Walk-In")
+
                         .Select(x => x.Name)
                         .ToArrayAsync();
                 }
@@ -103,8 +105,8 @@ namespace POS.Forms
                     var customers = await context.Customers
                         .AsNoTracking()
                         .AsQueryable()
+                        .Where(x => x.Name != "Walk-In")
                         .ApplySearch(_keyWord)
-                        //.OrderBy(x => x.Name)
                         .Select(c => new CustomerDTO()
                         {
                             Id = c.Id,

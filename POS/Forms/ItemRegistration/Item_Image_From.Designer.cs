@@ -73,7 +73,7 @@
             this.button3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(151, 379);
+            this.button3.Location = new System.Drawing.Point(407, 379);
             this.button3.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.button3.MaximumSize = new System.Drawing.Size(150, 35);
             this.button3.Name = "button3";
@@ -91,7 +91,7 @@
             this.button5.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(32, 379);
+            this.button5.Location = new System.Drawing.Point(288, 379);
             this.button5.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.button5.MaximumSize = new System.Drawing.Size(150, 35);
             this.button5.Name = "button5";
@@ -114,13 +114,13 @@
             // 
             // saveBtn
             // 
-            this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.saveBtn.AutoSize = true;
             this.saveBtn.BackColor = System.Drawing.SystemColors.HotTrack;
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveBtn.ForeColor = System.Drawing.Color.White;
             this.saveBtn.Image = ((System.Drawing.Image)(resources.GetObject("saveBtn.Image")));
-            this.saveBtn.Location = new System.Drawing.Point(377, 439);
+            this.saveBtn.Location = new System.Drawing.Point(32, 435);
             this.saveBtn.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.saveBtn.MaximumSize = new System.Drawing.Size(150, 35);
             this.saveBtn.MinimumSize = new System.Drawing.Size(150, 35);
