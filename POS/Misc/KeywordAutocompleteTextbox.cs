@@ -188,7 +188,8 @@ namespace test
             if (entry is null)
                 return false;
 
-            return entry.Contains(word);
+            //return entry.Contains(word);
+            return entry.IndexOf(word, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private void UpdateListBox()
