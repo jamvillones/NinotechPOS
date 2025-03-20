@@ -100,8 +100,8 @@ namespace POS.Forms
             {
                 var soldItem = await context.SoldItems.FirstOrDefaultAsync(x => x.Id == i);
 
-                if (!soldItem.Product.Item.IsEnumerable)                
-                    return;                
+                if (!soldItem.Product.Item.IsEnumerable)
+                    return;
 
                 if (!string.IsNullOrWhiteSpace(soldItem.SerialNumber))
                 {
@@ -161,36 +161,29 @@ namespace POS.Forms
                 soldBy.Text = sale.Login.ToString();
                 soldTo.Text = sale.Customer?.ToString();
 
-                //editItemsBtn.Visible = isCharged;
                 paymentsBtn.Visible = isCharged;
 
                 var soldItems = await GetSoldItemsAsync(p);
-
-                await AddRowsAsync(soldItems);
+                itemsTable.Rows.AddRange(soldItems.Select(CreateRow).ToArray());
 
                 discount.Text = sale.Discount.ToCurrency();
                 amountDue.Text = sale.AmountDue.ToCurrency();
                 amountRecieved.Text = sale.AmountRecieved.ToCurrency();
                 total.Text = sale.Total.ToCurrency();
                 remaining.Text = (sale.AmountDue - sale.AmountRecieved).ToCurrency();
-
-                //if (isCharged || sale.AmountRecieved >= sale.Total)
-                //{
-                //    remainGroup.Visible = false;
-                //    return;
-                //}
             }
         }
 
         private async void editItemsBtn_Click(object sender, EventArgs e)
         {
 
-            using (var editsolditems = new EditSale(_saleId))
+            using (var editSoldItems = new EditSale(_saleId))
             {
-                editsolditems.ShowDialog();
-                if (editsolditems.ChangesMade)
+                editSoldItems.ShowDialog();
+                if (editSoldItems.ChangesMade)
                 {
                     await LoadDataAsync();
+
                     amountDue.Text = itemsTable.Rows.Cast<DataGridViewRow>()
                        .Select(row => (int)(row.Cells[qtyCol.Index].Value) * ((decimal)(row.Cells[priceCol.Index].Value) - (decimal)(row.Cells[discountCol.Index].Value)))
                        .Sum()
@@ -295,13 +288,7 @@ namespace POS.Forms
                 {
 
                     itemsTable.Rows.Clear();
-                    await Task.Run(() =>
-                    {
-                        foreach (var s in result)
-                            itemsTable.InvokeIfRequired(() => itemsTable.Rows.Add(CreateRow(s)));
-                    });
-
-
+                    itemsTable.Rows.AddRange(result.Select(CreateRow).ToArray());
                 }
             }
             return isNotEmpty;
