@@ -25,7 +25,7 @@ namespace POS.Forms.ItemRegistration
 
         public static Item AskIfSerialRequired(this Item item)
         {
-            if (!item.IsFinite)
+            if (!item.IsEnumerable)
                 return item;
 
             var form = new RequireSerialNumber_Form(item);
@@ -38,7 +38,7 @@ namespace POS.Forms.ItemRegistration
 
         public static Item SetCosts(this Item item)
         {
-            if (!item.IsFinite)
+            if (!item.IsEnumerable)
                 return item;
 
             var form = new ItemCost_Form(item);

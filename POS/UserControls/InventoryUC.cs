@@ -155,7 +155,16 @@ namespace POS.UserControls
 
                 using (var context = new POSEntities())
                 {
+                    if (newItem.Type != ItemType.Quantifiable.ToString())
+                    {
+                        var serviceProduct = new Product() { Cost = 0 };
+
+                        newItem.Products.Add(serviceProduct);
+                        context.InventoryItems.Add(new InventoryItem() { Product = serviceProduct, Quantity = 0 });
+                    }
+
                     var item = context.Items.Add(newItem);
+
                     await context.SaveChangesAsync();
 
                     var dto = new ItemDTO()
@@ -172,10 +181,9 @@ namespace POS.UserControls
                     };
 
 
-                    itemsTable.Rows.Insert(0, CreateRow(dto));
 
-                    //if (!Departments_Store.Departments.Any(d => d.Equals(item.Department, StringComparison.OrdinalIgnoreCase)))
-                    //    Departments_Store.Departments.Add(item.Department);
+
+                    itemsTable.Rows.Insert(0, CreateRow(dto));
                     Departments_Store.AddNewDepartment(item.Department);
                 }
             }
@@ -183,23 +191,10 @@ namespace POS.UserControls
             {
                 Console.WriteLine(ex.Message);
             }
-            //catch
-            //{
+            catch
+            {
 
-            //}
-
-            //using (var form = new Step_BasicInformation(newItem))
-            //{
-            //}
-
-            //using (var form = new CreateEdit_Item_Form())
-            //{
-            //    if (form.ShowDialog() == DialogResult.OK)
-            //    {
-            //        var item = form.Tag as Item;
-            //        itemsTable.Rows.Add(CreateRow(item));
-            //    }
-            //}
+            }
         }
 
         /// <summary>
@@ -333,7 +328,7 @@ namespace POS.UserControls
                  item.Id,
                  item.Barcode,
                  item.Name,
-                 item.Qty,
+                 item.Type == ItemType.Quantifiable.ToString() ? item.Qty : null,
                  item.SellingPrice,
                  item.Type
                 );
@@ -741,6 +736,13 @@ namespace POS.UserControls
 
         private async void itemsTable_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.F5 && !IsBusyLoading)
+            {
+                IsTotalEntriesInitialized = false;
+                await LoadDataAsync();
+                return;
+            }
+
             if (e.KeyCode != Keys.Delete)
                 return;
 

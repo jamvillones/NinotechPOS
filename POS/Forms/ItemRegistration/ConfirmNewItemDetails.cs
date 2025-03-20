@@ -26,7 +26,7 @@ namespace POS.Forms.ItemRegistration
             dataGridView1.Rows.Add("Department", item.Department.NullIfEmpty());
             dataGridView1.Rows.Add("Selling Price", item.SellingPrice.ToString("C2"));
 
-            if (item.IsFinite)
+            if (item.IsEnumerable)
             {
                 dataGridView1.Rows.Add("Number of Cost", item.Products.Count);
                 dataGridView1.Rows.Add("Average Cost", item.Products.Count == 0 ? "--" : item.Products.Average(p => p.Cost).ToString("C2"));

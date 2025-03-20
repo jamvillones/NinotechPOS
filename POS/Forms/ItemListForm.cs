@@ -70,7 +70,7 @@ namespace POS.Forms
             item.Id,
             item.Barcode,
             item.Name,
-            item.IsFinite ? item.QuantityInInventory : default(int?),
+            item.IsEnumerable ? item.QuantityInInventory : default(int?),
             item.SellingPrice,
             item.Type.ToString()
             );

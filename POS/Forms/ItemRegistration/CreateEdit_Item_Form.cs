@@ -93,7 +93,7 @@ namespace POS.Forms.ItemRegistration
         private async void SaveBtn_Click(object sender, EventArgs e)
         {
 
-            if (Costs.Count <= 0 && Item.IsFinite)
+            if (Costs.Count <= 0 && Item.IsEnumerable)
             {
                 if (MessageBox.Show(
                     "Items without Cost cannot be restocked. Are you sure you intend to leave it empty?",
@@ -111,7 +111,7 @@ namespace POS.Forms.ItemRegistration
 
                     if (_id == string.Empty)
                     {
-                        if (!temp.IsFinite)
+                        if (!temp.IsEnumerable)
                         {
                             var newProduct = new Product() { Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none") };
                             temp.Products.Add(newProduct);
@@ -140,7 +140,7 @@ namespace POS.Forms.ItemRegistration
                         if (IsImageChanged)
                             toSave.SampleImage = temp.SampleImage;
 
-                        if (toSave.IsFinite)
+                        if (toSave.IsEnumerable)
                         {
                             //delete removed items
                             var toRemove = await context.Products.Where(x => x.ItemId == _id).ToListAsync();

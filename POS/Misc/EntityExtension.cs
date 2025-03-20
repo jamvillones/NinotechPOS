@@ -17,7 +17,7 @@ namespace POS
         {
             get
             {
-                if (!IsFinite || this.CriticalQuantity == null) return false;
+                if (!IsEnumerable || this.CriticalQuantity == null) return false;
 
                 var totalQty = this.QuantityInInventory;
 
@@ -28,7 +28,7 @@ namespace POS
             }
         }
 
-        public bool IsFinite => /*Type.Equals(ItemType.Quantifiable.ToString(), StringComparison.OrdinalIgnoreCase);*/
+        public bool IsEnumerable => /*Type.Equals(ItemType.Quantifiable.ToString(), StringComparison.OrdinalIgnoreCase);*/
             this.Type == ItemType.Quantifiable.ToString();
     }
 

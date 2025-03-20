@@ -30,12 +30,13 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaleDetails));
             this.itemsTable = new System.Windows.Forms.DataGridView();
             this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -121,15 +122,15 @@
             this.priceCol,
             this.discountCol,
             this.totalCol});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.DarkBlue;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.DarkBlue;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle9;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.DarkGray;
             this.itemsTable.Location = new System.Drawing.Point(20, 177);
@@ -151,40 +152,42 @@
             // 
             // serialCol
             // 
+            dataGridViewCellStyle3.NullValue = "N/A";
+            this.serialCol.DefaultCellStyle = dataGridViewCellStyle3;
             this.serialCol.HeaderText = "SERIAL";
             this.serialCol.Name = "serialCol";
             this.serialCol.ReadOnly = true;
             // 
             // supplierCol
             // 
-            dataGridViewCellStyle3.NullValue = "--";
-            this.supplierCol.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.NullValue = "N/A";
+            this.supplierCol.DefaultCellStyle = dataGridViewCellStyle4;
             this.supplierCol.HeaderText = "SUPPLIER";
             this.supplierCol.Name = "supplierCol";
             this.supplierCol.ReadOnly = true;
             // 
             // qtyCol
             // 
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = null;
-            this.qtyCol.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Format = "N0";
+            dataGridViewCellStyle5.NullValue = null;
+            this.qtyCol.DefaultCellStyle = dataGridViewCellStyle5;
             this.qtyCol.HeaderText = "QTY";
             this.qtyCol.Name = "qtyCol";
             this.qtyCol.ReadOnly = true;
             // 
             // priceCol
             // 
-            dataGridViewCellStyle5.Format = "C2";
-            this.priceCol.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Format = "C2";
+            this.priceCol.DefaultCellStyle = dataGridViewCellStyle6;
             this.priceCol.HeaderText = "PRICE";
             this.priceCol.Name = "priceCol";
             this.priceCol.ReadOnly = true;
             // 
             // discountCol
             // 
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.discountCol.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.discountCol.DefaultCellStyle = dataGridViewCellStyle7;
             this.discountCol.HeaderText = "DISCOUNT";
             this.discountCol.Name = "discountCol";
             this.discountCol.ReadOnly = true;
@@ -192,9 +195,9 @@
             // totalCol
             // 
             this.totalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Format = "C2";
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.totalCol.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.totalCol.DefaultCellStyle = dataGridViewCellStyle8;
             this.totalCol.HeaderText = "TOTAL";
             this.totalCol.Name = "totalCol";
             this.totalCol.ReadOnly = true;
@@ -291,7 +294,7 @@
             this.voidBtn.Name = "voidBtn";
             this.voidBtn.Size = new System.Drawing.Size(150, 35);
             this.voidBtn.TabIndex = 17;
-            this.voidBtn.Text = "Void Sale";
+            this.voidBtn.Text = "Void";
             this.voidBtn.UseVisualStyleBackColor = false;
             this.voidBtn.Click += new System.EventHandler(this.voidBtn_Click);
             // 
@@ -318,7 +321,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 35);
             this.button2.TabIndex = 21;
-            this.button2.Text = "Print Receipt";
+            this.button2.Text = "Print";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

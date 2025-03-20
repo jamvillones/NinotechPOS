@@ -236,7 +236,6 @@
             this.col_remove.Text = "❌";
             this.col_remove.UseColumnTextForButtonValue = true;
             this.col_remove.Visible = false;
-            this.col_remove.Width = 40;
             // 
             // panel5
             // 

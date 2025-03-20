@@ -140,7 +140,7 @@ namespace POS.Forms
                         .AsQueryable()
                         .FirstOrDefaultAsync(i => i.Barcode == keyword || i.Name == keyword);
 
-                    if (selectedItem != null && !selectedItem.IsFinite)
+                    if (selectedItem != null && !selectedItem.IsEnumerable)
                     {
                         TryAddInfinite(selectedItem.Id, selectedItem.Name, qty, selectedItem.SellingPrice);
                         loadingTxt.Text = string.Empty;
@@ -464,13 +464,15 @@ namespace POS.Forms
                         SaleType = tendered.Value < grandTotal ? SaleType.Charged.ToString() : SaleType.Regular.ToString()
                     };
 
-                    ToPrint = context.Sales.Add(newSale);
+                    
 
                     foreach (var entry in CartItems)
                     {
-                        var item = await context.Items.FirstOrDefaultAsync(x => x.Id == entry.Id);
+                        var item = await context.Items.Include(i => i.Products).FirstOrDefaultAsync(x => x.Id == entry.Id);
+
                         SoldItem newSoldItem = null;
-                        if (item.IsFinite)
+
+                        if (item.IsEnumerable)
                         {
                             if (item.IsSerialRequired)
                             {
@@ -535,7 +537,7 @@ namespace POS.Forms
                         }
                         else
                         {
-                            context.SoldItems.Add(
+                            newSale.SoldItems.Add(
                                 new SoldItem()
                                 {
                                     ProductId = item.Products.First().Id,
@@ -545,6 +547,8 @@ namespace POS.Forms
                                 });
                         }
                     }
+
+                    ToPrint = context.Sales.Add(newSale);
                     await context.SaveChangesAsync();
 
                     notifyIcon1.ShowBalloonTip(1, newSale.SaleType.ToString().ToUpper() + " SALE", newSale.Customer?.ToString() + " - " + newSale.AmountDue.ToCurrency(), ToolTipIcon.Info);
@@ -668,7 +672,7 @@ namespace POS.Forms
             using (var context = new POSEntities())
             {
                 var item = await context.Items.AsNoTracking().FirstOrDefaultAsync(x => x.Id == selected.Id);
-                maxQty = !item.IsFinite ? 999999999 : item.QuantityInInventory;
+                maxQty = !item.IsEnumerable ? 999999999 : item.QuantityInInventory;
             }
 
             using (var editDecimalForm = new EditDecimalValue(initialQty, maxQty, true))

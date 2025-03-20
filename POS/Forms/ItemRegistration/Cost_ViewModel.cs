@@ -18,6 +18,6 @@
         public Supplier Supplier { get; set; }
         public decimal Cost { get; set; } = 0;
 
-        public Product ToProduct => new Product() { Id = Id, SupplierId = Supplier.Id, Cost = Cost };
+        public Product ToProduct => new Product() { Id = Id, SupplierId = Supplier?.Id, Cost = Cost };
     }
 }
