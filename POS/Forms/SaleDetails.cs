@@ -120,11 +120,8 @@ namespace POS.Forms
                         .Where(ii => ii.Product.Item.Type == ItemType.Quantifiable.ToString())
                         .FirstOrDefaultAsync(x => x.Product.Id == soldItem.ProductId);
 
-                    if (inv != null)
-                    {
-                        if (inv.Quantity != 0)
-                            inv.Quantity += soldItem.Quantity;
-                    }
+                    if (inv != null)                    
+                        inv.Quantity += soldItem.Quantity;                    
                     else
                     {
                         var temp = new InventoryItem
