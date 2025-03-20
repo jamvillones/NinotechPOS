@@ -34,7 +34,7 @@ namespace POS
             var r = new ReceiptDetails() { ControlNumber = "", CustomerName = "test", Tendered = 100, TransactBy = "admin" };
 
             for (var i = 0; i < table.RowCount; i++)
-                r.Additem(
+                r.AddItem(
                     table[4, i].Value?.ToString(),
                     table[3, i].Value?.ToString(),
                     (int)table[6, i].Value,

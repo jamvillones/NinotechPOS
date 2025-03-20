@@ -77,7 +77,6 @@
             this.discount = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.total = new System.Windows.Forms.Label();
             this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -103,6 +102,7 @@
             this.itemsTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.itemsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -133,14 +133,14 @@
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle9;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.LightGray;
-            this.itemsTable.Location = new System.Drawing.Point(20, 177);
+            this.itemsTable.Location = new System.Drawing.Point(20, 171);
             this.itemsTable.MultiSelect = false;
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemsTable.RowHeadersVisible = false;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.itemsTable.Size = new System.Drawing.Size(944, 357);
+            this.itemsTable.Size = new System.Drawing.Size(944, 372);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 1;
             // 
@@ -168,8 +168,10 @@
             // 
             // qtyCol
             // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle5.Format = "N0";
             dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.qtyCol.DefaultCellStyle = dataGridViewCellStyle5;
             this.qtyCol.HeaderText = "QTY";
             this.qtyCol.Name = "qtyCol";
@@ -177,7 +179,9 @@
             // 
             // priceCol
             // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.priceCol.DefaultCellStyle = dataGridViewCellStyle6;
             this.priceCol.HeaderText = "PRICE";
             this.priceCol.Name = "priceCol";
@@ -185,8 +189,10 @@
             // 
             // discountCol
             // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle7.Format = "C2";
             dataGridViewCellStyle7.NullValue = "N/A";
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.discountCol.DefaultCellStyle = dataGridViewCellStyle7;
             this.discountCol.HeaderText = "DISCOUNT";
             this.discountCol.Name = "discountCol";
@@ -195,8 +201,10 @@
             // totalCol
             // 
             this.totalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(127)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle8.Format = "C2";
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.totalCol.DefaultCellStyle = dataGridViewCellStyle8;
             this.totalCol.HeaderText = "TOTAL";
             this.totalCol.Name = "totalCol";
@@ -556,16 +564,6 @@
             this.panel11.Size = new System.Drawing.Size(350, 1);
             this.panel11.TabIndex = 0;
             // 
-            // total
-            // 
-            this.total.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.total.ForeColor = System.Drawing.Color.Blue;
-            this.total.Location = new System.Drawing.Point(20, 536);
-            this.total.Name = "total";
-            this.total.Size = new System.Drawing.Size(944, 20);
-            this.total.TabIndex = 25;
-            this.total.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // searchControl1
             // 
             this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
@@ -586,7 +584,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 611);
-            this.Controls.Add(this.total);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.itemsTable);
             this.Controls.Add(this._messageLabel);
@@ -660,7 +657,6 @@
         private System.Windows.Forms.TextBox discount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Label total;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn serialCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplierCol;

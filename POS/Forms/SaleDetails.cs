@@ -41,7 +41,7 @@ namespace POS.Forms
             soldItem.Product.Supplier?.Name,
             soldItem.Quantity,
             soldItem.ItemPrice,
-            soldItem.Discount,
+            soldItem.Discount == 0 ? null : (decimal?)soldItem.Discount,
             soldItem.Quantity * (soldItem.ItemPrice - soldItem.Discount)
             );
 
@@ -101,14 +101,17 @@ namespace POS.Forms
                 var soldItem = await context.SoldItems.FirstOrDefaultAsync(x => x.Id == i);
 
                 if (!soldItem.Product.Item.IsEnumerable)
-                    return;
+                    continue;
 
                 if (!string.IsNullOrWhiteSpace(soldItem.SerialNumber))
                 {
-                    var inv = new InventoryItem();
-                    inv.Product = soldItem.Product;
-                    inv.Quantity = 1;
-                    inv.SerialNumber = soldItem.SerialNumber;
+                    var inv = new InventoryItem
+                    {
+                        Product = soldItem.Product,
+                        Quantity = 1,
+                        SerialNumber = soldItem.SerialNumber
+                    };
+
                     context.InventoryItems.Add(inv);
                 }
                 else
@@ -124,9 +127,12 @@ namespace POS.Forms
                     }
                     else
                     {
-                        var temp = new InventoryItem();
-                        temp.Product = soldItem.Product;
-                        temp.Quantity = soldItem.Quantity;
+                        var temp = new InventoryItem
+                        {
+                            Product = soldItem.Product,
+                            Quantity = soldItem.Quantity
+                        };
+
                         context.InventoryItems.Add(temp);
                     }
                 }
@@ -151,6 +157,8 @@ namespace POS.Forms
 
         private async void SaleDetails_Load(object sender, EventArgs e)
         {
+            itemsTable.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.NotSortable);
+
             using (var p = new POSEntities())
             {
                 var sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
@@ -166,10 +174,13 @@ namespace POS.Forms
                 var soldItems = await GetSoldItemsAsync(p);
                 itemsTable.Rows.AddRange(soldItems.Select(CreateRow).ToArray());
 
+                decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
+                itemsTable.Rows.Add("", "", "", "", "", "", subTotal);
+
                 discount.Text = sale.Discount.ToCurrency();
                 amountDue.Text = sale.AmountDue.ToCurrency();
                 amountRecieved.Text = sale.AmountRecieved.ToCurrency();
-                total.Text = sale.Total.ToCurrency();
+                //total.Text = sale.Total.ToCurrency();
                 remaining.Text = (sale.AmountDue - sale.AmountRecieved).ToCurrency();
             }
         }
@@ -184,10 +195,11 @@ namespace POS.Forms
                 {
                     await LoadDataAsync();
 
-                    amountDue.Text = itemsTable.Rows.Cast<DataGridViewRow>()
-                       .Select(row => (int)(row.Cells[qtyCol.Index].Value) * ((decimal)(row.Cells[priceCol.Index].Value) - (decimal)(row.Cells[discountCol.Index].Value)))
-                       .Sum()
-                       .ToString("C2");
+                    //amountDue.Text = itemsTable.Rows.Cast<DataGridViewRow>()
+                    //    //.Select(row => (int)(row.Cells[qtyCol.Index].Value) * ((decimal)(row.Cells[priceCol.Index].Value) - (decimal)(row.Cells[discountCol.Index].Value)))
+                    //    .Select(row => (decimal)(row.Cells[totalCol.Index].Value))
+                    //    .Sum()
+                    //   .ToString("C2");
                 }
             }
         }
@@ -237,10 +249,11 @@ namespace POS.Forms
                 details.CustomerName = soldTo.Text;
                 details.TransactBy = UserManager.instance.CurrentLogin.Name ?? "User";
                 details.Tendered = sale.AmountRecieved;
+                details.Discount = sale.Discount;
 
                 foreach (var soldItem in sale.SoldItems)
                 {
-                    details.Additem(
+                    details.AddItem(
                         soldItem.Product.Item.Name,
                         soldItem.SerialNumber,
                         soldItem.Quantity,
@@ -289,6 +302,10 @@ namespace POS.Forms
 
                     itemsTable.Rows.Clear();
                     itemsTable.Rows.AddRange(result.Select(CreateRow).ToArray());
+
+                    decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
+                    itemsTable.Rows.Add("", "", "", "", "", "", subTotal);
+
                 }
             }
             return isNotEmpty;

@@ -150,7 +150,8 @@ namespace POS.Misc
 
                 graphics.DrawLine(bluePen, new Point(0, contentsRect.Bottom), new Point(area.Width, contentsRect.Bottom));
 
-                string b2 = details.GrandTotal.ToCurrency() + "\n" +
+                string b2 = details.Discount.ToCurrency() + "\n" +
+                            details.GrandTotal.ToCurrency() + "\n" +
                             details.Tendered.ToCurrency() + "\n" +
                             details.Change.ToCurrency();
 
@@ -162,7 +163,8 @@ namespace POS.Misc
 
                 graphics.DrawString(b2, titleFont, Brushes.Black, b2Rect, farAlignment);
 
-                string b1 = "Grand Total: \n" +
+                string b1 = "Discount: \n" +
+                        "Grand Total: \n" +
                            "Tendered: \n" +
                            "Change: ";
 
@@ -210,10 +212,11 @@ namespace POS.Misc
         public List<ItemDetails> Items { get; } = new List<ItemDetails>();
 
         public decimal Tendered { get; set; }
-        public decimal GrandTotal => Items.Sum(x => x.Total);
+        public decimal Discount { get; set; } = 0;
+        public decimal GrandTotal => Items.Sum(x => x.Total) - Discount;
         public decimal Change => Tendered - GrandTotal;
 
-        public void Additem(string name, string serial, int quantity, decimal price, decimal discount)
+        public void AddItem(string name, string serial, int quantity, decimal price, decimal discount)
         {
             var i = new ItemDetails()
             {
@@ -223,6 +226,7 @@ namespace POS.Misc
                 Price = price,
                 Discount = discount
             };
+
             Items.Add(i);
         }
 

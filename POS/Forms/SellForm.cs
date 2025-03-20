@@ -651,7 +651,7 @@ namespace POS.Forms
             details.Tendered = ToPrint.AmountRecieved;
 
             foreach (var item in CartItems)
-                details.Additem(
+                details.AddItem(
                     item.Name,
                     item.Serial,
                     item.Quantity,
