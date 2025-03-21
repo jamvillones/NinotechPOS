@@ -579,7 +579,7 @@ namespace POS.UserControls
 
                     if (soldItem != null)
                     {
-                        using (var saleDetails = new SaleDetails(soldItem.Sale.Id))
+                        using (var saleDetails = new SaleDetails(soldItem.Sale.Id) { FormBorderStyle = FormBorderStyle.Sizable })
                         {
                             if (saleDetails.ShowDialog() == DialogResult.OK)
                             {
@@ -790,6 +790,11 @@ namespace POS.UserControls
 
             foreach (var row in selectedRows)
                 itemsTable.Rows.Remove(row);
+        }
+
+        private void trackItemCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            searchBar.firstControl.Focus();
         }
     }
 

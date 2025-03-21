@@ -35,15 +35,7 @@ namespace POS.Forms
 
         private readonly int _saleId;
 
-        DataGridViewRow CreateRow(SoldItem soldItem) => itemsTable.CreateRow(
-            soldItem.Product.Item.Name,
-            soldItem.SerialNumber,
-            soldItem.Product.Supplier?.Name,
-            soldItem.Quantity,
-            soldItem.ItemPrice,
-            soldItem.Discount == 0 ? null : (decimal?)soldItem.Discount,
-            soldItem.Quantity * (soldItem.ItemPrice - soldItem.Discount)
-            );
+
 
         private void OpenPayments_Click(object sender, EventArgs e)
         {
@@ -90,8 +82,8 @@ namespace POS.Forms
                    MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
 
-            DialogResult = DialogResult.OK;
-            //this.Close();
+            //DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         async Task AddBackToInventory(POSEntities context, params int[] id)
@@ -120,8 +112,8 @@ namespace POS.Forms
                         .Where(ii => ii.Product.Item.Type == ItemType.Quantifiable.ToString())
                         .FirstOrDefaultAsync(x => x.Product.Id == soldItem.ProductId);
 
-                    if (inv != null)                    
-                        inv.Quantity += soldItem.Quantity;                    
+                    if (inv != null)
+                        inv.Quantity += soldItem.Quantity;
                     else
                     {
                         var temp = new InventoryItem
@@ -136,22 +128,6 @@ namespace POS.Forms
             }
         }
 
-        private async Task AddRowsAsync(IEnumerable<SoldItem> items)
-        {
-            await Task.Run(() =>
-            {
-                foreach (var soldItem in items)
-                {
-                    //if (itemsTable.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[serialCol.Index] == null).Any(i => i.Cells[nameCol.Index].ToString().Equals(soldItem.Product.Item.Name, StringComparison.OrdinalIgnoreCase))) {
-
-                    //}
-                    //else
-                    itemsTable.InvokeIfRequired(() => itemsTable.Rows.Add(CreateRow(soldItem)));
-                }
-
-            });
-        }
-
         private async void SaleDetails_Load(object sender, EventArgs e)
         {
             itemsTable.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.NotSortable);
@@ -160,26 +136,21 @@ namespace POS.Forms
             {
                 var sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
 
-                this.Text = this.Text + " - " + sale.Id.ToString() + " ( " + sale.Date.Value.ToString("MMM d, yyyy hh:mm tt") + " - " + sale.SaleType + " )";
+                label7.Text = this.Text + " - " + sale.Id.ToString() + " [ " + sale.Date.Value.ToString("MMM d, yyyy hh:mm tt") + " - " + sale.SaleType + " ]";
                 bool isCharged = sale.SaleType.Equals(SaleType.Charged.ToString(), StringComparison.OrdinalIgnoreCase);
 
                 soldBy.Text = sale.Login.ToString();
                 soldTo.Text = sale.Customer?.ToString();
 
                 paymentsBtn.Visible = isCharged;
-
-                var soldItems = await GetSoldItemsAsync(p);
-                itemsTable.Rows.AddRange(soldItems.Select(CreateRow).ToArray());
-
-                decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
-                itemsTable.Rows.Add("", "", "", "", "", "", subTotal);
-
                 discount.Text = sale.Discount.ToCurrency();
                 amountDue.Text = sale.AmountDue.ToCurrency();
                 amountRecieved.Text = sale.AmountRecieved.ToCurrency();
-                //total.Text = sale.Total.ToCurrency();
+
                 remaining.Text = (sale.AmountDue - sale.AmountRecieved).ToCurrency();
             }
+
+            await LoadDataAsync();
         }
 
         private async void editItemsBtn_Click(object sender, EventArgs e)
@@ -268,45 +239,76 @@ namespace POS.Forms
             printAction = e.PrintAction;
         }
 
-        public async Task<List<SoldItem>> GetSoldItemsAsync(POSEntities context)
-        {
-            return await context.SoldItems
-                .AsNoTracking()
-                .AsQueryable()
-                .Where(so => so.SaleId == _saleId)
-                .OrderBy(o => o.Product.Item.Name)
-                .ToListAsync();
-        }
-
         async Task<bool> LoadDataAsync()
         {
             bool isNotEmpty = false;
             using (var context = new POSEntities())
             {
 
-                var soldItems = context.SoldItems.AsNoTracking().AsQueryable()
-                    .Where(so => so.SaleId == _saleId);
-
-                soldItems = string.IsNullOrWhiteSpace(keyword) ?
-                    soldItems :
-                    soldItems.Where(so => so.SerialNumber == keyword || so.Product.Item.Name.Contains(keyword));
+                var soldItems = context.SoldItems
+                    .AsNoTracking()
+                    .AsQueryable()
+                    .Where(so => so.SaleId == _saleId)
+                    .ApplySearch(keyword)
+                    .OrderBy(s => s.Product.Item.Name);
 
                 var result = await soldItems.ToListAsync();
                 isNotEmpty = result.Count > 0;
 
                 if (isNotEmpty)
                 {
-
                     itemsTable.Rows.Clear();
-                    itemsTable.Rows.AddRange(result.Select(CreateRow).ToArray());
+                    var nameGroupings = soldItems.GroupBy(s => s.Product.Item.Name);
+
+                    foreach (var group in nameGroupings)
+                    {
+                        bool isFirstNameEntry = true;
+                        var nameItems = result.Where(r => r.Product.Item.Name == group.Key);
+                        var supplierGroupings = nameItems.GroupBy(i => i.Product.Supplier?.Name);
+
+                        foreach (var supplierGroup in supplierGroupings)
+                        {
+                            bool isFirstSupplierEntry = true;
+                            var supplierItems = nameItems.Where(i => i.Product.Supplier?.Name == supplierGroup.Key);
+
+                            foreach (var i in supplierItems)
+                            {
+                                itemsTable.Rows.Add(
+                                    CreateRow(
+                                        i,
+                                        isFirstNameEntry,
+                                        isFirstSupplierEntry,
+                                        i.Product.Item.IsSerialRequired ? supplierItems.Count() : i.Quantity
+                                    )
+                                );
+
+                                isFirstSupplierEntry = false;
+                                isFirstNameEntry = false;
+                            }
+                        }
+                    }
+
+                    ////itemsTable.Rows.AddRange(result.Select(CreateRow).ToArray());
 
                     decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
-                    itemsTable.Rows.Add("", "", "", "", "", "", subTotal);
+                    itemsTable.Rows.Add("", "", "", "", "", "", "", subTotal);
 
                 }
             }
             return isNotEmpty;
         }
+
+        DataGridViewRow CreateRow(SoldItem soldItem, bool isFirstNameEntry = true, bool isFirstSupplierEntry = true, int? Qty = 0) => itemsTable.CreateRow(
+           soldItem.Id,
+           isFirstNameEntry ? soldItem.Product.Item.Name : null,
+           isFirstSupplierEntry ? soldItem.Product.Supplier?.Name : null,
+           isFirstSupplierEntry ? Qty : null,
+           soldItem.SerialNumber,
+           soldItem.ItemPrice,
+           soldItem.Discount == 0 ? null : (decimal?)soldItem.Discount,
+           soldItem.Quantity * (soldItem.ItemPrice - soldItem.Discount)
+           );
+
         string keyword = string.Empty;
 
         private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
@@ -335,6 +337,75 @@ namespace POS.Forms
                     soldTo.Text = ((Customer)customerChangingForm.Tag)?.ToString();
                 }
             }
+        }
+
+        private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void itemsTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+            if (e.ColumnIndex == serialCol.Index)
+            {
+                var table = sender as DataGridView;
+                var serial = table[e.ColumnIndex, e.RowIndex].Value?.ToString();
+
+                if (serial is null)
+                    return;
+
+                try
+                {
+                    Clipboard.SetText(serial);
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void remainGroup_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel9_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel7_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+
+    public static class SoldItem_Extension
+    {
+        public static IQueryable<SoldItem> ApplySearch(this IQueryable<SoldItem> soldItems, string keyword)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+                return soldItems;
+
+            return soldItems.Where(so => so.SerialNumber == keyword || so.Product.Item.Barcode == keyword || so.Product.Item.Name.Contains(keyword));
         }
     }
 }

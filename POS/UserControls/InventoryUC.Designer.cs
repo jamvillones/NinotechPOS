@@ -701,6 +701,7 @@
             this.trackItemCheckbox.TabStop = false;
             this.trackItemCheckbox.Text = "Track Item";
             this.trackItemCheckbox.UseVisualStyleBackColor = true;
+            this.trackItemCheckbox.CheckedChanged += new System.EventHandler(this.trackItemCheckbox_CheckedChanged);
             // 
             // searchBar
             // 

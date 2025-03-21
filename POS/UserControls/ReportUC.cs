@@ -110,12 +110,31 @@ namespace POS.UserControls
                 return;
             }
 
-            using (var saleDetails = new SaleDetails(index))
-            {
-                ///the result is okay when the sale is voided, thus entry on the table must also be removed
-                if (saleDetails.ShowDialog() == DialogResult.OK)
-                    table.Rows.RemoveAt(e.RowIndex);
-            }
+
+            EmbedForm(new SaleDetails(index));
+            //using (var saleDetails = new SaleDetails(index))
+            //{
+            //    ///the result is okay when the sale is voided, thus entry on the table must also be removed
+            //    if (saleDetails.ShowDialog() == DialogResult.OK)
+            //        table.Rows.RemoveAt(e.RowIndex);
+            //}
+        }
+
+        public void EmbedForm(Form frm)
+        {
+            tabControl1.Visible = false;
+            frm.FormClosing += Frm_FormClosing;
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.BringToFront();
+            frm.Visible = true;
+            frm.Dock = DockStyle.Fill;   // optional
+            this.Controls.Add(frm);
+        }
+
+        private void Frm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            tabControl1.Visible = true;
         }
 
         private async Task<bool> IsSaleStillPresent(int id)

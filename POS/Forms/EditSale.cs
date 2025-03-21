@@ -123,6 +123,8 @@ namespace POS.Forms
         /// <param name="id"></param>
         private async Task Initialize(int id)
         {
+            SoldItems.Clear();
+
             using (var p = new POSEntities())
             {
                 var sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == id);
@@ -166,47 +168,68 @@ namespace POS.Forms
             return quantity;
         }
 
-        private void Adv_ItemSelected(object sender, ItemInfoHolder e)
+        private async void Adv_ItemSelected(object sender, ItemInfoHolder e)
         {
-
-            using (var p = new POSEntities())
+            using (var context = new POSEntities())
             {
-                var targetSale = p.Sales.FirstOrDefault(x => x.Id == _saleId);
+                var sale = await context.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
 
-                var newSoldItem = new SoldItem();
+                if (e.Serial != null)
+                {
+                    var inventoryItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.SerialNumber == e.Serial);
+                    context.InventoryItems.Remove(inventoryItem);
 
-                InventoryItem Inv = null;
+                    var soldItem = new SoldItem()
+                    {
+                        SerialNumber = e.Serial,
+                        ItemPrice = e.SellingPrice,
+                        Discount = e.Discount,
+                        Quantity = e.Quantity,
+                        ProductId = e.ProductId,
+                        SaleId = sale.Id
+                    };
 
-                if (!string.IsNullOrEmpty(e.Serial))
-                    Inv = p.InventoryItems.FirstOrDefault(x => x.SerialNumber == e.Serial);
+                    context.SoldItems.Add(soldItem);
+
+                }
                 else
-                    Inv = p.InventoryItems.FirstOrDefault(x => x.Product.Item.Name == e.Name && x.Product.Supplier.Name == e.Supplier);
-
-                newSoldItem.SaleId = _saleId;
-                newSoldItem.Product = p.Products.FirstOrDefault(x => x.Item.Name == e.Name && x.Supplier.Name == e.Supplier);
-                newSoldItem.SerialNumber = e.Serial;
-                int rem = -1;
-
-                newSoldItem.Quantity = calculateQuantity(e.Quantity, Inv.Quantity, out rem);
-                newSoldItem.ItemPrice = e.SellingPrice;
-                newSoldItem.Discount = e.Discount;
-
-                if (rem == 0)
                 {
-                    p.InventoryItems.Remove(Inv);
+                    var product = await context.Products.FirstOrDefaultAsync(x => x.Id == e.ProductId);
+
+                    if (product.Item.IsEnumerable)
+                    {
+                        var inventoryItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.ProductId == e.ProductId);
+                        inventoryItem.Quantity -= e.Quantity;
+                        if (inventoryItem.Quantity == 0)
+                            context.InventoryItems.Remove(inventoryItem);
+
+
+                    }
+
+                    var soldItem = sale.SoldItems.FirstOrDefault(x => x.ProductId == e.ProductId);
+
+                    if (soldItem != null)
+                        soldItem.Quantity += e.Quantity;
+                    else
+                    {
+                        var soldItemToAdd = new SoldItem()
+                        {
+                            ItemPrice = e.SellingPrice,
+                            Discount = e.Discount,
+                            Quantity = e.Quantity,
+                            ProductId = e.ProductId,
+                            SaleId = sale.Id
+                        };
+
+                        context.SoldItems.Add(soldItemToAdd);
+                    }
+
                 }
-                else if (rem > 0)
-                {
-                    Inv.Quantity = rem;
-                }
 
-                var result = p.SoldItems.Add(newSoldItem);
-                p.SaveChanges();
-
-                OnSave?.Invoke(this, null);
-
-                SoldItems.Add(new SoldItemViewModel(result));
+                await context.SaveChangesAsync();
             }
+
+            await Initialize(_saleId);
         }
 
         private void itemsTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)

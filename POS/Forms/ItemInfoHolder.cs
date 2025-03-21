@@ -1,6 +1,9 @@
 ﻿//using VS2017POS.EntitiyFolder;
-namespace POS.Forms {
-    public struct ItemInfoHolder {
+namespace POS.Forms
+{
+    public struct ItemInfoHolder
+    {
+        public int ProductId { get; set; }
         public string Barcode { get; set; }
         public string Name { get; set; }
         public string Serial { get; set; }
@@ -8,8 +11,10 @@ namespace POS.Forms {
         public decimal SellingPrice { get; set; }
         public decimal Discount { get; set; }
         private int q;
-        public int Quantity {
-            get {
+        public int Quantity
+        {
+            get
+            {
                 return Serial == null ? q : 1;
             }
             set { q = value; }
