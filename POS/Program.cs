@@ -21,6 +21,8 @@ namespace POS
             Application.SetCompatibleTextRenderingDefault(false);
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
+            ConnectionConfiguration_Source.Initialize();
+
             //test for showing the installation path
             /*
              * string installPath = Assembly.GetExecutingAssembly().Location;

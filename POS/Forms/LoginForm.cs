@@ -100,7 +100,8 @@ namespace POS.Forms
                 //var STRINGS = connectionString.Split(';');
 
                 //MessageBox.Show(STRINGS[2], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                var config = new ConnectionConfigurations();
+                var config = new ServerConnections();
+                //var config = new ConnectionConfigurations();
                 config.ShowDialog();
 
             }

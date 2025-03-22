@@ -54,7 +54,7 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(5, 226);
+            this.panel1.Location = new System.Drawing.Point(5, 215);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(474, 40);
@@ -200,7 +200,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(5, 206);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(474, 20);
+            this.label1.Size = new System.Drawing.Size(474, 9);
             this.label1.TabIndex = 5;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -208,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 271);
+            this.ClientSize = new System.Drawing.Size(484, 260);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);

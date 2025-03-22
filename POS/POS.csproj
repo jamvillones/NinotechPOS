@@ -84,6 +84,9 @@
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -109,6 +112,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Add_Edit_ConnectionConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Add_Edit_ConnectionConfig.Designer.cs">
+      <DependentUpon>Add_Edit_ConnectionConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ChangeCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +216,12 @@
     </Compile>
     <Compile Include="Forms\SellForm.Designer.cs">
       <DependentUpon>SellForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ServerConnections.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ServerConnections.Designer.cs">
+      <DependentUpon>ServerConnections.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SetDepartment_Form.cs">
       <SubType>Form</SubType>
@@ -489,6 +504,9 @@
     <EmbeddedResource Include="Checkout.resx">
       <DependentUpon>Checkout.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Add_Edit_ConnectionConfig.resx">
+      <DependentUpon>Add_Edit_ConnectionConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChangeCustomerForm.resx">
       <DependentUpon>ChangeCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -554,6 +572,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SellForm.resx">
       <DependentUpon>SellForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ServerConnections.resx">
+      <DependentUpon>ServerConnections.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SetDepartment_Form.resx">
       <DependentUpon>SetDepartment_Form.cs</DependentUpon>
