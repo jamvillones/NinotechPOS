@@ -56,16 +56,17 @@
             // 
             this.discount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.discount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.discount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.discount.Location = new System.Drawing.Point(552, 579);
+            this.discount.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.discount.Location = new System.Drawing.Point(552, 578);
             this.discount.Maximum = new decimal(new int[] {
             1000000,
             0,
             0,
             0});
             this.discount.Name = "discount";
-            this.discount.Size = new System.Drawing.Size(270, 26);
+            this.discount.Size = new System.Drawing.Size(270, 29);
             this.discount.TabIndex = 18;
+            this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.discount.ThousandsSeparator = true;
             this.discount.ValueChanged += new System.EventHandler(this.discount_ValueChanged);
             // 
@@ -74,16 +75,17 @@
             this.sellingPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.sellingPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sellingPrice.DecimalPlaces = 2;
-            this.sellingPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sellingPrice.Location = new System.Drawing.Point(552, 547);
+            this.sellingPrice.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sellingPrice.Location = new System.Drawing.Point(552, 542);
             this.sellingPrice.Maximum = new decimal(new int[] {
             276447231,
             23283,
             0,
             0});
             this.sellingPrice.Name = "sellingPrice";
-            this.sellingPrice.Size = new System.Drawing.Size(270, 26);
+            this.sellingPrice.Size = new System.Drawing.Size(270, 29);
             this.sellingPrice.TabIndex = 17;
+            this.sellingPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.sellingPrice.ThousandsSeparator = true;
             this.sellingPrice.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
@@ -91,8 +93,8 @@
             // 
             this.quantity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.quantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.quantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quantity.Location = new System.Drawing.Point(552, 515);
+            this.quantity.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quantity.Location = new System.Drawing.Point(552, 506);
             this.quantity.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -104,8 +106,9 @@
             0,
             0});
             this.quantity.Name = "quantity";
-            this.quantity.Size = new System.Drawing.Size(270, 26);
+            this.quantity.Size = new System.Drawing.Size(270, 29);
             this.quantity.TabIndex = 16;
+            this.quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.quantity.ThousandsSeparator = true;
             this.quantity.Value = new decimal(new int[] {
             1,
@@ -154,13 +157,13 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.itemTables.DefaultCellStyle = dataGridViewCellStyle2;
             this.itemTables.EnableHeadersVisualStyles = false;
-            this.itemTables.Location = new System.Drawing.Point(12, 50);
+            this.itemTables.Location = new System.Drawing.Point(12, 56);
             this.itemTables.Name = "itemTables";
             this.itemTables.ReadOnly = true;
             this.itemTables.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.itemTables.RowHeadersVisible = false;
             this.itemTables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemTables.Size = new System.Drawing.Size(810, 450);
+            this.itemTables.Size = new System.Drawing.Size(810, 437);
             this.itemTables.TabIndex = 13;
             this.itemTables.TabStop = false;
             this.itemTables.SelectionChanged += new System.EventHandler(this.itemTables_SelectionChanged);
@@ -207,7 +210,7 @@
             this.selectBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.selectBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.selectBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.selectBtn.Location = new System.Drawing.Point(15, 565);
+            this.selectBtn.Location = new System.Drawing.Point(12, 567);
             this.selectBtn.Name = "selectBtn";
             this.selectBtn.Size = new System.Drawing.Size(190, 40);
             this.selectBtn.TabIndex = 17;
@@ -237,7 +240,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(497, 522);
+            this.label3.Location = new System.Drawing.Point(497, 506);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 22;
@@ -247,7 +250,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(489, 554);
+            this.label4.Location = new System.Drawing.Point(489, 542);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 23;
@@ -257,7 +260,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(494, 586);
+            this.label5.Location = new System.Drawing.Point(494, 578);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 24;
@@ -265,7 +268,6 @@
             // 
             // AdvancedSearchForm
             // 
-            this.AcceptButton = this.selectBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 617);

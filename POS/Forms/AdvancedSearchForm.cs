@@ -83,6 +83,7 @@ namespace POS.Forms
         void AddToCart()
         {
             ItemSelected?.Invoke(this, infoHolder);
+            Close();
         }
 
         private void selectBtn_Click(object sender, EventArgs e)

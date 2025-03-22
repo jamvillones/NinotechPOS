@@ -13,10 +13,6 @@ namespace POS.Forms
 {
     public partial class SaleDetails : Form
     {
-        //public SaleDetails() {
-        //    InitializeComponent();
-        //}
-
         public SaleDetails(int id)
         {
             InitializeComponent();
@@ -32,10 +28,7 @@ namespace POS.Forms
         }
 
         Login CurrentLogin => UserManager.instance.CurrentLogin;
-
         private readonly int _saleId;
-
-
 
         private void OpenPayments_Click(object sender, EventArgs e)
         {
@@ -61,7 +54,9 @@ namespace POS.Forms
                 {
                     //get the reference of the sale
                     var saleToVoid = context.Sales.FirstOrDefault(x => x.Id == _saleId);
-                    await AddBackToInventory(context, context.SoldItems.Where(x => x.SaleId == saleToVoid.Id).Select(x => x.Id).ToArray());
+                    var soldItemsToReturn = await context.SoldItems.Where(x => x.SaleId == saleToVoid.Id).ToArrayAsync();
+
+                    await context.ReturnSoldItems(soldItemsToReturn);
 
                     context.Sales.Remove(saleToVoid);
                     await context.SaveChangesAsync();
@@ -82,50 +77,8 @@ namespace POS.Forms
                    MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
 
-            //DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
             this.Close();
-        }
-
-        async Task AddBackToInventory(POSEntities context, params int[] id)
-        {
-            foreach (var i in id)
-            {
-                var soldItem = await context.SoldItems.FirstOrDefaultAsync(x => x.Id == i);
-
-                if (!soldItem.Product.Item.IsEnumerable)
-                    continue;
-
-                if (!string.IsNullOrWhiteSpace(soldItem.SerialNumber))
-                {
-                    var inv = new InventoryItem
-                    {
-                        Product = soldItem.Product,
-                        Quantity = 1,
-                        SerialNumber = soldItem.SerialNumber
-                    };
-
-                    context.InventoryItems.Add(inv);
-                }
-                else
-                {
-                    var inv = await context.InventoryItems
-                        .Where(ii => ii.Product.Item.Type == ItemType.Quantifiable.ToString())
-                        .FirstOrDefaultAsync(x => x.Product.Id == soldItem.ProductId);
-
-                    if (inv != null)
-                        inv.Quantity += soldItem.Quantity;
-                    else
-                    {
-                        var temp = new InventoryItem
-                        {
-                            Product = soldItem.Product,
-                            Quantity = soldItem.Quantity
-                        };
-
-                        context.InventoryItems.Add(temp);
-                    }
-                }
-            }
         }
 
         private async void SaleDetails_Load(object sender, EventArgs e)
@@ -153,23 +106,77 @@ namespace POS.Forms
             await LoadDataAsync();
         }
 
-        private async void editItemsBtn_Click(object sender, EventArgs e)
+        private void editItemsBtn_Click(object sender, EventArgs e)
         {
-
-            using (var editSoldItems = new EditSale(_saleId))
+            using (var adv = new AdvancedSearchForm())
             {
-                editSoldItems.ShowDialog();
-                if (editSoldItems.ChangesMade)
-                {
-                    await LoadDataAsync();
-
-                    //amountDue.Text = itemsTable.Rows.Cast<DataGridViewRow>()
-                    //    //.Select(row => (int)(row.Cells[qtyCol.Index].Value) * ((decimal)(row.Cells[priceCol.Index].Value) - (decimal)(row.Cells[discountCol.Index].Value)))
-                    //    .Select(row => (decimal)(row.Cells[totalCol.Index].Value))
-                    //    .Sum()
-                    //   .ToString("C2");
-                }
+                adv.ItemSelected += Adv_ItemSelected;
+                adv.ShowDialog();
             }
+        }
+
+        private async void Adv_ItemSelected(object sender, ItemInfoHolder e)
+        {
+            using (var context = new POSEntities())
+            {
+                var sale = await context.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
+
+                if (e.Serial != null)
+                {
+                    var inventoryItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.SerialNumber == e.Serial);
+                    context.InventoryItems.Remove(inventoryItem);
+
+                    var soldItem = new SoldItem()
+                    {
+                        SerialNumber = e.Serial,
+                        ItemPrice = e.SellingPrice,
+                        Discount = e.Discount,
+                        Quantity = e.Quantity,
+                        ProductId = e.ProductId,
+                        SaleId = sale.Id
+                    };
+
+                    context.SoldItems.Add(soldItem);
+
+                }
+                else
+                {
+                    var product = await context.Products.FirstOrDefaultAsync(x => x.Id == e.ProductId);
+
+                    if (product.Item.IsEnumerable)
+                    {
+                        var inventoryItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.ProductId == e.ProductId);
+                        inventoryItem.Quantity -= e.Quantity;
+                        if (inventoryItem.Quantity == 0)
+                            context.InventoryItems.Remove(inventoryItem);
+
+
+                    }
+
+                    var soldItem = sale.SoldItems.FirstOrDefault(x => x.ProductId == e.ProductId);
+
+                    if (soldItem != null)
+                        soldItem.Quantity += e.Quantity;
+                    else
+                    {
+                        var soldItemToAdd = new SoldItem()
+                        {
+                            ItemPrice = e.SellingPrice,
+                            Discount = e.Discount,
+                            Quantity = e.Quantity,
+                            ProductId = e.ProductId,
+                            SaleId = sale.Id
+                        };
+
+                        context.SoldItems.Add(soldItemToAdd);
+                    }
+
+                }
+
+                await context.SaveChangesAsync();
+            }
+
+            await LoadDataAsync();
         }
 
         private void SaleDetails_KeyDown(object sender, KeyEventArgs e)
@@ -212,12 +219,14 @@ namespace POS.Forms
             {
                 var sale = context.Sales.FirstOrDefault(x => x.Id == _saleId);
 
-                ReceiptDetails details = new ReceiptDetails();
-                details.ControlNumber = sale.Id.ToString();
-                details.CustomerName = soldTo.Text;
-                details.TransactBy = UserManager.instance.CurrentLogin.Name ?? "User";
-                details.Tendered = sale.AmountRecieved;
-                details.Discount = sale.Discount;
+                ReceiptDetails details = new ReceiptDetails
+                {
+                    ControlNumber = sale.Id.ToString(),
+                    CustomerName = soldTo.Text,
+                    TransactBy = UserManager.instance.CurrentLogin.Name ?? "User",
+                    Tendered = sale.AmountRecieved,
+                    Discount = sale.Discount
+                };
 
                 foreach (var soldItem in sale.SoldItems)
                 {
@@ -244,7 +253,6 @@ namespace POS.Forms
             bool isNotEmpty = false;
             using (var context = new POSEntities())
             {
-
                 var soldItems = context.SoldItems
                     .AsNoTracking()
                     .AsQueryable()
@@ -288,11 +296,8 @@ namespace POS.Forms
                         }
                     }
 
-                    ////itemsTable.Rows.AddRange(result.Select(CreateRow).ToArray());
-
                     decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
                     itemsTable.Rows.Add("", "", "", "", "", "", "", subTotal);
-
                 }
             }
             return isNotEmpty;
@@ -323,8 +328,6 @@ namespace POS.Forms
         {
             keyword = string.Empty;
             await LoadDataAsync();
-
-
         }
 
         private void soldTo_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -339,56 +342,80 @@ namespace POS.Forms
             }
         }
 
-        private void itemsTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void itemsTable_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1) return;
+            if (e.RowIndex == -1 || e.ColumnIndex == -1) return;
 
-            if (e.ColumnIndex == serialCol.Index)
+
+            var table = sender as DataGridView;
+
+            var value = table[e.ColumnIndex, e.RowIndex].Value?.ToString();
+
+            if (value is null)
+                return;
+
+            try
             {
-                var table = sender as DataGridView;
-                var serial = table[e.ColumnIndex, e.RowIndex].Value?.ToString();
+                Clipboard.SetText(value);
+            }
+            catch
+            {
 
-                if (serial is null)
-                    return;
+            }
 
-                try
+        }
+
+        private async void returnItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("Return these selected items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+                return;
+
+            try
+            {
+                using (var context = new POSEntities())
                 {
-                    Clipboard.SetText(serial);
-                }
-                catch
-                {
+                    var selectedIds = itemsTable.SelectedRows.Cast<DataGridViewRow>()
+                        .Select(row => (int)(row.Cells[0].Value));
 
+                    var selectedItems = await context.SoldItems
+                        .Where(soldItem => selectedIds.Any(i => i == soldItem.Id))
+                        .ToArrayAsync();
+
+                    if (selectedItems.Length == 0)
+                    {
+                        MessageBox.Show("No Item Selected", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    await context.ReturnSoldItems(selectedItems);
+                    context.SoldItems.RemoveRange(selectedItems);
+                    var sale = await context.Sales.FirstOrDefaultAsync(s => s.Id == _saleId);
+
+                    if (sale.SoldItems.Count == 0)
+                    {
+                        if (MessageBox.Show("Would you like to remove this sale?", "Sold items for this sale is empty", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            context.Sales.Remove(sale);
+                            await context.SaveChangesAsync();
+
+                            ///close this form because the sale is no longer available
+                            Close();
+                            ///return so that the load will not be called
+                            return;
+                        }
+                    }
+
+                    await context.SaveChangesAsync();
                 }
             }
-        }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Return Items Failed", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            }
 
-        private void panel5_Paint(object sender, PaintEventArgs e)
-        {
+            await LoadDataAsync();
 
-        }
-
-        private void remainGroup_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel9_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel7_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
 
         }
 
@@ -406,6 +433,50 @@ namespace POS.Forms
                 return soldItems;
 
             return soldItems.Where(so => so.SerialNumber == keyword || so.Product.Item.Barcode == keyword || so.Product.Item.Name.Contains(keyword));
+        }
+
+        public static async Task ReturnSoldItems(this POSEntities context, params SoldItem[] soldItems)
+        {
+            foreach (var soldItem in soldItems)
+            {
+                if (!soldItem.Product.Item.IsEnumerable)
+                    continue;
+
+                if (!string.IsNullOrWhiteSpace(soldItem.SerialNumber))
+                {
+                    ///just a safety check for when duplicate is found in the inventory item
+                    if (context.InventoryItems.Any(i => i.SerialNumber == soldItem.SerialNumber))
+                        continue;
+
+                    var inv = new InventoryItem
+                    {
+                        Product = soldItem.Product,
+                        Quantity = 1,
+                        SerialNumber = soldItem.SerialNumber
+                    };
+
+                    context.InventoryItems.Add(inv);
+                }
+                else
+                {
+                    var inventoryItem = await context.InventoryItems
+                        .Where(i => i.Product.Item.Type == ItemType.Quantifiable.ToString())
+                        .FirstOrDefaultAsync(x => x.Product.Id == soldItem.ProductId);
+
+                    if (inventoryItem != null)
+                        inventoryItem.Quantity += soldItem.Quantity;
+                    else
+                    {
+                        var temp = new InventoryItem
+                        {
+                            Product = soldItem.Product,
+                            Quantity = soldItem.Quantity
+                        };
+
+                        context.InventoryItems.Add(temp);
+                    }
+                }
+            }
         }
     }
 }

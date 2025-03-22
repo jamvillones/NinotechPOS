@@ -43,6 +43,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.inventoryTab = new POS.UserControls.InventoryUC();
             this.reportTab = new POS.UserControls.ReportUC();
             this.tabsHolderPanel.SuspendLayout();
@@ -54,9 +55,10 @@
             // 
             this.userButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.userButton.AutoEllipsis = true;
-            this.userButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.userButton.BackColor = System.Drawing.SystemColors.HotTrack;
             this.userButton.FlatAppearance.BorderSize = 0;
             this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.userButton.ForeColor = System.Drawing.Color.White;
             this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.userButton.Location = new System.Drawing.Point(1070, 15);
             this.userButton.Margin = new System.Windows.Forms.Padding(0);
@@ -76,10 +78,10 @@
             this.tabsHolderPanel.Controls.Add(this.inventoryTab);
             this.tabsHolderPanel.Controls.Add(this.reportTab);
             this.tabsHolderPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabsHolderPanel.Location = new System.Drawing.Point(0, 50);
+            this.tabsHolderPanel.Location = new System.Drawing.Point(0, 60);
             this.tabsHolderPanel.Name = "tabsHolderPanel";
             this.tabsHolderPanel.Padding = new System.Windows.Forms.Padding(15, 15, 15, 0);
-            this.tabsHolderPanel.Size = new System.Drawing.Size(1264, 631);
+            this.tabsHolderPanel.Size = new System.Drawing.Size(1264, 621);
             this.tabsHolderPanel.TabIndex = 3;
             // 
             // button7
@@ -111,6 +113,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.userButton);
             this.panel1.Controls.Add(this.flowLayoutPanel1);
@@ -118,7 +121,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(9);
-            this.panel1.Size = new System.Drawing.Size(1264, 50);
+            this.panel1.Size = new System.Drawing.Size(1264, 60);
             this.panel1.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -163,7 +166,7 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Location = new System.Drawing.Point(360, 3);
             this.button3.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
@@ -176,7 +179,7 @@
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button5.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Location = new System.Drawing.Point(512, 3);
             this.button5.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
@@ -189,7 +192,7 @@
             // 
             // button6
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button6.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Location = new System.Drawing.Point(664, 3);
             this.button6.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
@@ -202,7 +205,7 @@
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Location = new System.Drawing.Point(816, 3);
             this.button4.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
@@ -213,12 +216,22 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.ForeColor = System.Drawing.Color.Black;
+            this.panel2.Location = new System.Drawing.Point(0, 60);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1264, 1);
+            this.panel2.TabIndex = 4;
+            // 
             // inventoryTab
             // 
             this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.inventoryTab.Location = new System.Drawing.Point(15, 15);
             this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Size = new System.Drawing.Size(1234, 616);
+            this.inventoryTab.Size = new System.Drawing.Size(1234, 606);
             this.inventoryTab.TabIndex = 2;
             // 
             // reportTab
@@ -227,7 +240,7 @@
             this.reportTab.IsOldEntries = false;
             this.reportTab.Location = new System.Drawing.Point(15, 15);
             this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(1234, 616);
+            this.reportTab.Size = new System.Drawing.Size(1234, 606);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
             // 
@@ -236,6 +249,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.tabsHolderPanel);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -271,6 +285,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
