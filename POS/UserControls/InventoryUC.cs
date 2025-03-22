@@ -429,7 +429,7 @@ namespace POS.UserControls
                 var currLogin = UserManager.instance.CurrentLogin;
 
                 addItemBtn.Enabled = currLogin.CanEditItem;
-                editItemBtn.Enabled = currLogin.CanEditItem;
+                //editItemBtn.Enabled = currLogin.CanEditItem;
                 stockinBtn.Enabled = currLogin.CanStockIn;
 
                 departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -467,7 +467,7 @@ namespace POS.UserControls
 
             addVariationsBtn.Enabled = isSingleRowSelected;
 
-            editItemBtn.Enabled = currLogin.CanEditProduct && isSingleRowSelected;
+            editItemBtn.Enabled = isSingleRowSelected;
 
             bool IsEnumerable = itemsTable.SelectedRows.Count > 0 && itemsTable.SelectedCells[5].Value.ToString() == ItemType.Quantifiable.ToString();
             viewStockBtn.Enabled = IsEnumerable && isSingleRowSelected;

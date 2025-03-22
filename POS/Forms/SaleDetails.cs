@@ -1,6 +1,5 @@
 ﻿using POS.Misc;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing.Printing;
@@ -346,27 +345,23 @@ namespace POS.Forms
         {
             if (e.RowIndex == -1 || e.ColumnIndex == -1) return;
 
-
             var table = sender as DataGridView;
-
             var value = table[e.ColumnIndex, e.RowIndex].Value?.ToString();
 
             if (value is null)
                 return;
 
-            try
-            {
-                Clipboard.SetText(value);
-            }
-            catch
-            {
-
-            }
-
+            try { Clipboard.SetText(value); }
+            catch { }
         }
 
         private async void returnItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!CurrentLogin.CanVoidSale)
+            {
+                MessageBox.Show("You do not have permission to edit this sale", "Return aborted", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (MessageBox.Show("Return these selected items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 return;

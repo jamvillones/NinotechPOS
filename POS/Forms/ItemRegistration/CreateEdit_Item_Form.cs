@@ -32,6 +32,8 @@ namespace POS.Forms.ItemRegistration
             _type.SelectedIndex = 0;
 
             _id = id;
+
+            saveBtn.Enabled = UserManager.instance.CurrentLogin.CanEditItem;
         }
 
         string _id = string.Empty;
