@@ -86,41 +86,6 @@ namespace POS.UserControls
             if (e.RowIndex == -1)
                 return;
 
-            //if (e.ColumnIndex == col_remove.Index)
-            //{
-
-            //    if (!UserManager.instance.CurrentLogin.CanEditItem) return;
-            //    if (MessageBox.Show(
-            //        "Are you sure you want to delete the selected item?",
-            //        "This will also delete items in inventory.",
-            //        MessageBoxButtons.OKCancel,
-            //        MessageBoxIcon.Warning) == DialogResult.Cancel) return;
-
-            //    try
-            //    {
-            //        using (var context = new POSEntities())
-            //        {
-            //            var i = await context.Items
-            //                .Include(item => item.Products.Select(product => product.StockinHistories))
-            //                .FirstOrDefaultAsync(x => x.Id == SelectedId);
-
-            //            context.Items.Remove(i);
-            //            await context.SaveChangesAsync();
-            //        }
-            //        itemsTable.Rows.RemoveAt(e.RowIndex);
-            //    }
-            //    catch (DbUpdateException ex)
-            //    {
-            //        MessageBox.Show(ex.InnerException.Message, "Delete is aborted!", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-            //    }
-            //    catch
-            //    {
-
-            //    }
-
-            //    return;
-            //}
-
             var dgt = (DataGridView)sender;
             var qty = dgt[quantityCol.Index, e.RowIndex].Value as int?;
             var barcode = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -180,9 +145,6 @@ namespace POS.UserControls
                                                         .Sum()).Sum()
                     };
 
-
-
-
                     itemsTable.Rows.Insert(0, CreateRow(dto));
                     Departments_Store.AddNewDepartment(item.Department);
                 }
@@ -191,10 +153,7 @@ namespace POS.UserControls
             {
                 Console.WriteLine(ex.Message);
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         /// <summary>
@@ -281,11 +240,9 @@ namespace POS.UserControls
             }
         }
 
-        //string _selectedSerial = string.Empty;
         private async Task<bool> LoadDataAsync()
         {
             IsBusyLoading = true;
-            //loadingLabelItem.Visible = true;
 
             _cancelSource = new CancellationTokenSource();
             var token = _cancelSource.Token;
@@ -304,8 +261,6 @@ namespace POS.UserControls
                 _cancelSource?.Dispose();
             }
 
-
-            //loadingLabelItem.Visible = false;
             IsBusyLoading = false;
 
             return itemsTable.RowCount > 0;
@@ -357,7 +312,6 @@ namespace POS.UserControls
                 return;
             }
 
-
             using (var editForm = new CreateEdit_Item_Form(SelectedId))
             {
                 if (editForm.ShowDialog() == DialogResult.OK)
@@ -370,7 +324,6 @@ namespace POS.UserControls
 
         private void ShodSoldItemsForItem_Click(object sender, EventArgs e)
         {
-
             if (itemsTable.SelectedRows.Count == 0)
                 return;
 
@@ -387,45 +340,10 @@ namespace POS.UserControls
             await LoadDataAsync();
         }
 
-
-
-        private async void itemsTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-        {
-            //if (!UserManager.instance.CurrentLogin.CanEditItem)
-            //{
-            //    e.Cancel = true;
-            //    return;
-            //}
-
-
-            //var table = sender as DataGridView;
-            //var selectedRows = table.SelectedRows.Cast<DataGridViewRow>();
-            //var selectedIds = selectedRows.Select(row => row.Cells[0].Value.ToString());
-
-            //try
-            //{
-            //    using (var context = new POSEntities())
-            //    {
-            //        var toBeRemoved = context.Items.Include(i => i.Products.Select(p => p.StockinHistories))
-            //            .Where(i => selectedIds.Any(s => s == i.Id));
-
-            //        context.Items.RemoveRange(toBeRemoved);
-
-            //        await context.SaveChangesAsync();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    e.Cancel = true;
-            //    MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-        }
         private async void InventoryUC_Load(object sender, EventArgs e)
         {
-
             try
             {
-
                 var currLogin = UserManager.instance.CurrentLogin;
 
                 addItemBtn.Enabled = currLogin.CanEditItem;
@@ -441,11 +359,7 @@ namespace POS.UserControls
                 departmentOption.SelectedIndex = 0;
                 departmentOption.SelectedIndexChanged += departmentOption_SelectedIndexChanged;
             }
-            catch
-            {
-
-            }
-
+            catch { }
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)
@@ -487,13 +401,7 @@ namespace POS.UserControls
                 if (string.IsNullOrEmpty(barcodeToCopy))
                     return;
 
-                try
-                {
-                    Clipboard.SetText(barcodeToCopy);
-                }
-                catch (Exception)
-                {
-                }
+                try { Clipboard.SetText(barcodeToCopy); } catch (Exception) { }
             }
         }
 
@@ -543,7 +451,6 @@ namespace POS.UserControls
             if (trackItemCheckbox.Checked)
             {
                 await TrackItemAsync(e.Text);
-
                 return;
             }
 
@@ -592,10 +499,7 @@ namespace POS.UserControls
                     MessageBox.Show("Item Not Found!", "Tracking Item", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch
-            {
-
-            }
+            catch { }
         }
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
@@ -612,7 +516,6 @@ namespace POS.UserControls
             {
                 if (int.TryParse(rb.Tag.ToString(), out int value))
                 {
-
                     ItemFilter filter = (ItemFilter)value;
                     currentItemFilter = filter;
 
@@ -646,28 +549,8 @@ namespace POS.UserControls
                 if (!IsBusyLoading && pagination.CanNext)
                 {
                     pagination.Next();
-
                     await LoadDataAsync();
                 }
-            }
-        }
-
-        private async void button4_Click(object sender, EventArgs e)
-        {
-            using (var context = new POSEntities())
-            {
-                var departments = await context.Items.GetDepartments().ToArrayAsync();
-                departmentOption.Items.Add(string.Empty);
-                /* this causes double loading */
-                //departmentOption.SelectedIndex = 0;
-                departmentOption.Items.Clear();
-                departmentOption.AutoCompleteCustomSource.Clear();
-
-                departmentOption.Items.Add("");
-                departmentOption.Items.AddRange(departments);
-
-                departmentOption.AutoCompleteCustomSource.Add("");
-                departmentOption.AutoCompleteCustomSource.AddRange(departments);
             }
         }
 
@@ -675,21 +558,16 @@ namespace POS.UserControls
         {
             itemCount.Text = itemsTable.RowCount.ToString("N0");
         }
+
         private void itemsTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-
             itemCount.Text = itemsTable.RowCount.ToString("N0");
-        }
-
-        private void tablePanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var stockinLog = new StockinLog();
-            stockinLog.ShowDialog();
+            var stock_inLog = new StockinLog();
+            stock_inLog.ShowDialog();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -773,7 +651,6 @@ namespace POS.UserControls
                     var ids = selectedRows
                         .Select(row => row.Cells[0].Value.ToString());
 
-
                     var toBeDeleted = context.Items
                         //.Include(i => i.Products.Select(p => p.StockinHistories))
                         .Where(i => ids.Any(id => id == i.Id));
@@ -798,7 +675,6 @@ namespace POS.UserControls
         }
     }
 
-
     public class Pagination
     {
         public void Initialize(int totalCount, int pageSize = 100)
@@ -821,7 +697,6 @@ namespace POS.UserControls
         public int Next()
         {
             CurrentIndex++;
-
             return Start;
         }
     }
