@@ -109,6 +109,7 @@
             this.itemsTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.itemsTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.itemsTable.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.itemsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -254,10 +255,11 @@
             // 
             this.soldTo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.soldTo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.soldTo.Location = new System.Drawing.Point(0, 15);
+            this.soldTo.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.soldTo.Location = new System.Drawing.Point(0, 10);
             this.soldTo.Name = "soldTo";
             this.soldTo.ReadOnly = true;
-            this.soldTo.Size = new System.Drawing.Size(350, 13);
+            this.soldTo.Size = new System.Drawing.Size(350, 18);
             this.soldTo.TabIndex = 0;
             this.soldTo.TabStop = false;
             this.soldTo.Text = "Lerom Ipsum";
@@ -269,10 +271,11 @@
             this.amountDue.BackColor = System.Drawing.SystemColors.Control;
             this.amountDue.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.amountDue.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.amountDue.Location = new System.Drawing.Point(0, 15);
+            this.amountDue.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.amountDue.Location = new System.Drawing.Point(0, 10);
             this.amountDue.Name = "amountDue";
             this.amountDue.ReadOnly = true;
-            this.amountDue.Size = new System.Drawing.Size(230, 13);
+            this.amountDue.Size = new System.Drawing.Size(230, 18);
             this.amountDue.TabIndex = 0;
             this.amountDue.TabStop = false;
             this.amountDue.Text = "Lorem Ipsum";
@@ -283,10 +286,11 @@
             this.amountRecieved.BackColor = System.Drawing.SystemColors.Control;
             this.amountRecieved.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.amountRecieved.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.amountRecieved.Location = new System.Drawing.Point(0, 15);
+            this.amountRecieved.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.amountRecieved.Location = new System.Drawing.Point(0, 10);
             this.amountRecieved.Name = "amountRecieved";
             this.amountRecieved.ReadOnly = true;
-            this.amountRecieved.Size = new System.Drawing.Size(230, 13);
+            this.amountRecieved.Size = new System.Drawing.Size(230, 18);
             this.amountRecieved.TabIndex = 0;
             this.amountRecieved.TabStop = false;
             this.amountRecieved.Text = "Lorem Ipsum";
@@ -297,10 +301,11 @@
             this.remaining.BackColor = System.Drawing.SystemColors.Control;
             this.remaining.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.remaining.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.remaining.Location = new System.Drawing.Point(0, 15);
+            this.remaining.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.remaining.Location = new System.Drawing.Point(0, 10);
             this.remaining.Name = "remaining";
             this.remaining.ReadOnly = true;
-            this.remaining.Size = new System.Drawing.Size(230, 13);
+            this.remaining.Size = new System.Drawing.Size(230, 18);
             this.remaining.TabIndex = 0;
             this.remaining.TabStop = false;
             this.remaining.Text = "Lorem Ipsum";
@@ -323,10 +328,11 @@
             // 
             this.soldBy.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.soldBy.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.soldBy.Location = new System.Drawing.Point(0, 15);
+            this.soldBy.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.soldBy.Location = new System.Drawing.Point(0, 10);
             this.soldBy.Name = "soldBy";
             this.soldBy.ReadOnly = true;
-            this.soldBy.Size = new System.Drawing.Size(350, 13);
+            this.soldBy.Size = new System.Drawing.Size(350, 18);
             this.soldBy.TabIndex = 0;
             this.soldBy.TabStop = false;
             this.soldBy.Text = "Lorem Ipsum";
@@ -408,8 +414,8 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.soldTo);
             this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.soldTo);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(20, 57);
             this.panel1.Name = "panel1";
@@ -439,8 +445,8 @@
             // panel3
             // 
             this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel3.Controls.Add(this.soldBy);
             this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.soldBy);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Location = new System.Drawing.Point(20, 92);
             this.panel3.Name = "panel3";
@@ -471,8 +477,8 @@
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel5.Controls.Add(this.amountRecieved);
             this.panel5.Controls.Add(this.label4);
+            this.panel5.Controls.Add(this.amountRecieved);
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Location = new System.Drawing.Point(734, 127);
             this.panel5.Name = "panel5";
@@ -505,8 +511,8 @@
             this.remainGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.remainGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.remainGroup.BackColor = System.Drawing.SystemColors.Control;
-            this.remainGroup.Controls.Add(this.remaining);
             this.remainGroup.Controls.Add(this.label5);
+            this.remainGroup.Controls.Add(this.remaining);
             this.remainGroup.Controls.Add(this.panel8);
             this.remainGroup.Location = new System.Drawing.Point(734, 162);
             this.remainGroup.Name = "remainGroup";
@@ -539,8 +545,8 @@
             this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel9.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel9.BackColor = System.Drawing.SystemColors.Control;
-            this.panel9.Controls.Add(this.amountDue);
             this.panel9.Controls.Add(this.label6);
+            this.panel9.Controls.Add(this.amountDue);
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Location = new System.Drawing.Point(734, 92);
             this.panel9.Name = "panel9";
@@ -582,8 +588,8 @@
             this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel7.BackColor = System.Drawing.SystemColors.Control;
-            this.panel7.Controls.Add(this.discount);
             this.panel7.Controls.Add(this.label1);
+            this.panel7.Controls.Add(this.discount);
             this.panel7.Controls.Add(this.panel11);
             this.panel7.Location = new System.Drawing.Point(734, 57);
             this.panel7.Name = "panel7";
@@ -595,10 +601,11 @@
             this.discount.BackColor = System.Drawing.SystemColors.Control;
             this.discount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.discount.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.discount.Location = new System.Drawing.Point(0, 15);
+            this.discount.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.discount.Location = new System.Drawing.Point(0, 10);
             this.discount.Name = "discount";
             this.discount.ReadOnly = true;
-            this.discount.Size = new System.Drawing.Size(230, 13);
+            this.discount.Size = new System.Drawing.Size(230, 18);
             this.discount.TabIndex = 0;
             this.discount.TabStop = false;
             this.discount.Text = "Lorem Ipsum";
