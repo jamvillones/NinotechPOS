@@ -45,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 16);
+            this.label1.Location = new System.Drawing.Point(71, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 0;
@@ -54,7 +54,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(61, 90);
+            this.label2.Location = new System.Drawing.Point(73, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
@@ -65,7 +65,7 @@
             // 
             this.UsernameTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.UsernameTxt.Location = new System.Drawing.Point(121, 12);
+            this.UsernameTxt.Location = new System.Drawing.Point(133, 12);
             this.UsernameTxt.MaxLength = 50;
             this.UsernameTxt.Name = "UsernameTxt";
             this.UsernameTxt.Size = new System.Drawing.Size(181, 20);
@@ -75,7 +75,7 @@
             // 
             this.PasswordTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PasswordTxt.Location = new System.Drawing.Point(121, 86);
+            this.PasswordTxt.Location = new System.Drawing.Point(133, 86);
             this.PasswordTxt.MaxLength = 50;
             this.PasswordTxt.Name = "PasswordTxt";
             this.PasswordTxt.PasswordChar = '*';
@@ -87,9 +87,9 @@
             // 
             this.ConfirmBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ConfirmBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConfirmBtn.Location = new System.Drawing.Point(12, 188);
+            this.ConfirmBtn.Location = new System.Drawing.Point(38, 186);
             this.ConfirmBtn.Name = "ConfirmBtn";
-            this.ConfirmBtn.Size = new System.Drawing.Size(120, 35);
+            this.ConfirmBtn.Size = new System.Drawing.Size(276, 35);
             this.ConfirmBtn.TabIndex = 8;
             this.ConfirmBtn.Text = "Confirm";
             this.ConfirmBtn.UseVisualStyleBackColor = true;
@@ -99,7 +99,7 @@
             // 
             this.ConfirmPassTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ConfirmPassTxt.Location = new System.Drawing.Point(121, 120);
+            this.ConfirmPassTxt.Location = new System.Drawing.Point(133, 120);
             this.ConfirmPassTxt.MaxLength = 50;
             this.ConfirmPassTxt.Name = "ConfirmPassTxt";
             this.ConfirmPassTxt.PasswordChar = '*';
@@ -110,7 +110,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 124);
+            this.label3.Location = new System.Drawing.Point(35, 124);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 13);
             this.label3.TabIndex = 9;
@@ -134,7 +134,7 @@
             // 
             this.nameTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nameTxt.Location = new System.Drawing.Point(121, 46);
+            this.nameTxt.Location = new System.Drawing.Point(133, 46);
             this.nameTxt.MaxLength = 50;
             this.nameTxt.Name = "nameTxt";
             this.nameTxt.Size = new System.Drawing.Size(181, 20);
@@ -143,7 +143,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(79, 50);
+            this.label4.Location = new System.Drawing.Point(91, 50);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 13;
@@ -166,10 +166,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CreateLogin";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create Login";
             this.Load += new System.EventHandler(this.CreateLogin_Load);

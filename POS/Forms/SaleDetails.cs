@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -247,57 +248,107 @@ namespace POS.Forms
             printAction = e.PrintAction;
         }
 
+        void TryCancelLoading()
+        {
+            try
+            {
+                cancellationTokenSource?.Dispose();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        CancellationTokenSource cancellationTokenSource = null;
+
         async Task<bool> LoadDataAsync()
         {
+            cancellationTokenSource = new CancellationTokenSource();
+            var token = cancellationTokenSource.Token;
+
             bool isNotEmpty = false;
-            using (var context = new POSEntities())
+
+            try
             {
-                var soldItems = context.SoldItems
-                    .AsNoTracking()
-                    .AsQueryable()
-                    .Where(so => so.SaleId == _saleId)
-                    .ApplySearch(keyword)
-                    .OrderBy(s => s.Product.Item.Name);
-
-                var result = await soldItems.ToListAsync();
-                isNotEmpty = result.Count > 0;
-
-                if (isNotEmpty)
+                using (var context = new POSEntities())
                 {
-                    itemsTable.Rows.Clear();
-                    var nameGroupings = soldItems.GroupBy(s => s.Product.Item.Name);
+                    var soldItems = context.SoldItems
+                        .AsNoTracking()
+                        .AsQueryable()
+                        .Where(so => so.SaleId == _saleId)
+                        .ApplySearch(keyword)
+                        .OrderBy(s => s.Product.Item.Name);
 
-                    foreach (var group in nameGroupings)
+                    token.ThrowIfCancellationRequested();
+
+                    var result = await soldItems.ToListAsync(token);
+                    isNotEmpty = result.Count > 0;
+
+                    if (isNotEmpty)
                     {
-                        bool isFirstNameEntry = true;
-                        var nameItems = result.Where(r => r.Product.Item.Name == group.Key);
-                        var supplierGroupings = nameItems.GroupBy(i => i.Product.Supplier?.Name);
+                        itemsTable.Rows.Clear();
 
-                        foreach (var supplierGroup in supplierGroupings)
+                        if (checkBox1.Checked)
                         {
-                            bool isFirstSupplierEntry = true;
-                            var supplierItems = nameItems.Where(i => i.Product.Supplier?.Name == supplierGroup.Key);
-
-                            foreach (var i in supplierItems)
+                            var nameGroupings = soldItems.GroupBy(s => s.Product.Item.Name);
+                            foreach (var group in nameGroupings)
                             {
-                                itemsTable.Rows.Add(
-                                    CreateRow(
-                                        i,
-                                        isFirstNameEntry,
-                                        isFirstSupplierEntry,
-                                        i.Product.Item.IsSerialRequired ? supplierItems.Count() : i.Quantity
-                                    )
-                                );
+                                token.ThrowIfCancellationRequested();
 
-                                isFirstSupplierEntry = false;
-                                isFirstNameEntry = false;
+                                bool isFirstNameEntry = true;
+                                var nameItems = result.Where(r => r.Product.Item.Name == group.Key);
+                                var supplierGroupings = nameItems.GroupBy(i => i.Product.Supplier?.Name);
+
+                                foreach (var supplierGroup in supplierGroupings)
+                                {
+                                    token.ThrowIfCancellationRequested();
+
+                                    bool isFirstSupplierEntry = true;
+                                    var supplierItems = nameItems.Where(i => i.Product.Supplier?.Name == supplierGroup.Key);
+
+                                    foreach (var i in supplierItems)
+                                    {
+                                        token.ThrowIfCancellationRequested();
+
+                                        itemsTable.Rows.Add(
+                                            CreateRow(
+                                                i,
+                                                isFirstNameEntry,
+                                                isFirstSupplierEntry,
+                                                i.Product.Item.IsSerialRequired ? supplierItems.Count() : i.Quantity
+                                            )
+                                        );
+
+                                        isFirstSupplierEntry = false;
+                                        isFirstNameEntry = false;
+                                    }
+                                }
                             }
                         }
-                    }
+                        else
+                        {
+                            var rows = result.Select(soldItem => CreateRow(soldItem, true, true, soldItem.Quantity)).ToArray();
 
-                    decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
-                    itemsTable.Rows.Add("", "", "", "", "", "", "", subTotal);
+                            token.ThrowIfCancellationRequested();
+
+                            itemsTable.Rows.AddRange(rows);
+                        }
+
+                        decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
+                        itemsTable.Rows.Add("", "", "", "", "", "", "", subTotal);
+                    }
                 }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                cancellationTokenSource?.Dispose();
             }
             return isNotEmpty;
         }
@@ -318,6 +369,7 @@ namespace POS.Forms
         private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
         {
             keyword = e.Text.Trim();
+            TryCancelLoading();
             e.SearchFound = await LoadDataAsync();
 
             _messageLabel.Text = e.SearchFound ? "" : "**No Results Found.";
@@ -326,6 +378,7 @@ namespace POS.Forms
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
             keyword = string.Empty;
+            TryCancelLoading();
             await LoadDataAsync();
         }
 
@@ -409,14 +462,24 @@ namespace POS.Forms
                 MessageBox.Show(ex.Message, "Return Items Failed", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             }
 
+            TryCancelLoading();
             await LoadDataAsync();
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            TryCancelLoading();
+            await LoadDataAsync();
+        }
+
+        private void SaleDetails_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TryCancelLoading();
         }
     }
 

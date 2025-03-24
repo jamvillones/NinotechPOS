@@ -54,7 +54,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icons8_cash_register_color.ico</ApplicationIcon>
+    <ApplicationIcon>icons8_cash_register.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>21AE8317BA6A16265F5B62CBFDA45D709D6D1897</ManifestCertificateThumbprint>
@@ -117,6 +117,12 @@
     </Compile>
     <Compile Include="Forms\Add_Edit_ConnectionConfig.Designer.cs">
       <DependentUpon>Add_Edit_ConnectionConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AdminConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminConfirmation.Designer.cs">
+      <DependentUpon>AdminConfirmation.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ChangeCustomerForm.cs">
       <SubType>Form</SubType>
@@ -507,6 +513,9 @@
     <EmbeddedResource Include="Forms\Add_Edit_ConnectionConfig.resx">
       <DependentUpon>Add_Edit_ConnectionConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminConfirmation.resx">
+      <DependentUpon>AdminConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChangeCustomerForm.resx">
       <DependentUpon>ChangeCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -693,6 +702,7 @@
     <None Include="uiTesting_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icons8_cash_register.ico" />
     <Content Include="icons8_cash_register_color.ico" />
     <Content Include="POSModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -74,14 +74,14 @@ namespace POS
         /// </summary>
         private void saveSettings()
         {
-            var settings = Properties.Settings.Default;
+            //var settings = Properties.Settings.Default;
 
-            settings.IsLocalConnection = checkBox1.Checked;
-            settings.DataSource = dataSource;
-            settings.PortName = portName;
-            settings.UserId = id;
-            settings.Password = password;
-            settings.Save();
+            //settings.IsLocalConnection = checkBox1.Checked;
+            //settings.DataSource = dataSource;
+            //settings.PortName = portName;
+            //settings.UserId = id;
+            //settings.Password = password;
+            //settings.Save();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -96,11 +96,11 @@ namespace POS
         {
             var settings = Properties.Settings.Default;
 
-            dataSource = settings.DataSource;
-            portName = settings.PortName;
-            id = settings.UserId;
-            password = settings.Password;
-            checkBox1.Checked = settings.IsLocalConnection;
+            //dataSource = settings.DataSource;
+            //portName = settings.PortName;
+            //id = settings.UserId;
+            //password = settings.Password;
+            //checkBox1.Checked = settings.IsLocalConnection;
 
             textBox1.Enabled = textBox2.Enabled = textBox3.Enabled = textBox4.Enabled = !checkBox1.Checked;
         }

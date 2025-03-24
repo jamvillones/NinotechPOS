@@ -55,10 +55,10 @@
             // 
             this.userButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.userButton.AutoEllipsis = true;
-            this.userButton.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.userButton.BackColor = System.Drawing.SystemColors.Control;
             this.userButton.FlatAppearance.BorderSize = 0;
             this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.userButton.ForeColor = System.Drawing.Color.White;
+            this.userButton.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.userButton.Location = new System.Drawing.Point(1070, 15);
             this.userButton.Margin = new System.Windows.Forms.Padding(0);

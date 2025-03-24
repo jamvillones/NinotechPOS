@@ -30,22 +30,32 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserPrivilegesForm));
             this.userTable = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.searchControl1 = new POS.UserControls.SearchControl();
+            this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ItemEdit = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col_CostEdit = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col_SuppEdit = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col_StockIn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col_UndoStockIn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col_Void = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.col_RemoveBtn = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.userTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,110 +63,60 @@
             // 
             this.userTable.AllowUserToAddRows = false;
             this.userTable.AllowUserToDeleteRows = false;
-            this.userTable.AllowUserToResizeColumns = false;
             this.userTable.AllowUserToResizeRows = false;
             this.userTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.userTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
             this.userTable.BackgroundColor = System.Drawing.SystemColors.Control;
             this.userTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.userTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.userTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.userTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.userTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.userTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.userTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
+            this.col_Id,
             this.Column2,
             this.Column5,
-            this.Column4,
-            this.Column7,
-            this.Column14,
-            this.Column10,
-            this.Column12,
-            this.Column13,
-            this.Column3});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.userTable.DefaultCellStyle = dataGridViewCellStyle2;
+            this.col_ItemEdit,
+            this.col_CostEdit,
+            this.col_SuppEdit,
+            this.col_StockIn,
+            this.col_UndoStockIn,
+            this.col_Void,
+            this.col_RemoveBtn});
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.userTable.DefaultCellStyle = dataGridViewCellStyle11;
             this.userTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userTable.EnableHeadersVisualStyles = false;
             this.userTable.Location = new System.Drawing.Point(20, 75);
             this.userTable.MultiSelect = false;
             this.userTable.Name = "userTable";
-            this.userTable.RowHeadersVisible = false;
+            this.userTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.userTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.userTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.userTable.Size = new System.Drawing.Size(944, 446);
             this.userTable.TabIndex = 0;
             this.userTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.userTable_CellContentClick);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "ID";
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "USERNAME";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "NAME";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "ITEM/EDIT";
-            this.Column4.Name = "Column4";
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "PRODUCT/EDIT";
-            this.Column7.Name = "Column7";
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "INVENTORY/EDIT";
-            this.Column14.Name = "Column14";
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "SUPPLIER/EDIT";
-            this.Column10.Name = "Column10";
-            // 
-            // Column12
-            // 
-            this.Column12.HeaderText = "CAN STOCKIN";
-            this.Column12.Name = "Column12";
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "CAN VOID";
-            this.Column13.Name = "Column13";
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column3.HeaderText = "";
-            this.Column3.Name = "Column3";
-            this.Column3.Text = "Remove";
-            this.Column3.UseColumnTextForButtonValue = true;
-            this.Column3.Width = 12;
             // 
             // panel1
             // 
@@ -181,6 +141,103 @@
             this.searchControl1.TabIndex = 2;
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            // 
+            // col_Id
+            // 
+            this.col_Id.HeaderText = "ID";
+            this.col_Id.Name = "col_Id";
+            this.col_Id.Visible = false;
+            // 
+            // Column2
+            // 
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column2.HeaderText = "USERNAME";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            dataGridViewCellStyle3.NullValue = "N/A";
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column5.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column5.HeaderText = "NAME";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // col_ItemEdit
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = false;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.col_ItemEdit.DefaultCellStyle = dataGridViewCellStyle4;
+            this.col_ItemEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.col_ItemEdit.HeaderText = "ITEM - EDIT";
+            this.col_ItemEdit.Name = "col_ItemEdit";
+            // 
+            // col_CostEdit
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.NullValue = false;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.col_CostEdit.DefaultCellStyle = dataGridViewCellStyle5;
+            this.col_CostEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.col_CostEdit.HeaderText = "COST - EDIT";
+            this.col_CostEdit.Name = "col_CostEdit";
+            // 
+            // col_SuppEdit
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.NullValue = false;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.col_SuppEdit.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col_SuppEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.col_SuppEdit.HeaderText = "SUPPLIER - EDIT";
+            this.col_SuppEdit.Name = "col_SuppEdit";
+            // 
+            // col_StockIn
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.NullValue = false;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.col_StockIn.DefaultCellStyle = dataGridViewCellStyle7;
+            this.col_StockIn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.col_StockIn.HeaderText = "CAN STOCKIN";
+            this.col_StockIn.Name = "col_StockIn";
+            // 
+            // col_UndoStockIn
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.NullValue = false;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.col_UndoStockIn.DefaultCellStyle = dataGridViewCellStyle8;
+            this.col_UndoStockIn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.col_UndoStockIn.HeaderText = "UNDO STOCK - INS";
+            this.col_UndoStockIn.Name = "col_UndoStockIn";
+            this.col_UndoStockIn.ToolTipText = "*can undo stock - ins";
+            // 
+            // col_Void
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.NullValue = false;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.col_Void.DefaultCellStyle = dataGridViewCellStyle9;
+            this.col_Void.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.col_Void.HeaderText = "CAN VOID";
+            this.col_Void.Name = "col_Void";
+            // 
+            // col_RemoveBtn
+            // 
+            this.col_RemoveBtn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(1);
+            this.col_RemoveBtn.DefaultCellStyle = dataGridViewCellStyle10;
+            this.col_RemoveBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.col_RemoveBtn.HeaderText = "";
+            this.col_RemoveBtn.Name = "col_RemoveBtn";
+            this.col_RemoveBtn.Text = "REMOVE";
+            this.col_RemoveBtn.UseColumnTextForButtonValue = true;
+            this.col_RemoveBtn.Width = 12;
             // 
             // UserPrivilegesForm
             // 
@@ -208,15 +265,15 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel1;
         private UserControls.SearchControl searchControl1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column13;
-        private System.Windows.Forms.DataGridViewButtonColumn Column3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn col_ItemEdit;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn col_CostEdit;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn col_SuppEdit;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn col_StockIn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn col_UndoStockIn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn col_Void;
+        private System.Windows.Forms.DataGridViewButtonColumn col_RemoveBtn;
     }
 }

@@ -37,13 +37,12 @@ namespace POS
         private void LoadProperties()
         {
             var currentLogin = CurrentLogin;
-
             userButton.Text = "  " + currentLogin.ToString();
-            var settings = Properties.Settings.Default;
 
-            this.Text = "POS - " + (settings.IsLocalConnection ? "localConnection" : settings.DataSource);
+            this.Text = $"POS - {ConnectionConfiguration_Source.CurrentConfiguration}";
 
             bool isAdmin = currentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
+
             button6.Visible = isAdmin;
             button5.Enabled = currentLogin.CanEditSupplier;
         }

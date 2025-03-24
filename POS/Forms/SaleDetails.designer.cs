@@ -80,11 +80,12 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this._messageLabel = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.discount = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.discount = new System.Windows.Forms.TextBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.searchControl1 = new POS.UserControls.SearchControl();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -143,7 +144,7 @@
             this.itemsTable.DefaultCellStyle = dataGridViewCellStyle9;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.LightGray;
-            this.itemsTable.Location = new System.Drawing.Point(20, 210);
+            this.itemsTable.Location = new System.Drawing.Point(20, 220);
             this.itemsTable.Name = "itemsTable";
             this.itemsTable.ReadOnly = true;
             this.itemsTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
@@ -156,7 +157,7 @@
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.itemsTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(944, 327);
+            this.itemsTable.Size = new System.Drawing.Size(944, 317);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 2;
             this.itemsTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellClick);
@@ -185,7 +186,7 @@
             // qtyCol
             // 
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "0 Units";
+            dataGridViewCellStyle4.Format = "0 Unit/s";
             dataGridViewCellStyle4.NullValue = null;
             dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.qtyCol.DefaultCellStyle = dataGridViewCellStyle4;
@@ -596,6 +597,18 @@
             this.panel7.Size = new System.Drawing.Size(230, 29);
             this.panel7.TabIndex = 24;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Discount:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // discount
             // 
             this.discount.BackColor = System.Drawing.SystemColors.Control;
@@ -610,18 +623,6 @@
             this.discount.TabStop = false;
             this.discount.Text = "Lorem Ipsum";
             this.discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Discount:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel11
             // 
@@ -657,11 +658,25 @@
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(20, 200);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(94, 17);
+            this.checkBox1.TabIndex = 26;
+            this.checkBox1.Text = "Compact View";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 611);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.itemsTable);
@@ -682,6 +697,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sale Details";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SaleDetails_FormClosing);
             this.Load += new System.EventHandler(this.SaleDetails_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleDetails_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
@@ -738,6 +754,11 @@
         private System.Windows.Forms.TextBox discount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem returnItemToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplierCol;
@@ -746,9 +767,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn discountCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalCol;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem returnItemToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label7;
     }
 }

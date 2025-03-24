@@ -27,6 +27,7 @@ namespace POS.Forms
         private void loginBtn_Click(object sender, EventArgs e)
         {
             LoginSuccessful = UserManager.instance.Login(username.Text, password.Text);
+
             if (LoginSuccessful)
             {
                 this.Close();
@@ -52,7 +53,9 @@ namespace POS.Forms
         private void LoginForm_Load(object sender, EventArgs e)
         {
             var settings = Properties.Settings.Default;
-            this.Text = "POS-Login: " + (settings.IsLocalConnection ? "localHost" : settings.DataSource);
+            //this.Text = "POS-Login: " + (settings.IsLocalConnection ? "localHost" : settings.DataSource);
+
+            this.Text = $"POS - Login {ConnectionConfiguration_Source.CurrentConfiguration}";
 
             //label1.Text = "version: " + GetVersion();
             TryConnect();
@@ -102,8 +105,10 @@ namespace POS.Forms
                 //MessageBox.Show(STRINGS[2], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var config = new ServerConnections();
                 //var config = new ConnectionConfigurations();
-                config.ShowDialog();
-
+                if (config.ShowDialog() == DialogResult.OK)
+                {
+                    this.Text = $"POS - Login {ConnectionConfiguration_Source.CurrentConfiguration}";
+                }
             }
 
         }
@@ -123,7 +128,7 @@ namespace POS.Forms
         {
             using (var createLogin = new CreateLogin())
             {
-                if (createLogin.ShowDialog() == DialogResult.OK)
+                if (createLogin.RequireAdminConfirmationBeforeViewing() == DialogResult.OK)
                 {
 
                 }
