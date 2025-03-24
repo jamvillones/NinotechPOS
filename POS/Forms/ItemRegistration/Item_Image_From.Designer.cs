@@ -78,7 +78,7 @@
             this.button3.MaximumSize = new System.Drawing.Size(150, 35);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 35);
-            this.button3.TabIndex = 2;
+            this.button3.TabIndex = 3;
             this.button3.Text = "  Remove Image";
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button3.UseVisualStyleBackColor = false;
@@ -96,7 +96,7 @@
             this.button5.MaximumSize = new System.Drawing.Size(150, 35);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(120, 35);
-            this.button5.TabIndex = 1;
+            this.button5.TabIndex = 2;
             this.button5.Text = "  Choose Image";
             this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button5.UseVisualStyleBackColor = false;
@@ -126,7 +126,7 @@
             this.saveBtn.MinimumSize = new System.Drawing.Size(150, 35);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(150, 35);
-            this.saveBtn.TabIndex = 12;
+            this.saveBtn.TabIndex = 1;
             this.saveBtn.Text = "  Next Step";
             this.saveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.saveBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

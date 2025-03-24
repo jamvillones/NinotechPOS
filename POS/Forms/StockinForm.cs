@@ -244,9 +244,9 @@ namespace POS.Forms
         {
             using (var p = new POSEntities())
             {
-                if (p.InventoryItems.Any(x => x.SerialNumber == serial))
+                if (p.InventoryItems.Any(x => x.SerialNumber == serial) || p.SoldItems.Any(x => x.SerialNumber == serial))
                 {
-                    MessageBox.Show("Serial number already in inventory.", "Serial Number Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Serial number already found in record.", "Serial Number Invalid", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return true;
                 }
             }
@@ -425,6 +425,10 @@ namespace POS.Forms
             TryCancel();
             keyword = e.Text;
             e.SearchFound = await LoadDataAsync();
+            if (e.SearchFound)
+            {
+                serialNumber.SelectAll();
+            }
             _messageLabel.Text = e.SearchFound ? "" : "**No Results Found!";
         }
 

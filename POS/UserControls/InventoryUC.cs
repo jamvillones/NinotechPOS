@@ -672,6 +672,8 @@ namespace POS.UserControls
         private void trackItemCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             searchBar.firstControl.Focus();
+            var textBox = searchBar.firstControl as TextBox;
+            textBox.SelectAll();
         }
     }
 
