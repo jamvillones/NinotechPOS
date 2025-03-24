@@ -54,7 +54,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icons8_cash_register.ico</ApplicationIcon>
+    <ApplicationIcon>icons8_cash_register_color.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>21AE8317BA6A16265F5B62CBFDA45D709D6D1897</ManifestCertificateThumbprint>

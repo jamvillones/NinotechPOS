@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_3DAD367C44F949079BA6BC5B912C4FE9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4A8584C94F65A1F8D9FC1434F200B30B"
         "OwnerKey" = "8:_E2E906A01B314322912D8DE04C8AED54"
         "MsmSig" = "8:_UNDEFINED"
@@ -71,12 +77,6 @@
         {
         "MsmKey" = "8:_DB29C9683786BE5B2ACF03DA3A27F87B"
         "OwnerKey" = "8:_E2E906A01B314322912D8DE04C8AED54"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DE5D57276B0D4BBA8AF3FC7767F2085D"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -263,6 +263,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3DAD367C44F949079BA6BC5B912C4FE9"
+            {
+            "SourcePath" = "8:..\\POS\\icons8_cash_register_color.ico"
+            "TargetName" = "8:icons8_cash_register_color.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4A8584C94F65A1F8D9FC1434F200B30B"
@@ -482,26 +502,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DE5D57276B0D4BBA8AF3FC7767F2085D"
-            {
-            "SourcePath" = "8:..\\POS\\icons8_cash_register.ico"
-            "TargetName" = "8:icons8_cash_register.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
@@ -558,15 +558,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Niñotech POS"
-        "ProductCode" = "8:{814386C1-0FEA-4150-B704-8C742572745F}"
-        "PackageCode" = "8:{30D5E779-AE7F-42D6-9073-59A0E8C82CB4}"
+        "ProductCode" = "8:{61A10946-2E12-4C12-9411-15E5E42330BE}"
+        "PackageCode" = "8:{1E41202A-154E-4C14-8988-0D0284DEBB87}"
         "UpgradeCode" = "8:{A5499E8B-6ED5-4E19-B05A-1B37663684CA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.1131"
+        "ProductVersion" = "8:1.0.1133"
         "Manufacturer" = "8:Niñotech"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -576,7 +576,7 @@
         "Keywords" = "8:pos"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_DE5D57276B0D4BBA8AF3FC7767F2085D"
+        "ARPPRODUCTICON" = "8:_3DAD367C44F949079BA6BC5B912C4FE9"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -679,21 +679,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5BE97DAE62804EFAB6D0BB2D7CC277C0"
-            {
-            "Name" = "8:Niñotech POS"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_E2E906A01B314322912D8DE04C8AED54"
-            "Folder" = "8:_03F7AB25F6E847609F8E97623E46F450"
-            "WorkingFolder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
-            "Icon" = "8:_DE5D57276B0D4BBA8AF3FC7767F2085D"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E45A3D02BAA34AA0BEFB577F2BBB74D8"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A82B00384E1B4C2AA84CA2C8DA4B3F3F"
             {
             "Name" = "8:Niñotech POS"
             "Arguments" = "8:"
@@ -704,7 +690,21 @@
             "Target" = "8:_E2E906A01B314322912D8DE04C8AED54"
             "Folder" = "8:_F74937C57B0D4BD296B2F7312A54DBAA"
             "WorkingFolder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
-            "Icon" = "8:_DE5D57276B0D4BBA8AF3FC7767F2085D"
+            "Icon" = "8:_3DAD367C44F949079BA6BC5B912C4FE9"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_AE425DBDFEC544339177D736122A6515"
+            {
+            "Name" = "8:Niñotech POS"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_E2E906A01B314322912D8DE04C8AED54"
+            "Folder" = "8:_03F7AB25F6E847609F8E97623E46F450"
+            "WorkingFolder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
+            "Icon" = "8:_3DAD367C44F949079BA6BC5B912C4FE9"
             "Feature" = "8:"
             }
         }
