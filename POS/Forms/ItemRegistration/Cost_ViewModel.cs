@@ -10,7 +10,7 @@
         public Cost_ViewModel(Product p)
         {
             Id = p.Id;
-            Supplier = p.Supplier;
+            Supplier = new Supplier() { Id = p.Supplier.Id, Name = p.Supplier.Name, ContactDetails = p.Supplier.ContactDetails };
             Cost = p.Cost;
         }
 

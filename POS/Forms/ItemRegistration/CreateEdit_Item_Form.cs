@@ -413,6 +413,23 @@ namespace POS.Forms.ItemRegistration
 
             _barcode.Text = guid.Base36Encode();
         }
+
+        private void costTable_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var table = sender as DataGridView;
+            if (e.RowIndex == -1)
+                return;
+
+            var cost = table.SelectedRows[0].DataBoundItem as Cost_ViewModel;
+
+            using (var changeSupplier = new ChangeCostSupplier(cost.Id))
+            {
+                if (changeSupplier.RequireAdminConfirmationBeforeViewing() == DialogResult.OK)
+                {
+                    cost.Supplier = changeSupplier.Tag as Supplier;
+                }
+            }
+        }
     }
 
     public static class ItemDepartmentExtensions

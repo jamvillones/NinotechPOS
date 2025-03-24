@@ -507,6 +507,7 @@
             this.costTable.Size = new System.Drawing.Size(298, 158);
             this.costTable.StandardTab = true;
             this.costTable.TabIndex = 1;
+            this.costTable.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.costTable_CellContentDoubleClick);
             this.costTable.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.costTable_RowsAdded);
             // 
             // col_Id

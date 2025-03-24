@@ -124,6 +124,12 @@
     <Compile Include="Forms\AdminConfirmation.Designer.cs">
       <DependentUpon>AdminConfirmation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ChangeCostSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChangeCostSupplier.Designer.cs">
+      <DependentUpon>ChangeCostSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ChangeCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -515,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminConfirmation.resx">
       <DependentUpon>AdminConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChangeCostSupplier.resx">
+      <DependentUpon>ChangeCostSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChangeCustomerForm.resx">
       <DependentUpon>ChangeCustomerForm.cs</DependentUpon>
