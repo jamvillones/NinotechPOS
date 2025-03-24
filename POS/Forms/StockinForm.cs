@@ -98,13 +98,13 @@ namespace POS.Forms
             }
             catch (TaskCanceledException)
             {
-
             }
             finally
             {
                 soure?.Dispose();
                 soure = null;
             }
+
             return entriesFound;
         }
 
@@ -137,6 +137,9 @@ namespace POS.Forms
             itemName.Text = CurrentProductBarcode + " - " + CurrentProductName + " - " + CurrentProductCost.ToString("C2");
 
             Foo(CurrentSerialRequired);
+
+            serialNumber.Focus();
+            serialNumber.SelectAll();
         }
         void Foo(bool serialRequired)
         {
@@ -184,7 +187,7 @@ namespace POS.Forms
 
                     var product = await context.Products.FirstOrDefaultAsync(x => x.Id == productId);
 
-                    var stockinHist = new StockinHistory
+                    var stockInHistory = new StockinHistory
                     {
                         ProductId = product.Id,
                         ItemName = product.Item.Name,
@@ -196,7 +199,7 @@ namespace POS.Forms
                         LoginUsername = context.Logins.FirstOrDefault(x => x.Username == CurrLogin.Username).Username
                     };
 
-                    context.StockinHistories.Add(stockinHist);
+                    context.StockinHistories.Add(stockInHistory);
                 }
 
                 await context.SaveChangesAsync();
