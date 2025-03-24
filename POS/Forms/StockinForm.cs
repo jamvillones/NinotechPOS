@@ -116,7 +116,7 @@ namespace POS.Forms
             }
         }
 
-        private async void StockinForm_Load(object sender, EventArgs e)
+        private async void StockInForm_Load(object sender, EventArgs e)
         {
             createItemBtn.Enabled = CurrLogin.CanEditItem;
 

@@ -636,7 +636,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock In";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.StockinForm_Load);
+            this.Load += new System.EventHandler(this.StockInForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.StockinForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
