@@ -86,9 +86,9 @@ namespace POS.Forms
 
                     if (ResultsFound)
                     {
-                        histTable.Rows.Clear();
+                        historyTable.Rows.Clear();
                         token.ThrowIfCancellationRequested();
-                        histTable.Rows.AddRange(finalResult.Select(CreateRow).ToArray());
+                        historyTable.Rows.AddRange(finalResult.Select(CreateRow).ToArray());
                         _totalCost.Text = ((decimal)(finalResult.Select(x => x.Cost * x.Quantity).Sum())).ToString("C2");
                     }
                 }
@@ -109,7 +109,7 @@ namespace POS.Forms
         {
             var row = new DataGridViewRow();
 
-            row.CreateCells(histTable,
+            row.CreateCells(historyTable,
                        stockInHistory.Id,
                        stockInHistory.Date.Value,
                        stockInHistory.LoginUsername,
@@ -230,7 +230,7 @@ namespace POS.Forms
 
 
 
-        private async void histTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private async void historyTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex == -1)
                 return;
@@ -240,7 +240,7 @@ namespace POS.Forms
                 if (!UserManager.instance.IsAdmin)
                     return;
 
-                decimal oldCost = (decimal)histTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                decimal oldCost = (decimal)historyTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 decimal newCost = 0;
 
                 using (var costForm = new EditCostForm(oldCost))
@@ -251,9 +251,9 @@ namespace POS.Forms
                         return;
                 }
 
-                await ChangeCostForStockInEntry(histTable.GetSelectedId(), newCost);
+                await ChangeCostForStockInEntry(historyTable.GetSelectedId(), newCost);
 
-                histTable[e.ColumnIndex, e.RowIndex].Value = newCost;
+                historyTable[e.ColumnIndex, e.RowIndex].Value = newCost;
 
                 return;
             }
@@ -290,7 +290,7 @@ namespace POS.Forms
 
         private async Task UndoSelectedStockIns()
         {
-            if (histTable.SelectedRows.Count == 0)
+            if (historyTable.SelectedRows.Count == 0)
                 return;
 
             var login = UserManager.instance.CurrentLogin;
@@ -302,7 +302,7 @@ namespace POS.Forms
 
             if (MessageBox.Show("Are you sure you want to undo this selected item/s?", "Undo Stock-Ins", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
 
-            var selectedIds = histTable.GetSelectedIds<int>(out IEnumerable<DataGridViewRow> selectedRows);
+            var selectedIds = historyTable.GetSelectedIds<int>(out IEnumerable<DataGridViewRow> selectedRows);
 
             try
             {
@@ -330,10 +330,8 @@ namespace POS.Forms
             }
 
             foreach (var row in selectedRows)
-                histTable.Rows.Remove(row);
+                historyTable.Rows.Remove(row);
         }
-
-
 
         void ShowStockInFailedMessage()
         {
@@ -345,9 +343,7 @@ namespace POS.Forms
     }
 
     public class UndoStockInFailedException : Exception
-    {
-
-    }
+    { }
 
     public static class StockInExtension
     {
@@ -370,7 +366,6 @@ namespace POS.Forms
                     return stockIns.Where(s => s.Date.Value.Year == dateSelected.Year);
                 default:
                     return stockIns;
-
             }
         }
 

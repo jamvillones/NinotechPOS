@@ -40,7 +40,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockinLog));
-            this.histTable = new System.Windows.Forms.DataGridView();
+            this.historyTable = new System.Windows.Forms.DataGridView();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,7 +64,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.searchControl1 = new POS.UserControls.SearchControl();
-            ((System.ComponentModel.ISupportInitialize)(this.histTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.historyTable)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             this.dateRangeHolder.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -72,16 +72,16 @@
             // 
             // histTable
             // 
-            this.histTable.AllowUserToAddRows = false;
-            this.histTable.AllowUserToDeleteRows = false;
-            this.histTable.AllowUserToResizeRows = false;
-            this.histTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.histTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            this.histTable.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.histTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.histTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.histTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.histTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.historyTable.AllowUserToAddRows = false;
+            this.historyTable.AllowUserToDeleteRows = false;
+            this.historyTable.AllowUserToResizeRows = false;
+            this.historyTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.historyTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            this.historyTable.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.historyTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.historyTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.historyTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.historyTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -89,9 +89,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.histTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.histTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.histTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.historyTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.historyTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.historyTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column9,
             this.Column1,
             this.Column7,
@@ -107,14 +107,14 @@
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HotTrack;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.histTable.DefaultCellStyle = dataGridViewCellStyle9;
-            this.histTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.histTable.EnableHeadersVisualStyles = false;
-            this.histTable.GridColor = System.Drawing.Color.DarkGray;
-            this.histTable.Location = new System.Drawing.Point(20, 124);
-            this.histTable.Name = "histTable";
-            this.histTable.ReadOnly = true;
-            this.histTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.historyTable.DefaultCellStyle = dataGridViewCellStyle9;
+            this.historyTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.historyTable.EnableHeadersVisualStyles = false;
+            this.historyTable.GridColor = System.Drawing.Color.DarkGray;
+            this.historyTable.Location = new System.Drawing.Point(20, 124);
+            this.historyTable.Name = "histTable";
+            this.historyTable.ReadOnly = true;
+            this.historyTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -122,17 +122,17 @@
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.histTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.histTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.historyTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.historyTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(10);
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.histTable.RowsDefaultCellStyle = dataGridViewCellStyle11;
-            this.histTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.histTable.Size = new System.Drawing.Size(830, 305);
-            this.histTable.StandardTab = true;
-            this.histTable.TabIndex = 2;
-            this.histTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.histTable_CellMouseDoubleClick);
-            this.histTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.histTable_KeyDown);
+            this.historyTable.RowsDefaultCellStyle = dataGridViewCellStyle11;
+            this.historyTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.historyTable.Size = new System.Drawing.Size(830, 305);
+            this.historyTable.StandardTab = true;
+            this.historyTable.TabIndex = 2;
+            this.historyTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.historyTable_CellMouseDoubleClick);
+            this.historyTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.histTable_KeyDown);
             // 
             // Column9
             // 
@@ -409,7 +409,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(870, 482);
-            this.Controls.Add(this.histTable);
+            this.Controls.Add(this.historyTable);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -422,7 +422,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stockin Log";
             this.Load += new System.EventHandler(this.StockinLog_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.histTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.historyTable)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             this.dateRangeHolder.ResumeLayout(false);
@@ -435,7 +435,7 @@
         }
 
         #endregion
-        protected System.Windows.Forms.DataGridView histTable;
+        protected System.Windows.Forms.DataGridView historyTable;
         private UserControls.SearchControl searchControl1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel dateRangeHolder;
