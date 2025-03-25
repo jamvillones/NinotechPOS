@@ -32,6 +32,11 @@ namespace POS
             this.Type == ItemType.Quantifiable.ToString();
     }
 
+    partial class Product
+    {
+        public override string ToString() => $"{Item.Name} - {Supplier.Name}";
+    }
+
     partial class Sale
     {
         /// <summary>

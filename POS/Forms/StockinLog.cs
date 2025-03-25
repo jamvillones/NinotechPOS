@@ -1,8 +1,10 @@
 ﻿using POS.Misc;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -67,36 +69,27 @@ namespace POS.Forms
             {
                 using (var p = new POSEntities())
                 {
-                    var stockins = p.StockinHistories
+                    var stockIns = p.StockinHistories
                         .AsNoTracking()
-                        .FilterByKeyword(keyword)
-                        .AsQueryable();
+                        .AsQueryable()
+                        .FilterByKeyword(keyword);
 
-                    stockins = (InRangeMode ? stockins.FilterByDateRange(From_Date, To_Date) :
-                                              stockins.FilterByDate(Date, filterMode))
+                    stockIns = (InRangeMode ? stockIns.FilterByDateRange(From_Date, To_Date) :
+                                              stockIns.FilterByDate(Date, filterMode))
                         .OrderByDescending(x => x.Date)
                             .ThenBy(s => s.ItemName);
 
-                    var finalResult = await stockins.ToListAsync();
+                    var finalResult = await stockIns.ToListAsync();
 
-                    histTable.Rows.Clear();
 
                     ResultsFound = finalResult.Count > 0;
 
                     if (ResultsFound)
                     {
+                        histTable.Rows.Clear();
                         token.ThrowIfCancellationRequested();
-
-                        await Task.Run(() =>
-                        {
-                            foreach (var row in finalResult)
-                            {
-                                if (token.IsCancellationRequested) break;
-                                histTable.InvokeIfRequired(() => histTable.Rows.Add(CreateRow(row)));
-                            }
-                        });
-
-                        _totalCost.Text = string.Format("₱ {0:n}", finalResult.Select(x => x.Cost * x.Quantity).Sum());
+                        histTable.Rows.AddRange(finalResult.Select(CreateRow).ToArray());
+                        _totalCost.Text = ((decimal)(finalResult.Select(x => x.Cost * x.Quantity).Sum())).ToString("C2");
                     }
                 }
             }
@@ -112,20 +105,18 @@ namespace POS.Forms
             return ResultsFound;
         }
 
-        private DataGridViewRow CreateRow(StockinHistory stockinHistory)
+        private DataGridViewRow CreateRow(StockinHistory stockInHistory)
         {
             var row = new DataGridViewRow();
 
             row.CreateCells(histTable,
-                       stockinHistory.Id,
-                       stockinHistory.Date.Value,
-                       stockinHistory.LoginUsername,
-                       stockinHistory.ItemName,
-                       stockinHistory.SerialNumber,
-                       stockinHistory.Quantity,
-                       stockinHistory.Cost,
-                       stockinHistory.Supplier,
-                       "Undo"
+                       stockInHistory.Id,
+                       stockInHistory.Date.Value,
+                       stockInHistory.LoginUsername,
+                       stockInHistory.Product?.ToString() ?? stockInHistory.ItemName,
+                       stockInHistory.SerialNumber,
+                       stockInHistory.Quantity,
+                       stockInHistory.Cost
                        );
 
             return row;
@@ -237,24 +228,12 @@ namespace POS.Forms
             await LoadDataAsync();
         }
 
-        void ShowStockinFailedMessage()
-        {
-            MessageBox.Show("The amount of stock-in you are trying to revoke exceeds the current stock quantity. Please make sure to undo the correct stockin entry.",
-                            "Stockin Correction Terminated.",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
-        }
+
 
         private async void histTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex == -1)
                 return;
-
-            if (e.ColumnIndex == col_removeBtn.Index)
-            {
-                await UndoStockinForEntry(histTable.GetSelectedId());
-                return;
-            }
 
             if (e.ColumnIndex == col_Cost.Index)
             {
@@ -272,7 +251,7 @@ namespace POS.Forms
                         return;
                 }
 
-                await ChangeCostForStockinEntry(histTable.GetSelectedId(), newCost);
+                await ChangeCostForStockInEntry(histTable.GetSelectedId(), newCost);
 
                 histTable[e.ColumnIndex, e.RowIndex].Value = newCost;
 
@@ -280,65 +259,7 @@ namespace POS.Forms
             }
         }
 
-        async Task UndoStockinForEntry(int _id)
-        {
-            var login = UserManager.instance.CurrentLogin;
-
-            if (!login.CanEditInventory)
-            {
-                MessageBox.Show("You do not have permission to undo stockin.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
-            }
-
-            if (MessageBox.Show("Are you sure you want to undo this stockin?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
-
-            var id = _id;
-
-            using (var context = new POSEntities())
-            {
-                var stockin = await context.StockinHistories.FirstOrDefaultAsync(x => x.Id == id);
-
-                ///with serial
-                if (!string.IsNullOrWhiteSpace(stockin.SerialNumber))
-                {
-                    var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.SerialNumber == stockin.SerialNumber);
-                    if (invItem != null)
-                    {
-                        context.InventoryItems.Remove(invItem);
-                    }
-                    else
-                    {
-                        ShowStockinFailedMessage();
-                        return;
-                    }
-                }
-                else
-                {
-                    var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.ProductId == stockin.ProductId);
-
-                    if (invItem != null || invItem.Quantity >= stockin.Quantity)
-                    {
-                        invItem.Quantity -= (int)stockin.Quantity;
-                        if (invItem.Quantity <= 0)
-                            context.InventoryItems.Remove(invItem);
-                    }
-                    else
-                    {
-                        ShowStockinFailedMessage();
-                        return;
-                    }
-                }
-
-                context.StockinHistories.Remove(stockin);
-                await context.SaveChangesAsync();
-            }
-
-            MessageBox.Show("Stockin successfully undone.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            histTable.Rows.RemoveAt(histTable.DataGridViewCurrentRowIndex());
-        }
-
-        async Task ChangeCostForStockinEntry(int _id, decimal updatedCost)
+        async Task ChangeCostForStockInEntry(int _id, decimal updatedCost)
         {
 
             try
@@ -355,12 +276,83 @@ namespace POS.Forms
                 MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private async void histTable_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Delete)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            await UndoSelectedStockIns();
+        }
+
+        private async Task UndoSelectedStockIns()
+        {
+            if (histTable.SelectedRows.Count == 0)
+                return;
+
+            var login = UserManager.instance.CurrentLogin;
+            if (!login.CanEditInventory)
+            {
+                MessageBox.Show("You do not have permission to undo Stock-Ins.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            if (MessageBox.Show("Are you sure you want to undo this selected item/s?", "Undo Stock-Ins", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+
+            var selectedIds = histTable.GetSelectedIds<int>(out IEnumerable<DataGridViewRow> selectedRows);
+
+            try
+            {
+                using (var context = new POSEntities())
+                {
+                    var toUndoItems = context.StockinHistories.Where(st => selectedIds.Any(id => id == st.Id));
+                    if (toUndoItems.Count() > 0)
+                    {
+                        foreach (var st in toUndoItems)
+                            await context.HandleInventoryItemForStockInHistoryUndo(st);
+
+                        context.StockinHistories.RemoveRange(toUndoItems);
+                        await context.SaveChangesAsync();
+                    }
+                }
+            }
+            catch (UndoStockInFailedException)
+            {
+                ShowStockInFailedMessage();
+                return;
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            foreach (var row in selectedRows)
+                histTable.Rows.Remove(row);
+        }
+
+
+
+        void ShowStockInFailedMessage()
+        {
+            MessageBox.Show("The amount of stock-in you are trying to revoke exceeds the current stock quantity or The Item is already sold and no longer in INVENTORY.",
+                            "Undo Stock-In Terminated.",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+        }
     }
 
-    public static class StockinExtension
+    public class UndoStockInFailedException : Exception
+    {
+
+    }
+
+    public static class StockInExtension
     {
         public static IQueryable<StockinHistory> FilterByDate(
-            this IQueryable<StockinHistory> stockins,
+            this IQueryable<StockinHistory> stockIns,
             DateTime dateSelected,
             DateFilterMode filterMode)
         {
@@ -368,34 +360,60 @@ namespace POS.Forms
             switch (filterMode)
             {
                 case DateFilterMode.Daily:
-                    return stockins.Where(s => s.Date.Value.Year == dateSelected.Year &&
+                    return stockIns.Where(s => s.Date.Value.Year == dateSelected.Year &&
                                               s.Date.Value.Month == dateSelected.Month &&
                                               s.Date.Value.Day == dateSelected.Day);
                 case DateFilterMode.Monthly:
-                    return stockins.Where(s => s.Date.Value.Year == dateSelected.Year &&
+                    return stockIns.Where(s => s.Date.Value.Year == dateSelected.Year &&
                                              s.Date.Value.Month == dateSelected.Month);
                 case DateFilterMode.Annually:
-                    return stockins.Where(s => s.Date.Value.Year == dateSelected.Year);
+                    return stockIns.Where(s => s.Date.Value.Year == dateSelected.Year);
                 default:
-                    return stockins;
+                    return stockIns;
 
             }
         }
 
+        public static async Task HandleInventoryItemForStockInHistoryUndo(this POSEntities context, StockinHistory stockIn)
+        {
+            ///with serial
+            if (!string.IsNullOrWhiteSpace(stockIn.SerialNumber))
+            {
+                var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.SerialNumber == stockIn.SerialNumber);
+
+                if (invItem != null)
+                    context.InventoryItems.Remove(invItem);
+
+                else throw new UndoStockInFailedException();
+            }
+            else
+            {
+                var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.ProductId == stockIn.ProductId);
+
+                if (invItem != null && invItem.Quantity >= stockIn.Quantity)
+                {
+                    invItem.Quantity -= stockIn.Quantity;
+                    if (invItem.Quantity <= 0)
+                        context.InventoryItems.Remove(invItem);
+                }
+                else throw new UndoStockInFailedException();
+            }
+        }
+
         public static IQueryable<StockinHistory> FilterByDateRange(
-           this IQueryable<StockinHistory> stockins,
+           this IQueryable<StockinHistory> stockIns,
            DateTime from,
-           DateTime to) => stockins.Where(s => s.Date >= from && s.Date <= to);
+           DateTime to) => stockIns.Where(s => s.Date >= from && s.Date <= to);
 
         public static IQueryable<StockinHistory> FilterByKeyword(
-            this IQueryable<StockinHistory> stockins,
+            this IQueryable<StockinHistory> stockIns,
             string keyword = "")
         {
 
             if (string.IsNullOrWhiteSpace(keyword))
-                return stockins;
+                return stockIns;
 
-            return stockins.Where(s => s.ItemName.Contains(keyword) || s.SerialNumber.Contains(keyword));
+            return stockIns.Where(s => s.ItemName.Contains(keyword) || s.Product.Item.Name.Contains(keyword) || s.SerialNumber.Contains(keyword));
         }
     }
 }

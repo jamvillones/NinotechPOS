@@ -475,6 +475,16 @@ namespace POS.Forms
                 .Sum()
                 .ToString("C2");
         }
+
+        private void inventoryTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            label2.Text = inventoryTable.RowCount.ToString("0 Entries");
+        }
+
+        private void inventoryTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            label2.Text = inventoryTable.RowCount.ToString("0 Entries");
+        }
     }
 
     public static class StockinQueryExtensions

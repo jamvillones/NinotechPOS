@@ -481,6 +481,11 @@ namespace POS.Forms
         {
             TryCancelLoading();
         }
+
+        private void itemsTable_SelectionChanged(object sender, EventArgs e)
+        {
+            label8.Text = itemsTable.SelectedRows.Count.ToString("0 Selected");
+        }
     }
 
     public static class SoldItem_Extension

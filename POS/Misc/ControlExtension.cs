@@ -17,6 +17,18 @@ namespace POS
             row.CreateCells(dt, obs);
             return row;
         }
+        /// <summary>
+        /// Get the ids in DataGridView assuming the Column Id is in 0th index. selected rows is outed so that it can be manually removed
+        /// </summary>
+        /// <typeparam name="T">T is either int or string</typeparam>
+        /// <param name="table"></param>
+        /// <param name="selectedRows"></param>
+        /// <returns>Returns The Id used for tacking entities</returns>
+        public static IEnumerable<T> GetSelectedIds<T>(this DataGridView table, out IEnumerable<DataGridViewRow> selectedRows, int columnIndex = 0)
+        {
+            selectedRows = table.SelectedRows.Cast<DataGridViewRow>();
+            return selectedRows.Select(x => (T)x.Cells[columnIndex].Value);
+        }
 
         public static void DecimalOnlyEditting(this DataGridView table, int columIndex)
         {

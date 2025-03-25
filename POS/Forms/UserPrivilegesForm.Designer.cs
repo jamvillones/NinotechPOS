@@ -171,7 +171,6 @@
             dataGridViewCellStyle4.NullValue = false;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.col_ItemEdit.DefaultCellStyle = dataGridViewCellStyle4;
-            this.col_ItemEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.col_ItemEdit.HeaderText = "ITEM - EDIT";
             this.col_ItemEdit.Name = "col_ItemEdit";
             // 
@@ -181,7 +180,6 @@
             dataGridViewCellStyle5.NullValue = false;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.col_CostEdit.DefaultCellStyle = dataGridViewCellStyle5;
-            this.col_CostEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.col_CostEdit.HeaderText = "COST - EDIT";
             this.col_CostEdit.Name = "col_CostEdit";
             // 
@@ -191,7 +189,6 @@
             dataGridViewCellStyle6.NullValue = false;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.col_SuppEdit.DefaultCellStyle = dataGridViewCellStyle6;
-            this.col_SuppEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.col_SuppEdit.HeaderText = "SUPPLIER - EDIT";
             this.col_SuppEdit.Name = "col_SuppEdit";
             // 
@@ -201,7 +198,6 @@
             dataGridViewCellStyle7.NullValue = false;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.col_StockIn.DefaultCellStyle = dataGridViewCellStyle7;
-            this.col_StockIn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.col_StockIn.HeaderText = "CAN STOCKIN";
             this.col_StockIn.Name = "col_StockIn";
             // 
@@ -211,7 +207,6 @@
             dataGridViewCellStyle8.NullValue = false;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.col_UndoStockIn.DefaultCellStyle = dataGridViewCellStyle8;
-            this.col_UndoStockIn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.col_UndoStockIn.HeaderText = "UNDO STOCK - INS";
             this.col_UndoStockIn.Name = "col_UndoStockIn";
             this.col_UndoStockIn.ToolTipText = "*can undo stock - ins";
@@ -222,7 +217,6 @@
             dataGridViewCellStyle9.NullValue = false;
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.col_Void.DefaultCellStyle = dataGridViewCellStyle9;
-            this.col_Void.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.col_Void.HeaderText = "CAN VOID";
             this.col_Void.Name = "col_Void";
             // 
