@@ -5,6 +5,7 @@ using System;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -86,10 +87,19 @@ namespace POS.UserControls
             if (e.RowIndex == -1)
                 return;
 
-            var dgt = (DataGridView)sender;
-            var qty = dgt[quantityCol.Index, e.RowIndex].Value as int?;
-            var barcode = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
-            ShowInventoryInfo(barcode, qty);
+
+
+            if (e.ColumnIndex == nameCol.Index)
+                OpenEditForm();
+
+            else if (e.ColumnIndex == quantityCol.Index)
+            {
+                var dgt = (DataGridView)sender;
+                var qty = dgt[quantityCol.Index, e.RowIndex].Value as int?;
+                var barcode = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
+                ShowInventoryInfo(barcode, qty);
+            }
+
         }
 
         void ShowInventoryInfo(string barcode, int? quantity)
@@ -310,16 +320,8 @@ namespace POS.UserControls
             public string Type { get; set; }
         }
 
-        private void editBtn_Click(object sender, EventArgs e)
+        void OpenEditForm()
         {
-            var btn = sender as Button;
-            if (itemsTable.RowCount <= 0)
-            {
-                MessageBox.Show("You do not have an item.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btn.Enabled = false;
-                return;
-            }
-
             using (var editForm = new CreateEdit_Item_Form(SelectedId))
             {
                 if (editForm.ShowDialog() == DialogResult.OK)
@@ -339,6 +341,22 @@ namespace POS.UserControls
                     Departments_Store.AddNewDepartment(x.Department);
                 }
             }
+        }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            var btn = sender as Button;
+
+            if (itemsTable.RowCount <= 0)
+            {
+                MessageBox.Show("You do not have an item.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btn.Enabled = false;
+                return;
+            }
+
+
+            OpenEditForm();
+
         }
 
         private void ShodSoldItemsForItem_Click(object sender, EventArgs e)
