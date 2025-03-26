@@ -1,5 +1,7 @@
-﻿using POS.Misc;
+﻿using Newtonsoft.Json.Linq;
+using POS.Misc;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing.Printing;
@@ -410,6 +412,43 @@ namespace POS.Forms
 
         private async void returnItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private async void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            TryCancelLoading();
+            await LoadDataAsync();
+        }
+
+        private void SaleDetails_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TryCancelLoading();
+        }
+
+        private void itemsTable_SelectionChanged(object sender, EventArgs e)
+        {
+            label8.Text = itemsTable.SelectedRows.Count.ToString("0 Selected");
+        }
+
+        private async void itemsTable_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Delete)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            await ReturnSelectedItems();
+        }
+
+        async Task ReturnSelectedItems()
+        {
             if (!CurrentLogin.CanVoidSale)
             {
                 MessageBox.Show("You do not have permission to edit this sale", "Return aborted", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -423,8 +462,7 @@ namespace POS.Forms
             {
                 using (var context = new POSEntities())
                 {
-                    var selectedIds = itemsTable.SelectedRows.Cast<DataGridViewRow>()
-                        .Select(row => (int)(row.Cells[0].Value));
+                    var selectedIds = itemsTable.GetSelectedIds<int>(out IEnumerable<DataGridViewRow> selectedRows);
 
                     var selectedItems = await context.SoldItems
                         .Where(soldItem => selectedIds.Any(i => i == soldItem.Id))
@@ -464,27 +502,6 @@ namespace POS.Forms
 
             TryCancelLoading();
             await LoadDataAsync();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private async void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            TryCancelLoading();
-            await LoadDataAsync();
-        }
-
-        private void SaleDetails_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            TryCancelLoading();
-        }
-
-        private void itemsTable_SelectionChanged(object sender, EventArgs e)
-        {
-            label8.Text = itemsTable.SelectedRows.Count.ToString("0 Selected");
         }
     }
 

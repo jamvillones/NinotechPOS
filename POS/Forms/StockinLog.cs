@@ -39,9 +39,7 @@ namespace POS.Forms
 
         private CancellationTokenSource CancelSource = null;
 
-        private async void StockinLog_Load(object sender, EventArgs e) =>
-            await LoadDataAsync();
-
+        private async void StockinLog_Load(object sender, EventArgs e) => await LoadDataAsync();
 
         bool TryCancelCurrentOperation()
         {

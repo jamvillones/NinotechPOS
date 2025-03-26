@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -49,8 +48,6 @@
             this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.returnItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.soldTo = new System.Windows.Forms.TextBox();
             this.amountDue = new System.Windows.Forms.TextBox();
             this.amountRecieved = new System.Windows.Forms.TextBox();
@@ -88,7 +85,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
-            this.contextMenuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -133,7 +129,6 @@
             this.priceCol,
             this.discountCol,
             this.totalCol});
-            this.itemsTable.ContextMenuStrip = this.contextMenuStrip;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -163,6 +158,7 @@
             this.itemsTable.TabIndex = 2;
             this.itemsTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellClick);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
+            this.itemsTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itemsTable_KeyDown);
             // 
             // IdCol
             // 
@@ -237,22 +233,6 @@
             this.totalCol.HeaderText = "TOTAL";
             this.totalCol.Name = "totalCol";
             this.totalCol.ReadOnly = true;
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.returnItemToolStripMenuItem});
-            this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(194, 26);
-            // 
-            // returnItemToolStripMenuItem
-            // 
-            this.returnItemToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("returnItemToolStripMenuItem.Image")));
-            this.returnItemToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.returnItemToolStripMenuItem.Name = "returnItemToolStripMenuItem";
-            this.returnItemToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.returnItemToolStripMenuItem.Text = "Return Selected Item/s";
-            this.returnItemToolStripMenuItem.Click += new System.EventHandler(this.returnItemToolStripMenuItem_Click);
             // 
             // soldTo
             // 
@@ -713,7 +693,6 @@
             this.Load += new System.EventHandler(this.SaleDetails_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SaleDetails_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).EndInit();
-            this.contextMenuStrip.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -766,8 +745,6 @@
         private System.Windows.Forms.TextBox discount;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem returnItemToolStripMenuItem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBox1;

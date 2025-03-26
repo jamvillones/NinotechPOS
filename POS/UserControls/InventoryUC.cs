@@ -120,13 +120,13 @@ namespace POS.UserControls
 
                 using (var context = new POSEntities())
                 {
-                    if (newItem.Type != ItemType.Quantifiable.ToString())
-                    {
-                        var serviceProduct = new Product() { Cost = 0 };
+                    //if (newItem.Type != ItemType.Quantifiable.ToString())
+                    //{
+                    //    var serviceProduct = new Product() { Cost = 0 };
 
-                        newItem.Products.Add(serviceProduct);
-                        context.InventoryItems.Add(new InventoryItem() { Product = serviceProduct, Quantity = 0 });
-                    }
+                    //    newItem.Products.Add(serviceProduct);
+                    //    context.InventoryItems.Add(new InventoryItem() { Product = serviceProduct, Quantity = 0 });
+                    //}
 
                     var item = context.Items.Add(newItem);
 

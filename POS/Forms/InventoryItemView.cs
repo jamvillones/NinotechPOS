@@ -26,34 +26,70 @@ namespace POS.Forms
         string _id;
         string _serial = string.Empty;
 
-        DataGridViewRow CreateRow(InventoryItem item) => invTable.CreateRow(
+        DataGridViewRow CreateRow(InventoryItem item, bool isFirstEntry) => invTable.CreateRow(
             item.Id,
+            isFirstEntry ? item.Product.Supplier?.Name : null,
             item.SerialNumber,
-            item.Quantity,
-            item.Product.Supplier.Name
+            item.Quantity > 1 ? (int?)item.Quantity : null
             );
 
         private async void InventoryItemView_Load(object sender, EventArgs e)
         {
+            //using (var context = new POSEntities())
+            //{
+
+            //var invItems = await context.InventoryItems.AsNoTracking().AsQueryable().Where(x => x.Product.Item.Id == _id).ToListAsync();
+            //var item = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
+
+            //foreach (var inv in invItems)
+            //    invTable.InvokeIfRequired(() => invTable.Rows.Add(CreateRow(inv)));
+
+            //}
+
+            //if (!string.IsNullOrWhiteSpace(_serial))
+            //{
+            //    var index = invTable.Rows.Cast<DataGridViewRow>()
+            //        .FirstOrDefault(row => row.Cells[Column1.Index].Value?.ToString().Equals(_serial.Trim(), StringComparison.OrdinalIgnoreCase) ?? false).Index;
+
+            //    invTable.Rows[index].Selected = true;
+            //}
+
+            await LoadData_Async(_serial);
+        }
+
+        async Task LoadData_Async(string selectedSerialNumber = "")
+        {
             using (var context = new POSEntities())
             {
+                var inventoryItems = await context.InventoryItems.AsNoTracking().AsQueryable()
+                    .Where(x => x.Product.Item.Id == _id)
+                    .ToListAsync();
 
-                var invItems = await context.InventoryItems.AsNoTracking().AsQueryable().Where(x => x.Product.Item.Id == _id).ToListAsync();
-                var item = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
-                this.Text = this.Text + " - " + item.Name + " ( " + invItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0") + " units )";
-                await Task.Run(() =>
+
+                var itemGroupings = inventoryItems.GroupBy(x => x.Product.Supplier?.Name);
+
+                foreach (var group in itemGroupings)
                 {
-                    foreach (var inv in invItems)
-                        invTable.InvokeIfRequired(() => invTable.Rows.Add(CreateRow(inv)));
-                });
-            }
+                    bool isFirstEntry = true;
+                    var toAdd = inventoryItems.Where(x => x.Product.Supplier.Name.Equals(group.Key));
+                    foreach (var t in toAdd)
+                    {
+                        invTable.Rows.Add(CreateRow(t, isFirstEntry));
+                        isFirstEntry = false;
+                    }
+                }
 
-            if (!string.IsNullOrWhiteSpace(_serial))
-            {
-                var index = invTable.Rows.Cast<DataGridViewRow>()
-                    .FirstOrDefault(row => row.Cells[Column1.Index].Value?.ToString().Equals(_serial.Trim(), StringComparison.OrdinalIgnoreCase) ?? false).Index;
+                if (!string.IsNullOrWhiteSpace(_serial))
+                {
+                    var index = invTable.Rows.Cast<DataGridViewRow>()
+                        .FirstOrDefault(row => row.Cells[Column1.Index].Value?.ToString().Equals(selectedSerialNumber.Trim(), StringComparison.OrdinalIgnoreCase) ?? false).Index;
 
-                invTable.Rows[index].Selected = true;
+                    invTable.Rows[index].Selected = true;
+                }
+
+                //this.Text = this.Text + " - " + item.Name + " ( " + invItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0") + " units )";
+                this.Text = $"{this.Text} - {inventoryItems.First().Product.Item.Name} [{inventoryItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0")} Unit/s]";
+
             }
         }
 
@@ -104,6 +140,11 @@ namespace POS.Forms
                     var x = editForm.Tag as Item;
                 }
             }
+        }
+
+        private void invTable_SelectionChanged(object sender, EventArgs e)
+        {
+            label1.Text = $"Selected Items: {invTable.SelectedRows.Count.ToString("N0")}";
         }
     }
 }

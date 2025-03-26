@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -61,7 +62,13 @@ namespace POS.Forms.ItemRegistration
             item.Details = _description.Text.NullIfEmpty();
             item.Tags = _tags.Text.Trim(',', ' ').NullIfEmpty();
 
-           
+            if (item.Type != ItemType.Quantifiable.ToString())
+            {
+                var serviceProduct = new Product() { Cost = 0 };
+                serviceProduct.InventoryItems.Add(new InventoryItem() { Product = serviceProduct, Quantity = 0 });
+                item.Products.Add(serviceProduct);
+            }
+
 
 
             DialogResult = DialogResult.OK;

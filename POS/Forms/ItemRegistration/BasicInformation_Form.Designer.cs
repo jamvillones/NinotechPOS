@@ -69,9 +69,9 @@
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(399, 189);
+            this.button2.Location = new System.Drawing.Point(366, 10);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 35);
+            this.button2.Size = new System.Drawing.Size(96, 20);
             this.button2.TabIndex = 32;
             this.button2.TabStop = false;
             this.button2.Text = "Auto Generate";
@@ -85,7 +85,7 @@
             this._departmentOption.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this._departmentOption.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._departmentOption.FormattingEnabled = true;
-            this._departmentOption.Location = new System.Drawing.Point(208, 271);
+            this._departmentOption.Location = new System.Drawing.Point(208, 240);
             this._departmentOption.Name = "_departmentOption";
             this._departmentOption.Size = new System.Drawing.Size(161, 23);
             this._departmentOption.TabIndex = 4;
@@ -102,7 +102,7 @@
             "Quantifiable",
             "Service",
             "Software"});
-            this._type.Location = new System.Drawing.Point(31, 271);
+            this._type.Location = new System.Drawing.Point(31, 240);
             this._type.Name = "_type";
             this._type.Size = new System.Drawing.Size(161, 23);
             this._type.TabIndex = 3;
@@ -115,7 +115,7 @@
             this.panel13.Controls.Add(this._description);
             this.panel13.Controls.Add(this.panel14);
             this.panel13.Controls.Add(this.label7);
-            this.panel13.Location = new System.Drawing.Point(31, 442);
+            this.panel13.Location = new System.Drawing.Point(31, 359);
             this.panel13.Margin = new System.Windows.Forms.Padding(0);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(462, 35);
@@ -162,7 +162,7 @@
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Controls.Add(this._tags);
             this.panel9.Controls.Add(this.label5);
-            this.panel9.Location = new System.Drawing.Point(31, 382);
+            this.panel9.Location = new System.Drawing.Point(31, 316);
             this.panel9.Margin = new System.Windows.Forms.Padding(0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(462, 35);
@@ -209,7 +209,7 @@
             this.panel5.Controls.Add(this._criticalQty);
             this.panel5.Controls.Add(this.panel8);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(31, 322);
+            this.panel5.Location = new System.Drawing.Point(31, 273);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(462, 35);
@@ -258,13 +258,14 @@
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this._barcode);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(31, 189);
+            this.panel1.Location = new System.Drawing.Point(31, 180);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(362, 35);
+            this.panel1.Size = new System.Drawing.Size(462, 35);
             this.panel1.TabIndex = 2;
             // 
             // panel2
@@ -273,7 +274,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 34);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(362, 1);
+            this.panel2.Size = new System.Drawing.Size(462, 1);
             this.panel2.TabIndex = 1;
             // 
             // _barcode
@@ -288,7 +289,7 @@
             this._barcode.Location = new System.Drawing.Point(11, 16);
             this._barcode.MaxLength = 50;
             this._barcode.Name = "_barcode";
-            this._barcode.Size = new System.Drawing.Size(340, 16);
+            this._barcode.Size = new System.Drawing.Size(440, 16);
             this._barcode.TabIndex = 0;
             this._barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this._barcode_KeyDown);
             this._barcode.Validating += new System.ComponentModel.CancelEventHandler(this._barcode_Validating);
@@ -311,7 +312,7 @@
             this.panel6.Controls.Add(this._name);
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.label3);
-            this.panel6.Location = new System.Drawing.Point(31, 129);
+            this.panel6.Location = new System.Drawing.Point(31, 137);
             this.panel6.Margin = new System.Windows.Forms.Padding(0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(462, 35);
@@ -358,7 +359,7 @@
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Gray;
-            this.label6.Location = new System.Drawing.Point(28, 255);
+            this.label6.Location = new System.Drawing.Point(28, 224);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 33;
@@ -369,7 +370,7 @@
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Gray;
-            this.label8.Location = new System.Drawing.Point(205, 255);
+            this.label8.Location = new System.Drawing.Point(205, 224);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 13);
             this.label8.TabIndex = 34;
@@ -379,7 +380,7 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(122, 60);
+            this.label9.Location = new System.Drawing.Point(122, 35);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(281, 13);
             this.label9.TabIndex = 37;
@@ -392,7 +393,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label10.Location = new System.Drawing.Point(147, 30);
+            this.label10.Location = new System.Drawing.Point(147, 5);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(230, 30);
             this.label10.TabIndex = 36;
@@ -407,14 +408,13 @@
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveBtn.ForeColor = System.Drawing.Color.White;
             this.saveBtn.Image = ((System.Drawing.Image)(resources.GetObject("saveBtn.Image")));
-            this.saveBtn.Location = new System.Drawing.Point(31, 511);
+            this.saveBtn.Location = new System.Drawing.Point(31, 464);
             this.saveBtn.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.saveBtn.MaximumSize = new System.Drawing.Size(150, 35);
             this.saveBtn.MinimumSize = new System.Drawing.Size(150, 35);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(150, 35);
             this.saveBtn.TabIndex = 12;
-            this.saveBtn.TabStop = false;
             this.saveBtn.Text = "  Next Step";
             this.saveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.saveBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -425,13 +425,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 580);
+            this.ClientSize = new System.Drawing.Size(524, 531);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this._departmentOption);
             this.Controls.Add(this._type);
             this.Controls.Add(this.panel13);

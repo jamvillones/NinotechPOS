@@ -34,7 +34,7 @@ namespace POS
 
     partial class Product
     {
-        public override string ToString() => $"{Item.Name} - {Supplier.Name}";
+        public override string ToString() => $"{Item.Name} - {Supplier?.Name ?? "*No Supplier"}";
     }
 
     partial class Sale

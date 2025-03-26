@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,17 +38,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Customers_List));
             this.customerTable = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.loadingLabel = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.recHistBtn = new System.Windows.Forms.Button();
+            this.searchControl = new POS.UserControls.SearchControl();
             this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_transact = new System.Windows.Forms.DataGridViewButtonColumn();
             this.col_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_del = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.loadingLabel = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.recHistBtn = new System.Windows.Forms.Button();
-            this.searchControl = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.customerTable)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -94,6 +95,14 @@
             this.customerTable.MultiSelect = false;
             this.customerTable.Name = "customerTable";
             this.customerTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.customerTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.customerTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.customerTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.customerTable.Size = new System.Drawing.Size(944, 456);
@@ -105,62 +114,6 @@
             this.customerTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.customerTable_CellMouseDoubleClick);
             this.customerTable.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.customerTable_CellValidated);
             this.customerTable.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.customerTable_CellValidating);
-            // 
-            // col_id
-            // 
-            this.col_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.col_id.HeaderText = "Id";
-            this.col_id.Name = "col_id";
-            this.col_id.ReadOnly = true;
-            this.col_id.Visible = false;
-            // 
-            // col_transact
-            // 
-            this.col_transact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
-            this.col_transact.DefaultCellStyle = dataGridViewCellStyle2;
-            this.col_transact.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.col_transact.HeaderText = "";
-            this.col_transact.Name = "col_transact";
-            this.col_transact.Text = "TRANSACTIONS";
-            this.col_transact.UseColumnTextForButtonValue = true;
-            this.col_transact.Width = 12;
-            // 
-            // col_name
-            // 
-            dataGridViewCellStyle3.NullValue = "N/A";
-            this.col_name.DefaultCellStyle = dataGridViewCellStyle3;
-            this.col_name.HeaderText = "Name";
-            this.col_name.Name = "col_name";
-            // 
-            // col_contact
-            // 
-            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.NullValue = "N/A";
-            this.col_contact.DefaultCellStyle = dataGridViewCellStyle4;
-            this.col_contact.HeaderText = "Contact Details";
-            this.col_contact.Name = "col_contact";
-            // 
-            // col_address
-            // 
-            dataGridViewCellStyle5.NullValue = "N/A";
-            this.col_address.DefaultCellStyle = dataGridViewCellStyle5;
-            this.col_address.HeaderText = "Address";
-            this.col_address.Name = "col_address";
-            // 
-            // col_del
-            // 
-            this.col_del.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
-            this.col_del.DefaultCellStyle = dataGridViewCellStyle6;
-            this.col_del.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.col_del.HeaderText = "";
-            this.col_del.Name = "col_del";
-            this.col_del.Text = "REMOVE";
-            this.col_del.UseColumnTextForButtonValue = true;
-            this.col_del.Width = 12;
             // 
             // panel1
             // 
@@ -221,6 +174,63 @@
             this.searchControl.TabIndex = 0;
             this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl_OnSearch);
             this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl_OnTextEmpty);
+            // 
+            // col_id
+            // 
+            this.col_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.col_id.HeaderText = "Id";
+            this.col_id.Name = "col_id";
+            this.col_id.ReadOnly = true;
+            this.col_id.Visible = false;
+            this.col_id.Width = 50;
+            // 
+            // col_transact
+            // 
+            this.col_transact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            this.col_transact.DefaultCellStyle = dataGridViewCellStyle2;
+            this.col_transact.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.col_transact.HeaderText = "";
+            this.col_transact.Name = "col_transact";
+            this.col_transact.Text = "TRANSACTIONS";
+            this.col_transact.UseColumnTextForButtonValue = true;
+            this.col_transact.Width = 12;
+            // 
+            // col_name
+            // 
+            dataGridViewCellStyle3.NullValue = "N/A";
+            this.col_name.DefaultCellStyle = dataGridViewCellStyle3;
+            this.col_name.HeaderText = "NAME";
+            this.col_name.Name = "col_name";
+            // 
+            // col_contact
+            // 
+            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.NullValue = "N/A";
+            this.col_contact.DefaultCellStyle = dataGridViewCellStyle4;
+            this.col_contact.HeaderText = "CONTACT DETAILS";
+            this.col_contact.Name = "col_contact";
+            // 
+            // col_address
+            // 
+            dataGridViewCellStyle5.NullValue = "N/A";
+            this.col_address.DefaultCellStyle = dataGridViewCellStyle5;
+            this.col_address.HeaderText = "ADDRESS";
+            this.col_address.Name = "col_address";
+            // 
+            // col_del
+            // 
+            this.col_del.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
+            this.col_del.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col_del.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.col_del.HeaderText = "";
+            this.col_del.Name = "col_del";
+            this.col_del.Text = "REMOVE";
+            this.col_del.UseColumnTextForButtonValue = true;
+            this.col_del.Width = 12;
             // 
             // Customers_List
             // 

@@ -558,15 +558,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Niñotech POS"
-        "ProductCode" = "8:{7ED3E659-149D-43F0-9B44-CE957669271E}"
-        "PackageCode" = "8:{2771E6AE-6653-4279-80B1-6325D4BD121A}"
+        "ProductCode" = "8:{E1DED852-3642-467C-B46B-4DE7D392C73E}"
+        "PackageCode" = "8:{FB8D2573-DC58-4C82-B027-A62A79122AF2}"
         "UpgradeCode" = "8:{A5499E8B-6ED5-4E19-B05A-1B37663684CA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.1134"
+        "ProductVersion" = "8:1.0.1135"
         "Manufacturer" = "8:Niñotech"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1108,7 +1108,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E2E906A01B314322912D8DE04C8AED54"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\POS\\obj\\Release\\NinotechPOS.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"

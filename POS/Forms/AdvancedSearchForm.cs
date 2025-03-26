@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,30 +18,30 @@ namespace POS.Forms
         public AdvancedSearchForm()
         {
             InitializeComponent();
-            InitializeTable();
-            setAutoComplete();
+            //LoadData_Async();
+            //setAutoComplete();
 
         }
-        void setAutoComplete()
+        async Task setAutoComplete_Async()
         {
-            using (var p = new POSEntities())
+            try
             {
-                searchControl1.SetAutoComplete(p.InventoryItems.Select(x => x.Product.Item.Name).ToArray());
+
+                using (var context = new POSEntities())
+                {
+                    var autocomplete = await context.Items.AsNoTracking().Select(i => i.Name).ToArrayAsync();
+                    searchControl1.SetAutoComplete(autocomplete);
+                }
+            }
+            catch
+            {
+
             }
         }
-        //private void searchBtn_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void search_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //        searchBtn.PerformClick();
-        //}
 
         private void itemTables_SelectionChanged(object sender, EventArgs e)
         {
+
             if (itemTables.SelectedCells.Count == 0)
                 return;
             var id = (int)(itemTables.SelectedCells[0].Value);
@@ -52,6 +53,10 @@ namespace POS.Forms
             using (var p = new POSEntities())
             {
                 var i = p.InventoryItems.FirstOrDefault(x => x.Id == id);
+                if (i is null)
+                {
+                    return;
+                }
 
                 infoHolder.Barcode = i.Product.Item.Barcode;
                 infoHolder.Name = i.Product.Item.Name;
@@ -61,13 +66,14 @@ namespace POS.Forms
                 infoHolder.ProductId = i.ProductId;
 
                 quantity.Enabled = string.IsNullOrEmpty(serialNumber) ? true : false;
+                quantity.Maximum = i.Quantity == 0 ? 999999999 : i.Quantity;
 
                 quantity.Value = 1;
                 discount.Value = 0;
 
                 //itemName.Text = infoHolder.Name;
                 sellingPrice.Value = infoHolder.SellingPrice;
-                calculateTotal();
+                CalculateTotal();
                 //totalPrice.Text = infoHolder.TotalPrice.ToString();
 
                 infoHolder.Serial = i.SerialNumber;
@@ -107,74 +113,103 @@ namespace POS.Forms
                     break;
             }
         }
-        void calculateTotal()
+
+        void CalculateTotal()
         {
             //totalPrice.Text = string.Format("₱ {0:n}", infoHolder.TotalPrice);
         }
         private void quantity_ValueChanged(object sender, EventArgs e)
         {
             infoHolder.Quantity = (int)quantity.Value;
-            calculateTotal();
+            CalculateTotal();
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             infoHolder.SellingPrice = sellingPrice.Value;
-            calculateTotal();
+            CalculateTotal();
         }
 
         private void discount_ValueChanged(object sender, EventArgs e)
         {
             infoHolder.Discount = discount.Value;
-            calculateTotal();
+            CalculateTotal();
         }
 
-        private void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
+        private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
         {
+            keyWord = e.Text;
 
-            using (var p = new POSEntities())
+            await LoadData_Async();
+        }
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
+        {
+            //keyWord = string.Empty;
+            //await LoadData_Async();
+        }
+
+        string keyWord = "";
+
+        async Task LoadData_Async()
+        {
+            //try
+            //{
+            using (var context = new POSEntities())
             {
-                var searchedItems = p.InventoryItems.Where(x => x.Product.Item.Id == e.Text);
 
-                if (searchedItems.Count() == 0)
+                var inventoryItems = await context.InventoryItems.AsNoTracking().AsQueryable()
+                    .ApplySearch(keyWord)
+                    .OrderBy(x => x.Product.Item.Name)
+                    .ToListAsync();
+
+                if (inventoryItems.Count > 0)
                 {
-                    searchedItems = p.InventoryItems.Where(x => x.SerialNumber == e.Text);
-                    if (searchedItems.Count() == 0)
+                    itemTables.Rows.Clear();
+
+                    var itemGroupings = inventoryItems.GroupBy(x => x.Product.Item.Name);
+
+                    foreach (var group in itemGroupings)
                     {
-                        searchedItems = p.InventoryItems.Where(x => x.Product.Item.Name.Contains(e.Text));
+                        bool isFirstEntry = true;
+                        var toAdd = inventoryItems.Where(x => x.Product.Item.Name.Equals(group.Key));
+                        foreach (var t in toAdd)
+                        {
+                            itemTables.Rows.Add(CreateRow(t, isFirstEntry));
+                            isFirstEntry = false;
+                        }
                     }
                 }
-                e.SearchFound = true;
-                itemTables.Rows.Clear();
-                foreach (var i in searchedItems)
-                    itemTables.Rows.Add(i.Id, i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(), i.Product.Item.Barcode, i.SerialNumber, i.Product.Item.Name, i.Product.Supplier.Name);
 
             }
+            //}
+            //catch
+            //{
+
+            //}
         }
 
-        void InitializeTable()
-        {
-            using (var p = new POSEntities())
-            {
-                itemTables.Rows.Clear();
-                foreach (var i in p.InventoryItems)
-                    itemTables.Rows.Add(
-                        i.Id, i.Quantity == 0 ? "Inifinite" : i.Quantity.ToString(),
-                        i.Product.Item.Barcode,
-                        i.SerialNumber,
-                        i.Product.Item.Name,
-                        i.Product.Supplier?.Name);
+        DataGridViewRow CreateRow(InventoryItem inventoryItem, bool firstEntry = true) => itemTables.CreateRow(
+            inventoryItem.Id,
+            firstEntry ? inventoryItem.Product.Item.Barcode : null,
+            firstEntry ? inventoryItem.Product.ToString() : null,
+            inventoryItem.SerialNumber,
+            inventoryItem.Quantity <= 0 ? null : (int?)inventoryItem.Quantity
+            );
 
-            }
+        private async void AdvancedSearchForm_Load(object sender, EventArgs e)
+        {
+            await setAutoComplete_Async();
         }
-        private void searchControl1_OnTextEmpty(object sender, EventArgs e)
-        {
-            InitializeTable();
-        }
+    }
 
-        private void label2_Click(object sender, EventArgs e)
+    public static class InventoryItemContextExtension
+    {
+        public static IQueryable<InventoryItem> ApplySearch(this IQueryable<InventoryItem> items, string keyword = "")
         {
+            if (string.IsNullOrWhiteSpace(keyword))
+                return items;
 
+            return items.Where(i => i.SerialNumber.Contains(keyword) || i.Product.Item.Name.Contains(keyword));
         }
     }
 }
