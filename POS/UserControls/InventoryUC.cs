@@ -87,8 +87,6 @@ namespace POS.UserControls
             if (e.RowIndex == -1)
                 return;
 
-
-
             if (e.ColumnIndex == nameCol.Index)
                 OpenEditForm();
 
@@ -99,7 +97,6 @@ namespace POS.UserControls
                 var barcode = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
                 ShowInventoryInfo(barcode, qty);
             }
-
         }
 
         void ShowInventoryInfo(string barcode, int? quantity)
