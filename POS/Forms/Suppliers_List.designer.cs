@@ -36,13 +36,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Suppliers_List));
             this.supplierTable = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.recHistBtn = new System.Windows.Forms.Button();
             this.id_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_suppName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.recHistBtn = new System.Windows.Forms.Button();
             this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.supplierTable)).BeginInit();
             this.SuspendLayout();
@@ -103,6 +103,40 @@
             this.supplierTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.supplierTable_CellContentClick);
             this.supplierTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.supplierTable_CellEndEdit);
             // 
+            // id_col
+            // 
+            this.id_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.id_col.DefaultCellStyle = dataGridViewCellStyle2;
+            this.id_col.HeaderText = "Id";
+            this.id_col.Name = "id_col";
+            this.id_col.Visible = false;
+            // 
+            // col_suppName
+            // 
+            dataGridViewCellStyle3.NullValue = "N/A";
+            this.col_suppName.DefaultCellStyle = dataGridViewCellStyle3;
+            this.col_suppName.HeaderText = "NAME";
+            this.col_suppName.Name = "col_suppName";
+            // 
+            // col_contact
+            // 
+            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.NullValue = "N/A";
+            this.col_contact.DefaultCellStyle = dataGridViewCellStyle4;
+            this.col_contact.HeaderText = "CONTACT DETAILS";
+            this.col_contact.MinimumWidth = 100;
+            this.col_contact.Name = "col_contact";
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column4.HeaderText = "";
+            this.Column4.Name = "Column4";
+            this.Column4.Text = "REMOVE";
+            this.Column4.UseColumnTextForButtonValue = true;
+            this.Column4.Visible = false;
+            // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -134,42 +168,6 @@
             this.recHistBtn.Text = "Add Supplier";
             this.recHistBtn.UseVisualStyleBackColor = false;
             this.recHistBtn.Click += new System.EventHandler(this.addBtn_Click);
-            // 
-            // id_col
-            // 
-            this.id_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.id_col.DefaultCellStyle = dataGridViewCellStyle2;
-            this.id_col.HeaderText = "Id";
-            this.id_col.Name = "id_col";
-            this.id_col.Visible = false;
-            this.id_col.Width = 50;
-            // 
-            // col_suppName
-            // 
-            dataGridViewCellStyle3.NullValue = "N/A";
-            this.col_suppName.DefaultCellStyle = dataGridViewCellStyle3;
-            this.col_suppName.HeaderText = "NAME";
-            this.col_suppName.Name = "col_suppName";
-            // 
-            // col_contact
-            // 
-            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.NullValue = "N/A";
-            this.col_contact.DefaultCellStyle = dataGridViewCellStyle4;
-            this.col_contact.HeaderText = "CONTACT DETAILS";
-            this.col_contact.MinimumWidth = 100;
-            this.col_contact.Name = "col_contact";
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Column4.HeaderText = "";
-            this.Column4.Name = "Column4";
-            this.Column4.Text = "REMOVE";
-            this.Column4.UseColumnTextForButtonValue = true;
-            this.Column4.Visible = false;
-            this.Column4.Width = 12;
             // 
             // searchControl1
             // 

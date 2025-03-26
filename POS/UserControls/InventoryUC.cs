@@ -293,6 +293,14 @@ namespace POS.UserControls
 
         private class ItemDTO
         {
+            //public ItemDTO(Item item)
+            //{
+
+            //    Id = item.Id;
+            //    Barcode = item.Barcode;
+            //    Name = item.Name;
+
+            //}
             public string Id { get; set; }
             public string Barcode { get; set; }
             public string Name { get; set; }
@@ -317,6 +325,17 @@ namespace POS.UserControls
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     var x = editForm.Tag as Item;
+                    var selectedRow = itemsTable.SelectedRows[0];
+
+                    selectedRow.SetValues(
+                        x.Id,
+                        x.Barcode,
+                        x.Name,
+                        selectedRow.Cells[3].Value,
+                        x.SellingPrice,
+                        x.Type
+                        );
+
                     Departments_Store.AddNewDepartment(x.Department);
                 }
             }
