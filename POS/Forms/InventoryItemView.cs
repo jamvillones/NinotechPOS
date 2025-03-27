@@ -23,8 +23,9 @@ namespace POS.Forms
             invTable.AllowUserToDeleteRows = isAdmin;
             col_qty.ReadOnly = !isAdmin;
         }
-        string _id;
-        string _serial = string.Empty;
+
+        readonly string _id;
+        readonly string _serial = string.Empty;
 
         DataGridViewRow CreateRow(InventoryItem item, bool isFirstEntry) => invTable.CreateRow(
             item.Id,
@@ -33,29 +34,7 @@ namespace POS.Forms
             item.Quantity > 1 ? (int?)item.Quantity : null
             );
 
-        private async void InventoryItemView_Load(object sender, EventArgs e)
-        {
-            //using (var context = new POSEntities())
-            //{
-
-            //var invItems = await context.InventoryItems.AsNoTracking().AsQueryable().Where(x => x.Product.Item.Id == _id).ToListAsync();
-            //var item = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
-
-            //foreach (var inv in invItems)
-            //    invTable.InvokeIfRequired(() => invTable.Rows.Add(CreateRow(inv)));
-
-            //}
-
-            //if (!string.IsNullOrWhiteSpace(_serial))
-            //{
-            //    var index = invTable.Rows.Cast<DataGridViewRow>()
-            //        .FirstOrDefault(row => row.Cells[Column1.Index].Value?.ToString().Equals(_serial.Trim(), StringComparison.OrdinalIgnoreCase) ?? false).Index;
-
-            //    invTable.Rows[index].Selected = true;
-            //}
-
-            await LoadData_Async(_serial);
-        }
+        private async void InventoryItemView_Load(object sender, EventArgs e) => await LoadData_Async();
 
         async Task LoadData_Async(string selectedSerialNumber = "")
         {
@@ -64,7 +43,6 @@ namespace POS.Forms
                 var inventoryItems = await context.InventoryItems.AsNoTracking().AsQueryable()
                     .Where(x => x.Product.Item.Id == _id)
                     .ToListAsync();
-
 
                 var itemGroupings = inventoryItems.GroupBy(x => x.Product.Supplier?.Name);
 
@@ -81,55 +59,19 @@ namespace POS.Forms
 
                 if (!string.IsNullOrWhiteSpace(_serial))
                 {
+                    invTable.ClearSelection();
+                    invTable.CurrentCell = null;
+
                     var index = invTable.Rows.Cast<DataGridViewRow>()
                         .FirstOrDefault(row => row.Cells[Column1.Index].Value?.ToString().Equals(selectedSerialNumber.Trim(), StringComparison.OrdinalIgnoreCase) ?? false).Index;
 
                     invTable.Rows[index].Selected = true;
                 }
 
-                //this.Text = this.Text + " - " + item.Name + " ( " + invItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0") + " units )";
                 this.Text = $"{this.Text} - {inventoryItems.First().Product.Item.Name} [{inventoryItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0")} Unit/s]";
-
             }
         }
 
-        private void invTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-
-        }
-
-        private async void invTable_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to remove this entry?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
-            {
-                e.Cancel = true;
-                return;
-            }
-            var id = (int)e.Row.Cells[0].Value;
-            try
-            {
-
-                using (var context = new POSEntities())
-                {
-                    var inventoryItemToDelete = await context.InventoryItems.FirstOrDefaultAsync(x => x.Id == id);
-
-                    context.InventoryItems.Remove(inventoryItemToDelete);
-
-                    await context.SaveChangesAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void invTable_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-
-        }
-
-        //int SelectedInventoryItemId => invTable.RowCount == 0 ? 0 : (int)(invTable[0, invTable.SelectedCells[0].ColumnIndex].Value);
         private void ViewItemDetails_Click(object sender, EventArgs e)
         {
             using (var editForm = new CreateEdit_Item_Form(_id))
@@ -142,7 +84,7 @@ namespace POS.Forms
             }
         }
 
-        private void invTable_SelectionChanged(object sender, EventArgs e)
+        private void inventoryTable_SelectionChanged(object sender, EventArgs e)
         {
             label1.Text = $"Selected Items: {invTable.SelectedRows.Count.ToString("N0")}";
         }

@@ -405,6 +405,9 @@ namespace POS.Forms.ItemRegistration
         {
             if (e.Control && e.KeyCode == Keys.S)
                 saveBtn.PerformClick();
+
+            else if (e.KeyCode == Keys.Escape)
+                this.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -427,6 +430,20 @@ namespace POS.Forms.ItemRegistration
                 if (changeSupplier.RequireAdminConfirmationBeforeViewing() == DialogResult.OK)
                 {
                     cost.Supplier = changeSupplier.Tag as Supplier;
+                }
+            }
+        }
+
+        private void pictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (pictureBox.Image is null)
+                return;
+
+            using (var imagePreview = new PictureView(pictureBox.Image))
+            {
+                if (imagePreview.ShowDialog() == DialogResult.OK)
+                {
+
                 }
             }
         }

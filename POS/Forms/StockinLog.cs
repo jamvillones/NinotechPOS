@@ -24,6 +24,7 @@ namespace POS.Forms
             range_to_Dt.MaxDate = DateTime.Now;
 
             col_Id.Visible = UserManager.instance.IsAdmin;
+            label3.Visible = UserManager.instance.CurrentLogin.CanEditInventory;
         }
 
         bool InRangeMode => radioButton5.Checked;
@@ -536,10 +537,10 @@ namespace POS.Forms
             if (string.IsNullOrWhiteSpace(keyword))
                 return stockIns;
 
-            return stockIns.Where(s => 
-                s.Product.Item.Barcode == keyword || 
-                s.ItemName.Contains(keyword) || 
-                s.Product.Item.Name.Contains(keyword) || 
+            return stockIns.Where(s =>
+                s.Product.Item.Barcode == keyword ||
+                s.ItemName.Contains(keyword) ||
+                s.Product.Item.Name.Contains(keyword) ||
                 s.SerialNumber.Contains(keyword))
                 ;
         }

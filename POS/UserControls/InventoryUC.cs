@@ -648,10 +648,18 @@ namespace POS.UserControls
 
         private async void itemsTable_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F5 && !IsBusyLoading)
+            if (e.KeyCode == Keys.F5)
             {
+                if (IsBusyLoading)
+                    return;
+
                 IsTotalEntriesInitialized = false;
                 await LoadDataAsync();
+                return;
+            }
+            else if (e.KeyCode == Keys.F2)
+            {
+                OpenEditForm();
                 return;
             }
 
@@ -659,7 +667,6 @@ namespace POS.UserControls
                 return;
 
             e.Handled = true;
-
             await DeleteSelectedRows();
         }
 
