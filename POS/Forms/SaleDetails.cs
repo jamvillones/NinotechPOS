@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using POS.Misc;
+﻿using POS.Misc;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -210,6 +209,11 @@ namespace POS.Forms
             }
         }
 
+        //Rectangle area;
+        ////PrintAction printAction;
+        //Pen areaPen = new Pen(Brushes.Red);
+        //Pen gridPen = new Pen(Brushes.Gray);
+
         private void doc_PrintPage(object sender, PrintPageEventArgs e)
         {
             using (var context = new POSEntities())
@@ -236,7 +240,7 @@ namespace POS.Forms
                         );
                 }
 
-                e.FormatReciept(printAction, details);
+                e.FormatReceipt(printAction, details);
             }
         }
 
@@ -253,7 +257,6 @@ namespace POS.Forms
             }
             catch (Exception)
             {
-
                 throw;
             }
 
@@ -465,6 +468,7 @@ namespace POS.Forms
                     }
 
                     await context.ReturnSoldItems(selectedItems);
+
                     context.SoldItems.RemoveRange(selectedItems);
                     var sale = await context.Sales.FirstOrDefaultAsync(s => s.Id == _saleId);
 

@@ -63,6 +63,7 @@ namespace POS.Forms {
                     : printableArea.Height));
 
             area = new Rectangle(1, 1, availableWidth - 1, availableHeight - 1);
+
             if (printAction == PrintAction.PrintToPreview) {
                 //e.Graphics.DrawRectangle(areaPen, area);
                 //drawLines(area, e.Graphics, 9);

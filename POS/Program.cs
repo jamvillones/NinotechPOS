@@ -19,8 +19,8 @@ namespace POS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ConnectionConfiguration_Source.Initialize();
 
             //test for showing the installation path

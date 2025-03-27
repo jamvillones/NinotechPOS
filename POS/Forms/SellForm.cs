@@ -659,7 +659,7 @@ namespace POS.Forms
                     item.Discount
                     );
 
-            e.FormatReciept(printAction, details);
+            e.FormatReceipt(printAction, details);
             ToPrint = null;
         }
 

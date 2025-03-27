@@ -9,8 +9,9 @@ namespace POS.Misc
 {
     public static class ReceiptPrinting
     {
-
-        public static void FormatReciept(this PrintPageEventArgs e, PrintAction printAction, ReceiptDetails details)
+        static int currentPage = 1;
+        static int currentIndex = 0;
+        public static void FormatReceipt(this PrintPageEventArgs e, PrintAction printAction, ReceiptDetails details)
         {
             var settings = Properties.Settings.Default;
 
@@ -18,6 +19,7 @@ namespace POS.Misc
             using (Pen bluePen = new Pen(Brushes.Black) { Width = 0.5f, DashStyle = System.Drawing.Drawing2D.DashStyle.Dot })
             using (Font font = new Font("MS Gothic", 8, FontStyle.Regular))
             using (Font titleFont = new Font("MS Gothic", 8, FontStyle.Bold))
+            using (Font serialFont = new Font("MS Gothic", 8, FontStyle.Bold))
             using (StringFormat centerAlignment = new StringFormat() { Alignment = StringAlignment.Center })
             using (StringFormat leftFormat = new StringFormat() { Alignment = StringAlignment.Near })
             using (StringFormat farAlignment = new StringFormat() { Alignment = StringAlignment.Far })
@@ -31,121 +33,141 @@ namespace POS.Misc
                 int availableHeight = (int)Math.Floor(printableArea.Height);
 
                 var area = new Rectangle(0, 0, availableWidth - 1, availableHeight - 1);
+                int currentY = area.Top;
 
-                string Header = settings.HeaderText;
-                var headerSize = e.Graphics.MeasureString(Header, titleFont, area.Width);
-                var headerRect = new Rectangle(0, 0, area.Width, (int)Math.Floor(headerSize.Height));
+                if (currentPage == 1)
+                {
+                    string Header = settings.HeaderText;
+                    var headerSize = e.Graphics.MeasureString(Header, titleFont, area.Width);
+                    var headerRect = new Rectangle(0, 0, area.Width, (int)Math.Floor(headerSize.Height));
 
-                if (Header != string.Empty)
-                    e.Graphics.DrawString(Header, titleFont, Brushes.Black, headerRect, centerAlignment);
+                    if (Header != string.Empty)
+                        e.Graphics.DrawString(Header, titleFont, Brushes.Black, headerRect, centerAlignment);
 
-                string titleString = settings.DetailsText;
+                    string titleString = settings.DetailsText;
 
-                var titleSize = e.Graphics.MeasureString(titleString, titleFont, e.PageBounds.Width);
-                var titelRect = new Rectangle(0, headerRect.Bottom, area.Width, (int)titleSize.Height);
+                    var titleSize = e.Graphics.MeasureString(titleString, titleFont, e.PageBounds.Width);
+                    var titleRect = new Rectangle(0, headerRect.Bottom, area.Width, (int)titleSize.Height);
 
-                e.Graphics.DrawString(titleString, titleFont, Brushes.Black, titelRect, centerAlignment);
+                    e.Graphics.DrawString(titleString, titleFont, Brushes.Black, titleRect, centerAlignment);
 
-                string first = "Control Number:\n" +
-                               "Customer Name:\n" +
-                               "Transact By:\n" +
-                               "Date/Time:";
+                    string first = "Control Number:\n" +
+                                   "Customer Name:\n" +
+                                   "Transact By:\n" +
+                                   "Date/Time:";
 
-                var firstSize = e.Graphics.MeasureString(first, font, e.PageBounds.Width);
-                var firstRect = new Rectangle(0, titelRect.Bottom + 10, (int)firstSize.Width + 1, (int)firstSize.Height);
+                    var firstSize = e.Graphics.MeasureString(first, font, e.PageBounds.Width);
+                    var firstRect = new Rectangle(0, titleRect.Bottom + 10, (int)firstSize.Width + 1, (int)firstSize.Height);
 
-                e.Graphics.DrawString(first, font, Brushes.Black, firstRect, leftFormat);
+                    e.Graphics.DrawString(first, font, Brushes.Black, firstRect, leftFormat);
 
-                string second = details.ControlNumber + "\n" +
-                                details.CustomerName + "\n" +
-                                details.TransactBy + "\n" +
-                                DateTime.Now.ToString("MMMM d, yyyy hh:mm tt");
+                    string second = details.ControlNumber + "\n" +
+                                    details.CustomerName + "\n" +
+                                    details.TransactBy + "\n" +
+                                    DateTime.Now.ToString("MMMM d, yyyy hh:mm tt");
 
-                var secondSize = e.Graphics.MeasureString(second, titleFont, e.PageBounds.Width);
-                var secondRect = new Rectangle(firstRect.Right + 10, firstRect.Top, (int)secondSize.Width + 1, (int)firstSize.Height);
+                    var secondSize = e.Graphics.MeasureString(second, titleFont, e.PageBounds.Width);
+                    var secondRect = new Rectangle(firstRect.Right + 10, firstRect.Top, (int)secondSize.Width + 1, (int)firstSize.Height);
 
-                e.Graphics.DrawString(second, titleFont, Brushes.Black, secondRect, leftFormat);
+                    e.Graphics.DrawString(second, titleFont, Brushes.Black, secondRect, leftFormat);
+
+
+
+                    var colSize = graphics.MeasureString("Item Name / Serial", font);
+
+                    var colRect = new Rectangle(0,
+                                                secondRect.Bottom + 10,
+                                                area.Width,
+                                                (int)Math.Ceiling(colSize.Height));
+
+                    //graphics.DrawRectangle(bluePen, colRect);
+                    graphics.DrawLine(bluePen, new Point(0, colRect.Top), new Point(area.Width, colRect.Top));
+                    graphics.DrawString("Item Name: / Serial", font, Brushes.Black, colRect);
+
+                    colRect.Y = colRect.Bottom;
+
+                    colRect.Width = area.Width / 4;
+                    //graphics.DrawRectangle(bluePen, colRect);
+                    graphics.DrawString("Qty:", font, Brushes.Black, colRect);
+
+                    colRect.X = area.Width / 4;
+                    //graphics.DrawRectangle(bluePen, colRect);
+                    graphics.DrawString("Price:", font, Brushes.Black, colRect, farAlignment);
+
+                    colRect.X = (area.Width / 4) * 2;
+                    //graphics.DrawRectangle(bluePen, colRect);
+                    graphics.DrawString("Discount:", font, Brushes.Black, colRect, farAlignment);
+
+                    colRect.X = (area.Width / 4) * 3;
+                    colRect.Width = area.Width - colRect.X;
+
+                    //graphics.DrawRectangle(bluePen, colRect);
+                    graphics.DrawString("Total:", font, Brushes.Black, colRect, farAlignment);
+                    graphics.DrawLine(bluePen, new Point(0, colRect.Bottom), new Point(area.Width, colRect.Bottom));
+
+
+                    currentY = colRect.Bottom + 2;
+                }
 
                 var contentsRect = new Rectangle();
 
-
-                var colSize = graphics.MeasureString("Item Name / Serial", font);
-
-                var colRect = new Rectangle(0,
-                                            secondRect.Bottom + 10,
-                                            area.Width,
-                                            (int)Math.Ceiling(colSize.Height));
-
-                //graphics.DrawRectangle(bluePen, colRect);
-                graphics.DrawLine(bluePen, new Point(0, colRect.Top), new Point(area.Width, colRect.Top));
-                graphics.DrawString("Item Name: / Serial", font, Brushes.Black, colRect);
-
-                colRect.Y = colRect.Bottom;
-
-                colRect.Width = area.Width / 4;
-                //graphics.DrawRectangle(bluePen, colRect);
-                graphics.DrawString("Qty:", font, Brushes.Black, colRect);
-
-                colRect.X = area.Width / 4;
-                //graphics.DrawRectangle(bluePen, colRect);
-                graphics.DrawString("Price:", font, Brushes.Black, colRect, farAlignment);
-
-                colRect.X = (area.Width / 4) * 2;
-                //graphics.DrawRectangle(bluePen, colRect);
-                graphics.DrawString("Discount:", font, Brushes.Black, colRect, farAlignment);
-
-                colRect.X = (area.Width / 4) * 3;
-                colRect.Width = area.Width - colRect.X;
-
-                //graphics.DrawRectangle(bluePen, colRect);
-                graphics.DrawString("Total:", font, Brushes.Black, colRect, farAlignment);
-                graphics.DrawLine(bluePen, new Point(0, colRect.Bottom), new Point(area.Width, colRect.Bottom));
-
-
-                int currentY = colRect.Bottom + 2;
-
-                foreach (var i in details.Items)
+                for (int ii = currentIndex; ii < details.Items.Count; ii++)
                 {
-                    var size = graphics.MeasureString(i.Name + (i.Serial != null ? "\nSN: " + i.Serial : ""), titleFont, area.Width);
+                    var i = details.Items[ii];
+
+                    var nameSize = graphics.MeasureString(i.Name, titleFont, area.Width);
+                    var serialSize = i.Serial is null ? SizeF.Empty : graphics.MeasureString(i.Serial, serialFont, area.Width);
+
+                    var length = i.BiggestLength(graphics, area.Width / 4, titleFont);
+
+                    if (currentY + nameSize.Height + serialSize.Height + length + 2 > area.Height)
+                    {
+                        currentPage++;
+                        e.HasMorePages = true;
+                        return;
+                    }
+                    else
+                        e.HasMorePages = false;
+
 
                     contentsRect.X = area.Left;
                     contentsRect.Y = currentY;
                     contentsRect.Width = area.Width;
-                    contentsRect.Height = (int)size.Height;
+                    contentsRect.Height = (int)nameSize.Height;
+                    graphics.DrawString(i.Name, titleFont, Brushes.Black, contentsRect);
+                    currentY += contentsRect.Height;
 
-                    //graphics.DrawRectangle(bluePen, contentsRect);
-                    graphics.DrawString(i.Name + (i.Serial != null ? "\nSN: " + i.Serial : ""), titleFont, Brushes.Black, contentsRect);
+                    if (i.Serial != null)
+                    {
+                        contentsRect.X = area.Left;
+                        contentsRect.Y = currentY;
+                        contentsRect.Width = area.Width;
+                        contentsRect.Height = (int)serialSize.Height;
+                        graphics.DrawString(i.Serial, serialFont, Brushes.Black, contentsRect);
+                        currentY += contentsRect.Height;
+                    }
 
-                    currentY += (int)size.Height + 2;
-
-                    var length = i.BiggestLength(graphics, area.Width / 4, titleFont);
-                    contentsRect.X = 0;
+                    contentsRect.X = area.Left;
                     contentsRect.Y = currentY;
                     contentsRect.Width = area.Width / 4;
                     contentsRect.Height = length;
 
-                    //graphics.DrawRectangle(bluePen, contentsRect);
+                    currentY += contentsRect.Height + 5;
+
                     graphics.DrawString(i.Quantity.ToString() + "x", font, Brushes.Black, contentsRect, centerAlignment);
 
                     contentsRect.X = area.Width / 4;
-
-                    //graphics.DrawRectangle(bluePen, contentsRect);
                     graphics.DrawString(i.Price.ToCurrency(), font, Brushes.Black, contentsRect, farAlignment);
 
                     contentsRect.X = (area.Width / 4) * 2;
-
-                    //graphics.DrawRectangle(bluePen, contentsRect);
                     graphics.DrawString("-" + i.Discount.ToCurrency(), font, Brushes.Black, contentsRect, farAlignment);
 
                     contentsRect.X = (area.Width / 4) * 3;
                     contentsRect.Width = area.Width - contentsRect.X;
 
-                    //Console.WriteLine(contentsRect.X + " , " + contentsRect.Width);
-
-                    //graphics.DrawRectangle(bluePen, contentsRect);
                     graphics.DrawString(i.Total.ToCurrency(), font, Brushes.Black, contentsRect, farAlignment);
 
-                    currentY += length + 2;
+                    currentIndex++;
                 }
 
                 graphics.DrawLine(bluePen, new Point(0, contentsRect.Bottom), new Point(area.Width, contentsRect.Bottom));
@@ -160,6 +182,15 @@ namespace POS.Misc
                                            contentsRect.Bottom + 10,
                                            (int)Math.Ceiling(b2Size.Width),
                                            (int)b2Size.Height + 1);
+
+                if (currentY + b2Rect.Height > area.Height)
+                {
+                    currentPage++;
+                    e.HasMorePages = true;
+                    return;
+                }
+                else
+                    e.HasMorePages = false;
 
                 graphics.DrawString(b2, titleFont, Brushes.Black, b2Rect, farAlignment);
 
@@ -177,7 +208,9 @@ namespace POS.Misc
                 var discRect = new Rectangle(0, summaryRect.Bottom + 10, area.Width, (int)Math.Floor(discSize.Height));
                 graphics.DrawString(disclaimer, font, Brushes.Black, discRect, centerAlignment);
 
-                //DrawRectangles(graphics, bluePen, firstRect, secondRect, b2Rect, summaryRect);       
+
+                currentIndex = 0;
+                currentPage = 1;
             }
         }
 
