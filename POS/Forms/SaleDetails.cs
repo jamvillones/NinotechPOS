@@ -183,22 +183,17 @@ namespace POS.Forms
 
         private void SaleDetails_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.P)
-                OpenPrint();
+            //if (e.Control && e.KeyCode == Keys.P)
+            //    OpenPrint();
         }
 
         void OpenPrint()
         {
-            using (var reprint = new SaleReprint())
-            {
-                if (reprint.SetId(_saleId))
-                    reprint.ShowDialog();
-            }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            OpenPrint();
+            //using (var reprint = new SaleReprint())
+            //{
+            //    if (reprint.SetId(_saleId))
+            //        reprint.ShowDialog();
+            //}
         }
 
         PrintAction printAction;
@@ -408,11 +403,6 @@ namespace POS.Forms
 
             try { Clipboard.SetText(value); }
             catch { }
-        }
-
-        private async void returnItemToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)

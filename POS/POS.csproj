@@ -136,12 +136,6 @@
     <Compile Include="Forms\ChangeCustomerForm.Designer.cs">
       <DependentUpon>ChangeCustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ConnectionConfigurations.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ConnectionConfigurations.Designer.cs">
-      <DependentUpon>ConnectionConfigurations.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Create_Customer_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,12 +167,6 @@
       <DependentUpon>InventoryTimeStamp_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ItemInfoHolder.cs" />
-    <Compile Include="Forms\ItemListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ItemListForm.Designer.cs">
-      <DependentUpon>ItemListForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ItemRegistration\BasicInformation_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,12 +238,6 @@
     <Compile Include="Item.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ItemCartDetailsEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ItemCartDetailsEdit.Designer.cs">
-      <DependentUpon>ItemCartDetailsEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="Misc\Departments_Store.cs" />
     <Compile Include="Misc\NotificationHandler.cs" />
     <Compile Include="Misc\Tools.cs" />
@@ -270,12 +252,6 @@
     <Compile Include="ChargedPayRecord.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Checkout.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Checkout.Designer.cs">
-      <DependentUpon>Checkout.cs</DependentUpon>
-    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
@@ -285,12 +261,6 @@
     </Compile>
     <Compile Include="Forms\CustomerTransactionsForm.Designer.cs">
       <DependentUpon>CustomerTransactionsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ItemVariationsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ItemVariationsForm.designer.cs">
-      <DependentUpon>ItemVariationsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AdvancedSearchForm.cs">
       <SubType>Form</SubType>
@@ -304,12 +274,6 @@
     <Compile Include="Forms\PrintInventory.Designer.cs">
       <DependentUpon>PrintInventory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditSale.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EditSale.designer.cs">
-      <DependentUpon>EditSale.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\InventoryStockinLog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -322,23 +286,11 @@
     <Compile Include="Forms\StockinLog.Designer.cs">
       <DependentUpon>StockinLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SubstituteProduct.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SubstituteProduct.Designer.cs">
-      <DependentUpon>SubstituteProduct.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\UserPrivilegesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\UserPrivilegesForm.Designer.cs">
       <DependentUpon>UserPrivilegesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\VariationReferences.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\VariationReferences.Designer.cs">
-      <DependentUpon>VariationReferences.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IMainWindow.cs" />
     <Compile Include="Interfaces\IOnsave.cs" />
@@ -409,12 +361,6 @@
     <Compile Include="Forms\PaymentsForm.Designer.cs">
       <DependentUpon>PaymentsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ViewItem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ViewItem.designer.cs">
-      <DependentUpon>ViewItem.cs</DependentUpon>
-    </Compile>
     <Compile Include="Interfaces\ITab.cs" />
     <Compile Include="Misc\ControlExtension.cs" />
     <Compile Include="Misc\EntityExtension.cs" />
@@ -428,12 +374,6 @@
     <Compile Include="Misc\ReceiptPrinting.cs" />
     <Compile Include="Misc\SearchEventArgs.cs" />
     <Compile Include="Misc\UserManager.cs" />
-    <Compile Include="MoneyCalculator.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MoneyCalculator.Designer.cs">
-      <DependentUpon>MoneyCalculator.cs</DependentUpon>
-    </Compile>
     <Compile Include="POSModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -459,12 +399,6 @@
     </Compile>
     <Compile Include="Sale.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SaleReprint.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SaleReprint.Designer.cs">
-      <DependentUpon>SaleReprint.cs</DependentUpon>
     </Compile>
     <Compile Include="Misc\SearchHandler.cs" />
     <Compile Include="Forms\ShiftSummaryForm.cs">
@@ -519,9 +453,6 @@
     <Compile Include="UserControls\SearchControl.designer.cs">
       <DependentUpon>SearchControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Checkout.resx">
-      <DependentUpon>Checkout.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Add_Edit_ConnectionConfig.resx">
       <DependentUpon>Add_Edit_ConnectionConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -533,9 +464,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChangeCustomerForm.resx">
       <DependentUpon>ChangeCustomerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ConnectionConfigurations.resx">
-      <DependentUpon>ConnectionConfigurations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Create_Customer_Form.resx">
       <DependentUpon>Create_Customer_Form.cs</DependentUpon>
@@ -555,9 +483,6 @@
     <EmbeddedResource Include="Forms\InventoryTimeStamp_Form.resx">
       <DependentUpon>InventoryTimeStamp_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ItemListForm.resx">
-      <DependentUpon>ItemListForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemRegistration\BasicInformation_Form.resx">
       <DependentUpon>BasicInformation_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -576,9 +501,6 @@
     <EmbeddedResource Include="Forms\ItemSoldItemsForm.resx">
       <DependentUpon>ItemSoldItemsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ItemVariationsForm.resx">
-      <DependentUpon>ItemVariationsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdvancedSearchForm.resx">
       <DependentUpon>AdvancedSearchForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -590,9 +512,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PrintInventory.resx">
       <DependentUpon>PrintInventory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditSale.resx">
-      <DependentUpon>EditSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\InventoryStockinLog.resx">
       <DependentUpon>InventoryStockinLog.cs</DependentUpon>
@@ -609,17 +528,8 @@
     <EmbeddedResource Include="Forms\StockinLog.resx">
       <DependentUpon>StockinLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SubstituteProduct.resx">
-      <DependentUpon>SubstituteProduct.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserPrivilegesForm.resx">
       <DependentUpon>UserPrivilegesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\VariationReferences.resx">
-      <DependentUpon>VariationReferences.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ItemCartDetailsEdit.resx">
-      <DependentUpon>ItemCartDetailsEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -651,14 +561,8 @@
     <EmbeddedResource Include="Forms\PaymentsForm.resx">
       <DependentUpon>PaymentsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ViewItem.resx">
-      <DependentUpon>ViewItem.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Misc\KeywordAutocompleteTextbox.resx">
       <DependentUpon>KeywordAutocompleteTextbox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MoneyCalculator.resx">
-      <DependentUpon>MoneyCalculator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -672,9 +576,6 @@
     </Compile>
     <EmbeddedResource Include="RecieptPrintingConfigurations.resx">
       <DependentUpon>RecieptPrintingConfigurations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SaleReprint.resx">
-      <DependentUpon>SaleReprint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ShiftSummaryForm.resx">
       <DependentUpon>ShiftSummaryForm.cs</DependentUpon>

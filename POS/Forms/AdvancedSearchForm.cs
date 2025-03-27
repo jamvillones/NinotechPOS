@@ -142,11 +142,6 @@ namespace POS.Forms
 
             await LoadData_Async();
         }
-        private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
-        {
-            //keyWord = string.Empty;
-            //await LoadData_Async();
-        }
 
         string keyWord = "";
 

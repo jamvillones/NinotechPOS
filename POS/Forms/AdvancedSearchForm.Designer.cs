@@ -235,7 +235,7 @@
             this.searchControl1.Size = new System.Drawing.Size(580, 28);
             this.searchControl1.TabIndex = 1;
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            //this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // Column6
             // 

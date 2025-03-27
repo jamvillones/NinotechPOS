@@ -464,7 +464,7 @@ namespace POS.Forms
                         SaleType = tendered.Value < grandTotal ? SaleType.Charged.ToString() : SaleType.Regular.ToString()
                     };
 
-                    
+
 
                     foreach (var entry in CartItems)
                     {
@@ -686,16 +686,16 @@ namespace POS.Forms
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (var itemView = new ItemListForm())
-            {
-                if (itemView.ShowDialog() == DialogResult.OK)
-                {
-                    SetSearchKeyword(itemView.Tag.ToString());
-                }
-            }
-        }
+        private void button1_Click(object sender, EventArgs e) { }
+        //{
+        //    using (var itemView = new ItemListForm())
+        //    {
+        //        if (itemView.ShowDialog() == DialogResult.OK)
+        //        {
+        //            SetSearchKeyword(itemView.Tag.ToString());
+        //        }
+        //    }
+        //}
 
         private void changeCustomer_Click(object sender, EventArgs e)
         {

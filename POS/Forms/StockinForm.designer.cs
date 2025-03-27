@@ -63,6 +63,7 @@
             this.quantity = new System.Windows.Forms.NumericUpDown();
             this.addBtn = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.searchControl = new POS.UserControls.SearchControl();
             this.serialGroup = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -80,7 +81,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this._messageLabel = new System.Windows.Forms.Label();
-            this.searchControl = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.inventoryTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
@@ -239,7 +239,6 @@
             this.col_remove.Text = "Remove";
             this.col_remove.UseColumnTextForButtonValue = true;
             this.col_remove.Visible = false;
-            this.col_remove.Width = 12;
             // 
             // itemsTable
             // 
@@ -421,6 +420,23 @@
             this.toolTip.InitialDelay = 300;
             this.toolTip.ReshowDelay = 100;
             this.toolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // searchControl
+            // 
+            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchControl.BackColor = System.Drawing.Color.White;
+            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl.Location = new System.Drawing.Point(0, 0);
+            this.searchControl.MaximumSize = new System.Drawing.Size(350, 35);
+            this.searchControl.MinimumSize = new System.Drawing.Size(350, 35);
+            this.searchControl.Name = "searchControl";
+            this.searchControl.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.searchControl.SearchedText = "";
+            this.searchControl.Size = new System.Drawing.Size(350, 35);
+            this.searchControl.TabIndex = 0;
+            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
+            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // serialGroup
             // 
@@ -627,23 +643,6 @@
             this._messageLabel.Name = "_messageLabel";
             this._messageLabel.Size = new System.Drawing.Size(0, 13);
             this._messageLabel.TabIndex = 2;
-            // 
-            // searchControl
-            // 
-            this.searchControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchControl.BackColor = System.Drawing.Color.White;
-            this.searchControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl.Location = new System.Drawing.Point(0, 0);
-            this.searchControl.MaximumSize = new System.Drawing.Size(350, 35);
-            this.searchControl.MinimumSize = new System.Drawing.Size(350, 35);
-            this.searchControl.Name = "searchControl";
-            this.searchControl.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.searchControl.SearchedText = "";
-            this.searchControl.Size = new System.Drawing.Size(350, 35);
-            this.searchControl.TabIndex = 0;
-            this.toolTip.SetToolTip(this.searchControl, "(ctrl+F) to focus search");
-            this.searchControl.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // StockinForm
             // 
