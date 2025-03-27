@@ -433,7 +433,7 @@
             this.editItemBtn.Size = new System.Drawing.Size(180, 40);
             this.editItemBtn.TabIndex = 9;
             this.editItemBtn.TabStop = false;
-            this.editItemBtn.Text = "     Edit Item Details";
+            this.editItemBtn.Text = "     View Item Details";
             this.editItemBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.editItemBtn.UseVisualStyleBackColor = false;
             this.editItemBtn.Click += new System.EventHandler(this.editBtn_Click);

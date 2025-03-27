@@ -1,8 +1,10 @@
 ﻿using POS.Misc;
+using POS.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Threading;
@@ -11,15 +13,17 @@ using System.Windows.Forms;
 
 namespace POS.Forms
 {
-    public partial class StockinLog : Form
+    public partial class StockInLog : Form
     {
-        public StockinLog()
+        public StockInLog()
         {
             InitializeComponent();
 
             regular_Dt.MaxDate = DateTime.Now;
             range_from_Dt.MaxDate = DateTime.Now;
             range_to_Dt.MaxDate = DateTime.Now;
+
+            col_Id.Visible = UserManager.instance.IsAdmin;
         }
 
         bool InRangeMode => radioButton5.Checked;
@@ -39,12 +43,14 @@ namespace POS.Forms
 
         private CancellationTokenSource CancelSource = null;
 
-        private async void StockinLog_Load(object sender, EventArgs e) => await LoadDataAsync();
+        private async void StockInLog_Load(object sender, EventArgs e) => await LoadDataAsync();
 
         bool TryCancelCurrentOperation()
         {
             try
             {
+                IsTotalEntriesInitialized = false;
+
                 CancelSource?.Cancel();
                 return true;
             }
@@ -54,20 +60,74 @@ namespace POS.Forms
             }
         }
 
+        private class StockInHistoryDTO
+        {
+            public int Id { get; set; }
+            public DateTime Date { get; set; }
+            public string User { get; set; }
+            public string Name { get; set; }
+            public string SerialNumber { get; set; }
+            public int Qty { get; set; }
+            public decimal Cost { get; set; }
+        }
+
+        readonly Pagination pagination = new Pagination();
+
+        public bool IsTotalEntriesInitialized
+        {
+            get => isTotalEntriesInitialized;
+            private set
+            {
+                isTotalEntriesInitialized = value;
+
+                if (!IsTotalEntriesInitialized)
+                    historyTable.Rows.Clear();
+            }
+        }
+
+        public bool IsBusyLoading { get; private set; }
+
+        private int entryCount;
+        /// <summary>
+        /// Total Count Current Rows Displayed
+        /// </summary>
+        public int EntryCount
+        {
+            get { return entryCount; }
+            set
+            {
+                entryCount = value;
+                countLabel.Text = $"{entryCount:N0} / {totalCount:N0}";
+            }
+        }
+
+        private int totalCount;
+        /// <summary>
+        /// Total entries for the given parameters enabled
+        /// </summary>
+        public int TotalCount
+        {
+            get { return totalCount; }
+            set
+            {
+                totalCount = value;
+                countLabel.Text = $"{entryCount:N0} / {totalCount:N0}";
+            }
+        }
+
         private async Task<bool> LoadDataAsync()
         {
-
-            TryCancelCurrentOperation();
-
             CancelSource = new CancellationTokenSource();
             var token = CancelSource.Token;
 
             bool ResultsFound = false;
+            IsBusyLoading = true;
+
             try
             {
-                using (var p = new POSEntities())
+                using (var context = new POSEntities())
                 {
-                    var stockIns = p.StockinHistories
+                    var stockIns = context.StockinHistories
                         .AsNoTracking()
                         .AsQueryable()
                         .FilterByKeyword(keyword);
@@ -77,17 +137,43 @@ namespace POS.Forms
                         .OrderByDescending(x => x.Date)
                             .ThenBy(s => s.ItemName);
 
-                    var finalResult = await stockIns.ToListAsync();
+                    if (!IsTotalEntriesInitialized)
+                    {
+                        //get the total count of entries
+                        int totalItems = await stockIns.CountAsync(token);
 
+                        TotalCount = totalItems;
 
+                        //initialize the pagination
+                        pagination.Initialize(totalItems, 500);
+                        //ensure one time initialization of pagination
+                        IsTotalEntriesInitialized = true;
+                    }
+
+                    var loadingTask = stockIns
+                                    .Skip(pagination.Start).Take(pagination.PageSize)
+                                    .Select(sth => new StockInHistoryDTO()
+                                    {
+                                        Id = sth.Id,
+                                        Date = (DateTime)sth.Date,
+                                        User = sth.LoginUsername,
+                                        Name = sth.Product.Item.Name,
+                                        SerialNumber = sth.SerialNumber,
+                                        Qty = sth.Quantity,
+                                        Cost = (decimal)sth.Cost
+                                    }).ToListAsync();
+
+                    await Task.WhenAll(loadingTask, Task.Delay(500));
+
+                    var finalResult = loadingTask.Result;
                     ResultsFound = finalResult.Count > 0;
 
                     if (ResultsFound)
                     {
-                        historyTable.Rows.Clear();
                         token.ThrowIfCancellationRequested();
+
                         historyTable.Rows.AddRange(finalResult.Select(CreateRow).ToArray());
-                        _totalCost.Text = ((decimal)(finalResult.Select(x => x.Cost * x.Quantity).Sum())).ToString("C2");
+                        _totalCost.Text = finalResult.Select(x => x.Cost * x.Qty).Sum().ToString("C2");
                     }
                 }
             }
@@ -95,33 +181,56 @@ namespace POS.Forms
             {
                 return false;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Connection Not Established!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             finally
             {
                 CancelSource.Dispose();
+
+                IsBusyLoading = false;
+
+                EntryCount = historyTable.RowCount;
             }
 
             return ResultsFound;
         }
 
-        private DataGridViewRow CreateRow(StockinHistory stockInHistory)
+
+
+        private DataGridViewRow CreateRow(StockInHistoryDTO stockInHistory)
         {
             var row = new DataGridViewRow();
 
             row.CreateCells(historyTable,
-                       stockInHistory.Id,
-                       stockInHistory.Date.Value,
-                       stockInHistory.LoginUsername,
-                       stockInHistory.Product?.ToString() ?? stockInHistory.ItemName,
-                       stockInHistory.SerialNumber,
-                       stockInHistory.Quantity,
-                       stockInHistory.Cost
-                       );
+                      stockInHistory.Id,
+                      stockInHistory.Date,
+                      stockInHistory.User,
+                      stockInHistory.Name,
+                      stockInHistory.SerialNumber,
+                      stockInHistory.Qty,
+                      stockInHistory.Cost
+                      );
 
             return row;
         }
 
+        private async void itemsTable_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (sender is DataGridView dgv && dgv.IsScrolledToBottom())
+            {
+                if (!IsBusyLoading && pagination.CanNext)
+                {
+                    pagination.Next();
+                    await LoadDataAsync();
+                }
+            }
+        }
+
         private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
         {
+            TryCancelCurrentOperation();
             keyword = e.Text;
             bool found = await LoadDataAsync();
             //e.SearchFound = await LoadDataAsync();
@@ -134,12 +243,15 @@ namespace POS.Forms
 
         private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
+            TryCancelCurrentOperation();
+
             keyword = string.Empty;
             await LoadDataAsync();
         }
 
         private async void datePicker_ValueChanged(object sender, EventArgs e)
         {
+            TryCancelCurrentOperation();
             await LoadDataAsync();
         }
 
@@ -150,6 +262,8 @@ namespace POS.Forms
 
                 filterMode = DateFilterMode.All;
                 regular_Dt.Visible = false;
+
+                TryCancelCurrentOperation();
 
                 await LoadDataAsync();
             }
@@ -163,6 +277,8 @@ namespace POS.Forms
                 regular_Dt.CustomFormat = "yyyy";
                 regular_Dt.Visible = true;
 
+                TryCancelCurrentOperation();
+
                 await LoadDataAsync();
             }
         }
@@ -175,6 +291,8 @@ namespace POS.Forms
                 regular_Dt.CustomFormat = "MMM yyyy";
                 regular_Dt.Visible = true;
 
+                TryCancelCurrentOperation();
+
                 await LoadDataAsync();
             }
         }
@@ -186,6 +304,9 @@ namespace POS.Forms
                 filterMode = DateFilterMode.Daily;
                 regular_Dt.CustomFormat = "MMM d, yyyy";
                 regular_Dt.Visible = true;
+                TryCancelCurrentOperation();
+
+
 
                 await LoadDataAsync();
             }
@@ -200,6 +321,8 @@ namespace POS.Forms
                     regular_Dt.Visible = false;
                     dateRangeHolder.Visible = true;
 
+                    TryCancelCurrentOperation();
+
                     await LoadDataAsync();
                 }
                 else
@@ -208,12 +331,17 @@ namespace POS.Forms
         }
 
         bool preventFrom = false;
+
+        private bool isTotalEntriesInitialized = false;
+
         private async void range_to_Dt_ValueChanged(object sender, EventArgs e)
         {
             ///this makes sure that the from event doesnt trigger a load
             preventFrom = true;
             range_from_Dt.MaxDate = range_to_Dt.Value.Date;
             preventFrom = false;
+
+            TryCancelCurrentOperation();
 
             await LoadDataAsync();
         }
@@ -222,6 +350,8 @@ namespace POS.Forms
         {
             if (preventFrom)
                 return;
+
+            TryCancelCurrentOperation();
 
             await LoadDataAsync();
         }
@@ -406,7 +536,12 @@ namespace POS.Forms
             if (string.IsNullOrWhiteSpace(keyword))
                 return stockIns;
 
-            return stockIns.Where(s => s.ItemName.Contains(keyword) || s.Product.Item.Name.Contains(keyword) || s.SerialNumber.Contains(keyword));
+            return stockIns.Where(s => 
+                s.Product.Item.Barcode == keyword || 
+                s.ItemName.Contains(keyword) || 
+                s.Product.Item.Name.Contains(keyword) || 
+                s.SerialNumber.Contains(keyword))
+                ;
         }
     }
 }

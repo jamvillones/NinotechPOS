@@ -600,7 +600,7 @@ namespace POS.UserControls
 
         private void button5_Click(object sender, EventArgs e)
         {
-            var stock_inLog = new StockinLog();
+            var stock_inLog = new StockInLog();
             stock_inLog.ShowDialog();
         }
 

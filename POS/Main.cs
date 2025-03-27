@@ -185,7 +185,7 @@ namespace POS
         }
         private void stockinLog_Click(object sender, EventArgs e)
         {
-            OpenDialog<StockinLog>();
+            OpenDialog<StockInLog>();
         }
         private void printInventory_Click(object sender, EventArgs e)
         {
