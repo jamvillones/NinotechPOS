@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -68,9 +69,9 @@ namespace POS.Forms
                     username.AutoCompleteCustomSource.AddRange(loadingTask.Result);
                 }
             }
-            catch (Exception ex)
+            catch (EntityException)
             {
-                if (MessageBox.Show(ex.Message + "\n\nMake sure the server is operational and is connected before clicking retry.", "Connection Failed!", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
+                if (MessageBox.Show("Make sure the server is operational and is connected. Also ensure that the connection configuration parameters are set properly.\n\nFor further questions, please contact 0997 522 4858 and look for Jamil Villones.", "Connection Not Established!", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
                     await TryConnect();
             }
         }
