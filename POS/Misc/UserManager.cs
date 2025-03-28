@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,9 +57,9 @@ namespace POS.Misc
                 {
                     MessageBox.Show("Login Not Authorized By Admin", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                catch
+                catch (EntityException ex)
                 {
-
+                    Console.WriteLine(ex.Message);
                 }
             }
             return false;

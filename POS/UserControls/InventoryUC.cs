@@ -250,6 +250,7 @@ namespace POS.UserControls
         private async Task<bool> LoadDataAsync()
         {
             IsBusyLoading = true;
+            Cursor.Current = Cursors.WaitCursor;
 
             _cancelSource = new CancellationTokenSource();
             var token = _cancelSource.Token;
@@ -268,6 +269,7 @@ namespace POS.UserControls
                 _cancelSource?.Dispose();
             }
 
+            Cursor.Current = Cursors.Default;
             IsBusyLoading = false;
 
             return itemsTable.RowCount > 0;

@@ -1,14 +1,15 @@
 ﻿using POS.Misc;
 using System;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace POS.Forms
 {
     public partial class LoginForm : Form
     {
-        //UserManager u;
         public bool LoginSuccessful
         {
             get; private set;
@@ -16,13 +17,9 @@ namespace POS.Forms
         public LoginForm()
         {
             InitializeComponent();
-            //u = manager;
         }
 
-        private void exitBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void exitBtn_Click(object sender, EventArgs e) => this.Close();
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
@@ -33,8 +30,7 @@ namespace POS.Forms
                 this.Close();
                 return;
             }
-            ///MessageBox.Show("Login failed!","", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            ///
+
             System.Media.SystemSounds.Hand.Play();
             label2.Text = "Log In Failed!";
         }
@@ -50,38 +46,33 @@ namespace POS.Forms
                 return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
-        private void LoginForm_Load(object sender, EventArgs e)
+
+        private async void LoginForm_Load(object sender, EventArgs e)
         {
             var settings = Properties.Settings.Default;
-            //this.Text = "POS-Login: " + (settings.IsLocalConnection ? "localHost" : settings.DataSource);
 
             this.Text = $"POS - Login {ConnectionConfiguration_Source.CurrentConfiguration}";
 
-            //label1.Text = "version: " + GetVersion();
-            TryConnect();
+            await TryConnect();
         }
 
-        void TryConnect()
+        async Task TryConnect()
         {
             try
             {
-                using (var p = new POSEntities())
+                using (var context = new POSEntities())
                 {
-                    username.AutoCompleteCustomSource.AddRange(p.Logins.Select(x => x.Username).ToArray());
+                    var loadingTask = context.Logins.AsNoTracking().Select(x => x.Username).ToArrayAsync();
+                    await Task.WhenAll(loadingTask, Task.Delay(1000));
+
+                    username.AutoCompleteCustomSource.AddRange(loadingTask.Result);
                 }
             }
             catch (Exception ex)
             {
                 if (MessageBox.Show(ex.Message + "\n\nMake sure the server is operational and is connected before clicking retry.", "Connection Failed!", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
-                {
-                    TryConnect();
-                }
+                    await TryConnect();
             }
-        }
-
-        private void hide_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void hide_MouseDown(object sender, MouseEventArgs e)
@@ -98,19 +89,11 @@ namespace POS.Forms
         {
             if (e.Alt && e.Shift && e.Control && e.KeyCode == Keys.C)
             {
-                //var connectionString = ConfigurationManager.ConnectionStrings["POSEntities"].ConnectionString.ToString();
-
-                //var STRINGS = connectionString.Split(';');
-
-                //MessageBox.Show(STRINGS[2], "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var config = new ServerConnections();
-                //var config = new ConnectionConfigurations();
-                if (config.ShowDialog() == DialogResult.OK)
-                {
-                    this.Text = $"POS - Login {ConnectionConfiguration_Source.CurrentConfiguration}";
-                }
-            }
 
+                if (config.ShowDialog() == DialogResult.OK)
+                    this.Text = $"POS - Login {ConnectionConfiguration_Source.CurrentConfiguration}";
+            }
         }
 
         private void password_TextChanged(object sender, EventArgs e)

@@ -76,7 +76,7 @@
             this.hide.TabIndex = 6;
             this.hide.TabStop = false;
             this.hide.Visible = false;
-            this.hide.Click += new System.EventHandler(this.hide_Click);
+            //this.hide.Click += new System.EventHandler(this.hide_Click);
             this.hide.MouseDown += new System.Windows.Forms.MouseEventHandler(this.hide_MouseDown);
             this.hide.MouseUp += new System.Windows.Forms.MouseEventHandler(this.hide_MouseUp);
             // 
