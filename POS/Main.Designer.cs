@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.userButton = new System.Windows.Forms.Button();
             this.tabsHolderPanel = new System.Windows.Forms.Panel();
+            this.inventoryTab = new POS.UserControls.InventoryUC();
+            this.reportTab = new POS.UserControls.ReportUC();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.button7 = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -44,8 +46,6 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.inventoryTab = new POS.UserControls.InventoryUC();
-            this.reportTab = new POS.UserControls.ReportUC();
             this.tabsHolderPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -83,6 +83,24 @@
             this.tabsHolderPanel.Padding = new System.Windows.Forms.Padding(15, 15, 15, 0);
             this.tabsHolderPanel.Size = new System.Drawing.Size(1264, 621);
             this.tabsHolderPanel.TabIndex = 3;
+            // 
+            // inventoryTab
+            // 
+            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inventoryTab.Location = new System.Drawing.Point(15, 15);
+            this.inventoryTab.Name = "inventoryTab";
+            this.inventoryTab.Size = new System.Drawing.Size(1234, 606);
+            this.inventoryTab.TabIndex = 2;
+            // 
+            // reportTab
+            // 
+            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportTab.IsOldEntries = false;
+            this.reportTab.Location = new System.Drawing.Point(15, 15);
+            this.reportTab.Name = "reportTab";
+            this.reportTab.Size = new System.Drawing.Size(1234, 606);
+            this.reportTab.TabIndex = 1;
+            this.reportTab.TabStop = false;
             // 
             // button7
             // 
@@ -136,7 +154,7 @@
             this.flowLayoutPanel1.Controls.Add(this.button4);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(967, 36);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(769, 36);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // button1
@@ -156,7 +174,7 @@
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Location = new System.Drawing.Point(159, 3);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 3, 50, 3);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 3, 100, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 30);
             this.button2.TabIndex = 1;
@@ -166,53 +184,77 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button3.AutoSize = true;
+            this.button3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(360, 3);
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.button3.Location = new System.Drawing.Point(410, 3);
             this.button3.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(150, 30);
+            this.button3.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.button3.Size = new System.Drawing.Size(102, 29);
             this.button3.TabIndex = 2;
-            this.button3.Text = "Customers";
+            this.button3.Text = "CUSTOMERS";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button5.AutoSize = true;
+            this.button5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button5.BackColor = System.Drawing.Color.Transparent;
+            this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(512, 3);
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.button5.Location = new System.Drawing.Point(514, 3);
             this.button5.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(150, 30);
+            this.button5.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.button5.Size = new System.Drawing.Size(93, 29);
             this.button5.TabIndex = 3;
-            this.button5.Text = "Suppliers";
+            this.button5.Text = "SUPPLIERS";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button6.AutoSize = true;
+            this.button6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button6.BackColor = System.Drawing.Color.Transparent;
+            this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(664, 3);
+            this.button6.Font = new System.Drawing.Font("Segoe UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.button6.Location = new System.Drawing.Point(609, 3);
             this.button6.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(150, 30);
+            this.button6.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.button6.Size = new System.Drawing.Size(70, 29);
             this.button6.TabIndex = 4;
-            this.button6.Text = "Users";
+            this.button6.Text = "USERS";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button4.AutoSize = true;
+            this.button4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button4.BackColor = System.Drawing.Color.Transparent;
+            this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(816, 3);
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.button4.Location = new System.Drawing.Point(681, 3);
             this.button4.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(150, 30);
+            this.button4.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.button4.Size = new System.Drawing.Size(87, 29);
             this.button4.TabIndex = 5;
-            this.button4.Text = "Settings";
+            this.button4.Text = "SETTINGS";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -225,24 +267,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1264, 1);
             this.panel2.TabIndex = 4;
-            // 
-            // inventoryTab
-            // 
-            this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inventoryTab.Location = new System.Drawing.Point(15, 15);
-            this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Size = new System.Drawing.Size(1234, 606);
-            this.inventoryTab.TabIndex = 2;
-            // 
-            // reportTab
-            // 
-            this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportTab.IsOldEntries = false;
-            this.reportTab.Location = new System.Drawing.Point(15, 15);
-            this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(1234, 606);
-            this.reportTab.TabIndex = 1;
-            this.reportTab.TabStop = false;
             // 
             // Main
             // 
@@ -265,6 +289,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

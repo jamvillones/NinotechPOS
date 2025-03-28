@@ -200,7 +200,7 @@ namespace POS.Forms.ItemRegistration
 
         private async void Create_Item_Form_Load(object sender, EventArgs e)
         {
-            this.Enabled = false;
+            //this.Enabled = false;
 
             try
             {
@@ -237,7 +237,7 @@ namespace POS.Forms.ItemRegistration
                 else
                     this.Close();
             }
-            this.Enabled = true;
+            //this.Enabled = true;
         }
 
         private async void AddCost_Click(object sender, EventArgs e)

@@ -78,6 +78,7 @@
             this.itemCount = new System.Windows.Forms.Label();
             this.trackItemCheckbox = new System.Windows.Forms.CheckBox();
             this.searchBar = new POS.UserControls.SearchControl();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.panel5.SuspendLayout();
@@ -87,6 +88,7 @@
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tablePanel
@@ -718,14 +720,23 @@
             this.searchBar.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchBar.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.contentPanel);
+            this.panel3.Controls.Add(this.flowLayoutPanel1);
+            this.panel3.Controls.Add(this.searchBar);
+            this.panel3.Controls.Add(this.trackItemCheckbox);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1055, 720);
+            this.panel3.TabIndex = 14;
+            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.contentPanel);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.searchBar);
-            this.Controls.Add(this.trackItemCheckbox);
+            this.Controls.Add(this.panel3);
             this.Name = "InventoryUC";
             this.Size = new System.Drawing.Size(1055, 720);
             this.Load += new System.EventHandler(this.InventoryUC_Load);
@@ -741,8 +752,9 @@
             this.panel8.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -788,5 +800,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
         private System.Windows.Forms.DataGridViewButtonColumn col_remove;
+        private System.Windows.Forms.Panel panel3;
     }
 }

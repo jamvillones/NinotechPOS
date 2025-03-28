@@ -300,14 +300,6 @@ namespace POS.UserControls
 
         private class ItemDTO
         {
-            //public ItemDTO(Item item)
-            //{
-
-            //    Id = item.Id;
-            //    Barcode = item.Barcode;
-            //    Name = item.Name;
-
-            //}
             public string Id { get; set; }
             public string Barcode { get; set; }
             public string Name { get; set; }
@@ -317,8 +309,14 @@ namespace POS.UserControls
             public string Type { get; set; }
         }
 
-        void OpenEditForm()
+        bool OpenEditForm()
         {
+            if (itemsTable.RowCount <= 0)
+            {
+                MessageBox.Show("You do not have an item.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+
             using (var editForm = new CreateEdit_Item_Form(SelectedId))
             {
                 if (editForm.ShowDialog() == DialogResult.OK)
@@ -338,22 +336,14 @@ namespace POS.UserControls
                     Departments_Store.AddNewDepartment(x.Department);
                 }
             }
+
+            return true;
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
             var btn = sender as Button;
-
-            if (itemsTable.RowCount <= 0)
-            {
-                MessageBox.Show("You do not have an item.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btn.Enabled = false;
-                return;
-            }
-
-
-            OpenEditForm();
-
+            btn.Enabled = OpenEditForm();
         }
 
         private void ShodSoldItemsForItem_Click(object sender, EventArgs e)

@@ -11,6 +11,17 @@ namespace POS
 {
     public static class ControlExtension
     {
+
+        public static Form EmbedForm(this Control control, Form frm)
+        {
+            frm.TopLevel = false;
+            frm.FormBorderStyle = FormBorderStyle.None;
+            frm.Visible = true;
+            frm.Dock = DockStyle.Fill;   // optional
+            frm.BringToFront();
+            control.Controls.Add(frm);
+            return frm;
+        }
         public static DataGridViewRow CreateRow(this DataGridView dt, params object[] obs)
         {
             var row = new DataGridViewRow();
