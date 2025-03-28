@@ -13,7 +13,8 @@ namespace POS.Misc
         static int currentIndex = 0;
         public static void FormatReceipt(this PrintPageEventArgs e, PrintAction printAction, ReceiptDetails details)
         {
-            var settings = Properties.Settings.Default;
+            //var settings = Properties.Settings.Default;
+            var settings = ReceiptPrintingConfigurations.ReceiptPrintingConfig;
 
             using (Graphics graphics = e.Graphics)
             using (Pen bluePen = new Pen(Brushes.Black) { Width = 0.5f, DashStyle = System.Drawing.Drawing2D.DashStyle.Dot })
@@ -37,14 +38,14 @@ namespace POS.Misc
 
                 if (currentPage == 1)
                 {
-                    string Header = settings.HeaderText;
+                    string Header = settings.Header;
                     var headerSize = e.Graphics.MeasureString(Header, titleFont, area.Width);
                     var headerRect = new Rectangle(0, 0, area.Width, (int)Math.Floor(headerSize.Height));
 
                     if (Header != string.Empty)
                         e.Graphics.DrawString(Header, titleFont, Brushes.Black, headerRect, centerAlignment);
 
-                    string titleString = settings.DetailsText;
+                    string titleString = settings.Details;
 
                     var titleSize = e.Graphics.MeasureString(titleString, titleFont, e.PageBounds.Width);
                     var titleRect = new Rectangle(0, headerRect.Bottom, area.Width, (int)titleSize.Height);
@@ -116,7 +117,7 @@ namespace POS.Misc
                     var i = details.Items[ii];
 
                     var nameSize = graphics.MeasureString(i.Name, titleFont, area.Width);
-                    var serialSize = i.Serial is null ? SizeF.Empty : graphics.MeasureString(i.Serial, serialFont, area.Width);
+                    var serialSize = i.Serial is null ? SizeF.Empty : graphics.MeasureString("► " + i.Serial, serialFont, area.Width);
 
                     var length = i.BiggestLength(graphics, area.Width / 4, titleFont);
 
@@ -143,7 +144,7 @@ namespace POS.Misc
                         contentsRect.Y = currentY;
                         contentsRect.Width = area.Width;
                         contentsRect.Height = (int)serialSize.Height;
-                        graphics.DrawString(i.Serial, serialFont, Brushes.Black, contentsRect);
+                        graphics.DrawString("► " + i.Serial, serialFont, Brushes.Black, contentsRect);
                         currentY += contentsRect.Height;
                     }
 
@@ -152,7 +153,6 @@ namespace POS.Misc
                     contentsRect.Width = area.Width / 4;
                     contentsRect.Height = length;
 
-                    currentY += contentsRect.Height + 5;
 
                     graphics.DrawString(i.Quantity.ToString() + "x", font, Brushes.Black, contentsRect, centerAlignment);
 
@@ -167,6 +167,7 @@ namespace POS.Misc
 
                     graphics.DrawString(i.Total.ToCurrency(), font, Brushes.Black, contentsRect, farAlignment);
 
+                    currentY += contentsRect.Height + 5;
                     currentIndex++;
                 }
 
@@ -177,13 +178,30 @@ namespace POS.Misc
                             details.Tendered.ToCurrency() + "\n" +
                             details.Change.ToCurrency();
 
+                string b1 = "Discount: \n" +
+                         "Grand Total: \n" +
+                            "Tendered: \n" +
+                              "Change: ";
+
+                currentY += 10;
                 var b2Size = graphics.MeasureString(b2, titleFont, area.Width, farAlignment);
                 var b2Rect = new Rectangle(area.Width - (int)Math.Floor(b2Size.Width),
                                            contentsRect.Bottom + 10,
                                            (int)Math.Ceiling(b2Size.Width),
                                            (int)b2Size.Height + 1);
 
-                if (currentY + b2Rect.Height > area.Height)
+                var summarySize = graphics.MeasureString(b1, font, area.Width);
+                var summaryRect = new Rectangle(b2Rect.Left - (int)summarySize.Width - 10, currentY, (int)summarySize.Width + 1, (int)summarySize.Height);
+
+                currentY += summaryRect.Height + 10;
+
+                string disclaimer = settings.Footer;
+                var discSize = disclaimer is null ? SizeF.Empty : graphics.MeasureString(disclaimer, font, area.Width);
+                var discRect = new Rectangle(0, currentY, area.Width, (int)Math.Floor(discSize.Height));
+
+                currentY += discRect.Height;
+
+                if (currentY > area.Height)
                 {
                     currentPage++;
                     e.HasMorePages = true;
@@ -193,21 +211,12 @@ namespace POS.Misc
                     e.HasMorePages = false;
 
                 graphics.DrawString(b2, titleFont, Brushes.Black, b2Rect, farAlignment);
-
-                string b1 = "Discount: \n" +
-                        "Grand Total: \n" +
-                           "Tendered: \n" +
-                           "Change: ";
-
-                var summarySize = graphics.MeasureString(b1, font, area.Width);
-                var summaryRect = new Rectangle(b2Rect.Left - (int)summarySize.Width - 10, contentsRect.Bottom + 10, (int)summarySize.Width + 1, (int)summarySize.Height);
                 graphics.DrawString(b1, font, Brushes.Black, summaryRect, farAlignment);
 
-                string disclaimer = "*THIS IS AN INTERNAL ORDER FORM ONLY.\nPLEASE ASK FOR SALES INVOICE FROM CASHIER.";
-                var discSize = graphics.MeasureString(disclaimer, font, area.Width);
-                var discRect = new Rectangle(0, summaryRect.Bottom + 10, area.Width, (int)Math.Floor(discSize.Height));
-                graphics.DrawString(disclaimer, font, Brushes.Black, discRect, centerAlignment);
+                if (disclaimer != null)
+                    graphics.DrawString(disclaimer, font, Brushes.Black, discRect, centerAlignment);
 
+                //currentY += b2Rect.Height;
 
                 currentIndex = 0;
                 currentPage = 1;

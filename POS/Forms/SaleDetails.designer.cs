@@ -81,9 +81,10 @@
             this.discount = new System.Windows.Forms.TextBox();
             this.panel11 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -153,7 +154,7 @@
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.itemsTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.itemsTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.itemsTable.Size = new System.Drawing.Size(944, 317);
+            this.itemsTable.Size = new System.Drawing.Size(944, 309);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 2;
             this.itemsTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellClick);
@@ -296,14 +297,18 @@
             // 
             // paymentsBtn
             // 
-            this.paymentsBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.paymentsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.paymentsBtn.Location = new System.Drawing.Point(512, 0);
-            this.paymentsBtn.Margin = new System.Windows.Forms.Padding(6, 0, 0, 0);
+            this.paymentsBtn.BackColor = System.Drawing.Color.White;
+            this.paymentsBtn.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.paymentsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.paymentsBtn.Image = ((System.Drawing.Image)(resources.GetObject("paymentsBtn.Image")));
+            this.paymentsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.paymentsBtn.Location = new System.Drawing.Point(504, 20);
+            this.paymentsBtn.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.paymentsBtn.Name = "paymentsBtn";
             this.paymentsBtn.Size = new System.Drawing.Size(150, 35);
             this.paymentsBtn.TabIndex = 16;
-            this.paymentsBtn.Text = "Payments";
+            this.paymentsBtn.Text = "   Payments";
+            this.paymentsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.paymentsBtn.UseVisualStyleBackColor = false;
             this.paymentsBtn.Click += new System.EventHandler(this.OpenPayments_Click);
             // 
@@ -324,41 +329,53 @@
             // voidBtn
             // 
             this.voidBtn.BackColor = System.Drawing.Color.RosyBrown;
-            this.voidBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.voidBtn.ForeColor = System.Drawing.Color.Black;
-            this.voidBtn.Location = new System.Drawing.Point(712, 0);
+            this.voidBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
+            this.voidBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.voidBtn.ForeColor = System.Drawing.Color.White;
+            this.voidBtn.Image = ((System.Drawing.Image)(resources.GetObject("voidBtn.Image")));
+            this.voidBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.voidBtn.Location = new System.Drawing.Point(704, 20);
             this.voidBtn.Margin = new System.Windows.Forms.Padding(50, 0, 0, 0);
             this.voidBtn.Name = "voidBtn";
             this.voidBtn.Size = new System.Drawing.Size(150, 35);
             this.voidBtn.TabIndex = 17;
-            this.voidBtn.Text = "Void";
+            this.voidBtn.Text = "   Void";
+            this.voidBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.voidBtn.UseVisualStyleBackColor = false;
             this.voidBtn.Click += new System.EventHandler(this.voidBtn_Click);
             // 
             // editItemsBtn
             // 
-            this.editItemsBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.editItemsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.editItemsBtn.Location = new System.Drawing.Point(356, 0);
-            this.editItemsBtn.Margin = new System.Windows.Forms.Padding(6, 0, 0, 0);
+            this.editItemsBtn.BackColor = System.Drawing.Color.White;
+            this.editItemsBtn.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.editItemsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editItemsBtn.Image = ((System.Drawing.Image)(resources.GetObject("editItemsBtn.Image")));
+            this.editItemsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.editItemsBtn.Location = new System.Drawing.Point(352, 20);
+            this.editItemsBtn.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.editItemsBtn.Name = "editItemsBtn";
             this.editItemsBtn.Size = new System.Drawing.Size(150, 35);
             this.editItemsBtn.TabIndex = 17;
-            this.editItemsBtn.Text = "Add Items";
+            this.editItemsBtn.Text = "   Add Items";
+            this.editItemsBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.editItemsBtn.UseVisualStyleBackColor = false;
             this.editItemsBtn.Click += new System.EventHandler(this.editItemsBtn_Click);
             // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Location = new System.Drawing.Point(200, 0);
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button2.Location = new System.Drawing.Point(200, 20);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 35);
             this.button2.TabIndex = 21;
-            this.button2.Text = "Print";
+            this.button2.Text = "   Print";
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -376,22 +393,26 @@
             this.flowLayoutPanel1.Controls.Add(this.paymentsBtn);
             this.flowLayoutPanel1.Controls.Add(this.voidBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 556);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 536);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(944, 35);
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(944, 55);
             this.flowLayoutPanel1.TabIndex = 18;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.Location = new System.Drawing.Point(0, 20);
             this.button1.Margin = new System.Windows.Forms.Padding(0, 0, 50, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 35);
             this.button1.TabIndex = 22;
-            this.button1.Text = "Close";
+            this.button1.Text = "   Close";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -625,21 +646,6 @@
             this.label7.TabIndex = 25;
             this.label7.Text = "Title";
             // 
-            // searchControl1
-            // 
-            this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
-            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchControl1.Location = new System.Drawing.Point(20, 156);
-            this.searchControl1.MaximumSize = new System.Drawing.Size(350, 60);
-            this.searchControl1.MinimumSize = new System.Drawing.Size(200, 35);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(350, 35);
-            this.searchControl1.TabIndex = 1;
-            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
-            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
@@ -662,11 +668,36 @@
             this.label8.TabIndex = 27;
             this.label8.Text = "0 Selected";
             // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel12.Location = new System.Drawing.Point(20, 535);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(944, 1);
+            this.panel12.TabIndex = 28;
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.BackColor = System.Drawing.SystemColors.Window;
+            this.searchControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchControl1.Location = new System.Drawing.Point(20, 156);
+            this.searchControl1.MaximumSize = new System.Drawing.Size(350, 60);
+            this.searchControl1.MinimumSize = new System.Drawing.Size(200, 35);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.searchControl1.SearchedText = "";
+            this.searchControl1.Size = new System.Drawing.Size(350, 35);
+            this.searchControl1.TabIndex = 1;
+            this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
+            // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 611);
+            this.Controls.Add(this.panel12);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label7);
@@ -757,5 +788,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn discountCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalCol;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel12;
     }
 }

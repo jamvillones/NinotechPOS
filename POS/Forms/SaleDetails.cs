@@ -21,11 +21,6 @@ namespace POS.Forms
 
             voidBtn.Visible = CurrentLogin.CanVoidSale;
             editItemsBtn.Visible = CurrentLogin.CanVoidSale;
-
-            var settings = Properties.Settings.Default;
-
-            if (!string.IsNullOrEmpty(settings.ReceiptPrinter))
-                doc.PrinterSettings.PrinterName = settings.ReceiptPrinter;
         }
 
         Login CurrentLogin => UserManager.instance.CurrentLogin;
@@ -229,7 +224,7 @@ namespace POS.Forms
                     Discount = sale.Discount
                 };
 
-                foreach (var soldItem in sale.SoldItems)
+                foreach (var soldItem in sale.SoldItems.OrderBy(x => x.Product.Item.Name).ThenBy(x => x.SerialNumber))
                 {
                     details.AddItem(
                         soldItem.Product.Item.Name,
@@ -247,6 +242,8 @@ namespace POS.Forms
         private void doc_BeginPrint(object sender, PrintEventArgs e)
         {
             printAction = e.PrintAction;
+            doc.PrinterSettings.PrintFileName = $"Sale - #{_saleId} - {DateTime.Now:ddMMyyyy}";
+            doc.PrinterSettings.PrinterName = ReceiptPrintingConfigurations.ReceiptPrintingConfig.Printer;
         }
 
         void TryCancelLoading()
@@ -442,7 +439,7 @@ namespace POS.Forms
 
         async Task ReturnSelectedItems()
         {
-            if (!CurrentLogin.CanVoidSale)
+            if (!CurrentLogin.CanEditInventory)
             {
                 MessageBox.Show("You do not have permission to edit this sale", "Return aborted", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

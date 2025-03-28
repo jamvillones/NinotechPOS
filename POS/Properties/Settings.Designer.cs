@@ -26,42 +26,6 @@ namespace POS.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string HeaderText {
-            get {
-                return ((string)(this["HeaderText"]));
-            }
-            set {
-                this["HeaderText"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DetailsText {
-            get {
-                return ((string)(this["DetailsText"]));
-            }
-            set {
-                this["DetailsText"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ReceiptPrinter {
-            get {
-                return ((string)(this["ReceiptPrinter"]));
-            }
-            set {
-                this["ReceiptPrinter"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Note {
             get {
                 return ((string)(this["Note"]));
@@ -116,6 +80,18 @@ namespace POS.Properties {
             }
             set {
                 this["ConfigIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ReceiptPrintingConfig {
+            get {
+                return ((string)(this["ReceiptPrintingConfig"]));
+            }
+            set {
+                this["ReceiptPrintingConfig"] = value;
             }
         }
     }

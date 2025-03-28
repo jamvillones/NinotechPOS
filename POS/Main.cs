@@ -49,6 +49,8 @@ namespace POS
 
         private async void Main_Load(object sender, EventArgs e)
         {
+            ReceiptPrintingConfigurations.Initialize();
+
             try
             {
                 SetButtonChangeMechanism(button1, button2);
@@ -193,7 +195,7 @@ namespace POS
         }
         private void receiptConfig_Click(object sender, EventArgs e)
         {
-            OpenDialog<RecieptPrintingConfigurations>();
+            OpenDialog<ReceiptPrintingConfigurations>();
         }
 
         void OpenDialog<T>() where T : Form, new()
@@ -273,7 +275,7 @@ namespace POS
 
         private void button4_Click(object sender, EventArgs e)
         {
-            OpenDialog<RecieptPrintingConfigurations>();
+            OpenDialog<ReceiptPrintingConfigurations>();
         }
 
         private void button7_Click(object sender, EventArgs e)
