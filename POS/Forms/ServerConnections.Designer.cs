@@ -57,7 +57,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Location = new System.Drawing.Point(32, 132);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(385, 40);
+            this.button1.Size = new System.Drawing.Size(254, 40);
             this.button1.TabIndex = 1;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = false;
@@ -124,6 +124,7 @@
             this.Controls.Add(this.comboBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ServerConnections";
@@ -132,6 +133,8 @@
             this.Text = "Server Connections";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ServerConnections_FormClosing);
             this.Load += new System.EventHandler(this.ServerConnections_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ServerConnections_KeyDown);
+            //this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ServerConnections_PreviewKeyDown);
             this.ResumeLayout(false);
 
         }

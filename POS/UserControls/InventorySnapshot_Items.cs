@@ -9,14 +9,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-public interface ILoadable {
+public interface ILoadable
+{
     Task Initialize_Async();
     void TryCancel();
 }
 
-namespace POS.UserControls {
-    public partial class InventorySnapshot_Items : UserControl, ILoadable {
-        public InventorySnapshot_Items() {
+namespace POS.UserControls
+{
+    public partial class InventorySnapshot_Items : UserControl, ILoadable
+    {
+        public InventorySnapshot_Items()
+        {
             InitializeComponent();
 
             this.dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
@@ -25,7 +29,8 @@ namespace POS.UserControls {
             this.searchControl1.OnTextEmpty += searchControl1_OnTextEmpty;
         }
 
-        private class InventoryTimeStamp {
+        private class InventoryTimeStamp
+        {
             public int ProductId { get; set; }
             public string Name { get; set; }
             public int Qty { get; set; }
@@ -36,21 +41,27 @@ namespace POS.UserControls {
 
         DateTime DateSelected => dateTimePicker1.Value.Date.AddHours(23).AddMinutes(59);
 
-        public async Task Initialize_Async() {
+        public async Task Initialize_Async()
+        {
             await LoadAsync();
         }
 
-        private async Task LoadAsync() {
+        private async Task LoadAsync()
+        {
             CancellationTokenSource = new CancellationTokenSource();
             var token = CancellationTokenSource.Token;
-            try {
-                using (var context = new POSEntities()) {
+            try
+            {
+                using (var context = new POSEntities())
+                {
                     var items = await context.Products
                         .AsNoTracking()
                         .AsQueryable()
                         .Where(i => i.Item.Type == ItemType.Quantifiable.ToString())
                         .ApplySearch(keyword)
-                        .Select(i => new InventoryTimeStamp() {
+                        .OrderBy(o => o.Item.Name)
+                        .Select(i => new InventoryTimeStamp()
+                        {
                             ProductId = i.Id,
                             Name = i.Item.Name + " - " + i.Supplier.Name,
                             Qty = i.StockinHistories.Where(s => s.Date <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum() -
@@ -61,17 +72,18 @@ namespace POS.UserControls {
                         .ToListAsync(token);
 
                     token.ThrowIfCancellationRequested();
-                    if (items.Count > 0) {
-
-                        TotalLabel.Text = items.Sum(i => i.TotalCost).ToCurrency();
-
+                    if (items.Count > 0)
+                    {
                         dataGridView.Rows.Clear();
-                        foreach (var item in items) {
+                        foreach (var item in items)
+                        {
                             if (token.IsCancellationRequested)
                                 break;
+
                             var createdRow = CreateRow(item);
                             dataGridView.Rows.Add(createdRow);
                         }
+                        dataGridView.Rows.Add("", "", "", "", "", items.Select(i => i.TotalCost).DefaultIfEmpty(0).Sum().ToCurrency());
 
                         return;
                     }
@@ -79,52 +91,64 @@ namespace POS.UserControls {
                     MessageBox.Show("No Entries Found.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (OperationCanceledException) {
+            catch (OperationCanceledException)
+            {
 
             }
-            finally {
+            finally
+            {
                 CancellationTokenSource?.Dispose();
             }
         }
 
         DataGridViewRow CreateRow(InventoryTimeStamp p) => dataGridView.CreateRow(p.ProductId, p.Name, p.InventoryQty, p.Qty, p.Cost, p.TotalCost);
 
-        private async void dateTimePicker1_ValueChanged(object sender, EventArgs e) {
+        private async void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
             await LoadAsync();
         }
-        private class Correction_Inventory_Item {
+        private class Correction_Inventory_Item
+        {
             public int ProductId { get; set; }
             public int ComputedQty { get; set; }
             public int InventoryQty { get; set; }
         }
-        private async Task Balance_Async() {
+        private async Task Balance_Async()
+        {
             if (dataGridView.SelectedRows.Count == 0)
                 return;
 
-            using (var context = new POSEntities()) {
+            using (var context = new POSEntities())
+            {
                 var user = await context.Logins.FirstOrDefaultAsync(x => x.Username == "admin");
                 var correctionDate = new DateTime(2019, 1, 1);
                 var supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none");
 
-                var correctionSaleInstance = new Sale() {
+                var correctionSaleInstance = new Sale()
+                {
                     Date = correctionDate,
                     Customer = context.Customers.FirstOrDefault(x => x.Name == "Inventory Correction") ?? new Customer() { Name = "Inventory Correction" },
                     Login = user,
                 };
 
-                var selecteds = dataGridView.SelectedRows.Cast<DataGridViewRow>().Select(i => new Correction_Inventory_Item() {
+                var selecteds = dataGridView.SelectedRows.Cast<DataGridViewRow>().Select(i => new Correction_Inventory_Item()
+                {
                     ProductId = (int)i.Cells[0].Value,
                     InventoryQty = (int)i.Cells[2].Value,
                     ComputedQty = (int)i.Cells[3].Value,
                 }).ToArray();
 
-                foreach (var instance in selecteds) {
+                foreach (var instance in selecteds)
+                {
 
-                    if (instance.ComputedQty != instance.InventoryQty) {
+                    if (instance.ComputedQty != instance.InventoryQty)
+                    {
                         var product = await context.Products.FirstOrDefaultAsync(x => x.Id == instance.ProductId);
-                        if (instance.ComputedQty < instance.InventoryQty) {
+                        if (instance.ComputedQty < instance.InventoryQty)
+                        {
                             ///add corrective stockin
-                            var newStockin = new StockinHistory() {
+                            var newStockin = new StockinHistory()
+                            {
                                 ProductId = instance.ProductId,
                                 Cost = product.Cost,
                                 Quantity = instance.InventoryQty - instance.ComputedQty,
@@ -137,9 +161,11 @@ namespace POS.UserControls {
                             context.StockinHistories.Add(newStockin);
 
                         }
-                        else {
+                        else
+                        {
                             ///add corrective sell
-                            var newSoldItem = new SoldItem() {
+                            var newSoldItem = new SoldItem()
+                            {
                                 ProductId = instance.ProductId,
                                 ItemPrice = product.Item.SellingPrice,
                                 Quantity = instance.ComputedQty - instance.InventoryQty,
@@ -158,7 +184,8 @@ namespace POS.UserControls {
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e) {
+        private async void button1_Click(object sender, EventArgs e)
+        {
             if (MessageBox.Show("Are you sure you want to balance?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
             await Balance_Async();
@@ -166,22 +193,27 @@ namespace POS.UserControls {
 
         string keyword = string.Empty;
 
-        private async void searchControl1_OnSearch(object sender, SearchEventArgs e) {
+        private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
+        {
             keyword = e.Text;
             await LoadAsync();
         }
 
-        private async void searchControl1_OnTextEmpty(object sender, EventArgs e) {
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
+        {
             keyword = string.Empty;
             await LoadAsync();
         }
 
         CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
-        public void TryCancel() {
-            try {
+        public void TryCancel()
+        {
+            try
+            {
                 CancellationTokenSource?.Cancel();
             }
-            catch (ObjectDisposedException) {
+            catch (ObjectDisposedException)
+            {
 
             }
         }

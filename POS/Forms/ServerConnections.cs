@@ -139,6 +139,12 @@ namespace POS.Forms
         {
             TryCancel();
         }
+
+        private void ServerConnections_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
+        }
     }
 
 

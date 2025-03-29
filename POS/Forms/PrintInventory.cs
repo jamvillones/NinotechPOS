@@ -7,18 +7,24 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace POS.Forms {
-    public partial class PrintInventory : Form {
-        public PrintInventory() {
+namespace POS.Forms
+{
+    public partial class PrintInventory : Form
+    {
+        public PrintInventory()
+        {
             InitializeComponent();
         }
 
-        private async void PrintInventory_Load(object sender, EventArgs e) {
+        private async void PrintInventory_Load(object sender, EventArgs e)
+        {
             worker.RunWorkerAsync();
 
-            using (var context = new POSEntities()) {
+            using (var context = new POSEntities())
+            {
                 //var s = p.InventoryItems.ToArray();
                 var entries = await context.InventoryItems
                     .AsNoTracking()
@@ -43,7 +49,8 @@ namespace POS.Forms {
         PrintAction printAction;
         Pen areaPen = new Pen(Brushes.Red);
         Pen gridPen = new Pen(Brushes.Gray);
-        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e) {
+        private void printDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
             Graphics graphics = e.Graphics;
             RectangleF marginBounds = e.MarginBounds;
             RectangleF printableArea = e.PageSettings.PrintableArea;
@@ -64,7 +71,8 @@ namespace POS.Forms {
 
             area = new Rectangle(1, 1, availableWidth - 1, availableHeight - 1);
 
-            if (printAction == PrintAction.PrintToPreview) {
+            if (printAction == PrintAction.PrintToPreview)
+            {
                 //e.Graphics.DrawRectangle(areaPen, area);
                 //drawLines(area, e.Graphics, 9);
             }
@@ -78,7 +86,8 @@ namespace POS.Forms {
         int index = 0;
         int pageCount { get; set; } = 1;
 
-        void PrintLayout(PrintPageEventArgs e) {
+        void PrintLayout(PrintPageEventArgs e)
+        {
             Graphics g = e.Graphics;
             Rectangle pageNumberRect = new Rectangle(0, 0, area.Width, 40);
             farFormat.Alignment = StringAlignment.Far;
@@ -123,7 +132,8 @@ namespace POS.Forms {
             int yStart = colRect.Bottom;
             Rectangle stringHolderRect = new Rectangle();
 
-            while (index < datas.Count) {
+            while (index < datas.Count)
+            {
                 var i = datas[index];
 
                 List<int> heights = new List<int>();
@@ -134,7 +144,8 @@ namespace POS.Forms {
 
                 var max = heights.Max();
 
-                if (yStart + max > area.Height) {
+                if (yStart + max > area.Height)
+                {
                     e.HasMorePages = true;
                     pageCount++;
                     return;
@@ -148,7 +159,7 @@ namespace POS.Forms {
                 stringHolderRect.Height = max;
 
                 g.DrawRectangle(gridPen, stringHolderRect);
-                g.DrawString(i[0]?.ToString()??"", contentFont, Brushes.Black, stringHolderRect);
+                g.DrawString(i[0]?.ToString() ?? "", contentFont, Brushes.Black, stringHolderRect);
 
                 stringHolderRect.X = stringHolderRect.Right;
                 stringHolderRect.Width = area.Width * 1 / 9;
@@ -194,9 +205,11 @@ namespace POS.Forms {
             index = 0;
         }
 
-        void drawLines(RectangleF p, Graphics g, int xDivision) {
+        void drawLines(RectangleF p, Graphics g, int xDivision)
+        {
             Pen linePen = new Pen(Brushes.Blue);
-            for (int i = 1; i < xDivision; i++) {
+            for (int i = 1; i < xDivision; i++)
+            {
 
                 int x = ((int)p.Width / xDivision) * i;
                 Point start = new Point(x, 0);
@@ -206,18 +219,23 @@ namespace POS.Forms {
             }
         }
 
-        private void document_BeginPrint(object sender, PrintEventArgs e) {
+        private void document_BeginPrint(object sender, PrintEventArgs e)
+        {
             printAction = e.PrintAction;
+            printDocument.PrinterSettings.PrinterName = comboBox1.Text;
         }
 
         List<DataListHolder> datas = new List<DataListHolder>();
 
-        private void PrintInventory_KeyDown(object sender, KeyEventArgs e) {
-            if (e.Control && e.KeyCode == Keys.P) {
+        private void PrintInventory_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.P)
+            {
                 button2.PerformClick();
             }
 
-            if (e.Alt) {
+            if (e.Alt)
+            {
                 if (e.KeyCode == Keys.Left)
                     if (printPreviewControl1.StartPage > 0)
                         printPreviewControl1.StartPage--;
@@ -226,30 +244,35 @@ namespace POS.Forms {
             }
         }
 
-        private void worker_DoWork(object sender, DoWorkEventArgs e) {
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
             var printers = PrinterSettings.InstalledPrinters.Cast<string>().ToArray();
             comboBox1.Invoke((MethodInvoker)delegate { comboBox1.Items.AddRange(printers); });
-            comboBox1.Invoke((MethodInvoker)delegate { comboBox1.Text = printDocument.PrinterSettings.PrinterName; });
+            comboBox1.Invoke((MethodInvoker)delegate { comboBox1.Text = printDocument.PrinterSettings.PrinterName; });            
+        }
+        
+
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
         }
 
-        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
-
-        }
-
-        private void printDocument_BeginPrint(object sender, PrintEventArgs e) {
+        private void printDocument_BeginPrint(object sender, PrintEventArgs e)
+        {
             printAction = e.PrintAction;
             pageCount = 1;
         }
 
-        private void button2_Click(object sender, EventArgs e) {
+        private void button2_Click(object sender, EventArgs e)
+        {
             printDocument.DefaultPageSettings.PrinterSettings.Copies = (short)numericUpDown1.Value;
 
             printDocument.Print();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
             printDocument.PrinterSettings.PrinterName = comboBox1.Text;
-
 
             printPreviewControl1.StartPage = 0;
             pageCount = 1;
@@ -257,18 +280,21 @@ namespace POS.Forms {
             printPreviewControl1.Document = printDocument;
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e) {
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
             var value = (double)trackBar1.Value / 100;
             printPreviewControl1.Zoom = value;
         }
 
-        private void button1_Click(object sender, EventArgs e) {
+        private void button1_Click(object sender, EventArgs e)
+        {
             if (printPreviewControl1.StartPage > 0)
                 printPreviewControl1.StartPage--;
         }
 
-        private void button3_Click(object sender, EventArgs e) {
+        private void button3_Click(object sender, EventArgs e)
+        {
             printPreviewControl1.StartPage++;
-        }
+        }       
     }
 }

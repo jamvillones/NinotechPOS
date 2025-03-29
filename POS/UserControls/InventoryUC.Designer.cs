@@ -79,6 +79,7 @@
             this.trackItemCheckbox = new System.Windows.Forms.CheckBox();
             this.searchBar = new POS.UserControls.SearchControl();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.panel5.SuspendLayout();
@@ -475,6 +476,7 @@
             // 
             // panel6
             // 
+            this.panel6.Controls.Add(this.button7);
             this.panel6.Controls.Add(this.button3);
             this.panel6.Controls.Add(this.button2);
             this.panel6.Controls.Add(this.button5);
@@ -732,6 +734,25 @@
             this.panel3.Size = new System.Drawing.Size(1055, 720);
             this.panel3.TabIndex = 14;
             // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.White;
+            this.button7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
+            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button7.Location = new System.Drawing.Point(0, 470);
+            this.button7.Margin = new System.Windows.Forms.Padding(5);
+            this.button7.Name = "button7";
+            this.button7.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.button7.Size = new System.Drawing.Size(180, 40);
+            this.button7.TabIndex = 26;
+            this.button7.TabStop = false;
+            this.button7.Text = "    Extract Data";
+            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button7.UseVisualStyleBackColor = false;
+            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -801,5 +822,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
         private System.Windows.Forms.DataGridViewButtonColumn col_remove;
         private System.Windows.Forms.Panel panel3;
+        protected System.Windows.Forms.Button button7;
     }
 }
