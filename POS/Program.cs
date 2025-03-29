@@ -5,6 +5,7 @@ using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS
@@ -37,21 +38,47 @@ namespace POS
             do
             {
                 signedOut = false;
-                var login = new LoginForm();
-                Application.Run(login);
 
-                if (login.LoginSuccessful)
+                var settings = Properties.Settings.Default;
+
+                if (!string.IsNullOrEmpty(settings.Login_Username))
                 {
-                    login.Dispose();
+                    UserManager.instance.Login(settings.Login_Username, settings.Login_Password);
 
                     performBackup = true;
-
                     var main = new Main();
                     Application.Run(main);
 
                     signedOut = main.IsLoggedOut;
+
+                    if (signedOut)
+                    {
+                        settings.Login_Username = settings.Login_Password = null;
+                        settings.Save();                       
+                    }
+                    
                     main.Dispose();
                 }
+                else
+                {
+                    var login = new LoginForm();
+                    Application.Run(login);
+
+                    if (login.LoginSuccessful)
+                    {
+                        login.Dispose();
+
+                        performBackup = true;
+
+                        var main = new Main();
+                        Application.Run(main);
+
+                        signedOut = main.IsLoggedOut;
+
+                        main.Dispose();
+                    }
+                }
+
                 GC.Collect();
             }
             while (signedOut);

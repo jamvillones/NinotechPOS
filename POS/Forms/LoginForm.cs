@@ -22,9 +22,9 @@ namespace POS.Forms
 
         private void exitBtn_Click(object sender, EventArgs e) => this.Close();
 
-        private void loginBtn_Click(object sender, EventArgs e)
+        private async void loginBtn_Click(object sender, EventArgs e)
         {
-            LoginSuccessful = UserManager.instance.Login(username.Text, password.Text);
+            LoginSuccessful =await UserManager.instance.Login_Async(username.Text, password.Text, checkBox1.Checked);
 
             if (LoginSuccessful)
             {

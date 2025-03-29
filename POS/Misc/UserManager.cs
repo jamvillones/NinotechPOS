@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
@@ -33,8 +34,46 @@ namespace POS.Misc
         public bool IsLoggedIn => CurrentLogin != null;
         public bool IsAdmin => CurrentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
 
+        public async Task<bool> Login_Async(string username, string password, bool stayLoggedIn = false)
+        {
+            var settings = Properties.Settings.Default;
+            string un = username.Trim();
+            string pw = password.Trim();
+            using (var p = new POSEntities())
+            {
+                try
+                {
+                    var login = await p.Logins.FirstOrDefaultAsync(x => x.Username == un && x.Password == pw);
+
+                    if (login != null)
+                    {
+                        if (stayLoggedIn)
+                        {
+                            settings.Login_Username = login.Username;
+                            settings.Login_Password = login.Password;
+                            settings.Save();
+                        }
+
+                        CurrentLogin = login;
+                        return true;
+
+                    }
+                }
+                catch (LoginNotAuthorized)
+                {
+                    MessageBox.Show("Login Not Authorized By Admin", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (EntityException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return false;
+        }
+
         public bool Login(string username, string password)
         {
+            var settings = Properties.Settings.Default;
             string un = username.Trim();
             string pw = password.Trim();
             using (var p = new POSEntities())
@@ -45,12 +84,8 @@ namespace POS.Misc
 
                     if (login != null)
                     {
-                        //if (!login.CanEditInventory)
-                        //    throw new LoginNotAuthorized();
-
                         CurrentLogin = login;
                         return true;
-
                     }
                 }
                 catch (LoginNotAuthorized)

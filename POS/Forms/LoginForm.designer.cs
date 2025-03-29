@@ -43,6 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.hide)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -58,7 +59,7 @@
             this.username.BackColor = System.Drawing.SystemColors.Control;
             this.username.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.username.ForeColor = System.Drawing.Color.Black;
-            this.username.Location = new System.Drawing.Point(101, 193);
+            this.username.Location = new System.Drawing.Point(101, 197);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(189, 13);
             this.username.TabIndex = 0;
@@ -86,7 +87,7 @@
             this.password.BackColor = System.Drawing.SystemColors.Control;
             this.password.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.password.ForeColor = System.Drawing.Color.Black;
-            this.password.Location = new System.Drawing.Point(101, 229);
+            this.password.Location = new System.Drawing.Point(101, 233);
             this.password.Name = "password";
             this.password.PasswordChar = '●';
             this.password.Size = new System.Drawing.Size(163, 13);
@@ -98,14 +99,14 @@
             // 
             this.loginBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.loginBtn.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.loginBtn.FlatAppearance.BorderSize = 0;
-            this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.loginBtn.FlatAppearance.BorderColor = System.Drawing.Color.LightSkyBlue;
+            this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginBtn.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginBtn.ForeColor = System.Drawing.Color.White;
             this.loginBtn.Location = new System.Drawing.Point(60, 292);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(230, 46);
-            this.loginBtn.TabIndex = 2;
+            this.loginBtn.TabIndex = 3;
             this.loginBtn.TabStop = false;
             this.loginBtn.Text = "LOG IN";
             this.loginBtn.UseVisualStyleBackColor = false;
@@ -161,7 +162,7 @@
             // label2
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Maroon;
             this.label2.Location = new System.Drawing.Point(0, 442);
             this.label2.Name = "label2";
@@ -185,19 +186,28 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
-            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
             this.button1.Location = new System.Drawing.Point(60, 352);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(230, 46);
-            this.button1.TabIndex = 13;
+            this.button1.TabIndex = 4;
             this.button1.TabStop = false;
             this.button1.Text = "SIGN UP";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(60, 264);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(98, 17);
+            this.checkBox1.TabIndex = 2;
+            this.checkBox1.Text = "Stay Logged In";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // LoginForm
             // 
@@ -206,6 +216,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(350, 511);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox3);
@@ -251,5 +262,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
