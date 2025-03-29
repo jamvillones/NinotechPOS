@@ -439,7 +439,7 @@ namespace POS.Forms
 
         async Task ReturnSelectedItems()
         {
-            if (!CurrentLogin.CanEditInventory)
+            if (!CurrentLogin.CanVoidSale)
             {
                 MessageBox.Show("You do not have permission to edit this sale", "Return aborted", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
