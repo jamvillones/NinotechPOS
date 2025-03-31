@@ -63,7 +63,7 @@ namespace POS.Forms
             }
             catch (EntityException)
             {
-                if (MessageBox.Show("Make sure the server is operational and is connected. Also ensure that the connection configuration parameters are set properly.\n\nFor further questions, please contact 0997 522 4858 and look for Jamil Villones.", "Connection Not Established!", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
+                if (MessageBox.Show("Make sure the server is operational and is connected. Also ensure that the connection configuration parameters are set properly.", "Connection Not Established!", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
                     await TryConnect();
             }
         }
