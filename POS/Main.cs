@@ -4,6 +4,7 @@ using POS.Misc;
 using POS.UserControls;
 using System;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,10 +42,10 @@ namespace POS
 
             this.Text = $"POS - {ConnectionConfiguration_Source.CurrentConfiguration}";
 
-            bool isAdmin = currentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
+            bool isAdmin = UserManager.instance.IsAdmin;
 
-            button6.Visible = isAdmin;
-            button5.Enabled = currentLogin.CanEditSupplier;
+            usersButton.Visible = isAdmin;
+            supplierButton.Enabled = currentLogin.CanEditSupplier;
         }
 
         private async void Main_Load(object sender, EventArgs e)
@@ -78,13 +79,16 @@ namespace POS
 
                     foreach (var c in itemsInCriticalQuantity)
                     {
-                        builder.AppendLine(c.Name + " - " + c.QuantityInInventory + " units");
+                        builder.AppendLine($"{c.Name} - {c.QuantityInInventory} units");
                     }
 
                     NotificationHandler.Instance.ShowTooltip("Items in Critical Qty (" + itemsInCriticalQuantity.Count + "): ", builder.ToString(), ToolTipIcon.Warning);
                 }
             }
-            catch (Exception) { }
+            catch (EntityException ex)
+            {
+                MessageBox.Show(ex.Message, "Critical Quantity Not Retrieved", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         void SetButtonChangeMechanism(params Button[] buttons)
@@ -100,6 +104,7 @@ namespace POS
             var button = sender as Button;
 
             button.BackColor = selectedButtonColor;
+
             prevButton = button;
         }
 
@@ -133,70 +138,18 @@ namespace POS
 
         private void userButton_Click(object sender, EventArgs e)
         {
-
             var editUser = new ChangePass(CurrentLogin.Id);
 
-            editUser.ShowDialog();
-            //if (MessageBox.Show("Are you sure you want to log off?",
-            //    "",
-            //    MessageBoxButtons.OKCancel,
-            //    MessageBoxIcon.Question) == DialogResult.Cancel) return;
-
-            //IsLoggedOut = true;
-            //this.Close();
+            if (editUser.ShowDialog() == DialogResult.OK)
+            {
+                var changed = editUser.Tag as Login;
+                userButton.Text = changed.ToString();
+            }
         }
 
         public bool IsLoggedOut { get; private set; } = false;
 
         #region toolstrips
-        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (var changeDetails = new ChangePass(UserManager.instance.CurrentLogin.Id))
-            {
-                if (changeDetails.ShowDialog() == DialogResult.OK)
-                {
-                    var result = (Login)changeDetails.Tag;
-                    userButton.Text = result.ToString();
-                }
-            }
-        }
-        private void addNewLoginToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //OpenDialog<CreateLogin>();
-            using (var changeDetails = new ChangePass())
-            {
-                if (changeDetails.ShowDialog() == DialogResult.OK)
-                {
-                    //var result = (Login)changeDetails.Tag;
-                    //userButton.Text = result.ToString();
-                }
-            }
-        }
-        private void loginPrivilegesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenDialog<UserPrivilegesForm>();
-        }
-
-        private void openSupplier_Click(object sender, EventArgs e)
-        {
-            OpenDialog<Suppliers_List>();
-        }
-        private void createCustomer_Click(object sender, EventArgs e)
-        {
-            OpenDialog<Customers_List>();
-        }
-        private void stockinLog_Click(object sender, EventArgs e)
-        {
-            OpenDialog<StockInLog>();
-        }
-        private void printInventory_Click(object sender, EventArgs e)
-        {
-            OpenDialog<PrintInventory>();
-        }
-        private void receiptConfig_Click(object sender, EventArgs e)
-        {
-            OpenDialog<ReceiptPrintingConfigurations>();
-        }
 
         void OpenDialog<T>() where T : Form, new()
         {
@@ -253,16 +206,6 @@ namespace POS
             OpenDialog<Suppliers_List>();
         }
 
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    inventoryTab.BringToFront();
-        //}
-
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    reportTab.BringToFront();
-        //}
-
         private void button3_Click_1(object sender, EventArgs e)
         {
             OpenDialog<Customers_List>();
@@ -286,6 +229,7 @@ namespace POS
                MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
             IsLoggedOut = true;
+            UserManager.instance.LogOut();
             this.Close();
         }
     }

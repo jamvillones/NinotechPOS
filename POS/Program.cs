@@ -33,55 +33,38 @@ namespace POS
             bool performBackup = false;
             UserManager.instance = new UserManager();
 
-            bool signedOut;
+            //bool signedOut;
 
             do
             {
-                signedOut = false;
 
                 var settings = Properties.Settings.Default;
 
                 if (!string.IsNullOrEmpty(settings.Login_Username))
                 {
-                    UserManager.instance.Login(settings.Login_Username, settings.Login_Password);
+                    if (!UserManager.instance.Login(settings.Login_Username))
+                    {
+                        MessageBox.Show("Saved Log In is no longer Available", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
 
-                    performBackup = true;
+                ///if the automatic login is not successful, show login form
+                if (!UserManager.instance.IsLoggedIn)
+                    Application.Run(new LoginForm());
+
+
+                if (UserManager.instance.IsLoggedIn)
+                {
                     var main = new Main();
                     Application.Run(main);
-
-                    signedOut = main.IsLoggedOut;
-
-                    if (signedOut)
-                    {
-                        settings.Login_Username = settings.Login_Password = null;
-                        settings.Save();                       
-                    }
-                    
                     main.Dispose();
                 }
-                else
-                {
-                    var login = new LoginForm();
-                    Application.Run(login);
+                /// terminate loop when there is no login
+                else break;
 
-                    if (login.LoginSuccessful)
-                    {
-                        login.Dispose();
-
-                        performBackup = true;
-
-                        var main = new Main();
-                        Application.Run(main);
-
-                        signedOut = main.IsLoggedOut;
-
-                        main.Dispose();
-                    }
-                }
-
-                GC.Collect();
+                //GC.Collect();
             }
-            while (signedOut);
+            while (!UserManager.instance.IsLoggedIn);
 
             //#if !DEBUG
             if (performBackup)

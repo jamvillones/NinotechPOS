@@ -42,8 +42,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.supplierButton = new System.Windows.Forms.Button();
+            this.usersButton = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabsHolderPanel.SuspendLayout();
@@ -149,8 +149,8 @@
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.button3);
-            this.flowLayoutPanel1.Controls.Add(this.button5);
-            this.flowLayoutPanel1.Controls.Add(this.button6);
+            this.flowLayoutPanel1.Controls.Add(this.supplierButton);
+            this.flowLayoutPanel1.Controls.Add(this.usersButton);
             this.flowLayoutPanel1.Controls.Add(this.button4);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -203,41 +203,41 @@
             // 
             // button5
             // 
-            this.button5.AutoSize = true;
-            this.button5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button5.BackColor = System.Drawing.Color.Transparent;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.button5.Location = new System.Drawing.Point(514, 3);
-            this.button5.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.button5.Name = "button5";
-            this.button5.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.button5.Size = new System.Drawing.Size(93, 29);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "SUPPLIERS";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.supplierButton.AutoSize = true;
+            this.supplierButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.supplierButton.BackColor = System.Drawing.Color.Transparent;
+            this.supplierButton.FlatAppearance.BorderSize = 0;
+            this.supplierButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.supplierButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.supplierButton.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.supplierButton.Location = new System.Drawing.Point(514, 3);
+            this.supplierButton.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.supplierButton.Name = "button5";
+            this.supplierButton.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.supplierButton.Size = new System.Drawing.Size(93, 29);
+            this.supplierButton.TabIndex = 3;
+            this.supplierButton.Text = "SUPPLIERS";
+            this.supplierButton.UseVisualStyleBackColor = false;
+            this.supplierButton.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
-            this.button6.AutoSize = true;
-            this.button6.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button6.BackColor = System.Drawing.Color.Transparent;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Segoe UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.button6.Location = new System.Drawing.Point(609, 3);
-            this.button6.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.button6.Name = "button6";
-            this.button6.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
-            this.button6.Size = new System.Drawing.Size(70, 29);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "USERS";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.usersButton.AutoSize = true;
+            this.usersButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.usersButton.BackColor = System.Drawing.Color.Transparent;
+            this.usersButton.FlatAppearance.BorderSize = 0;
+            this.usersButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.usersButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usersButton.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.usersButton.Location = new System.Drawing.Point(609, 3);
+            this.usersButton.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
+            this.usersButton.Name = "button6";
+            this.usersButton.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
+            this.usersButton.Size = new System.Drawing.Size(70, 29);
+            this.usersButton.TabIndex = 4;
+            this.usersButton.Text = "USERS";
+            this.usersButton.UseVisualStyleBackColor = false;
+            this.usersButton.Click += new System.EventHandler(this.button6_Click);
             // 
             // button4
             // 
@@ -307,8 +307,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button supplierButton;
+        private System.Windows.Forms.Button usersButton;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Panel panel2;
     }
