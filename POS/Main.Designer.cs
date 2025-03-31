@@ -201,7 +201,7 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
-            // button5
+            // supplierButton
             // 
             this.supplierButton.AutoSize = true;
             this.supplierButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -212,7 +212,7 @@
             this.supplierButton.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.supplierButton.Location = new System.Drawing.Point(514, 3);
             this.supplierButton.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.supplierButton.Name = "button5";
+            this.supplierButton.Name = "supplierButton";
             this.supplierButton.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.supplierButton.Size = new System.Drawing.Size(93, 29);
             this.supplierButton.TabIndex = 3;
@@ -220,7 +220,7 @@
             this.supplierButton.UseVisualStyleBackColor = false;
             this.supplierButton.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button6
+            // usersButton
             // 
             this.usersButton.AutoSize = true;
             this.usersButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -231,7 +231,7 @@
             this.usersButton.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.usersButton.Location = new System.Drawing.Point(609, 3);
             this.usersButton.Margin = new System.Windows.Forms.Padding(1, 3, 1, 3);
-            this.usersButton.Name = "button6";
+            this.usersButton.Name = "usersButton";
             this.usersButton.Padding = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.usersButton.Size = new System.Drawing.Size(70, 29);
             this.usersButton.TabIndex = 4;
@@ -285,6 +285,7 @@
             this.Text = "POS";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             this.tabsHolderPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

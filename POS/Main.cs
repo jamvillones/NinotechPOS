@@ -1,4 +1,5 @@
-﻿using POS.Forms;
+﻿using Newtonsoft.Json;
+using POS.Forms;
 using POS.Interfaces;
 using POS.Misc;
 using POS.UserControls;
@@ -40,7 +41,7 @@ namespace POS
             var currentLogin = CurrentLogin;
             userButton.Text = "  " + currentLogin.ToString();
 
-            this.Text = $"POS - {ConnectionConfiguration_Source.CurrentConfiguration}";
+            this.Text = $"POS version: {this.GetVersion()} - {ConnectionConfiguration_Source.CurrentConfiguration}";
 
             bool isAdmin = UserManager.instance.IsAdmin;
 
@@ -174,7 +175,28 @@ namespace POS
             CancelLoadings(inventoryTab);
             notifyIcon1.Visible = false;
             notifyIcon1.Dispose();
+
+            var settings = Properties.Settings.Default;
+
+            settings.WindowConfiguration = JsonConvert.SerializeObject(WindowConfiguration.Instance);
+            settings.Save();
         }
+
+        protected override void WndProc(ref Message m)
+        {
+            FormWindowState org = this.WindowState;
+            base.WndProc(ref m);
+            if (this.WindowState != org)
+                this.OnFormWindowStateChanged(EventArgs.Empty);
+        }
+
+        protected virtual void OnFormWindowStateChanged(EventArgs e)
+        {
+            // Do your stuff
+            if (this.WindowState != FormWindowState.Minimized)
+                WindowConfiguration.Instance.WindowState = this.WindowState;
+        }
+
         void CancelLoadings(params ITab[] tabs)
         {
             foreach (var i in tabs)
@@ -231,6 +253,12 @@ namespace POS
             IsLoggedOut = true;
             UserManager.instance.LogOut();
             this.Close();
+        }
+
+        private void Main_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F12)
+                button7.PerformClick();
         }
     }
 }

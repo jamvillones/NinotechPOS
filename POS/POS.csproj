@@ -244,6 +244,7 @@
     <Compile Include="Installer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Misc\WindowConfiguration.cs" />
     <Compile Include="NewCartDetails.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>POSModel.tt</DependentUpon>

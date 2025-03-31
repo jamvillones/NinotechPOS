@@ -23,6 +23,7 @@ namespace POS
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ConnectionConfiguration_Source.Initialize();
+            WindowConfiguration.Initialize();
 
             //test for showing the installation path
             /*
@@ -56,6 +57,10 @@ namespace POS
                 if (UserManager.instance.IsLoggedIn)
                 {
                     var main = new Main();
+                    if (WindowConfiguration.Instance != null)
+                    {
+                        main.WindowState = WindowConfiguration.Instance.WindowState;
+                    }
                     Application.Run(main);
                     main.Dispose();
                 }

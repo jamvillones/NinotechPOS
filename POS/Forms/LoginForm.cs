@@ -24,7 +24,7 @@ namespace POS.Forms
 
         private async void loginBtn_Click(object sender, EventArgs e)
         {
-            LoginSuccessful =await UserManager.instance.Login_Async(username.Text, password.Text, checkBox1.Checked);
+            LoginSuccessful = await UserManager.instance.Login_Async(username.Text, password.Text, checkBox1.Checked);
 
             if (LoginSuccessful)
             {
@@ -36,23 +36,15 @@ namespace POS.Forms
             label2.Text = "Log In Failed!";
         }
 
-        string GetVersion()
-        {
-            try
-            {
-                return System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
-            }
-            catch (Exception)
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            }
-        }
+
 
         private async void LoginForm_Load(object sender, EventArgs e)
         {
             var settings = Properties.Settings.Default;
 
             this.Text = $"POS - Login {ConnectionConfiguration_Source.CurrentConfiguration}";
+
+            label1.Text = this.GetVersion();
 
             await TryConnect();
         }

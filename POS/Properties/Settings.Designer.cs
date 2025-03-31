@@ -94,5 +94,17 @@ namespace POS.Properties {
                 this["ReceiptPrintingConfig"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WindowConfiguration {
+            get {
+                return ((string)(this["WindowConfiguration"]));
+            }
+            set {
+                this["WindowConfiguration"] = value;
+            }
+        }
     }
 }

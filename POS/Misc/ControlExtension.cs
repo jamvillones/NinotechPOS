@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace POS
 {
     public static class ControlExtension
     {
+        public static string GetVersion(this Control control) => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         public static Form EmbedForm(this Control control, Form frm)
         {
