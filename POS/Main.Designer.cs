@@ -56,20 +56,23 @@
             this.userButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.userButton.AutoEllipsis = true;
             this.userButton.BackColor = System.Drawing.SystemColors.Control;
-            this.userButton.FlatAppearance.BorderSize = 0;
-            this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.userButton.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.userButton.FlatAppearance.BorderColor = System.Drawing.Color.LightGray;
+            this.userButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.userButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userButton.ForeColor = System.Drawing.Color.Black;
+            this.userButton.Image = ((System.Drawing.Image)(resources.GetObject("userButton.Image")));
             this.userButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.userButton.Location = new System.Drawing.Point(1070, 15);
+            this.userButton.Location = new System.Drawing.Point(1039, 15);
             this.userButton.Margin = new System.Windows.Forms.Padding(0);
             this.userButton.Name = "userButton";
-            this.userButton.Padding = new System.Windows.Forms.Padding(5);
-            this.userButton.Size = new System.Drawing.Size(150, 30);
+            this.userButton.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.userButton.Size = new System.Drawing.Size(180, 30);
             this.userButton.TabIndex = 5;
             this.userButton.TabStop = false;
-            this.userButton.Text = "  Username";
+            this.userButton.Text = "   Username";
             this.userButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.toolTip.SetToolTip(this.userButton, "View Login Details");
+            this.userButton.UseCompatibleTextRendering = true;
             this.userButton.UseVisualStyleBackColor = false;
             this.userButton.Click += new System.EventHandler(this.userButton_Click);
             // 
@@ -80,25 +83,25 @@
             this.tabsHolderPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabsHolderPanel.Location = new System.Drawing.Point(0, 60);
             this.tabsHolderPanel.Name = "tabsHolderPanel";
-            this.tabsHolderPanel.Padding = new System.Windows.Forms.Padding(15, 15, 15, 0);
+            this.tabsHolderPanel.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.tabsHolderPanel.Size = new System.Drawing.Size(1264, 621);
             this.tabsHolderPanel.TabIndex = 3;
             // 
             // inventoryTab
             // 
             this.inventoryTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inventoryTab.Location = new System.Drawing.Point(15, 15);
+            this.inventoryTab.Location = new System.Drawing.Point(0, 15);
             this.inventoryTab.Name = "inventoryTab";
-            this.inventoryTab.Size = new System.Drawing.Size(1234, 606);
+            this.inventoryTab.Size = new System.Drawing.Size(1264, 606);
             this.inventoryTab.TabIndex = 2;
             // 
             // reportTab
             // 
             this.reportTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.reportTab.IsOldEntries = false;
-            this.reportTab.Location = new System.Drawing.Point(15, 15);
+            this.reportTab.Location = new System.Drawing.Point(0, 15);
             this.reportTab.Name = "reportTab";
-            this.reportTab.Size = new System.Drawing.Size(1234, 606);
+            this.reportTab.Size = new System.Drawing.Size(1264, 606);
             this.reportTab.TabIndex = 1;
             this.reportTab.TabStop = false;
             // 
@@ -106,8 +109,9 @@
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button7.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button7.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption;
             this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
             this.button7.Location = new System.Drawing.Point(1219, 15);
             this.button7.Margin = new System.Windows.Forms.Padding(0);
@@ -278,7 +282,7 @@
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MinimumSize = new System.Drawing.Size(1280, 720);
+            this.MinimumSize = new System.Drawing.Size(1025, 665);
             this.Name = "Main";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -296,7 +300,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button userButton;
         private System.Windows.Forms.Panel tabsHolderPanel;
         private UserControls.InventoryUC inventoryTab;
         private UserControls.ReportUC reportTab;
@@ -312,6 +315,7 @@
         private System.Windows.Forms.Button usersButton;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button userButton;
     }
 }
 

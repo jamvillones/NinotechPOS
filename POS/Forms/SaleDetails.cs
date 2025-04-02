@@ -20,7 +20,6 @@ namespace POS.Forms
             _saleId = id;
 
             voidBtn.Visible = CurrentLogin.CanVoidSale;
-            editItemsBtn.Visible = CurrentLogin.CanVoidSale;
         }
 
         Login CurrentLogin => UserManager.instance.CurrentLogin;
@@ -87,6 +86,8 @@ namespace POS.Forms
 
                 label7.Text = this.Text + " - " + sale.Id.ToString() + " [ " + sale.Date.Value.ToString("MMM d, yyyy hh:mm tt") + " - " + sale.SaleType + " ]";
                 bool isCharged = sale.SaleType.Equals(SaleType.Charged.ToString(), StringComparison.OrdinalIgnoreCase);
+                editItemsBtn.Visible = isCharged;
+
 
                 soldBy.Text = sale.Login.ToString();
                 soldTo.Text = sale.Customer?.ToString();

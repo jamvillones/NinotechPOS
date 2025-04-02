@@ -144,7 +144,7 @@ namespace POS
             if (editUser.ShowDialog() == DialogResult.OK)
             {
                 var changed = editUser.Tag as Login;
-                userButton.Text = changed.ToString();
+                userButton.Text = $"  {changed}";
             }
         }
 
