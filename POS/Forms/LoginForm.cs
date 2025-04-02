@@ -108,5 +108,14 @@ namespace POS.Forms
                 }
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (var config = new ServerConnections())
+            {
+                if (config.ShowDialog() == DialogResult.OK)
+                    this.Text = $"POS - Login {ConnectionConfiguration_Source.CurrentConfiguration}";
+            }
+        }
     }
 }

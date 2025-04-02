@@ -194,6 +194,18 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAFiSURBVDhPrZJPSwJRFMXd9YX6CNmqaJFKTX8IZmYTjTOr0BFSISgIx0BaBGa1cSGYBc4gGW2K
+        EnQRESmIrYLat5h8s3jNebzAmbE2deBw3z2/c3cv9G+aEqS5sCC1XXfGuA3Oq0ElCuWL7ROT/mRwXg2q
+        0f8slJ8IPX0kdPPa9hg5OK8G1Rw4+WqX0MqzQ43W0GPk4LwaFGCtR1jxoDP0GPmvx5cDMnk1cHbPe6R0
+        /DDsNPpOHvOsS0rIwXl1vETTXpEs+1Cx6AR2TOxS3V5mBb+iampjPq7vx/RcZSFbvMM7qiS3GHMnduSx
+        RK7CmNtnh5CUNu7N7gcdtbpXfAPD9DP02SEkZo1W88Who9aMo3cwTD9Dnx1Cq8md23z1ho5azhivYJh+
+        hj47hKKKvhaJ65lZSSvPiGoN74iS0sAwsSMHxxt9dvit6UV5Pbwk18OCaLl/OM1jJuzIwdHj8V8UCn0B
+        QABPfZsaNZUAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAEBAAAAEAIABoBAAAJgAAACAgAAABACAAqBAAAI4EAAAoAAAAEAAAACAAAAABACAAAAAAADAE
