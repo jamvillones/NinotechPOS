@@ -51,12 +51,17 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel9.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfirmBtn
@@ -64,7 +69,7 @@
             this.ConfirmBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ConfirmBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ConfirmBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ConfirmBtn.Location = new System.Drawing.Point(23, 225);
+            this.ConfirmBtn.Location = new System.Drawing.Point(23, 254);
             this.ConfirmBtn.Name = "ConfirmBtn";
             this.ConfirmBtn.Size = new System.Drawing.Size(150, 35);
             this.ConfirmBtn.TabIndex = 8;
@@ -171,7 +176,7 @@
             this.panel3.Controls.Add(this.passwordTxtBx);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(3, 79);
+            this.panel3.Location = new System.Drawing.Point(3, 117);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(304, 32);
             this.panel3.TabIndex = 11;
@@ -217,7 +222,7 @@
             this.panel5.Controls.Add(this.newPasswordTxt);
             this.panel5.Controls.Add(this.panel8);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(3, 117);
+            this.panel5.Location = new System.Drawing.Point(3, 155);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(304, 32);
             this.panel5.TabIndex = 12;
@@ -263,7 +268,7 @@
             this.panel9.Controls.Add(this.comfirmPasswordTxt);
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Controls.Add(this.label5);
-            this.panel9.Location = new System.Drawing.Point(3, 155);
+            this.panel9.Location = new System.Drawing.Point(3, 193);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(304, 32);
             this.panel9.TabIndex = 13;
@@ -308,21 +313,67 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanel1.Controls.Add(this.panel6);
             this.flowLayoutPanel1.Controls.Add(this.panel1);
+            this.flowLayoutPanel1.Controls.Add(this.panel11);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.panel5);
             this.flowLayoutPanel1.Controls.Add(this.panel9);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(23, 20);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(312, 199);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(312, 228);
             this.flowLayoutPanel1.TabIndex = 14;
+            // 
+            // panel11
+            // 
+            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel11.AutoSize = true;
+            this.panel11.Controls.Add(this.textBox1);
+            this.panel11.Controls.Add(this.panel12);
+            this.panel11.Controls.Add(this.label6);
+            this.panel11.Location = new System.Drawing.Point(3, 79);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(304, 32);
+            this.panel11.TabIndex = 14;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(12, 14);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(280, 15);
+            this.textBox1.TabIndex = 2;
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.Black;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel12.Location = new System.Drawing.Point(0, 31);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(304, 1);
+            this.panel12.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(122, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Email Address (optional):";
             // 
             // ChangePass
             // 
             this.AcceptButton = this.ConfirmBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(358, 283);
+            this.ClientSize = new System.Drawing.Size(358, 312);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ConfirmBtn);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -346,6 +397,8 @@
             this.panel9.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -373,5 +426,9 @@
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label6;
     }
 }

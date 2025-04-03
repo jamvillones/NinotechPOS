@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,10 +53,11 @@ namespace POS.Forms
                         if (newPasswordTxt.Text == comfirmPasswordTxt.Text)
                             u.Password = newPasswordTxt.Text;
                         else
-                            MessageBox.Show("New Password and Confim Password did not match.", "Change Password Unsuccessful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("New Password and Confirm Password did not match.", "Change Password Unsuccessful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     u.Name = string.IsNullOrWhiteSpace(nameTxtBx.Text) ? null : nameTxtBx.Text.Trim();
+                    u.Email = textBox1.Text.NullIfEmpty();
                 }
 
                 await context.SaveChangesAsync();
