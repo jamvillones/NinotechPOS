@@ -134,7 +134,6 @@ namespace POS.Forms
                     };
 
                     context.SoldItems.Add(soldItem);
-
                 }
                 else
                 {
@@ -144,30 +143,21 @@ namespace POS.Forms
                     {
                         var inventoryItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.ProductId == e.ProductId);
                         inventoryItem.Quantity -= e.Quantity;
+
                         if (inventoryItem.Quantity == 0)
                             context.InventoryItems.Remove(inventoryItem);
-
-
                     }
 
-                    var soldItem = sale.SoldItems.FirstOrDefault(x => x.ProductId == e.ProductId);
-
-                    if (soldItem != null)
-                        soldItem.Quantity += e.Quantity;
-                    else
+                    var soldItemToAdd = new SoldItem()
                     {
-                        var soldItemToAdd = new SoldItem()
-                        {
-                            ItemPrice = e.SellingPrice,
-                            Discount = e.Discount,
-                            Quantity = e.Quantity,
-                            ProductId = e.ProductId,
-                            SaleId = sale.Id
-                        };
+                        ItemPrice = e.SellingPrice,
+                        Discount = e.Discount,
+                        Quantity = e.Quantity,
+                        ProductId = e.ProductId,
+                        SaleId = sale.Id
+                    };
 
-                        context.SoldItems.Add(soldItemToAdd);
-                    }
-
+                    context.SoldItems.Add(soldItemToAdd);
                 }
 
                 await context.SaveChangesAsync();
@@ -307,7 +297,7 @@ namespace POS.Forms
                                                 i,
                                                 isFirstNameEntry,
                                                 isFirstSupplierEntry,
-                                                i.Product.Item.IsSerialRequired ? supplierItems.Count() : i.Quantity
+                                                i.Product.Item.IsSerialRequired ? supplierItems.Count() : supplierItems.Where(x => x.ProductId == i.ProductId).Sum(s => s.Quantity)
                                             )
                                         );
 
