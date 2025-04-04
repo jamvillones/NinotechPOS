@@ -15,7 +15,7 @@ namespace POS.Forms {
 
         private async void ItemSoldItemsForm_Load(object sender, EventArgs e) {
             try {
-                using (var context = new POSEntities()) {
+                using (var context = POSEntities.Create()) {
                     var sales = await context.Sales.AsNoTracking().AsQueryable()
                         .Where(x => x.SoldItems.Any(so => so.SaleId == x.Id && so.Product.ItemId == _id))
                         .OrderByDescending(o => o.Date)

@@ -24,7 +24,7 @@ namespace POS.Misc
                 return;
             }
 
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 CurrentLogin = context.Logins.FirstOrDefault(x => x.Username == username && x.Password == password);
             }
@@ -47,7 +47,7 @@ namespace POS.Misc
             var settings = Properties.Settings.Default;
             string un = username.Trim();
             string pw = password.Trim();
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 try
                 {
@@ -83,7 +83,7 @@ namespace POS.Misc
         {
             var settings = Properties.Settings.Default;
             string un = username.Trim();
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 try
                 {

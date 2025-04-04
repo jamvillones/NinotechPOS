@@ -38,7 +38,7 @@ namespace POS.Forms
 
         async Task LoadData_Async(string selectedSerialNumber = "")
         {
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var inventoryItems = await context.InventoryItems.AsNoTracking().AsQueryable()
                     .Where(x => x.Product.Item.Id == _id)

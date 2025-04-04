@@ -53,11 +53,12 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.button1.BackColor = System.Drawing.SystemColors.HotTrack;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(32, 132);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(32, 115);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(254, 40);
+            this.button1.Size = new System.Drawing.Size(80, 30);
             this.button1.TabIndex = 1;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = false;
@@ -79,7 +80,7 @@
             // 
             this.button3.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(119, 68);
+            this.button3.Location = new System.Drawing.Point(120, 68);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(80, 30);
             this.button3.TabIndex = 3;
@@ -91,7 +92,7 @@
             // 
             this.button4.BackColor = System.Drawing.Color.RosyBrown;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button4.Location = new System.Drawing.Point(206, 68);
+            this.button4.Location = new System.Drawing.Point(208, 68);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(80, 30);
             this.button4.TabIndex = 4;
@@ -115,7 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(449, 198);
+            this.ClientSize = new System.Drawing.Size(449, 171);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -134,7 +135,6 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ServerConnections_FormClosing);
             this.Load += new System.EventHandler(this.ServerConnections_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ServerConnections_KeyDown);
-            //this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ServerConnections_PreviewKeyDown);
             this.ResumeLayout(false);
 
         }

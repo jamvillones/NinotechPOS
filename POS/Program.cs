@@ -76,7 +76,7 @@ namespace POS
             {
                 try
                 {
-                    using (var p = new POSEntities()) p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
+                    using (var p = POSEntities.Create()) p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
                 }
                 catch (Exception ex)
                 {

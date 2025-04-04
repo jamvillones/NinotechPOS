@@ -38,7 +38,7 @@ namespace POS.Forms
                 return;
             }
 
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 if (context.Suppliers.FirstOrDefault(s => s.Name == SupplierName) != null)
                 {

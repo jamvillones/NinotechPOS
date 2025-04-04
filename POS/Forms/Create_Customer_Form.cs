@@ -48,7 +48,7 @@ namespace POS.Forms {
             }
 
             try {
-                using (var context = new POSEntities()) {
+                using (var context = POSEntities.Create()) {
                     var found = await context.Customers.AnyAsync(c => c.Name == CustomerName);
 
                     if (found) {

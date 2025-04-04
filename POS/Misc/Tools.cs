@@ -24,10 +24,14 @@ namespace Connections
                 var entityCnxStringBuilder = new EntityConnectionStringBuilder(System.Configuration.ConfigurationManager.ConnectionStrings[configNameEf].ConnectionString);
 
                 // init the sqlbuilder with the full EF connectionstring cargo
-                var sqlCnxStringBuilder = new SqlConnectionStringBuilder(entityCnxStringBuilder.ProviderConnectionString);
+
                 ConnectionConfigurationProfile currentConfig = ConnectionConfiguration_Source.CurrentConfiguration;
 
-                sqlCnxStringBuilder.DataSource = currentConfig.Connection;
+                var sqlCnxStringBuilder = new SqlConnectionStringBuilder(entityCnxStringBuilder.ProviderConnectionString)
+                {
+                    DataSource = currentConfig.Connection,
+                    InitialCatalog = "POS"
+                };
 
                 if (currentConfig.Port is null)
                 {
@@ -67,9 +71,11 @@ namespace Connections
                 var entityCnxStringBuilder = new EntityConnectionStringBuilder(System.Configuration.ConfigurationManager.ConnectionStrings[configNameEf].ConnectionString);
 
                 // init the sqlbuilder with the full EF connectionstring cargo
-                var sqlCnxStringBuilder = new SqlConnectionStringBuilder(entityCnxStringBuilder.ProviderConnectionString);
-
-                sqlCnxStringBuilder.DataSource = currentConfig.Connection;
+                var sqlCnxStringBuilder = new SqlConnectionStringBuilder(entityCnxStringBuilder.ProviderConnectionString)
+                {
+                    DataSource = currentConfig.Connection,
+                    InitialCatalog = "POS"
+                };
 
                 if (currentConfig.Port is null)
                 {

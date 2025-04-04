@@ -107,7 +107,7 @@ namespace POS.Forms.ItemRegistration
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var temp = Item;
 
@@ -204,7 +204,7 @@ namespace POS.Forms.ItemRegistration
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
 
                     var suppliers = await context.Suppliers
@@ -254,7 +254,7 @@ namespace POS.Forms.ItemRegistration
                     MessageBoxIcon.Question
                     ) == DialogResult.Cancel) return;
 
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
 
                     var newSupplier = context.Suppliers.Add(new Supplier() { Name = _supplierOption.Text.Trim() });
@@ -375,7 +375,7 @@ namespace POS.Forms.ItemRegistration
                 return;
             }
             ///editing
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var currentItem = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
 

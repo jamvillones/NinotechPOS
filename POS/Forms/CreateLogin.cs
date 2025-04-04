@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using POS.Misc;
+using System;
+using System.Data.Entity;
 using System.Windows.Forms;
 
 namespace POS.Forms
@@ -17,101 +12,69 @@ namespace POS.Forms
             InitializeComponent();
         }
 
-        private void ConfirmBtn_Click(object sender, EventArgs e)
+        private async void ConfirmBtn_Click(object sender, EventArgs e)
         {
             if (UsernameTxt.Text == string.Empty || PasswordTxt.Text == string.Empty)
             {
-                MessageBox.Show("fields must not be empty!");
+                MessageBox.Show("fields must not be empty!", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            using (var eb = new POSEntities())
-            {
-                var u = eb.Logins.FirstOrDefault(x => x.Username == UsernameTxt.Text);
-                if (u != null)
-                {
-                    MessageBox.Show("Username already taken.");
-                    return;
-                }
-            }
-            if (!SamePassword)
+
+            if (!IsPasswordMatched)
             {
                 ActiveControl = PasswordTxt;
-                MessageBox.Show("Password does not match");
+                MessageBox.Show("Password do not match", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 PasswordTxt.Clear();
                 ConfirmPassTxt.Clear();
                 return;
             }
-            using (var a = new POSEntities())
-            {
-                var login = new Login();
 
-                login.Username = UsernameTxt.Text;
-                login.Password = PasswordTxt.Text;
-                if (!string.IsNullOrWhiteSpace(nameTxt.Text))
+            using (var context = POSEntities.Create())
+            {
+                var u = await context.Logins.FirstOrDefaultAsync(x => x.Username == UsernameTxt.Text);
+
+                if (u != null)
                 {
-                    login.Name = nameTxt.Text.Trim();
+                    MessageBox.Show("Username already taken.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
 
-                login.CanStockIn = false;
+                var login = new Login
+                {
+                    Username = UsernameTxt.Text,
+                    Password = PasswordTxt.Text,
+                    Email = textBox1.Text.NullIfEmpty(),
+                    Name = nameTxt.Text.NullIfEmpty(),
 
-               // login.CanAddSupplier = false;
-                login.CanEditSupplier = false;
-               // login.CanDeleteSupplier = false;
+                    CanStockIn = false,
+                    CanEditSupplier = false,
+                    CanEditItem = false,
+                    CanEditProduct = false
+                };
 
-                //login.CanAddItem = false;
-                login.CanEditItem = false;
-                //login.CanDeleteItem = false;
-
-               // login.CanAddProduct = false;
-                login.CanEditProduct = false;
-
-                a.Logins.Add(login);
-                a.SaveChanges();
+                context.Logins.Add(login);
+                await context.SaveChangesAsync();
             }
-            MessageBox.Show("Successfully added");
+
+            MessageBox.Show("Successfully added", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
+
         /// <summary>
         /// checks if the password match
         /// </summary>
-        bool SamePassword
-        {
-            get
-            {
-                return PasswordTxt.Text == ConfirmPassTxt.Text;
-            }
-        }
+        bool IsPasswordMatched => PasswordTxt.Text == ConfirmPassTxt.Text;
 
         private void PasswordTxt_TextChanged(object sender, EventArgs e)
         {
             if (PasswordTxt.Text == string.Empty) return;
-            checkImage.Visible = SamePassword ? true : false;
+            checkImage.Visible = IsPasswordMatched;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             if (ConfirmPassTxt.Text == string.Empty) return;
-            checkImage.Visible = SamePassword ? true : false;
-        }
-
-        private void CreateLogin_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkImage_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+            checkImage.Visible = IsPasswordMatched;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace POS.Forms
             try
             {
 
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
 
                     var products = await context.Products
@@ -110,7 +110,7 @@ namespace POS.Forms
 
         void SetAutoComplete()
         {
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 searchControl.SetAutoComplete(p.Products.Where(x => x.Item.Type == ItemType.Quantifiable.ToString()).GroupBy(y => y.Item.Name).Select(a => a.Key).ToArray());
             }
@@ -170,7 +170,7 @@ namespace POS.Forms
             if (MessageBox.Show("Are you sure you want to stock these items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 return;
 
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
 
                 foreach (var s in ToStockins)
@@ -245,7 +245,7 @@ namespace POS.Forms
 
         bool SerialAlreadyTaken(string serial)
         {
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 if (p.InventoryItems.Any(x => x.SerialNumber == serial) || p.SoldItems.Any(x => x.SerialNumber == serial))
                 {

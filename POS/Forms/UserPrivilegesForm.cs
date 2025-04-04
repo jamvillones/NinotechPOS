@@ -25,7 +25,7 @@ namespace POS.Forms
             bool resultsNotEmpty = false;
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var logins = context.Logins
                         .AsNoTracking()
@@ -86,7 +86,7 @@ namespace POS.Forms
 
                 try
                 {
-                    using (var context = new POSEntities())
+                    using (var context = POSEntities.Create())
                     {
                         var loginToRemove = await context.Logins.FirstOrDefaultAsync(x => x.Id == id);
                         context.Logins.Remove(loginToRemove);
@@ -107,7 +107,7 @@ namespace POS.Forms
             if (!(table.Rows[e.RowIndex].Cells[e.ColumnIndex] is DataGridViewCheckBoxCell)) return;
 
             var check = !(bool)table.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var user = await context.Logins.FirstOrDefaultAsync(x => x.Id == id);
 

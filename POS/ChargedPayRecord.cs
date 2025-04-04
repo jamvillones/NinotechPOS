@@ -16,7 +16,7 @@ namespace POS
     {
         public int Id { get; set; }
         public string Username { get; set; }
-        public decimal AmountPayed { get; set; }
+        public Nullable<decimal> AmountPayed { get; set; }
         public Nullable<int> SaleId { get; set; }
         public Nullable<System.DateTime> TransactionTime { get; set; }
     

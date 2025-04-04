@@ -56,7 +56,7 @@ namespace POS.Forms
         {
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
 
                     Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "Walk-In");
@@ -133,7 +133,7 @@ namespace POS.Forms
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var selectedItem = await context.Items
                         .AsNoTracking()
@@ -431,7 +431,7 @@ namespace POS.Forms
             try
             {
 
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     Customer = await context.Customers.FirstOrDefaultAsync(x => x.Name == "Walk-In");
                 }
@@ -452,7 +452,7 @@ namespace POS.Forms
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var newSale = new Sale()
                     {
@@ -669,7 +669,7 @@ namespace POS.Forms
             int initialQty = selected.Quantity;
             int maxQty = 0;
 
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var item = await context.Items.AsNoTracking().FirstOrDefaultAsync(x => x.Id == selected.Id);
                 maxQty = !item.IsEnumerable ? 999999999 : item.QuantityInInventory;

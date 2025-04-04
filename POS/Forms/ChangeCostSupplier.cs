@@ -27,7 +27,7 @@ namespace POS.Forms
         {
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var suppliers = await context.Suppliers.ToListAsync();
                     comboBox1.DataSource = suppliers;
@@ -45,7 +45,7 @@ namespace POS.Forms
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var cost = await context.Products.FirstOrDefaultAsync(x => x.Id == _costId);
                 cost.Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Id == SelectedSupplier.Id);

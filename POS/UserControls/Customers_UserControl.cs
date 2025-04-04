@@ -42,7 +42,7 @@ namespace POS.UserControls
         {
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     return await context.Customers
                         .AsNoTracking()
@@ -99,7 +99,7 @@ namespace POS.UserControls
             try
             {
                 loadingLabel.Text = "loading...";
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var customers = await context.Customers
                         .AsNoTracking()
@@ -159,7 +159,7 @@ namespace POS.UserControls
             var table = customerTable;
             var id = (int)(table.Rows[rowIndex].Cells[0].Value);
 
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 var customerToBeDeleted = p.Customers.FirstOrDefault(x => x.Id == id);
                 if (customerToBeDeleted.Sales.Count > 0)
@@ -221,7 +221,7 @@ namespace POS.UserControls
                 return;
             }
 
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var target = context.Customers.FirstOrDefault(x => x.Id == id);
 
@@ -293,7 +293,7 @@ namespace POS.UserControls
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     Selected = await context.Customers.FirstOrDefaultAsync(x => x.Id == id);
                 }

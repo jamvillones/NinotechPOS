@@ -23,7 +23,17 @@ namespace POS.Forms
 
         private async void loginBtn_Click(object sender, EventArgs e)
         {
-            LoginSuccessful = await UserManager.instance.Login_Async(username.Text, password.Text, checkBox1.Checked);
+            var button = sender as Button;
+
+            button.Enabled = false;
+            panel3.Visible = false;
+
+            button.Text = "LOADING...";
+
+            var task = UserManager.instance.Login_Async(username.Text, password.Text, checkBox1.Checked);
+            await Task.WhenAll(task, Task.Delay(500));
+
+            LoginSuccessful = task.Result;
 
             if (LoginSuccessful)
             {
@@ -31,8 +41,10 @@ namespace POS.Forms
                 return;
             }
 
+            button.Text = "LOG IN";
+            button.Enabled = true;
+            panel3.Visible = true;
             System.Media.SystemSounds.Hand.Play();
-            label2.Text = "Log In Failed!";
         }
 
         private async void LoginForm_Load(object sender, EventArgs e)
@@ -48,7 +60,7 @@ namespace POS.Forms
         {
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var loadingTask = context.Logins.AsNoTracking().Select(x => x.Username).ToArrayAsync();
                     await Task.WhenAll(loadingTask, Task.Delay(1000));
@@ -80,22 +92,21 @@ namespace POS.Forms
         {
             if (e.Alt && e.Shift && e.Control && e.KeyCode == Keys.C)
             {
-                var config = new ServerConnections();
+                using (var config = new ServerConnections())
+                    config.ShowDialog();
 
-                if (config.ShowDialog() == DialogResult.OK)
-                    this.Text = $"POS - Login {ConnectionConfiguration_Source.CurrentConfiguration}";
+                this.Text = $"POS - Login {ConnectionConfiguration_Source.CurrentConfiguration}";
             }
         }
 
         private void password_TextChanged(object sender, EventArgs e)
         {
             hide.Visible = !string.IsNullOrWhiteSpace(password.Text);
-            label2.Text = string.Empty;
         }
 
         private void username_TextChanged(object sender, EventArgs e)
         {
-            label2.Text = string.Empty;
+
         }
 
         private void button1_Click(object sender, EventArgs e)

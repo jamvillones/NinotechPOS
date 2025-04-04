@@ -27,7 +27,7 @@ namespace POS.Forms
         {
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var adminLogin = await context.Logins.FirstOrDefaultAsync(x => x.Username == "admin");
 

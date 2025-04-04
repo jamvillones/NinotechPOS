@@ -36,7 +36,7 @@ namespace POS.Forms
         }
         async Task Edit()
         {
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var u = await context.Logins.FirstOrDefaultAsync(x => x.Id == _id);
 
@@ -73,7 +73,7 @@ namespace POS.Forms
             if (string.IsNullOrEmpty(passwordTxtBx.Text) || string.IsNullOrWhiteSpace(currUser.Text))
                 return;
 
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var newUser = new Login()
                 {
@@ -90,16 +90,18 @@ namespace POS.Forms
             DialogResult = DialogResult.OK;
         }
 
-        private void ChangePass_Load(object sender, EventArgs e)
+        private async void ChangePass_Load(object sender, EventArgs e)
         {
             if (_id != 0)
             {
 
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
-                    var user = context.Logins.FirstOrDefault(x => x.Id == _id);
+                    var user = await context.Logins.FirstOrDefaultAsync(x => x.Id == _id);
+
                     currUser.Text = user.Username;
                     nameTxtBx.Text = user.Name;
+                    textBox1.Text = user.Email;
                 }
             }
         }

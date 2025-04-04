@@ -11,7 +11,7 @@ namespace POS
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class SoldItem
     {
         public int Id { get; set; }
@@ -21,8 +21,9 @@ namespace POS
         public string SerialNumber { get; set; }
         public decimal Discount { get; set; }
         public int ProductId { get; set; }
-    
-        public virtual Sale Sale { get; set; }
+        public System.DateTime DateAdded { get; set; } = DateTime.Now;
+
         public virtual Product Product { get; set; }
+        public virtual Sale Sale { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace POS.Forms
         private void supplierTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             var id = (int)(((DataGridView)sender).Rows[e.RowIndex].Cells[0].Value);
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 targetSupplier = p.Suppliers.FirstOrDefault(x => x.Id == id);
             }
@@ -59,7 +59,7 @@ namespace POS.Forms
 
             try
             {
-                using (var p = new POSEntities())
+                using (var p = POSEntities.Create())
                 {
                     var supplier = await p.Suppliers.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -149,7 +149,7 @@ namespace POS.Forms
             }
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var s = await context.Suppliers.FirstOrDefaultAsync(x => x.Id == id);
                     context.Suppliers.Remove(s);
@@ -204,7 +204,7 @@ namespace POS.Forms
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var suppliers = await context.Suppliers.AsNoTracking().AsQueryable()
                         .Where(s => s.Name != "none")

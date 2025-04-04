@@ -39,7 +39,7 @@ namespace POS.Forms {
 
             if (MessageBox.Show("Are you sure you want to change the customer?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
 
-            using (var context = new POSEntities()) {
+            using (var context = POSEntities.Create()) {
                 var sale = await context.Sales.FirstOrDefaultAsync(s => s.Id == _saleId);
                 var selectedCustomer = await context.Customers.FirstOrDefaultAsync(c => c.Id == id);
                 sale.CustomerId = selectedCustomer.Id;
@@ -54,7 +54,7 @@ namespace POS.Forms {
 
         async Task LoadDataToTable_Async(CancellationToken token) {
 
-            using (var context = new POSEntities()) {
+            using (var context = POSEntities.Create()) {
                 var customers = await context.Customers
                     .AsNoTracking()
                     .ApplySearch(searchText)

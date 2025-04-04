@@ -95,7 +95,7 @@ namespace POS.Forms
             {
                 try
                 {
-                    using (var context = new POSEntities())
+                    using (var context = POSEntities.Create())
                     {
                         var currentConfig = ConnectionConfiguration_Source.CurrentConfiguration;
                         context.TestConnection(currentConfig);

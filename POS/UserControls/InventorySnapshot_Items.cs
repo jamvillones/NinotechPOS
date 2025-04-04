@@ -52,7 +52,7 @@ namespace POS.UserControls
             var token = CancellationTokenSource.Token;
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var items = await context.Products
                         .AsNoTracking()
@@ -64,8 +64,8 @@ namespace POS.UserControls
                         {
                             ProductId = i.Id,
                             Name = i.Item.Name + " - " + i.Supplier.Name,
-                            Qty = i.StockinHistories.Where(s => s.Date <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum() -
-                                  i.SoldItems.Where(s => s.Sale.Date <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
+                            Qty = i.StockinHistories.Where(s => s.Date <= DateSelected).Select(s => (int)s.Quantity).DefaultIfEmpty(0).Sum() -
+                                  i.SoldItems.Where(s => s.DateAdded <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
                             InventoryQty = i.InventoryItems.Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
                             Cost = i.Cost
                         })
@@ -118,7 +118,7 @@ namespace POS.UserControls
             if (dataGridView.SelectedRows.Count == 0)
                 return;
 
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var user = await context.Logins.FirstOrDefaultAsync(x => x.Username == "admin");
                 var correctionDate = new DateTime(2019, 1, 1);

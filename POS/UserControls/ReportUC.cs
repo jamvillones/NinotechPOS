@@ -141,7 +141,7 @@ namespace POS.UserControls
         {
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                     return await context.Sales.AnyAsync(x => x.Id == id);
             }
             catch (Exception)
@@ -166,7 +166,7 @@ namespace POS.UserControls
             {
 
 
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     string type = SaleType.Regular.ToString();
 
@@ -271,7 +271,7 @@ namespace POS.UserControls
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var unpaginatedList = context.Sales
                                       .AsNoTracking()

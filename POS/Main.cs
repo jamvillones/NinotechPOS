@@ -38,15 +38,16 @@ namespace POS
         /// </summary>
         private void LoadProperties()
         {
+            this.Text = $"POS version: {this.GetVersion()} - {ConnectionConfiguration_Source.CurrentConfiguration}";
+
             var currentLogin = CurrentLogin;
             userButton.Text = "  " + currentLogin.ToString();
 
-            this.Text = $"POS version: {this.GetVersion()} - {ConnectionConfiguration_Source.CurrentConfiguration}";
 
             bool isAdmin = UserManager.instance.IsAdmin;
 
             usersButton.Visible = isAdmin;
-            supplierButton.Enabled = currentLogin.CanEditSupplier;
+            supplierButton.Visible = currentLogin.CanEditSupplier;
         }
 
         private async void Main_Load(object sender, EventArgs e)
@@ -71,7 +72,7 @@ namespace POS
         {
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var itemsInCriticalQuantity = await context.Items.IsInCriticalQty()
                         .ToListAsync();
@@ -259,6 +260,17 @@ namespace POS
         {
             if (e.KeyCode == Keys.F12)
                 button7.PerformClick();
+
+            else if (e.KeyCode == Keys.F11)
+            {
+                using (var switchUser = new SwitchUser())
+                {
+                    if (switchUser.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadProperties();
+                    }
+                }
+            }
         }
     }
 }

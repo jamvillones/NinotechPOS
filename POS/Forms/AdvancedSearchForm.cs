@@ -27,7 +27,7 @@ namespace POS.Forms
             try
             {
 
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var autocomplete = await context.Items.AsNoTracking().Select(i => i.Name).ToArrayAsync();
                     searchControl1.SetAutoComplete(autocomplete);
@@ -50,7 +50,7 @@ namespace POS.Forms
             //var supplier = itemTables.Rows[itemTables.SelectedCells[0].RowIndex].Cells[4].Value.ToString();
 
 
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 var i = p.InventoryItems.FirstOrDefault(x => x.Id == id);
                 if (i is null)
@@ -149,7 +149,7 @@ namespace POS.Forms
         {
             //try
             //{
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
 
                 var inventoryItems = await context.InventoryItems.AsNoTracking().AsQueryable()

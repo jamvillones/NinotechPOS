@@ -8,6 +8,7 @@ using System.Data.Entity.Infrastructure;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -97,6 +98,15 @@ namespace POS.UserControls
                 var barcode = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
                 ShowInventoryInfo(barcode, qty);
             }
+
+            else if(e.ColumnIndex == priceCol.Index)
+            {
+                using (var variation = new ItemSoldItemsForm(SelectedId))
+                {
+                    variation.Text += SelectedName;
+                    variation.ShowDialog();
+                }
+            }
         }
 
         void ShowInventoryInfo(string barcode, int? quantity)
@@ -125,7 +135,7 @@ namespace POS.UserControls
                     .SetCosts()
                     .ConfirmDetailsBeforeSaving();
 
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     //if (newItem.Type != ItemType.Quantifiable.ToString())
                     //{
@@ -183,7 +193,7 @@ namespace POS.UserControls
         {
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     //decimal totalInventoryValue = await context.InventoryItems.AsNoTracking()
                     //    .Where(y => y.Product.Item.Type == ItemType.Quantifiable.ToString())
@@ -206,7 +216,7 @@ namespace POS.UserControls
                         int totalItems = await itemQuery.CountAsync(token);
                         totalCount.Text = totalItems.ToString();
                         //initialize the pagination
-                        pagination.Initialize(totalItems, 500);
+                        pagination.Initialize(totalItems, 100);
                         //ensure one time initialization of pagination
                         IsTotalEntriesInitialized = true;
                     }
@@ -373,7 +383,6 @@ namespace POS.UserControls
                 var currLogin = UserManager.instance.CurrentLogin;
 
                 addItemBtn.Enabled = currLogin.CanEditItem;
-                //editItemBtn.Enabled = currLogin.CanEditItem;
                 stockinBtn.Enabled = currLogin.CanStockIn;
 
                 departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -490,7 +499,7 @@ namespace POS.UserControls
         {
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var inventoryItem = await context.InventoryItems.AsNoTracking()
                         .FirstOrDefaultAsync(i => i.SerialNumber == serialNumber);
@@ -618,7 +627,7 @@ namespace POS.UserControls
 
                     Cursor = Cursors.WaitCursor;
 
-                    using (var context = new POSEntities())
+                    using (var context = POSEntities.Create())
                     {
                         var selectedRows = itemsTable.SelectedRows.Cast<DataGridViewRow>();
                         var ids = selectedRows.Select(row => row.Cells[0].Value.ToString());
@@ -678,14 +687,12 @@ namespace POS.UserControls
 
             try
             {
-
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var ids = selectedRows
                         .Select(row => row.Cells[0].Value.ToString());
 
                     var toBeDeleted = context.Items
-                        //.Include(i => i.Products.Select(p => p.StockinHistories))
                         .Where(i => ids.Any(id => id == i.Id));
 
                     context.Items.RemoveRange(toBeDeleted);
@@ -707,6 +714,70 @@ namespace POS.UserControls
             searchBar.firstControl.Focus();
             var textBox = searchBar.firstControl as TextBox;
             textBox.SelectAll();
+        }
+
+        Form showImage = null;
+        CancellationTokenSource showImageCancelSource;
+        private async void itemsTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex != nameCol.Index)
+                return;
+
+            var dg = sender as DataGridView;
+
+            showImageCancelSource = new CancellationTokenSource();
+            var token = showImageCancelSource.Token;
+
+            try
+            {
+                await Task.Delay(1000, token);
+
+                token.ThrowIfCancellationRequested();
+                var id = dg[0, e.RowIndex].Value?.ToString();
+
+                Image toShow = null;
+
+                using (var context = POSEntities.Create())
+                {
+                    var item = await context.Items.FirstOrDefaultAsync(x => x.Id == id, token);
+                    toShow = item.SampleImage?.ToImage();
+                }
+
+                token.ThrowIfCancellationRequested();
+
+                if (toShow is null)
+                    return;
+
+                showImage = new Show_Image(toShow) { Location = new Point(MousePosition.X + 10, MousePosition.Y) };
+                showImage.Show();
+            }
+            catch (TaskCanceledException)
+            {
+
+            }
+            finally
+            {
+                showImageCancelSource.Dispose();
+                showImageCancelSource = null;
+            }
+        }
+
+        private void itemsTable_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+            showImage?.Close();
+
+            if (showImageCancelSource is null) return;
+
+            try
+            {
+                showImageCancelSource?.Cancel();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
         }
     }
 

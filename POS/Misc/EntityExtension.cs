@@ -1,4 +1,5 @@
-﻿using POS.Misc;
+﻿using Connections;
+using POS.Misc;
 using System;
 using System.Linq;
 
@@ -30,6 +31,16 @@ namespace POS
 
         public bool IsEnumerable => /*Type.Equals(ItemType.Quantifiable.ToString(), StringComparison.OrdinalIgnoreCase);*/
             this.Type == ItemType.Quantifiable.ToString();
+    }
+
+    public partial class POSEntities
+    {
+        public static POSEntities Create()
+        {
+            var context = new POSEntities();
+            context.ChangeDatabase();
+            return context;
+        }
     }
 
     partial class Product
@@ -84,7 +95,7 @@ namespace POS
         /// </summary>
         public static void SetIsSerialRequired()
         {
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var items = context.Items.AsQueryable().Where(i => i.Products.Any(p => p.StockinHistories.Any(st => st.SerialNumber != null))).ToList();
 

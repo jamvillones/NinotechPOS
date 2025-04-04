@@ -45,7 +45,7 @@ namespace POS.Forms
             try
             {
 
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     //get the reference of the sale
                     var saleToVoid = context.Sales.FirstOrDefault(x => x.Id == _saleId);
@@ -80,7 +80,7 @@ namespace POS.Forms
         {
             itemsTable.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.NotSortable);
 
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 var sale = await p.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
 
@@ -114,7 +114,7 @@ namespace POS.Forms
 
         private async void Adv_ItemSelected(object sender, ItemInfoHolder e)
         {
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var sale = await context.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
 
@@ -182,15 +182,6 @@ namespace POS.Forms
             //    OpenPrint();
         }
 
-        void OpenPrint()
-        {
-            //using (var reprint = new SaleReprint())
-            //{
-            //    if (reprint.SetId(_saleId))
-            //        reprint.ShowDialog();
-            //}
-        }
-
         PrintAction printAction;
 
         private void button2_Click(object sender, EventArgs e)
@@ -212,7 +203,7 @@ namespace POS.Forms
 
         private void doc_PrintPage(object sender, PrintPageEventArgs e)
         {
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var sale = context.Sales.FirstOrDefault(x => x.Id == _saleId);
 
@@ -271,7 +262,7 @@ namespace POS.Forms
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var soldItems = context.SoldItems
                         .AsNoTracking()
@@ -336,7 +327,7 @@ namespace POS.Forms
                         }
 
                         decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
-                        itemsTable.Rows.Add("", "", "", "", "", "", "", subTotal);
+                        itemsTable.Rows.Add("", "", "", "", "", "", "", "", subTotal);
                     }
                 }
             }
@@ -353,6 +344,7 @@ namespace POS.Forms
 
         DataGridViewRow CreateRow(SoldItem soldItem, bool isFirstNameEntry = true, bool isFirstSupplierEntry = true, int? Qty = 0) => itemsTable.CreateRow(
            soldItem.Id,
+           soldItem.DateAdded,
            isFirstNameEntry ? soldItem.Product.Item.Name : null,
            isFirstSupplierEntry ? soldItem.Product.Supplier?.Name : null,
            isFirstSupplierEntry ? Qty : null,
@@ -451,7 +443,7 @@ namespace POS.Forms
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var selectedIds = itemsTable.GetSelectedIds<int>(out IEnumerable<DataGridViewRow> selectedRows);
 
@@ -494,6 +486,11 @@ namespace POS.Forms
 
             TryCancelLoading();
             await LoadDataAsync();
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            dateAddedCol.Visible = checkBox2.Checked;
         }
     }
 

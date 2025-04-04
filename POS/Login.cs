@@ -23,9 +23,6 @@ namespace POS
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-
-        public string Email { get; set; }
-
         public bool CanEditItem { get; set; }
         public bool CanEditProduct { get; set; }
         public bool CanEditSupplier { get; set; }
@@ -33,6 +30,7 @@ namespace POS
         public bool CanStockIn { get; set; }
         public bool CanVoidSale { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sales { get; set; }

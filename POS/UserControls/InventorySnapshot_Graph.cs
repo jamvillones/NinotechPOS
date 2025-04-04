@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace POS.UserControls {
-    public partial class InventorySnapshot_Graph : UserControl, ILoadable {
-        public InventorySnapshot_Graph() {
+namespace POS.UserControls
+{
+    public partial class InventorySnapshot_Graph : UserControl, ILoadable
+    {
+        public InventorySnapshot_Graph()
+        {
             InitializeComponent();
 
             IsSettingYear = true;
@@ -21,7 +24,8 @@ namespace POS.UserControls {
 
         }
 
-        private async void DateTimePicker1_ValueChanged(object sender, EventArgs e) {
+        private async void DateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
             TryCancel();
 
             await Initialize_Async();
@@ -30,7 +34,8 @@ namespace POS.UserControls {
         bool IsSettingYear = false;
 
         CancellationTokenSource source = null;
-        public async Task Initialize_Async() {
+        public async Task Initialize_Async()
+        {
             if (IsSettingYear)
                 return;
 
@@ -44,13 +49,16 @@ namespace POS.UserControls {
             chart1.Series[0].LegendText = radioButton1.Checked ? selectedYear.ToString() : CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(selectedMonth) + " " + selectedYear.ToString();
             chart1.Series[0].Points.Clear();
 
-            try {
-                using (var context = new POSEntities()) {
+            try
+            {
+                using (var context = POSEntities.Create())
+                {
 
                     int upTo = radioButton1.Checked ? selectedYear == DateTime.Today.Year ? DateTime.Today.Month : 12
                         : selectedYear == DateTime.Today.Year && selectedMonth == DateTime.Today.Month ? DateTime.Today.Day : DateTime.DaysInMonth(selectedYear, selectedMonth);
 
-                    for (var i = 1; i <= upTo; i++) {
+                    for (var i = 1; i <= upTo; i++)
+                    {
                         DateTime CurrentDate = radioButton1.Checked ? GetUpToMonth(selectedYear, i) : GetUpToDay(selectedYear, selectedMonth, i);
 
                         var currentInventoryValue = await GetValueAsOfDate(
@@ -62,7 +70,8 @@ namespace POS.UserControls {
 
                         token.ThrowIfCancellationRequested();
 
-                        var point = new DataPoint() {
+                        var point = new DataPoint()
+                        {
                             Label = currentInventoryValue.ToCurrency(),
                             XValue = i,
                             AxisLabel = radioButton1.Checked ? CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i) : i.ToString()
@@ -75,15 +84,18 @@ namespace POS.UserControls {
                 }
 
             }
-            catch (Exception) {
+            catch (Exception)
+            {
 
             }
-            finally {
+            finally
+            {
                 source?.Dispose();
             }
         }
 
-        DateTime GetUpToDay(int year, int month, int day) {
+        DateTime GetUpToDay(int year, int month, int day)
+        {
             return new DateTime()
                 .AddYears(year - 1)
                 .AddMonths(month - 1)
@@ -91,7 +103,8 @@ namespace POS.UserControls {
                 .AddHours(23).AddMinutes(59).AddSeconds(59).AddMilliseconds(999);
         }
 
-        DateTime GetUpToMonth(int year, int month) {
+        DateTime GetUpToMonth(int year, int month)
+        {
             return new DateTime()
                 .AddYears(year - 1)
                     .AddMonths(month - 1)
@@ -102,15 +115,18 @@ namespace POS.UserControls {
                             .AddMilliseconds(999);
         }
 
-        async Task<decimal> GetValueAsOfDate(IQueryable<Product> products, DateTime upTo, CancellationToken cancelToken) {
+        async Task<decimal> GetValueAsOfDate(IQueryable<Product> products, DateTime upTo, CancellationToken cancelToken)
+        {
             return await products
-            .Select(x => x.StockinHistories.Where(s => s.Date <= upTo).Select(s => s.Quantity * x.Cost).DefaultIfEmpty(0).Sum() -
-                         x.SoldItems.Where(s => s.Sale.Date <= upTo).Select(s => s.Quantity * x.Cost).DefaultIfEmpty(0).Sum())
+            .Select(x => x.StockinHistories.Where(s => s.Date <= upTo).Select(s => (int)s.Quantity * x.Cost).DefaultIfEmpty(0).Sum() -
+                         x.SoldItems.Where(s => s.DateAdded <= upTo).Select(s => s.Quantity * x.Cost).DefaultIfEmpty(0).Sum())
             .SumAsync(cancelToken);
         }
 
-        private async void radioButton1_CheckedChanged(object sender, EventArgs e) {
-            if (sender is RadioButton rb && rb.Checked) {
+        private async void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton rb && rb.Checked)
+            {
                 dateTimePicker1.CustomFormat = "yyyy";
 
                 TryCancel();
@@ -119,8 +135,10 @@ namespace POS.UserControls {
 
         }
 
-        private async void radioButton2_CheckedChanged(object sender, EventArgs e) {
-            if (sender is RadioButton rb && rb.Checked) {
+        private async void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (sender is RadioButton rb && rb.Checked)
+            {
                 dateTimePicker1.CustomFormat = "MMMM yyyy";
 
                 TryCancel();
@@ -128,9 +146,11 @@ namespace POS.UserControls {
             }
         }
 
-        public void TryCancel() {
+        public void TryCancel()
+        {
             try { source?.Cancel(); }
-            catch (ObjectDisposedException) {
+            catch (ObjectDisposedException)
+            {
 
             }
         }

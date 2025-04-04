@@ -7,7 +7,6 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS.Forms
@@ -23,7 +22,7 @@ namespace POS.Forms
         {
             worker.RunWorkerAsync();
 
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 //var s = p.InventoryItems.ToArray();
                 var entries = await context.InventoryItems

@@ -73,7 +73,7 @@ namespace POS
             ///load the users first
             await Task.Run(() =>
             {
-                using (var pos = new POSEntities())
+                using (var pos = POSEntities.Create())
                 {
                     ///get the users data
                     var users = pos.Logins.Select(x => x.Username).ToArray();
@@ -96,7 +96,7 @@ namespace POS
         {
             await Task.Run(() =>
             {
-                using (var pos = new POSEntities())
+                using (var pos = POSEntities.Create())
                 {
                     ///filter sales by date selected in datePicker
                     var sales = pos.Sales.Where(x => x.Date.Value.Day == datePicker.Value.Day &&

@@ -18,7 +18,7 @@ namespace POS.Forms
         }
         public bool SetId(int id)
         {
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 //customerNameTxt.Text = p.Customers.FirstOrDefault(x => x.Id == id)?.Name;
 

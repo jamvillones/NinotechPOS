@@ -235,6 +235,18 @@
     <Compile Include="Forms\SetDepartment_Form.Designer.cs">
       <DependentUpon>SetDepartment_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Show Image.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Show Image.Designer.cs">
+      <DependentUpon>Show Image.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SwitchUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SwitchUser.Designer.cs">
+      <DependentUpon>SwitchUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Item.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
@@ -526,8 +538,14 @@
     <EmbeddedResource Include="Forms\SetDepartment_Form.resx">
       <DependentUpon>SetDepartment_Form.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Show Image.resx">
+      <DependentUpon>Show Image.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StockinLog.resx">
       <DependentUpon>StockinLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SwitchUser.resx">
+      <DependentUpon>SwitchUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserPrivilegesForm.resx">
       <DependentUpon>UserPrivilegesForm.cs</DependentUpon>

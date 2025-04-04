@@ -65,7 +65,7 @@ namespace POS.Misc
             int index = dataGridView.SelectedCells[0].RowIndex;
             var selectedRow = dataGridView.Rows[index];
             string Value = Convert.ToString(selectedRow.Cells[0].Value);
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 item = p.Items.FirstOrDefault(x => x.Id == Value);
             }
@@ -74,7 +74,7 @@ namespace POS.Misc
 
         public static Supplier getSupplier(this Control control)
         {
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 return p.Suppliers.FirstOrDefault(x => x.Name == control.Text);
             }
@@ -83,7 +83,7 @@ namespace POS.Misc
         {
             Item item;
             string barcode = dgt.Rows[dgt.CurrentCell.RowIndex].Cells["Barcode"].Value.ToString();
-            using (var p = new POSEntities())
+            using (var p = POSEntities.Create())
             {
                 item = p.Items.FirstOrDefault(x => x.Id == barcode);
                 return item;

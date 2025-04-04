@@ -50,9 +50,9 @@ namespace POS.Forms
                     Id = ConnectionConfiguration_Source.Configurations.Select(i => i.Id).Max() + 1,
                     Name = textBox5.Text.NullIfEmpty(),
                     DataSource = textBox1.Text.Trim(),
-                    Port = textBox2.Text.Trim(),
-                    Username = textBox3.Text.Trim(),
-                    Password = textBox4.Text.Trim(),
+                    Port = textBox2.Text.Trim().NullIfEmpty(),
+                    Username = textBox3.Text.Trim().NullIfEmpty(),
+                    Password = textBox4.Text.Trim().NullIfEmpty(),
                 };
 
                 DialogResult = DialogResult.OK;
@@ -61,9 +61,9 @@ namespace POS.Forms
             {
                 config.Name = textBox5.Text.NullIfEmpty();
                 config.DataSource = textBox1.Text.Trim();
-                config.Port = textBox2.Text.Trim();
-                config.Username = textBox3.Text.Trim();
-                config.Password = textBox4.Text.Trim();
+                config.Port = textBox2.Text.Trim().NullIfEmpty();
+                config.Username = textBox3.Text.Trim().NullIfEmpty();
+                config.Password = textBox4.Text.Trim().NullIfEmpty();
 
                 DialogResult = DialogResult.OK;
 
@@ -72,7 +72,7 @@ namespace POS.Forms
 
         private void Add_Edit_ConnectionConfig_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
+
         }
     }
 }

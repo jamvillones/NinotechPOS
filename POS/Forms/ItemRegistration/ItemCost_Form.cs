@@ -60,7 +60,7 @@ namespace POS.Forms.ItemRegistration
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var suppliers = await context.Suppliers
                                 .OrderBy(s => s.Name)
@@ -89,7 +89,7 @@ namespace POS.Forms.ItemRegistration
                     MessageBoxIcon.Question
                     ) == DialogResult.Cancel) return;
 
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
 
                     var newSupplier = context.Suppliers.Add(new Supplier() { Name = _supplierOption.Text.Trim() });

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
             this.tablePanel = new System.Windows.Forms.Panel();
             this.itemsTable = new System.Windows.Forms.DataGridView();
@@ -78,9 +78,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.itemCount = new System.Windows.Forms.Label();
             this.trackItemCheckbox = new System.Windows.Forms.CheckBox();
-            this.searchBar = new POS.UserControls.SearchControl();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.searchBar = new POS.UserControls.SearchControl();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.panel5.SuspendLayout();
@@ -116,15 +116,15 @@
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Id,
@@ -134,15 +134,15 @@
             this.priceCol,
             this.typeCol,
             this.col_remove});
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(5, 2, 20, 2);
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5, 2, 20, 2);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle7;
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.LightGray;
@@ -158,6 +158,8 @@
             this.itemsTable.TabIndex = 3;
             this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
+            this.itemsTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellMouseEnter);
+            this.itemsTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellMouseLeave);
             this.itemsTable.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.itemsTable_RowsAdded);
             this.itemsTable.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.itemsTable_RowsRemoved);
             this.itemsTable.Scroll += new System.Windows.Forms.ScrollEventHandler(this.itemsTable_Scroll);
@@ -174,9 +176,9 @@
             // barcodeCol
             // 
             this.barcodeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(1);
-            this.barcodeCol.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            this.barcodeCol.DefaultCellStyle = dataGridViewCellStyle2;
             this.barcodeCol.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.barcodeCol.HeaderText = "BARCODE";
             this.barcodeCol.MinimumWidth = 50;
@@ -196,10 +198,10 @@
             // 
             // quantityCol
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N0";
-            dataGridViewCellStyle10.NullValue = "N/A";
-            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = "N/A";
+            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle3;
             this.quantityCol.HeaderText = "QUANTITY";
             this.quantityCol.MinimumWidth = 50;
             this.quantityCol.Name = "quantityCol";
@@ -207,9 +209,9 @@
             // 
             // priceCol
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "C2";
-            this.priceCol.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "C2";
+            this.priceCol.DefaultCellStyle = dataGridViewCellStyle4;
             this.priceCol.HeaderText = "SELLING PRICE";
             this.priceCol.MinimumWidth = 50;
             this.priceCol.Name = "priceCol";
@@ -218,8 +220,8 @@
             // typeCol
             // 
             this.typeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.typeCol.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.typeCol.DefaultCellStyle = dataGridViewCellStyle5;
             this.typeCol.HeaderText = "TYPE";
             this.typeCol.Name = "typeCol";
             this.typeCol.ReadOnly = true;
@@ -228,8 +230,8 @@
             // col_remove
             // 
             this.col_remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle13.Padding = new System.Windows.Forms.Padding(1);
-            this.col_remove.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
+            this.col_remove.DefaultCellStyle = dataGridViewCellStyle6;
             this.col_remove.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.col_remove.HeaderText = "";
             this.col_remove.MinimumWidth = 40;
@@ -727,23 +729,6 @@
             this.trackItemCheckbox.UseVisualStyleBackColor = true;
             this.trackItemCheckbox.CheckedChanged += new System.EventHandler(this.trackItemCheckbox_CheckedChanged);
             // 
-            // searchBar
-            // 
-            this.searchBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.searchBar.BackColor = System.Drawing.Color.White;
-            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchBar.Location = new System.Drawing.Point(15, 17);
-            this.searchBar.MaximumSize = new System.Drawing.Size(450, 35);
-            this.searchBar.MinimumSize = new System.Drawing.Size(200, 40);
-            this.searchBar.Name = "searchBar";
-            this.searchBar.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.searchBar.SearchedText = "";
-            this.searchBar.Size = new System.Drawing.Size(450, 40);
-            this.searchBar.TabIndex = 1;
-            this.searchBar.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
-            this.searchBar.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.contentPanel);
@@ -767,6 +752,23 @@
             this.panel7.Padding = new System.Windows.Forms.Padding(15, 0, 15, 0);
             this.panel7.Size = new System.Drawing.Size(1055, 57);
             this.panel7.TabIndex = 14;
+            // 
+            // searchBar
+            // 
+            this.searchBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.searchBar.BackColor = System.Drawing.Color.White;
+            this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchBar.Location = new System.Drawing.Point(15, 17);
+            this.searchBar.MaximumSize = new System.Drawing.Size(450, 35);
+            this.searchBar.MinimumSize = new System.Drawing.Size(200, 40);
+            this.searchBar.Name = "searchBar";
+            this.searchBar.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.searchBar.SearchedText = "";
+            this.searchBar.Size = new System.Drawing.Size(450, 40);
+            this.searchBar.TabIndex = 1;
+            this.searchBar.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
+            this.searchBar.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
             // InventoryUC
             // 
@@ -831,6 +833,9 @@
         private System.Windows.Forms.Panel panel5;
         protected System.Windows.Forms.Button button4;
         protected System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Panel panel3;
+        protected System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
         private System.Windows.Forms.DataGridViewButtonColumn barcodeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
@@ -838,8 +843,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
         private System.Windows.Forms.DataGridViewButtonColumn col_remove;
-        private System.Windows.Forms.Panel panel3;
-        protected System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Panel panel7;
     }
 }

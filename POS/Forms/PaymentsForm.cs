@@ -20,7 +20,7 @@ namespace POS.Forms {
         public void SetId(int id) {
             _id = id;
 
-            using (var p = new POSEntities()) {
+            using (var p = POSEntities.Create()) {
                 var sale = p.Sales.FirstOrDefault(x => x.Id == id);
 
                 Text = Text + " - " + sale.Customer.Name;
@@ -53,7 +53,7 @@ namespace POS.Forms {
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
-            using (var context = new POSEntities()) {
+            using (var context = POSEntities.Create()) {
                 var sale = await context.Sales.FirstOrDefaultAsync(x => x.Id == _id);
                 sale.AmountRecieved += paymentNum.Value;
 
@@ -89,11 +89,11 @@ namespace POS.Forms {
 
             var t = sender as DataGridView;
 
-            using (var context = new POSEntities()) {
+            using (var context = POSEntities.Create()) {
                 var paymentToUndo = await context.ChargedPayRecords.FirstOrDefaultAsync(c => c.Id == SelectedId);
                 var sale = paymentToUndo.Sale;
 
-                sale.AmountRecieved -= paymentToUndo.AmountPayed;
+                sale.AmountRecieved -= (decimal)paymentToUndo.AmountPayed;
                 context.ChargedPayRecords.Remove(paymentToUndo);
                 await context.SaveChangesAsync();
 

@@ -36,7 +36,7 @@ namespace POS.Misc
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var departments = await context.Items
                         .AsNoTracking()

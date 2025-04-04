@@ -126,7 +126,7 @@ namespace POS.Forms
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var stockIns = context.StockinHistories
                         .AsNoTracking()
@@ -160,7 +160,7 @@ namespace POS.Forms
                                         User = sth.LoginUsername,
                                         Name = sth.Product.Item.Name,
                                         SerialNumber = sth.SerialNumber,
-                                        Qty = sth.Quantity,
+                                        Qty = (int)sth.Quantity,
                                         Cost = (decimal)sth.Cost
                                     }).ToListAsync();
 
@@ -393,7 +393,7 @@ namespace POS.Forms
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var entity = await context.StockinHistories.FirstOrDefaultAsync(x => x.Id == _id);
                     entity.Cost = updatedCost;
@@ -435,7 +435,7 @@ namespace POS.Forms
 
             try
             {
-                using (var context = new POSEntities())
+                using (var context = POSEntities.Create())
                 {
                     var toUndoItems = context.StockinHistories.Where(st => selectedIds.Any(id => id == st.Id));
                     if (toUndoItems.Count() > 0)
@@ -516,7 +516,7 @@ namespace POS.Forms
 
                 if (invItem != null && invItem.Quantity >= stockIn.Quantity)
                 {
-                    invItem.Quantity -= stockIn.Quantity;
+                    invItem.Quantity -= (int)stockIn.Quantity;
                     if (invItem.Quantity <= 0)
                         context.InventoryItems.Remove(invItem);
                 }

@@ -22,7 +22,7 @@ namespace POS.Forms {
         {
             histTable.Rows.Clear();
 
-            using (var context = new POSEntities())
+            using (var context = POSEntities.Create())
             {
                 var hist = await context.StockinHistories
                     .Where(x => x.Product.Item.Id == _id)
