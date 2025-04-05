@@ -447,6 +447,14 @@ namespace POS.Forms.ItemRegistration
                 }
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            using (var openCamera = new CaptureImage())
+            {
+                openCamera.ShowDialog();
+            }
+        }
     }
 
     public static class ItemDepartmentExtensions

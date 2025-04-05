@@ -76,6 +76,10 @@ namespace POS.Forms
                                     MessageBoxIcon.Error) == DialogResult.Retry)
                     await GetLoginUsernameForAutocomplete();
             }
+            catch
+            {
+
+            }
         }
 
         private void hide_MouseDown(object sender, MouseEventArgs e)

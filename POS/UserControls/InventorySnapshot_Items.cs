@@ -23,8 +23,11 @@ namespace POS.UserControls
         {
             InitializeComponent();
 
+            dateTimePicker1.MaxDate = DateTime.Today;
+
+            Column5.Visible = Column6.Visible = checkBox1.Checked;
+
             this.dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
-            this.button1.Click += button1_Click;
             this.searchControl1.OnSearch += searchControl1_OnSearch;
             this.searchControl1.OnTextEmpty += searchControl1_OnTextEmpty;
         }
@@ -33,10 +36,13 @@ namespace POS.UserControls
         {
             public int ProductId { get; set; }
             public string Name { get; set; }
-            public int Qty { get; set; }
+            public int QtyAsOf => StockInAsOf - SoldAsOf;
+
+            public int StockInAsOf { get; set; }
+            public int SoldAsOf { get; set; }
             public int InventoryQty { get; set; }
             public decimal Cost { get; set; } = 0;
-            public decimal TotalCost => Qty * Cost;
+            public decimal TotalCost => QtyAsOf * Cost;
         }
 
         DateTime DateSelected => dateTimePicker1.Value.Date.AddHours(23).AddMinutes(59);
@@ -64,8 +70,11 @@ namespace POS.UserControls
                         {
                             ProductId = i.Id,
                             Name = i.Item.Name + " - " + i.Supplier.Name,
-                            Qty = i.StockinHistories.Where(s => s.Date <= DateSelected).Select(s => (int)s.Quantity).DefaultIfEmpty(0).Sum() -
-                                  i.SoldItems.Where(s => s.DateAdded <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
+                            StockInAsOf = i.StockinHistories.Where(s => s.Date <= DateSelected).Select(s => (int)s.Quantity).DefaultIfEmpty().Sum(),
+                            SoldAsOf = i.SoldItems.Where(s => s.DateAdded <= DateSelected).Select(s => (int)s.Quantity).DefaultIfEmpty().Sum(),
+                            //QtyAsOf = i.StockinHistories.Where(s => s.Date <= DateSelected).Select(s => (int)s.Quantity).DefaultIfEmpty(0).Sum() -
+                            //      i.SoldItems.Where(s => s.DateAdded <= DateSelected).Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
+
                             InventoryQty = i.InventoryItems.Select(s => s.Quantity).DefaultIfEmpty(0).Sum(),
                             Cost = i.Cost
                         })
@@ -83,7 +92,8 @@ namespace POS.UserControls
                             var createdRow = CreateRow(item);
                             dataGridView.Rows.Add(createdRow);
                         }
-                        dataGridView.Rows.Add("", "", "", "", "", items.Select(i => i.TotalCost).DefaultIfEmpty(0).Sum().ToCurrency());
+
+                        dataGridView.Rows.Add("", "", "", "", "", "", "", items.Select(i => i.TotalCost).DefaultIfEmpty(0).Sum().ToCurrency());
 
                         return;
                     }
@@ -101,95 +111,98 @@ namespace POS.UserControls
             }
         }
 
-        DataGridViewRow CreateRow(InventoryTimeStamp p) => dataGridView.CreateRow(p.ProductId, p.Name, p.InventoryQty, p.Qty, p.Cost, p.TotalCost);
+        DataGridViewRow CreateRow(InventoryTimeStamp p) => dataGridView.CreateRow(
+            p.ProductId,
+            p.Name,
+            p.InventoryQty,
+            p.StockInAsOf,
+            p.SoldAsOf,
+            p.QtyAsOf,
+            p.Cost,
+            p.TotalCost);
 
         private async void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             await LoadAsync();
         }
-        private class Correction_Inventory_Item
-        {
-            public int ProductId { get; set; }
-            public int ComputedQty { get; set; }
-            public int InventoryQty { get; set; }
-        }
-        private async Task Balance_Async()
-        {
-            if (dataGridView.SelectedRows.Count == 0)
-                return;
 
-            using (var context = POSEntities.Create())
-            {
-                var user = await context.Logins.FirstOrDefaultAsync(x => x.Username == "admin");
-                var correctionDate = new DateTime(2019, 1, 1);
-                var supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none");
+        //private class Correction_Inventory_Item
+        //{
+        //    public int ProductId { get; set; }
+        //    public int ComputedQty { get; set; }
+        //    public int InventoryQty { get; set; }
+        //}
 
-                var correctionSaleInstance = new Sale()
-                {
-                    Date = correctionDate,
-                    Customer = context.Customers.FirstOrDefault(x => x.Name == "Inventory Correction") ?? new Customer() { Name = "Inventory Correction" },
-                    Login = user,
-                };
+        //private async Task Balance_Async()
+        //{
+        //    if (dataGridView.SelectedRows.Count == 0)
+        //        return;
 
-                var selecteds = dataGridView.SelectedRows.Cast<DataGridViewRow>().Select(i => new Correction_Inventory_Item()
-                {
-                    ProductId = (int)i.Cells[0].Value,
-                    InventoryQty = (int)i.Cells[2].Value,
-                    ComputedQty = (int)i.Cells[3].Value,
-                }).ToArray();
+        //    using (var context = POSEntities.Create())
+        //    {
+        //        var user = await context.Logins.FirstOrDefaultAsync(x => x.Username == "admin");
+        //        var correctionDate = new DateTime(2019, 1, 1);
+        //        var supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none");
 
-                foreach (var instance in selecteds)
-                {
+        //        var correctionSaleInstance = new Sale()
+        //        {
+        //            Date = correctionDate,
+        //            Customer = context.Customers.FirstOrDefault(x => x.Name == "Inventory Correction") ?? new Customer() { Name = "Inventory Correction" },
+        //            Login = user,
+        //        };
 
-                    if (instance.ComputedQty != instance.InventoryQty)
-                    {
-                        var product = await context.Products.FirstOrDefaultAsync(x => x.Id == instance.ProductId);
-                        if (instance.ComputedQty < instance.InventoryQty)
-                        {
-                            ///add corrective stockin
-                            var newStockin = new StockinHistory()
-                            {
-                                ProductId = instance.ProductId,
-                                Cost = product.Cost,
-                                Quantity = instance.InventoryQty - instance.ComputedQty,
-                                Date = correctionDate,
-                                ItemName = product.Item.Name,
-                                LoginUsername = user.Username,
-                                Supplier = supplier.Name,
-                            };
+        //        var selecteds = dataGridView.SelectedRows.Cast<DataGridViewRow>().Select(i => new Correction_Inventory_Item()
+        //        {
+        //            ProductId = (int)i.Cells[0].Value,
+        //            InventoryQty = (int)i.Cells[2].Value,
+        //            ComputedQty = (int)i.Cells[3].Value,
+        //        }).ToArray();
 
-                            context.StockinHistories.Add(newStockin);
+        //        foreach (var instance in selecteds)
+        //        {
 
-                        }
-                        else
-                        {
-                            ///add corrective sell
-                            var newSoldItem = new SoldItem()
-                            {
-                                ProductId = instance.ProductId,
-                                ItemPrice = product.Item.SellingPrice,
-                                Quantity = instance.ComputedQty - instance.InventoryQty,
-                            };
+        //            if (instance.ComputedQty != instance.InventoryQty)
+        //            {
+        //                var product = await context.Products.FirstOrDefaultAsync(x => x.Id == instance.ProductId);
+        //                if (instance.ComputedQty < instance.InventoryQty)
+        //                {
+        //                    ///add corrective stockin
+        //                    var newStockin = new StockinHistory()
+        //                    {
+        //                        ProductId = instance.ProductId,
+        //                        Cost = product.Cost,
+        //                        Quantity = instance.InventoryQty - instance.ComputedQty,
+        //                        Date = correctionDate,
+        //                        ItemName = product.Item.Name,
+        //                        LoginUsername = user.Username,
+        //                        Supplier = supplier.Name,
+        //                    };
 
-                            correctionSaleInstance.SoldItems.Add(newSoldItem);
-                        }
-                    }
-                }
+        //                    context.StockinHistories.Add(newStockin);
 
-                context.Sales.Add(correctionSaleInstance);
+        //                }
+        //                else
+        //                {
+        //                    ///add corrective sell
+        //                    var newSoldItem = new SoldItem()
+        //                    {
+        //                        ProductId = instance.ProductId,
+        //                        ItemPrice = product.Item.SellingPrice,
+        //                        Quantity = instance.ComputedQty - instance.InventoryQty,
+        //                    };
 
-                await context.SaveChangesAsync();
+        //                    correctionSaleInstance.SoldItems.Add(newSoldItem);
+        //                }
+        //            }
+        //        }
 
-                MessageBox.Show("Correction Successful!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+        //        context.Sales.Add(correctionSaleInstance);
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to balance?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
+        //        await context.SaveChangesAsync();
 
-            await Balance_Async();
-        }
+        //        MessageBox.Show("Correction Successful!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+        //}
 
         string keyword = string.Empty;
 
@@ -216,6 +229,11 @@ namespace POS.UserControls
             {
 
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            Column5.Visible = Column6.Visible = checkBox1.Checked;
         }
     }
 }

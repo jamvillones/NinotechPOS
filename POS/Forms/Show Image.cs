@@ -6,9 +6,7 @@ namespace POS.Forms
 {
     public partial class Show_Image : Form
     {
-        private readonly string id;
-
-        Image image;
+        readonly Image image;
 
         public Show_Image(Image image)
         {
