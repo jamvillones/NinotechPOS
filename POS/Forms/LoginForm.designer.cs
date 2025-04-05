@@ -177,6 +177,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(30, 30);
             this.button2.TabIndex = 4;
+            this.button2.TabStop = false;
             this.toolTip.SetToolTip(this.button2, "Open Connection Configurations");
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -193,6 +194,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(30, 30);
             this.button3.TabIndex = 5;
+            this.button3.TabStop = false;
             this.toolTip.SetToolTip(this.button3, "Add New User");
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button1_Click);
@@ -210,6 +212,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(30, 30);
             this.button1.TabIndex = 6;
+            this.button1.TabStop = false;
             this.toolTip.SetToolTip(this.button1, "Change Password");
             this.button1.UseVisualStyleBackColor = false;
             // 

@@ -99,7 +99,7 @@ namespace POS.UserControls
                 ShowInventoryInfo(barcode, qty);
             }
 
-            else if(e.ColumnIndex == priceCol.Index)
+            else if (e.ColumnIndex == priceCol.Index)
             {
                 using (var variation = new ItemSoldItemsForm(SelectedId))
                 {
@@ -380,10 +380,7 @@ namespace POS.UserControls
         {
             try
             {
-                var currLogin = UserManager.instance.CurrentLogin;
-
-                addItemBtn.Enabled = currLogin.CanEditItem;
-                stockinBtn.Enabled = currLogin.CanStockIn;
+                SetupButtonByLogin();
 
                 departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
                 departmentOption.AutoCompleteSource = AutoCompleteSource.ListItems;
@@ -395,6 +392,14 @@ namespace POS.UserControls
                 departmentOption.SelectedIndexChanged += departmentOption_SelectedIndexChanged;
             }
             catch { }
+        }
+
+        public void SetupButtonByLogin()
+        {
+            var currLogin = UserManager.instance.CurrentLogin;
+
+            addItemBtn.Enabled = currLogin.CanEditItem;
+            stockinBtn.Enabled = currLogin.CanStockIn;
         }
 
         private void itemsTable_SelectionChanged(object sender, EventArgs e)

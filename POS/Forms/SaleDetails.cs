@@ -20,6 +20,7 @@ namespace POS.Forms
             _saleId = id;
 
             voidBtn.Visible = CurrentLogin.CanVoidSale;
+            dateAddedCol.Visible = checkBox2.Checked;
         }
 
         Login CurrentLogin => UserManager.instance.CurrentLogin;

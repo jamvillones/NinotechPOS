@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -144,6 +146,78 @@ namespace POS.Forms
         {
             if (e.KeyCode == Keys.Escape)
                 this.Close();
+        }
+
+        //readonly string path = @"C:\Users\PC\Desktop\ConnectionConfig.txt";
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Save your configuration profiles";
+            saveFileDialog.Filter = "Profiles (*.dat)|*.dat|All Files (*.*)|*.*";
+            saveFileDialog.DefaultExt = ".dat";
+            saveFileDialog.FileName = "Connection_Configuration_Profiles.dat";
+
+            //OpenFileDialog openFileDialog = new OpenFileDialog
+            //{
+            //    Title = "Select a text file",
+            //    Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
+            //};
+
+            // Show the dialog and get result
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = saveFileDialog.FileName;
+
+                if (File.Exists(path))
+                    File.Delete(path);
+
+                try
+                {
+                    string content = JsonConvert.SerializeObject(ConnectionConfiguration_Source.Configurations.Skip(1).ToArray());
+
+                    using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+                    using (StreamWriter writer = new StreamWriter(fs))
+                    {
+                        writer.WriteLine(content);
+                    }
+
+                    MessageBox.Show("Extraction Successful", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(ex.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+
+                }
+            }
+
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Select a text file",
+                Filter = "Profiles (*.dat)|*.dat|All Files (*.*)|*.*"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = openFileDialog.FileName;
+                string content = File.ReadAllText(path);
+
+                var profiles = JsonConvert.DeserializeObject<ConnectionConfigurationProfile[]>(content);
+                foreach (var configurationProfile in profiles)
+                    ConnectionConfiguration_Source.Configurations.Add(configurationProfile);
+
+                MessageBox.Show("Success", string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 

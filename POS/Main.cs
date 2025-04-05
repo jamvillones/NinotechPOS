@@ -250,7 +250,6 @@ namespace POS
                "",
                MessageBoxButtons.OKCancel,
                MessageBoxIcon.Question) == DialogResult.Cancel) return;
-
             IsLoggedOut = true;
             UserManager.instance.LogOut();
             this.Close();
@@ -267,6 +266,7 @@ namespace POS
                 {
                     if (switchUser.ShowDialog() == DialogResult.OK)
                     {
+                        inventoryTab.SetupButtonByLogin();
                         LoadProperties();
                     }
                 }
