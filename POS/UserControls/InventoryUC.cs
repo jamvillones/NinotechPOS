@@ -756,13 +756,17 @@ namespace POS.UserControls
                 showImage = new Show_Image(toShow) { Location = new Point(MousePosition.X + 10, MousePosition.Y) };
                 showImage.Show();
             }
-            catch (TaskCanceledException)
+            catch (OperationCanceledException)
+            {
+
+            }
+            catch
             {
 
             }
             finally
             {
-                showImageCancelSource.Dispose();
+                showImageCancelSource?.Dispose();
                 showImageCancelSource = null;
             }
         }
