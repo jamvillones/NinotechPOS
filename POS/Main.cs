@@ -236,7 +236,7 @@ namespace POS
 
         private void button6_Click(object sender, EventArgs e)
         {
-            OpenDialog<UserPrivilegesForm>();
+            OpenDialog<Users_Form>();
         }
 
         private void button4_Click(object sender, EventArgs e)

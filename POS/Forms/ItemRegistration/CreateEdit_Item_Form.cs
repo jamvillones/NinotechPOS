@@ -33,7 +33,7 @@ namespace POS.Forms.ItemRegistration
 
             _id = id;
 
-            saveBtn.Enabled = UserManager.instance.CurrentLogin.CanEditItem;
+            saveBtn.Enabled = add_cost_panel.Enabled = costTable.AllowUserToDeleteRows = UserManager.instance.CurrentLogin.CanEditItem;
         }
 
         string _id = string.Empty;
