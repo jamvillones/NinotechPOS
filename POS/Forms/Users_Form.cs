@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,9 +14,21 @@ namespace POS.Forms
         public Users_Form()
         {
             InitializeComponent();
+            checkBox2.CheckedChanged += EnableDisableOtherCheckBoxes;
         }
 
-        POSEntities context { get; set; }
+        private void EnableDisableOtherCheckBoxes(object sender, EventArgs e)
+        {
+            var c = sender as CheckBox;
+
+            checkBox1.Enabled =
+            checkBox3.Enabled =
+            checkBox4.Enabled =
+            checkBox5.Enabled =
+            checkBox6.Enabled = c.Checked;
+        }
+
+        POSEntities context;
 
         private async void Users_Form_Load(object sender, EventArgs e)
         {
@@ -35,7 +48,7 @@ namespace POS.Forms
                     dataGridView1.Rows.Add(user);
 
             }
-            catch (EntityException ex)
+            catch (EntityException)
             {
                 if (MessageBox.Show("Reload Entries?", "Connection not established", MessageBoxButtons.RetryCancel, MessageBoxIcon.Question) == DialogResult.Retry)
                 {
@@ -52,7 +65,15 @@ namespace POS.Forms
         DataGridViewRow CreateRow(Login login)
         {
             var row = new DataGridViewRow();
-            row.CreateCells(dataGridView1, login.Id, login.Username, login.Name, login.Email, login);
+            if (!login.CanEditProduct) row.DefaultCellStyle.ForeColor = Color.Gray;
+
+            row.CreateCells(dataGridView1,
+                login.Id,
+                login.Username,
+                login.Name,
+                login.Email,
+                login);
+
             return row;
         }
 
@@ -64,9 +85,10 @@ namespace POS.Forms
                 MessageBox.Show("Changes Saved", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
+            catch (EntityException) { }
             finally
             {
-                context.Dispose();
+
             }
         }
 
@@ -114,6 +136,11 @@ namespace POS.Forms
                     break;
             }
 
+        }
+
+        private void Users_Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            context?.Dispose();
         }
     }
 }

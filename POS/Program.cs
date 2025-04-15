@@ -45,7 +45,7 @@ namespace POS
                 {
                     if (!UserManager.instance.Login(settings.Login_Username))
                     {
-                        MessageBox.Show("Saved Log In is no longer Available", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show("Saved Log In is no longer Available", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 

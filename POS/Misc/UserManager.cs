@@ -14,20 +14,20 @@ namespace POS.Misc
     {
         public UserManager()
         {
-            var settings = Properties.Settings.Default;
+            //var settings = Properties.Settings.Default;
 
-            var username = settings.Login_Username;
-            var password = settings.Login_Password;
+            //var username = settings.Login_Username;
+            //var password = settings.Login_Password;
 
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-            {
-                return;
-            }
+            //if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            //{
+            //    return;
+            //}
 
-            using (var context = POSEntities.Create())
-            {
-                CurrentLogin = context.Logins.FirstOrDefault(x => x.Username == username && x.Password == password);
-            }
+            //using (var context = POSEntities.Create())
+            //{
+            //    CurrentLogin = context.Logins.FirstOrDefault(x => x.Username == username && x.Password == password);
+            //}
         }
         public static UserManager instance;
         public Login CurrentLogin { get; private set; }
@@ -55,12 +55,16 @@ namespace POS.Misc
 
                     if (login != null)
                     {
+                        if (!login.CanEditProduct)
+                            throw new LoginNotAuthorized();
+
                         if (stayLoggedIn)
                         {
                             settings.Login_Username = login.Username;
                             settings.Login_Password = login.Password;
                             settings.Save();
                         }
+
 
                         CurrentLogin = login;
                         return true;
@@ -81,13 +85,16 @@ namespace POS.Misc
 
         public bool Login(string username)
         {
-            var settings = Properties.Settings.Default;
+
             string un = username.Trim();
             using (var p = POSEntities.Create())
             {
                 try
                 {
                     var login = p.Logins.FirstOrDefault(x => x.Username == un);
+
+                    if (!login.CanEditProduct)
+                        throw new LoginNotAuthorized();
 
                     if (login != null)
                     {
@@ -98,6 +105,11 @@ namespace POS.Misc
                 catch (LoginNotAuthorized)
                 {
                     MessageBox.Show("Login Not Authorized By Admin", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    var settings = Properties.Settings.Default;
+                    settings.Login_Username = null;
+                    settings.Save();
+
                 }
                 catch (EntityException ex)
                 {

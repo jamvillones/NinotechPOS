@@ -505,6 +505,7 @@
             this.costTable.Location = new System.Drawing.Point(5, 46);
             this.costTable.MultiSelect = false;
             this.costTable.Name = "costTable";
+            this.costTable.ReadOnly = true;
             this.costTable.RowHeadersVisible = false;
             this.costTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.costTable.Size = new System.Drawing.Size(298, 225);
@@ -533,6 +534,7 @@
             this.col_Value.DefaultCellStyle = dataGridViewCellStyle2;
             this.col_Value.HeaderText = "VALUE";
             this.col_Value.Name = "col_Value";
+            this.col_Value.ReadOnly = true;
             this.col_Value.ToolTipText = "Edit Cost";
             // 
             // button3

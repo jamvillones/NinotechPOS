@@ -33,7 +33,9 @@ namespace POS.Forms.ItemRegistration
 
             _id = id;
 
-            saveBtn.Enabled = add_cost_panel.Enabled = costTable.AllowUserToDeleteRows = UserManager.instance.CurrentLogin.CanEditItem;
+            bool canEditItem = UserManager.instance.CurrentLogin.CanEditItem;
+            saveBtn.Enabled = add_cost_panel.Enabled = costTable.AllowUserToDeleteRows = canEditItem;
+            costTable.ReadOnly = !canEditItem;
         }
 
         string _id = string.Empty;
@@ -420,7 +422,7 @@ namespace POS.Forms.ItemRegistration
         private void costTable_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var table = sender as DataGridView;
-            if (e.RowIndex == -1)
+            if (e.RowIndex == -1 || e.RowIndex != col_Supplier.Index)
                 return;
 
             var cost = table.SelectedRows[0].DataBoundItem as Cost_ViewModel;
