@@ -57,6 +57,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7D29063B06BBF24080A91EB5F64FEF3A"
+        "OwnerKey" = "8:_E2E906A01B314322912D8DE04C8AED54"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8663FAD4F462D4F47F6319635FFBC63A"
         "OwnerKey" = "8:_E2E906A01B314322912D8DE04C8AED54"
         "MsmSig" = "8:_UNDEFINED"
@@ -75,6 +81,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_95426F5A5949564A4D58725163235263"
+        "OwnerKey" = "8:_E2E906A01B314322912D8DE04C8AED54"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_95426F5A5949564A4D58725163235263"
+        "OwnerKey" = "8:_F9D7B8E96CC57B00D9FD8EDB7DC789E6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DB29C9683786BE5B2ACF03DA3A27F87B"
         "OwnerKey" = "8:_E2E906A01B314322912D8DE04C8AED54"
         "MsmSig" = "8:_UNDEFINED"
@@ -83,6 +101,18 @@
         {
         "MsmKey" = "8:_E2E906A01B314322912D8DE04C8AED54"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F9D7B8E96CC57B00D9FD8EDB7DC789E6"
+        "OwnerKey" = "8:_E2E906A01B314322912D8DE04C8AED54"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F9D7B8E96CC57B00D9FD8EDB7DC789E6"
+        "OwnerKey" = "8:_7D29063B06BBF24080A91EB5F64FEF3A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -125,6 +155,24 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_8AC059FE883FE1B0BE9FCA2763F63EC0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7D29063B06BBF24080A91EB5F64FEF3A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F9D7B8E96CC57B00D9FD8EDB7DC789E6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_95426F5A5949564A4D58725163235263"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -409,6 +457,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7D29063B06BBF24080A91EB5F64FEF3A"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_7D29063B06BBF24080A91EB5F64FEF3A"
+                    {
+                    "Name" = "8:AForge.Video.DirectShow.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:AForge.Video.DirectShow.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8663FAD4F462D4F47F6319635FFBC63A"
             {
             "AssemblyRegister" = "3:1"
@@ -471,6 +550,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_95426F5A5949564A4D58725163235263"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_95426F5A5949564A4D58725163235263"
+                    {
+                    "Name" = "8:AForge.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:AForge.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DB29C9683786BE5B2ACF03DA3A27F87B"
             {
             "AssemblyRegister" = "3:1"
@@ -485,6 +595,37 @@
                     }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F9D7B8E96CC57B00D9FD8EDB7DC789E6"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F9D7B8E96CC57B00D9FD8EDB7DC789E6"
+                    {
+                    "Name" = "8:AForge.Video.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:AForge.Video.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
@@ -558,15 +699,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Niñotech POS"
-        "ProductCode" = "8:{2CD31E3F-4C13-4525-9C1E-E7C841F1C8DB}"
-        "PackageCode" = "8:{0CBFA104-052F-40FF-A99B-BC54559E5F3E}"
+        "ProductCode" = "8:{4686214B-C2A1-484A-9619-31B023CA63B2}"
+        "PackageCode" = "8:{FD0642F8-E6C8-40A7-A0B8-10CE60A51702}"
         "UpgradeCode" = "8:{A5499E8B-6ED5-4E19-B05A-1B37663684CA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.157"
+        "ProductVersion" = "8:1.0.158"
         "Manufacturer" = "8:Niñotech"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1108,7 +1249,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_E2E906A01B314322912D8DE04C8AED54"
             {
-            "SourcePath" = "8:..\\POS\\obj\\Release\\NinotechPOS.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"

@@ -207,6 +207,11 @@ namespace POS.Forms
 
             await LoadDataAsync();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public static class LoginQueryExtensions
