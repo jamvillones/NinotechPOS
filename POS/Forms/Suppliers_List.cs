@@ -1,12 +1,9 @@
 ﻿using POS.Misc;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
-using System.Drawing;
+using System.Data.Entity.Core;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,8 +12,7 @@ namespace POS.Forms
 {
     public partial class Suppliers_List : Form
     {
-        ///List<Supplier> suppliers = new List<Supplier>();
-        //public event EventHandler OnSave;
+
         public Suppliers_List()
         {
             InitializeComponent();
@@ -27,40 +23,40 @@ namespace POS.Forms
             await LoadDataAsync();
         }
 
-        //void resetAutoComplete()
-        //{
-        //    using (var p = new POSEntities())
-        //    {
-        //        searchControl1.SetAutoComplete(p.Suppliers.Select(x => x.Name).ToArray());
-        //    }
-        //}
-
         #region edits
         Supplier targetSupplier;
         private void supplierTable_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            var id = (int)(((DataGridView)sender).Rows[e.RowIndex].Cells[0].Value);
-            using (var p = POSEntities.Create())
-            {
-                targetSupplier = p.Suppliers.FirstOrDefault(x => x.Id == id);
-            }
-        }
-        private async void supplierTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            var dgt = (DataGridView)sender;
-            var newValue = dgt.CurrentCell.Value?.ToString().Trim().NullIfEmpty();
-
-            ///make sure to terminate the save when changes values are not changed
-            if ((e.ColumnIndex == col_suppName.Index && newValue == targetSupplier.Name) ||
-                (e.ColumnIndex == col_contact.Index && newValue == targetSupplier.ContactDetails))
-                return;
-
-            var id = (int)(dgt.Rows[e.RowIndex].Cells[0].Value);
-
+            var id = (int)((DataGridView)sender).Rows[e.RowIndex].Cells[0].Value;
             try
             {
                 using (var p = POSEntities.Create())
                 {
+                    targetSupplier = p.Suppliers.FirstOrDefault(x => x.Id == id);
+                }
+            }
+            catch (UnautorizedLoginException)
+            {
+                this.ShowLoginUnauthorizedMessage();
+                return;
+            }
+        }
+        private async void supplierTable_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                using (var p = POSEntities.Create())
+                {
+                    var dgt = (DataGridView)sender;
+                    var newValue = dgt.CurrentCell.Value?.ToString().Trim().NullIfEmpty();
+
+                    ///make sure to terminate the save when changes values are not changed
+                    if ((e.ColumnIndex == col_suppName.Index && newValue == targetSupplier.Name) ||
+                        (e.ColumnIndex == col_contact.Index && newValue == targetSupplier.ContactDetails))
+                        return;
+
+                    var id = (int)(dgt.Rows[e.RowIndex].Cells[0].Value);
+
                     var supplier = await p.Suppliers.FirstOrDefaultAsync(x => x.Id == id);
 
                     if (e.ColumnIndex == col_suppName.Index) supplier.Name = newValue;
@@ -69,7 +65,12 @@ namespace POS.Forms
                     await p.SaveChangesAsync();
                 }
             }
-            catch (Exception ex)
+            catch (UnautorizedLoginException)
+            {
+                this.ShowLoginUnauthorizedMessage();
+                return;
+            }
+            catch (EntityException ex)
             {
                 MessageBox.Show(ex.Message, "Edit Not Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
@@ -78,59 +79,6 @@ namespace POS.Forms
             MessageBox.Show("Edit Saved", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
-
-        //private void textBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    addSuppBtn.Enabled = supplierName.Text == string.Empty || contactDetails.Text == string.Empty ? false : true;
-        //}
-
-        //private void supplierName_Leave(object sender, EventArgs e)
-        //{
-        //    if (supplierName.Text == string.Empty)
-        //        return;
-
-        //    using (var p = new POSEntities())
-        //    {
-        //        if (p.Suppliers.Any(x => x.Name == supplierName.Text))
-        //        {
-        //            MessageBox.Show("Supplier already present.");
-        //            this.ActiveControl = supplierName;
-        //            supplierName.SelectAll();
-        //        }
-        //    }
-        //}
-
-        //string supplier => string.IsNullOrWhiteSpace(supplierName.Text) ? null : supplierName.Text.Trim();
-        //string contact => string.IsNullOrWhiteSpace(contactDetails.Text) ? null : contactDetails.Text.Trim();
-
-        //bool canSave => supplier != null && contact != null;
-
-
-        //private void addSuppBtn_Click(object sender, EventArgs e)
-        //{
-        //    if (!canSave)
-        //        return;
-
-        //    if (MessageBox.Show("Are you sure you want to add a new Supplier?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-        //        return;
-
-        //    using (var p = new POSEntities())
-        //    {
-        //        var newSupplier = new Supplier();
-        //        newSupplier.Name = supplier;
-        //        newSupplier.ContactDetails = contact;
-        //        p.Suppliers.Add(newSupplier);
-
-        //        supplierTable.Rows.Add(newSupplier.Id, newSupplier.Name, newSupplier.ContactDetails, "Delete");
-
-        //        p.SaveChanges();
-        //    }
-
-        //    resetAutoComplete();
-        //    OnSave?.Invoke(this, null);
-        //    supplierName.ResetText();
-        //    contactDetails.ResetText();
-        //}
 
         private async void supplierTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -156,7 +104,13 @@ namespace POS.Forms
                     await context.SaveChangesAsync();
                 }
             }
-            catch
+            catch (UnautorizedLoginException)
+            {
+                this.ShowLoginUnauthorizedMessage();
+
+                return;
+            }
+            catch (Exception)
             {
                 MessageBox.Show("Supplier cannot be deleted\nThis supplier is already referenced in one of the items", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -229,16 +183,12 @@ namespace POS.Forms
 
                 }
             }
-
-            catch (OperationCanceledException)
+            catch (UnautorizedLoginException)
             {
-
+                this.ShowLoginUnauthorizedMessage();
             }
-            catch
-            {
-
-            }
-
+            catch (OperationCanceledException) { }
+            catch (EntityException) { }
 
             return false;
         }

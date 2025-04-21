@@ -24,6 +24,10 @@ namespace POS
             control.Controls.Add(frm);
             return frm;
         }
+
+        public static DialogResult ShowLoginUnauthorizedMessage(this Control control) =>
+             MessageBox.Show("Your permission has been revoked! Contact ADMINISTRATOR for more details. ", "Operation Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         public static DataGridViewRow CreateRow(this DataGridView dt, params object[] obs)
         {
             var row = new DataGridViewRow();

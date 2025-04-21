@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -50,7 +51,12 @@ namespace POS.Forms
                         .ToArrayAsync();
                 }
             }
-            catch
+            catch (UnautorizedLoginException)
+            {
+                this.ShowLoginUnauthorizedMessage();
+                return Array.Empty<string>();
+            }
+            catch (EntityException)
             {
                 return Array.Empty<string>();
             }
@@ -130,8 +136,12 @@ namespace POS.Forms
                     }
                 }
             }
+            catch (UnautorizedLoginException)
+            {
+                this.ShowLoginUnauthorizedMessage();
+            }
             catch (OperationCanceledException) { }
-            catch { }
+            catch (EntityException) { }
             finally
             {
                 tokenSource?.Dispose();
@@ -177,19 +187,26 @@ namespace POS.Forms
             var table = customerTable;
             var id = (int)(table.Rows[rowIndex].Cells[0].Value);
 
-            using (var p = POSEntities.Create())
+            try
             {
-                var customerToBeDeleted = p.Customers.FirstOrDefault(x => x.Id == id);
-                if (customerToBeDeleted.Sales.Count > 0)
+                using (var p = POSEntities.Create())
                 {
-                    MessageBox.Show("This customer already made transactions and cannot be deleted!", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    return;
+                    var customerToBeDeleted = p.Customers.FirstOrDefault(x => x.Id == id);
+                    if (customerToBeDeleted.Sales.Count > 0)
+                    {
+                        MessageBox.Show("This customer already made transactions and cannot be deleted!", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
+                    if (customerToBeDeleted != null)
+                    {
+                        p.Customers.Remove(customerToBeDeleted);
+                        p.SaveChanges();
+                    }
                 }
-                if (customerToBeDeleted != null)
-                {
-                    p.Customers.Remove(customerToBeDeleted);
-                    p.SaveChanges();
-                }
+            }
+            catch (UnautorizedLoginException)
+            {
+                this.ShowLoginUnauthorizedMessage();
             }
 
             table.Rows.RemoveAt(rowIndex);
@@ -237,21 +254,27 @@ namespace POS.Forms
                 lastValue = "";
                 return;
             }
-
-            using (var context = POSEntities.Create())
+            try
             {
-                var target = await context.Customers.FirstOrDefaultAsync(x => x.Id == id);
+                using (var context = POSEntities.Create())
+                {
+                    var target = await context.Customers.FirstOrDefaultAsync(x => x.Id == id);
 
-                if (e.ColumnIndex == col_name.Index)
-                    target.Name = newValue;
+                    if (e.ColumnIndex == col_name.Index)
+                        target.Name = newValue;
 
-                else if (e.ColumnIndex == col_address.Index)
-                    target.Address = newValue;
+                    else if (e.ColumnIndex == col_address.Index)
+                        target.Address = newValue;
 
-                else if (e.ColumnIndex == col_contact.Index)
-                    target.ContactDetails = newValue;
+                    else if (e.ColumnIndex == col_contact.Index)
+                        target.ContactDetails = newValue;
 
-                await context.SaveChangesAsync();
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (UnautorizedLoginException)
+            {
+                this.ShowLoginUnauthorizedMessage();
             }
         }
 
@@ -333,12 +356,17 @@ namespace POS.Forms
                 using (var context = POSEntities.Create())
                 {
                     Selected = await context.Customers.FirstOrDefaultAsync(x => x.Id == id);
+                    if (Selected is null)
+                    {
+                        MessageBox.Show("Customer not found", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        customerTable.Rows.RemoveAt(e.RowIndex);
+                        return;
+                    }
                 }
-                if (Selected is null)
-                {
-                    MessageBox.Show("Customer might be removed", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            }
+            catch (UnautorizedLoginException)
+            {
+                this.ShowLoginUnauthorizedMessage();
             }
             catch
             {
@@ -352,15 +380,9 @@ namespace POS.Forms
     public static class CustomerQueryExtensions
     {
         public static IQueryable<Customer> ApplySearch(this IQueryable<Customer> customers, string keyword)
-        {
-
-            if (keyword.IsEmpty())
-                return customers;
-
-
-
-            return customers.Where(c => c.Name.Contains(keyword) || c.ContactDetails == keyword || c.Address.Contains(keyword));
-        }
+            => keyword.IsEmpty() ?
+            customers :
+            customers.Where(c => c.Name.Contains(keyword) || c.ContactDetails == keyword || c.Address.Contains(keyword));
     }
 
 }

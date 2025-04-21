@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 //using VS2017POS.EntitiyFolder;
@@ -56,7 +54,7 @@ namespace POS.Misc
                     if (login != null)
                     {
                         if (!login.CanEditProduct)
-                            throw new LoginNotAuthorized();
+                            throw new UnautorizedLoginException();
 
                         if (stayLoggedIn)
                         {
@@ -71,7 +69,7 @@ namespace POS.Misc
 
                     }
                 }
-                catch (LoginNotAuthorized)
+                catch (UnautorizedLoginException)
                 {
                     MessageBox.Show("Login Not Authorized By Admin", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -94,7 +92,7 @@ namespace POS.Misc
                     var login = p.Logins.FirstOrDefault(x => x.Username == un);
 
                     if (!login.CanEditProduct)
-                        throw new LoginNotAuthorized();
+                        throw new UnautorizedLoginException();
 
                     if (login != null)
                     {
@@ -102,7 +100,7 @@ namespace POS.Misc
                         return true;
                     }
                 }
-                catch (LoginNotAuthorized)
+                catch (UnautorizedLoginException)
                 {
                     MessageBox.Show("Login Not Authorized By Admin", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -119,7 +117,7 @@ namespace POS.Misc
             return false;
         }
     }
-    public class LoginNotAuthorized : Exception
+    public class UnautorizedLoginException : Exception
     {
 
     }

@@ -47,7 +47,7 @@ namespace POS
                 var login = context.Logins.FirstOrDefault(x => x.Id == loginId);
 
                 if (!login.CanEditProduct)                
-                    throw new LoginNotAuthorized();
+                    throw new UnautorizedLoginException();
                 
             }
 
