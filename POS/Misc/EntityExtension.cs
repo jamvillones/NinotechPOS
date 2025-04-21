@@ -39,6 +39,18 @@ namespace POS
         {
             var context = new POSEntities();
             context.ChangeDatabase();
+
+            if (UserManager.instance.CurrentLogin != null)
+            {
+                //verify the login credentials
+                var loginId = UserManager.instance.CurrentLogin.Id;
+                var login = context.Logins.FirstOrDefault(x => x.Id == loginId);
+
+                if (!login.CanEditProduct)                
+                    throw new LoginNotAuthorized();
+                
+            }
+
             return context;
         }
     }

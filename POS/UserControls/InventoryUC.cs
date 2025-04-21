@@ -83,13 +83,11 @@ namespace POS.UserControls
         }
         #endregion
 
-        private void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private async void itemsTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex == -1)
-                return;
+            if (e.RowIndex == -1) return;
 
-            if (e.ColumnIndex == nameCol.Index)
-                OpenEditForm();
+            if (e.ColumnIndex == nameCol.Index) await OpenEditForm();
 
             else if (e.ColumnIndex == quantityCol.Index)
             {
@@ -321,7 +319,7 @@ namespace POS.UserControls
             public string Type { get; set; }
         }
 
-        bool OpenEditForm()
+        async Task<bool> OpenEditForm()
         {
             if (itemsTable.RowCount <= 0)
             {
@@ -331,6 +329,8 @@ namespace POS.UserControls
 
             using (var editForm = new CreateEdit_Item_Form(SelectedId))
             {
+                await editForm.InitializeData();
+
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     var x = editForm.Tag as Item;
@@ -352,10 +352,10 @@ namespace POS.UserControls
             return true;
         }
 
-        private void editBtn_Click(object sender, EventArgs e)
+        private async void editBtn_Click(object sender, EventArgs e)
         {
             var btn = sender as Button;
-            btn.Enabled = OpenEditForm();
+            btn.Enabled = await OpenEditForm();
         }
 
         private void ShodSoldItemsForItem_Click(object sender, EventArgs e)
@@ -665,7 +665,7 @@ namespace POS.UserControls
             }
             else if (e.KeyCode == Keys.F2)
             {
-                OpenEditForm();
+                await OpenEditForm();
                 return;
             }
 

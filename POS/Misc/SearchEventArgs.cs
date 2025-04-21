@@ -20,10 +20,14 @@ namespace POS.Misc
                 return sender.SearchedText;
             }
         }
+
         public bool SearchFound
         {
-            get { return sender.SearchDone; }
-            set { sender.SearchDone = value; }
+            get => sender.SearchDone;
+            set
+            {
+                sender.SearchDone = value || sender.SearchDone;
+            }
         }
         public bool SameSearch { get; set; }
     }

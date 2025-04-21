@@ -483,8 +483,10 @@
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.costTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.costTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.costTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -496,7 +498,7 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.costTable.DefaultCellStyle = dataGridViewCellStyle3;
@@ -505,20 +507,19 @@
             this.costTable.Location = new System.Drawing.Point(5, 46);
             this.costTable.MultiSelect = false;
             this.costTable.Name = "costTable";
-            this.costTable.ReadOnly = true;
             this.costTable.RowHeadersVisible = false;
-            this.costTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.costTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.costTable.Size = new System.Drawing.Size(298, 225);
             this.costTable.StandardTab = true;
             this.costTable.TabIndex = 1;
             this.costTable.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.costTable_CellContentDoubleClick);
+            this.costTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.costTable_CellMouseDoubleClick);
             this.costTable.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.costTable_RowsAdded);
             // 
             // col_Id
             // 
             this.col_Id.HeaderText = "ID";
             this.col_Id.Name = "col_Id";
-            this.col_Id.ReadOnly = true;
             this.col_Id.Visible = false;
             // 
             // col_Supplier
@@ -534,7 +535,6 @@
             this.col_Value.DefaultCellStyle = dataGridViewCellStyle2;
             this.col_Value.HeaderText = "VALUE";
             this.col_Value.Name = "col_Value";
-            this.col_Value.ReadOnly = true;
             this.col_Value.ToolTipText = "Edit Cost";
             // 
             // button3

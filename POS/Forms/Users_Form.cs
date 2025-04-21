@@ -177,6 +177,8 @@ namespace POS.Forms
 
             bool hasResult = await LoadDataAsync();
 
+            e.SearchFound = hasResult;
+
             if (!hasResult)
                 MessageBox.Show("No Entries Found!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -201,16 +203,11 @@ namespace POS.Forms
             addedRow.DefaultCellStyle.SelectionForeColor = isAuthorized ? Color.Blue : Color.Gray;
         }
 
-        private async void button3_Click(object sender, EventArgs e)
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
         {
             keyword = string.Empty;
 
             await LoadDataAsync();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 

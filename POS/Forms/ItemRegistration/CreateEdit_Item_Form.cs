@@ -3,11 +3,13 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace POS.Forms.ItemRegistration
@@ -200,10 +202,8 @@ namespace POS.Forms.ItemRegistration
             panel16.Visible = value;
         }
 
-        private async void Create_Item_Form_Load(object sender, EventArgs e)
+        public async Task InitializeData()
         {
-            //this.Enabled = false;
-
             try
             {
                 using (var context = POSEntities.Create())
@@ -227,9 +227,8 @@ namespace POS.Forms.ItemRegistration
                     if (!_id.IsEmpty())
                         Item = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
                 }
-
             }
-            catch (Exception ex)
+            catch (EntityException ex)
             {
                 if (MessageBox.Show(ex.Message, "Connection not established", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
                 {
@@ -239,7 +238,11 @@ namespace POS.Forms.ItemRegistration
                 else
                     this.Close();
             }
-            //this.Enabled = true;
+        }
+
+        private void Create_Item_Form_Load(object sender, EventArgs e)
+        {
+
         }
 
         private async void AddCost_Click(object sender, EventArgs e)
@@ -421,19 +424,7 @@ namespace POS.Forms.ItemRegistration
 
         private void costTable_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var table = sender as DataGridView;
-            if (e.RowIndex == -1 || e.RowIndex != col_Supplier.Index)
-                return;
 
-            var cost = table.SelectedRows[0].DataBoundItem as Cost_ViewModel;
-
-            using (var changeSupplier = new ChangeCostSupplier(cost.Id))
-            {
-                if (changeSupplier.RequireAdminConfirmationBeforeViewing() == DialogResult.OK)
-                {
-                    cost.Supplier = changeSupplier.Tag as Supplier;
-                }
-            }
         }
 
         private void pictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -455,6 +446,24 @@ namespace POS.Forms.ItemRegistration
             using (var openCamera = new CaptureImage())
             {
                 openCamera.ShowDialog();
+            }
+        }
+
+        private void costTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var table = sender as DataGridView;
+
+            if (e.RowIndex == -1 || e.ColumnIndex != col_Supplier.Index)
+                return;
+
+            var cost = table.SelectedCells[0].OwningRow.DataBoundItem as Cost_ViewModel;
+
+            using (var changeSupplier = new ChangeCostSupplier(cost.Id))
+            {
+                if (changeSupplier.RequireAdminConfirmationBeforeViewing() == DialogResult.OK)
+                {
+                    cost.Supplier = changeSupplier.Tag as Supplier;
+                }
             }
         }
     }
