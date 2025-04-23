@@ -327,9 +327,12 @@ namespace POS.UserControls
                 return false;
             }
 
-            using (var editForm = new CreateEdit_Item_Form(SelectedId))
+            using (var editForm = new CreateEdit_Item_Form())
             {
-                await editForm.InitializeData();
+                if (!await editForm.InitializeData(SelectedId))
+                {
+                    return false;
+                }
 
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {

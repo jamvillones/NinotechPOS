@@ -47,17 +47,21 @@ namespace POS
             return selectedRows.Select(x => (T)x.Cells[columnIndex].Value);
         }
 
-        public static void DecimalOnlyEditting(this DataGridView table, int columIndex)
+        public static void DecimalOnlyEditting(this DataGridView table, int columnIndex)
         {
+
             table.EditingControlShowing += (sender, e) =>
             {
-
                 var dgtTable = sender as DataGridView;
+
+                if (table.SelectedCells[0].ColumnIndex != columnIndex)
+                    return;
+
                 if (e.Control is TextBox t)
                 {
                     t.Validating += T_Validating;
                     t.TextChanged += T_TextChanged;
-                    t.Text = dgtTable[columIndex, dgtTable.SelectedCells[0].RowIndex].Value.ToString();
+                    t.Text = dgtTable[columnIndex, dgtTable.SelectedCells[0].RowIndex].Value.ToString();
                 }
             };
         }
@@ -82,6 +86,7 @@ namespace POS
         public static void Table_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             var table = sender as DataGridView;
+
             if (e.Control is TextBox t)
             {
                 t.Validating += T_Validating;

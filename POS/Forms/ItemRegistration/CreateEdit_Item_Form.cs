@@ -1,5 +1,6 @@
 ﻿using POS.Misc;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ using System.Data.Entity.Validation;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,77 +19,64 @@ namespace POS.Forms.ItemRegistration
 
     public partial class CreateEdit_Item_Form : Form
     {
-        public CreateEdit_Item_Form(string id = "")
+        public CreateEdit_Item_Form()
         {
             InitializeComponent();
 
-            costTable.AutoGenerateColumns = false;
-
-            col_Id.DataPropertyName = nameof(Cost_ViewModel.Id);
-            col_Supplier.DataPropertyName = nameof(Cost_ViewModel.Supplier);
-            col_Value.DataPropertyName = nameof(Cost_ViewModel.Cost);
-
-            costTable.DataSource = Costs;
-            col_Id.Visible = false;
-
-            costTable.DecimalOnlyEditting(col_Value.Index);
-            _type.SelectedIndex = 0;
-
-            _id = id;
+            SetCostBindings();
 
             bool canEditItem = UserManager.instance.CurrentLogin.CanEditItem;
-            saveBtn.Enabled = add_cost_panel.Enabled = costTable.AllowUserToDeleteRows = canEditItem;
+
+            buttonsHolder.Visible = canEditItem;
             costTable.ReadOnly = !canEditItem;
+
+            addCostButton.Visible =
+            autoGenBarcodeButton.Visible =
+            chooseImageButton.Visible =
+            removeImageButton.Visible = canEditItem;
         }
 
-        string _id = string.Empty;
-
-
-
-        readonly BindingList<Cost_ViewModel> Costs = new BindingList<Cost_ViewModel>();
-
-        private Item Item
+        private void SetCostBindings()
         {
-            get => new Item()
+            costTable.AutoGenerateColumns = false;
+            col_Supplier.DataPropertyName = nameof(Product.Supplier);
+            col_Value.DataPropertyName = nameof(Product.Cost);
+            costTable.DataSource = Costs;
+            costTable.DecimalOnlyEditting(col_Value.Index);
+        }
+
+        readonly BindingList<Product> Costs = new BindingList<Product>();
+
+        private Item _item;
+        public Item Item
+        {
+            get => _item;
+
+            private set
             {
-                Id = _id == string.Empty ? Guid.NewGuid().ToString("N") : _id,
-                Barcode = _barcode.Text.NullIfEmpty(),
-                Name = _name.Text.NullIfEmpty(),
-                SellingPrice = _price.Value,
-                CriticalQuantity = (int?)_criticalQty.Value,
-                Type = _type.SelectedItem.ToString(),
-                IsSerialRequired = checkBox1.Checked,
-                Department = string.IsNullOrWhiteSpace(departmentOption.Text) ? null : departmentOption.Text.Trim(),
-                Details = _description.Text.NullIfEmpty(),
-                Tags = string.IsNullOrWhiteSpace(_tags.Text) ? null : _tags.Text.Trim(',', ' '),
-                Products = Costs.Select(c => c.ToProduct).ToList(),
-                SampleImage = pictureBox.Image.ToByteArray()
-            };
-            set
-            {
-                this.Text = "Edit Item - " + value.Name;
-                _id = value.Id;
+                _item = value;
+
+                this.Text = $"Item ID: {value.Id.ToUpper()}";
+
                 _barcode.Text = value.Barcode;
                 _name.Text = value.Name;
-                _price.Value = value.SellingPrice;
+                _price.Text = value.SellingPrice.ToString("F2");
                 _criticalQty.Value = value.CriticalQuantity ?? 0;
                 _description.Text = value.Details;
                 _tags.Text = value.Tags;
-                _type.SelectedItem = value.Type;
-                pictureBox.Image = value.SampleImage.ToImage();
 
-                checkBox1.Checked = value.IsSerialRequired;
-                checkBox1.Enabled = false;
+                pictureBox.Image = value.SampleImage.ToImage();
 
                 departmentOption.Text = value.Department;
 
-                if (value.Type != ItemType.Quantifiable.ToString())
+                foreach (var p in value.Products)
+                    Costs.Add(p);
+
+                if (!value.IsEnumerable)
                     ToggleCostGroup();
 
-                _type.Enabled = _id == string.Empty;
-
-                foreach (var p in value.Products)
-                    Costs.Add(new Cost_ViewModel(p));
+                label10.Text = $"Type: {value.Type}";
+                label9.Visible = value.IsSerialRequired;
             }
         }
 
@@ -99,233 +88,243 @@ namespace POS.Forms.ItemRegistration
         private async void SaveBtn_Click(object sender, EventArgs e)
         {
 
-            if (Costs.Count <= 0 && Item.IsEnumerable)
-            {
-                if (MessageBox.Show(
-                    "Items without Cost cannot be restocked. Are you sure you intend to leave it empty?",
-                    "Cost Is Empty",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Warning) == DialogResult.Cancel)
-                    return;
-            }
+            //if (Costs.Count <= 0 && Item.IsEnumerable)
+            //{
+            //    if (MessageBox.Show(
+            //        "Items without Cost cannot be restocked. Are you sure you intend to leave it empty?",
+            //        "Cost Is Empty",
+            //        MessageBoxButtons.OKCancel,
+            //        MessageBoxIcon.Warning) == DialogResult.Cancel)
+            //        return;
+            //}
 
-            try
-            {
-                using (var context = POSEntities.Create())
-                {
-                    var temp = Item;
+            //try
+            //{
+            //    using (var context = POSEntities.Create())
+            //    {
+            //        var temp = Item;
 
-                    if (_id == string.Empty)
-                    {
-                        if (!temp.IsEnumerable)
-                        {
-                            var newProduct = new Product() { Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none") };
-                            temp.Products.Add(newProduct);
-                            context.InventoryItems.Add(new InventoryItem() { Product = newProduct });
-                        }
+            //        if (_id == string.Empty)
+            //        {
+            //            if (!temp.IsEnumerable)
+            //            {
+            //                var newProduct = new Product() { Supplier = await context.Suppliers.FirstOrDefaultAsync(x => x.Name == "none") };
+            //                temp.Products.Add(newProduct);
+            //                context.InventoryItems.Add(new InventoryItem() { Product = newProduct });
+            //            }
 
-                        var toSave = context.Items.Add(temp);
+            //            var toSave = context.Items.Add(temp);
 
 
-                        Tag = toSave;
-                    }
+            //            Tag = toSave;
+            //        }
 
-                    else
-                    {
-                        var toSave = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
-                        toSave.Name = temp.Name;
-                        toSave.Barcode = temp.Barcode;
-                        toSave.SellingPrice = temp.SellingPrice;
-                        toSave.CriticalQuantity = temp.CriticalQuantity;
-                        toSave.Department = temp.Department;
-                        toSave.Details = temp.Details;
-                        toSave.Type = temp.Type;
-                        toSave.IsSerialRequired = temp.IsSerialRequired;
-                        toSave.Tags = temp.Tags;
+            //        else
+            //        {
+            //            var toSave = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
+            //            toSave.Name = temp.Name;
+            //            toSave.Barcode = temp.Barcode;
+            //            toSave.SellingPrice = temp.SellingPrice;
+            //            toSave.CriticalQuantity = temp.CriticalQuantity;
+            //            toSave.Department = temp.Department;
+            //            toSave.Details = temp.Details;
+            //            toSave.Type = temp.Type;
+            //            toSave.IsSerialRequired = temp.IsSerialRequired;
+            //            toSave.Tags = temp.Tags;
 
-                        if (IsImageChanged)
-                            toSave.SampleImage = temp.SampleImage;
+            //            if (IsImageChanged)
+            //                toSave.SampleImage = temp.SampleImage;
 
-                        if (toSave.IsEnumerable)
-                        {
-                            //delete removed items
-                            var toRemove = await context.Products.Where(x => x.ItemId == _id).ToListAsync();
-                            foreach (var entry in toRemove)
-                                if (!temp.Products.Any(t => t.Id == entry.Id))
-                                    context.Products.Remove(entry);
+            //            if (toSave.IsEnumerable)
+            //            {
+            //                //delete removed items
+            //                var toRemove = await context.Products.Where(x => x.ItemId == _id).ToListAsync();
+            //                foreach (var entry in toRemove)
+            //                    if (!temp.Products.Any(t => t.Id == entry.Id))
+            //                        context.Products.Remove(entry);
 
-                            ///add those with 0 id and edit otherwise
-                            foreach (var cost in temp.Products)
-                            {
-                                if (cost.Id == 0)
-                                    toSave.Products.Add(cost);
-                                else
-                                {
-                                    var product = await context.Products.FirstOrDefaultAsync(x => x.Id == cost.Id);
-                                    product.Cost = cost.Cost;
-                                }
-                            }
-                        }
+            //                ///add those with 0 id and edit otherwise
+            //                foreach (var cost in temp.Products)
+            //                {
+            //                    if (cost.Id == 0)
+            //                        toSave.Products.Add(cost);
+            //                    else
+            //                    {
+            //                        var product = await context.Products.FirstOrDefaultAsync(x => x.Id == cost.Id);
+            //                        product.Cost = cost.Cost;
+            //                    }
+            //                }
+            //            }
 
-                        Tag = toSave;
-                    }
-                    await context.SaveChangesAsync();
-                }
-            }
-            catch (DbUpdateException)
-            {
-                MessageBox.Show(
-                    "Barcode or Name is already taken.",
-                    "Save failed",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                    ); return;
-            }
-            catch (DbEntityValidationException)
-            {
-                MessageBox.Show("Item Name cannot be empty!", "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            //            Tag = toSave;
+            //        }
+            //        await context.SaveChangesAsync();
+            //    }
+            //}
+            //catch (DbUpdateException)
+            //{
+            //    MessageBox.Show(
+            //        "Barcode or Name is already taken.",
+            //        "Save failed",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Error
+            //        ); return;
+            //}
+            //catch (DbEntityValidationException)
+            //{
+            //    MessageBox.Show("Item Name cannot be empty!", "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Save failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
-            MessageBox.Show("Save successful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            DialogResult = DialogResult.OK;
+            //MessageBox.Show("Save successful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //DialogResult = DialogResult.OK;
         }
 
         void ToggleCostGroup(bool value = false)
         {
-            label8.Visible = value;
-            panel16.Visible = value;
+            label6.Visible = value;
+            costTable.Visible = value;
+            addCostButton.Visible = value;
         }
 
-        public async Task InitializeData()
+        public BindingList<Supplier> Suppliers { get; private set; }
+
+        POSEntities context = null;
+
+        public async Task<bool> InitializeData(string id)
         {
             try
             {
-                using (var context = POSEntities.Create())
-                {
+                context = POSEntities.Create();
 
-                    var suppliers = await context.Suppliers
-                        .OrderBy(s => s.Name)
-                        .ToArrayAsync();
+                SetSupplierOptions(await context.Suppliers.OrderBy(s => s.Name).ToListAsync());
+                SetDepartmentOptions(await context.Items.GetDepartments().ToArrayAsync());
 
-                    _supplierOption.Items.AddRange(suppliers);
+                Item = await context.Items.Include(i => i.Products).FirstOrDefaultAsync(x => x.Id == id);
 
-                    var departments = await context.Items
-                        .GetDepartments()
-                        .ToArrayAsync();
-
-                    departmentOption.Items.AddRange(departments);
-                    departmentOption.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                    departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                    departmentOption.AutoCompleteCustomSource.AddRange(departments);
-
-                    if (!_id.IsEmpty())
-                        Item = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
-                }
+                return true;
+            }
+            catch (UnautorizedLoginException)
+            {
+                this.ShowLoginUnauthorizedMessage();
+                return false;
             }
             catch (EntityException ex)
             {
                 if (MessageBox.Show(ex.Message, "Connection not established", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error) == DialogResult.Retry)
                 {
-                    Create_Item_Form_Load(null, EventArgs.Empty);
-                    return;
+                    return await InitializeData(id);
                 }
                 else
-                    this.Close();
+                    return false;
             }
         }
 
-        private void Create_Item_Form_Load(object sender, EventArgs e)
+        private void SetSupplierOptions(List<Supplier> suppliers)
         {
+            Suppliers = new BindingList<Supplier>(suppliers);
+            var comboBoxColumn = (DataGridViewComboBoxColumn)costTable.Columns[nameof(col_Supplier)];
 
+            comboBoxColumn.DisplayMember = nameof(Supplier.Name);
+            comboBoxColumn.ValueMember = nameof(Supplier.Self);
+
+            comboBoxColumn.DataSource = Suppliers;
         }
 
-        private async void AddCost_Click(object sender, EventArgs e)
+        private void SetDepartmentOptions(string[] departments)
         {
-            if (_supplierOption.Text.IsEmpty()) return;
-
-            if (_supplierOption.SelectedItem == null)
-            {
-
-                if (MessageBox.Show(
-                    "Supplier might not be registered yet. Do want to add this and continue?",
-                    "",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Question
-                    ) == DialogResult.Cancel) return;
-
-                using (var context = POSEntities.Create())
-                {
-
-                    var newSupplier = context.Suppliers.Add(new Supplier() { Name = _supplierOption.Text.Trim() });
-                    await context.SaveChangesAsync();
-
-                    _supplierOption.Items.Add(newSupplier);
-                    _supplierOption.SelectedItem = newSupplier;
-                }
-            }
-
-            var selectedCost = Costs.FirstOrDefault(c => c.Supplier.Name.Equals(_supplierOption.Text, StringComparison.OrdinalIgnoreCase));
-
-            if (selectedCost != null)
-            {
-                // get the index of the duplicate cost
-                var index = costTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells[col_Supplier.Index].Value.ToString().Equals(_supplierOption.Text, StringComparison.OrdinalIgnoreCase)).Index;
-
-                // select and focus to the row
-                costTable.Rows[index].Selected = true;
-                costTable.FirstDisplayedScrollingRowIndex = index;
-
-                MessageBox.Show("Supplier is already added.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-
-                // for user convenience
-                _supplierOption.SelectAll();
-                return;
-            }
-
-            Costs.Add(new Cost_ViewModel()
-            {
-                Supplier = _supplierOption.SelectedItem as Supplier,
-                Cost = 0
-            });
-
-            _supplierOption.SelectedItem = null;
+            departmentOption.Items.AddRange(departments);
+            departmentOption.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            departmentOption.AutoCompleteCustomSource.AddRange(departments);
         }
+
+        //private async void AddCost_Click(object sender, EventArgs e)
+        //{
+        //    if (_supplierOption.Text.IsEmpty()) return;
+
+        //    if (_supplierOption.SelectedItem == null)
+        //    {
+
+        //        if (MessageBox.Show(
+        //            "Supplier might not be registered yet. Do want to add this and continue?",
+        //            "",
+        //            MessageBoxButtons.OKCancel,
+        //            MessageBoxIcon.Question
+        //            ) == DialogResult.Cancel) return;
+
+        //        using (var context = POSEntities.Create())
+        //        {
+
+        //            var newSupplier = context.Suppliers.Add(new Supplier() { Name = _supplierOption.Text.Trim() });
+        //            await context.SaveChangesAsync();
+
+        //            _supplierOption.Items.Add(newSupplier);
+        //            _supplierOption.SelectedItem = newSupplier;
+        //        }
+        //    }
+
+        //    var selectedCost = Costs.FirstOrDefault(c => c.Supplier.Name.Equals(_supplierOption.Text, StringComparison.OrdinalIgnoreCase));
+
+        //    if (selectedCost != null)
+        //    {
+        //        // get the index of the duplicate cost
+        //        var index = costTable.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells[col_Supplier.Index].Value.ToString().Equals(_supplierOption.Text, StringComparison.OrdinalIgnoreCase)).Index;
+
+        //        // select and focus to the row
+        //        costTable.Rows[index].Selected = true;
+        //        costTable.FirstDisplayedScrollingRowIndex = index;
+
+        //        MessageBox.Show("Supplier is already added.", "", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+        //        // for user convenience
+        //        _supplierOption.SelectAll();
+        //        return;
+        //    }
+
+        //    Costs.Add(new Cost_ViewModel()
+        //    {
+        //        Supplier = _supplierOption.SelectedItem as Supplier,
+        //        Cost = 0
+        //    });
+
+        //    _supplierOption.SelectedItem = null;
+        //}
 
         private void costTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            var table = sender as DataGridView;
-            var row = table.Rows[e.RowIndex];
-            int id = (int)table[col_Id.Index, e.RowIndex].Value;
-            row.DefaultCellStyle.ForeColor = id == 0 ? Color.Black : Color.Blue;
+            //var table = sender as DataGridView;
+            //var row = table.Rows[e.RowIndex];
+            //int id = (int)table[col_Id.Index, e.RowIndex].Value;
+            //row.DefaultCellStyle.ForeColor = id == 0 ? Color.Black : Color.Blue;
 
-            row.Selected = true;
-            costTable.FirstDisplayedScrollingRowIndex = e.RowIndex;
+            //row.Selected = true;
+            //costTable.FirstDisplayedScrollingRowIndex = e.RowIndex;
         }
 
-        private void _supplierOption_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter && !string.IsNullOrWhiteSpace(_supplierOption.Text))
-            {
-                button4.PerformClick();
-            }
-        }
+        //private void _supplierOption_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter && !string.IsNullOrWhiteSpace(_supplierOption.Text))
+        //    {
+        //        button4.PerformClick();
+        //    }
+        //}
 
-        private void _type_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            bool isEnumerable = _type.Text == ItemType.Quantifiable.ToString();
-            if (!isEnumerable)
-                checkBox1.Checked = false;
+        //private void _type_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    bool isEnumerable = _type.Text == ItemType.Quantifiable.ToString();
+        //    if (!isEnumerable)
+        //        checkBox1.Checked = false;
 
-            checkBox1.Enabled = isEnumerable;
-            ToggleCostGroup(isEnumerable);
-            _criticalQty.Enabled = isEnumerable;
-        }
+        //    checkBox1.Enabled = isEnumerable;
+        //    ToggleCostGroup(isEnumerable);
+        //    _criticalQty.Enabled = isEnumerable;
+        //}
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -362,54 +361,50 @@ namespace POS.Forms.ItemRegistration
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
-            if (_id == string.Empty)
-            {
-                //adding
-                _name.Text = string.Empty;
-                _barcode.Text = string.Empty;
-                _type.SelectedIndex = 0;
-                checkBox1.Checked = false;
-                _price.Value = 0;
-                _criticalQty.Value = 0;
-                _tags.Text = string.Empty;
-                _description.Text = string.Empty;
+            //if (_id == string.Empty)
+            //{
+            //    //adding
+            //    _name.Text = string.Empty;
+            //    _barcode.Text = string.Empty;
+            //    //_type.SelectedIndex = 0;
+            //    //checkBox1.Checked = false;
+            //    _price.Value = 0;
+            //    _criticalQty.Value = 0;
+            //    _tags.Text = string.Empty;
+            //    _description.Text = string.Empty;
 
-                Costs.Clear();
-                pictureBox.Image = null;
+            //    Costs.Clear();
+            //    pictureBox.Image = null;
 
-                return;
-            }
-            ///editing
-            using (var context = POSEntities.Create())
-            {
-                var currentItem = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
+            //    return;
+            //}
+            /////editing
+            //using (var context = POSEntities.Create())
+            //{
+            //    var currentItem = await context.Items.FirstOrDefaultAsync(x => x.Id == _id);
 
-                if (currentItem != null)
-                {
+            //    if (currentItem != null)
+            //    {
+            //        _id = currentItem.Id;
+            //        _barcode.Text = currentItem.Barcode;
+            //        _name.Text = currentItem.Name;
+            //        _price.Value = currentItem.SellingPrice;
+            //        _criticalQty.Value = currentItem.CriticalQuantity ?? 0;
+            //        _description.Text = currentItem.Details;
+            //        _tags.Text = currentItem.Tags;
+            //        pictureBox.Image = currentItem.SampleImage.ToImage();
 
-                    _id = currentItem.Id;
-                    _barcode.Text = currentItem.Barcode;
-                    _name.Text = currentItem.Name;
-                    _price.Value = currentItem.SellingPrice;
-                    _criticalQty.Value = currentItem.CriticalQuantity ?? 0;
-                    _description.Text = currentItem.Details;
-                    _tags.Text = currentItem.Tags;
-                    _type.SelectedItem = currentItem.Type;
-                    pictureBox.Image = currentItem.SampleImage.ToImage();
-
-                    checkBox1.Checked = currentItem.IsSerialRequired;
-
-                    Costs.Clear();
-                    foreach (var p in currentItem.Products)
-                        Costs.Add(new Cost_ViewModel(p));
-                }
-            }
+            //        Costs.Clear();
+            //        foreach (var p in currentItem.Products)
+            //            Costs.Add(new Cost_ViewModel(p));
+            //    }
+            //}
         }
 
         private void CreateEdit_Item_Form_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.S)
-                saveBtn.PerformClick();
+                saveButton.PerformClick();
 
             else if (e.KeyCode == Keys.Escape)
                 this.Close();
@@ -420,11 +415,6 @@ namespace POS.Forms.ItemRegistration
             string guid = Guid.NewGuid().ToString("N").Substring(0, 12); // Shorten GUID
 
             _barcode.Text = guid.Base36Encode();
-        }
-
-        private void costTable_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void pictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -451,18 +441,84 @@ namespace POS.Forms.ItemRegistration
 
         private void costTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            var table = sender as DataGridView;
+            //var table = sender as DataGridView;
 
-            if (e.RowIndex == -1 || e.ColumnIndex != col_Supplier.Index)
+            //if (e.RowIndex == -1 || e.ColumnIndex != col_Supplier.Index)
+            //    return;
+
+            //var cost = table.SelectedCells[0].OwningRow.DataBoundItem as Product;
+
+            //using (var changeSupplier = new ChangeCostSupplier(cost.Id))
+            //{
+            //    if (changeSupplier.RequireAdminConfirmationBeforeViewing() == DialogResult.OK)
+            //    {
+            //        cost.Supplier = changeSupplier.Tag as Supplier;
+            //    }
+            //}
+        }
+
+        private void CreateEdit_Item_Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            context?.Dispose();
+        }
+
+        private void _price_Validating(object sender, CancelEventArgs e)
+        {
+            var textbox = sender as TextBox;
+
+            string text = textbox.Text.Trim();
+            if (decimal.TryParse(text, out decimal newPrice))
+            {
+                textbox.Text = newPrice.ToString("F2");
+                return;
+            }
+
+            try
+            {
+                var result = new DataTable().Compute(text, null);
+                if (decimal.TryParse(result.ToString(), out decimal computedPrice))
+                    textbox.Text = computedPrice.ToString("F2");
+            }
+            catch
+            {
+                MessageBox.Show("Expression cannot be parsed!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
+        }
+
+        private void costTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
                 return;
 
-            var cost = table.SelectedCells[0].OwningRow.DataBoundItem as Cost_ViewModel;
-
-            using (var changeSupplier = new ChangeCostSupplier(cost.Id))
+            //I supposed your button column is at index 0
+            if (e.ColumnIndex == Column1.Index)
             {
-                if (changeSupplier.RequireAdminConfirmationBeforeViewing() == DialogResult.OK)
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                var image = Properties.Resources.copy_15px;
+                var w = image.Width;
+                var h = image.Height;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                e.Graphics.DrawImage(image, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+        }
+
+        private void costTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+            if (e.ColumnIndex == Column1.Index)
+            {
+                try
                 {
-                    cost.Supplier = changeSupplier.Tag as Supplier;
+                    Clipboard.SetText(((Product)costTable[Column1.Index, e.RowIndex].OwningRow.DataBoundItem).Cost.ToString());
+                }
+                catch (Exception)
+                {
+
                 }
             }
         }

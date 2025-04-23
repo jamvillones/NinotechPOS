@@ -68,15 +68,15 @@ namespace POS.Forms
                     invTable.Rows[index].Selected = true;
                 }
 
-                this.Text = $"{this.Text} - {inventoryItems.First().Product.Item.Name} [{inventoryItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum().ToString("N0")} Unit/s]";
+                this.Text = $"{this.Text} - {inventoryItems.First().Product.Item.Name} [{inventoryItems.Select(i => i.Quantity).DefaultIfEmpty(0).Sum():N0} Unit/s]";
             }
         }
 
-        private void ViewItemDetails_Click(object sender, EventArgs e)
+        private async void ViewItemDetails_Click(object sender, EventArgs e)
         {
-            using (var editForm = new CreateEdit_Item_Form(_id))
+            using (var editForm = new CreateEdit_Item_Form())
             {
-
+                await editForm.InitializeData(_id);
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     var x = editForm.Tag as Item;
@@ -86,7 +86,7 @@ namespace POS.Forms
 
         private void inventoryTable_SelectionChanged(object sender, EventArgs e)
         {
-            label1.Text = $"Selected Items: {invTable.SelectedRows.Count.ToString("N0")}";
+            label1.Text = $"Selected Items: {invTable.SelectedRows.Count:N0}";
         }
     }
 }

@@ -46,18 +46,20 @@ namespace POS
                 var loginId = UserManager.instance.CurrentLogin.Id;
                 var login = context.Logins.FirstOrDefault(x => x.Id == loginId);
 
-                if (!login.CanEditProduct)                
+                if (!login.CanEditProduct)
                     throw new UnautorizedLoginException();
-                
+
             }
 
             return context;
         }
     }
 
-    partial class Product
+    public partial class Product
     {
         public override string ToString() => $"{Item.Name} - {Supplier?.Name ?? "*No Supplier"}";
+
+        //public Product Self => this;
     }
 
     partial class Sale
@@ -85,6 +87,8 @@ namespace POS
     partial class Supplier
     {
         public override string ToString() => Name + (string.IsNullOrWhiteSpace(ContactDetails) ? "" : " - " + ContactDetails);
+
+        public Supplier Self => this;
     }
 
     partial class Customer
