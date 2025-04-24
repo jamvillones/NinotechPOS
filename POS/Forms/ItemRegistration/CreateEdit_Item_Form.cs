@@ -45,7 +45,7 @@ namespace POS.Forms.ItemRegistration
             costTable.DecimalOnlyEditting(col_Value.Index);
         }
 
-        readonly BindingList<Product> Costs = new BindingList<Product>();
+        BindingList<Product> Costs { get; } = new BindingList<Product>();
 
         private Item _item;
         public Item Item
@@ -187,7 +187,7 @@ namespace POS.Forms.ItemRegistration
 
         void ToggleCostGroup(bool value = false)
         {
-            label6.Visible = value;
+            panel16.Visible = value;
             costTable.Visible = value;
             addCostButton.Visible = value;
         }
@@ -298,10 +298,20 @@ namespace POS.Forms.ItemRegistration
 
         private void costTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            //var table = sender as DataGridView;
-            //var row = table.Rows[e.RowIndex];
-            //int id = (int)table[col_Id.Index, e.RowIndex].Value;
-            //row.DefaultCellStyle.ForeColor = id == 0 ? Color.Black : Color.Blue;
+
+            var row = costTable.Rows[e.RowIndex];
+            int id = ((Product)row.DataBoundItem).Id;
+
+            if (id == 0)
+            {
+                row.DefaultCellStyle.BackColor = Color.IndianRed;
+                row.DefaultCellStyle.SelectionBackColor = Color.IndianRed;
+            }
+
+            //var backColor = id == 0 ? Color.Red : Color.Blue;
+
+            //row.DefaultCellStyle.ForeColor = backColor;
+            //row.DefaultCellStyle.SelectionForeColor = backColor;
 
             //row.Selected = true;
             //costTable.FirstDisplayedScrollingRowIndex = e.RowIndex;
@@ -466,32 +476,16 @@ namespace POS.Forms.ItemRegistration
         {
             var textbox = sender as TextBox;
 
-            string text = textbox.Text.Trim();
-            if (decimal.TryParse(text, out decimal newPrice))
-            {
-                textbox.Text = newPrice.ToString("F2");
-                return;
-            }
-
-            try
-            {
-                var result = new DataTable().Compute(text, null);
-                if (decimal.TryParse(result.ToString(), out decimal computedPrice))
-                    textbox.Text = computedPrice.ToString("F2");
-            }
-            catch
-            {
-                MessageBox.Show("Expression cannot be parsed!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
-            }
+            e.Cancel = textbox.ComputeExpression();
         }
+
+
 
         private void costTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0)
                 return;
 
-            //I supposed your button column is at index 0
             if (e.ColumnIndex == Column1.Index)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
@@ -516,10 +510,27 @@ namespace POS.Forms.ItemRegistration
                 {
                     Clipboard.SetText(((Product)costTable[Column1.Index, e.RowIndex].OwningRow.DataBoundItem).Cost.ToString());
                 }
-                catch (Exception)
+                catch
                 {
 
                 }
+            }
+        }
+
+        private void _price_KeyDown(object sender, KeyEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (e.KeyCode == Keys.Enter)
+
+            {
+                var textbox = sender as TextBox;
+
+                if (textbox.ComputeExpression())
+                {
+
+                }
+
+                e.Handled = true;
             }
         }
     }
@@ -527,8 +538,8 @@ namespace POS.Forms.ItemRegistration
     public static class ItemDepartmentExtensions
     {
         public static IQueryable<string> GetDepartments(this IQueryable<Item> items)
-        {
-            return items.Where(i => i.Department != null).GroupBy(s => s.Department).Select(s => s.Key.ToString());
-        }
+            => items.Where(i => i.Department != null)
+                    .GroupBy(s => s.Department)
+                    .Select(s => s.Key.ToString());
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reflection;
@@ -45,6 +47,37 @@ namespace POS
         {
             selectedRows = table.SelectedRows.Cast<DataGridViewRow>();
             return selectedRows.Select(x => (T)x.Cells[columnIndex].Value);
+        }
+
+        public static bool ComputeExpression(this TextBox textbox, decimal min = 0, decimal max = 999999999)
+        {
+            string text = textbox.Text.Trim();
+
+            if (text.IsEmpty())
+            {
+                textbox.Text = "0.00";
+                return false;
+            }
+            if (decimal.TryParse(text, out decimal newPrice))
+            {
+                textbox.Text = newPrice.Clamp(min, max).ToString("F2");
+                return false;
+            }
+
+            try
+            {
+                var result = new DataTable().Compute(text, null);
+                if (decimal.TryParse(result.ToString(), out decimal computedPrice))
+                    textbox.Text = computedPrice.Clamp(min, max).ToString("F2");
+            }
+            catch
+            {
+                MessageBox.Show("Expression cannot be parsed!", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                textbox.Undo();
+                textbox.ClearUndo();
+                return true;
+            }
+            return false;
         }
 
         public static void DecimalOnlyEditting(this DataGridView table, int columnIndex)

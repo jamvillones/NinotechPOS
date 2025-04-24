@@ -18,6 +18,13 @@ namespace POS.Misc
         /// <returns></returns>
         public static string NullIfEmpty(this string s) => string.IsNullOrWhiteSpace(s) || string.IsNullOrEmpty(s) || s.Equals("n/a", StringComparison.OrdinalIgnoreCase) ? null : s.Trim();
 
+        public static decimal Clamp(this decimal value, decimal min, decimal max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+
         public static string Base36Encode(this string hex)
         {
             long value = Convert.ToInt64(hex, 16);
