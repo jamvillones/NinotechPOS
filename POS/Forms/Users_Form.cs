@@ -151,14 +151,14 @@ namespace POS.Forms
                     break;
             }
 
-            button1.Enabled = button2.Enabled = HasChanges;
+            button1.Enabled = button2.Enabled = context.HasChanges();
         }
 
-        bool HasChanges => context.ChangeTracker.Entries().Any(e => e.IsEntityActuallyModified());
+        
 
         private void Users_Form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (HasChanges)
+            if (context.HasChanges())
             {
                 if (MessageBox.Show("There are pending changes.", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 {
@@ -189,7 +189,7 @@ namespace POS.Forms
 
             SetCheckBoxValues(SelectedLogin);
 
-            button1.Enabled = button2.Enabled = HasChanges;
+            button1.Enabled = button2.Enabled = context.HasChanges();
         }
 
         private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -257,46 +257,6 @@ namespace POS.Forms
         //    return true;
         //}
 
-        public static bool IsEntityActuallyModified(this DbEntityEntry entry)
-        {
-            if (entry.State != EntityState.Modified)
-                return false;
-
-            foreach (var propName in entry.OriginalValues.PropertyNames)
-            {
-                var original = entry.OriginalValues[propName];
-                var current = entry.CurrentValues[propName];
-
-                if (!object.Equals(original, current))
-                    return true;
-            }
-
-            return false;
-        }
-
-        public static void UndoAllChanges(this DbContext context)
-        {
-            foreach (var entry in context.ChangeTracker.Entries())
-            {
-                switch (entry.State)
-                {
-                    case EntityState.Modified:
-                        // Reset property values to original
-                        entry.CurrentValues.SetValues(entry.OriginalValues);
-                        entry.State = EntityState.Unchanged;
-                        break;
-
-                    case EntityState.Added:
-                        // Remove newly added entities
-                        entry.State = EntityState.Detached;
-                        break;
-
-                    case EntityState.Deleted:
-                        // Revert deletion
-                        entry.State = EntityState.Unchanged;
-                        break;
-                }
-            }
-        }
+        
     }
 }

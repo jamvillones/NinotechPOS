@@ -738,7 +738,7 @@ namespace POS.UserControls
 
             try
             {
-                await Task.Delay(1000, token);
+                await Task.Delay(2000, token);
 
                 token.ThrowIfCancellationRequested();
                 var id = dg[0, e.RowIndex].Value?.ToString();

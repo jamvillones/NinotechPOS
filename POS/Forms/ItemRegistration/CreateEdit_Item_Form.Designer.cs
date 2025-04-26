@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateEdit_Item_Form));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonsHolder = new System.Windows.Forms.FlowLayoutPanel();
@@ -47,12 +48,11 @@
             this.autoGenBarcodeButton = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
             this._departmentOption = new System.Windows.Forms.ComboBox();
-            this.panel12 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
             this.removeImageButton = new System.Windows.Forms.Button();
             this.chooseImageButton = new System.Windows.Forms.Button();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this._pictureBox = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this._name = new System.Windows.Forms.TextBox();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -79,17 +79,18 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this._price = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.sellingPriceLabel = new System.Windows.Forms.Label();
             this.panel16 = new System.Windows.Forms.Panel();
             this.panel17 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.panel12 = new System.Windows.Forms.Panel();
             this.ItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonsHolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.costTable)).BeginInit();
             this.panel11.SuspendLayout();
             this.panel15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).BeginInit();
             this.panel6.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -177,8 +178,8 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 2, 5, 2);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.MenuHighlight;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.costTable.DefaultCellStyle = dataGridViewCellStyle4;
             this.costTable.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -188,15 +189,22 @@
             this.costTable.MultiSelect = false;
             this.costTable.Name = "costTable";
             this.costTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.costTable.RowHeadersVisible = false;
-            this.costTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.costTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.costTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.costTable.Size = new System.Drawing.Size(325, 244);
             this.costTable.StandardTab = true;
             this.costTable.TabIndex = 9;
             this.costTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.costTable_CellClick);
-            this.costTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.costTable_CellMouseDoubleClick);
             this.costTable.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.costTable_CellPainting);
             this.costTable.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.costTable_RowsAdded);
+            this.costTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.costTable_KeyDown);
             // 
             // col_Supplier
             // 
@@ -258,9 +266,10 @@
             this.autoGenBarcodeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.autoGenBarcodeButton.BackColor = System.Drawing.Color.White;
             this.autoGenBarcodeButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.AppWorkspace;
+            this.autoGenBarcodeButton.FlatAppearance.BorderSize = 0;
             this.autoGenBarcodeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.autoGenBarcodeButton.Image = ((System.Drawing.Image)(resources.GetObject("autoGenBarcodeButton.Image")));
-            this.autoGenBarcodeButton.Location = new System.Drawing.Point(524, 5);
+            this.autoGenBarcodeButton.Location = new System.Drawing.Point(527, 5);
             this.autoGenBarcodeButton.Name = "autoGenBarcodeButton";
             this.autoGenBarcodeButton.Size = new System.Drawing.Size(25, 25);
             this.autoGenBarcodeButton.TabIndex = 21;
@@ -271,12 +280,10 @@
             // 
             // panel11
             // 
-            this.panel11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel11.Controls.Add(this._departmentOption);
             this.panel11.Controls.Add(this.panel12);
+            this.panel11.Controls.Add(this._departmentOption);
             this.panel11.Controls.Add(this.label8);
-            this.panel11.Location = new System.Drawing.Point(369, 107);
+            this.panel11.Location = new System.Drawing.Point(369, 109);
             this.panel11.Margin = new System.Windows.Forms.Padding(0);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(567, 40);
@@ -290,19 +297,11 @@
             this._departmentOption.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this._departmentOption.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             this._departmentOption.FormattingEnabled = true;
-            this._departmentOption.Location = new System.Drawing.Point(18, 14);
+            this._departmentOption.Location = new System.Drawing.Point(18, 13);
             this._departmentOption.Name = "_departmentOption";
             this._departmentOption.Size = new System.Drawing.Size(530, 25);
             this._departmentOption.TabIndex = 18;
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.Black;
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel12.Location = new System.Drawing.Point(0, 39);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(567, 1);
-            this.panel12.TabIndex = 1;
+            this._departmentOption.Tag = "Department";
             // 
             // label8
             // 
@@ -319,7 +318,7 @@
             // 
             this.panel15.Controls.Add(this.removeImageButton);
             this.panel15.Controls.Add(this.chooseImageButton);
-            this.panel15.Controls.Add(this.pictureBox);
+            this.panel15.Controls.Add(this._pictureBox);
             this.panel15.Location = new System.Drawing.Point(20, 34);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(325, 156);
@@ -360,20 +359,21 @@
             this.chooseImageButton.UseVisualStyleBackColor = false;
             this.chooseImageButton.Click += new System.EventHandler(this.button5_Click);
             // 
-            // pictureBox
+            // _pictureBox
             // 
-            this.pictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
-            this.pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.BackgroundImage")));
-            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(325, 156);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox.TabIndex = 14;
-            this.pictureBox.TabStop = false;
-            this.pictureBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDoubleClick);
+            this._pictureBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(244)))), ((int)(((byte)(255)))));
+            this._pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("_pictureBox.BackgroundImage")));
+            this._pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this._pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this._pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._pictureBox.Location = new System.Drawing.Point(0, 0);
+            this._pictureBox.Name = "_pictureBox";
+            this._pictureBox.Size = new System.Drawing.Size(325, 156);
+            this._pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this._pictureBox.TabIndex = 14;
+            this._pictureBox.TabStop = false;
+            this._pictureBox.Tag = "";
+            this._pictureBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDoubleClick);
             // 
             // panel6
             // 
@@ -432,7 +432,7 @@
             this.panel1.Controls.Add(this._barcode);
             this.panel1.Controls.Add(this.autoGenBarcodeButton);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(369, 68);
+            this.panel1.Location = new System.Drawing.Point(369, 69);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(567, 35);
@@ -461,6 +461,8 @@
             this._barcode.Name = "_barcode";
             this._barcode.Size = new System.Drawing.Size(500, 18);
             this._barcode.TabIndex = 0;
+            this._barcode.Tag = "Barcode";
+            this._barcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this._barcode_KeyDown);
             // 
             // label1
             // 
@@ -480,7 +482,7 @@
             this.panel5.Controls.Add(this._criticalQty);
             this.panel5.Controls.Add(this.panel8);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(369, 151);
+            this.panel5.Location = new System.Drawing.Point(369, 154);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(567, 35);
@@ -503,7 +505,9 @@
             this._criticalQty.Name = "_criticalQty";
             this._criticalQty.Size = new System.Drawing.Size(530, 21);
             this._criticalQty.TabIndex = 3;
+            this._criticalQty.Tag = "CriticalQuantity";
             this._criticalQty.ThousandsSeparator = true;
+            this._criticalQty.Leave += new System.EventHandler(this._criticalQty_Leave);
             // 
             // panel8
             // 
@@ -532,7 +536,7 @@
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Controls.Add(this._tags);
             this.panel9.Controls.Add(this.label5);
-            this.panel9.Location = new System.Drawing.Point(369, 190);
+            this.panel9.Location = new System.Drawing.Point(369, 194);
             this.panel9.Margin = new System.Windows.Forms.Padding(0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(567, 35);
@@ -560,6 +564,7 @@
             this._tags.Name = "_tags";
             this._tags.Size = new System.Drawing.Size(530, 18);
             this._tags.TabIndex = 0;
+            this._tags.Tag = "Tags";
             // 
             // label5
             // 
@@ -580,10 +585,10 @@
             this.panel13.Controls.Add(this._details);
             this.panel13.Controls.Add(this.panel14);
             this.panel13.Controls.Add(this.label7);
-            this.panel13.Location = new System.Drawing.Point(369, 233);
+            this.panel13.Location = new System.Drawing.Point(369, 263);
             this.panel13.Margin = new System.Windows.Forms.Padding(0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(567, 275);
+            this.panel13.Size = new System.Drawing.Size(567, 245);
             this.panel13.TabIndex = 6;
             // 
             // _details
@@ -597,14 +602,15 @@
             this._details.MaxLength = 300;
             this._details.Multiline = true;
             this._details.Name = "_details";
-            this._details.Size = new System.Drawing.Size(567, 251);
+            this._details.Size = new System.Drawing.Size(567, 221);
             this._details.TabIndex = 2;
+            this._details.Tag = "Notes";
             // 
             // panel14
             // 
             this.panel14.BackColor = System.Drawing.Color.Black;
             this.panel14.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel14.Location = new System.Drawing.Point(0, 274);
+            this.panel14.Location = new System.Drawing.Point(0, 244);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(567, 1);
             this.panel14.TabIndex = 3;
@@ -667,7 +673,7 @@
             // 
             this.panel3.Controls.Add(this._price);
             this.panel3.Controls.Add(this.panel4);
-            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.sellingPriceLabel);
             this.panel3.Location = new System.Drawing.Point(20, 195);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
@@ -687,6 +693,8 @@
             this._price.Name = "_price";
             this._price.Size = new System.Drawing.Size(303, 18);
             this._price.TabIndex = 0;
+            this._price.Tag = "Selling Price";
+            this._price.Enter += new System.EventHandler(this._price_Enter);
             this._price.KeyDown += new System.Windows.Forms.KeyEventHandler(this._price_KeyDown);
             this._price.Validating += new System.ComponentModel.CancelEventHandler(this._price_Validating);
             // 
@@ -699,16 +707,16 @@
             this.panel4.Size = new System.Drawing.Size(325, 1);
             this.panel4.TabIndex = 1;
             // 
-            // label2
+            // sellingPriceLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Selling Price:";
+            this.sellingPriceLabel.AutoSize = true;
+            this.sellingPriceLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.sellingPriceLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.sellingPriceLabel.Location = new System.Drawing.Point(0, 0);
+            this.sellingPriceLabel.Name = "sellingPriceLabel";
+            this.sellingPriceLabel.Size = new System.Drawing.Size(68, 13);
+            this.sellingPriceLabel.TabIndex = 0;
+            this.sellingPriceLabel.Text = "Selling Price:";
             // 
             // panel16
             // 
@@ -751,6 +759,15 @@
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.Black;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel12.Location = new System.Drawing.Point(0, 39);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(567, 1);
+            this.panel12.TabIndex = 19;
+            // 
             // ItemBindingSource
             // 
             this.ItemBindingSource.AllowNew = false;
@@ -760,7 +777,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(956, 581);
             this.Controls.Add(this.panel16);
@@ -774,11 +790,10 @@
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel13);
             this.Controls.Add(this.buttonsHolder);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(972, 620);
             this.Name = "CreateEdit_Item_Form";
             this.Padding = new System.Windows.Forms.Padding(20, 0, 20, 20);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -792,7 +807,7 @@
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.panel15.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -826,12 +841,11 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.ComboBox _departmentOption;
-        private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Button removeImageButton;
         private System.Windows.Forms.Button chooseImageButton;
-        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.PictureBox _pictureBox;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.TextBox _name;
         private System.Windows.Forms.Panel panel7;
@@ -859,7 +873,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox _price;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label sellingPriceLabel;
         private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Panel panel16;
         private System.Windows.Forms.Panel panel17;
@@ -869,5 +883,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Value;
         private System.Windows.Forms.DataGridViewButtonColumn Column1;
         private System.Windows.Forms.BindingSource ItemBindingSource;
+        private System.Windows.Forms.Panel panel12;
     }
 }

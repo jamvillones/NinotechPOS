@@ -1,12 +1,14 @@
 ﻿using Connections;
-using Newtonsoft.Json.Converters;
 using POS.Misc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 using System.Linq;
-using System.Windows.Forms;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
 
 namespace POS
 {
@@ -34,7 +36,7 @@ namespace POS
             }
         }
 
-        public bool IsEnumerable => /*Type.Equals(ItemType.Quantifiable.ToString(), StringComparison.OrdinalIgnoreCase);*/
+        public bool IsEnumerable =>
             this.Type == ItemType.Quantifiable.ToString();
     }
 
@@ -109,7 +111,7 @@ namespace POS
     }
 
 
-    public class BaseModel : IDataErrorInfo
+    public class BaseModel : IDataErrorInfo, INotifyPropertyChanged
     {
         public string this[string propertyName]
         {
@@ -142,6 +144,13 @@ namespace POS
                 return string.Empty;
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     public static class ContextManipulationMethods
@@ -162,5 +171,50 @@ namespace POS
                 context.SaveChanges();
             }
         }
+
+        public static bool HasChanges(this DbContext context) => context.ChangeTracker.Entries().Any(e => e.IsEntityActuallyModified());
+
+        public static bool IsEntityActuallyModified(this DbEntityEntry entry)
+        {
+            if (entry.State != EntityState.Modified)
+                return false;
+
+            foreach (var propName in entry.OriginalValues.PropertyNames)
+            {
+                var original = entry.OriginalValues[propName];
+                var current = entry.CurrentValues[propName];
+
+                if (!object.Equals(original, current))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public static void UndoAllChanges(this DbContext context)
+        {
+            foreach (var entry in context.ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Modified:
+                        // Reset property values to original
+                        entry.CurrentValues.SetValues(entry.OriginalValues);
+                        entry.State = EntityState.Unchanged;
+                        break;
+
+                    case EntityState.Added:
+                        // Remove newly added entities
+                        entry.State = EntityState.Detached;
+                        break;
+
+                    case EntityState.Deleted:
+                        // Revert deletion
+                        entry.State = EntityState.Unchanged;
+                        break;
+                }
+            }
+        }
     }
 }
+

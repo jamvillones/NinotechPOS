@@ -87,7 +87,7 @@ namespace POS
             {
                 var dgtTable = sender as DataGridView;
 
-                if (table.SelectedCells[0].ColumnIndex != columnIndex)
+                if (table.CurrentCell.ColumnIndex != columnIndex)
                     return;
 
                 if (e.Control is TextBox t)
@@ -170,6 +170,37 @@ namespace POS
                     }
                 }
             };
+        }
+
+
+        public static List<T> GetControls<T>(this Control parent) where T : Control
+        {
+            var controls = new List<T>();
+
+            foreach (Control c in parent.Controls)
+            {
+                if (c is T a)
+                    controls.Add(a);
+                else
+                    controls.AddRange(c.GetControls<T>());
+            }
+
+            return controls;
+        }
+
+        public static List<Control> GetControls(this Control parent, Func<Control, bool> Condition)
+        {
+            var controls = new List<Control>();
+
+            foreach (Control c in parent.Controls)
+            {
+                if (Condition(c))
+                    controls.Add(c);
+                else
+                    controls.AddRange(c.GetControls(Condition));
+            }
+
+            return controls;
         }
 
         public static void InvokeIfRequired(this Control c, Action a)

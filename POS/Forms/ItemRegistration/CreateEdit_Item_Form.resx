@@ -175,14 +175,15 @@
   </data>
   <data name="autoGenBarcodeButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAV1JREFUOE/N
-        UjtOAzEQ3RPQ0XECOABVnKWkYh20LTXtcgI4AOkQNW22Aa09CiegpUlDyx1ol3kzdrwEC20QkRjpaTwf
-        v/GMp9iJlDM6mFpX54AYco5PaS8XByZndChEUTTg+zxcjZyT8+VRPu77cuavhSjKgPA2VtUzfJuEtBjk
-        NPD9QAhNT4rkQ04kxGXWc8Zq6BOiKDsk/POWc/jFp3xfG//CeNAz3bBuTeUek09y3hWZtdkUTuTKrtWz
-        a9VOPgjbKyCYXwVLqy3RMy6G9q6UJA/kxDFsOUNp/41zXo11H2q7FmMKo+IOdM5rSYS0QDVAf9P3xtLF
-        pKZ9jTNR1ZWIwwdIPvsClUoiFI0dY6xfjRdCK6EUG92yaBl29Bnr76eVvwvxFq8CUWmpMxUtcYYvUKkk
-        Qt8MKuvS2u4y2Cg035YwB2k5pPLOjmgZiynDzYAvNNAhtRj1Kf9YiuITRiL1ohFmMNgAAAAASUVORK5C
-        YII=
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAbtJREFUOE9j
+        GBxg8385hlX/RaE8KoAN/92B+CHD+v/GUBEywfr/yUCD7gDxfyj+xrDuvw9UlkSw4X8F1JBnQLwbyt7I
+        sO0/H1QFCWDtfxmg5p9AfAnoSgGGjf/tgLie4f9/RrD85v+qYJposPF/NNRFcWA+zCAQ2Pi/Bih+HcpD
+        gITa7utAvCGhtispvrb7dWJ1rxWQf8QrNjNDpWDqP5CBajm9/zwSc9wtvYL/OUcknQRhtlVfngPl7kGN
+        QQCQIUADDsTXdGUD6f8JNd0OibXd1zxjMwv0wzL/M6z/959v+pX/bpkFAebu/v+dwhMv6xVPuQ80DGTZ
+        IqgxCIDLwOCc6mBLz6D/oh17wDHLuubbXenq5f8lJh5/x7j+zz+m9X9+AGNaE2oMAuAyEEQHZJT8N/MM
+        /i9Vv/Y/4/p/oMgBG8698Ml33dqFvVAjUAE+A0H8wMzS/1bewf/t8lvCdWKK/ptl1N4CedsjPjsPagQq
+        IGQgCMdVdfwPLaw2803J/x+QXrwpprxlDkgeagQqIMZAEE5s6NGCsqeC8aiBcACUxJpTQDSID8NxDb1q
+        YMvrujtAGCQPNWJIAAYGAE15o6gaJTCwAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="removeImageButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -206,7 +207,7 @@
         lCYkUFIGCiwAu4QYDFSLkpQHEDAwAABQFnwTDZVpxAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="pictureBox.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="_pictureBox.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABGdBTUEAALGPC/xhBQAAA/RJREFUeF7t
         nedy00AUhfPQeQBeAh6IhF5DIHQyDGXSe2/LPWMJjOfG3pXWV3etc2a+f7Es7SdtlzPHMAzDMAzDMAzD

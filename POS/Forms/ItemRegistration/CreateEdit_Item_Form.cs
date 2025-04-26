@@ -5,12 +5,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core;
-using System.Data.Entity.Infrastructure;
-using System.Data.Entity.Validation;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,34 +20,66 @@ namespace POS.Forms.ItemRegistration
         public CreateEdit_Item_Form()
         {
             InitializeComponent();
-
             SetCostBindings();
-
-            bool canEditItem = UserManager.instance.CurrentLogin.CanEditItem;
-
-            buttonsHolder.Visible = canEditItem;
-            costTable.ReadOnly = !canEditItem;
-
-            addCostButton.Visible =
-            autoGenBarcodeButton.Visible =
-            chooseImageButton.Visible =
-            removeImageButton.Visible = canEditItem;
-
-
+            SetBehaviorBasedOnUserPermission(UserManager.instance.CurrentLogin.CanEditItem);
+            Costs.ListChanged += Costs_ListChanged;
         }
 
-        private void BindFields()
+        private void SetBehaviorBasedOnUserPermission(bool canEditItem)
         {
-            ItemBindingSource = new BindingSource();
-            ItemBindingSource.DataSource = Item;
+            //buttonsHolder.Visible = canEditItem;
 
-            _name.DataBindings.Add(new Binding("Text", ItemBindingSource, nameof(POS.Item.Name), false, DataSourceUpdateMode.OnValidation));
-            _barcode.DataBindings.Add(new Binding("Text", ItemBindingSource, nameof(POS.Item.Barcode), false, DataSourceUpdateMode.OnValidation));
-            _departmentOption.DataBindings.Add(new Binding("Text", ItemBindingSource, nameof(POS.Item.Department), false, DataSourceUpdateMode.OnValidation));
-            _tags.DataBindings.Add(new Binding("Text", ItemBindingSource, nameof(POS.Item.Tags), false, DataSourceUpdateMode.OnValidation));
-            _details.DataBindings.Add(new Binding("Text", ItemBindingSource, nameof(POS.Item.Details), false, DataSourceUpdateMode.OnValidation));
-            _price.DataBindings.Add(new Binding("Text", ItemBindingSource, nameof(POS.Item.SellingPrice), false, DataSourceUpdateMode.OnValidation));
-            _criticalQty.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), ItemBindingSource, nameof(POS.Item.CriticalQuantity), false, DataSourceUpdateMode.OnValidation));
+            costTable.ReadOnly = !canEditItem;
+
+            foreach (var control in this.GetControls(c => c.Tag != null))
+                control.Validated += Control_Validated;
+
+            foreach (var control in this.GetControls<TextBox>())
+                control.ReadOnly = !canEditItem;
+
+            foreach (var btn in this.GetControls<Button>())
+                btn.Visible = canEditItem;
+
+            foreach (var combo in this.GetControls<ComboBox>())
+                combo.Enabled = canEditItem;
+
+            foreach (var num in this.GetControls<NumericUpDown>())
+            {
+                num.ReadOnly = !canEditItem;
+                num.Increment = !canEditItem ? 0 : num.Increment;
+            }
+
+            costTable.CellValidated += Control_Validated;
+        }
+
+        private void Control_Validated(object sender, EventArgs e)
+        {
+            if (context is null) return;
+
+            cancelButton.Enabled = saveButton.Enabled = context.HasChanges();
+        }
+
+        private void BindFields(Item item)
+        {
+            ItemBindingSource = new BindingSource { DataSource = item };
+
+            string propertyText = nameof(Control.Text);
+            _name.DataBindings.Add(
+                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Name), false, DataSourceUpdateMode.OnValidation));
+            _barcode.DataBindings.Add(
+                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Barcode), false, DataSourceUpdateMode.OnPropertyChanged));
+            _departmentOption.DataBindings.Add(
+                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Department), false, DataSourceUpdateMode.OnValidation));
+            _tags.DataBindings.Add(
+                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Tags), false, DataSourceUpdateMode.OnValidation));
+            _details.DataBindings.Add(
+                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Details), false, DataSourceUpdateMode.OnValidation));
+            _price.DataBindings.Add(
+                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.SellingPrice), false, DataSourceUpdateMode.OnValidation));
+            _criticalQty.DataBindings.Add(
+                new Binding(nameof(NumericUpDown.Value), ItemBindingSource, nameof(POS.Item.CriticalQuantity), true, DataSourceUpdateMode.OnPropertyChanged));
+            _pictureBox.DataBindings.Add(
+                new Binding(nameof(PictureBox.Image), ItemBindingSource, nameof(POS.Item.SampleImage), true, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void SetCostBindings()
@@ -71,8 +101,13 @@ namespace POS.Forms.ItemRegistration
             private set
             {
                 _item = value;
+
+                isPopulatingCost = true;
+
                 foreach (var p in value.Products)
                     Costs.Add(p);
+
+                isPopulatingCost = false;
 
                 if (!value.IsEnumerable)
                     ToggleCostGroup();
@@ -82,7 +117,15 @@ namespace POS.Forms.ItemRegistration
             }
         }
 
-
+        bool isPopulatingCost = false;
+        private void Costs_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            if (isPopulatingCost)
+            {
+                return;
+            }
+            saveButton.Enabled = cancelButton.Enabled = true;
+        }
 
         private async void SaveBtn_Click(object sender, EventArgs e)
         {
@@ -129,6 +172,8 @@ namespace POS.Forms.ItemRegistration
                                     .Include(i => i.Products)
                                     .FirstOrDefaultAsync(x => x.Id == id);
 
+                BindFields(Item);
+
                 return true;
             }
             catch (UnautorizedLoginException)
@@ -172,23 +217,26 @@ namespace POS.Forms.ItemRegistration
             var newProduct = (Product)row.DataBoundItem;
             Item.Products.Add(newProduct);
 
-
             int id = newProduct.Id;
-
             if (id == 0)
             {
-                row.DefaultCellStyle.BackColor = Color.IndianRed;
-                row.DefaultCellStyle.SelectionBackColor = Color.IndianRed;
+                row.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Maroon;
+                row.DefaultCellStyle.ForeColor = System.Drawing.Color.Maroon;
+
             }
+
         }
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to remove this image?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
-            if (pictureBox.Image != null)
+            if (_pictureBox.Image != null)
             {
                 Item.SampleImage = null;
-                pictureBox.Image = null;
+
+                //_pictureBox.Image = null;
             }
         }
 
@@ -201,9 +249,8 @@ namespace POS.Forms.ItemRegistration
                 try
                 {
                     var image = new Bitmap(openFileDialog.FileName);
-
                     Item.SampleImage = image.ToByteArray();
-                    pictureBox.Image = image;
+                    //_pictureBox.Image = image;
                 }
                 catch (IOException)
                 {
@@ -220,12 +267,13 @@ namespace POS.Forms.ItemRegistration
                 MessageBoxIcon.Warning) == DialogResult.No) return;
 
             context.UndoAllChanges();
-
             this.ValidateChildren();
 
+            isPopulatingCost = true;
             Costs.Clear();
             foreach (var product in Item.Products)
                 Costs.Add(product);
+            isPopulatingCost = false;
         }
 
         private void CreateEdit_Item_Form_KeyDown(object sender, KeyEventArgs e)
@@ -244,15 +292,17 @@ namespace POS.Forms.ItemRegistration
         {
             string guid = Guid.NewGuid().ToString("N").Substring(0, 12); // Shorten GUID
 
-            _barcode.Text = guid.Base36Encode();
+            Item.Barcode = guid.Base36Encode();
+
+            _barcode.SelectAll();
         }
 
         private void pictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (pictureBox.Image is null)
+            if (_pictureBox.Image is null)
                 return;
 
-            using (var imagePreview = new PictureView(pictureBox.Image))
+            using (var imagePreview = new PictureView(_pictureBox.Image))
             {
                 if (imagePreview.ShowDialog() == DialogResult.OK)
                 {
@@ -269,14 +319,9 @@ namespace POS.Forms.ItemRegistration
             }
         }
 
-        private void costTable_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-
-        }
-
         private void CreateEdit_Item_Form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (context.ChangeTracker.HasChanges())
+            if (context.HasChanges())
             {
                 if (MessageBox.Show("You want to exit with saving changes?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 {
@@ -333,11 +378,12 @@ namespace POS.Forms.ItemRegistration
             }
         }
 
+        const decimal markUpValue = 1.3m;
         private void _price_KeyDown(object sender, KeyEventArgs e)
         {
             var textBox = sender as TextBox;
-            if (e.KeyCode == Keys.Enter)
 
+            if (e.KeyCode == Keys.Enter)
             {
                 var textbox = sender as TextBox;
 
@@ -347,12 +393,19 @@ namespace POS.Forms.ItemRegistration
                 }
 
                 e.Handled = true;
+                return;
+            }
+
+            else if (e.KeyCode == Keys.F4 && Costs.Count > 0)
+            {
+                textBox.Text = $"{(MaxCost * markUpValue):N2}";
+                sellingPriceLabel.Text = "Selling Price:";
+                return;
             }
         }
 
         private void CreateEdit_Item_Form_Load(object sender, EventArgs e)
         {
-            BindFields();
 
         }
 
@@ -365,6 +418,70 @@ namespace POS.Forms.ItemRegistration
         private void addCostButton_Click(object sender, EventArgs e)
         {
             Costs.AddNew();
+        }
+
+        private void _barcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F4)
+                autoGenBarcodeButton.PerformClick();
+        }
+
+        private void _criticalQty_Validated(object sender, EventArgs e)
+        {
+            Console.WriteLine("  validated");
+        }
+
+        private void _criticalQty_Leave(object sender, EventArgs e)
+        {
+            if (sender is NumericUpDown nud && nud.Text == "")
+            {
+                nud.Value = 0;
+            }
+        }
+
+        decimal MaxCost => Item is null ? 0 : Item.Products.Select(p => p.Cost).Max();
+
+        private void _price_Enter(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(_price.Text) || _price.Text == "0.00")
+            {
+                sellingPriceLabel.Text = $"Selling Price: [F4] {MaxCost} * {markUpValue} = {(MaxCost * markUpValue):N2}";
+            }
+        }
+
+        private void costTable_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Delete || costTable.ReadOnly)
+            {
+                return;
+            }
+
+            e.Handled = true;
+            DeleteSelectedCost();
+        }
+
+        private void DeleteSelectedCost()
+        {
+            var selectedCost = (Product)costTable.CurrentRow.DataBoundItem;
+
+            if (!context.StockinHistories.AsNoTracking().Any(st => st.ProductId == selectedCost.Id))
+            {
+                Costs.Remove(selectedCost);
+                Item.Products.Remove(selectedCost);
+            }
+            else
+            {
+                MessageBox.Show("This Cost is already in use", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+    }
+
+    public class BaseViewModel : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
