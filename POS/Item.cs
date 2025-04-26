@@ -11,7 +11,8 @@ namespace POS
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Item
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,10 @@ namespace POS
         }
     
         public string Id { get; set; }
-        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Field Must Be Unique and Not Empty!")]
+        public string Name { get; 
+            set; }
         public decimal SellingPrice { get; set; }
         public string Department { get; set; }
         public string Details { get; set; }

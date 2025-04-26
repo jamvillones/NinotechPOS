@@ -1,11 +1,16 @@
 ﻿using Connections;
+using Newtonsoft.Json.Converters;
 using POS.Misc;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace POS
 {
-    partial class Item
+    partial class Item : BaseModel
     {
         public int QuantityInInventory => this.Products
             .Select(a => a.InventoryItems
@@ -101,6 +106,42 @@ namespace POS
     partial class Login
     {
         public override string ToString() => string.IsNullOrWhiteSpace(Name) ? Username : Name;
+    }
+
+
+    public class BaseModel : IDataErrorInfo
+    {
+        public string this[string propertyName]
+        {
+            get
+            {
+                var descriptor = TypeDescriptor.GetProperties(this)[propertyName];
+                if (descriptor is null)
+                    return string.Empty;
+
+                var errs = new List<ValidationResult>();
+                var valContext = new ValidationContext(this, null, null) { MemberName = propertyName };
+
+                if (!Validator.TryValidateProperty(descriptor?.GetValue(this), valContext, errs))
+                    return errs.FirstOrDefault()?.ErrorMessage ?? string.Empty;
+
+                return string.Empty;
+            }
+        }
+
+        public string Error
+        {
+            get
+            {
+                var errs = new List<ValidationResult>();
+                var valContext = new ValidationContext(this, null, null);
+
+                if (!Validator.TryValidateObject(this, valContext, errs, true))
+                    return string.Join(Environment.NewLine, errs);
+
+                return string.Empty;
+            }
+        }
     }
 
     public static class ContextManipulationMethods
