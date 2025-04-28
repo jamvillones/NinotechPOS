@@ -156,6 +156,19 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>230, 26</value>
   </metadata>
+  <data name="checkoutBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAGtSURBVDhPYxh6YMLJn6ETTv2cP+HUr/1AejOQv2zC6R+FUGnSQf/pH9lAg/4j44mnfk0JDV3F
+        nG61Y1aG9fbdMJxmtX1RmvFmLqhW7ACXgem227RCgk/8121/Ccf+UWf+p1tttYNqxQ5wGZhqvUM7IPL0
+        f8Vpn+HYK/HC/wyb7Q5QrahgetFpw6llZ7dNmv/oIbqBk1a9fDWx4MyFZOc9f0MDj/2H4XiXvf96c04e
+        mFp63gBqDAJMLT17GYj/d7Rd/9+9/SMKbptw9z9IbnLx2f+TCk/D8eSiM2BxIL4INQYBgIKvQJLtycf+
+        l3jtRcGNMYdhGnHhV1BjEAAkCJJc0HoJjGfVnP+/uP0ymMYnRtDAddNvgvH8pkv/N8+9DabxiRE0cCbQ
+        dhCeXn7u/+zaC2AanxhBA9dMuQHG85ou/t84+xaYxidG0MAVvdfAeG79hf+rJ90A0/jECBpIJsY0sNh9
+        z7ZC9z2HyMEgvVBjEACY0W+nW20H5k1M3JVx/H9X+nGschC87RbUGAQAliT+QMkrQHwXHec573kAwtjk
+        gPhKus02X6gxgx4wMAAAwmV/0Jj/rkYAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="printDoc.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>16, 26</value>
   </metadata>

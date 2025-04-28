@@ -47,8 +47,8 @@ namespace POS.Forms
         {
 
             bool entriesFound = false;
-            soure = new CancellationTokenSource();
-            var token = soure.Token;
+            source = new CancellationTokenSource();
+            var token = source.Token;
 
             try
             {
@@ -101,8 +101,8 @@ namespace POS.Forms
             }
             finally
             {
-                soure?.Dispose();
-                soure = null;
+                source?.Dispose();
+                source = null;
             }
 
             return entriesFound;
@@ -119,7 +119,6 @@ namespace POS.Forms
         private async void StockInForm_Load(object sender, EventArgs e)
         {
             createItemBtn.Enabled = CurrLogin.CanEditItem;
-
             await LoadDataAsync();
         }
 
@@ -180,10 +179,10 @@ namespace POS.Forms
                     int quantity = s.Quantity;
 
                     /// date picker is checked, it means the stockin is only a correction and must not change the inventory values
-                    if (!dateTimePicker1.Checked)
-                    {
-                        await AddToInventory(context, serialNum, productId, quantity);
-                    }
+                    //if (!dateTimePicker1.Checked)
+                    //{
+                    //    await AddToInventory(context, serialNum, productId, quantity);
+                    //}
 
                     var product = await context.Products.FirstOrDefaultAsync(x => x.Id == productId);
 
@@ -195,7 +194,7 @@ namespace POS.Forms
                         Supplier = product.Supplier.Name,
                         Quantity = quantity,
                         SerialNumber = string.IsNullOrWhiteSpace(serialNum) ? null : serialNum,
-                        Date = dateTimePicker1.Checked ? dateTimePicker1.Value.Date : DateTime.Now,
+                        Date = DateTime.Now,
                         LoginUsername = context.Logins.FirstOrDefault(x => x.Username == CurrLogin.Username).Username
                     };
 
@@ -203,7 +202,7 @@ namespace POS.Forms
                 }
 
                 await context.SaveChangesAsync();
-                MessageBox.Show("Stockin Succesful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Stock-In Succesful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
             }
         }
@@ -398,25 +397,53 @@ namespace POS.Forms
 
         private async void createItemBtn_Click(object sender, EventArgs e)
         {
-            using (var form = new CreateEdit_Item_Form())
+            //using (var form = new CreateEdit_Item_Form())
+            //{
+            //    if (form.ShowDialog() == DialogResult.OK)
+            //    {
+            //        if (form.Tag is Item addedItem && addedItem.Type == ItemType.Quantifiable.ToString())
+            //        {
+            //            SetAutoComplete();
+            //            await LoadDataAsync();
+            //        }
+            //    }
+            //}
+            var newItem = new Item() { Id = Guid.NewGuid().ToString("N") };
+
+            try
             {
-                if (form.ShowDialog() == DialogResult.OK)
+                newItem
+                    .SetBasicInfo()
+                    .AskIfSerialRequired()
+                    .SetImage()
+                    .SetCosts()
+                    .ConfirmDetailsBeforeSaving();
+
+                using (var context = POSEntities.Create())
                 {
-                    if (form.Tag is Item addedItem && addedItem.Type == ItemType.Quantifiable.ToString())
-                    {
-                        SetAutoComplete();
-                        await LoadDataAsync();
-                    }
+                    var item = context.Items.Add(newItem);
+
+                    await context.SaveChangesAsync();
+
+                    Departments_Store.AddNewDepartment(item.Department);
                 }
             }
+            catch (OperationCanceledException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch { }
+
+
         }
-        CancellationTokenSource soure = null;
+
+        CancellationTokenSource source = null;
 
         void TryCancel()
         {
             try
             {
-                soure?.Cancel();
+                source?.Cancel();
             }
             catch (ObjectDisposedException)
             {
