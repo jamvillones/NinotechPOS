@@ -21,7 +21,6 @@ namespace POS.Forms.ItemRegistration
         {
             InitializeComponent();
             SetCostBindings();
-            SetBehaviorBasedOnUserPermission(UserManager.instance.CurrentLogin.CanEditItem);
             Costs.ListChanged += Costs_ListChanged;
         }
 
@@ -31,8 +30,40 @@ namespace POS.Forms.ItemRegistration
 
             costTable.ReadOnly = !canEditItem;
 
-            foreach (var control in this.GetControls(c => c.Tag != null))
-                control.Validated += Control_Validated;
+            if (canEditItem)
+                foreach (var control in this.GetControls(c => c.Tag != null))
+                {
+                    switch (control)
+                    {
+                        case TextBox textBox:
+                            textBox.TextChanged += (s, e) =>
+                            {
+                                UpdateButtonBehaviorIfChangeDetected();
+                            };
+                            break;
+                        case ComboBox checkBox:
+                            checkBox.TextChanged += (s, e) =>
+                            {
+                                UpdateButtonBehaviorIfChangeDetected();
+                            };
+                            break;
+                        case NumericUpDown nud:
+                            nud.ValueChanged += (s, e) =>
+                            {
+                                UpdateButtonBehaviorIfChangeDetected();
+                            };
+                            break;
+                        case DataGridView dgv:
+                            dgv.CellValidated += (s, e) =>
+                            {
+                                UpdateButtonBehaviorIfChangeDetected();
+                            };
+                            break;
+                        default:
+                            Console.WriteLine($"No handler for control type: {control.GetType().Name}");
+                            break;
+                    }
+                }
 
             foreach (var control in this.GetControls<TextBox>())
                 control.ReadOnly = !canEditItem;
@@ -48,34 +79,42 @@ namespace POS.Forms.ItemRegistration
                 num.ReadOnly = !canEditItem;
                 num.Increment = !canEditItem ? 0 : num.Increment;
             }
-
-            costTable.CellValidated += Control_Validated;
         }
 
-        private void Control_Validated(object sender, EventArgs e)
+        private void UpdateButtonBehaviorIfChangeDetected()
         {
-            if (context is null) return;
-
             cancelButton.Enabled = saveButton.Enabled = context.HasChanges();
+        }
+
+        Image SampleImage
+        {
+            get => _pictureBox.Image;
+
+            set
+            {
+                Item.SampleImage = value.ToByteArray();
+                UpdateButtonBehaviorIfChangeDetected();
+            }
         }
 
         private void BindFields(Item item)
         {
             ItemBindingSource = new BindingSource { DataSource = item };
 
-            string propertyText = nameof(Control.Text);
+            string controlTextPropertyString = nameof(Control.Text);
+
             _name.DataBindings.Add(
-                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Name), false, DataSourceUpdateMode.OnValidation));
+                new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.Name), true, DataSourceUpdateMode.OnPropertyChanged));
             _barcode.DataBindings.Add(
-                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Barcode), false, DataSourceUpdateMode.OnPropertyChanged));
+                new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.Barcode), true, DataSourceUpdateMode.OnPropertyChanged));
             _departmentOption.DataBindings.Add(
-                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Department), false, DataSourceUpdateMode.OnValidation));
+                new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.Department), true, DataSourceUpdateMode.OnPropertyChanged));
             _tags.DataBindings.Add(
-                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Tags), false, DataSourceUpdateMode.OnValidation));
+                new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.Tags), true, DataSourceUpdateMode.OnPropertyChanged));
             _details.DataBindings.Add(
-                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.Details), false, DataSourceUpdateMode.OnValidation));
+                new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.Details), true, DataSourceUpdateMode.OnPropertyChanged));
             _price.DataBindings.Add(
-                new Binding(propertyText, ItemBindingSource, nameof(POS.Item.SellingPrice), false, DataSourceUpdateMode.OnValidation));
+                new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.SellingPrice), true, DataSourceUpdateMode.OnPropertyChanged));
             _criticalQty.DataBindings.Add(
                 new Binding(nameof(NumericUpDown.Value), ItemBindingSource, nameof(POS.Item.CriticalQuantity), true, DataSourceUpdateMode.OnPropertyChanged));
             _pictureBox.DataBindings.Add(
@@ -111,6 +150,7 @@ namespace POS.Forms.ItemRegistration
 
                 if (!value.IsEnumerable)
                     ToggleCostGroup();
+
 
                 label10.Text = $"Type: {value.Type}";
                 label9.Visible = value.IsSerialRequired;
@@ -169,8 +209,8 @@ namespace POS.Forms.ItemRegistration
                 SetDepartmentOptions(await context.Items.GetDepartments().ToArrayAsync());
 
                 Item = await context.Items
-                                    .Include(i => i.Products)
-                                    .FirstOrDefaultAsync(x => x.Id == id);
+                       .Include(i => i.Products)
+                       .FirstOrDefaultAsync(x => x.Id == id);
 
                 BindFields(Item);
 
@@ -227,16 +267,12 @@ namespace POS.Forms.ItemRegistration
 
         }
 
-
-
         private void button3_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to remove this image?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
             if (_pictureBox.Image != null)
             {
-                Item.SampleImage = null;
-
-                //_pictureBox.Image = null;
+                SampleImage = null;
             }
         }
 
@@ -249,8 +285,7 @@ namespace POS.Forms.ItemRegistration
                 try
                 {
                     var image = new Bitmap(openFileDialog.FileName);
-                    Item.SampleImage = image.ToByteArray();
-                    //_pictureBox.Image = image;
+                    SampleImage = image;
                 }
                 catch (IOException)
                 {
@@ -267,13 +302,15 @@ namespace POS.Forms.ItemRegistration
                 MessageBoxIcon.Warning) == DialogResult.No) return;
 
             context.UndoAllChanges();
-            this.ValidateChildren();
 
             isPopulatingCost = true;
             Costs.Clear();
             foreach (var product in Item.Products)
                 Costs.Add(product);
             isPopulatingCost = false;
+
+
+            UpdateButtonBehaviorIfChangeDetected();
         }
 
         private void CreateEdit_Item_Form_KeyDown(object sender, KeyEventArgs e)
@@ -281,7 +318,7 @@ namespace POS.Forms.ItemRegistration
             if (e.Control && e.KeyCode == Keys.S)
                 saveButton.PerformClick();
 
-            else if (e.Control && e.KeyCode == Keys.Z)
+            else if (e.KeyCode == Keys.F5)
                 cancelButton.PerformClick();
 
             else if (e.KeyCode == Keys.Escape)
@@ -323,7 +360,10 @@ namespace POS.Forms.ItemRegistration
         {
             if (context.HasChanges())
             {
-                if (MessageBox.Show("You want to exit with saving changes?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+                if (MessageBox.Show("You want to exit with saving changes?",
+                    "",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.No)
                 {
                     e.Cancel = true;
                     return;
@@ -406,6 +446,7 @@ namespace POS.Forms.ItemRegistration
 
         private void CreateEdit_Item_Form_Load(object sender, EventArgs e)
         {
+            SetBehaviorBasedOnUserPermission(UserManager.instance.CurrentLogin.CanEditItem);
 
         }
 

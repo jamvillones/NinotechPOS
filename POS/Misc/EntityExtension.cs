@@ -174,6 +174,7 @@ namespace POS
 
         public static bool HasChanges(this DbContext context) => context.ChangeTracker.Entries().Any(e => e.IsEntityActuallyModified());
 
+
         public static bool IsEntityActuallyModified(this DbEntityEntry entry)
         {
             if (entry.State != EntityState.Modified)

@@ -639,6 +639,12 @@ namespace POS.Forms
         private void printDoc_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             printAction = e.PrintAction;
+
+            string chosenPrinter = ReceiptPrintingConfigurations.ReceiptPrintingConfig.Printer;
+
+            if (chosenPrinter is null) return;
+
+            printDoc.PrinterSettings.PrinterName = chosenPrinter;
         }
 
         private void printDoc_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)

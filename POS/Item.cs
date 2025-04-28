@@ -45,6 +45,7 @@ namespace POS
             get => _name;
             set
             {
+                //Console.WriteLine(value);
                 if (_name != value)
                 {
                     _name = value;

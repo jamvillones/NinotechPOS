@@ -47,6 +47,7 @@
             this.addCostButton = new System.Windows.Forms.Button();
             this.autoGenBarcodeButton = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
             this._departmentOption = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
@@ -84,7 +85,6 @@
             this.panel17 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.panel12 = new System.Windows.Forms.Panel();
             this.ItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonsHolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.costTable)).BeginInit();
@@ -120,15 +120,19 @@
             // cancelButton
             // 
             this.cancelButton.BackColor = System.Drawing.Color.RosyBrown;
+            this.cancelButton.Enabled = false;
             this.cancelButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.Image = ((System.Drawing.Image)(resources.GetObject("cancelButton.Image")));
+            this.cancelButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.cancelButton.Location = new System.Drawing.Point(170, 0);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(0);
             this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.cancelButton.Size = new System.Drawing.Size(155, 35);
             this.cancelButton.TabIndex = 11;
             this.cancelButton.Text = "    Cancel Changes";
+            this.cancelButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.cancelButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.cancelButton.UseVisualStyleBackColor = false;
             this.cancelButton.Click += new System.EventHandler(this.cancelBtn_Click);
@@ -137,17 +141,21 @@
             // 
             this.saveButton.AutoSize = true;
             this.saveButton.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.saveButton.Enabled = false;
             this.saveButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
             this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveButton.Image = ((System.Drawing.Image)(resources.GetObject("saveButton.Image")));
+            this.saveButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.saveButton.Location = new System.Drawing.Point(0, 0);
             this.saveButton.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.saveButton.MaximumSize = new System.Drawing.Size(150, 35);
             this.saveButton.MinimumSize = new System.Drawing.Size(155, 35);
             this.saveButton.Name = "saveButton";
+            this.saveButton.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.saveButton.Size = new System.Drawing.Size(155, 35);
             this.saveButton.TabIndex = 10;
             this.saveButton.Text = "    Save";
+            this.saveButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.saveButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.saveButton.UseVisualStyleBackColor = false;
             this.saveButton.Click += new System.EventHandler(this.SaveBtn_Click);
@@ -201,6 +209,7 @@
             this.costTable.Size = new System.Drawing.Size(325, 244);
             this.costTable.StandardTab = true;
             this.costTable.TabIndex = 9;
+            this.costTable.Tag = "Costs";
             this.costTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.costTable_CellClick);
             this.costTable.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.costTable_CellPainting);
             this.costTable.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.costTable_RowsAdded);
@@ -288,6 +297,15 @@
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(567, 40);
             this.panel11.TabIndex = 3;
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.Black;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel12.Location = new System.Drawing.Point(0, 39);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(567, 1);
+            this.panel12.TabIndex = 19;
             // 
             // _departmentOption
             // 
@@ -505,7 +523,7 @@
             this._criticalQty.Name = "_criticalQty";
             this._criticalQty.Size = new System.Drawing.Size(530, 21);
             this._criticalQty.TabIndex = 3;
-            this._criticalQty.Tag = "CriticalQuantity";
+            this._criticalQty.Tag = "Critical Quantity";
             this._criticalQty.ThousandsSeparator = true;
             this._criticalQty.Leave += new System.EventHandler(this._criticalQty_Leave);
             // 
@@ -758,15 +776,6 @@
             // 
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
-            // 
-            // panel12
-            // 
-            this.panel12.BackColor = System.Drawing.Color.Black;
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel12.Location = new System.Drawing.Point(0, 39);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(567, 1);
-            this.panel12.TabIndex = 19;
             // 
             // ItemBindingSource
             // 
