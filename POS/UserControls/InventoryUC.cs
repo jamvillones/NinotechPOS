@@ -87,6 +87,15 @@ namespace POS.UserControls
         {
             if (e.RowIndex == -1) return;
 
+            try
+            {
+                showImageCancelSource?.Cancel();
+            }
+            catch (ObjectDisposedException)
+            {
+
+            }
+
             if (e.ColumnIndex == nameCol.Index) await OpenEditForm();
 
             else if (e.ColumnIndex == quantityCol.Index)
@@ -753,7 +762,7 @@ namespace POS.UserControls
 
                 token.ThrowIfCancellationRequested();
 
-                if (toShow is null)
+                if (toShow is null || token.IsCancellationRequested)
                     return;
 
                 showImage = new Show_Image(toShow) { Location = new Point(MousePosition.X + 10, MousePosition.Y) };
@@ -770,7 +779,6 @@ namespace POS.UserControls
             finally
             {
                 showImageCancelSource?.Dispose();
-                showImageCancelSource = null;
             }
         }
 
@@ -779,8 +787,6 @@ namespace POS.UserControls
             if (e.RowIndex == -1) return;
 
             showImage?.Close();
-
-            if (showImageCancelSource is null) return;
 
             try
             {

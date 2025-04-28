@@ -41,8 +41,8 @@ namespace POS.Forms.ItemRegistration
                                 UpdateButtonBehaviorIfChangeDetected();
                             };
                             break;
-                        case ComboBox checkBox:
-                            checkBox.TextChanged += (s, e) =>
+                        case ComboBox combo:
+                            combo.TextChanged += (s, e) =>
                             {
                                 UpdateButtonBehaviorIfChangeDetected();
                             };
@@ -72,7 +72,16 @@ namespace POS.Forms.ItemRegistration
                 btn.Visible = canEditItem;
 
             foreach (var combo in this.GetControls<ComboBox>())
-                combo.Enabled = canEditItem;
+            {
+                if (!canEditItem)
+                {
+                    combo.DropDownStyle = ComboBoxStyle.DropDownList;
+                    combo.KeyPress += (s, ee) =>
+                    {
+                        ee.Handled = true;
+                    };
+                }
+            }
 
             foreach (var num in this.GetControls<NumericUpDown>())
             {
@@ -206,7 +215,7 @@ namespace POS.Forms.ItemRegistration
                 context = POSEntities.Create();
 
                 SetSupplierOptions(await context.Suppliers.OrderBy(s => s.Name).ToListAsync());
-                SetDepartmentOptions(await context.Items.GetDepartments().ToArrayAsync());
+                SetDepartmentOptions(Departments_Store.Departments);
 
                 Item = await context.Items
                        .Include(i => i.Products)
@@ -242,12 +251,13 @@ namespace POS.Forms.ItemRegistration
             comboBoxColumn.DataSource = Suppliers;
         }
 
-        private void SetDepartmentOptions(string[] departments)
+        private void SetDepartmentOptions(BindingList<string> departments)
         {
-            _departmentOption.Items.AddRange(departments);
-            _departmentOption.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            _departmentOption.AutoCompleteSource = AutoCompleteSource.ListItems;
             _departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            _departmentOption.AutoCompleteCustomSource.AddRange(departments);
+            //_departmentOption.AutoCompleteCustomSource.AddRange(departments);
+            _departmentOption.DataSource = departments;
+            //_departmentOption.Items.AddRange(departments);
         }
 
         private void costTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -339,7 +349,7 @@ namespace POS.Forms.ItemRegistration
             if (_pictureBox.Image is null)
                 return;
 
-            using (var imagePreview = new PictureView(_pictureBox.Image))
+            using (var imagePreview = new PictureView(SampleImage))
             {
                 if (imagePreview.ShowDialog() == DialogResult.OK)
                 {
@@ -358,10 +368,12 @@ namespace POS.Forms.ItemRegistration
 
         private void CreateEdit_Item_Form_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (context.HasChanges())
+
+
+            if (saveButton.Visible && context.HasChanges())
             {
-                if (MessageBox.Show("You want to exit with saving changes?",
-                    "",
+                if (MessageBox.Show("You want to exit without saving changes?",
+                    "Pending Changes",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.No)
                 {
@@ -529,7 +541,7 @@ namespace POS.Forms.ItemRegistration
     public static class ItemDepartmentExtensions
     {
         public static IQueryable<string> GetDepartments(this IQueryable<Item> items)
-            => items.Where(i => i.Department != null)
+            => items.Where(i => !string.IsNullOrEmpty(i.Department))
                     .GroupBy(s => s.Department)
                     .Select(s => s.Key.ToString());
     }

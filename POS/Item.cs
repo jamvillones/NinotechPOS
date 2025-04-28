@@ -9,6 +9,7 @@
 
 namespace POS
 {
+    using POS.Misc;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -62,7 +63,14 @@ namespace POS
         public string Department
         {
             get => _department;
-            set { if (_department != value) { _department = value; OnPropertyChanged(); } }
+            set
+            {
+                if (_department != value)
+                {
+                    _department = value.NullIfEmpty(); 
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public string Details

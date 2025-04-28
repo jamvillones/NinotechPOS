@@ -11,7 +11,7 @@ namespace POS.Misc
     public static class Departments_Store
     {
         static bool hasLoaded = false;
-        public static BindingList<string> Departments { get; private set; } = new BindingList<string> { "" };
+        public static BindingList<string> Departments { get; private set; } = new BindingList<string> { string.Empty };
 
         public static void AddNewDepartment(string newDepartment)
         {
