@@ -36,7 +36,7 @@ namespace POS.Forms
 
         private async void InventoryItemView_Load(object sender, EventArgs e) => await LoadData_Async();
 
-        async Task LoadData_Async(string selectedSerialNumber = "")
+        async Task LoadData_Async()
         {
             using (var context = POSEntities.Create())
             {
@@ -63,7 +63,7 @@ namespace POS.Forms
                     invTable.CurrentCell = null;
 
                     var index = invTable.Rows.Cast<DataGridViewRow>()
-                        .FirstOrDefault(row => row.Cells[Column1.Index].Value?.ToString().Equals(selectedSerialNumber.Trim(), StringComparison.OrdinalIgnoreCase) ?? false).Index;
+                        .FirstOrDefault(row => row.Cells[Column1.Index].Value?.ToString().Equals(_serial.Trim(), StringComparison.OrdinalIgnoreCase) ?? false).Index;
 
                     invTable.Rows[index].Selected = true;
                 }

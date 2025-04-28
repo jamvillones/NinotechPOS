@@ -178,11 +178,10 @@ namespace POS.Forms
                     string serialNum = s.Serial;
                     int quantity = s.Quantity;
 
-                    /// date picker is checked, it means the stockin is only a correction and must not change the inventory values
-                    //if (!dateTimePicker1.Checked)
-                    //{
-                    //    await AddToInventory(context, serialNum, productId, quantity);
-                    //}
+                    //date picker is checked, it means the stockin is only a correction and must not change the inventory values
+
+                    await AddToInventory(context, serialNum, productId, quantity);
+
 
                     var product = await context.Products.FirstOrDefaultAsync(x => x.Id == productId);
 
@@ -202,7 +201,7 @@ namespace POS.Forms
                 }
 
                 await context.SaveChangesAsync();
-                MessageBox.Show("Stock-In Succesful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Stock-In Successful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
             }
         }
