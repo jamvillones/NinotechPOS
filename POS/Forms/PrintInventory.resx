@@ -159,6 +159,15 @@
         AAAASUVORK5CYII=
 </value>
   </data>
+  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAACzSURBVDhP1ZTNCYNAEIX3bhe55iCJnQTtJwTSQizCCkLqSAU24W1847zD+sesgST4wQfLzNsn
+        CBr2iYhcU2TcB+EkGPdh3oXxH4KHFvACq0Q1W/D6GCxq+CkP1hgYnG2+mRt82VFOrBsKS5ttJod3O0rJ
+        uqFQ30dMB9+OmompWLdYqLSwWVF3U9zChusZurPIiO8WZvAQqaQUxncyrudoEjzhcUXd/fFbRnbxdzWV
+        8V0RQg/7gORI1xdJXgAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>81</value>
   </metadata>

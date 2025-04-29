@@ -16,6 +16,13 @@ namespace POS.Forms
         public PrintInventory()
         {
             InitializeComponent();
+            comboBox2.SelectedIndex = 0;
+            comboBox2.SelectedIndexChanged += ComboBox2_SelectedIndexChanged;
+        }
+
+        private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            label4.Visible = textBox2.Visible = comboBox2.SelectedIndex == 3;
         }
 
         private async void PrintInventory_Load(object sender, EventArgs e)
@@ -83,15 +90,15 @@ namespace POS.Forms
         Font contentFont = new Font("Times New Roman", 10, FontStyle.Regular);
         Font columnFont = new Font("Times New Roman", 10, FontStyle.Bold);
         int index = 0;
-        int pageCount { get; set; } = 1;
+        int pageIndex { get; set; } = 1;
 
         void PrintLayout(PrintPageEventArgs e)
         {
             Graphics g = e.Graphics;
             Rectangle pageNumberRect = new Rectangle(0, 0, area.Width, 40);
             farFormat.Alignment = StringAlignment.Far;
-            g.DrawString("Date Printed: " + DateTime.Now.ToString("MMM/d/yyyy hh:mm tt").ToUpper() + "\nUser: " + UserManager.instance.CurrentLogin.Username, contentFont, Brushes.Black, pageNumberRect);
-            g.DrawString("Page: " + pageCount, contentFont, Brushes.Black, pageNumberRect, farFormat);
+            g.DrawString("Date Printed: " + DateTime.Now.ToString("MMM|d|yyyy hh:mm tt").ToUpper() + "\nUser: " + UserManager.instance.CurrentLogin.Username, contentFont, Brushes.Black, pageNumberRect);
+            g.DrawString("Page: " + pageIndex, contentFont, Brushes.Black, pageNumberRect, farFormat);
             int colHeight = (int)g.MeasureString("Item Name", contentFont).Height;
 
             Rectangle colRect = new Rectangle(area.Left, pageNumberRect.Bottom, area.Width * 1 / 9, colHeight);
@@ -146,7 +153,7 @@ namespace POS.Forms
                 if (yStart + max > area.Height)
                 {
                     e.HasMorePages = true;
-                    pageCount++;
+                    pageIndex++;
                     return;
                 }
                 else
@@ -247,9 +254,9 @@ namespace POS.Forms
         {
             var printers = PrinterSettings.InstalledPrinters.Cast<string>().ToArray();
             comboBox1.Invoke((MethodInvoker)delegate { comboBox1.Items.AddRange(printers); });
-            comboBox1.Invoke((MethodInvoker)delegate { comboBox1.Text = printDocument.PrinterSettings.PrinterName; });            
+            comboBox1.Invoke((MethodInvoker)delegate { comboBox1.Text = printDocument.PrinterSettings.PrinterName; });
         }
-        
+
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -259,7 +266,7 @@ namespace POS.Forms
         private void printDocument_BeginPrint(object sender, PrintEventArgs e)
         {
             printAction = e.PrintAction;
-            pageCount = 1;
+            pageIndex = 1;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -274,7 +281,7 @@ namespace POS.Forms
             printDocument.PrinterSettings.PrinterName = comboBox1.Text;
 
             printPreviewControl1.StartPage = 0;
-            pageCount = 1;
+            pageIndex = 1;
 
             printPreviewControl1.Document = printDocument;
         }
@@ -299,6 +306,12 @@ namespace POS.Forms
         private void button2_Click_1(object sender, EventArgs e)
         {
             printDocument.Print();
+        }
+
+        private void printDocument_EndPrint(object sender, PrintEventArgs e)
+        {
+            textBox2.Text = $"{1} - {pageIndex}";
+
         }
     }
 }

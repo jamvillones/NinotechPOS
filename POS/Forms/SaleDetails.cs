@@ -202,9 +202,10 @@ namespace POS.Forms
                 {
                     ControlNumber = sale.Id.ToString(),
                     CustomerName = soldTo.Text,
-                    TransactBy = UserManager.instance.CurrentLogin.Name ?? "User",
+                    TransactBy = sale.Login.ToString() ?? "User",
                     Tendered = sale.AmountRecieved,
-                    Discount = sale.Discount
+                    Discount = sale.Discount,
+                    IssuedOn = sale.Date.Value
                 };
 
                 foreach (var soldItem in sale.SoldItems.OrderBy(x => x.Product.Item.Name).ThenBy(x => x.SerialNumber))

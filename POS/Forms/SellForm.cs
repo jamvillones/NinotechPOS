@@ -655,6 +655,7 @@ namespace POS.Forms
             details.CustomerName = ToPrint.Customer.ToString();
             details.TransactBy = ToPrint.Login.ToString();
             details.Tendered = ToPrint.AmountRecieved;
+            details.IssuedOn = ToPrint.Date.Value;
 
             foreach (var item in CartItems)
                 details.AddItem(

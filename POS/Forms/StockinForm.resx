@@ -120,15 +120,13 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="stockinBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAa9JREFUOE/l
-        Uz1IQlEYvQQF/YAI3mtKUDS1RENzTUG74BiEvXfNtiKIhsI9QquptbJA8kFTlOS7L6NBJIhqbLMlwqUo
-        isq+7/IhCCqlQUMHDu/ec75z7r2I7E8gzMw4krbNw2OqayRtm8c/KoSSZW46eS6dZ01Ye6RaIrsOgjdt
-        rkjW7Zf5DlI0embP27mpcsASMYca2RqYwSx2kMQYlypIgXfgsUee+shintCZH7QCEtckax1ekKZMCTvI
-        AtPIDAupNrmhDsH8AF4ymW8lm/GwMwreCG31i6DgSpjqFWYtzGIHuZWAgUU8EU6f6562+7yhbD9ZDNe+
-        qZNeYdrzOANFEbLqAG4mDHULoScIvXmlM0gOE+HMEGgvXNqP8CNdsGiphaza4KY9Cc97wBsAP70TR51k
-        MT5jd6GmPUPd4yxZtQGhbiHtKJUWSC4DtDv09AzMklyJjd39gXjCWsAvScwt0y5hOAHaloEaerStmmUg
-        BOM7Vgm/JH0bVbOxhBVAcS1hreqBH1BnIIsdVAfX3jvwg1jUJzXGYmw7Vf4zaKxsWSKWSI01wvVkklPN
-        b4OxL82rRwsqWXRWAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAEfSURBVDhP1Y8xTsNAFEStUEUQGq4AB4AeJCQaujQ5CFFOAA0FnAMOQI5ACxQ0KegRCHqq5Y13
+        sFj8kziIhic92X/2z8qu/g8ppTVc91hAfiI9FqijrscMQQ+v8RYHjhvIHqXHBrJNd66w5zhDMEZxh1uO
+        a5hbF2rHu2LsuISDs3yebhzVMEcXTrUIp45iWJjhz3J0obKZx/ksKC/NQrqWo6yAwx18wA97j9s+a8o8
+        5+614GAP3/ENdx23vob3cC+EhQPc91jDHP1ya28pFPR75/hq9R7/Xle4YIJfTBwvhsVjfNLTUQH5hfRY
+        EHYZRihGjjqjTq5+6zIMc5YuUQurqI4Y+rr6wgG+1PHveMYNX5ch6OMhHq2oOn1f89dU1Sc/MDQFzy8k
+        8gAAAABJRU5ErkJggg==
 </value>
   </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

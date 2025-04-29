@@ -55,7 +55,7 @@ namespace POS.Misc
                     string first = "Control Number:\n" +
                                    "Customer Name:\n" +
                                    "Transact By:\n" +
-                                   "Date/Time:";
+                                   "Issued On:";
 
                     var firstSize = e.Graphics.MeasureString(first, font, e.PageBounds.Width);
                     var firstRect = new Rectangle(0, titleRect.Bottom + 10, (int)firstSize.Width + 1, (int)firstSize.Height);
@@ -65,7 +65,7 @@ namespace POS.Misc
                     string second = details.ControlNumber + "\n" +
                                     details.CustomerName + "\n" +
                                     details.TransactBy + "\n" +
-                                    DateTime.Now.ToString("MMMM d, yyyy hh:mm tt");
+                                    details.IssuedOn.ToString("MMMM d, yyyy hh:mm tt");
 
                     var secondSize = e.Graphics.MeasureString(second, titleFont, e.PageBounds.Width);
                     var secondRect = new Rectangle(firstRect.Right + 10, firstRect.Top, (int)secondSize.Width + 1, (int)firstSize.Height);
@@ -235,6 +235,7 @@ namespace POS.Misc
         public string CustomerName { get; set; }
         public string ControlNumber { get; set; }
         public string TransactBy { get; set; }
+        public DateTime IssuedOn { get; set; }
 
         public class ItemDetails
         {

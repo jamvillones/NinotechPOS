@@ -36,28 +36,18 @@ namespace POS.Forms.ItemRegistration
                     switch (control)
                     {
                         case TextBox textBox:
-                            textBox.TextChanged += (s, e) =>
-                            {
-                                UpdateButtonBehaviorIfChangeDetected();
-                            };
+                            textBox.TextChanged += (s, e) => UpdateButtonBehaviorIfChangeDetected();
+                            textBox.Validating += (s, e) => textBox.Text = textBox.Text.Trim();
                             break;
                         case ComboBox combo:
-                            combo.TextChanged += (s, e) =>
-                            {
-                                UpdateButtonBehaviorIfChangeDetected();
-                            };
+                            combo.TextChanged += (s, e) => UpdateButtonBehaviorIfChangeDetected();
+                            combo.Validating += (s, e) => combo.Text = combo.Text.Trim();
                             break;
                         case NumericUpDown nud:
-                            nud.ValueChanged += (s, e) =>
-                            {
-                                UpdateButtonBehaviorIfChangeDetected();
-                            };
+                            nud.ValueChanged += (s, e) => UpdateButtonBehaviorIfChangeDetected();
                             break;
                         case DataGridView dgv:
-                            dgv.CellValidated += (s, e) =>
-                            {
-                                UpdateButtonBehaviorIfChangeDetected();
-                            };
+                            dgv.CellValidated += (s, e) => UpdateButtonBehaviorIfChangeDetected();
                             break;
                         default:
                             Console.WriteLine($"No handler for control type: {control.GetType().Name}");
@@ -526,6 +516,21 @@ namespace POS.Forms.ItemRegistration
             {
                 MessageBox.Show("This Cost is already in use", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void textboxTrimAfterEdit(object sender, CancelEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            textBox.Text = textBox.Text.Trim();
+        }
+
+        private void _tags_Validating(object sender, CancelEventArgs e)
+        {
+            var textbox = sender as TextBox;
+
+            var tags = textbox.Text.Split(',').Select(t => t.Trim());
+
+            textbox.Text = string.Join(",", tags);
         }
     }
 
