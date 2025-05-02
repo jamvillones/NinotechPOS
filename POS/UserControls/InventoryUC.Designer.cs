@@ -44,16 +44,18 @@
             this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.typeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.departmentOption = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.departmentOption = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.viewStockBtn = new System.Windows.Forms.Button();
             this.stockinBtn = new System.Windows.Forms.Button();
@@ -80,6 +82,7 @@
             this.trackItemCheckbox = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.searchBar = new POS.UserControls.SearchControl();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
@@ -132,6 +135,7 @@
             this.nameCol,
             this.quantityCol,
             this.priceCol,
+            this.col_Notes,
             this.typeCol,
             this.col_remove});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -217,6 +221,14 @@
             this.priceCol.Name = "priceCol";
             this.priceCol.ReadOnly = true;
             // 
+            // col_Notes
+            // 
+            this.col_Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Notes.HeaderText = "NOTES";
+            this.col_Notes.Name = "col_Notes";
+            this.col_Notes.ReadOnly = true;
+            this.col_Notes.Visible = false;
+            // 
             // typeCol
             // 
             this.typeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -241,17 +253,32 @@
             this.col_remove.Text = "❌";
             this.col_remove.UseColumnTextForButtonValue = true;
             this.col_remove.Visible = false;
+            this.col_remove.Width = 40;
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.flowLayoutPanel2);
+            this.panel5.Controls.Add(this.label1);
+            this.panel5.Controls.Add(this.checkBox1);
             this.panel5.Controls.Add(this.departmentOption);
+            this.panel5.Controls.Add(this.flowLayoutPanel2);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(1, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(872, 39);
             this.panel5.TabIndex = 2;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(762, 11);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(107, 17);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.Text = "Show Item Notes";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // flowLayoutPanel2
             // 
@@ -323,17 +350,6 @@
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // departmentOption
-            // 
-            this.departmentOption.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.departmentOption.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.departmentOption.FormattingEnabled = true;
-            this.departmentOption.Location = new System.Drawing.Point(685, 7);
-            this.departmentOption.Name = "departmentOption";
-            this.departmentOption.Size = new System.Drawing.Size(180, 25);
-            this.departmentOption.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.departmentOption, "Filter By Department");
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
@@ -342,6 +358,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1, 645);
             this.panel2.TabIndex = 8;
+            // 
+            // departmentOption
+            // 
+            this.departmentOption.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.departmentOption.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.departmentOption.FormattingEnabled = true;
+            this.departmentOption.Location = new System.Drawing.Point(571, 7);
+            this.departmentOption.Name = "departmentOption";
+            this.departmentOption.Size = new System.Drawing.Size(180, 25);
+            this.departmentOption.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.departmentOption, "Filter By Department");
             // 
             // button1
             // 
@@ -753,6 +780,16 @@
             this.panel7.Size = new System.Drawing.Size(1055, 57);
             this.panel7.TabIndex = 14;
             // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(495, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Filter By Dept:";
+            // 
             // searchBar
             // 
             this.searchBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -836,12 +873,15 @@
         private System.Windows.Forms.Panel panel3;
         protected System.Windows.Forms.Button button7;
         private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
         private System.Windows.Forms.DataGridViewButtonColumn barcodeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Notes;
         private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
         private System.Windows.Forms.DataGridViewButtonColumn col_remove;
+        private System.Windows.Forms.Label label1;
     }
 }

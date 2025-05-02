@@ -162,6 +162,7 @@ namespace POS.UserControls
                         Barcode = item.Barcode,
                         Name = item.Name,
                         SellingPrice = item.SellingPrice,
+
                         Type = item.Type.ToString(),
                         Qty = item.Products.Select(a => a.InventoryItems
                                                         .Select(b => b.Quantity)
@@ -239,6 +240,7 @@ namespace POS.UserControls
                                             Name = i.Name,
                                             SellingPrice = i.SellingPrice,
                                             Type = i.Type,
+                                            Notes = i.Details,
                                             Qty = i.Products.Select(a => a.InventoryItems
                                                                         .Select(b => b.Quantity)
                                                                         .DefaultIfEmpty(0)
@@ -311,6 +313,7 @@ namespace POS.UserControls
                  item.Name,
                  item.Type == ItemType.Quantifiable.ToString() ? item.Qty : null,
                  item.SellingPrice,
+                 item.Notes,
                  item.Type
                 );
 
@@ -324,6 +327,7 @@ namespace POS.UserControls
             public string Name { get; set; }
 
             public int? Qty { get; set; }
+            public string Notes { get; set; }
             public decimal SellingPrice { get; set; }
             public string Type { get; set; }
         }
@@ -435,7 +439,7 @@ namespace POS.UserControls
 
             editItemBtn.Enabled = isSingleRowSelected;
 
-            bool IsEnumerable = itemsTable.SelectedRows.Count > 0 && itemsTable.SelectedCells[5].Value.ToString() == ItemType.Quantifiable.ToString();
+            bool IsEnumerable = itemsTable.SelectedRows.Count > 0 && itemsTable.SelectedCells[typeCol.Index].Value.ToString() == ItemType.Quantifiable.ToString();
             viewStockBtn.Enabled = IsEnumerable && isSingleRowSelected;
         }
 
@@ -796,6 +800,11 @@ namespace POS.UserControls
             {
 
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            col_Notes.Visible = checkBox1.Checked;
         }
     }
 
