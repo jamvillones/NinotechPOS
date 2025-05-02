@@ -88,8 +88,8 @@ namespace POS.Forms
                 {
                     list.Add(new DataListHolder(
                         isFirstEntry ? inventoryItem.Product.Item.Barcode : "",
-                        item.SerialNumber,
                         isFirstEntry ? inventoryItem.Product.Item.Name : "",
+                        item.SerialNumber,
                         isFirstEntry ? qty.ToString() : "",
                         isFirstEntry ? inventoryItem.Product.Cost.ToString() : "",
                         isFirstEntry ? (qty * inventoryItem.Product.Cost).ToString() : ""
@@ -138,7 +138,7 @@ namespace POS.Forms
         Pen gridPen = new Pen(Brushes.Gray);
         StringFormat farFormat = new StringFormat() { Alignment = StringAlignment.Far };
         StringFormat centerFormat = new StringFormat() { Alignment = StringAlignment.Center };
-        Font contentFont = new Font("Consolas", 9, FontStyle.Regular);
+        Font contentFont = new Font("Consolas", 11, FontStyle.Regular);
         Font columnFont = new Font("Consolas", 10, FontStyle.Bold);
         int index = 0;
         int pageIndex { get; set; } = 1;
@@ -153,28 +153,28 @@ namespace POS.Forms
 
             int colHeight = (int)g.MeasureString("Test for column height", columnFont).Height;
 
-            Rectangle colRect = new Rectangle(area.Left, pageNumberRect.Bottom, area.Width * 2 / 9, colHeight);
+            Rectangle colRect = new Rectangle(area.Left, pageNumberRect.Bottom, area.Width * 2 / 10, colHeight);
             g.DrawRectangle(gridPen, colRect);
             g.DrawString("BARCODE", columnFont, Brushes.Black, colRect, centerFormat);
 
 
             colRect.X = colRect.Right;
-            colRect.Width = area.Width * 3 / 9;
+            colRect.Width = area.Width * 3 / 10;
             g.DrawRectangle(gridPen, colRect);
             g.DrawString("NAME", columnFont, Brushes.Black, colRect, centerFormat);
 
             colRect.X = colRect.Right;
-            colRect.Width = area.Width * 2 / 9;
+            colRect.Width = area.Width * 3 / 10;
             g.DrawRectangle(gridPen, colRect);
             g.DrawString("SERIAL #", columnFont, Brushes.Black, colRect, centerFormat);
 
             colRect.X = colRect.Right;
-            colRect.Width = area.Width * 1 / 9;
+            colRect.Width = area.Width * 1 / 10;
             g.DrawRectangle(gridPen, colRect);
             g.DrawString("QTY", columnFont, Brushes.Black, colRect, centerFormat);
 
             colRect.X = colRect.Right;
-            colRect.Width = area.Width * 1 / 9;
+            colRect.Width = area.Width * 1 / 10;
             g.DrawRectangle(gridPen, colRect);
             g.DrawString("ON HAND", columnFont, Brushes.Black, colRect, centerFormat);
 
@@ -187,9 +187,9 @@ namespace POS.Forms
 
                 List<int> heights = new List<int>
                 {
-                    (int)g.MeasureString(i.Items[0]?.ToString() ?? string.Empty, contentFont, area.Width * 2 / 9).Height,
-                    (int)g.MeasureString(i.Items[1]?.ToString() ?? string.Empty, contentFont, area.Width * 2 / 9).Height,
-                    (int)g.MeasureString(i.Items[2]?.ToString() ?? string.Empty, contentFont, area.Width * 3 / 9).Height
+                    (int)g.MeasureString(i.Items[0]?.ToString() ?? string.Empty, contentFont, area.Width * 2 / 10).Height,
+                    (int)g.MeasureString(i.Items[1]?.ToString() ?? string.Empty, contentFont, area.Width * 3 / 10).Height,
+                    (int)g.MeasureString(i.Items[2]?.ToString() ?? string.Empty, contentFont, area.Width * 3 / 10).Height
                 };
 
                 var max = heights.Max();
@@ -204,29 +204,28 @@ namespace POS.Forms
                     e.HasMorePages = false;
 
                 stringHolderRect.X = area.Left;
-                stringHolderRect.Width = area.Width * 2 / 9;
+                stringHolderRect.Width = area.Width * 2 / 10;
                 stringHolderRect.Y = yStart;
                 stringHolderRect.Height = max;
 
                 g.DrawRectangle(gridPen, stringHolderRect);
                 g.DrawString(i[0]?.ToString() ?? "", contentFont, Brushes.Black, stringHolderRect);
-
+               
                 stringHolderRect.X = stringHolderRect.Right;
-                stringHolderRect.Width = area.Width * 3 / 9;
-                stringHolderRect.Y = yStart;
-                stringHolderRect.Height = max;
-
-                g.DrawRectangle(gridPen, stringHolderRect);
-                g.DrawString(i[2].ToString(), contentFont, Brushes.Black, stringHolderRect);
-
-                stringHolderRect.X = stringHolderRect.Right;
-                stringHolderRect.Width = area.Width * 2 / 9;
+                stringHolderRect.Width = area.Width * 3 / 10;
 
                 g.DrawRectangle(gridPen, stringHolderRect);
                 g.DrawString(i[1]?.ToString(), contentFont, Brushes.Black, stringHolderRect);
 
                 stringHolderRect.X = stringHolderRect.Right;
-                stringHolderRect.Width = area.Width * 1 / 9;
+                stringHolderRect.Width = area.Width * 3 / 10;
+                stringHolderRect.Y = yStart;
+
+                g.DrawRectangle(gridPen, stringHolderRect);
+                g.DrawString(i[2]?.ToString(), contentFont, Brushes.Black, stringHolderRect);
+
+                stringHolderRect.X = stringHolderRect.Right;
+                stringHolderRect.Width = area.Width * 1 / 10;
 
                 g.DrawRectangle(gridPen, stringHolderRect);
                 g.DrawString(i[3].ToString(), contentFont, Brushes.Black, stringHolderRect, farFormat);
@@ -244,10 +243,10 @@ namespace POS.Forms
                 //g.DrawString(i[5].ToString(), contentFont, Brushes.Black, stringHolderRect, farFormat);
 
                 stringHolderRect.X = stringHolderRect.Right;
-                stringHolderRect.Width = area.Width * 1 / 9;
+                stringHolderRect.Width = area.Width * 1 / 10;
 
                 g.DrawRectangle(gridPen, stringHolderRect);
-                g.DrawString("", contentFont, Brushes.Black, stringHolderRect, farFormat);
+                //g.DrawString("", contentFont, Brushes.Black, stringHolderRect, farFormat);
 
                 yStart = stringHolderRect.Bottom;
                 index++;
