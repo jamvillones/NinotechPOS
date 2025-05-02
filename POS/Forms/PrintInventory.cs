@@ -138,8 +138,8 @@ namespace POS.Forms
         Pen gridPen = new Pen(Brushes.Gray);
         StringFormat farFormat = new StringFormat() { Alignment = StringAlignment.Far };
         StringFormat centerFormat = new StringFormat() { Alignment = StringAlignment.Center };
-        Font contentFont = new Font("Consolas", 11, FontStyle.Regular);
-        Font columnFont = new Font("Arial", 10, FontStyle.Bold);
+        Font contentFont = new Font("Consolas", 9, FontStyle.Regular);
+        Font columnFont = new Font("Consolas", 10, FontStyle.Bold);
         int index = 0;
         int pageIndex { get; set; } = 1;
 
@@ -148,9 +148,10 @@ namespace POS.Forms
             Graphics g = e.Graphics;
             Rectangle pageNumberRect = new Rectangle(0, 0, area.Width, 40);
             farFormat.Alignment = StringAlignment.Far;
-            g.DrawString("Date Printed: " + DateTime.Now.ToString("MMM - d - yyyy hh:mm tt").ToUpper() + "\nUser: " + UserManager.instance.CurrentLogin.ToString(), contentFont, Brushes.Black, pageNumberRect);
+            g.DrawString("Date Printed: " + DateTime.Now.ToString("MMM-d-yyyy hh:mm tt").ToUpper() + "\nUser: " + UserManager.instance.CurrentLogin.ToString(), contentFont, Brushes.Black, pageNumberRect);
             g.DrawString("Page: " + pageIndex, contentFont, Brushes.Black, pageNumberRect, farFormat);
-            int colHeight = (int)g.MeasureString("Item Name", contentFont).Height;
+
+            int colHeight = (int)g.MeasureString("Test for column height", columnFont).Height;
 
             Rectangle colRect = new Rectangle(area.Left, pageNumberRect.Bottom, area.Width * 2 / 9, colHeight);
             g.DrawRectangle(gridPen, colRect);
@@ -172,16 +173,6 @@ namespace POS.Forms
             g.DrawRectangle(gridPen, colRect);
             g.DrawString("QTY", columnFont, Brushes.Black, colRect, centerFormat);
 
-            //colRect.X = colRect.Right;
-            //colRect.Width = area.Width * 1 / 9;
-            //g.DrawRectangle(gridPen, colRect);
-            //g.DrawString("COST", columnFont, Brushes.Black, colRect, centerFormat);
-
-            //colRect.X = colRect.Right;
-            //colRect.Width = area.Width * 1 / 9;
-            //g.DrawRectangle(gridPen, colRect);
-            //g.DrawString("TOTAL", columnFont, Brushes.Black, colRect, centerFormat);
-
             colRect.X = colRect.Right;
             colRect.Width = area.Width * 1 / 9;
             g.DrawRectangle(gridPen, colRect);
@@ -194,11 +185,12 @@ namespace POS.Forms
             {
                 var i = Data[index];
 
-                List<int> heights = new List<int>();
-
-                heights.Add((int)g.MeasureString(i.Items[0]?.ToString() ?? string.Empty, contentFont, area.Width * 2 / 9).Height);
-                heights.Add((int)g.MeasureString(i.Items[1]?.ToString() ?? string.Empty, contentFont, area.Width * 2 / 9).Height);
-                heights.Add((int)g.MeasureString(i.Items[2]?.ToString() ?? string.Empty, contentFont, area.Width * 3 / 9).Height);
+                List<int> heights = new List<int>
+                {
+                    (int)g.MeasureString(i.Items[0]?.ToString() ?? string.Empty, contentFont, area.Width * 2 / 9).Height,
+                    (int)g.MeasureString(i.Items[1]?.ToString() ?? string.Empty, contentFont, area.Width * 2 / 9).Height,
+                    (int)g.MeasureString(i.Items[2]?.ToString() ?? string.Empty, contentFont, area.Width * 3 / 9).Height
+                };
 
                 var max = heights.Max();
 
