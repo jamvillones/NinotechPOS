@@ -806,6 +806,15 @@ namespace POS.UserControls
         {
             col_Notes.Visible = checkBox1.Checked;
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (itemsTable.Rows.Count == 0) return;
+
+            var selectedId = itemsTable.SelectedRows[0].Cells[0].Value.ToString();
+
+            new ItemHistory(selectedId).ShowDialog();
+        }
     }
 
     public class Pagination

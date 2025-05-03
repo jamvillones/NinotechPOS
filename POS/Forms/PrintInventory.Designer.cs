@@ -37,6 +37,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tagsOption = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.pagesOption = new System.Windows.Forms.ComboBox();
@@ -98,6 +100,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.tagsOption);
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.pagesOption);
@@ -116,6 +120,31 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(20);
             this.panel1.Size = new System.Drawing.Size(300, 741);
             this.panel1.TabIndex = 9;
+            // 
+            // tagsOption
+            // 
+            this.tagsOption.BackColor = System.Drawing.Color.White;
+            this.tagsOption.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tagsOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tagsOption.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.tagsOption.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tagsOption.FormattingEnabled = true;
+            this.tagsOption.Location = new System.Drawing.Point(20, 283);
+            this.tagsOption.Name = "tagsOption";
+            this.tagsOption.Size = new System.Drawing.Size(260, 25);
+            this.tagsOption.TabIndex = 20;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label6.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label6.Location = new System.Drawing.Point(20, 260);
+            this.label6.Name = "label6";
+            this.label6.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label6.Size = new System.Drawing.Size(47, 23);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Filter By:";
             // 
             // textBox2
             // 
@@ -230,7 +259,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(260, 50);
             this.button2.TabIndex = 8;
-            this.button2.Text = "   PRINT ";
+            this.button2.Text = "   PRINT (CTRL+P)";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = false;
@@ -296,7 +325,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(818, 692);
+            this.MinimumSize = new System.Drawing.Size(1280, 780);
             this.Name = "PrintInventory";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -333,5 +362,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.ComboBox paperOptions;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox tagsOption;
+        private System.Windows.Forms.Label label6;
     }
 }

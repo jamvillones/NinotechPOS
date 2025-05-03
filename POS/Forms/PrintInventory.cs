@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,7 +25,8 @@ namespace POS.Forms
 
             SetupAvailablePrinters();
 
-            paperOptions.DisplayMember = nameof(PaperSize.PaperName);
+            paperOptions.DisplayMember = nameof(PaperViewModel.Name);
+            paperOptions.ValueMember = nameof(PaperViewModel.Paper);
             paperOptions.DataSource = Papers;
         }
 
@@ -57,19 +59,34 @@ namespace POS.Forms
 
         private async void PrintInventory_Load(object sender, EventArgs e)
         {
+            await GetDataAsync();
+
+            printerOption.SelectedItem = AvailablePrinters.FirstOrDefault(p => p.Equals(printDocument.PrinterSettings.PrinterName));
+            tagsOption.DataSource = Departments_Store.Departments;
+            tagsOption.SelectedIndexChanged += TagsOption_SelectedIndexChanged;
+        }
+
+        private async Task GetDataAsync()
+        {
             using (var context = POSEntities.Create())
             {
                 var entries = await context.InventoryItems
                     .AsNoTracking()
                     .AsQueryable()
                     .Where(inv => inv.Product.Item.Type == ItemType.Quantifiable.ToString())
+                    .FilterByDepartment(tagsOption.Text.Trim())
                     .OrderBy(x => x.Product.Item.Name)
                     .ToListAsync();
 
                 Data = ProcessData(entries);
             }
+        }
 
-            printerOption.SelectedItem = AvailablePrinters.FirstOrDefault(p => p.Equals(printDocument.PrinterSettings.PrinterName));
+        private async void TagsOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            await GetDataAsync();
+
+            printPreview.Document = printDocument;
         }
 
         List<DataListHolder> ProcessData(List<InventoryItem> inventoryItems)
@@ -142,7 +159,6 @@ namespace POS.Forms
         Font columnFont = new Font("Consolas", 10, FontStyle.Bold);
         int index = 0;
         int pageIndex { get; set; } = 1;
-
         void PrintLayout(PrintPageEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -210,7 +226,7 @@ namespace POS.Forms
 
                 g.DrawRectangle(gridPen, stringHolderRect);
                 g.DrawString(i[0]?.ToString() ?? "", contentFont, Brushes.Black, stringHolderRect);
-               
+
                 stringHolderRect.X = stringHolderRect.Right;
                 stringHolderRect.Width = area.Width * 3 / 10;
 
@@ -269,12 +285,6 @@ namespace POS.Forms
             }
         }
 
-        private void document_BeginPrint(object sender, PrintEventArgs e)
-        {
-            printAction = e.PrintAction;
-            printDocument.PrinterSettings.PrinterName = printerOption.Text;
-        }
-
         List<DataListHolder> Data = new List<DataListHolder>();
         private void PrintInventory_KeyDown(object sender, KeyEventArgs e)
         {
@@ -315,13 +325,26 @@ namespace POS.Forms
 
             Papers.Clear();
 
-            foreach (PaperSize paperSize in printDocument.PrinterSettings.PaperSizes)
-                Papers.Add(paperSize);
+            foreach (PaperSize p in printDocument.PrinterSettings.PaperSizes)
+                Papers.Add(new PaperViewModel(p));
 
             isPaperSizesResetting = false;
 
             printDocument.PrinterSettings.PrinterName = printerOption.Text;
             printPreview.Document = printDocument;
+        }
+
+        private class PaperViewModel
+        {
+            public PaperViewModel(PaperSize paperSize)
+            {
+                Paper = paperSize;
+            }
+
+            public PaperSize Paper { get; }
+
+            public string Name => $"{Paper.PaperName} - {(decimal)Paper.Width / 100}in x {(decimal)Paper.Height / 100}in";
+
         }
 
         private void printDocument_EndPrint(object sender, PrintEventArgs e)
@@ -330,7 +353,7 @@ namespace POS.Forms
             printPreview.Rows = pageIndex;
         }
 
-        BindingList<PaperSize> Papers { get; } = new BindingList<PaperSize>();
+        BindingList<PaperViewModel> Papers { get; } = new BindingList<PaperViewModel>();
 
         bool isPaperSizesResetting = false;
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -338,8 +361,22 @@ namespace POS.Forms
             if (isPaperSizesResetting)
                 return;
 
-            printDocument.DefaultPageSettings.PaperSize = (PaperSize)paperOptions.SelectedItem;
+            printDocument.DefaultPageSettings.PaperSize = (PaperSize)paperOptions.SelectedValue;
             printPreview.Document = printDocument;
         }
+    }
+
+    static class InventoryItemExtension
+    {
+        public static IQueryable<InventoryItem> FilterByDepartment(this IQueryable<InventoryItem> inventories, string department)
+        {
+            if (department.IsEmpty())
+            {
+                return inventories;
+            }
+
+            return inventories.Where(i => i.Product.Item.Department == department);
+        }
+
     }
 }
