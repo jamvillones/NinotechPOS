@@ -652,7 +652,7 @@
             this.button8.Size = new System.Drawing.Size(180, 40);
             this.button8.TabIndex = 27;
             this.button8.TabStop = false;
-            this.button8.Text = "     Item Progression";
+            this.button8.Text = "     Stock Progression";
             this.button8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
