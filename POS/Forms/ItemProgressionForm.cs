@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace POS.Forms
 {
-    public partial class ItemHistory : Form
+    public partial class ItemProgressionForm : Form
     {
-        public ItemHistory(string id)
+        public ItemProgressionForm(string id)
         {
             InitializeComponent();
 
@@ -28,9 +28,11 @@ namespace POS.Forms
 
         private void DataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
+            var dgv = sender as DataGridView;
+
             for (int i = e.RowIndex; i < e.RowIndex + e.RowCount; i++)
             {
-                var row = dataGridView1.Rows[i];
+                var row = dgv.Rows[i];
 
                 if (row.Cells[Column1.Index].Value?.ToString() != null)
                 {
@@ -73,9 +75,10 @@ namespace POS.Forms
                 using (var context = POSEntities.Create())
                 {
                     var item = await context.Items.FirstOrDefaultAsync(i => i.Id == ItemId);
-                    bool isSerialRequired = item.IsSerialRequired;
 
                     this.Text = $"{this.Text} - {item.Name}";
+
+                    bool isSerialRequired = item.IsSerialRequired;
 
                     var stockIns = await context.StockinHistories.Where(s => s.Product.Item.Id == ItemId).AsNoTracking().ToListAsync();
 
@@ -110,7 +113,7 @@ namespace POS.Forms
                     foreach (var h in joined.OrderByDescending(i => i.Time))
                         History.Add(h);
 
-                    //chart1.Series[0].Name = item.Name;
+                    chart1.Series[0].Name = item.Name;
 
                     foreach (var h in joined.OrderBy(i => i.Time))
                         chart1.Series[0].Points.AddXY(h.Time, h.StandingValue);

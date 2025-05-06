@@ -31,10 +31,9 @@ namespace POS
             MessageBox.Show(installPath);
             */
 
-            bool performBackup = false;
+            //bool performBackup = false;
             UserManager.instance = new UserManager();
 
-            //bool signedOut;
 
             do
             {
@@ -64,26 +63,13 @@ namespace POS
                     Application.Run(main);
                     main.Dispose();
                 }
+
                 /// terminate loop when there is no login
                 else break;
 
                 //GC.Collect();
             }
             while (!UserManager.instance.IsLoggedIn);
-
-            //#if !DEBUG
-            if (performBackup)
-            {
-                try
-                {
-                    using (var p = POSEntities.Create()) p.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            //#endif
         }
     }
 }

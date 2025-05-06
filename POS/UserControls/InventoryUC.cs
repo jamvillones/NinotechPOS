@@ -4,11 +4,8 @@ using POS.Misc;
 using System;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -358,6 +355,7 @@ namespace POS.UserControls
                         x.Name,
                         selectedRow.Cells[3].Value,
                         x.SellingPrice,
+                        x.Details,
                         x.Type
                         );
 
@@ -813,7 +811,7 @@ namespace POS.UserControls
 
             var selectedId = itemsTable.SelectedRows[0].Cells[0].Value.ToString();
 
-            new ItemHistory(selectedId).ShowDialog();
+            new ItemProgressionForm(selectedId).ShowDialog();
         }
     }
 

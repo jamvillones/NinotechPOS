@@ -9,6 +9,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Contexts;
+using System.Threading.Tasks;
+using POS.Forms;
+using System.Text;
 
 namespace POS
 {
@@ -38,6 +41,8 @@ namespace POS
 
         public bool IsEnumerable =>
             this.Type == ItemType.Quantifiable.ToString();
+
+        public override string ToString() => $"{Name}-{Id}";
     }
 
     public partial class POSEntities
@@ -153,8 +158,87 @@ namespace POS
         }
     }
 
+    partial class POSEntities
+    {
+        public override async Task<int> SaveChangesAsync()
+        {
+            int changesMade = 0;
+            try
+            {
+                this.LogChanges(UserManager.instance.CurrentLogin);
+
+                changesMade = await base.SaveChangesAsync();
+                return changesMade;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (changesMade > 0)
+                {
+                    this.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
+                }
+            }
+        }
+    }
+
+    public class ChangesLogInfo
+    {
+
+    }
+
+
     public static class ContextManipulationMethods
     {
+        public static void LogChanges(this DbContext context, Login user)
+        {
+            var entries = context.ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
+
+            if (entries.Count() == 0) return;
+
+            var strBuilder = new StringBuilder();
+            strBuilder.AppendLine($"{user} -> {DateTime.Now}. ");
+
+            foreach (var entry in entries)
+            {
+                string entityName = entry.Entity.GetType().Name;
+                string state = entry.State.ToString();
+
+                // Log the change
+                strBuilder.AppendLine($"Entity: {entityName}, State: {state}");
+
+                if (entry.State == EntityState.Added)
+                {
+                    strBuilder.AppendLine($"Values: {string.Join(" , ", entry.CurrentValues.PropertyNames.Select(prop => $"{prop}:{entry.CurrentValues[prop]}"))}");
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    foreach (var property in entry.OriginalValues.PropertyNames)
+                    {
+                        var originalValue = entry.OriginalValues[property];
+                        var currentValue = entry.CurrentValues[property];
+                        if (!object.Equals(originalValue, currentValue))
+                        {
+                            // Log the change in the property value
+                            strBuilder.AppendLine($"Property '{property}': '{originalValue}'->'{currentValue}'");
+                        }
+                    }
+                }
+                else if (entry.State == EntityState.Deleted)
+                {
+                    foreach (var property in entry.OriginalValues.PropertyNames)
+                    {
+                        var originalValue = entry.OriginalValues[property];
+                        strBuilder.AppendLine($"Deleted: {property} = {originalValue}");
+                    }
+                }
+            }
+
+            Console.WriteLine(strBuilder.ToString());
+        }
 
         /// <summary>
         /// run this to set the isSerialRequired Property based on stockin entries with serial

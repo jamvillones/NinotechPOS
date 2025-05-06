@@ -181,11 +181,11 @@
     <Compile Include="Forms\InventoryTimeStamp_Form.Designer.cs">
       <DependentUpon>InventoryTimeStamp_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ItemHistory.cs">
+    <Compile Include="Forms\ItemProgressionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ItemHistory.Designer.cs">
-      <DependentUpon>ItemHistory.cs</DependentUpon>
+    <Compile Include="Forms\ItemProgressionForm.Designer.cs">
+      <DependentUpon>ItemProgressionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ItemInfoHolder.cs" />
     <Compile Include="Forms\ItemRegistration\BasicInformation_Form.cs">
@@ -526,8 +526,8 @@
     <EmbeddedResource Include="Forms\InventoryTimeStamp_Form.resx">
       <DependentUpon>InventoryTimeStamp_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ItemHistory.resx">
-      <DependentUpon>ItemHistory.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ItemProgressionForm.resx">
+      <DependentUpon>ItemProgressionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemRegistration\BasicInformation_Form.resx">
       <DependentUpon>BasicInformation_Form.cs</DependentUpon>
