@@ -192,7 +192,7 @@ namespace POS
 
     public static class ContextManipulationMethods
     {
-        public static void LogChanges(this DbContext context, Login user)
+        public static void LogChanges(this POSEntities context, Login user)
         {
             var entries = context.ChangeTracker.Entries()
                 .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
@@ -236,6 +236,8 @@ namespace POS
                     }
                 }
             }
+
+
 
             Console.WriteLine(strBuilder.ToString());
         }
