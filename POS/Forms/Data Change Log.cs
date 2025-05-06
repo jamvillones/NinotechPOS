@@ -17,6 +17,7 @@ namespace POS.Forms
 
             dataGridView1.AutoGenerateColumns = false;
 
+            col_Date.DataPropertyName = nameof(ChangeLog.Time);
             col_Time.DataPropertyName = nameof(ChangeLog.Time);
             col_By.DataPropertyName = nameof(ChangeLog.MadeBy);
             col_Details.DataPropertyName = nameof(ChangeLog.Details);
