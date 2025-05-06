@@ -184,12 +184,6 @@ namespace POS
         }
     }
 
-    public class ChangesLogInfo
-    {
-
-    }
-
-
     public static class ContextManipulationMethods
     {
         public static void LogChanges(this POSEntities context, Login user)
@@ -200,15 +194,13 @@ namespace POS
             if (entries.Count() == 0) return;
 
             var strBuilder = new StringBuilder();
-            //strBuilder.AppendLine($"{user} -> {DateTime.Now}. ");
 
             foreach (var entry in entries)
             {
                 string entityName = entry.Entity.GetType().Name;
                 string state = entry.State.ToString();
 
-                // Log the change
-                strBuilder.AppendLine($"▸ Entity: {entityName}, State: {state}");
+                strBuilder.AppendLine($"▸ Entry: {entityName}, State: {state}");
 
                 if (entry.State == EntityState.Added)
                 {
@@ -238,25 +230,23 @@ namespace POS
             }
 
             context.ChangeLogs.Add(new ChangeLog() {  MadeBy = user.ToString(), Details = strBuilder.ToString() });
-
-            //Console.WriteLine(strBuilder.ToString());
         }
 
         /// <summary>
         /// run this to set the isSerialRequired Property based on stockin entries with serial
         /// </summary>
-        public static void SetIsSerialRequired()
-        {
-            using (var context = POSEntities.Create())
-            {
-                var items = context.Items.AsQueryable().Where(i => i.Products.Any(p => p.StockinHistories.Any(st => st.SerialNumber != null))).ToList();
+        //public static void SetIsSerialRequired()
+        //{
+        //    using (var context = POSEntities.Create())
+        //    {
+        //        var items = context.Items.AsQueryable().Where(i => i.Products.Any(p => p.StockinHistories.Any(st => st.SerialNumber != null))).ToList();
 
-                foreach (var i in items)
-                    i.IsSerialRequired = true;
+        //        foreach (var i in items)
+        //            i.IsSerialRequired = true;
 
-                context.SaveChanges();
-            }
-        }
+        //        context.SaveChanges();
+        //    }
+        //}
 
         public static bool HasChanges(this DbContext context) => context.ChangeTracker.Entries().Any(e => e.IsEntityActuallyModified());
 
