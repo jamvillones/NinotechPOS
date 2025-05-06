@@ -183,8 +183,9 @@
             chartArea1.AlignmentStyle = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentStyles.None;
             chartArea1.AxisX.Interval = 1D;
             chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.LabelStyle.Angle = 20;
-            chartArea1.AxisX.LabelStyle.Format = "MMM d, yyyy h:mm:ss tt";
+            chartArea1.AxisX.LabelStyle.Angle = 45;
+            chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.SystemColors.HotTrack;
+            chartArea1.AxisX.LabelStyle.Format = "MMM d-yyyy-h:mm tt";
             chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gainsboro;
             chartArea1.AxisY.LineColor = System.Drawing.SystemColors.ActiveCaptionText;
             chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gainsboro;
@@ -195,11 +196,14 @@
             this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(3, 3);
             this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
             series1.BorderWidth = 5;
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
+            series1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             series1.IsValueShownAsLabel = true;
             series1.IsXValueIndexed = true;
+            series1.LabelForeColor = System.Drawing.Color.Maroon;
             series1.Legend = "Legend1";
             series1.Name = "Progression";
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.DateTime;
@@ -227,8 +231,10 @@
             this.ClientSize = new System.Drawing.Size(804, 451);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.Name = "ItemProgressionForm";
             this.Text = "Stock Progression";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ItemHistory_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);

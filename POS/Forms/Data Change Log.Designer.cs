@@ -130,7 +130,7 @@
             // 
             // col_Date
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle2.Format = "MMM d-yyyy";
             dataGridViewCellStyle2.NullValue = null;
             this.col_Date.DefaultCellStyle = dataGridViewCellStyle2;
@@ -140,7 +140,7 @@
             // 
             // col_Time
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle3.Format = "h:mm:ss tt";
             this.col_Time.DefaultCellStyle = dataGridViewCellStyle3;
             this.col_Time.HeaderText = "TIME";
@@ -149,7 +149,7 @@
             // 
             // col_By
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             this.col_By.DefaultCellStyle = dataGridViewCellStyle4;
             this.col_By.HeaderText = "COMMITTED BY";
             this.col_By.Name = "col_By";
