@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -554,7 +556,7 @@ namespace POS.Forms
                     notifyIcon1.ShowBalloonTip(1, newSale.SaleType.ToString().ToUpper() + " SALE", newSale.Customer?.ToString() + " - " + newSale.AmountDue.ToCurrency(), ToolTipIcon.Info);
                 }
             }
-            catch (Exception)
+            catch (EntityException)
             {
 
             }

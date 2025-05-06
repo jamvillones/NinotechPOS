@@ -121,6 +121,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeLog.cs">
+      <DependentUpon>POSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Add_Edit_ConnectionConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +165,12 @@
     </Compile>
     <Compile Include="Forms\Create_Supplier_Form.Designer.cs">
       <DependentUpon>Create_Supplier_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Data Change Log.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Data Change Log.Designer.cs">
+      <DependentUpon>Data Change Log.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\EditCostForm.cs">
       <SubType>Form</SubType>
@@ -516,6 +525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomerTransactionsForm.resx">
       <DependentUpon>CustomerTransactionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Data Change Log.resx">
+      <DependentUpon>Data Change Log.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditCostForm.resx">
       <DependentUpon>EditCostForm.cs</DependentUpon>

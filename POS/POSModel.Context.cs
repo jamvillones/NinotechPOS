@@ -35,5 +35,6 @@ namespace POS
         public virtual DbSet<ChargedPayRecord> ChargedPayRecords { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<SoldItem> SoldItems { get; set; }
+        public virtual DbSet<ChangeLog> ChangeLogs { get; set; }
     }
 }

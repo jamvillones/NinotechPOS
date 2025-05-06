@@ -271,6 +271,11 @@ namespace POS
                     }
                 }
             }
+
+            else if (e.KeyCode == Keys.F10)
+            {
+                new Data_Change_Log().ShowDialog();
+            }
         }
     }
 }

@@ -200,7 +200,7 @@ namespace POS
             if (entries.Count() == 0) return;
 
             var strBuilder = new StringBuilder();
-            strBuilder.AppendLine($"{user} -> {DateTime.Now}. ");
+            //strBuilder.AppendLine($"{user} -> {DateTime.Now}. ");
 
             foreach (var entry in entries)
             {
@@ -208,11 +208,11 @@ namespace POS
                 string state = entry.State.ToString();
 
                 // Log the change
-                strBuilder.AppendLine($"Entity: {entityName}, State: {state}");
+                strBuilder.AppendLine($"▸ Entity: {entityName}, State: {state}");
 
                 if (entry.State == EntityState.Added)
                 {
-                    strBuilder.AppendLine($"Values: {string.Join(" , ", entry.CurrentValues.PropertyNames.Select(prop => $"{prop}:{entry.CurrentValues[prop]}"))}");
+                    strBuilder.AppendLine($"Values: {string.Join(" , ", entry.CurrentValues.PropertyNames.Where(prop => entry.CurrentValues[prop] != null).Select(prop => $"{prop}:{entry.CurrentValues[prop]}"))}");
                 }
                 else if (entry.State == EntityState.Modified)
                 {
@@ -237,9 +237,9 @@ namespace POS
                 }
             }
 
+            context.ChangeLogs.Add(new ChangeLog() {  MadeBy = user.ToString(), Details = strBuilder.ToString() });
 
-
-            Console.WriteLine(strBuilder.ToString());
+            //Console.WriteLine(strBuilder.ToString());
         }
 
         /// <summary>

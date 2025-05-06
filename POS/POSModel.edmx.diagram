@@ -24,6 +24,7 @@
         <EntityTypeShape EntityType="POSModel.SoldItem" Width="1.5" PointX="4.875" PointY="1.75" IsExpanded="false" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Product" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Sale" />
+        <EntityTypeShape EntityType="POSModel.ChangeLog" Width="1.5" PointX="0.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

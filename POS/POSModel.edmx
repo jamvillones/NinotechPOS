@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="POSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChangeLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MadeBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+          <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="ChargedPayRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -240,6 +249,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="POSModelStoreContainer">
+          <EntitySet Name="ChangeLog" EntityType="Self.ChangeLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChargedPayRecord" EntityType="Self.ChargedPayRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InventoryItem" EntityType="Self.InventoryItem" Schema="dbo" store:Type="Tables" />
@@ -348,6 +358,7 @@
             <End Role="Sale" EntitySet="Sales" />
             <End Role="SoldItem" EntitySet="SoldItems" />
           </AssociationSet>
+          <EntitySet Name="ChangeLogs" EntityType="POSModel.ChangeLog" />
           </EntityContainer>
         <EntityType Name="Supplier">
           <Key>
@@ -591,6 +602,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ChangeLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MadeBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -719,6 +739,16 @@
                 <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
                 <ScalarProperty Name="SaleId" ColumnName="SaleId" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChangeLogs">
+            <EntityTypeMapping TypeName="POSModel.ChangeLog">
+              <MappingFragment StoreEntitySet="ChangeLog">
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="MadeBy" ColumnName="MadeBy" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
