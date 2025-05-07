@@ -116,6 +116,7 @@ namespace POS.Forms
 
                     chart1.Series[0].Name = item.Name;
 
+                    ///so that the charts start with coordinate (0,0)
                     chart1.Series[0].Points.AddXY(0, 0);
 
                     int xValue = 1;

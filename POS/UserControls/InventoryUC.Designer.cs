@@ -254,7 +254,6 @@
             this.col_remove.Text = "❌";
             this.col_remove.UseColumnTextForButtonValue = true;
             this.col_remove.Visible = false;
-            this.col_remove.Width = 40;
             // 
             // panel5
             // 
@@ -779,10 +778,9 @@
             // trackItemCheckbox
             // 
             this.trackItemCheckbox.AutoSize = true;
-            this.trackItemCheckbox.Dock = System.Windows.Forms.DockStyle.Top;
             this.trackItemCheckbox.Location = new System.Drawing.Point(15, 0);
             this.trackItemCheckbox.Name = "trackItemCheckbox";
-            this.trackItemCheckbox.Size = new System.Drawing.Size(1025, 17);
+            this.trackItemCheckbox.Size = new System.Drawing.Size(77, 17);
             this.trackItemCheckbox.TabIndex = 13;
             this.trackItemCheckbox.TabStop = false;
             this.trackItemCheckbox.Text = "Track Item";
@@ -818,8 +816,8 @@
             this.searchBar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.searchBar.BackColor = System.Drawing.Color.White;
             this.searchBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchBar.Location = new System.Drawing.Point(15, 17);
+            this.searchBar.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.searchBar.MaximumSize = new System.Drawing.Size(450, 35);
             this.searchBar.MinimumSize = new System.Drawing.Size(200, 40);
             this.searchBar.Name = "searchBar";
