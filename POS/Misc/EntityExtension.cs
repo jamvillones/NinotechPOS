@@ -215,7 +215,7 @@ namespace POS
                         if (!object.Equals(originalValue, currentValue))
                         {
                             // Log the change in the property value
-                            strBuilder.AppendLine($"Property '{property}': '{originalValue}'->'{currentValue}'");
+                            strBuilder.AppendLine($"Property '{property}': '{originalValue}'→'{currentValue}'");
                         }
                     }
                 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POS.Misc;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
@@ -44,11 +45,14 @@ namespace POS.Forms
 
                 var logs = await context.ChangeLogs.AsNoTracking()
                     .FilterByDate(dateTimePicker1.Checked, Start, End)
+                    .ApplySearchFilter(keyword)
                     .OrderByDescending(l => l.Time)
                     .ToListAsync();
 
                 foreach (var log in logs)
                     Changes.Add(log);
+
+                label2.Text = $"{Changes.Count} items";
             }
         }
 
@@ -78,6 +82,23 @@ namespace POS.Forms
             //    e.FormattingApplied = true;
             //}
         }
+
+        string keyword = "";
+        private async void searchControl1_OnSearch(object sender, Misc.SearchEventArgs e)
+        {
+            keyword = e.Text;
+
+            await LoadData_Async();
+
+            e.SearchFound = Changes.Count > 0;
+        }
+
+        private async void searchControl1_OnTextEmpty(object sender, EventArgs e)
+        {
+            keyword = string.Empty;
+
+            await LoadData_Async();
+        }
     }
 
     public static class ChangeLogExtension
@@ -87,6 +108,13 @@ namespace POS.Forms
             if (!shouldBeApplied) return logs;
 
             return logs.Where(l => l.Time >= start && l.Time <= end);
+        }
+
+        public static IQueryable<ChangeLog> ApplySearchFilter(this IQueryable<ChangeLog> logs, string keyword)
+        {
+            if (keyword.IsEmpty()) return logs;
+
+            return logs.Where(l => l.Details.Contains(keyword) || l.MadeBy.Contains(keyword));
         }
     }
 }

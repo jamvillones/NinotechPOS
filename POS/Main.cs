@@ -255,6 +255,7 @@ namespace POS
             this.Close();
         }
 
+        Form ChangeLogForm { get; set; } = null;
         private void Main_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F12)
@@ -271,14 +272,27 @@ namespace POS
                     }
                 }
             }
-
             else if (e.KeyCode == Keys.F10)
             {
-                using (var changeLog = new Data_Change_Log())
+                if (ChangeLogForm is null)
                 {
-                    changeLog.RequireAdminConfirmationBeforeViewing();
+                    ChangeLogForm = new Data_Change_Log();
+                    ChangeLogForm.FormClosed += ChangeLogForm_FormClosed;
+                    ChangeLogForm.Show();
                 }
+                else
+                    ChangeLogForm?.BringToFront();
+
             }
         }
+
+        private void ChangeLogForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            var form = sender as Form;
+            form.Dispose();
+
+            ChangeLogForm = null;
+        }
     }
+
 }

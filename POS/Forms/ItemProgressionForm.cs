@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace POS.Forms
 {
@@ -115,8 +116,20 @@ namespace POS.Forms
 
                     chart1.Series[0].Name = item.Name;
 
+                    chart1.Series[0].Points.AddXY(0, 0);
+
+                    int xValue = 1;
                     foreach (var h in joined.OrderBy(i => i.Time))
-                        chart1.Series[0].Points.AddXY(h.Time, h.StandingValue);
+                    {
+                        var dataPoint = new DataPoint(xValue++, h.StandingValue);
+                        //dataPoint.LabelToolTip = $"{h.Time} - {h.StandingValue}";
+                        dataPoint.ToolTip = $"{h.StandingValue} unit/s ({h.Quantity:+0;-0;+0} Δ) ▸ {h.Time}";
+                        dataPoint.Label = "";
+
+
+                        chart1.Series[0].Points.Add(dataPoint);
+                    }
+                    //chart1.Series[0].Points.AddXY(h.Time, h.StandingValue);
                 }
             }
             catch { }
