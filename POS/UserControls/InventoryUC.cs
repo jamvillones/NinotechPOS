@@ -58,15 +58,13 @@ namespace POS.UserControls
                     sellForm.WindowState = FormWindowState.Maximized;
 
                 sellForm.BringToFront();
-
-                var searchKeyword = SelectedBarcode.IsEmpty() ? SelectedName : SelectedBarcode;
-                sellForm.SetSearchKeyword(searchKeyword);
-                return;
             }
-
-            sellForm = new SellForm();
-            sellForm.FormClosed += SellForm_FormClosed;
-            sellForm.Show();
+            else
+            {
+                sellForm = new SellForm();
+                sellForm.FormClosed += SellForm_FormClosed;
+                sellForm.Show();
+            }
         }
         private async void SellForm_OnSave(object sender, EventArgs e)
         {
@@ -306,6 +304,7 @@ namespace POS.UserControls
 
             row.CreateCells(itemsTable,
                  item.Id,
+                 null,
                  item.Barcode,
                  item.Name,
                  item.Type == ItemType.Quantifiable.ToString() ? item.Qty : null,
@@ -351,6 +350,7 @@ namespace POS.UserControls
 
                     selectedRow.SetValues(
                         x.Id,
+                        null,
                         x.Barcode,
                         x.Name,
                         selectedRow.Cells[3].Value,
@@ -437,7 +437,7 @@ namespace POS.UserControls
 
             editItemBtn.Enabled = isSingleRowSelected;
 
-            bool IsEnumerable = itemsTable.SelectedRows.Count > 0 && itemsTable.SelectedCells[typeCol.Index].Value.ToString() == ItemType.Quantifiable.ToString();
+            bool IsEnumerable = itemsTable.SelectedRows.Count > 0 && itemsTable.SelectedCells[col_Type.Index].Value.ToString() == ItemType.Quantifiable.ToString();
             viewStockBtn.Enabled = IsEnumerable && isSingleRowSelected;
         }
 
@@ -807,11 +807,72 @@ namespace POS.UserControls
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (itemsTable.Rows.Count == 0) return;
 
-            var selectedId = itemsTable.SelectedRows[0].Cells[0].Value.ToString();
+        }
+
+        private void itemsTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+
+            if (e.RowIndex < 0)
+                return;
+
+            if (e.ColumnIndex == col_ShowProgression.Index)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                var image = Properties.Resources.graph_15px;
+                var w = image.Width;
+                var h = image.Height;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                e.Graphics.DrawImage(image, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+
+        }
+
+        private void itemsTable_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (itemsTable.Rows.Count == 0 || e.RowIndex == -1 || e.ColumnIndex != col_ShowProgression.Index) return;
+
+            var selectedId = itemsTable[col_Id.Index, e.RowIndex].Value?.ToString();
 
             new ItemProgressionForm(selectedId).ShowDialog();
+        }
+
+        private void itemsTable_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1) return;
+            var dgv = sender as DataGridView;
+            if (e.Button == MouseButtons.Right)
+            {
+                dgv.ClearSelection();
+                dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected = true;
+
+                // Optional: show context menu at mouse position
+                restockThisItemToolStripMenuItem.Enabled = dgv.SelectedRows[0].Cells[col_Type.Index].Value.ToString() == ItemType.Quantifiable.ToString();
+                contextMenuStrip.Show(Cursor.Position);
+            }
+        }
+
+        private void sellThisItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSellForm();
+
+            var searchKeyword = SelectedBarcode.IsEmpty() ? SelectedName : SelectedBarcode;
+            sellForm.SetSearchKeyword(searchKeyword);
+        }
+
+        private async void restockThisItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var searchKeyword = SelectedBarcode.IsEmpty() ? SelectedName : SelectedBarcode;
+
+            using (var stockinForm = new StockinForm())
+            {
+                await stockinForm.DoSearch(searchKeyword);
+                stockinForm.ShowDialog();
+            }
+
         }
     }
 

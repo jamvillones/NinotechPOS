@@ -702,6 +702,8 @@
       <DependentUpon>POSModel.edmx</DependentUpon>
       <LastGenOutput>POSModel.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\graph_15px.png" />
+    <None Include="Resources\progression_15px.bmp" />
     <None Include="Resources\copy_15px1.png" />
     <None Include="Resources\copy_to_clipboard_15px.png" />
   </ItemGroup>

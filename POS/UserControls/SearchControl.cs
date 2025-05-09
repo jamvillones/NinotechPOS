@@ -13,6 +13,7 @@ namespace POS.UserControls
                 return searchText;
             }
         }
+
         private string prevSearch = "";
         public bool SearchDone = false;
         /// <summary>

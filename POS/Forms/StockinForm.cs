@@ -2,6 +2,7 @@
 using POS.Misc;
 using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -136,15 +137,22 @@ namespace POS.Forms
             itemName.Text = CurrentProductBarcode + " - " + CurrentProductName + " - " + CurrentProductCost.ToString("C2");
 
             Foo(CurrentSerialRequired);
-
-            serialNumber.Focus();
-            serialNumber.SelectAll();
         }
         void Foo(bool serialRequired)
         {
             quantity.Value = 1;
             qtyGroup.Visible = !serialRequired;
             serialGroup.Visible = serialRequired;
+
+            if (serialGroup.Visible)
+            {
+                serialNumber.Focus();
+                serialNumber.SelectAll();
+            }
+            else if (qtyGroup.Visible)
+            {
+                quantity.Focus();
+            }
         }
         bool AlreadyInTable(int id, out ToStockinViewModel stockinEntry)
         {
@@ -449,16 +457,33 @@ namespace POS.Forms
 
             }
         }
-        private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
+
+        public async Task<bool> DoSearch(string searchText)
         {
             TryCancel();
-            keyword = e.Text;
-            e.SearchFound = await LoadDataAsync();
-            if (e.SearchFound)
-            {
-                serialNumber.SelectAll();
-            }
-            _messageLabel.Text = e.SearchFound ? "" : "**No Results Found!";
+
+            keyword = searchText;
+            bool searchFound = await LoadDataAsync();
+
+            //if (searchFound)
+            //{
+            //    if (quantity.Visible)
+            //        quantity.Focus();
+
+            //    else if (serialNumber.Visible)
+            //    {
+            //        serialNumber.Focus();
+            //        serialNumber.SelectAll();
+            //    }
+            //}
+
+            _messageLabel.Text = searchFound ? string.Empty : "**No Results Found!";
+            return searchFound;
+        }
+
+        private async void searchControl1_OnSearch(object sender, SearchEventArgs e)
+        {
+            e.SearchFound = await DoSearch(e.Text);
         }
 
         string keyword = string.Empty;

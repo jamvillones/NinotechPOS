@@ -40,13 +40,13 @@
             this.tablePanel = new System.Windows.Forms.Panel();
             this.itemsTable = new System.Windows.Forms.DataGridView();
             this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ShowProgression = new System.Windows.Forms.DataGridViewButtonColumn();
             this.barcodeCol = new System.Windows.Forms.DataGridViewButtonColumn();
             this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.typeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_remove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -57,6 +57,9 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.sellThisItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restockThisItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.viewStockBtn = new System.Windows.Forms.Button();
             this.stockinBtn = new System.Windows.Forms.Button();
@@ -71,7 +74,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -89,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.panel5.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -132,13 +135,13 @@
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Id,
+            this.col_ShowProgression,
             this.barcodeCol,
             this.nameCol,
             this.quantityCol,
             this.priceCol,
             this.col_Notes,
-            this.typeCol,
-            this.col_remove});
+            this.col_Type});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -161,10 +164,13 @@
             this.itemsTable.Size = new System.Drawing.Size(862, 606);
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 3;
+            this.itemsTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellClick);
             this.itemsTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellContentClick);
             this.itemsTable.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDoubleClick);
+            this.itemsTable.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseDown);
             this.itemsTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellMouseEnter);
             this.itemsTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellMouseLeave);
+            this.itemsTable.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.itemsTable_CellPainting);
             this.itemsTable.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.itemsTable_RowsAdded);
             this.itemsTable.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.itemsTable_RowsRemoved);
             this.itemsTable.Scroll += new System.Windows.Forms.ScrollEventHandler(this.itemsTable_Scroll);
@@ -178,12 +184,27 @@
             this.col_Id.ReadOnly = true;
             this.col_Id.Visible = false;
             // 
+            // col_ShowProgression
+            // 
+            this.col_ShowProgression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            this.col_ShowProgression.DefaultCellStyle = dataGridViewCellStyle2;
+            this.col_ShowProgression.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.col_ShowProgression.HeaderText = "";
+            this.col_ShowProgression.MinimumWidth = 40;
+            this.col_ShowProgression.Name = "col_ShowProgression";
+            this.col_ShowProgression.ReadOnly = true;
+            this.col_ShowProgression.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_ShowProgression.Text = "";
+            this.col_ShowProgression.UseColumnTextForButtonValue = true;
+            this.col_ShowProgression.Width = 40;
+            // 
             // barcodeCol
             // 
             this.barcodeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
-            this.barcodeCol.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(1);
+            this.barcodeCol.DefaultCellStyle = dataGridViewCellStyle3;
             this.barcodeCol.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.barcodeCol.HeaderText = "BARCODE";
             this.barcodeCol.MinimumWidth = 50;
@@ -203,10 +224,10 @@
             // 
             // quantityCol
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = "N/A";
-            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = "N/A";
+            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle4;
             this.quantityCol.HeaderText = "QUANTITY";
             this.quantityCol.MinimumWidth = 50;
             this.quantityCol.Name = "quantityCol";
@@ -214,9 +235,9 @@
             // 
             // priceCol
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "C2";
-            this.priceCol.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "C2";
+            this.priceCol.DefaultCellStyle = dataGridViewCellStyle5;
             this.priceCol.HeaderText = "SELLING PRICE";
             this.priceCol.MinimumWidth = 50;
             this.priceCol.Name = "priceCol";
@@ -230,30 +251,15 @@
             this.col_Notes.ReadOnly = true;
             this.col_Notes.Visible = false;
             // 
-            // typeCol
+            // col_Type
             // 
-            this.typeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.typeCol.DefaultCellStyle = dataGridViewCellStyle5;
-            this.typeCol.HeaderText = "TYPE";
-            this.typeCol.Name = "typeCol";
-            this.typeCol.ReadOnly = true;
-            this.typeCol.Visible = false;
-            // 
-            // col_remove
-            // 
-            this.col_remove.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
-            this.col_remove.DefaultCellStyle = dataGridViewCellStyle6;
-            this.col_remove.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.col_remove.HeaderText = "";
-            this.col_remove.MinimumWidth = 40;
-            this.col_remove.Name = "col_remove";
-            this.col_remove.ReadOnly = true;
-            this.col_remove.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_remove.Text = "❌";
-            this.col_remove.UseColumnTextForButtonValue = true;
-            this.col_remove.Visible = false;
+            this.col_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.col_Type.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col_Type.HeaderText = "TYPE";
+            this.col_Type.Name = "col_Type";
+            this.col_Type.ReadOnly = true;
+            this.col_Type.Visible = false;
             // 
             // panel5
             // 
@@ -379,6 +385,30 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1, 645);
             this.panel2.TabIndex = 8;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sellThisItemToolStripMenuItem,
+            this.restockThisItemToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(172, 48);
+            // 
+            // sellThisItemToolStripMenuItem
+            // 
+            this.sellThisItemToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sellThisItemToolStripMenuItem.Image")));
+            this.sellThisItemToolStripMenuItem.Name = "sellThisItemToolStripMenuItem";
+            this.sellThisItemToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.sellThisItemToolStripMenuItem.Text = "Sell This Item?";
+            this.sellThisItemToolStripMenuItem.Click += new System.EventHandler(this.sellThisItemToolStripMenuItem_Click);
+            // 
+            // restockThisItemToolStripMenuItem
+            // 
+            this.restockThisItemToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restockThisItemToolStripMenuItem.Image")));
+            this.restockThisItemToolStripMenuItem.Name = "restockThisItemToolStripMenuItem";
+            this.restockThisItemToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.restockThisItemToolStripMenuItem.Text = "Restock This Item?";
+            this.restockThisItemToolStripMenuItem.Click += new System.EventHandler(this.restockThisItemToolStripMenuItem_Click);
             // 
             // button1
             // 
@@ -523,7 +553,6 @@
             this.panel6.Controls.Add(this.button2);
             this.panel6.Controls.Add(this.button5);
             this.panel6.Controls.Add(this.panel1);
-            this.panel6.Controls.Add(this.button8);
             this.panel6.Controls.Add(this.button6);
             this.panel6.Controls.Add(this.button4);
             this.panel6.Controls.Add(this.viewStockBtn);
@@ -548,7 +577,7 @@
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
             this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(0, 510);
+            this.button7.Location = new System.Drawing.Point(0, 470);
             this.button7.Margin = new System.Windows.Forms.Padding(5);
             this.button7.Name = "button7";
             this.button7.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -558,6 +587,7 @@
             this.button7.Text = "    Extract Data";
             this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Visible = false;
             // 
             // button3
             // 
@@ -567,7 +597,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(0, 470);
+            this.button3.Location = new System.Drawing.Point(0, 430);
             this.button3.Margin = new System.Windows.Forms.Padding(5);
             this.button3.Name = "button3";
             this.button3.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -587,7 +617,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 430);
+            this.button2.Location = new System.Drawing.Point(0, 390);
             this.button2.Margin = new System.Windows.Forms.Padding(5);
             this.button2.Name = "button2";
             this.button2.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -607,7 +637,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(0, 390);
+            this.button5.Location = new System.Drawing.Point(0, 350);
             this.button5.Margin = new System.Windows.Forms.Padding(5);
             this.button5.Name = "button5";
             this.button5.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -623,7 +653,7 @@
             // 
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 375);
+            this.panel1.Location = new System.Drawing.Point(0, 335);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(190, 15);
             this.panel1.TabIndex = 22;
@@ -637,26 +667,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(190, 1);
             this.panel4.TabIndex = 12;
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.Color.White;
-            this.button8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
-            this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button8.Location = new System.Drawing.Point(0, 335);
-            this.button8.Margin = new System.Windows.Forms.Padding(5);
-            this.button8.Name = "button8";
-            this.button8.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.button8.Size = new System.Drawing.Size(190, 40);
-            this.button8.TabIndex = 27;
-            this.button8.TabStop = false;
-            this.button8.Text = "     Stock Progression";
-            this.button8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button6
             // 
@@ -842,6 +852,7 @@
             this.panel5.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.contextMenuStrip.ResumeLayout(false);
             this.contentPanel.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
@@ -895,15 +906,17 @@
         protected System.Windows.Forms.Button button7;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
+        private System.Windows.Forms.DataGridViewButtonColumn col_ShowProgression;
         private System.Windows.Forms.DataGridViewButtonColumn barcodeCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Notes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn typeCol;
-        private System.Windows.Forms.DataGridViewButtonColumn col_remove;
-        private System.Windows.Forms.Label label1;
-        protected System.Windows.Forms.Button button8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_Type;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem sellThisItemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restockThisItemToolStripMenuItem;
     }
 }

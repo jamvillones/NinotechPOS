@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="col_ShowProgression.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="barcodeCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -132,16 +135,38 @@
   <metadata name="col_Notes.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="typeCol.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="col_remove.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="col_Type.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>10, 16</value>
   </metadata>
+  <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>107, 16</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="sellThisItemToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAShJREFUOE9j
+        oCroO/ZfqO/YN2kQ7j/+U3PCiS/iUCniwISTP0MnnPr5H45P/1xVaLmKM9N6u1+a5fZQEE613GkFVY4J
+        sBmQZrktwCP50n+LivtgHO535DdUOSbAbsD2UJBGxWmfwTgg8vR/qHIEmF5yUWxq6dnrE3puITQDcd+q
+        l//7c0/9L/Pb/7/cbx8YV4cc/A9Ue21S5TlRqHYGhqllZ4OAgv/bsk79L0o8AcfVKSdAirFjoB6odgaG
+        aaVnQkGCc+ouEIVBakF6oNoRBqyccI0ojNMAbLZhw7RzASkYxYBC993+OfY7z6LjfJfd50EYmxxID1Q7
+        A0Oq1VaDdKvt/4D4PzKujzr0vyHyEIoYFP/LNN+uB9UOASCBVIsdLsRgDM3kAwYGAEKpvDtnJTlgAAAA
+        AElFTkSuQmCC
+</value>
+  </data>
+  <data name="restockThisItemToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAU9JREFUOE9j
+        GBwgvrrHLqG2qwLKZfg/gyHk/3SG3VjxDIZN/2cyyEGVIkB8bdfslKoJ4iA2UNEqIP4PwpdqGf5vzGT4
+        /7YXwgfjmQyhYE3IIKGmuzShutcCxEY2ACvGZkBiXVd4fG13GIgNVES6AXG13ZaJtV0lIPaDNoYLNxsZ
+        /uPCz7oYqsCakEFcdZ90Ym33RBAbaAvcBeerGP6vTGH4/6aHgAsaGhqYEmp7VoHYyAZgxdgMAIGE2u41
+        IBqoaBmGJmQ8kyEArAEdAA1Y+2mHoO3/XWxb/29hPYgVbwLi/ezr/u/nBMcYCkis7rXqn5i88+wK7acb
+        phq9vL5O4/H/A+yrYfjffvbVB2fJ7Xu/nXcDVgNgwMLdf7prZPJ/C48AB6gQGJi5+TqBxM3c/aZBhbAD
+        Szd/K5Ahxi6h/FAhMADxQeJmHoGWUKEBBwwMAElLDj+T6CoSAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAUJJREFUOE+N
@@ -236,14 +261,6 @@
         R+tzyx3ErTRU0OjPZbEPJ7O2/YAQdMOnOMMBnKjcQ8JKIYwk3vGKPr7RxCqCqPz7fDWs4w1VrEB/FMML
         SggyvW0lg2eouIUh1pDHAEFmlXXGrvdpDvGIHZxARwmiF6YL0ouSI0Qxwi6UY2gHDVxrwo/e9gVals6p
         XOIJOahcxxf2sDS6VR3pDh+4QcQYY34ARtFPcC31n9oAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="button8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAHpJREFUOE9j
-        oAaQAOIDaHgFEBMFFID4Pxp+AMREgYHTDAMOQAzSiAzuAzG6wSDLMABM8xkk/BOIG4DYGIh9gZig5nIk
-        /A6ItwJxBxBPB2KCmpHBEiDejYbFgRgDYNNMNKAowJSA+C8QkxVgIOACxGQFGDZAdICRABgYAAjyQlp+
-        y67XAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="button6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

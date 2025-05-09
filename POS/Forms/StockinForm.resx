@@ -120,13 +120,12 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="stockinBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAEfSURBVDhP1Y8xTsNAFEStUEUQGq4AB4AeJCQaujQ5CFFOAA0FnAMOQI5ACxQ0KegRCHqq5Y13
-        sFj8kziIhic92X/2z8qu/g8ppTVc91hAfiI9FqijrscMQQ+v8RYHjhvIHqXHBrJNd66w5zhDMEZxh1uO
-        a5hbF2rHu2LsuISDs3yebhzVMEcXTrUIp45iWJjhz3J0obKZx/ksKC/NQrqWo6yAwx18wA97j9s+a8o8
-        5+614GAP3/ENdx23vob3cC+EhQPc91jDHP1ya28pFPR75/hq9R7/Xle4YIJfTBwvhsVjfNLTUQH5hfRY
-        EHYZRihGjjqjTq5+6zIMc5YuUQurqI4Y+rr6wgG+1PHveMYNX5ch6OMhHq2oOn1f89dU1Sc/MDQFzy8k
-        8gAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAR9JREFUOE/V
+        jzFOw0AURK1QRRAargAHgB4kJBq6NDkIUU4ADQWcAw5AjkALFDQp6BEIeqrljXewWPyTOIiGJz3Zf/bP
+        yq7+DymlNVz3WEB+Ij0WqKOuxwxBD6/xFgeOG8gepccGsk13rrDnOEMwRnGHW45rmFsXase7Yuy4hIOz
+        fJ5uHNUwRxdOtQinjmJYmOHPcnShspnH+SwoL81CupajrIDDHXzAD3uP2z5ryjzn7rXgYA/f8Q13Hbe+
+        hvdwL4SFA9z3WMMc/XJrbykU9Hvn+Gr1Hv9eV7hggl9MHC+GxWN80tNRAfmF9FgQdhlGKEaOOqNOrn7r
+        Mgxzli5RC6uojhj6uvrCAb7U8e94xg1flyHo4yEerag6fV/z11TVJz8wNAXPLyTyAAAAAElFTkSuQmCC
 </value>
   </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

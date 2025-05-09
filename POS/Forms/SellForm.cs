@@ -5,11 +5,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core;
-using System.Data.Entity.Infrastructure;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using test;
 
 namespace POS.Forms
 {
@@ -18,14 +18,17 @@ namespace POS.Forms
         public SellForm()
         {
             InitializeComponent();
-
             SetBindings();
             FormatValues();
         }
 
         public void SetSearchKeyword(string keyword)
         {
-            searchControl1.firstControl.Text = keyword;
+            string qtyPlaceHolder = "[Replace Qty]";
+            var searchTextbox = searchControl1.firstControl as KeywordAutoCompleteTextBox;
+            searchTextbox.Text = $"{qtyPlaceHolder} * {keyword}";
+            searchTextbox.Select(0, qtyPlaceHolder.Length);
+            searchTextbox.Focus();
         }
 
         private void SetBindings()

@@ -180,6 +180,7 @@
             // 
             // chart1
             // 
+            this.chart1.BorderSkin.BackColor = System.Drawing.Color.White;
             chartArea1.AlignmentStyle = System.Windows.Forms.DataVisualization.Charting.AreaAlignmentStyles.None;
             chartArea1.AxisX.Interval = 1D;
             chartArea1.AxisX.IsLabelAutoFit = false;
@@ -187,10 +188,13 @@
             chartArea1.AxisX.LabelStyle.Enabled = false;
             chartArea1.AxisX.LabelStyle.ForeColor = System.Drawing.SystemColors.HotTrack;
             chartArea1.AxisX.LabelStyle.Format = "MMM d-yyyy-h:mm tt";
-            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Gainsboro;
+            chartArea1.AxisX.LineColor = System.Drawing.SystemColors.HotTrack;
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Fuchsia;
             chartArea1.AxisX.Minimum = 0D;
-            chartArea1.AxisY.LineColor = System.Drawing.SystemColors.ActiveCaptionText;
-            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Gainsboro;
+            chartArea1.AxisY.LineColor = System.Drawing.SystemColors.HotTrack;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chartArea1.AxisY2.LineColor = System.Drawing.Color.White;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -201,15 +205,15 @@
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel;
             series1.BorderWidth = 5;
             series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
-            series1.Color = System.Drawing.SystemColors.ActiveCaption;
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.SystemColors.MenuHighlight;
             series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             series1.IsVisibleInLegend = false;
             series1.Label = " ";
             series1.LabelForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             series1.LabelToolTip = " ";
             series1.Legend = "Legend1";
-            series1.MarkerColor = System.Drawing.Color.Black;
+            series1.MarkerColor = System.Drawing.SystemColors.ControlText;
             series1.MarkerSize = 10;
             series1.Name = "Progression";
             this.chart1.Series.Add(series1);
