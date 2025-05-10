@@ -353,7 +353,7 @@ namespace POS.UserControls
                         null,
                         x.Barcode,
                         x.Name,
-                        selectedRow.Cells[3].Value,
+                        selectedRow.Cells[quantityCol.Index].Value,
                         x.SellingPrice,
                         x.Details,
                         x.Type
@@ -749,7 +749,7 @@ namespace POS.UserControls
 
             try
             {
-                await Task.Delay(500, token);
+                await Task.Delay(1000, token);
 
                 token.ThrowIfCancellationRequested();
                 var id = dg[0, e.RowIndex].Value?.ToString();

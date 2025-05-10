@@ -229,7 +229,7 @@ namespace POS
                 }
             }
 
-            context.ChangeLogs.Add(new ChangeLog() {  MadeBy = user.ToString(), Details = strBuilder.ToString() });
+            context.ChangeLogs.Add(new ChangeLog() { MadeBy = user.ToString(), Details = strBuilder.ToString() });
         }
 
         /// <summary>
@@ -253,19 +253,19 @@ namespace POS
 
         public static bool IsEntityActuallyModified(this DbEntityEntry entry)
         {
-            if (entry.State != EntityState.Modified)
-                return false;
-
-            foreach (var propName in entry.OriginalValues.PropertyNames)
+            if (entry.State == EntityState.Modified)
             {
-                var original = entry.OriginalValues[propName];
-                var current = entry.CurrentValues[propName];
+                foreach (var propName in entry.OriginalValues.PropertyNames)
+                {
+                    var original = entry.OriginalValues[propName];
+                    var current = entry.CurrentValues[propName];
 
-                if (!object.Equals(original, current))
-                    return true;
+                    if (!object.Equals(original, current))
+                        return true;
+                }
             }
 
-            return false;
+            return entry.State == EntityState.Added || entry.State == EntityState.Deleted;
         }
 
         public static void UndoAllChanges(this DbContext context)

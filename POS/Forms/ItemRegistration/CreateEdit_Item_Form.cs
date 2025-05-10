@@ -22,6 +22,7 @@ namespace POS.Forms.ItemRegistration
             InitializeComponent();
             SetCostBindings();
             Costs.ListChanged += Costs_ListChanged;
+
         }
 
         private void SetBehaviorBasedOnUserPermission(bool canEditItem)
@@ -157,13 +158,21 @@ namespace POS.Forms.ItemRegistration
         }
 
         bool isPopulatingCost = false;
+
         private void Costs_ListChanged(object sender, ListChangedEventArgs e)
         {
             if (isPopulatingCost)
-            {
                 return;
-            }
-            saveButton.Enabled = cancelButton.Enabled = true;
+
+            var toAdd = Costs.ToList().Where(c => c.Id == 0);
+            foreach (var t in toAdd)
+                Item.Products.Add(t);
+
+            var toRemove = Item.Products.Where(i => !Costs.Any(c => c.Id == i.Id)).ToList();
+            foreach (var t in toRemove)
+                Item.Products.Remove(t);
+
+            saveButton.Enabled = cancelButton.Enabled = context.HasChanges();
         }
 
         private async void SaveBtn_Click(object sender, EventArgs e)
@@ -171,7 +180,7 @@ namespace POS.Forms.ItemRegistration
             if (Item.Error != string.Empty)
                 return;
 
-            if (MessageBox.Show("Apply Changes To The Item?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
+            if (MessageBox.Show("Save Changes?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
             try
             {
@@ -255,9 +264,10 @@ namespace POS.Forms.ItemRegistration
 
             var row = costTable.Rows[e.RowIndex];
             var newProduct = (Product)row.DataBoundItem;
-            Item.Products.Add(newProduct);
+            //Item.Products.Add(newProduct);
 
             int id = newProduct.Id;
+
             if (id == 0)
             {
                 row.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Maroon;
