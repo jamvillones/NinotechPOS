@@ -380,11 +380,12 @@ namespace POS.UserControls
             }
         }
 
-        private void chargedTable_KeyDown(object sender, KeyEventArgs e)
+        private async void chargedTable_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
             {
-                _ = LoadChargedAsync();
+                IsOldEntries = false;
+                await LoadChargedAsync();
             }
         }
 
