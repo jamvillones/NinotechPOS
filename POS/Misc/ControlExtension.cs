@@ -21,9 +21,10 @@ namespace POS
             frm.TopLevel = false;
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.Visible = true;
+            control.Controls.Add(frm);
+            frm.Size = control.Size;
             frm.Dock = DockStyle.Fill;   // optional
             frm.BringToFront();
-            control.Controls.Add(frm);
             return frm;
         }
 

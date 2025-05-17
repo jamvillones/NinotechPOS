@@ -838,6 +838,7 @@ namespace POS.UserControls
             var selectedId = itemsTable[col_Id.Index, e.RowIndex].Value?.ToString();
 
             new ItemProgressionForm(selectedId).ShowDialog();
+            //tablePanel.EmbedForm(new ItemProgressionForm(selectedId));
         }
 
         private void itemsTable_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
