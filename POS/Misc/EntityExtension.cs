@@ -229,7 +229,7 @@ namespace POS
                 }
             }
 
-            context.ChangeLogs.Add(new ChangeLog() { MadeBy = user.ToString(), Details = strBuilder.ToString() });
+            context.ChangeLogs.Add(new ChangeLog() { MadeBy = user?.ToString()??"admin", Details = strBuilder.ToString() });
         }
 
         /// <summary>
