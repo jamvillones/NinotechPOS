@@ -875,6 +875,11 @@ namespace POS.UserControls
             }
 
         }
+
+        private async void button7_Click(object sender, EventArgs e)
+        {
+            await ContextManipulationMethods.ExtractInventory(departmentOption.Text.Trim());
+        }
     }
 
     public class Pagination

@@ -1,17 +1,24 @@
 ﻿using Connections;
+using OfficeOpenXml;
+using POS.Forms;
 using POS.Misc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity.Infrastructure;
+using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Contexts;
-using System.Threading.Tasks;
-using POS.Forms;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace POS
 {
@@ -45,6 +52,11 @@ namespace POS
         public override string ToString() => $"{Name}-{Id}";
     }
 
+    public partial class ChargedPayRecord
+    {
+        public override string ToString() => $"{TransactionTime?.ToString("MMM d yyyy - h:mm tt")} - {AmountPayed?.ToString("C")}";
+    }
+
     public partial class POSEntities
     {
         public static POSEntities Create()
@@ -65,6 +77,10 @@ namespace POS
 
             return context;
         }
+
+
+
+
     }
 
     public partial class Product
@@ -184,6 +200,61 @@ namespace POS
         }
     }
 
+
+    public readonly struct ExcelData
+    {
+        public ExcelData(string Barcode, string Name, string Supplier, string SerialNumber, int Quantity)
+        {
+            this.Barcode = Barcode;
+            this.Name = Name;
+            this.Supplier = Supplier;
+            this.SerialNumber = SerialNumber;
+            this.Quantity = Quantity;
+        }
+
+        public string Barcode { get; }
+        public string Name { get; }
+        public string Supplier { get; }
+        public string SerialNumber { get; }
+        public int Quantity { get; }
+    }
+
+    public static class DataTableHelper
+    {
+        public static DataTable ToDataTable<T>(this List<T> items, params string[] selectedProperties)
+        {
+            DataTable table = new DataTable(typeof(T).Name);
+            PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            var filteredProps = selectedProperties.Length > 0 ? properties.Where(p => selectedProperties.Any(x => x.Equals(p.Name))).ToArray() : properties.ToArray();
+
+            // Add columns
+            foreach (var prop in filteredProps)
+            {
+                string formattedName = InsertSpacesInCamelCase(prop.Name);
+                table.Columns.Add(formattedName.ToUpper(), Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            }
+
+            // Add rows
+            foreach (var item in items)
+            {
+                var values = new object[filteredProps.Length];
+
+                for (int i = 0; i < filteredProps.Length; i++)
+                    values[i] = filteredProps[i].GetValue(item, null);
+
+                table.Rows.Add(values);
+            }
+
+            return table;
+        }
+
+        private static string InsertSpacesInCamelCase(string input)
+        {
+            return Regex.Replace(input, "(?<!^)([A-Z])", " $1");
+        }
+    }
+
     public static class ContextManipulationMethods
     {
         public static void LogChanges(this POSEntities context, Login user)
@@ -229,7 +300,7 @@ namespace POS
                 }
             }
 
-            context.ChangeLogs.Add(new ChangeLog() { MadeBy = user?.ToString()??"admin", Details = strBuilder.ToString() });
+            context.ChangeLogs.Add(new ChangeLog() { MadeBy = user?.ToString() ?? "admin", Details = strBuilder.ToString() });
         }
 
         /// <summary>
@@ -292,6 +363,95 @@ namespace POS
                 }
             }
         }
+
+        public static async Task<bool> ExtractInventory(string department = "")
+        {
+            try
+            {
+                using (var context = POSEntities.Create())
+                {
+                    var entries = await context.InventoryItems
+                                .AsNoTracking()
+                                .AsQueryable()
+                                .Where(inv => inv.Product.Item.Type == ItemType.Quantifiable.ToString())
+                                .FilterByDepartment(department)
+                                .OrderBy(x => x.Product.Item.Name)
+                                .ToListAsync();
+
+                    var data = entries.ProcessData();
+
+                    var dataTable = data.ToDataTable();
+
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                    {
+                        saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+                        saveFileDialog.Title = "Save Excel File";
+                        saveFileDialog.FileName = $"Inventory Export {(string.IsNullOrEmpty(department) ? "" : "[" + department.ToUpper() + "] ")}{DateTime.Now:MMddyyyyHHmmss}.xlsx";
+
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            using (var package = new ExcelPackage())
+                            {
+                                var worksheet = package.Workbook.Worksheets.Add("Data");
+                                worksheet.Cells["A1"].LoadFromDataTable(dataTable, true);
+
+                                for (int col = 1; col <= dataTable.Columns.Count; col++)
+                                {
+                                    var colType = dataTable.Columns[col - 1].DataType;
+                                    if (colType == typeof(DateTime))
+                                        worksheet.Column(col).Style.Numberformat.Format = "MMM d yyyy - h:mm";
+                                }
+                                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+                                worksheet.Cells[worksheet.Dimension.Address].Style.WrapText = true;
+
+                                package.SaveAs(new FileInfo(saveFileDialog.FileName));
+                                MessageBox.Show("Export successful!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return true;
+        }
+
+        public static List<ExcelData> ProcessData(this List<InventoryItem> inventoryItems)
+        {
+            var NameGroup = inventoryItems.GroupBy(i => i.Product.Item.Name);
+            var list = new List<ExcelData>();
+
+            foreach (var name in NameGroup)
+            {
+                var groupedByName = inventoryItems.Where(i => i.Product.Item.Name == name.Key);
+
+                var SupplierGroup = groupedByName.GroupBy(x => x.Product.SupplierId);
+
+                foreach (var supplier in SupplierGroup)
+                {
+                    var groupedBySupplier = groupedByName.Where(i => i.Product.SupplierId == supplier.Key);
+                    foreach (var i in groupedBySupplier)
+                    {
+                        var serialNumber = i.Product.Item.IsSerialRequired ? string.Join(Environment.NewLine, groupedBySupplier.Select(j => j.SerialNumber)) : string.Empty;
+                        int quantity = groupedBySupplier.Sum(x => x.Quantity);
+
+                        list.Add(new ExcelData(
+                            i.Product.Item.Barcode,
+                            i.Product.Item.Name,
+                            i.Product.Supplier.Name,
+                            serialNumber,
+                            quantity
+                            ));
+                    }
+                }
+            }
+            return list;
+        }
+
+
     }
+
 }
 

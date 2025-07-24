@@ -283,13 +283,14 @@ namespace POS.UserControls
                     if (!IsOldEntries)
                     {
                         int totalItemCount = await unpaginatedList.CountAsync(token);
+                        Console.WriteLine(totalItemCount);
                         pagination.Initialize(totalItemCount);
                         IsOldEntries = true;
                     }
 
                     var task_Loading = unpaginatedList
                                        .OrderByDescending(c => c.Date)
-                                       .Skip(pagination.Start).Take(pagination.PageSize)
+                                       //.Skip(pagination.Start).Take(pagination.PageSize)
                                        .ToListAsync(token);
 
                     var task_minimumLoadingTime = Task.Delay(500, token);
@@ -307,7 +308,7 @@ namespace POS.UserControls
                 }
             }
             catch (OperationCanceledException) { Console.WriteLine("-------Charged Loading Cancelled-------"); }
-            catch { }
+            //catch { }
             finally
             {
                 chargedCancellationSource?.Dispose();
@@ -332,6 +333,7 @@ namespace POS.UserControls
                 sale.Id,
                 sale.Customer?.ToString(),
                 sale.Date.Value,
+                sale.ChargedPayRecords.LastOrDefault()?.ToString(),
                 sale.AmountDue,
                 sale.AmountRecieved,
                 sale.Remaining,
@@ -452,6 +454,9 @@ namespace POS.UserControls
         /// <returns></returns>
         public static IQueryable<Sale> FilterCharged(this IQueryable<Sale> sales, SaleStatusFilter filter)
         {
+            if (filter == SaleStatusFilter.All)
+                return sales;
+
             switch (filter)
             {
                 case SaleStatusFilter.Paid:
