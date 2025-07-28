@@ -3,6 +3,7 @@ using OfficeOpenXml;
 using POS.Forms;
 using POS.Misc;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -378,7 +379,7 @@ namespace POS
                                 .OrderBy(x => x.Product.Item.Name)
                                 .ToListAsync();
 
-                    var data = entries.ProcessData();
+                    var data = entries.ProcessInventoryData();
 
                     var dataTable = data.ToDataTable();
 
@@ -418,7 +419,7 @@ namespace POS
             return true;
         }
 
-        public static List<ExcelData> ProcessData(this List<InventoryItem> inventoryItems)
+        public static List<ExcelData> ProcessInventoryData(this List<InventoryItem> inventoryItems)
         {
             var NameGroup = inventoryItems.GroupBy(i => i.Product.Item.Name);
             var list = new List<ExcelData>();
@@ -427,24 +428,24 @@ namespace POS
             {
                 var groupedByName = inventoryItems.Where(i => i.Product.Item.Name == name.Key);
 
-                var SupplierGroup = groupedByName.GroupBy(x => x.Product.SupplierId);
+                var productGroup = groupedByName.GroupBy(x => x.ProductId);
 
-                foreach (var supplier in SupplierGroup)
+                foreach (var product in productGroup)
                 {
-                    var groupedBySupplier = groupedByName.Where(i => i.Product.SupplierId == supplier.Key);
-                    foreach (var i in groupedBySupplier)
-                    {
-                        var serialNumber = i.Product.Item.IsSerialRequired ? string.Join(Environment.NewLine, groupedBySupplier.Select(j => j.SerialNumber)) : string.Empty;
-                        int quantity = groupedBySupplier.Sum(x => x.Quantity);
+                    var prod = inventoryItems.FirstOrDefault(i => i.ProductId == product.Key)?.Product;
 
-                        list.Add(new ExcelData(
-                            i.Product.Item.Barcode,
-                            i.Product.Item.Name,
-                            i.Product.Supplier.Name,
-                            serialNumber,
-                            quantity
-                            ));
-                    }
+                    var serialNumber = !prod.Item.IsSerialRequired ? string.Empty :
+                        string.Join(Environment.NewLine, inventoryItems.Where(i => i.ProductId == product.Key).Select(a => "▸" + a.SerialNumber));
+
+                    var qty = inventoryItems.Where(i => i.ProductId == product.Key).Select(a => a.Quantity).Sum();
+
+                    list.Add(new ExcelData(
+                        prod.Item.Barcode,
+                        prod.Item.Name,
+                        prod.Supplier.Name,
+                        serialNumber,
+                        qty
+                        ));
                 }
             }
             return list;
