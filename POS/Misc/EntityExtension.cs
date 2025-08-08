@@ -3,23 +3,21 @@ using OfficeOpenXml;
 using POS.Forms;
 using POS.Misc;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media;
 
 namespace POS
 {
@@ -73,15 +71,9 @@ namespace POS
 
                 if (!login.CanEditProduct)
                     throw new UnautorizedLoginException();
-
             }
-
             return context;
         }
-
-
-
-
     }
 
     public partial class Product
@@ -201,7 +193,6 @@ namespace POS
         }
     }
 
-
     public readonly struct ExcelData
     {
         public ExcelData(string Barcode, string Name, string Supplier, string SerialNumber, int Quantity)
@@ -212,7 +203,6 @@ namespace POS
             this.SerialNumber = SerialNumber;
             this.Quantity = Quantity;
         }
-
         public string Barcode { get; }
         public string Name { get; }
         public string Supplier { get; }
@@ -304,24 +294,7 @@ namespace POS
             context.ChangeLogs.Add(new ChangeLog() { MadeBy = user?.ToString() ?? "admin", Details = strBuilder.ToString() });
         }
 
-        /// <summary>
-        /// run this to set the isSerialRequired Property based on stockin entries with serial
-        /// </summary>
-        //public static void SetIsSerialRequired()
-        //{
-        //    using (var context = POSEntities.Create())
-        //    {
-        //        var items = context.Items.AsQueryable().Where(i => i.Products.Any(p => p.StockinHistories.Any(st => st.SerialNumber != null))).ToList();
-
-        //        foreach (var i in items)
-        //            i.IsSerialRequired = true;
-
-        //        context.SaveChanges();
-        //    }
-        //}
-
         public static bool HasChanges(this DbContext context) => context.ChangeTracker.Entries().Any(e => e.IsEntityActuallyModified());
-
 
         public static bool IsEntityActuallyModified(this DbEntityEntry entry)
         {
@@ -405,17 +378,27 @@ namespace POS
                                 worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
                                 worksheet.Cells[worksheet.Dimension.Address].Style.WrapText = true;
 
-                                package.SaveAs(new FileInfo(saveFileDialog.FileName));
-                                MessageBox.Show("Export successful!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                await package.SaveAsAsync(new FileInfo(saveFileDialog.FileName));
+
+                                if (MessageBox.Show("Export successful!\nDo you want to open the file?", "Export Done", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                                    return true;
                             }
                         }
+
+                        await Task.Delay(2000);
+
+                        var dir = Path.GetDirectoryName(saveFileDialog.FileName);
+
+                        Console.WriteLine("dir->" + dir + "\"" + saveFileDialog.FileName);
+
+                        string fileName =@saveFileDialog.FileName;
+                        Process.Start("Excel.exe", $"\"{fileName}\"");
                     }
                 }
             }
             catch (Exception)
-            {
+            { }
 
-            }
             return true;
         }
 
