@@ -210,7 +210,7 @@
             this.recHistBtn.Name = "recHistBtn";
             this.recHistBtn.Size = new System.Drawing.Size(250, 40);
             this.recHistBtn.TabIndex = 17;
-            this.recHistBtn.Text = "Add Cutomer";
+            this.recHistBtn.Text = "ADD CUSTOMER";
             this.recHistBtn.UseVisualStyleBackColor = false;
             this.recHistBtn.Click += new System.EventHandler(this.recHistBtn_Click);
             // 

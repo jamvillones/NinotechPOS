@@ -67,6 +67,7 @@ namespace POS.Forms
             public DateTime Date { get; set; }
             public string User { get; set; }
             public string Name { get; set; }
+            public string Supplier { get; set; }
             public string SerialNumber { get; set; }
             public int Qty { get; set; }
             public decimal Cost { get; set; }
@@ -159,6 +160,7 @@ namespace POS.Forms
                                         Date = (DateTime)sth.Date,
                                         User = sth.LoginUsername,
                                         Name = sth.Product.Item.Name,
+                                        Supplier = sth.Product.Supplier.Name,
                                         SerialNumber = sth.SerialNumber,
                                         Qty = (int)sth.Quantity,
                                         Cost = (decimal)sth.Cost
@@ -209,6 +211,7 @@ namespace POS.Forms
                       stockInHistory.Date,
                       stockInHistory.User,
                       stockInHistory.Name,
+                      stockInHistory.Supplier,
                       stockInHistory.SerialNumber,
                       stockInHistory.Qty,
                       stockInHistory.Cost
