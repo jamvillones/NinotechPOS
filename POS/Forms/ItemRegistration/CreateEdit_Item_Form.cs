@@ -117,6 +117,8 @@ namespace POS.Forms.ItemRegistration
                 new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.SellingPrice), true, DataSourceUpdateMode.OnPropertyChanged));
             _criticalQty.DataBindings.Add(
                 new Binding(nameof(NumericUpDown.Value), ItemBindingSource, nameof(POS.Item.CriticalQuantity), true, DataSourceUpdateMode.OnPropertyChanged));
+            _warranty.DataBindings.Add(
+                new Binding(nameof(NumericUpDown.Value), ItemBindingSource, nameof(POS.Item.Warranty), true, DataSourceUpdateMode.OnPropertyChanged));
             _pictureBox.DataBindings.Add(
                 new Binding(nameof(PictureBox.Image), ItemBindingSource, nameof(POS.Item.SampleImage), true, DataSourceUpdateMode.OnPropertyChanged));
         }
@@ -182,14 +184,14 @@ namespace POS.Forms.ItemRegistration
 
             if (MessageBox.Show("Save Changes?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
-            try
-            {
-                await context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                return;
-            }
+            //try
+            //{
+            await context.SaveChangesAsync();
+            //}
+            //catch (Exception)
+            //{
+            //    return;
+            //}
 
             Tag = Item;
             DialogResult = DialogResult.OK;

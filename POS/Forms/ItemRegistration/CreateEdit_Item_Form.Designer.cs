@@ -85,6 +85,10 @@
             this.panel17 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.panel18 = new System.Windows.Forms.Panel();
+            this._warranty = new System.Windows.Forms.NumericUpDown();
+            this.panel19 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.ItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonsHolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.costTable)).BeginInit();
@@ -101,6 +105,8 @@
             this.panel3.SuspendLayout();
             this.panel16.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.panel18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._warranty)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -604,10 +610,10 @@
             this.panel13.Controls.Add(this._details);
             this.panel13.Controls.Add(this.panel14);
             this.panel13.Controls.Add(this.label7);
-            this.panel13.Location = new System.Drawing.Point(369, 263);
+            this.panel13.Location = new System.Drawing.Point(369, 271);
             this.panel13.Margin = new System.Windows.Forms.Padding(0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(567, 245);
+            this.panel13.Size = new System.Drawing.Size(567, 237);
             this.panel13.TabIndex = 6;
             // 
             // _details
@@ -621,7 +627,7 @@
             this._details.MaxLength = 300;
             this._details.Multiline = true;
             this._details.Name = "_details";
-            this._details.Size = new System.Drawing.Size(567, 221);
+            this._details.Size = new System.Drawing.Size(567, 213);
             this._details.TabIndex = 2;
             this._details.Tag = "Notes";
             // 
@@ -629,7 +635,7 @@
             // 
             this.panel14.BackColor = System.Drawing.Color.Black;
             this.panel14.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel14.Location = new System.Drawing.Point(0, 244);
+            this.panel14.Location = new System.Drawing.Point(0, 236);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(567, 1);
             this.panel14.TabIndex = 3;
@@ -778,6 +784,59 @@
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 
+            // panel18
+            // 
+            this.panel18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel18.Controls.Add(this._warranty);
+            this.panel18.Controls.Add(this.panel19);
+            this.panel18.Controls.Add(this.label2);
+            this.panel18.Location = new System.Drawing.Point(369, 233);
+            this.panel18.Margin = new System.Windows.Forms.Padding(0);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(567, 35);
+            this.panel18.TabIndex = 34;
+            // 
+            // _warranty
+            // 
+            this._warranty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._warranty.BackColor = System.Drawing.Color.White;
+            this._warranty.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this._warranty.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._warranty.ForeColor = System.Drawing.Color.Black;
+            this._warranty.Location = new System.Drawing.Point(18, 13);
+            this._warranty.Maximum = new decimal(new int[] {
+            365,
+            0,
+            0,
+            0});
+            this._warranty.Name = "_warranty";
+            this._warranty.Size = new System.Drawing.Size(530, 21);
+            this._warranty.TabIndex = 3;
+            this._warranty.Tag = "Warranty";
+            this._warranty.ThousandsSeparator = true;
+            // 
+            // panel19
+            // 
+            this.panel19.BackColor = System.Drawing.Color.Black;
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel19.Location = new System.Drawing.Point(0, 34);
+            this.panel19.Name = "panel19";
+            this.panel19.Size = new System.Drawing.Size(567, 1);
+            this.panel19.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Warranty (In Days):";
+            // 
             // ItemBindingSource
             // 
             this.ItemBindingSource.AllowNew = false;
@@ -789,6 +848,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(956, 581);
+            this.Controls.Add(this.panel18);
             this.Controls.Add(this.panel16);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.flowLayoutPanel2);
@@ -836,6 +896,9 @@
             this.panel16.ResumeLayout(false);
             this.panel16.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.panel18.ResumeLayout(false);
+            this.panel18.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this._warranty)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -894,5 +957,9 @@
         private System.Windows.Forms.DataGridViewButtonColumn Column1;
         private System.Windows.Forms.BindingSource ItemBindingSource;
         private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel18;
+        private System.Windows.Forms.NumericUpDown _warranty;
+        private System.Windows.Forms.Panel panel19;
+        private System.Windows.Forms.Label label2;
     }
 }

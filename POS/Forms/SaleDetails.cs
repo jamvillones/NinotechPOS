@@ -337,6 +337,7 @@ namespace POS.Forms
         DataGridViewRow CreateRow(SoldItem soldItem, bool isFirstNameEntry = true, bool isFirstSupplierEntry = true, int? Qty = 0) => itemsTable.CreateRow(
            soldItem.Id,
            soldItem.DateAdded,
+           soldItem.WarrantyStatus,
            isFirstNameEntry ? soldItem.Product.Item.Name : null,
            isFirstSupplierEntry ? soldItem.Product.Supplier?.Name : null,
            isFirstSupplierEntry ? Qty : null,
@@ -483,6 +484,12 @@ namespace POS.Forms
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             dateAddedCol.Visible = checkBox2.Checked;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            bool shown = ((CheckBox)sender).Checked;
+            Column1.Visible = shown;
         }
     }
 

@@ -43,6 +43,7 @@
             this.itemsTable = new System.Windows.Forms.DataGridView();
             this.IdCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateAddedCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.supplierCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,6 +89,7 @@
             this.panel12 = new System.Windows.Forms.Panel();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.searchControl1 = new POS.UserControls.SearchControl();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -127,6 +129,7 @@
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdCol,
             this.dateAddedCol,
+            this.Column1,
             this.nameCol,
             this.supplierCol,
             this.qtyCol,
@@ -180,6 +183,13 @@
             this.dateAddedCol.HeaderText = "ADDED ON";
             this.dateAddedCol.Name = "dateAddedCol";
             this.dateAddedCol.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "WARRANTY STATUS";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
             // 
             // nameCol
             // 
@@ -694,7 +704,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(138, 200);
+            this.checkBox2.Location = new System.Drawing.Point(130, 200);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(113, 17);
             this.checkBox2.TabIndex = 29;
@@ -717,11 +727,23 @@
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(259, 200);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(132, 17);
+            this.checkBox3.TabIndex = 30;
+            this.checkBox3.Text = "Show Warranty Status";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
             // SaleDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 611);
+            this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.panel12);
             this.Controls.Add(this.label7);
@@ -808,8 +830,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateAddedCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn supplierCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn qtyCol;

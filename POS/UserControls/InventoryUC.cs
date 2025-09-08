@@ -880,6 +880,15 @@ namespace POS.UserControls
         {
             await ContextManipulationMethods.ExtractInventory(departmentOption.Text.Trim());
         }
+
+        private async void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            using (var context = POSEntities.Create())
+            {
+                bool canStockIn = (await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.CurrentLogin.Id)).CanStockIn;
+                restockThisItemToolStripMenuItem.Enabled = canStockIn;
+            }
+        }
     }
 
     public class Pagination

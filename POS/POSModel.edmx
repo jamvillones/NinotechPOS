@@ -57,6 +57,7 @@
           <Property Name="Tags" Type="nvarchar(max)" />
           <Property Name="IsSerialRequired" Type="bit" Nullable="false" />
           <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Warranty" Type="int" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -315,7 +316,6 @@
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Suppliers" EntityType="POSModel.Supplier" />
           <EntitySet Name="InventoryItems" EntityType="POSModel.InventoryItem" />
-          <EntitySet Name="Items" EntityType="POSModel.Item" />
           <EntitySet Name="Sales" EntityType="POSModel.Sale" />
           <AssociationSet Name="FK_Sale_Customer" Association="POSModel.FK_Sale_Customer">
             <End Role="Customer" EntitySet="Customers" />
@@ -325,10 +325,6 @@
           <AssociationSet Name="FK_Product_ProductBySupplier" Association="POSModel.FK_Product_ProductBySupplier">
             <End Role="Product" EntitySet="Products" />
             <End Role="InventoryItem" EntitySet="InventoryItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Item" Association="POSModel.FK_Product_Item">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductBySupplier_Supplier" Association="POSModel.FK_ProductBySupplier_Supplier">
             <End Role="Supplier" EntitySet="Suppliers" />
@@ -359,6 +355,11 @@
             <End Role="SoldItem" EntitySet="SoldItems" />
           </AssociationSet>
           <EntitySet Name="ChangeLogs" EntityType="POSModel.ChangeLog" />
+          <EntitySet Name="Items" EntityType="POSModel.Item" />
+          <AssociationSet Name="FK_Product_Item" Association="POSModel.FK_Product_Item">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Supplier">
           <Key>
@@ -378,23 +379,6 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Product" Relationship="POSModel.FK_Product_ProductBySupplier" FromRole="InventoryItem" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Item">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="SampleImage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CriticalQuantity" Type="Int32" />
-          <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="POSModel.FK_Product_Item" FromRole="Item" ToRole="Product" />
-          <Property Name="IsSerialRequired" Type="Boolean" Nullable="false" />
-          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -433,10 +417,10 @@
           <Property Name="SupplierId" Type="Int32" />
           <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <NavigationProperty Name="InventoryItems" Relationship="POSModel.FK_Product_ProductBySupplier" FromRole="Product" ToRole="InventoryItem" />
-          <NavigationProperty Name="Item" Relationship="POSModel.FK_Product_Item" FromRole="Product" ToRole="Item" />
           <NavigationProperty Name="Supplier" Relationship="POSModel.FK_ProductBySupplier_Supplier" FromRole="Product" ToRole="Supplier" />
           <NavigationProperty Name="StockinHistories" Relationship="POSModel.FK_StockinHistory_Product" FromRole="Product" ToRole="StockinHistory" />
           <NavigationProperty Name="SoldItems" Relationship="POSModel.FK_SoldItem_Product" FromRole="Product" ToRole="SoldItem" />
+          <NavigationProperty Name="Item" Relationship="POSModel.FK_Product_Item" FromRole="Product" ToRole="Item" />
         </EntityType>
         <Association Name="FK_Product_ProductBySupplier">
           <End Type="POSModel.Product" Role="Product" Multiplicity="1">
@@ -449,20 +433,6 @@
             </Principal>
             <Dependent Role="InventoryItem">
               <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_Item">
-          <End Type="POSModel.Item" Role="Item" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="POSModel.Product" Role="Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Product">
-              <PropertyRef Name="ItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -611,6 +581,38 @@
           <Property Name="Time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SampleImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CriticalQuantity" Type="Int32" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsSerialRequired" Type="Boolean" Nullable="false" />
+          <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Warranty" Type="Int32" />
+          <NavigationProperty Name="Products" Relationship="POSModel.FK_Product_Item" FromRole="Item" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Product_Item">
+          <End Type="POSModel.Item" Role="Item" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="POSModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -642,23 +644,6 @@
                 <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="POSModel.Item">
-              <MappingFragment StoreEntitySet="Item">
-                <ScalarProperty Name="Tags" ColumnName="Tags" />
-                <ScalarProperty Name="IsSerialRequired" ColumnName="IsSerialRequired" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-                <ScalarProperty Name="CriticalQuantity" ColumnName="CriticalQuantity" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="SampleImage" ColumnName="SampleImage" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -749,6 +734,24 @@
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="MadeBy" ColumnName="MadeBy" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="POSModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Warranty" ColumnName="Warranty" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="IsSerialRequired" ColumnName="IsSerialRequired" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="CriticalQuantity" ColumnName="CriticalQuantity" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SampleImage" ColumnName="SampleImage" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

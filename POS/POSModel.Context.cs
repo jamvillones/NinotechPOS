@@ -28,7 +28,6 @@ namespace POS
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<InventoryItem> InventoryItems { get; set; }
-        public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<StockinHistory> StockinHistories { get; set; }
@@ -36,5 +35,6 @@ namespace POS
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<SoldItem> SoldItems { get; set; }
         public virtual DbSet<ChangeLog> ChangeLogs { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
     }
 }

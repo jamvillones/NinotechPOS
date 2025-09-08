@@ -21,6 +21,30 @@ using System.Windows.Forms;
 
 namespace POS
 {
+    public static class WarrantyChecker
+    {
+        /// <summary>
+        /// Determines if the product is still under warranty.
+        /// </summary>
+        /// <param name="purchaseDate">The date the product was purchased.</param>
+        /// <param name="warrantyDays">The warranty period in days.</param>
+        /// <returns>True if the product is under warranty, otherwise false.</returns>
+        public static bool IsUnderWarranty(this DateTime purchaseDate, int warrantyDays)
+        {
+            DateTime warrantyEndDate = purchaseDate.AddDays(warrantyDays);
+            return DateTime.Now <= warrantyEndDate;
+        }
+
+        public static int DaysLeftOfWarranty(this DateTime purchaseDate, int warrantyDays)
+        {
+            DateTime warrantyEndDate = purchaseDate.AddDays(warrantyDays);
+            TimeSpan difference = warrantyEndDate - DateTime.Now;
+            return (int)Math.Ceiling(difference.TotalDays);
+        }
+    }
+
+
+
     partial class Item : BaseModel
     {
         public int QuantityInInventory => this.Products
@@ -29,6 +53,7 @@ namespace POS
                 .DefaultIfEmpty(0)
                 .Sum())
             .Sum();
+
 
         public bool InCriticalQuantity
         {
@@ -51,6 +76,11 @@ namespace POS
         public override string ToString() => $"{Name}-{Id}";
     }
 
+    partial class SoldItem
+    {
+        public string WarrantyStatus => Product.Item.Warranty == 0 ? "--" : (DateAdded.IsUnderWarranty((int)Product.Item.Warranty) ? $"Active ({DateAdded.DaysLeftOfWarranty((int)Product.Item.Warranty)})" : "Expired");
+
+    }
     public partial class ChargedPayRecord
     {
         public override string ToString() => $"{TransactionTime?.ToString("MMM d yyyy - h:mm tt")} - {AmountPayed?.ToString("C")}";
@@ -391,7 +421,7 @@ namespace POS
 
                         Console.WriteLine("dir->" + dir + "\"" + saveFileDialog.FileName);
 
-                        string fileName =@saveFileDialog.FileName;
+                        string fileName = @saveFileDialog.FileName;
                         Process.Start("Excel.exe", $"\"{fileName}\"");
                     }
                 }

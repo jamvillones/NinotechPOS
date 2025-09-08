@@ -9,120 +9,30 @@
 
 namespace POS
 {
-    using POS.Misc;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Item
     {
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Item()
         {
             this.Products = new HashSet<Product>();
         }
-
-
-        #region private fields
-        private string _barcode;
-        private string _name;
-        private decimal _sellingPrice;
-        private string _department;
-        private string _details;
-        private byte[] _sampleImage;
-        private string _type;
-        private Nullable<int> _criticalQuantity;
-        private bool _isSerialRequired;
-        private string _tags;
-        #endregion
-
-        #region Public Properties
+    
         public string Id { get; set; }
-
-        [Required(ErrorMessage = "Field Must Be Unique and Not Empty!")]
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                //Console.WriteLine(value);
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        public decimal SellingPrice
-        {
-            get => _sellingPrice;
-            set { if (_sellingPrice != value) { _sellingPrice = value; OnPropertyChanged(); } }
-        }
-
-        public string Department
-        {
-            get => _department;
-            set
-            {
-                if (_department != value)
-                {
-                    _department = value.NullIfEmpty(); 
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string Details
-        {
-            get => _details;
-            set { if (_details != value) { _details = value; OnPropertyChanged(); } }
-        }
-
-        public byte[] SampleImage
-        {
-            get => _sampleImage;
-            set { if (_sampleImage != value) { _sampleImage = value; OnPropertyChanged(); } }
-        }
-
-        public string Type
-        {
-            get => _type;
-            set { if (_type != value) { _type = value; OnPropertyChanged(); } }
-        }
-
-        public Nullable<int> CriticalQuantity
-        {
-            get => _criticalQuantity;
-            set
-            {
-                if (_criticalQuantity != value)
-                {
-                    _criticalQuantity = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string Barcode
-        {
-            get => _barcode;
-            set { if (_barcode != value) { _barcode = value; OnPropertyChanged(); } }
-        }
-
-        public bool IsSerialRequired
-        {
-            get => _isSerialRequired;
-            set { if (_isSerialRequired != value) { _isSerialRequired = value; OnPropertyChanged(); } }
-        }
-
-        public string Tags
-        {
-            get => _tags;
-            set { if (_tags != value) { _tags = value; OnPropertyChanged(); } }
-        }
-        #endregion
-
+        public string Name { get; set; }
+        public decimal SellingPrice { get; set; }
+        public string Department { get; set; }
+        public string Details { get; set; }
+        public byte[] SampleImage { get; set; }
+        public string Type { get; set; }
+        public Nullable<int> CriticalQuantity { get; set; }
+        public string Tags { get; set; }
+        public bool IsSerialRequired { get; set; }
+        public string Barcode { get; set; }
+        public Nullable<int> Warranty { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }

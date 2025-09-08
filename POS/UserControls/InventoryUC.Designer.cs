@@ -69,8 +69,8 @@
             this.contentPanel = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.button7 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -392,13 +392,14 @@
             this.sellThisItemToolStripMenuItem,
             this.restockThisItemToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(172, 48);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // sellThisItemToolStripMenuItem
             // 
             this.sellThisItemToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("sellThisItemToolStripMenuItem.Image")));
             this.sellThisItemToolStripMenuItem.Name = "sellThisItemToolStripMenuItem";
-            this.sellThisItemToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.sellThisItemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sellThisItemToolStripMenuItem.Text = "Sell This Item?";
             this.sellThisItemToolStripMenuItem.Click += new System.EventHandler(this.sellThisItemToolStripMenuItem_Click);
             // 
@@ -406,7 +407,7 @@
             // 
             this.restockThisItemToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("restockThisItemToolStripMenuItem.Image")));
             this.restockThisItemToolStripMenuItem.Name = "restockThisItemToolStripMenuItem";
-            this.restockThisItemToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.restockThisItemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.restockThisItemToolStripMenuItem.Text = "Restock This Item?";
             this.restockThisItemToolStripMenuItem.Click += new System.EventHandler(this.restockThisItemToolStripMenuItem_Click);
             // 
@@ -588,26 +589,6 @@
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(0, 390);
-            this.button3.Margin = new System.Windows.Forms.Padding(5);
-            this.button3.Name = "button3";
-            this.button3.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.button3.Size = new System.Drawing.Size(190, 40);
-            this.button3.TabIndex = 19;
-            this.button3.TabStop = false;
-            this.button3.Text = "    Items Time Table";
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.White;
@@ -627,6 +608,26 @@
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.White;
+            this.button3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.Location = new System.Drawing.Point(0, 390);
+            this.button3.Margin = new System.Windows.Forms.Padding(5);
+            this.button3.Name = "button3";
+            this.button3.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.button3.Size = new System.Drawing.Size(190, 40);
+            this.button3.TabIndex = 19;
+            this.button3.TabStop = false;
+            this.button3.Text = "    Items Time Table";
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button5
             // 
