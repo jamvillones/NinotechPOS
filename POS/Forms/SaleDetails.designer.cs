@@ -743,12 +743,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 611);
+            this.Controls.Add(this.itemsTable);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.panel12);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.panel7);
-            this.Controls.Add(this.itemsTable);
             this.Controls.Add(this._messageLabel);
             this.Controls.Add(this.searchControl1);
             this.Controls.Add(this.panel1);

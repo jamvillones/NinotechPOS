@@ -89,12 +89,18 @@ namespace POS.Forms
         void AddToCart()
         {
             ItemSelected?.Invoke(this, infoHolder);
+            Tag = textBox1.Text.Trim();
             Close();
         }
 
         private void selectBtn_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
 
+                MessageBox.Show("Must provide reason", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (string.IsNullOrEmpty(infoHolder.Name))
             {
                 MessageBox.Show("No item Selected", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);

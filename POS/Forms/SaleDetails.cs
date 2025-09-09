@@ -115,6 +115,7 @@ namespace POS.Forms
 
         private async void Adv_ItemSelected(object sender, ItemInfoHolder e)
         {
+            string reasonForAddtion = (sender as Form).Tag as string;
             using (var context = POSEntities.Create())
             {
                 var sale = await context.Sales.FirstOrDefaultAsync(x => x.Id == _saleId);
@@ -319,7 +320,7 @@ namespace POS.Forms
                         }
 
                         decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
-                        itemsTable.Rows.Add("", "", "", "", "", "", "", "", subTotal);
+                        itemsTable.Rows.Add("", "", "", "", "", "", "", "", "", subTotal);
                     }
                 }
             }

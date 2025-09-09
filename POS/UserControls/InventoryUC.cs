@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -157,7 +158,7 @@ namespace POS.UserControls
                         Barcode = item.Barcode,
                         Name = item.Name,
                         SellingPrice = item.SellingPrice,
-
+                        Warranty = (int)item.Warranty,
                         Type = item.Type.ToString(),
                         Qty = item.Products.Select(a => a.InventoryItems
                                                         .Select(b => b.Quantity)
@@ -236,6 +237,7 @@ namespace POS.UserControls
                                             SellingPrice = i.SellingPrice,
                                             Type = i.Type,
                                             Notes = i.Details,
+                                            Warranty = (int)i.Warranty,
                                             Qty = i.Products.Select(a => a.InventoryItems
                                                                         .Select(b => b.Quantity)
                                                                         .DefaultIfEmpty(0)
@@ -310,6 +312,7 @@ namespace POS.UserControls
                  item.Type == ItemType.Quantifiable.ToString() ? item.Qty : null,
                  item.SellingPrice,
                  item.Notes,
+                 item.WarrantyDetails,
                  item.Type
                 );
 
@@ -318,12 +321,28 @@ namespace POS.UserControls
 
         private class ItemDTO
         {
+            public ItemDTO()
+            {
+
+            }
+
             public string Id { get; set; }
             public string Barcode { get; set; }
             public string Name { get; set; }
 
             public int? Qty { get; set; }
             public string Notes { get; set; }
+            public int Warranty { get; set; } = 0;
+            public string WarrantyDetails
+            {
+                get
+                {
+                    if (Warranty == 0)
+                        return "No Warranty";
+
+                    return Warranty.ToDaysToYMWD();
+                }
+            }
             public decimal SellingPrice { get; set; }
             public string Type { get; set; }
         }
@@ -346,6 +365,7 @@ namespace POS.UserControls
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     var x = editForm.Tag as Item;
+
                     var selectedRow = itemsTable.SelectedRows[0];
 
                     selectedRow.SetValues(
@@ -356,6 +376,7 @@ namespace POS.UserControls
                         selectedRow.Cells[quantityCol.Index].Value,
                         x.SellingPrice,
                         x.Details,
+                        ((int)x.Warranty).ToDaysToYMWD(),
                         x.Type
                         );
 
@@ -802,7 +823,9 @@ namespace POS.UserControls
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            col_Notes.Visible = checkBox1.Checked;
+            bool isShown = checkBox1.Checked;
+            col_Notes.Visible = isShown;
+            warrantyCol.Visible = isShown;
         }
 
         private void button8_Click(object sender, EventArgs e)

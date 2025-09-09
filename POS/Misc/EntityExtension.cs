@@ -41,6 +41,32 @@ namespace POS
             TimeSpan difference = warrantyEndDate - DateTime.Now;
             return (int)Math.Ceiling(difference.TotalDays);
         }
+
+        public static string ToDaysToYMWD(this int totalDays)
+        {
+            int years = totalDays / 365;
+            int remainingDays = totalDays % 365;
+
+            int months = remainingDays / 30;
+            remainingDays %= 30;
+
+            int weeks = remainingDays / 7;
+            int days = remainingDays % 7;
+
+            // Build the result string dynamically
+            List<string> parts = new List<string>();
+            if (years > 0)
+                parts.Add($"{years} year{(years > 1 ? "s" : "")}");
+            if (months > 0)
+                parts.Add($"{months} month{(months > 1 ? "s" : "")}");
+            if (weeks > 0)
+                parts.Add($"{weeks} week{(weeks > 1 ? "s" : "")}");
+            if (days > 0 || parts.Count == 0) // Always show days if all are zero
+                parts.Add($"{days} day{(days > 1 ? "s" : "")}");
+
+            return string.Join(", ", parts);
+        }
+
     }
 
 

@@ -28,17 +28,8 @@ namespace POS.Forms.ItemRegistration
             {
                 using (var context = POSEntities.Create())
                 {
-                    //var departments = await context.Items
-                    //    .AsNoTracking()
-                    //    .GetDepartments()
-                    //    .ToArrayAsync();
-
                     RegisteredNames = await context.Items.AsNoTracking().Select(i => i.Name).ToListAsync();
                     RegisteredBarcodes = await context.Items.AsNoTracking().Where(i => i.Barcode != null).Select(i => i.Barcode).ToListAsync();
-
-                    //_departmentOption.Items.Add("");
-                    //_departmentOption.Items.AddRange(departments);
-                    //_departmentOption.AutoCompleteCustomSource.AddRange(departments);
                 }
             }
             catch (Exception)
@@ -56,6 +47,7 @@ namespace POS.Forms.ItemRegistration
             item.Name = _name.Text.Trim();
 
             item.CriticalQuantity = (int?)_criticalQty.Value;
+            item.Warranty = (int?)numericUpDown1.Value;
 
             item.Type = _type.SelectedItem.ToString();
             item.Department = _departmentOption.Text.NullIfEmpty();
@@ -68,8 +60,6 @@ namespace POS.Forms.ItemRegistration
                 serviceProduct.InventoryItems.Add(new InventoryItem() { Product = serviceProduct, Quantity = 0 });
                 item.Products.Add(serviceProduct);
             }
-
-
 
             DialogResult = DialogResult.OK;
         }
