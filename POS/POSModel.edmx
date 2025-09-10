@@ -108,6 +108,7 @@
           <Property Name="Discount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="ReasonForAddtition" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="StockinHistory">
           <Key>
@@ -543,6 +544,7 @@
           <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Product" Relationship="POSModel.FK_SoldItem_Product" FromRole="SoldItem" ToRole="Product" />
           <NavigationProperty Name="Sale" Relationship="POSModel.FK_SoldItem_Sale" FromRole="SoldItem" ToRole="Sale" />
+          <Property Name="ReasonForAddtition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_SoldItem_Product">
           <End Type="POSModel.Product" Role="Product" Multiplicity="1">
@@ -717,6 +719,7 @@
           <EntitySetMapping Name="SoldItems">
             <EntityTypeMapping TypeName="POSModel.SoldItem">
               <MappingFragment StoreEntitySet="SoldItem">
+                <ScalarProperty Name="ReasonForAddtition" ColumnName="ReasonForAddtition" />
                 <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />

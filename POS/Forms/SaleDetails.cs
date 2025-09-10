@@ -132,7 +132,8 @@ namespace POS.Forms
                         Discount = e.Discount,
                         Quantity = e.Quantity,
                         ProductId = e.ProductId,
-                        SaleId = sale.Id
+                        SaleId = sale.Id,
+                        ReasonForAddtition = reasonForAddtion
                     };
 
                     context.SoldItems.Add(soldItem);
@@ -156,7 +157,8 @@ namespace POS.Forms
                         Discount = e.Discount,
                         Quantity = e.Quantity,
                         ProductId = e.ProductId,
-                        SaleId = sale.Id
+                        SaleId = sale.Id,
+                        ReasonForAddtition = reasonForAddtion
                     };
 
                     context.SoldItems.Add(soldItemToAdd);
@@ -320,7 +322,7 @@ namespace POS.Forms
                         }
 
                         decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
-                        itemsTable.Rows.Add("", "", "", "", "", "", "", "", "", subTotal);
+                        itemsTable.Rows.Add("", "", "", "", "", "", "", "","", "", subTotal);
                     }
                 }
             }
@@ -338,6 +340,7 @@ namespace POS.Forms
         DataGridViewRow CreateRow(SoldItem soldItem, bool isFirstNameEntry = true, bool isFirstSupplierEntry = true, int? Qty = 0) => itemsTable.CreateRow(
            soldItem.Id,
            soldItem.DateAdded,
+           soldItem.ReasonForAddtition,
            soldItem.WarrantyStatus,
            isFirstNameEntry ? soldItem.Product.Item.Name : null,
            isFirstSupplierEntry ? soldItem.Product.Supplier?.Name : null,
@@ -485,6 +488,7 @@ namespace POS.Forms
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             dateAddedCol.Visible = checkBox2.Checked;
+            Column2.Visible = checkBox2.Checked;
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)

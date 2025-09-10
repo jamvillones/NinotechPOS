@@ -11,7 +11,7 @@ namespace POS
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class ChangeLog
     {
         public int Id { get; set; }

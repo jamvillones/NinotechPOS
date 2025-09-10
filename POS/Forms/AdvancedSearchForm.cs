@@ -88,8 +88,8 @@ namespace POS.Forms
 
         void AddToCart()
         {
-            ItemSelected?.Invoke(this, infoHolder);
             Tag = textBox1.Text.Trim();
+            ItemSelected?.Invoke(this, infoHolder);
             Close();
         }
 
@@ -97,7 +97,6 @@ namespace POS.Forms
         {
             if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
-
                 MessageBox.Show("Must provide reason", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }

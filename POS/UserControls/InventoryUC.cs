@@ -237,7 +237,7 @@ namespace POS.UserControls
                                             SellingPrice = i.SellingPrice,
                                             Type = i.Type,
                                             Notes = i.Details,
-                                            Warranty = (int)i.Warranty,
+                                            Warranty = (int?)i.Warranty,
                                             Qty = i.Products.Select(a => a.InventoryItems
                                                                         .Select(b => b.Quantity)
                                                                         .DefaultIfEmpty(0)
@@ -332,7 +332,7 @@ namespace POS.UserControls
 
             public int? Qty { get; set; }
             public string Notes { get; set; }
-            public int Warranty { get; set; } = 0;
+            public int? Warranty { get; set; } = 0;
             public string WarrantyDetails
             {
                 get
@@ -340,7 +340,7 @@ namespace POS.UserControls
                     if (Warranty == 0)
                         return "No Warranty";
 
-                    return Warranty.ToDaysToYMWD();
+                    return Warranty?.ToDaysToYMWD();
                 }
             }
             public decimal SellingPrice { get; set; }

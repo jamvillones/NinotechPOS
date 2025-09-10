@@ -21,6 +21,5 @@ namespace POS.Forms
         }
         public decimal TotalPrice { get { return (Quantity * (SellingPrice - Discount)); } }
 
-        public string Reason { get; set; }
     }
 }
