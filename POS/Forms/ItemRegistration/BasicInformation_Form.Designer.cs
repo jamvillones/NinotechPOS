@@ -333,7 +333,7 @@
             this._name.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._name.ForeColor = System.Drawing.Color.Black;
             this._name.Location = new System.Drawing.Point(11, 16);
-            this._name.MaxLength = 50;
+            this._name.MaxLength = 100;
             this._name.Name = "_name";
             this._name.Size = new System.Drawing.Size(440, 16);
             this._name.TabIndex = 0;
