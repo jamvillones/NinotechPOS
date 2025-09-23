@@ -70,18 +70,6 @@ namespace POS
 
     }
 
-    //partial class POSEntities
-    //{
-    //    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    //    {
-
-    //    }
-    //}
-
-   
-
-
-
     partial class Item : BaseModel
     {
         public int QuantityInInventory => this.Products
@@ -236,12 +224,14 @@ namespace POS
 
     partial class POSEntities
     {
+        public string AdditionalDetails { get; set; } = "";
+
         public override async Task<int> SaveChangesAsync()
         {
             int changesMade = 0;
             try
             {
-                this.LogChanges(UserManager.instance.CurrentLogin);
+                this.LogChanges(UserManager.instance.CurrentLogin, AdditionalDetails);
 
                 changesMade = await base.SaveChangesAsync();
                 return changesMade;
@@ -319,7 +309,7 @@ namespace POS
         {
             return inv.Where(x => !x.IsDefective);
         }
-        public static void LogChanges(this POSEntities context, Login user)
+        public static void LogChanges(this POSEntities context, Login user, string details = "")
         {
             var entries = context.ChangeTracker.Entries()
                 .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted);
@@ -362,7 +352,11 @@ namespace POS
                 }
             }
 
-            context.ChangeLogs.Add(new ChangeLog() { MadeBy = user?.ToString() ?? "admin", Details = strBuilder.ToString() });
+            context.ChangeLogs.Add(new ChangeLog()
+            {
+                MadeBy = user?.ToString() ?? "admin",
+                Details = strBuilder.ToString() + (string.IsNullOrEmpty(details) ? string.Empty : "\n" + details)
+            });
         }
 
         public static bool HasChanges(this DbContext context) => context.ChangeTracker.Entries().Any(e => e.IsEntityActuallyModified());
