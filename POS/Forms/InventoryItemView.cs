@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -87,6 +88,32 @@ namespace POS.Forms
         private void inventoryTable_SelectionChanged(object sender, EventArgs e)
         {
             label1.Text = $"Selected Items: {invTable.SelectedRows.Count:N0}";
+        }
+
+        private void invTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (e.ColumnIndex == markAsDefectiveCol.Index)
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                var image = Properties.Resources.undo_15px;
+                var w = image.Width;
+                var h = image.Height;
+                var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                e.Graphics.DrawImage(image, new Rectangle(x, y, w, h));
+                e.Handled = true;
+            }
+        }
+
+        private void invTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+
         }
     }
 }

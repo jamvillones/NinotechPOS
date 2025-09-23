@@ -29,19 +29,21 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryItemView));
             this.invTable = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.markAsDefectiveCol = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.invTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,28 +70,66 @@
             this.Column3,
             this.Column2,
             this.Column1,
-            this.col_qty});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.invTable.DefaultCellStyle = dataGridViewCellStyle4;
+            this.col_qty,
+            this.markAsDefectiveCol});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.invTable.DefaultCellStyle = dataGridViewCellStyle5;
             this.invTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.invTable.EnableHeadersVisualStyles = false;
             this.invTable.GridColor = System.Drawing.Color.Gainsboro;
             this.invTable.Location = new System.Drawing.Point(20, 40);
             this.invTable.Name = "invTable";
             this.invTable.RowHeadersVisible = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.invTable.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.invTable.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.invTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.invTable.Size = new System.Drawing.Size(544, 461);
             this.invTable.TabIndex = 4;
+            this.invTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.invTable_CellMouseClick);
+            this.invTable.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.invTable_CellPainting);
             this.invTable.SelectionChanged += new System.EventHandler(this.inventoryTable_SelectionChanged);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(91)))), ((int)(((byte)(218)))));
+            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial Black", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(20, 521);
+            this.button1.MaximumSize = new System.Drawing.Size(250, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(250, 40);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "VIEW ITEM DETAILS";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.ViewItemDetails_Click);
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(20, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(544, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Selected Items: 0";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(20, 501);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(544, 20);
+            this.panel1.TabIndex = 7;
             // 
             // Column3
             // 
@@ -125,37 +165,22 @@
             this.col_qty.Name = "col_qty";
             this.col_qty.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // button1
+            // markAsDefectiveCol
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(20, 521);
-            this.button1.MaximumSize = new System.Drawing.Size(250, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(250, 40);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "View Item Details";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.ViewItemDetails_Click);
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(20, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(544, 20);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Selected Items: 0";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(20, 501);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(544, 20);
-            this.panel1.TabIndex = 7;
+            this.markAsDefectiveCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(1);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(120)))), ((int)(((byte)(139)))));
+            this.markAsDefectiveCol.DefaultCellStyle = dataGridViewCellStyle4;
+            this.markAsDefectiveCol.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.markAsDefectiveCol.HeaderText = "";
+            this.markAsDefectiveCol.MinimumWidth = 40;
+            this.markAsDefectiveCol.Name = "markAsDefectiveCol";
+            this.markAsDefectiveCol.ReadOnly = true;
+            this.markAsDefectiveCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.markAsDefectiveCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.markAsDefectiveCol.ToolTipText = "Mark As Defective";
+            this.markAsDefectiveCol.Width = 40;
             // 
             // InventoryItemView
             // 
@@ -184,10 +209,11 @@
         private System.Windows.Forms.DataGridView invTable;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_qty;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridViewButtonColumn markAsDefectiveCol;
     }
 }

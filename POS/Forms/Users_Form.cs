@@ -149,6 +149,9 @@ namespace POS.Forms
                 case 6:
                     SelectedLogin.CanVoidSale = checkbox.Checked;
                     break;
+                case 7:
+
+                    break;
             }
 
             button1.Enabled = button2.Enabled = context.HasChanges();
