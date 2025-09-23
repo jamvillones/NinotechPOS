@@ -40,7 +40,8 @@ namespace POS.Forms
             checkBox3.Enabled =
             checkBox4.Enabled =
             checkBox5.Enabled =
-            checkBox6.Enabled = c.Checked;
+            checkBox6.Enabled =
+            checkBox7.Enabled = c.Checked;
         }
 
         private async void Users_Form_Load(object sender, EventArgs e)
@@ -120,6 +121,7 @@ namespace POS.Forms
             checkBox4.Checked = login.CanStockIn;
             checkBox5.Checked = login.CanEditInventory;
             checkBox6.Checked = login.CanVoidSale;
+            checkBox7.Checked = login.CanMarkAsDefective;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -150,14 +152,14 @@ namespace POS.Forms
                     SelectedLogin.CanVoidSale = checkbox.Checked;
                     break;
                 case 7:
-
+                    SelectedLogin.CanMarkAsDefective = checkbox.Checked;
                     break;
             }
 
             button1.Enabled = button2.Enabled = context.HasChanges();
         }
 
-        
+
 
         private void Users_Form_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -260,6 +262,6 @@ namespace POS.Forms
         //    return true;
         //}
 
-        
+
     }
 }

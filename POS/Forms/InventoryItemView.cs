@@ -42,7 +42,7 @@ namespace POS.Forms
             using (var context = POSEntities.Create())
             {
                 var inventoryItems = await context.InventoryItems.AsNoTracking().AsQueryable()
-                    .Where(x => x.Product.Item.Id == _id)
+                    .Where(x => x.Product.Item.Id == _id && !x.IsDefective)
                     .ToListAsync();
 
                 var itemGroupings = inventoryItems.GroupBy(x => x.Product.Supplier?.Name);
@@ -109,11 +109,48 @@ namespace POS.Forms
             }
         }
 
-        private void invTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private async void invTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex == -1) return;
+            if (e.RowIndex == -1 || e.ColumnIndex == -1) return;
 
+            if (e.ColumnIndex == markAsDefectiveCol.Index)
+            {
+                var operationSuccess = await MarkAsDefective((int)invTable.SelectedCells[0].Value);
 
+                if (operationSuccess)
+                    invTable.Rows.RemoveAt(e.RowIndex);
+            }
+        }
+
+        private async Task<bool> MarkAsDefective(int value)
+        {
+            if (MessageBox.Show("Mark Item as Defective?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return false;
+
+            try
+            {
+                using (var context = POSEntities.Create())
+                {
+                    ///ensures the login privilege is up to date
+                    var currentLogin = await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.CurrentLogin.Id);
+
+                    if (!currentLogin.CanMarkAsDefective)
+                    {
+                        MessageBox.Show("Current User has no ADMINISTRATIVE authority to perform this action!", "Operation Aborted", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return false;
+                    }
+
+                    var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.Id == value);
+                    invItem.IsDefective = true;
+
+                    await context.SaveChangesAsync();
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

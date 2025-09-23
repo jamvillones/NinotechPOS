@@ -158,6 +158,7 @@ namespace POS.Forms
             {
 
                 var inventoryItems = await context.InventoryItems.AsNoTracking().AsQueryable()
+                    .IsValid()
                     .ApplySearch(keyWord)
                     .OrderBy(x => x.Product.Item.Name)
                     .ToListAsync();

@@ -275,7 +275,7 @@
             this.searchControl1.Name = "searchControl1";
             this.searchControl1.Padding = new System.Windows.Forms.Padding(5);
             this.searchControl1.SearchedText = "";
-            this.searchControl1.Size = new System.Drawing.Size(580, 28);
+            this.searchControl1.Size = new System.Drawing.Size(428, 28);
             this.searchControl1.TabIndex = 1;
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             // 

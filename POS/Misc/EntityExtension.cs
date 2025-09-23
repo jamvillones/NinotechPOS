@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -69,12 +70,22 @@ namespace POS
 
     }
 
+    //partial class POSEntities
+    //{
+    //    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    //    {
+
+    //    }
+    //}
+
+   
+
 
 
     partial class Item : BaseModel
     {
         public int QuantityInInventory => this.Products
-            .Select(a => a.InventoryItems
+            .Select(a => a.InventoryItems.Where(x => !x.IsDefective)
                 .Select(b => b.Quantity)
                 .DefaultIfEmpty(0)
                 .Sum())
@@ -304,6 +315,10 @@ namespace POS
 
     public static class ContextManipulationMethods
     {
+        public static IQueryable<InventoryItem> IsValid(this IQueryable<InventoryItem> inv)
+        {
+            return inv.Where(x => !x.IsDefective);
+        }
         public static void LogChanges(this POSEntities context, Login user)
         {
             var entries = context.ChangeTracker.Entries()

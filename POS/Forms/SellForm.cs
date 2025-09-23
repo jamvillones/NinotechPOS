@@ -176,6 +176,7 @@ namespace POS.Forms
                                 var takenSerialNumbers = CartItems.Select(x => x.Serial).ToArray();
 
                                 serial = (await context.InventoryItems.AsNoTracking().AsQueryable()
+                                    .IsValid()
                                     .Where(x => takenSerialNumbers.All(c => c != x.SerialNumber))
                                     .Where(x => x.Product.Item.Id == selectedItem.Id)
                                     .FirstAsync())?.SerialNumber;
@@ -202,6 +203,7 @@ namespace POS.Forms
                             .InventoryItems
                             .AsNoTracking()
                             .AsQueryable()
+                            .IsValid()
                             .FirstOrDefaultAsync(i => i.SerialNumber == keyword);
 
                         if (invItem != null && CartItems.All(c => c.Serial != invItem.SerialNumber))
@@ -251,6 +253,7 @@ namespace POS.Forms
                 Price = price,
                 Discount = discount
             });
+
             loadingTxt.Text = string.Empty;
         }
         void TryAddInfinite(string id, string name, int qty, decimal price, decimal discount = 0)

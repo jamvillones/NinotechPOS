@@ -160,7 +160,7 @@ namespace POS.UserControls
                         SellingPrice = item.SellingPrice,
                         Warranty = (int)item.Warranty,
                         Type = item.Type.ToString(),
-                        Qty = item.Products.Select(a => a.InventoryItems
+                        Qty = item.Products.Select(a => a.InventoryItems.Where(x => !x.IsDefective)
                                                         .Select(b => b.Quantity)
                                                         .DefaultIfEmpty(0)
                                                         .Sum()).Sum()
@@ -239,6 +239,7 @@ namespace POS.UserControls
                                             Notes = i.Details,
                                             Warranty = (int?)i.Warranty,
                                             Qty = i.Products.Select(a => a.InventoryItems
+                                                                        .Where(x => !x.IsDefective)
                                                                         .Select(b => b.Quantity)
                                                                         .DefaultIfEmpty(0)
                                                                         .Sum())
@@ -542,6 +543,7 @@ namespace POS.UserControls
                 using (var context = POSEntities.Create())
                 {
                     var inventoryItem = await context.InventoryItems.AsNoTracking()
+                        .Where(x=>!x.IsDefective)
                         .FirstOrDefaultAsync(i => i.SerialNumber == serialNumber);
 
                     if (inventoryItem != null)
