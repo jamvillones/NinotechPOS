@@ -53,6 +53,7 @@
             this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.discountCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.markAsDefectiveCo = new System.Windows.Forms.DataGridViewButtonColumn();
             this.soldTo = new System.Windows.Forms.TextBox();
             this.amountDue = new System.Windows.Forms.TextBox();
             this.amountRecieved = new System.Windows.Forms.TextBox();
@@ -139,7 +140,8 @@
             this.serialCol,
             this.priceCol,
             this.discountCol,
-            this.totalCol});
+            this.totalCol,
+            this.markAsDefectiveCo});
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI Light", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -168,6 +170,8 @@
             this.itemsTable.StandardTab = true;
             this.itemsTable.TabIndex = 2;
             this.itemsTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemsTable_CellClick);
+            this.itemsTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.itemsTable_CellMouseClick);
+            this.itemsTable.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.itemsTable_CellPainting);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             this.itemsTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itemsTable_KeyDown);
             // 
@@ -270,6 +274,15 @@
             this.totalCol.HeaderText = "TOTAL";
             this.totalCol.Name = "totalCol";
             this.totalCol.ReadOnly = true;
+            // 
+            // markAsDefectiveCo
+            // 
+            this.markAsDefectiveCo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.markAsDefectiveCo.HeaderText = "";
+            this.markAsDefectiveCo.MinimumWidth = 40;
+            this.markAsDefectiveCo.Name = "markAsDefectiveCo";
+            this.markAsDefectiveCo.ReadOnly = true;
+            this.markAsDefectiveCo.Width = 40;
             // 
             // soldTo
             // 
@@ -855,5 +868,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn priceCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn discountCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalCol;
+        private System.Windows.Forms.DataGridViewButtonColumn markAsDefectiveCo;
     }
 }

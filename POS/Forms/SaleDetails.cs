@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Threading;
@@ -21,6 +22,48 @@ namespace POS.Forms
 
             voidBtn.Visible = CurrentLogin.CanVoidSale;
             dateAddedCol.Visible = checkBox2.Checked;
+
+            markAsDefectiveCo.Visible = CurrentLogin.CanMarkAsDefective;
+        }
+
+        private async Task<bool> MarkAsDefective(int value)
+        {
+            if (MessageBox.Show("Mark Item as Defective?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return false;
+
+            var reasonForm = new ReasonForReturnForm();
+
+            if (reasonForm.ShowDialog() != DialogResult.OK)
+                return false;
+
+            var reason = reasonForm.Tag as string;
+
+            try
+            {
+                using (var context = POSEntities.Create())
+                {
+                    ///ensures the login privilege is up to date
+                    var currentLogin = await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.CurrentLogin.Id);
+
+                    if (!currentLogin.CanMarkAsDefective)
+                    {
+                        MessageBox.Show("Current User has no ADMINISTRATIVE authority to perform this action!", "Operation Aborted", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return false;
+                    }
+
+                    var soldItem = await context.SoldItems.FirstOrDefaultAsync(x => x.Id == value);
+                    context.AdditionalDetails = "SN:" + soldItem.SerialNumber + "=>" + reason;
+                    soldItem.IsDefective = true;
+
+                    await context.SaveChangesAsync();
+                    context.AdditionalDetails = null;
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         Login CurrentLogin => UserManager.instance.CurrentLogin;
@@ -262,6 +305,7 @@ namespace POS.Forms
                     var soldItems = context.SoldItems
                         .AsNoTracking()
                         .AsQueryable()
+                        .IsValid()
                         .Where(so => so.SaleId == _saleId)
                         .ApplySearch(keyword)
                         .OrderBy(s => s.Product.Item.Name);
@@ -322,7 +366,7 @@ namespace POS.Forms
                         }
 
                         decimal subTotal = itemsTable.Rows.Cast<DataGridViewRow>().Select(row => (decimal)(row.Cells[totalCol.Index].Value)).Sum();
-                        itemsTable.Rows.Add("", "", "", "", "", "", "", "","", "", subTotal);
+                        itemsTable.Rows.Add("", "", "", "", "", "", "", "", "", "", subTotal);
                     }
                 }
             }
@@ -495,6 +539,49 @@ namespace POS.Forms
         {
             bool shown = ((CheckBox)sender).Checked;
             Column1.Visible = shown;
+        }
+
+        private void itemsTable_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (e.RowIndex == this.itemsTable.RowCount - 1)
+            {
+                // This is the last row, perform your custom painting here
+                // ...
+            }
+            else
+            {
+                // This is not the last row, perform other painting logic
+                // ...
+                if (e.ColumnIndex == markAsDefectiveCo.Index)
+                {
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                    var image = Properties.Resources.undo_15px;
+                    var w = image.Width;
+                    var h = image.Height;
+                    var x = e.CellBounds.Left + (e.CellBounds.Width - w) / 2;
+                    var y = e.CellBounds.Top + (e.CellBounds.Height - h) / 2;
+
+                    e.Graphics.DrawImage(image, new Rectangle(x, y, w, h));
+                    e.Handled = true;
+                }
+            }
+
+        }
+
+        private async void itemsTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.RowIndex == itemsTable.RowCount - 1 || e.ColumnIndex == -1) return;
+
+            if (e.ColumnIndex == markAsDefectiveCo.Index)
+            {
+
+                var operationSuccess = await MarkAsDefective((int)itemsTable.SelectedCells[0].Value);
+
+                if (operationSuccess) await LoadDataAsync();
+            }
         }
     }
 

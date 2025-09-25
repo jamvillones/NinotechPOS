@@ -21,6 +21,7 @@ namespace POS.Forms
             _serial = serial;
 
             bool isAdmin = UserManager.instance.CurrentLogin.Username.Equals("admin", StringComparison.OrdinalIgnoreCase);
+            markAsDefectiveCol.Visible = UserManager.instance.CurrentLogin.CanMarkAsDefective;
             invTable.AllowUserToDeleteRows = isAdmin;
             col_qty.ReadOnly = !isAdmin;
         }
