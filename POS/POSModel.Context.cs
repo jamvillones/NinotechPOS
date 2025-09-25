@@ -33,8 +33,8 @@ namespace POS
         public virtual DbSet<StockinHistory> StockinHistories { get; set; }
         public virtual DbSet<ChargedPayRecord> ChargedPayRecords { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
-        public virtual DbSet<SoldItem> SoldItems { get; set; }
-        public virtual DbSet<ChangeLog> ChangeLogs { get; set; }
         public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<ChangeLog> ChangeLogs { get; set; }
+        public virtual DbSet<SoldItem> SoldItems { get; set; }
     }
 }

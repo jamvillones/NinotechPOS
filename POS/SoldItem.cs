@@ -23,6 +23,7 @@ namespace POS
         public int ProductId { get; set; }
         public System.DateTime DateAdded { get; set; } = DateTime.Now;
         public string ReasonForAddtition { get; set; }
+        public bool IsDefective { get; set; }
 
         public virtual Product Product { get; set; }
         public virtual Sale Sale { get; set; }

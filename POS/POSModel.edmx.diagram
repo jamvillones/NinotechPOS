@@ -12,11 +12,10 @@
         <AssociationConnector Association="POSModel.FK_Sale_Customer" />
         <EntityTypeShape EntityType="POSModel.Product" Width="1.5" PointX="6.75" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="POSModel.FK_Product_ProductBySupplier" ManuallyRouted="true" >
-          <ConnectorPoint PointX="7.9552011838291268" PointY="3.2494921874999996" />
-          <ConnectorPoint PointX="7.9552011838291268" PointY="3.44012248828125" />
-          <ConnectorPoint PointX="8.5" PointY="3.44012248828125" />
-          <ConnectorPoint PointX="8.5" PointY="6.8362939453125" />
-          <ConnectorPoint PointX="9.625" PointY="6.8362939453125" />
+          <ConnectorPoint PointX="8.25" PointY="3.1163352734184584" />
+          <ConnectorPoint PointX="8.93749974295497" PointY="3.1163352734184584" />
+          <ConnectorPoint PointX="8.93749974295497" PointY="5.9791665170400741" />
+          <ConnectorPoint PointX="9.625" PointY="5.9791665170400741" />
         </AssociationConnector>
         <AssociationConnector Association="POSModel.FK_ProductBySupplier_Supplier" />
         <EntityTypeShape EntityType="POSModel.StockinHistory" Width="1.5" PointX="9.625" PointY="2.625" IsExpanded="true" />
@@ -25,12 +24,12 @@
         <AssociationConnector Association="POSModel.FK_ChargedPayRecord_ChargedPayRecord" />
         <EntityTypeShape EntityType="POSModel.Login" Width="1.5" PointX="2.5" PointY="7.5" />
         <AssociationConnector Association="POSModel.FK_Sale_Login" />
-        <EntityTypeShape EntityType="POSModel.SoldItem" Width="1.5" PointX="6.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSModel.Item" Width="1.5" PointX="6.75" PointY="4.5" />
+        <AssociationConnector Association="POSModel.FK_Product_Item" />
+        <EntityTypeShape EntityType="POSModel.ChangeLog" Width="1.5" PointX="2.5" PointY="0.5" />
+        <EntityTypeShape EntityType="POSModel.SoldItem" Width="1.5" PointX="4.75" PointY="0.5" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Product" />
         <AssociationConnector Association="POSModel.FK_SoldItem_Sale" />
-        <EntityTypeShape EntityType="POSModel.ChangeLog" Width="1.5" PointX="0.625" PointY="1.25" />
-        <EntityTypeShape EntityType="POSModel.Item" Width="1.5" PointX="2.5" PointY="1.25" />
-        <AssociationConnector Association="POSModel.FK_Product_Item" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
