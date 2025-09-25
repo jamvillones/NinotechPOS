@@ -305,10 +305,9 @@ namespace POS
 
     public static class ContextManipulationMethods
     {
-        public static IQueryable<InventoryItem> IsValid(this IQueryable<InventoryItem> inv)
-        {
-            return inv.Where(x => !x.IsDefective);
-        }
+        public static IQueryable<InventoryItem> IsValid(this IQueryable<InventoryItem> inv) => inv.Where(x => !x.IsDefective);
+        public static IQueryable<SoldItem> IsValid(this IQueryable<SoldItem> soldItems) => soldItems.Where(x => !x.IsDefective);
+
         public static void LogChanges(this POSEntities context, Login user, string details = "")
         {
             var entries = context.ChangeTracker.Entries()
@@ -358,9 +357,7 @@ namespace POS
                 Details = strBuilder.ToString() + (string.IsNullOrEmpty(details) ? string.Empty : "\n *NOTE:" + details)
             });
         }
-
         public static bool HasChanges(this DbContext context) => context.ChangeTracker.Entries().Any(e => e.IsEntityActuallyModified());
-
         public static bool IsEntityActuallyModified(this DbEntityEntry entry)
         {
             if (entry.State == EntityState.Modified)
@@ -377,7 +374,6 @@ namespace POS
 
             return entry.State == EntityState.Added || entry.State == EntityState.Deleted;
         }
-
         public static void UndoAllChanges(this DbContext context)
         {
             foreach (var entry in context.ChangeTracker.Entries())
@@ -402,7 +398,6 @@ namespace POS
                 }
             }
         }
-
         public static async Task<bool> ExtractInventory(string department = "")
         {
             try
@@ -466,7 +461,6 @@ namespace POS
 
             return true;
         }
-
         public static List<ExcelData> ProcessInventoryData(this List<InventoryItem> inventoryItems)
         {
             var NameGroup = inventoryItems.GroupBy(i => i.Product.Item.Name);
@@ -498,8 +492,6 @@ namespace POS
             }
             return list;
         }
-
-
     }
 
 }
