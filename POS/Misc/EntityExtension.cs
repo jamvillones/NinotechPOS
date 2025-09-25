@@ -355,7 +355,7 @@ namespace POS
             context.ChangeLogs.Add(new ChangeLog()
             {
                 MadeBy = user?.ToString() ?? "admin",
-                Details = strBuilder.ToString() + (string.IsNullOrEmpty(details) ? string.Empty : "\n" + details)
+                Details = strBuilder.ToString() + (string.IsNullOrEmpty(details) ? string.Empty : "\n *NOTE:" + details)
             });
         }
 

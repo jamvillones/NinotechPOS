@@ -39,6 +39,9 @@ namespace POS.Forms
 
         async Task LoadData_Async()
         {
+            if (invTable.RowCount > 0)
+                invTable.Rows.Clear();
+
             using (var context = POSEntities.Create())
             {
                 var inventoryItems = await context.InventoryItems.AsNoTracking().AsQueryable()
@@ -115,16 +118,24 @@ namespace POS.Forms
 
             if (e.ColumnIndex == markAsDefectiveCol.Index)
             {
+
                 var operationSuccess = await MarkAsDefective((int)invTable.SelectedCells[0].Value);
 
                 if (operationSuccess)
-                    invTable.Rows.RemoveAt(e.RowIndex);
+                    await LoadData_Async();
             }
         }
 
         private async Task<bool> MarkAsDefective(int value)
         {
             if (MessageBox.Show("Mark Item as Defective?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return false;
+
+            var reasonForm = new ReasonForReturnForm();
+
+            if (reasonForm.ShowDialog() != DialogResult.OK)
+                return false;
+
+            var reason = reasonForm.Tag as string;
 
             try
             {
@@ -140,9 +151,11 @@ namespace POS.Forms
                     }
 
                     var invItem = await context.InventoryItems.FirstOrDefaultAsync(x => x.Id == value);
+                    context.AdditionalDetails = "SN:" + invItem.SerialNumber + "=>" + reason;
                     invItem.IsDefective = true;
 
                     await context.SaveChangesAsync();
+                    context.AdditionalDetails = null;
 
                     return true;
                 }

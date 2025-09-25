@@ -36,14 +36,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryItemView));
             this.invTable = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.markAsDefectiveCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.invTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,41 +96,6 @@
             this.invTable.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.invTable_CellPainting);
             this.invTable.SelectionChanged += new System.EventHandler(this.inventoryTable_SelectionChanged);
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(91)))), ((int)(((byte)(218)))));
-            this.button1.FlatAppearance.BorderSize = 2;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Arial Black", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(20, 521);
-            this.button1.MaximumSize = new System.Drawing.Size(250, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(250, 40);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "VIEW ITEM DETAILS";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.ViewItemDetails_Click);
-            // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(20, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(544, 20);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Selected Items: 0";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(20, 501);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(544, 20);
-            this.panel1.TabIndex = 7;
-            // 
             // Column3
             // 
             this.Column3.HeaderText = "ID";
@@ -181,6 +146,41 @@
             this.markAsDefectiveCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.markAsDefectiveCol.ToolTipText = "Mark As Defective";
             this.markAsDefectiveCol.Width = 40;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(91)))), ((int)(((byte)(218)))));
+            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial Black", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(20, 521);
+            this.button1.MaximumSize = new System.Drawing.Size(250, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(250, 40);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "VIEW ITEM DETAILS";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.ViewItemDetails_Click);
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(20, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(544, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Selected Items: 0";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(20, 501);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(544, 20);
+            this.panel1.TabIndex = 7;
             // 
             // InventoryItemView
             // 
