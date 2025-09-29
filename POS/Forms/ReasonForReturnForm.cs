@@ -30,5 +30,10 @@ namespace POS.Forms
             Tag = reason;
             DialogResult = DialogResult.OK;
         }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
