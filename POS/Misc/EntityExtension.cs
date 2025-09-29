@@ -305,6 +305,32 @@ namespace POS
 
     public static class ContextManipulationMethods
     {
+        public static IQueryable<InventoryItem> FilterItems(this IQueryable<InventoryItem> inventoryItems, string keyword)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                return inventoryItems;
+            }
+
+            return inventoryItems.Where(
+                x => x.SerialNumber.Contains(keyword) || 
+                x.Product.Item.Name.Contains(keyword) || 
+                x.Product.Supplier.Name.Contains(keyword));
+        }
+
+        public static IQueryable<SoldItem> FilterItems(this IQueryable<SoldItem> inventoryItems, string keyword)
+        {
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                return inventoryItems;
+            }
+
+            return inventoryItems.Where(
+                x => x.SerialNumber.Contains(keyword) ||
+                x.Product.Item.Name.Contains(keyword) ||
+                x.Product.Supplier.Name.Contains(keyword));
+        }
+
         public static IQueryable<InventoryItem> IsValid(this IQueryable<InventoryItem> inv) => inv.Where(x => !x.IsDefective);
         public static IQueryable<SoldItem> IsValid(this IQueryable<SoldItem> soldItems) => soldItems.Where(x => !x.IsDefective);
 

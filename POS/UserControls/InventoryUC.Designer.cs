@@ -29,16 +29,25 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tablePanel = new System.Windows.Forms.Panel();
             this.itemsTable = new System.Windows.Forms.DataGridView();
+            this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ShowProgression = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.barcodeCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warrantyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -62,6 +71,7 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.button7 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -79,15 +89,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.searchBar = new POS.UserControls.SearchControl();
-            this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ShowProgression = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.barcodeCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warrantyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.panel5.SuspendLayout();
@@ -124,15 +125,15 @@
             this.itemsTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemsTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical;
             this.itemsTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.itemsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Id,
@@ -144,15 +145,15 @@
             this.col_Notes,
             this.warrantyCol,
             this.col_Type});
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle21.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle21.Padding = new System.Windows.Forms.Padding(5, 2, 20, 2);
-            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5, 2, 20, 2);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemsTable.DefaultCellStyle = dataGridViewCellStyle7;
             this.itemsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemsTable.EnableHeadersVisualStyles = false;
             this.itemsTable.GridColor = System.Drawing.Color.LightGray;
@@ -178,6 +179,97 @@
             this.itemsTable.Scroll += new System.Windows.Forms.ScrollEventHandler(this.itemsTable_Scroll);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             this.itemsTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itemsTable_KeyDown);
+            // 
+            // col_Id
+            // 
+            this.col_Id.HeaderText = "ID";
+            this.col_Id.Name = "col_Id";
+            this.col_Id.ReadOnly = true;
+            this.col_Id.Visible = false;
+            // 
+            // col_ShowProgression
+            // 
+            this.col_ShowProgression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            this.col_ShowProgression.DefaultCellStyle = dataGridViewCellStyle2;
+            this.col_ShowProgression.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.col_ShowProgression.HeaderText = "";
+            this.col_ShowProgression.MinimumWidth = 40;
+            this.col_ShowProgression.Name = "col_ShowProgression";
+            this.col_ShowProgression.ReadOnly = true;
+            this.col_ShowProgression.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_ShowProgression.Text = "";
+            this.col_ShowProgression.UseColumnTextForButtonValue = true;
+            this.col_ShowProgression.Width = 40;
+            // 
+            // barcodeCol
+            // 
+            this.barcodeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(1);
+            this.barcodeCol.DefaultCellStyle = dataGridViewCellStyle3;
+            this.barcodeCol.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.barcodeCol.HeaderText = "BARCODE";
+            this.barcodeCol.MinimumWidth = 50;
+            this.barcodeCol.Name = "barcodeCol";
+            this.barcodeCol.ReadOnly = true;
+            this.barcodeCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.barcodeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.barcodeCol.ToolTipText = "Copy Barcode To Clipboard";
+            this.barcodeCol.Width = 93;
+            // 
+            // nameCol
+            // 
+            this.nameCol.HeaderText = "NAME";
+            this.nameCol.MinimumWidth = 100;
+            this.nameCol.Name = "nameCol";
+            this.nameCol.ReadOnly = true;
+            // 
+            // quantityCol
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N0";
+            dataGridViewCellStyle4.NullValue = "N/A";
+            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle4;
+            this.quantityCol.HeaderText = "QUANTITY";
+            this.quantityCol.MinimumWidth = 50;
+            this.quantityCol.Name = "quantityCol";
+            this.quantityCol.ReadOnly = true;
+            // 
+            // priceCol
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "C2";
+            this.priceCol.DefaultCellStyle = dataGridViewCellStyle5;
+            this.priceCol.HeaderText = "SELLING PRICE";
+            this.priceCol.MinimumWidth = 50;
+            this.priceCol.Name = "priceCol";
+            this.priceCol.ReadOnly = true;
+            // 
+            // col_Notes
+            // 
+            this.col_Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Notes.HeaderText = "NOTES";
+            this.col_Notes.Name = "col_Notes";
+            this.col_Notes.ReadOnly = true;
+            this.col_Notes.Visible = false;
+            // 
+            // warrantyCol
+            // 
+            this.warrantyCol.HeaderText = "WARRANTY";
+            this.warrantyCol.Name = "warrantyCol";
+            this.warrantyCol.ReadOnly = true;
+            this.warrantyCol.Visible = false;
+            // 
+            // col_Type
+            // 
+            this.col_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.col_Type.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col_Type.HeaderText = "TYPE";
+            this.col_Type.Name = "col_Type";
+            this.col_Type.ReadOnly = true;
+            this.col_Type.Visible = false;
             // 
             // panel5
             // 
@@ -469,6 +561,7 @@
             this.panel6.AutoScroll = true;
             this.panel6.Controls.Add(this.button7);
             this.panel6.Controls.Add(this.button2);
+            this.panel6.Controls.Add(this.button8);
             this.panel6.Controls.Add(this.button3);
             this.panel6.Controls.Add(this.button5);
             this.panel6.Controls.Add(this.panel1);
@@ -495,7 +588,7 @@
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
             this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(0, 470);
+            this.button7.Location = new System.Drawing.Point(0, 510);
             this.button7.Margin = new System.Windows.Forms.Padding(5);
             this.button7.Name = "button7";
             this.button7.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -515,7 +608,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 430);
+            this.button2.Location = new System.Drawing.Point(0, 470);
             this.button2.Margin = new System.Windows.Forms.Padding(5);
             this.button2.Name = "button2";
             this.button2.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
@@ -526,6 +619,26 @@
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.White;
+            this.button8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
+            this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button8.Location = new System.Drawing.Point(0, 430);
+            this.button8.Margin = new System.Windows.Forms.Padding(5);
+            this.button8.Name = "button8";
+            this.button8.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.button8.Size = new System.Drawing.Size(190, 40);
+            this.button8.TabIndex = 27;
+            this.button8.TabStop = false;
+            this.button8.Text = "     View Invalid Items";
+            this.button8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
             // button3
             // 
@@ -756,97 +869,6 @@
             this.searchBar.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchBar.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
-            // col_Id
-            // 
-            this.col_Id.HeaderText = "ID";
-            this.col_Id.Name = "col_Id";
-            this.col_Id.ReadOnly = true;
-            this.col_Id.Visible = false;
-            // 
-            // col_ShowProgression
-            // 
-            this.col_ShowProgression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle16.Padding = new System.Windows.Forms.Padding(1);
-            this.col_ShowProgression.DefaultCellStyle = dataGridViewCellStyle16;
-            this.col_ShowProgression.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.col_ShowProgression.HeaderText = "";
-            this.col_ShowProgression.MinimumWidth = 40;
-            this.col_ShowProgression.Name = "col_ShowProgression";
-            this.col_ShowProgression.ReadOnly = true;
-            this.col_ShowProgression.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_ShowProgression.Text = "";
-            this.col_ShowProgression.UseColumnTextForButtonValue = true;
-            this.col_ShowProgression.Width = 40;
-            // 
-            // barcodeCol
-            // 
-            this.barcodeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.Padding = new System.Windows.Forms.Padding(1);
-            this.barcodeCol.DefaultCellStyle = dataGridViewCellStyle17;
-            this.barcodeCol.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.barcodeCol.HeaderText = "BARCODE";
-            this.barcodeCol.MinimumWidth = 50;
-            this.barcodeCol.Name = "barcodeCol";
-            this.barcodeCol.ReadOnly = true;
-            this.barcodeCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.barcodeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.barcodeCol.ToolTipText = "Copy Barcode To Clipboard";
-            this.barcodeCol.Width = 93;
-            // 
-            // nameCol
-            // 
-            this.nameCol.HeaderText = "NAME";
-            this.nameCol.MinimumWidth = 100;
-            this.nameCol.Name = "nameCol";
-            this.nameCol.ReadOnly = true;
-            // 
-            // quantityCol
-            // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Format = "N0";
-            dataGridViewCellStyle18.NullValue = "N/A";
-            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle18;
-            this.quantityCol.HeaderText = "QUANTITY";
-            this.quantityCol.MinimumWidth = 50;
-            this.quantityCol.Name = "quantityCol";
-            this.quantityCol.ReadOnly = true;
-            // 
-            // priceCol
-            // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Format = "C2";
-            this.priceCol.DefaultCellStyle = dataGridViewCellStyle19;
-            this.priceCol.HeaderText = "SELLING PRICE";
-            this.priceCol.MinimumWidth = 50;
-            this.priceCol.Name = "priceCol";
-            this.priceCol.ReadOnly = true;
-            // 
-            // col_Notes
-            // 
-            this.col_Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Notes.HeaderText = "NOTES";
-            this.col_Notes.Name = "col_Notes";
-            this.col_Notes.ReadOnly = true;
-            this.col_Notes.Visible = false;
-            // 
-            // warrantyCol
-            // 
-            this.warrantyCol.HeaderText = "WARRANTY";
-            this.warrantyCol.Name = "warrantyCol";
-            this.warrantyCol.ReadOnly = true;
-            this.warrantyCol.Visible = false;
-            // 
-            // col_Type
-            // 
-            this.col_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.col_Type.DefaultCellStyle = dataGridViewCellStyle20;
-            this.col_Type.HeaderText = "TYPE";
-            this.col_Type.Name = "col_Type";
-            this.col_Type.ReadOnly = true;
-            this.col_Type.Visible = false;
-            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -928,5 +950,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Notes;
         private System.Windows.Forms.DataGridViewTextBoxColumn warrantyCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Type;
+        protected System.Windows.Forms.Button button8;
     }
 }

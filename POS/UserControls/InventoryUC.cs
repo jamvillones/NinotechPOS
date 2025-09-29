@@ -19,6 +19,8 @@ namespace POS.UserControls
         public InventoryUC()
         {
             InitializeComponent();
+
+
         }
 
         ItemFilter currentItemFilter = ItemFilter.All;
@@ -543,7 +545,7 @@ namespace POS.UserControls
                 using (var context = POSEntities.Create())
                 {
                     var inventoryItem = await context.InventoryItems.AsNoTracking()
-                        .Where(x=>!x.IsDefective)
+                        .Where(x => !x.IsDefective)
                         .FirstOrDefaultAsync(i => i.SerialNumber == serialNumber);
 
                     if (inventoryItem != null)
@@ -913,6 +915,29 @@ namespace POS.UserControls
                 bool canStockIn = (await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.CurrentLogin.Id)).CanStockIn;
                 restockThisItemToolStripMenuItem.Enabled = canStockIn;
             }
+        }
+
+        private async void button8_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var context = POSEntities.Create())
+                {
+                    var currentLogin = await context.Logins.FirstOrDefaultAsync(x => x.Id == UserManager.instance.CurrentLogin.Id);
+
+                    if (!currentLogin.CanMarkAsDefective)
+                    {
+                        MessageBox.Show("User is not authorized for this action!", "Operation Aborted", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
+            new Invalid_Items().ShowDialog();
         }
     }
 
