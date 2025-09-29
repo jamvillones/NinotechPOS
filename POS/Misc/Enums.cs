@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POS.Misc {
     enum SaleType { Regular, Charged, Count };
-    enum Months { January, February, March, April, May, June, July, August, September, October, November, December, Count }
+    //enum Months { January, February, March, April, May, June, July, August, September, October, November, December, Count }
     enum ItemType { Quantifiable, Software, Service, Count }
 
     public enum DateFilterMode { All, Daily, Monthly, Annually }
