@@ -20,7 +20,7 @@ namespace POS.Forms
             InitializeComponent();
             _saleId = id;
 
-            voidBtn.Visible = CurrentLogin.CanVoidSale;
+            //voidBtn.Visible = CurrentLogin.CanVoidSale;
             dateAddedCol.Visible = checkBox2.Checked;
 
             markAsDefectiveCo.Visible = CurrentLogin.CanMarkAsDefective;
@@ -78,6 +78,31 @@ namespace POS.Forms
             }
         }
 
+        string VeryLogin()
+        {
+
+            var verifyForm = new EnterCredentialsForm();
+
+            if (verifyForm.ShowDialog() == DialogResult.OK)
+            {
+                if (verifyForm.Tag is Login login)
+                {
+                    if (login.CanVoidSale)
+                    {
+                        return login.Name ?? login.Username;
+                    }
+
+                    MessageBox.Show(
+                        "You do not have authority to perform this action.",
+                        "",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Stop);
+                }
+            }
+
+            return null;
+        }
+
         private async void voidBtn_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(
@@ -86,11 +111,23 @@ namespace POS.Forms
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Warning) == DialogResult.Cancel) return;
 
+            string user = VeryLogin();
+
+            if (user is null)
+                return;
+
             try
             {
-
                 using (var context = POSEntities.Create())
                 {
+                    string reason = string.Empty;
+
+                    var s = new ReasonForReturnForm();
+                    if (s.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    reason = s.Tag as string;
+
                     //get the reference of the sale
                     var saleToVoid = context.Sales.FirstOrDefault(x => x.Id == _saleId);
                     var soldItemsToReturn = await context.SoldItems.Where(x => x.SaleId == saleToVoid.Id).ToArrayAsync();
@@ -98,6 +135,8 @@ namespace POS.Forms
                     await context.ReturnSoldItems(soldItemsToReturn);
 
                     context.Sales.Remove(saleToVoid);
+
+                    context.AdditionalDetails = reason + " -> " + "VERIFIED BY:" + user;
                     await context.SaveChangesAsync();
                 }
             }

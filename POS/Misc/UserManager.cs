@@ -45,11 +45,12 @@ namespace POS.Misc
             var settings = Properties.Settings.Default;
             string un = username.Trim();
             string pw = password.Trim();
-            using (var p = POSEntities.Create())
+
+            using (var context = POSEntities.Create())
             {
                 try
                 {
-                    var login = await p.Logins.FirstOrDefaultAsync(x => x.Username == un && x.Password == pw);
+                    var login = await context.Logins.FirstOrDefaultAsync(x => x.Username == un && x.Password == pw);
 
                     if (login != null)
                     {
@@ -62,7 +63,6 @@ namespace POS.Misc
                             settings.Login_Password = login.Password;
                             settings.Save();
                         }
-
 
                         CurrentLogin = login;
                         return true;

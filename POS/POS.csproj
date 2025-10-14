@@ -184,6 +184,12 @@
     <Compile Include="Forms\EditDecimalValue.Designer.cs">
       <DependentUpon>EditDecimalValue.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EnterCredentialsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EnterCredentialsForm.Designer.cs">
+      <DependentUpon>EnterCredentialsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Invalid Items.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -546,6 +552,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditDecimalValue.resx">
       <DependentUpon>EditDecimalValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EnterCredentialsForm.resx">
+      <DependentUpon>EnterCredentialsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Invalid Items.resx">
       <DependentUpon>Invalid Items.cs</DependentUpon>

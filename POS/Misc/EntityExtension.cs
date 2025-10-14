@@ -252,17 +252,19 @@ namespace POS
 
     public readonly struct ExcelData
     {
-        public ExcelData(string Barcode, string Name, string Supplier, string SerialNumber, int Quantity)
+        public ExcelData(string barcode, string name, string supplier, string department, string serial, int quantity)
         {
-            this.Barcode = Barcode;
-            this.Name = Name;
-            this.Supplier = Supplier;
-            this.SerialNumber = SerialNumber;
-            this.Quantity = Quantity;
+            this.Barcode = barcode;
+            this.Name = name;
+            this.Supplier = supplier;
+            this.SerialNumber = serial;
+            this.Department = department;
+            this.Quantity = quantity;
         }
         public string Barcode { get; }
         public string Name { get; }
         public string Supplier { get; }
+        public string Department { get; }
         public string SerialNumber { get; }
         public int Quantity { get; }
     }
@@ -313,8 +315,8 @@ namespace POS
             }
 
             return inventoryItems.Where(
-                x => x.SerialNumber.Contains(keyword) || 
-                x.Product.Item.Name.Contains(keyword) || 
+                x => x.SerialNumber.Contains(keyword) ||
+                x.Product.Item.Name.Contains(keyword) ||
                 x.Product.Supplier.Name.Contains(keyword));
         }
 
@@ -511,6 +513,7 @@ namespace POS
                         prod.Item.Barcode,
                         prod.Item.Name,
                         prod.Supplier.Name,
+                        prod.Item.Department,
                         serialNumber,
                         qty
                         ));

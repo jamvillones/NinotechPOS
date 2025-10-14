@@ -62,7 +62,13 @@ namespace POS.Forms
             {
                 using (var context = POSEntities.Create())
                 {
-                    var loadingTask = context.Logins.AsNoTracking().Select(x => x.Username).ToArrayAsync();
+                    var loadingTask = context.Logins
+                        .AsNoTracking()
+                        ///only the authorized
+                        .Where(x => x.CanEditProduct)
+                        .Select(x => x.Username)
+                        .ToArrayAsync();
+
                     await Task.WhenAll(loadingTask, Task.Delay(1000));
 
                     username.AutoCompleteCustomSource.AddRange(loadingTask.Result);
