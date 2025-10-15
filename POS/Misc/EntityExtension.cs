@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -226,28 +227,43 @@ namespace POS
     {
         public string AdditionalDetails { get; set; } = "";
 
-        //public override async Task<int> SaveChangesAsync()
-        //{
-        //    int changesMade = 0;
-        //    try
-        //    {
-        //        this.LogChanges(UserManager.instance.CurrentLogin, AdditionalDetails);
+        public override async Task<int> SaveChangesAsync()
+        {
+            int changesMade = 0;
+            try
+            {
+                this.LogChanges(UserManager.instance.CurrentLogin, AdditionalDetails);
 
-        //        changesMade = await base.SaveChangesAsync();
-        //        return changesMade;
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        if (changesMade > 0)
-        //        {
-        //            this.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
-        //        }
-        //    }
-        //}
+                changesMade = await base.SaveChangesAsync();
+                return changesMade;
+            }
+            catch (DbEntityValidationException exc)
+            {
+                foreach (var eve in exc.EntityValidationErrors)
+                {
+                    Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+
+                throw;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (changesMade > 0)
+                {
+                    this.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
+                }
+            }
+        }
     }
 
     public readonly struct ExcelData
