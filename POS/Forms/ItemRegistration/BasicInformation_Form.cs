@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace POS.Forms.ItemRegistration
 {
@@ -88,7 +86,8 @@ namespace POS.Forms.ItemRegistration
 
         private void _name_TextChanged(object sender, EventArgs e)
         {
-            saveBtn.Enabled = !string.IsNullOrWhiteSpace(_name.Text);
+            saveBtn.Enabled =
+                IsValid;
         }
 
         private void _type_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,5 +127,12 @@ namespace POS.Forms.ItemRegistration
                 e.Cancel = true;
             }
         }
+
+        private void _departmentOption_TextChanged(object sender, EventArgs e)
+        {
+            saveBtn.Enabled = IsValid;
+        }
+
+        bool IsValid => !string.IsNullOrWhiteSpace(_name.Text) && !string.IsNullOrWhiteSpace(_departmentOption.Text.Trim());
     }
 }

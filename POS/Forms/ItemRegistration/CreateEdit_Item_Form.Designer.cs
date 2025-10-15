@@ -326,6 +326,7 @@
             this._departmentOption.Size = new System.Drawing.Size(530, 21);
             this._departmentOption.TabIndex = 18;
             this._departmentOption.Tag = "Department";
+            this._departmentOption.Validated += new System.EventHandler(this._departmentOption_Validated);
             // 
             // label8
             // 
@@ -781,6 +782,7 @@
             // 
             // errorProvider
             // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             this.errorProvider.Icon = ((System.Drawing.Icon)(resources.GetObject("errorProvider.Icon")));
             // 

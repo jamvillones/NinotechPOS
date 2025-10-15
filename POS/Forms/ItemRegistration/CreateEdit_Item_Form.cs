@@ -83,7 +83,8 @@ namespace POS.Forms.ItemRegistration
 
         private void UpdateButtonBehaviorIfChangeDetected()
         {
-            cancelButton.Enabled = saveButton.Enabled = context.HasChanges();
+            cancelButton.Enabled = context.HasChanges();
+            saveButton.Enabled = context.HasChanges() && Item.Error == string.Empty;
         }
 
         Image SampleImage
@@ -314,6 +315,8 @@ namespace POS.Forms.ItemRegistration
                 MessageBoxIcon.Warning) == DialogResult.No) return;
 
             context.UndoAllChanges();
+            ItemBindingSource.ResetItem(0);
+            errorProvider.Clear();
 
             isPopulatingCost = true;
             Costs.Clear();
@@ -543,6 +546,13 @@ namespace POS.Forms.ItemRegistration
             var tags = textbox.Text.Split(',').Select(t => t.Trim());
 
             textbox.Text = string.Join(",", tags);
+        }
+
+        private void _departmentOption_Validated(object sender, EventArgs e)
+        {
+            var control = sender as ComboBox;
+            var tag = control.Tag?.ToString();
+            errorProvider.SetError(control, Item[tag]);
         }
     }
 

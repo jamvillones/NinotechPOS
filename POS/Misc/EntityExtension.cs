@@ -226,28 +226,28 @@ namespace POS
     {
         public string AdditionalDetails { get; set; } = "";
 
-        public override async Task<int> SaveChangesAsync()
-        {
-            int changesMade = 0;
-            try
-            {
-                this.LogChanges(UserManager.instance.CurrentLogin, AdditionalDetails);
+        //public override async Task<int> SaveChangesAsync()
+        //{
+        //    int changesMade = 0;
+        //    try
+        //    {
+        //        this.LogChanges(UserManager.instance.CurrentLogin, AdditionalDetails);
 
-                changesMade = await base.SaveChangesAsync();
-                return changesMade;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (changesMade > 0)
-                {
-                    this.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
-                }
-            }
-        }
+        //        changesMade = await base.SaveChangesAsync();
+        //        return changesMade;
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        if (changesMade > 0)
+        //        {
+        //            this.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, @"EXEC [dbo].[sp_backup]");
+        //        }
+        //    }
+        //}
     }
 
     public readonly struct ExcelData

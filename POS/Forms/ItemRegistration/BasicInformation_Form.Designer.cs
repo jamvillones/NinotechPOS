@@ -95,6 +95,7 @@
             this._departmentOption.Name = "_departmentOption";
             this._departmentOption.Size = new System.Drawing.Size(161, 23);
             this._departmentOption.TabIndex = 4;
+            this._departmentOption.TextChanged += new System.EventHandler(this._departmentOption_TextChanged);
             // 
             // _type
             // 

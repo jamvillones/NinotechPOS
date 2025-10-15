@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Remoting.Contexts;
@@ -39,7 +41,7 @@ namespace POS.Forms
             product.Id,
             product.Item.Barcode,
             product.Item.Name,
-            product.Supplier.Name,
+            product.Supplier?.Name,
             product.Cost,
             product.Item.IsSerialRequired);
 
@@ -177,41 +179,61 @@ namespace POS.Forms
             if (MessageBox.Show("Are you sure you want to stock these items?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
                 return;
 
-            using (var context = POSEntities.Create())
+            try
             {
 
-                foreach (var s in ToStockins)
+                using (var context = POSEntities.Create())
                 {
-                    int productId = s.ProductId;
-                    string serialNum = s.Serial;
-                    int quantity = s.Quantity;
 
-                    //date picker is checked, it means the stockin is only a correction and must not change the inventory values
-
-                    await AddToInventory(context, serialNum, productId, quantity);
-
-
-                    var product = await context.Products.FirstOrDefaultAsync(x => x.Id == productId);
-
-                    var stockInHistory = new StockinHistory
+                    foreach (var s in ToStockins)
                     {
-                        ProductId = product.Id,
-                        ItemName = product.Item.Name,
-                        Cost = product.Cost,
-                        Supplier = product.Supplier.Name,
-                        Quantity = quantity,
-                        SerialNumber = string.IsNullOrWhiteSpace(serialNum) ? null : serialNum,
-                        Date = DateTime.Now,
-                        LoginUsername = context.Logins.FirstOrDefault(x => x.Username == CurrLogin.Username).Username
-                    };
+                        int productId = s.ProductId;
+                        string serialNum = s.Serial;
+                        int quantity = s.Quantity;
 
-                    context.StockinHistories.Add(stockInHistory);
+                        //date picker is checked, it means the stockin is only a correction and must not change the inventory values
+
+                        await AddToInventory(context, serialNum, productId, quantity);
+
+
+                        var product = await context.Products.FirstOrDefaultAsync(x => x.Id == productId);
+
+                        var stockInHistory = new StockinHistory
+                        {
+                            ProductId = product.Id,
+                            ItemName = product.Item.Name,
+                            Cost = product.Cost,
+                            Supplier = product.Supplier.Name,
+                            Quantity = quantity,
+                            SerialNumber = string.IsNullOrWhiteSpace(serialNum) ? null : serialNum,
+                            Date = DateTime.Now,
+                            LoginUsername = context.Logins.FirstOrDefault(x => x.Username == CurrLogin.Username).Username
+                        };
+
+                        context.StockinHistories.Add(stockInHistory);
+                    }
+
+                    await context.SaveChangesAsync();
+                    MessageBox.Show("Stock-In Successful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.DialogResult = DialogResult.OK;
+                }
+            }
+            catch (DbEntityValidationException exc)
+            {
+                foreach (var eve in exc.EntityValidationErrors)
+                {
+                    Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
                 }
 
-                await context.SaveChangesAsync();
-                MessageBox.Show("Stock-In Successful", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK;
+                throw;
             }
+
         }
 
         async Task AddToInventory(POSEntities context, string serialNum, int productId, int quantity)
