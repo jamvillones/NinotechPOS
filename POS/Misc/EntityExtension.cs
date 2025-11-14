@@ -104,7 +104,7 @@ namespace POS
 
     partial class SoldItem
     {
-        public string WarrantyStatus => Product.Item.Warranty == 0 ? "--" : (DateAdded.IsUnderWarranty((int)Product.Item.Warranty) ? $"Active ({DateAdded.DaysLeftOfWarranty((int)Product.Item.Warranty)})" : "Expired");
+        public string WarrantyStatus => Product.Item.Warranty == 0 ? "--" : (DateAdded.IsUnderWarranty((int)(Product.Item.Warranty ?? 0)) ? $"Active ({DateAdded.DaysLeftOfWarranty((int)Product.Item.Warranty)})" : "Expired");
 
     }
     public partial class ChargedPayRecord

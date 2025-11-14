@@ -411,7 +411,6 @@ namespace POS.Forms
             }
             catch
             {
-
             }
             finally
             {
