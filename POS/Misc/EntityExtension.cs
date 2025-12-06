@@ -11,6 +11,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -268,51 +269,92 @@ namespace POS
 
     public readonly struct ExcelData
     {
-        public ExcelData(string barcode, string name, string supplier, string department, string serial, int quantity)
+        public ExcelData(byte[] image, string barcode, string name, string supplier, string department, string serial, int quantity, string notes)
         {
+            this.Image = image;
             this.Barcode = barcode;
             this.Name = name;
             this.Supplier = supplier;
             this.SerialNumber = serial;
             this.Department = department;
             this.Quantity = quantity;
+            this.Notes = notes;
         }
+        public byte[] Image { get; }
         public string Barcode { get; }
         public string Name { get; }
         public string Supplier { get; }
         public string Department { get; }
         public string SerialNumber { get; }
         public int Quantity { get; }
+        public string Notes { get; }
+    }
+
+    public class ImageCell
+    {
+        public int RowIndex { get; set; }          // The row in the DataTable
+        public string PropertyName { get; set; }   // The property name
+        public byte[] ImageBytes { get; set; }     // The image data
     }
 
     public static class DataTableHelper
+
     {
-        public static DataTable ToDataTable<T>(this List<T> items, params string[] selectedProperties)
+        public static (DataTable Table, List<ImageCell> Images) ToDataTableWithImages<T>(this List<T> items, params string[] selectedProperties)
         {
             DataTable table = new DataTable(typeof(T).Name);
+            List<ImageCell> imageList = new List<ImageCell>();
+
             PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-            var filteredProps = selectedProperties.Length > 0 ? properties.Where(p => selectedProperties.Any(x => x.Equals(p.Name))).ToArray() : properties.ToArray();
+            var filteredProps = selectedProperties.Length > 0
+                ? properties.Where(p => selectedProperties.Any(x => x.Equals(p.Name))).ToArray()
+                : properties.ToArray();
 
-            // Add columns
+            // Add only non-image columns
             foreach (var prop in filteredProps)
             {
-                string formattedName = InsertSpacesInCamelCase(prop.Name);
-                table.Columns.Add(formattedName.ToUpper(), Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+                if (prop.PropertyType != typeof(byte[])) // skip image properties in DataTable
+                {
+                    string formattedName = InsertSpacesInCamelCase(prop.Name);
+                    table.Columns.Add(formattedName.ToUpper(), Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+                }
             }
 
-            // Add rows
+            // Add rows + capture image data
+            int rowIndex = 1;
+
             foreach (var item in items)
             {
-                var values = new object[filteredProps.Length];
+                var rowValues = new List<object>();
 
-                for (int i = 0; i < filteredProps.Length; i++)
-                    values[i] = filteredProps[i].GetValue(item, null);
+                foreach (var prop in filteredProps)
+                {
+                    if (prop.PropertyType == typeof(byte[]))
+                    {
+                        var imgBytes = prop.GetValue(item) as byte[];
 
-                table.Rows.Add(values);
+                        if (imgBytes != null && imgBytes.Length > 0)
+                        {
+                            imageList.Add(new ImageCell
+                            {
+                                RowIndex = rowIndex,
+                                PropertyName = prop.Name,
+                                ImageBytes = imgBytes
+                            });
+                        }
+                    }
+                    else
+                    {
+                        rowValues.Add(prop.GetValue(item, null));
+                    }
+                }
+
+                table.Rows.Add(rowValues.ToArray());
+                rowIndex++;
             }
 
-            return table;
+            return (table, imageList);
         }
 
         private static string InsertSpacesInCamelCase(string input)
@@ -458,7 +500,7 @@ namespace POS
 
                     var data = entries.ProcessInventoryData();
 
-                    var dataTable = data.ToDataTable();
+                    var (dataTable, images) = data.ToDataTableWithImages();
 
                     using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
@@ -471,7 +513,8 @@ namespace POS
                             using (var package = new ExcelPackage())
                             {
                                 var worksheet = package.Workbook.Worksheets.Add("Data");
-                                worksheet.Cells["A1"].LoadFromDataTable(dataTable, true);
+                                worksheet.Cells["B1"].LoadFromDataTable(dataTable, true);
+                                int targetColumnIndex = 0;
 
                                 for (int col = 1; col <= dataTable.Columns.Count; col++)
                                 {
@@ -479,7 +522,34 @@ namespace POS
                                     if (colType == typeof(DateTime))
                                         worksheet.Column(col).Style.Numberformat.Format = "MMM d yyyy - h:mm";
                                 }
+
                                 worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+                                foreach (var img in images)
+                                {
+                                    int colIndex = dataTable.Columns.Count + 1; // put images after last column
+
+                                    using (var ms = new MemoryStream(img.ImageBytes))
+                                    {
+                                        ms.Position = 0;
+                                        using (var imageObj = Image.FromStream(ms))
+                                        {
+                                            var pictureName = $"{img.PropertyName}_{img.RowIndex}_{Guid.NewGuid()}";
+                                            var pic = worksheet.Drawings.AddPicture(pictureName, imageObj);
+
+                                            // Position: (rowIndex-1, pixelOffset, colIndex-1, pixelOffset)
+                                            pic.SetPosition(img.RowIndex, 2, targetColumnIndex, 2);
+                                            pic.SetSize(80, 80);
+
+                                            // 🔥 IMPORTANT: Adjust row height
+                                            worksheet.Row(img.RowIndex + 1).Height = 85 * 0.75; // convert pixels → Excel points
+
+                                            //double columnWidth = imageObj.Width / 7.0;
+                                            worksheet.Column(1).Width = 12;
+                                            //worksheet.Column(7).Width = 80 * 0.75;
+                                        }
+                                    }
+                                }
                                 worksheet.Cells[worksheet.Dimension.Address].Style.WrapText = true;
 
                                 await package.SaveAsAsync(new FileInfo(saveFileDialog.FileName));
@@ -526,12 +596,14 @@ namespace POS
                     var qty = inventoryItems.Where(i => i.ProductId == product.Key).Select(a => a.Quantity).Sum();
 
                     list.Add(new ExcelData(
+                        prod.Item.SampleImage,
                         prod.Item.Barcode,
                         prod.Item.Name,
                         prod.Supplier.Name,
                         prod.Item.Department,
                         serialNumber,
-                        qty
+                        qty,
+                        prod.Item.Details
                         ));
                 }
             }
