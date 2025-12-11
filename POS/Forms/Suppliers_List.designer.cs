@@ -209,7 +209,7 @@
             this.showPurchasesCol.HeaderText = "";
             this.showPurchasesCol.Name = "showPurchasesCol";
             this.showPurchasesCol.ReadOnly = true;
-            this.showPurchasesCol.Text = "Show Purchases";
+            this.showPurchasesCol.Text = "PURCHASES";
             this.showPurchasesCol.UseColumnTextForButtonValue = true;
             this.showPurchasesCol.Width = 12;
             // 

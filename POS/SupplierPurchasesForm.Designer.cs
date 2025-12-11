@@ -36,15 +36,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierPurchasesForm));
             this.table = new System.Windows.Forms.DataGridView();
-            this.col_suppName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.viewGraph_Col = new System.Windows.Forms.DataGridViewButtonColumn();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
+            this.col_suppName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.viewGraph_Col = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.table)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -101,38 +101,6 @@
             this.table.Size = new System.Drawing.Size(780, 394);
             this.table.StandardTab = true;
             this.table.TabIndex = 2;
-            // 
-            // col_suppName
-            // 
-            dataGridViewCellStyle2.NullValue = "N/A";
-            this.col_suppName.DefaultCellStyle = dataGridViewCellStyle2;
-            this.col_suppName.HeaderText = "PRODUCT";
-            this.col_suppName.Name = "col_suppName";
-            this.col_suppName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // col_contact
-            // 
-            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = "0";
-            this.col_contact.DefaultCellStyle = dataGridViewCellStyle3;
-            this.col_contact.HeaderText = "VALUE";
-            this.col_contact.MinimumWidth = 100;
-            this.col_contact.Name = "col_contact";
-            this.col_contact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // viewGraph_Col
-            // 
-            this.viewGraph_Col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.viewGraph_Col.DefaultCellStyle = dataGridViewCellStyle4;
-            this.viewGraph_Col.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.viewGraph_Col.HeaderText = "";
-            this.viewGraph_Col.Name = "viewGraph_Col";
-            this.viewGraph_Col.Text = "View Graph";
-            this.viewGraph_Col.UseColumnTextForButtonValue = true;
-            this.viewGraph_Col.Width = 12;
             // 
             // flowLayoutPanel1
             // 
@@ -208,6 +176,39 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // col_suppName
+            // 
+            dataGridViewCellStyle2.NullValue = "N/A";
+            this.col_suppName.DefaultCellStyle = dataGridViewCellStyle2;
+            this.col_suppName.HeaderText = "PRODUCT";
+            this.col_suppName.Name = "col_suppName";
+            this.col_suppName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // col_contact
+            // 
+            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = "0";
+            this.col_contact.DefaultCellStyle = dataGridViewCellStyle3;
+            this.col_contact.HeaderText = "VALUE";
+            this.col_contact.MinimumWidth = 100;
+            this.col_contact.Name = "col_contact";
+            this.col_contact.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // viewGraph_Col
+            // 
+            this.viewGraph_Col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
+            this.viewGraph_Col.DefaultCellStyle = dataGridViewCellStyle4;
+            this.viewGraph_Col.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.viewGraph_Col.HeaderText = "";
+            this.viewGraph_Col.Name = "viewGraph_Col";
+            this.viewGraph_Col.Text = "View Graph";
+            this.viewGraph_Col.UseColumnTextForButtonValue = true;
+            this.viewGraph_Col.Visible = false;
+            this.viewGraph_Col.Width = 12;
+            // 
             // SupplierPurchasesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,9 +239,9 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_suppName;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_contact;
         private System.Windows.Forms.DataGridViewButtonColumn viewGraph_Col;
-        private System.Windows.Forms.Button button1;
     }
 }
