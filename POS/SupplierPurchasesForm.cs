@@ -101,7 +101,7 @@ namespace POS
                 .Where(x => x.Cells[0].Value?.ToString() != "")
                 .Select(x => new DataPoint()
                 {
-                    AxisLabel = x.Cells[0].Value.ToString() + " - " + ((decimal)x.Cells[1].Value).ToPercentageString(total),
+                    AxisLabel = ((decimal)x.Cells[1].Value).ToPercentageString(total) + " • " + x.Cells[0].Value.ToString(),
                     YValues = new double[] { (double)((decimal)(x.Cells[1].Value)) }
                 })
                 .ToArray();
