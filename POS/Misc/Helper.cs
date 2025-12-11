@@ -11,6 +11,11 @@ namespace POS.Misc
 {
     public static class Helper
     {
+        public static string ToPercentageString(this decimal value, decimal total)
+        {
+            return Math.Round((value / total) * 100, 2).ToString("0.00") + "%";
+        }
+
         /// <summary>
         /// returns null if the text is empty, null, or whitespace. resulting string is trimmed of whitespace 
         /// </summary>

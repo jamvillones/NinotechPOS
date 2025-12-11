@@ -193,7 +193,7 @@ namespace POS.Forms
             return false;
         }
 
-        DataGridViewRow CreateRow(Supplier s) => supplierTable.CreateRow(s.Id, s.Name, s.ContactDetails, "Remove");
+        DataGridViewRow CreateRow(Supplier s) => supplierTable.CreateRow(s.Id, s.Name, s.ContactDetails, "", "");
 
         private void addBtn_Click(object sender, EventArgs e)
         {
@@ -210,6 +210,22 @@ namespace POS.Forms
         private void Suppliers_FormClosing(object sender, FormClosingEventArgs e)
         {
             TryCancel();
+        }
+
+        private void supplierTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1 || e.ColumnIndex != showPurchasesCol.Index)
+                return;
+
+            var dgv = sender as DataGridView;
+            int id = (int)dgv[0, e.RowIndex].Value;
+
+            OpenSupplierPurchases(id);
+        }
+
+        void OpenSupplierPurchases(int supplierId)
+        {
+            new SupplierPurchasesForm(supplierId).ShowDialog();
         }
     }
 

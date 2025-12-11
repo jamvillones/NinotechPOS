@@ -259,6 +259,12 @@
     <Compile Include="Forms\PictureView.Designer.cs">
       <DependentUpon>PictureView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\PurchasedItem_Chart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PurchasedItem_Chart.Designer.cs">
+      <DependentUpon>PurchasedItem_Chart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ReasonForReturnForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -484,6 +490,12 @@
     <Compile Include="Supplier.cs">
       <DependentUpon>POSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SupplierPurchasesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupplierPurchasesForm.Designer.cs">
+      <DependentUpon>SupplierPurchasesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Customers_UserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -598,6 +610,9 @@
     <EmbeddedResource Include="Forms\InventoryStockinLog.resx">
       <DependentUpon>InventoryStockinLog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PurchasedItem_Chart.resx">
+      <DependentUpon>PurchasedItem_Chart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ReasonForReturnForm.resx">
       <DependentUpon>ReasonForReturnForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -673,6 +688,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ShiftSummaryForm.resx">
       <DependentUpon>ShiftSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SupplierPurchasesForm.resx">
+      <DependentUpon>SupplierPurchasesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Customers_UserControl.resx">
       <DependentUpon>Customers_UserControl.cs</DependentUpon>
