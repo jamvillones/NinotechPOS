@@ -48,7 +48,7 @@ namespace POS
                 foreach (var e in entries)
                     table.Rows.Add(e.Product, e.Value);
 
-                table.Rows.Add(null, entries.Sum(x => x.Value));
+                table.Rows.Add("", entries.Sum(x => x.Value));
             }
         }
 
@@ -98,10 +98,10 @@ namespace POS
             var total = (decimal)table.Rows[table.RowCount - 1].Cells[1].Value;
             var dataPoints = table.Rows
                 .Cast<DataGridViewRow>()
-                .Where(x => x.Cells[0].Value != null)
+                .Where(x => x.Cells[0].Value?.ToString() != "")
                 .Select(x => new DataPoint()
                 {
-                    AxisLabel = x.Cells[0].Value.ToString() + " - " + ((decimal)x.Cells[1].Value).ToPercentageString(total) ,
+                    AxisLabel = x.Cells[0].Value.ToString() + " - " + ((decimal)x.Cells[1].Value).ToPercentageString(total),
                     YValues = new double[] { (double)((decimal)(x.Cells[1].Value)) }
                 })
                 .ToArray();
