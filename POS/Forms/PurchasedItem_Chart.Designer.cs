@@ -45,7 +45,7 @@
             this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(0, 0);
             this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
             series1.IsValueShownAsLabel = true;
@@ -55,6 +55,7 @@
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(799, 551);
             this.chart1.TabIndex = 0;
+            this.chart1.TabStop = false;
             this.chart1.Text = "chart1";
             // 
             // PurchasedItem_Chart

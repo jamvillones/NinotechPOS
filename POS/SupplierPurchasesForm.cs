@@ -12,12 +12,13 @@ namespace POS
     public partial class SupplierPurchasesForm : Form
     {
         private readonly int supplierId;
-        private DateFilterMode dateFilter = DateFilterMode.Annually;
+        private DateFilterMode dateFilter = DateFilterMode.Daily;
 
-        public SupplierPurchasesForm(int supplierId)
+        public SupplierPurchasesForm(int supplierId, string itemName)
         {
             InitializeComponent();
             this.supplierId = supplierId;
+            this.Text = this.Text + " - " + itemName;
         }
 
         private class SupplierPurchasesDTO
@@ -107,6 +108,13 @@ namespace POS
                 .ToArray();
 
             new PurchasedItem_Chart(dataPoints).ShowDialog();
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            DateFilter = DateFilterMode.Daily;
+            dateTimePicker.CustomFormat = "MMM d yyyy";
+            dateTimePicker.Visible = true;
         }
     }
 

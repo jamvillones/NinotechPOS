@@ -219,13 +219,14 @@ namespace POS.Forms
 
             var dgv = sender as DataGridView;
             int id = (int)dgv[0, e.RowIndex].Value;
+            string itemName = dgv[1, e.RowIndex].Value.ToString();
 
-            OpenSupplierPurchases(id);
+            OpenSupplierPurchases(id, itemName);
         }
 
-        void OpenSupplierPurchases(int supplierId)
+        void OpenSupplierPurchases(int supplierId, string itemName)
         {
-            new SupplierPurchasesForm(supplierId).ShowDialog();
+            new SupplierPurchasesForm(supplierId, itemName).ShowDialog();
         }
     }
 

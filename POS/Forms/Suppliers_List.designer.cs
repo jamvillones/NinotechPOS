@@ -38,15 +38,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Suppliers_List));
             this.supplierTable = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.recHistBtn = new System.Windows.Forms.Button();
-            this.searchControl1 = new POS.UserControls.SearchControl();
             this.id_col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_suppName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_contact = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.showPurchasesCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.recHistBtn = new System.Windows.Forms.Button();
+            this.searchControl1 = new POS.UserControls.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.supplierTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,6 +109,60 @@
             this.supplierTable.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.supplierTable_CellEndEdit);
             this.supplierTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.supplierTable_CellMouseClick);
             // 
+            // id_col
+            // 
+            this.id_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.id_col.DefaultCellStyle = dataGridViewCellStyle2;
+            this.id_col.HeaderText = "Id";
+            this.id_col.Name = "id_col";
+            this.id_col.ReadOnly = true;
+            this.id_col.Visible = false;
+            // 
+            // col_suppName
+            // 
+            dataGridViewCellStyle3.NullValue = "N/A";
+            this.col_suppName.DefaultCellStyle = dataGridViewCellStyle3;
+            this.col_suppName.HeaderText = "NAME";
+            this.col_suppName.Name = "col_suppName";
+            this.col_suppName.ReadOnly = true;
+            // 
+            // col_contact
+            // 
+            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.NullValue = "N/A";
+            this.col_contact.DefaultCellStyle = dataGridViewCellStyle4;
+            this.col_contact.HeaderText = "CONTACT DETAILS";
+            this.col_contact.MinimumWidth = 100;
+            this.col_contact.Name = "col_contact";
+            this.col_contact.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(1);
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Column4.HeaderText = "";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Text = "REMOVE";
+            this.Column4.UseColumnTextForButtonValue = true;
+            this.Column4.Width = 12;
+            // 
+            // showPurchasesCol
+            // 
+            this.showPurchasesCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
+            this.showPurchasesCol.DefaultCellStyle = dataGridViewCellStyle6;
+            this.showPurchasesCol.HeaderText = "";
+            this.showPurchasesCol.Name = "showPurchasesCol";
+            this.showPurchasesCol.ReadOnly = true;
+            this.showPurchasesCol.Text = "PURCHASES";
+            this.showPurchasesCol.UseColumnTextForButtonValue = true;
+            this.showPurchasesCol.Width = 12;
+            // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -157,61 +211,6 @@
             this.searchControl1.TabIndex = 0;
             this.searchControl1.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchControl1.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
-            // 
-            // id_col
-            // 
-            this.id_col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.id_col.DefaultCellStyle = dataGridViewCellStyle2;
-            this.id_col.HeaderText = "Id";
-            this.id_col.Name = "id_col";
-            this.id_col.ReadOnly = true;
-            this.id_col.Visible = false;
-            this.id_col.Width = 50;
-            // 
-            // col_suppName
-            // 
-            dataGridViewCellStyle3.NullValue = "N/A";
-            this.col_suppName.DefaultCellStyle = dataGridViewCellStyle3;
-            this.col_suppName.HeaderText = "NAME";
-            this.col_suppName.Name = "col_suppName";
-            this.col_suppName.ReadOnly = true;
-            // 
-            // col_contact
-            // 
-            this.col_contact.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.NullValue = "N/A";
-            this.col_contact.DefaultCellStyle = dataGridViewCellStyle4;
-            this.col_contact.HeaderText = "CONTACT DETAILS";
-            this.col_contact.MinimumWidth = 100;
-            this.col_contact.Name = "col_contact";
-            this.col_contact.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(1);
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column4.HeaderText = "";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Text = "REMOVE";
-            this.Column4.UseColumnTextForButtonValue = true;
-            this.Column4.Width = 12;
-            // 
-            // showPurchasesCol
-            // 
-            this.showPurchasesCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
-            this.showPurchasesCol.DefaultCellStyle = dataGridViewCellStyle6;
-            this.showPurchasesCol.HeaderText = "";
-            this.showPurchasesCol.Name = "showPurchasesCol";
-            this.showPurchasesCol.ReadOnly = true;
-            this.showPurchasesCol.Text = "PURCHASES";
-            this.showPurchasesCol.UseColumnTextForButtonValue = true;
-            this.showPurchasesCol.Width = 12;
             // 
             // Suppliers_List
             // 
