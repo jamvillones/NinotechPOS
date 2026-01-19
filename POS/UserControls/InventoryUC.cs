@@ -905,7 +905,9 @@ namespace POS.UserControls
 
         private async void button7_Click(object sender, EventArgs e)
         {
-            await ContextManipulationMethods.ExtractInventory(departmentOption.Text.Trim());
+            bool includeImage = MessageBox.Show("Include Images In Report?", "Export Inventory Data", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+
+            await ContextManipulationMethods.ExtractInventory(departmentOption.Text.Trim(), includeImage);
         }
 
         private async void contextMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)

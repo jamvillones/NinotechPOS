@@ -269,24 +269,26 @@ namespace POS
 
     public readonly struct ExcelData
     {
-        public ExcelData(byte[] image, string barcode, string name, string supplier, string department, string serial, int quantity, string notes)
+        public ExcelData(byte[] image, string barcode, string name, string supplier, decimal cost, string department, string serial, int quantity, string notes)
         {
             this.Image = image;
             this.Barcode = barcode;
             this.Name = name;
             this.Supplier = supplier;
+            this.Cost = cost;
+            this.Quantity = quantity;
             this.SerialNumber = serial;
             this.Department = department;
-            this.Quantity = quantity;
             this.Notes = notes;
         }
         public byte[] Image { get; }
         public string Barcode { get; }
         public string Name { get; }
         public string Supplier { get; }
-        public string Department { get; }
-        public string SerialNumber { get; }
+        public decimal Cost { get; }
         public int Quantity { get; }
+        public string SerialNumber { get; }
+        public string Department { get; }
         public string Notes { get; }
     }
 
@@ -484,7 +486,7 @@ namespace POS
                 }
             }
         }
-        public static async Task<bool> ExtractInventory(string department = "")
+        public static async Task<bool> ExtractInventory(string department = "", bool includeImage = false)
         {
             try
             {
@@ -512,6 +514,7 @@ namespace POS
                         {
                             using (var package = new ExcelPackage())
                             {
+
                                 var worksheet = package.Workbook.Worksheets.Add("Data");
                                 worksheet.Cells["B1"].LoadFromDataTable(dataTable, true);
                                 int targetColumnIndex = 0;
@@ -525,36 +528,41 @@ namespace POS
 
                                 worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
 
-                                foreach (var img in images)
+                                if (includeImage)
                                 {
-                                    int colIndex = dataTable.Columns.Count + 1; // put images after last column
 
-                                    using (var ms = new MemoryStream(img.ImageBytes))
+                                    foreach (var img in images)
                                     {
-                                        ms.Position = 0;
-                                        using (var imageObj = Image.FromStream(ms))
+                                        int colIndex = dataTable.Columns.Count + 1; // put images after last column
+
+                                        using (var ms = new MemoryStream(img.ImageBytes))
                                         {
-                                            var pictureName = $"{img.PropertyName}_{img.RowIndex}_{Guid.NewGuid()}";
-                                            var pic = worksheet.Drawings.AddPicture(pictureName, imageObj);
+                                            ms.Position = 0;
+                                            using (var imageObj = Image.FromStream(ms))
+                                            {
+                                                var pictureName = $"{img.PropertyName}_{img.RowIndex}_{Guid.NewGuid()}";
+                                                var pic = worksheet.Drawings.AddPicture(pictureName, imageObj);
 
-                                            // Position: (rowIndex-1, pixelOffset, colIndex-1, pixelOffset)
-                                            pic.SetPosition(img.RowIndex, 2, targetColumnIndex, 2);
-                                            pic.SetSize(80, 80);
+                                                // Position: (rowIndex-1, pixelOffset, colIndex-1, pixelOffset)
+                                                pic.SetPosition(img.RowIndex, 2, targetColumnIndex, 2);
+                                                pic.SetSize(80, 80);
 
-                                            // 🔥 IMPORTANT: Adjust row height
-                                            worksheet.Row(img.RowIndex + 1).Height = 85 * 0.75; // convert pixels → Excel points
+                                                // 🔥 IMPORTANT: Adjust row height
+                                                worksheet.Row(img.RowIndex + 1).Height = 85 * 0.75; // convert pixels → Excel points
 
-                                            //double columnWidth = imageObj.Width / 7.0;
-                                            worksheet.Column(1).Width = 12;
-                                            //worksheet.Column(7).Width = 80 * 0.75;
+                                                //double columnWidth = imageObj.Width / 7.0;
+                                                worksheet.Column(1).Width = 12;
+                                                //worksheet.Column(7).Width = 80 * 0.75;
+                                            }
                                         }
                                     }
                                 }
+
                                 worksheet.Cells[worksheet.Dimension.Address].Style.WrapText = true;
 
                                 await package.SaveAsAsync(new FileInfo(saveFileDialog.FileName));
 
-                                if (MessageBox.Show("Export successful!\nDo you want to open the file?", "Export Done", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                                if (MessageBox.Show("Do you want to open the file?", "Export Successful!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                                     return true;
                             }
                         }
@@ -600,6 +608,7 @@ namespace POS
                         prod.Item.Barcode,
                         prod.Item.Name,
                         prod.Supplier.Name,
+                        prod.Cost,
                         prod.Item.Department,
                         serialNumber,
                         qty,
