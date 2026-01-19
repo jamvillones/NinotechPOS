@@ -43,6 +43,7 @@ namespace POS.Forms
             record.Id,
             record.Username,
             record.AmountPayed,
+            record.Details,
             record.TransactionTime.Value
             );
 

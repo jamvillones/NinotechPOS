@@ -42,7 +42,7 @@
             this.addPaymentBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addPaymentBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.addPaymentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addPaymentBtn.Location = new System.Drawing.Point(23, 123);
+            this.addPaymentBtn.Location = new System.Drawing.Point(23, 120);
             this.addPaymentBtn.Margin = new System.Windows.Forms.Padding(0);
             this.addPaymentBtn.Name = "addPaymentBtn";
             this.addPaymentBtn.Size = new System.Drawing.Size(150, 33);
@@ -57,6 +57,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Sales Discount",
@@ -64,10 +65,10 @@
             "Cash Payment",
             "Cheque Payment",
             "Online Payment"});
-            this.comboBox1.Location = new System.Drawing.Point(23, 76);
+            this.comboBox1.Location = new System.Drawing.Point(23, 77);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(317, 21);
+            this.comboBox1.Size = new System.Drawing.Size(317, 28);
             this.comboBox1.TabIndex = 26;
             // 
             // paymentNum
@@ -75,6 +76,7 @@
             this.paymentNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.paymentNum.DecimalPlaces = 2;
+            this.paymentNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.paymentNum.Location = new System.Drawing.Point(23, 31);
             this.paymentNum.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.paymentNum.Maximum = new decimal(new int[] {
@@ -83,7 +85,7 @@
             0,
             0});
             this.paymentNum.Name = "paymentNum";
-            this.paymentNum.Size = new System.Drawing.Size(317, 20);
+            this.paymentNum.Size = new System.Drawing.Size(317, 26);
             this.paymentNum.TabIndex = 24;
             this.paymentNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.paymentNum.ThousandsSeparator = true;
@@ -92,7 +94,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 18);
+            this.label1.Location = new System.Drawing.Point(20, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 27;
@@ -101,7 +103,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 63);
+            this.label2.Location = new System.Drawing.Point(20, 62);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 28;
@@ -111,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 174);
+            this.ClientSize = new System.Drawing.Size(359, 172);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.addPaymentBtn);
@@ -119,6 +121,7 @@
             this.Controls.Add(this.paymentNum);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Payment_Form";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Payment";
             ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).EndInit();
             this.ResumeLayout(false);
