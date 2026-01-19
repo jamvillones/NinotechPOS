@@ -1,26 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using POS.Misc;
+using System;
 using System.Data;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using POS.Misc;
-namespace POS.Forms {
-    public partial class PaymentsForm : Form {
+namespace POS.Forms
+{
+    public partial class PaymentsForm : Form
+    {
         //Sale currentSale;
         int _id = 0;
-        public PaymentsForm() {
+        public PaymentsForm()
+        {
             InitializeComponent();
         }
 
-        public void SetId(int id) {
+        public void SetId(int id)
+        {
             _id = id;
 
-            using (var p = POSEntities.Create()) {
+            using (var p = POSEntities.Create())
+            {
                 var sale = p.Sales.FirstOrDefault(x => x.Id == id);
 
                 Text = Text + " - " + sale.Customer.Name;
@@ -33,10 +33,10 @@ namespace POS.Forms {
             }
         }
 
-        void PostProcess(Sale sale) {
+        void PostProcess(Sale sale)
+        {
             total.Text = sale.Remaining.ToString("C2");
             flowLayoutPanel1.Visible = sale.Remaining > 0;
-            paymentNum.Maximum = sale.Remaining;
         }
 
         DataGridViewRow CreateRow(ChargedPayRecord record) => table.CreateRow(
@@ -46,41 +46,91 @@ namespace POS.Forms {
             record.TransactionTime.Value
             );
 
-        private async void AddPayment_Click(object sender, EventArgs e) {
-            if (paymentNum.Value == 0) return;
-            if (MessageBox.Show("Are you sure you want to add payment?",
-                "",
-                MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Question) == DialogResult.Cancel) return;
+        private async void AddPayment_Click(object sender, EventArgs e)
+        {
 
-            using (var context = POSEntities.Create()) {
-                var sale = await context.Sales.FirstOrDefaultAsync(x => x.Id == _id);
-                sale.AmountRecieved += paymentNum.Value;
+            try
+            {
+                using (var context = POSEntities.Create())
+                {
 
-                total.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
+                    var sale = await context.Sales.FirstOrDefaultAsync(x => x.Id == _id);
 
-                var transaction = new ChargedPayRecord();
-                transaction.Sale = sale;
-                transaction.Username = UserManager.instance.CurrentLogin.Username;
-                transaction.TransactionTime = DateTime.Now;
-                transaction.AmountPayed = paymentNum.Value;
+                    var paymentForm = new Payment_Form(sale.Remaining);
 
-                var result = context.ChargedPayRecords.Add(transaction);
-                await context.SaveChangesAsync();
+                    if (paymentForm.ShowDialog() == DialogResult.OK)
+                    {
+                        /// process the payment
+                        /// 
+                        var payRecord = (ChargedPayRecord)paymentForm.Tag;
+                        payRecord.Sale = sale;
+                        payRecord.Username = UserManager.instance.CurrentLogin.Username;
+                        payRecord.TransactionTime = DateTime.Now;
 
-                table.Rows.Add(CreateRow(result));
+                        sale.AmountRecieved += (decimal)payRecord.AmountPayed;
+                        total.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
 
-                MessageBox.Show(sale.AmountRecieved < sale.AmountDue ? "Payment added." : "Amount fully Paid.",
-                    "",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                        //var transaction = new ChargedPayRecord();
+                        //transaction.Sale = sale;
+                        //transaction.Username = UserManager.instance.CurrentLogin.Username;
+                        //transaction.TransactionTime = DateTime.Now;
+                        //transaction.AmountPayed = paymentNum.Value;
 
-                paymentNum.Value = 0;
-                PostProcess(sale);
+                        var result = context.ChargedPayRecords.Add(payRecord);
+                        await context.SaveChangesAsync();
+
+                        table.Rows.Add(CreateRow(result));
+
+                        MessageBox.Show(sale.AmountRecieved < sale.AmountDue ? "Payment added." : "Amount Fully Paid.",
+                            "",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+
+                        //paymentNum.Value = 0;
+                        PostProcess(sale);
+                    }
+                }
             }
+            catch
+            {
+
+            }
+            //if (paymentNum.Value == 0) return;
+            //if (MessageBox.Show("Are you sure you want to add payment?",
+            //    "",
+            //    MessageBoxButtons.OKCancel,
+            //    MessageBoxIcon.Question) == DialogResult.Cancel) return;
+
+            //using (var context = POSEntities.Create())
+            //{
+            //    var sale = await context.Sales.FirstOrDefaultAsync(x => x.Id == _id);
+            //    sale.AmountRecieved += paymentNum.Value;
+
+            //    total.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
+
+            //    var transaction = new ChargedPayRecord();
+            //    transaction.Sale = sale;
+            //    transaction.Username = UserManager.instance.CurrentLogin.Username;
+            //    transaction.TransactionTime = DateTime.Now;
+            //    transaction.AmountPayed = paymentNum.Value;
+
+            //    var result = context.ChargedPayRecords.Add(transaction);
+            //    await context.SaveChangesAsync();
+
+            //    table.Rows.Add(CreateRow(result));
+
+            //    MessageBox.Show(sale.AmountRecieved < sale.AmountDue ? "Payment added." : "Amount fully Paid.",
+            //        "",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Information);
+
+            //    paymentNum.Value = 0;
+            //    PostProcess(sale);
+            //}
         }
         int SelectedId => (int)table.SelectedCells[col_Id.Index].Value;
-        private async void table_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
+        private async void table_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
             if (e.ColumnIndex != col_Remove.Index) return;
             if (MessageBox.Show("Are you sure you want to undo this payment?",
                 "",
@@ -89,7 +139,8 @@ namespace POS.Forms {
 
             var t = sender as DataGridView;
 
-            using (var context = POSEntities.Create()) {
+            using (var context = POSEntities.Create())
+            {
                 var paymentToUndo = await context.ChargedPayRecords.FirstOrDefaultAsync(c => c.Id == SelectedId);
                 var sale = paymentToUndo.Sale;
 

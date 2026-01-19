@@ -44,12 +44,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.paymentNum = new System.Windows.Forms.NumericUpDown();
             this.addPaymentBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.table)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -190,26 +188,6 @@
             this.panel4.Size = new System.Drawing.Size(519, 1);
             this.panel4.TabIndex = 0;
             // 
-            // paymentNum
-            // 
-            this.paymentNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.paymentNum.DecimalPlaces = 2;
-            this.paymentNum.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paymentNum.Location = new System.Drawing.Point(209, 20);
-            this.paymentNum.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
-            this.paymentNum.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.paymentNum.Name = "paymentNum";
-            this.paymentNum.Size = new System.Drawing.Size(150, 33);
-            this.paymentNum.TabIndex = 21;
-            this.paymentNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.paymentNum.ThousandsSeparator = true;
-            this.paymentNum.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left;
-            // 
             // addPaymentBtn
             // 
             this.addPaymentBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -228,7 +206,6 @@
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.addPaymentBtn);
-            this.flowLayoutPanel1.Controls.Add(this.paymentNum);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 378);
@@ -256,7 +233,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.table)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.paymentNum)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -270,7 +246,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.NumericUpDown paymentNum;
         private System.Windows.Forms.Button addPaymentBtn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;

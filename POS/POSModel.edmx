@@ -23,6 +23,7 @@
           <Property Name="AmountPayed" Type="decimal" Precision="18" Scale="2" />
           <Property Name="SaleId" Type="int" />
           <Property Name="TransactionTime" Type="datetime" />
+          <Property Name="Details" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -490,6 +491,7 @@
           <Property Name="SaleId" Type="Int32" />
           <Property Name="TransactionTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Sale" Relationship="POSModel.FK_ChargedPayRecord_ChargedPayRecord" FromRole="ChargedPayRecord" ToRole="Sale" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ChargedPayRecord_ChargedPayRecord">
           <End Type="POSModel.Sale" Role="Sale" Multiplicity="0..1">
@@ -698,6 +700,7 @@
           <EntitySetMapping Name="ChargedPayRecords">
             <EntityTypeMapping TypeName="POSModel.ChargedPayRecord">
               <MappingFragment StoreEntitySet="ChargedPayRecord">
+                <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="TransactionTime" ColumnName="TransactionTime" />
                 <ScalarProperty Name="SaleId" ColumnName="SaleId" />
                 <ScalarProperty Name="AmountPayed" ColumnName="AmountPayed" />
