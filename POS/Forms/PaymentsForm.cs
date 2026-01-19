@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
+
 namespace POS.Forms
 {
     public partial class PaymentsForm : Form
