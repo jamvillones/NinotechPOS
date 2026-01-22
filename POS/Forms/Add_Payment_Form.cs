@@ -35,5 +35,30 @@ namespace POS.Forms
         {
             comboBox1.SelectedIndex = 0;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Add Full Payment?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No) return;
+
+            Tag = new ChargedPayRecord()
+            {
+                AmountPayed = paymentNum.Maximum,
+                Details = comboBox1.Text.Trim().ToUpper(),
+                TransactionTime = DateTime.Now,
+                Username = UserManager.instance.CurrentLogin.Username
+            };
+
+            DialogResult = DialogResult.OK;
+        }
+
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            button1.Enabled = !string.IsNullOrWhiteSpace(comboBox1.Text);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            button1.Enabled = !string.IsNullOrWhiteSpace(comboBox1.Text);
+        }
     }
 }
