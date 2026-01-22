@@ -154,5 +154,10 @@ namespace POS.Forms
                 PostProcess(sale);
             }
         }
+
+        private void PaymentsForm_Load(object sender, EventArgs e)
+        {
+            col_Remove.Visible = UserManager.instance.IsAdmin;
+        }
     }
 }
