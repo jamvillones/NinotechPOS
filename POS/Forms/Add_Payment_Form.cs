@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using POS.Misc;
+using System;
 using System.Windows.Forms;
 
 namespace POS.Forms
 {
-    public partial class Payment_Form : Form
+    public partial class Add_Payment_Form : Form
     {
-        public Payment_Form(decimal maxAmount)
+        public Add_Payment_Form(decimal maxAmount)
         {
             InitializeComponent();
             paymentNum.Maximum = maxAmount;
@@ -26,8 +20,20 @@ namespace POS.Forms
                 return;
             }
 
-            Tag = new ChargedPayRecord() { AmountPayed = paymentNum.Value, Details = comboBox1.Text.Trim() };
+            Tag = new ChargedPayRecord()
+            {
+                AmountPayed = paymentNum.Value,
+                Details = comboBox1.Text.Trim().ToUpper(),
+                TransactionTime = DateTime.Now,
+                Username = UserManager.instance.CurrentLogin.Username
+            };
+
             DialogResult = DialogResult.OK;
+        }
+
+        private void Payment_Form_Load(object sender, EventArgs e)
+        {
+            comboBox1.SelectedIndex = 0;
         }
     }
 }

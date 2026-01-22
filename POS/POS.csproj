@@ -253,11 +253,11 @@
     <Compile Include="Forms\ItemRegistration\CreateEdit_Item_Form.Designer.cs">
       <DependentUpon>CreateEdit_Item_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Payment_Form.cs">
+    <Compile Include="Forms\Add_Payment_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Payment_Form.Designer.cs">
-      <DependentUpon>Payment_Form.cs</DependentUpon>
+    <Compile Include="Forms\Add_Payment_Form.Designer.cs">
+      <DependentUpon>Add_Payment_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PictureView.cs">
       <SubType>Form</SubType>
@@ -607,8 +607,8 @@
     <EmbeddedResource Include="Forms\ItemRegistration\CreateEdit_Item_Form.resx">
       <DependentUpon>CreateEdit_Item_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Payment_Form.resx">
-      <DependentUpon>Payment_Form.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Add_Payment_Form.resx">
+      <DependentUpon>Add_Payment_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PictureView.resx">
       <DependentUpon>PictureView.cs</DependentUpon>

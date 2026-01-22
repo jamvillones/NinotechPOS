@@ -42,10 +42,10 @@
             this.addPaymentBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.table)).BeginInit();
             this.panel3.SuspendLayout();
@@ -77,10 +77,10 @@
             this.table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.table.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Id,
+            this.Column3,
             this.Column1,
             this.Column2,
             this.Column4,
-            this.Column3,
             this.col_Remove});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
@@ -99,7 +99,7 @@
             this.table.ReadOnly = true;
             this.table.RowHeadersVisible = false;
             this.table.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.table.Size = new System.Drawing.Size(519, 308);
+            this.table.Size = new System.Drawing.Size(774, 431);
             this.table.TabIndex = 0;
             this.table.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.table_CellMouseDoubleClick);
             // 
@@ -112,7 +112,7 @@
             this.total.Location = new System.Drawing.Point(0, 15);
             this.total.Name = "total";
             this.total.ReadOnly = true;
-            this.total.Size = new System.Drawing.Size(519, 14);
+            this.total.Size = new System.Drawing.Size(774, 14);
             this.total.TabIndex = 0;
             this.total.TabStop = false;
             this.total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -126,7 +126,7 @@
             this.panel3.Location = new System.Drawing.Point(20, 20);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-            this.panel3.Size = new System.Drawing.Size(519, 50);
+            this.panel3.Size = new System.Drawing.Size(774, 50);
             this.panel3.TabIndex = 20;
             // 
             // label1
@@ -145,20 +145,23 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 29);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(519, 1);
+            this.panel4.Size = new System.Drawing.Size(774, 1);
             this.panel4.TabIndex = 0;
             // 
             // addPaymentBtn
             // 
             this.addPaymentBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addPaymentBtn.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.addPaymentBtn.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.addPaymentBtn.FlatAppearance.BorderSize = 0;
             this.addPaymentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.addPaymentBtn.Location = new System.Drawing.Point(369, 20);
+            this.addPaymentBtn.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addPaymentBtn.ForeColor = System.Drawing.Color.White;
+            this.addPaymentBtn.Location = new System.Drawing.Point(524, 20);
             this.addPaymentBtn.Margin = new System.Windows.Forms.Padding(0);
             this.addPaymentBtn.Name = "addPaymentBtn";
-            this.addPaymentBtn.Size = new System.Drawing.Size(150, 33);
+            this.addPaymentBtn.Size = new System.Drawing.Size(250, 40);
             this.addPaymentBtn.TabIndex = 22;
-            this.addPaymentBtn.Text = "Add Payment";
+            this.addPaymentBtn.Text = "ADD PAYMENT";
             this.addPaymentBtn.UseVisualStyleBackColor = false;
             this.addPaymentBtn.Click += new System.EventHandler(this.AddPayment_Click);
             // 
@@ -168,10 +171,10 @@
             this.flowLayoutPanel1.Controls.Add(this.addPaymentBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 378);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 501);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(519, 53);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(774, 60);
             this.flowLayoutPanel1.TabIndex = 23;
             // 
             // col_Id
@@ -181,17 +184,27 @@
             this.col_Id.ReadOnly = true;
             this.col_Id.Visible = false;
             // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Format = "h:mm:ss tt - MMM d, yyyy";
+            dataGridViewCellStyle3.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column3.HeaderText = "DATE | TIME";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
             // Column1
             // 
-            this.Column1.HeaderText = "RECEIVED BY";
+            this.Column1.HeaderText = "BY";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column2.HeaderText = "AMOUNT";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
@@ -201,16 +214,6 @@
             this.Column4.HeaderText = "DETAILS";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Format = "g";
-            dataGridViewCellStyle4.NullValue = null;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Column3.HeaderText = "DATE";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
             // 
             // col_Remove
             // 
@@ -227,7 +230,7 @@
             this.AcceptButton = this.addPaymentBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 451);
+            this.ClientSize = new System.Drawing.Size(814, 581);
             this.Controls.Add(this.table);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel3);
@@ -257,10 +260,10 @@
         private System.Windows.Forms.Button addPaymentBtn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewButtonColumn col_Remove;
     }
 }

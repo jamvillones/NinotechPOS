@@ -42,10 +42,10 @@ namespace POS.Forms
 
         DataGridViewRow CreateRow(ChargedPayRecord record) => table.CreateRow(
             record.Id,
+            record.TransactionTime.Value,
             record.Username,
             record.AmountPayed,
-            record.Details,
-            record.TransactionTime.Value
+            record.Details.ToUpper()
             );
 
         private async void AddPayment_Click(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace POS.Forms
 
                     var sale = await context.Sales.FirstOrDefaultAsync(x => x.Id == _id);
 
-                    var paymentForm = new Payment_Form(sale.Remaining);
+                    var paymentForm = new Add_Payment_Form(sale.Remaining);
 
                     if (paymentForm.ShowDialog() == DialogResult.OK)
                     {
@@ -66,8 +66,7 @@ namespace POS.Forms
                         /// 
                         var payRecord = (ChargedPayRecord)paymentForm.Tag;
                         payRecord.Sale = sale;
-                        payRecord.Username = UserManager.instance.CurrentLogin.Username;
-                        payRecord.TransactionTime = DateTime.Now;
+                        //payRecord.Username = UserManager.instance.CurrentLogin.Username;
 
                         sale.AmountRecieved += (decimal)payRecord.AmountPayed;
                         total.Text = string.Format("₱ {0:n}", sale.AmountRecieved);
