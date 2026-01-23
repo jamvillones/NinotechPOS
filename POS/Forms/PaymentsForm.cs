@@ -45,7 +45,7 @@ namespace POS.Forms
             record.TransactionTime.Value,
             record.Username,
             record.AmountPayed,
-            record.Details.ToUpper()
+            record.Details?.ToUpper()
             );
 
         private async void AddPayment_Click(object sender, EventArgs e)
