@@ -435,7 +435,8 @@ namespace POS.Forms.ItemRegistration
             }
         }
 
-        const decimal markUpValue = 1.3m;
+        const decimal markUpValue = 1.5m;
+
         private void _price_KeyDown(object sender, KeyEventArgs e)
         {
             var textBox = sender as TextBox;
