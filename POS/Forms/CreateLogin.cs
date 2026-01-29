@@ -29,6 +29,13 @@ namespace POS.Forms
                 return;
             }
 
+            if(!string.IsNullOrEmpty(textBox2.Text) && !IsRFIDMatched)
+            {
+                ActiveControl = textBox2;
+                MessageBox.Show("RFID do not match", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             using (var context = POSEntities.Create())
             {
                 var u = await context.Logins.FirstOrDefaultAsync(x => x.Username == UsernameTxt.Text);
@@ -65,6 +72,8 @@ namespace POS.Forms
         /// </summary>
         bool IsPasswordMatched => PasswordTxt.Text == ConfirmPassTxt.Text;
 
+        bool IsRFIDMatched => textBox2.Text.Equals(textBox3.Text);
+
         private void PasswordTxt_TextChanged(object sender, EventArgs e)
         {
             if (PasswordTxt.Text == string.Empty) return;
@@ -75,6 +84,30 @@ namespace POS.Forms
         {
             if (ConfirmPassTxt.Text == string.Empty) return;
             checkImage.Visible = IsPasswordMatched;
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                textBox3.Select();
+                textBox3.Focus();
+            }
+        }
+
+        private void checkForRFIDMatch_TextChanged(object sender, EventArgs e)
+        {
+            pictureBox1.Visible = textBox2.Text.Equals(textBox3.Text);
+        }
+
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                                ConfirmBtn.PerformClick();
+            }
         }
     }
 }
