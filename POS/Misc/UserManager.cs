@@ -43,14 +43,20 @@ namespace POS.Misc
         public async Task<bool> Login_Async(string username, string password, bool stayLoggedIn = false)
         {
             var settings = Properties.Settings.Default;
-            string un = username.Trim();
-            string pw = password.Trim();
+
+            string un = username;
+            string pw = password;
 
             using (var context = POSEntities.Create())
             {
                 try
                 {
-                    var login = await context.Logins.FirstOrDefaultAsync(x => x.Username == un && x.Password == pw);
+                    Login login = null;
+                    if (string.IsNullOrWhiteSpace(un) && !string.IsNullOrWhiteSpace(pw))
+                        login = await context.Logins.FirstOrDefaultAsync(x => x.RFID == pw);
+
+                    else
+                        login = await context.Logins.FirstOrDefaultAsync(x => x.Username == un && x.Password == pw);
 
                     if (login != null)
                     {

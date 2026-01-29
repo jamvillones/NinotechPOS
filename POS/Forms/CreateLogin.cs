@@ -29,7 +29,7 @@ namespace POS.Forms
                 return;
             }
 
-            if(!string.IsNullOrEmpty(textBox2.Text) && !IsRFIDMatched)
+            if (!string.IsNullOrEmpty(textBox2.Text) && !IsRFIDMatched)
             {
                 ActiveControl = textBox2;
                 MessageBox.Show("RFID do not match", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -52,7 +52,7 @@ namespace POS.Forms
                     Password = PasswordTxt.Text,
                     Email = textBox1.Text.NullIfEmpty(),
                     Name = nameTxt.Text.NullIfEmpty(),
-
+                    RFID = string.IsNullOrWhiteSpace(textBox2.Text) ? null : textBox2.Text,
                     CanStockIn = false,
                     CanEditSupplier = false,
                     CanEditItem = false,
@@ -106,7 +106,7 @@ namespace POS.Forms
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
-                                ConfirmBtn.PerformClick();
+                ConfirmBtn.PerformClick();
             }
         }
     }

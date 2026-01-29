@@ -77,6 +77,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="CanMarkAsDefective" Type="bit" Nullable="false" />
+          <Property Name="RFID" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -524,6 +525,7 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sales" Relationship="POSModel.FK_Sale_Login" FromRole="Login" ToRole="Sale" />
           <Property Name="CanMarkAsDefective" Type="Boolean" Nullable="false" />
+          <Property Name="RFID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Sale_Login">
           <End Type="POSModel.Login" Role="Login" Multiplicity="0..1" />
@@ -712,6 +714,7 @@
           <EntitySetMapping Name="Logins">
             <EntityTypeMapping TypeName="POSModel.Login">
               <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="RFID" ColumnName="RFID" />
                 <ScalarProperty Name="CanMarkAsDefective" ColumnName="CanMarkAsDefective" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
