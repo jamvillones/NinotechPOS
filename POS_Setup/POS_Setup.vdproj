@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_05765F8F31C64921A948DBE5ECDCB25D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2FD74A8545CE55D1DBAB995E2AD21B18"
         "OwnerKey" = "8:_E2E906A01B314322912D8DE04C8AED54"
         "MsmSig" = "8:_UNDEFINED"
@@ -227,7 +233,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\POS_Setup.msi"
+        "OutputFilename" = "8:Release\\Ninotech_POS_Setup_v1.0.210.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -282,6 +288,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_05765F8F31C64921A948DBE5ECDCB25D"
+            {
+            "SourcePath" = "8:..\\POS\\Connection_Configuration_Profiles.dat"
+            "TargetName" = "8:Connection_Configuration_Profiles.dat"
+            "Tag" = "8:"
+            "Folder" = "8:_887C63E31E794F2B9F49559FC9DE5A16"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2FD74A8545CE55D1DBAB995E2AD21B18"
             {
             "AssemblyRegister" = "3:1"
@@ -699,15 +725,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Niñotech POS"
-        "ProductCode" = "8:{03C3FEDD-2192-49D7-840D-E4517A3FEB7D}"
-        "PackageCode" = "8:{6EDAA2C6-FA95-4AB3-8FC7-08E003230862}"
+        "ProductCode" = "8:{6F180A7B-6371-41AB-B414-B556595C10E5}"
+        "PackageCode" = "8:{06595458-5CD4-4041-8AC2-21C53F16CFA8}"
         "UpgradeCode" = "8:{A5499E8B-6ED5-4E19-B05A-1B37663684CA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.205"
+        "ProductVersion" = "8:1.0.210"
         "Manufacturer" = "8:Niñotech"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

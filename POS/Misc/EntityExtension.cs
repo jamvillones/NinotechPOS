@@ -269,13 +269,14 @@ namespace POS
 
     public readonly struct ExcelData
     {
-        public ExcelData(byte[] image, string barcode, string name, string supplier, decimal cost, string department, string serial, int quantity, string notes)
+        public ExcelData(byte[] image, string barcode, string name, string supplier, decimal cost, decimal price, string department, string serial, int quantity, string notes)
         {
             this.Image = image;
             this.Barcode = barcode;
             this.Name = name;
             this.Supplier = supplier;
             this.Cost = cost;
+            this.Price = price;
             this.Quantity = quantity;
             this.SerialNumber = serial;
             this.Department = department;
@@ -286,6 +287,7 @@ namespace POS
         public string Name { get; }
         public string Supplier { get; }
         public decimal Cost { get; }
+        public decimal Price { get; }
         public int Quantity { get; }
         public string SerialNumber { get; }
         public string Department { get; }
@@ -609,6 +611,7 @@ namespace POS
                         prod.Item.Name,
                         prod.Supplier.Name,
                         prod.Cost,
+                        prod.Item.SellingPrice,
                         prod.Item.Department,
                         serialNumber,
                         qty,

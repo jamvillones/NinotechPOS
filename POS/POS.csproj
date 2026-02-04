@@ -722,6 +722,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Connection_Configuration_Profiles.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <EntityDeploy Include="POSModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

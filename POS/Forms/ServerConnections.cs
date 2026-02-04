@@ -2,15 +2,10 @@
 using Newtonsoft.Json;
 using POS.Properties;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,7 +29,6 @@ namespace POS.Forms
         {
             comboBox1.DataSource = ConnectionConfiguration_Source.Configurations;
             comboBox1.SelectedItem = ConnectionConfiguration_Source.CurrentConfiguration;
-
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
         }
 
@@ -62,15 +56,12 @@ namespace POS.Forms
         {
             var config = ConnectionConfiguration_Source.CurrentConfiguration;
             if (config.Id == 0)
-            {
                 return;
-            }
 
             using (var add_EditConfig = new Add_Edit_ConnectionConfig(config))
             {
                 if (add_EditConfig.ShowDialog() == DialogResult.OK)
                 {
-
                 }
             }
         }
@@ -88,7 +79,6 @@ namespace POS.Forms
 
         private async void button5_Click(object sender, EventArgs e)
         {
-
             var button = sender as Button;
             button.Text = "Connecting...";
             cancelSource = new CancellationTokenSource();
@@ -148,7 +138,6 @@ namespace POS.Forms
                 this.Close();
         }
 
-        //readonly string path = @"C:\Users\PC\Desktop\ConnectionConfig.txt";
         private void button6_Click(object sender, EventArgs e)
         {
 
@@ -157,12 +146,6 @@ namespace POS.Forms
             saveFileDialog.Filter = "Profiles (*.dat)|*.dat|All Files (*.*)|*.*";
             saveFileDialog.DefaultExt = ".dat";
             saveFileDialog.FileName = "Connection_Configuration_Profiles.dat";
-
-            //OpenFileDialog openFileDialog = new OpenFileDialog
-            //{
-            //    Title = "Select a text file",
-            //    Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*"
-            //};
 
             // Show the dialog and get result
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -191,11 +174,8 @@ namespace POS.Forms
                 }
                 finally
                 {
-
                 }
             }
-
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -210,9 +190,12 @@ namespace POS.Forms
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string path = openFileDialog.FileName;
+                MessageBox.Show(path);
+
                 string content = File.ReadAllText(path);
 
                 var profiles = JsonConvert.DeserializeObject<ConnectionConfigurationProfile[]>(content);
+
                 foreach (var configurationProfile in profiles)
                     ConnectionConfiguration_Source.Configurations.Add(configurationProfile);
 
@@ -233,6 +216,7 @@ namespace POS.Forms
             if (!isInitialized)
             {
                 settings = Properties.Settings.Default;
+
                 Configurations.Add(new ConnectionConfigurationProfile()
                 {
                     Id = 0,
@@ -242,9 +226,26 @@ namespace POS.Forms
 
                 var configs = JsonConvert.DeserializeObject<ConnectionConfigurationProfile[]>(settings.Configs);
 
-                if (configs != null)
+                if (configs == null)
+                {
+                    string installPath = Environment.CurrentDirectory + "\\Connection_Configuration_Profiles.dat";
+
+                    string content = File.ReadAllText(installPath);
+
+                    var profiles = JsonConvert.DeserializeObject<ConnectionConfigurationProfile[]>(content);
+
+                    foreach (var configurationProfile in profiles)
+                        Configurations.Add(configurationProfile);
+
+                    Save();
+
+                    MessageBox.Show("Configuration Retrieved","",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
                     foreach (var config in configs)
                         Configurations.Add(config);
+                }
 
                 isInitialized = true;
             }
@@ -259,7 +260,7 @@ namespace POS.Forms
         {
             var newConfig = JsonConvert.SerializeObject(Configurations.Skip(1).ToArray());
             settings.Configs = newConfig;
-            settings.ConfigIndex = CurrentConfiguration.Id;
+            settings.ConfigIndex = CurrentConfiguration?.Id ?? 0;
             settings.Save();
         }
 

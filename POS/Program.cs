@@ -1,8 +1,11 @@
-﻿using OfficeOpenXml;
+﻿using Newtonsoft.Json;
+using OfficeOpenXml;
 using POS.Forms;
 using POS.Misc;
 using System;
 using System.Data.Entity;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -22,18 +25,15 @@ namespace POS
             Application.SetCompatibleTextRenderingDefault(false);
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             ConnectionConfiguration_Source.Initialize();
             WindowConfiguration.Initialize();
 
             //test for showing the installation path
-            /*
-             * string installPath = Assembly.GetExecutingAssembly().Location;
-            MessageBox.Show(installPath);
-            */
 
-            //bool performBackup = false;
+           
+
             UserManager.instance = new UserManager();
-
 
             do
             {
