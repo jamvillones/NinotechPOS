@@ -39,7 +39,7 @@ namespace POS
                     .Select(x => new SupplierPurchasesDTO()
                     {
                         Product = x.Item.Name,
-                        Value = x.StockinHistories.FilterByDate(DateFilter, dateTimePicker.Value).Sum(st => st.Cost ?? 0m)
+                        Value = x.StockinHistories.FilterByDate(DateFilter, dateTimePicker.Value).Sum(st => st.Quantity * (st.Cost ?? 0m))
                     })
                     .Where(x => x.Value > 0)
                     .ToList();
