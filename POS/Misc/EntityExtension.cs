@@ -1,5 +1,6 @@
 ﻿using Connections;
 using OfficeOpenXml;
+using OfficeOpenXml.ConditionalFormatting;
 using POS.Forms;
 using POS.Misc;
 using System;
@@ -269,7 +270,7 @@ namespace POS
 
     public readonly struct ExcelData
     {
-        public ExcelData(byte[] image, string barcode, string name, string supplier, decimal cost, decimal price, string department, string serial, int quantity, string notes)
+        public ExcelData(byte[] image, string barcode, string name, string supplier, decimal? cost, decimal? price, string department, string serial, int? quantity, string notes)
         {
             this.Image = image;
             this.Barcode = barcode;
@@ -286,9 +287,9 @@ namespace POS
         public string Barcode { get; }
         public string Name { get; }
         public string Supplier { get; }
-        public decimal Cost { get; }
-        public decimal Price { get; }
-        public int Quantity { get; }
+        public decimal? Cost { get; }
+        public decimal? Price { get; }
+        public int? Quantity { get; }
         public string SerialNumber { get; }
         public string Department { get; }
         public string Notes { get; }
@@ -311,9 +312,11 @@ namespace POS
 
             PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
-            var filteredProps = selectedProperties.Length > 0
-                ? properties.Where(p => selectedProperties.Any(x => x.Equals(p.Name))).ToArray()
-                : properties.ToArray();
+            //var filteredProps = selectedProperties.Length > 0
+            //    ? properties.Where(p => selectedProperties.Any(x => x.Equals(p.Name))).ToArray()
+            //    : properties.ToArray();
+
+            var filteredProps = properties.Where(p => selectedProperties.Any(x => x.Equals(p.Name))).ToArray();
 
             // Add only non-image columns
             foreach (var prop in filteredProps)
@@ -488,7 +491,7 @@ namespace POS
                 }
             }
         }
-        public static async Task<bool> ExtractInventory(string department = "", bool includeImage = false)
+        public static async Task<bool> ExtractInventory(string department = "", bool includeImage = false, bool separateWithSerial = false, params string[] props)
         {
             try
             {
@@ -502,9 +505,9 @@ namespace POS
                                 .OrderBy(x => x.Product.Item.Name)
                                 .ToListAsync();
 
-                    var data = entries.ProcessInventoryData();
+                    var data = entries.ProcessInventoryData(separateWithSerial);
 
-                    var (dataTable, images) = data.ToDataTableWithImages();
+                    var (dataTable, images) = data.ToDataTableWithImages(props);
 
                     using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
@@ -585,40 +588,93 @@ namespace POS
 
             return true;
         }
-        public static List<ExcelData> ProcessInventoryData(this List<InventoryItem> inventoryItems)
+        public static List<ExcelData> ProcessInventoryData(this List<InventoryItem> inventoryItems, bool shouldSeparate = false)
         {
-            var NameGroup = inventoryItems.GroupBy(i => i.Product.Item.Name);
             var list = new List<ExcelData>();
 
-            foreach (var name in NameGroup)
+            if (shouldSeparate)
             {
-                var groupedByName = inventoryItems.Where(i => i.Product.Item.Name == name.Key);
+                var GroupByProductId = inventoryItems.GroupBy(x => x.Product.Id);
 
-                var productGroup = groupedByName.GroupBy(x => x.ProductId);
-
-                foreach (var product in productGroup)
+                foreach (var id in GroupByProductId)
                 {
-                    var prod = inventoryItems.FirstOrDefault(i => i.ProductId == product.Key)?.Product;
+                    var inventoryItem = inventoryItems.Where(x => x.ProductId == id.Key);
+                    bool isFirstEntry = true;
 
-                    var serialNumber = !prod.Item.IsSerialRequired ? string.Empty :
-                        string.Join(Environment.NewLine, inventoryItems.Where(i => i.ProductId == product.Key).Select(a => "▸" + a.SerialNumber));
+                    foreach (var inv in inventoryItem)
+                    {
 
-                    var qty = inventoryItems.Where(i => i.ProductId == product.Key).Select(a => a.Quantity).Sum();
+                        if (isFirstEntry)
+                        {
+                            list.Add(new ExcelData(
+                               inv.Product.Item.SampleImage,
+                               inv.Product.Item.Barcode,
+                               inv.Product.Item.Name,
+                               inv.Product.Supplier.Name,
+                               inv.Product.Cost,
+                               inv.Product.Item.SellingPrice,
+                               inv.Product.Item.Department,
+                               inv.SerialNumber,
+                               inventoryItem.Sum(x => x.Quantity),
+                               inv.Product.Item.Details
 
-                    list.Add(new ExcelData(
-                        prod.Item.SampleImage,
-                        prod.Item.Barcode,
-                        prod.Item.Name,
-                        prod.Supplier.Name,
-                        prod.Cost,
-                        prod.Item.SellingPrice,
-                        prod.Item.Department,
-                        serialNumber,
-                        qty,
-                        prod.Item.Details
-                        ));
+                           ));
+                        }
+                        else
+                        {
+                            list.Add(new ExcelData(
+                                null,
+                                string.Empty,
+                                string.Empty,
+                                string.Empty,
+                                null,
+                                null,
+                                string.Empty,
+                                inv.SerialNumber,
+                                null,
+                                string.Empty
+                                ));
+                        }
+                        isFirstEntry = false;
+                    }
                 }
             }
+            else
+            {
+                var NameGroup = inventoryItems.GroupBy(i => i.Product.Item.Name);
+
+                foreach (var name in NameGroup)
+                {
+                    var groupedByName = inventoryItems.Where(i => i.Product.Item.Name == name.Key);
+
+                    var productGroup = groupedByName.GroupBy(x => x.ProductId);
+
+                    foreach (var product in productGroup)
+                    {
+                        var prod = inventoryItems.FirstOrDefault(i => i.ProductId == product.Key)?.Product;
+
+                        var serialNumber = !prod.Item.IsSerialRequired ? string.Empty :
+                            string.Join(Environment.NewLine, inventoryItems.Where(i => i.ProductId == product.Key).Select(a => "▸" + a.SerialNumber));
+
+                        var qty = inventoryItems.Where(i => i.ProductId == product.Key).Select(a => a.Quantity).Sum();
+
+                        list.Add(new ExcelData(
+                            prod.Item.SampleImage,
+                            prod.Item.Barcode,
+                            prod.Item.Name,
+                            prod.Supplier.Name,
+                            prod.Cost,
+                            prod.Item.SellingPrice,
+                            prod.Item.Department,
+                            serialNumber,
+                            qty,
+                            prod.Item.Details
+
+                            ));
+                    }
+                }
+            }
+
             return list;
         }
     }
