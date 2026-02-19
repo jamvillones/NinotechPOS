@@ -31,23 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryUC));
             this.tablePanel = new System.Windows.Forms.Panel();
             this.itemsTable = new System.Windows.Forms.DataGridView();
-            this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ShowProgression = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.barcodeCol = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.warrantyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -89,6 +80,15 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.searchBar = new POS.UserControls.SearchControl();
+            this.col_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ShowProgression = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.barcodeCol = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.nameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.warrantyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.panel5.SuspendLayout();
@@ -179,97 +179,6 @@
             this.itemsTable.Scroll += new System.Windows.Forms.ScrollEventHandler(this.itemsTable_Scroll);
             this.itemsTable.SelectionChanged += new System.EventHandler(this.itemsTable_SelectionChanged);
             this.itemsTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.itemsTable_KeyDown);
-            // 
-            // col_Id
-            // 
-            this.col_Id.HeaderText = "ID";
-            this.col_Id.Name = "col_Id";
-            this.col_Id.ReadOnly = true;
-            this.col_Id.Visible = false;
-            // 
-            // col_ShowProgression
-            // 
-            this.col_ShowProgression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
-            this.col_ShowProgression.DefaultCellStyle = dataGridViewCellStyle2;
-            this.col_ShowProgression.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.col_ShowProgression.HeaderText = "";
-            this.col_ShowProgression.MinimumWidth = 40;
-            this.col_ShowProgression.Name = "col_ShowProgression";
-            this.col_ShowProgression.ReadOnly = true;
-            this.col_ShowProgression.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_ShowProgression.Text = "";
-            this.col_ShowProgression.UseColumnTextForButtonValue = true;
-            this.col_ShowProgression.Width = 40;
-            // 
-            // barcodeCol
-            // 
-            this.barcodeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(1);
-            this.barcodeCol.DefaultCellStyle = dataGridViewCellStyle3;
-            this.barcodeCol.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.barcodeCol.HeaderText = "BARCODE";
-            this.barcodeCol.MinimumWidth = 50;
-            this.barcodeCol.Name = "barcodeCol";
-            this.barcodeCol.ReadOnly = true;
-            this.barcodeCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.barcodeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.barcodeCol.ToolTipText = "Copy Barcode To Clipboard";
-            this.barcodeCol.Width = 93;
-            // 
-            // nameCol
-            // 
-            this.nameCol.HeaderText = "NAME";
-            this.nameCol.MinimumWidth = 100;
-            this.nameCol.Name = "nameCol";
-            this.nameCol.ReadOnly = true;
-            // 
-            // quantityCol
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N0";
-            dataGridViewCellStyle4.NullValue = "N/A";
-            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle4;
-            this.quantityCol.HeaderText = "QUANTITY";
-            this.quantityCol.MinimumWidth = 50;
-            this.quantityCol.Name = "quantityCol";
-            this.quantityCol.ReadOnly = true;
-            // 
-            // priceCol
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "C2";
-            this.priceCol.DefaultCellStyle = dataGridViewCellStyle5;
-            this.priceCol.HeaderText = "SELLING PRICE";
-            this.priceCol.MinimumWidth = 50;
-            this.priceCol.Name = "priceCol";
-            this.priceCol.ReadOnly = true;
-            // 
-            // col_Notes
-            // 
-            this.col_Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.col_Notes.HeaderText = "NOTES";
-            this.col_Notes.Name = "col_Notes";
-            this.col_Notes.ReadOnly = true;
-            this.col_Notes.Visible = false;
-            // 
-            // warrantyCol
-            // 
-            this.warrantyCol.HeaderText = "WARRANTY";
-            this.warrantyCol.Name = "warrantyCol";
-            this.warrantyCol.ReadOnly = true;
-            this.warrantyCol.Visible = false;
-            // 
-            // col_Type
-            // 
-            this.col_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.col_Type.DefaultCellStyle = dataGridViewCellStyle6;
-            this.col_Type.HeaderText = "TYPE";
-            this.col_Type.Name = "col_Type";
-            this.col_Type.ReadOnly = true;
-            this.col_Type.Visible = false;
             // 
             // panel5
             // 
@@ -871,6 +780,96 @@
             this.searchBar.OnSearch += new System.EventHandler<POS.Misc.SearchEventArgs>(this.searchControl1_OnSearch);
             this.searchBar.OnTextEmpty += new System.EventHandler(this.searchControl1_OnTextEmpty);
             // 
+            // col_Id
+            // 
+            this.col_Id.HeaderText = "ID";
+            this.col_Id.Name = "col_Id";
+            this.col_Id.ReadOnly = true;
+            this.col_Id.Visible = false;
+            // 
+            // col_ShowProgression
+            // 
+            this.col_ShowProgression.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            this.col_ShowProgression.DefaultCellStyle = dataGridViewCellStyle2;
+            this.col_ShowProgression.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.col_ShowProgression.HeaderText = "";
+            this.col_ShowProgression.MinimumWidth = 40;
+            this.col_ShowProgression.Name = "col_ShowProgression";
+            this.col_ShowProgression.ReadOnly = true;
+            this.col_ShowProgression.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_ShowProgression.Text = "";
+            this.col_ShowProgression.UseColumnTextForButtonValue = true;
+            this.col_ShowProgression.Width = 40;
+            // 
+            // barcodeCol
+            // 
+            this.barcodeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(1);
+            this.barcodeCol.DefaultCellStyle = dataGridViewCellStyle3;
+            this.barcodeCol.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.barcodeCol.HeaderText = "BARCODE";
+            this.barcodeCol.MinimumWidth = 50;
+            this.barcodeCol.Name = "barcodeCol";
+            this.barcodeCol.ReadOnly = true;
+            this.barcodeCol.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.barcodeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.barcodeCol.ToolTipText = "Copy Barcode To Clipboard";
+            this.barcodeCol.Width = 93;
+            // 
+            // nameCol
+            // 
+            this.nameCol.HeaderText = "NAME";
+            this.nameCol.MinimumWidth = 100;
+            this.nameCol.Name = "nameCol";
+            this.nameCol.ReadOnly = true;
+            // 
+            // quantityCol
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.NullValue = "N/A";
+            this.quantityCol.DefaultCellStyle = dataGridViewCellStyle4;
+            this.quantityCol.HeaderText = "QUANTITY";
+            this.quantityCol.MinimumWidth = 50;
+            this.quantityCol.Name = "quantityCol";
+            this.quantityCol.ReadOnly = true;
+            // 
+            // priceCol
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "C2";
+            this.priceCol.DefaultCellStyle = dataGridViewCellStyle5;
+            this.priceCol.HeaderText = "SELLING PRICE";
+            this.priceCol.MinimumWidth = 50;
+            this.priceCol.Name = "priceCol";
+            this.priceCol.ReadOnly = true;
+            // 
+            // col_Notes
+            // 
+            this.col_Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.col_Notes.HeaderText = "NOTES";
+            this.col_Notes.Name = "col_Notes";
+            this.col_Notes.ReadOnly = true;
+            this.col_Notes.Visible = false;
+            // 
+            // warrantyCol
+            // 
+            this.warrantyCol.HeaderText = "WARRANTY";
+            this.warrantyCol.Name = "warrantyCol";
+            this.warrantyCol.ReadOnly = true;
+            this.warrantyCol.Visible = false;
+            // 
+            // col_Type
+            // 
+            this.col_Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.col_Type.DefaultCellStyle = dataGridViewCellStyle6;
+            this.col_Type.HeaderText = "TYPE";
+            this.col_Type.Name = "col_Type";
+            this.col_Type.ReadOnly = true;
+            this.col_Type.Visible = false;
+            // 
             // InventoryUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -943,6 +942,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem sellThisItemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restockThisItemToolStripMenuItem;
+        protected System.Windows.Forms.Button button8;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Id;
         private System.Windows.Forms.DataGridViewButtonColumn col_ShowProgression;
         private System.Windows.Forms.DataGridViewButtonColumn barcodeCol;
@@ -952,6 +952,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Notes;
         private System.Windows.Forms.DataGridViewTextBoxColumn warrantyCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Type;
-        protected System.Windows.Forms.Button button8;
     }
 }

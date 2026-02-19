@@ -61,6 +61,8 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel13.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -91,9 +93,9 @@
             this._departmentOption.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this._departmentOption.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._departmentOption.FormattingEnabled = true;
-            this._departmentOption.Location = new System.Drawing.Point(208, 240);
+            this._departmentOption.Location = new System.Drawing.Point(225, 200);
             this._departmentOption.Name = "_departmentOption";
-            this._departmentOption.Size = new System.Drawing.Size(161, 23);
+            this._departmentOption.Size = new System.Drawing.Size(188, 23);
             this._departmentOption.TabIndex = 4;
             this._departmentOption.TextChanged += new System.EventHandler(this._departmentOption_TextChanged);
             // 
@@ -109,9 +111,9 @@
             "Quantifiable",
             "Service",
             "Software"});
-            this._type.Location = new System.Drawing.Point(31, 240);
+            this._type.Location = new System.Drawing.Point(31, 200);
             this._type.Name = "_type";
-            this._type.Size = new System.Drawing.Size(161, 23);
+            this._type.Size = new System.Drawing.Size(188, 23);
             this._type.TabIndex = 3;
             this._type.SelectedIndexChanged += new System.EventHandler(this._type_SelectedIndexChanged);
             // 
@@ -122,7 +124,7 @@
             this.panel13.Controls.Add(this._description);
             this.panel13.Controls.Add(this.panel14);
             this.panel13.Controls.Add(this.label7);
-            this.panel13.Location = new System.Drawing.Point(31, 404);
+            this.panel13.Location = new System.Drawing.Point(31, 413);
             this.panel13.Margin = new System.Windows.Forms.Padding(0);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(462, 35);
@@ -169,7 +171,7 @@
             this.panel9.Controls.Add(this.panel10);
             this.panel9.Controls.Add(this._tags);
             this.panel9.Controls.Add(this.label5);
-            this.panel9.Location = new System.Drawing.Point(31, 361);
+            this.panel9.Location = new System.Drawing.Point(31, 370);
             this.panel9.Margin = new System.Windows.Forms.Padding(0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(462, 35);
@@ -216,7 +218,7 @@
             this.panel5.Controls.Add(this._criticalQty);
             this.panel5.Controls.Add(this.panel8);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(31, 273);
+            this.panel5.Location = new System.Drawing.Point(31, 282);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(462, 35);
@@ -269,7 +271,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this._barcode);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(31, 180);
+            this.panel1.Location = new System.Drawing.Point(31, 140);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(462, 35);
@@ -319,7 +321,7 @@
             this.panel6.Controls.Add(this._name);
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.label3);
-            this.panel6.Location = new System.Drawing.Point(31, 137);
+            this.panel6.Location = new System.Drawing.Point(31, 97);
             this.panel6.Margin = new System.Windows.Forms.Padding(0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(462, 35);
@@ -366,7 +368,7 @@
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Gray;
-            this.label6.Location = new System.Drawing.Point(28, 224);
+            this.label6.Location = new System.Drawing.Point(28, 184);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(34, 13);
             this.label6.TabIndex = 33;
@@ -377,7 +379,7 @@
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.Gray;
-            this.label8.Location = new System.Drawing.Point(205, 224);
+            this.label8.Location = new System.Drawing.Point(222, 184);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 13);
             this.label8.TabIndex = 34;
@@ -387,7 +389,7 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(122, 35);
+            this.label9.Location = new System.Drawing.Point(122, 59);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(281, 13);
             this.label9.TabIndex = 37;
@@ -400,7 +402,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label10.Location = new System.Drawing.Point(147, 5);
+            this.label10.Location = new System.Drawing.Point(147, 29);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(230, 30);
             this.label10.TabIndex = 36;
@@ -415,7 +417,7 @@
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.saveBtn.ForeColor = System.Drawing.Color.White;
             this.saveBtn.Image = ((System.Drawing.Image)(resources.GetObject("saveBtn.Image")));
-            this.saveBtn.Location = new System.Drawing.Point(31, 464);
+            this.saveBtn.Location = new System.Drawing.Point(31, 509);
             this.saveBtn.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
             this.saveBtn.MaximumSize = new System.Drawing.Size(150, 35);
             this.saveBtn.MinimumSize = new System.Drawing.Size(150, 35);
@@ -435,7 +437,7 @@
             this.panel3.Controls.Add(this.numericUpDown1);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(31, 316);
+            this.panel3.Location = new System.Drawing.Point(31, 325);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(462, 35);
@@ -480,11 +482,36 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Warranty In Days:";
             // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.Gray;
+            this.label11.Location = new System.Drawing.Point(28, 232);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(110, 13);
+            this.label11.TabIndex = 40;
+            this.label11.Text = "Unit Of Measurement:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.comboBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(31, 248);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(188, 23);
+            this.comboBox1.TabIndex = 39;
+            // 
             // BasicInformation_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 531);
+            this.ClientSize = new System.Drawing.Size(524, 578);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.label9);
@@ -559,5 +586,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

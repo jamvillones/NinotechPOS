@@ -18,6 +18,7 @@ namespace POS.Forms.ItemRegistration
         }
 
         List<string> RegisteredNames = new List<string>();
+
         List<string> RegisteredBarcodes = new List<string>();
 
         private async void BasicInformation_Form_Load(object sender, EventArgs e)
@@ -31,7 +32,8 @@ namespace POS.Forms.ItemRegistration
                 }
             }
             catch (Exception)
-            { }
+            { 
+            }
 
             _departmentOption.DataSource = Departments_Store.Departments;
             _departmentOption.SelectedIndex = 0;
@@ -51,6 +53,7 @@ namespace POS.Forms.ItemRegistration
             item.Department = _departmentOption.Text.NullIfEmpty();
             item.Details = _description.Text.NullIfEmpty();
             item.Tags = _tags.Text.Trim(',', ' ').NullIfEmpty();
+            item.UnitPerQuantity = comboBox1.Text.NullIfEmpty();
 
             if (item.Type != ItemType.Quantifiable.ToString())
             {

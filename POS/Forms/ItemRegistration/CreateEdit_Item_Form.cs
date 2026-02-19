@@ -110,6 +110,8 @@ namespace POS.Forms.ItemRegistration
                 new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.Barcode), true, DataSourceUpdateMode.OnPropertyChanged));
             _departmentOption.DataBindings.Add(
                 new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.Department), true, DataSourceUpdateMode.OnPropertyChanged));
+            comboBox1.DataBindings.Add(
+               new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.UnitPerQuantity), true, DataSourceUpdateMode.OnPropertyChanged));
             _tags.DataBindings.Add(
                 new Binding(controlTextPropertyString, ItemBindingSource, nameof(POS.Item.Tags), true, DataSourceUpdateMode.OnPropertyChanged));
             _details.DataBindings.Add(

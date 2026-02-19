@@ -89,6 +89,10 @@
             this._warranty = new System.Windows.Forms.NumericUpDown();
             this.panel19 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.panel20 = new System.Windows.Forms.Panel();
+            this.panel21 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.ItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonsHolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.costTable)).BeginInit();
@@ -107,6 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.panel18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._warranty)).BeginInit();
+            this.panel20.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,7 +126,7 @@
             this.buttonsHolder.Location = new System.Drawing.Point(20, 523);
             this.buttonsHolder.Name = "buttonsHolder";
             this.buttonsHolder.Size = new System.Drawing.Size(325, 35);
-            this.buttonsHolder.TabIndex = 10;
+            this.buttonsHolder.TabIndex = 11;
             // 
             // cancelButton
             // 
@@ -301,7 +306,7 @@
             this.panel11.Location = new System.Drawing.Point(369, 109);
             this.panel11.Margin = new System.Windows.Forms.Padding(0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(567, 40);
+            this.panel11.Size = new System.Drawing.Size(276, 40);
             this.panel11.TabIndex = 3;
             // 
             // panel12
@@ -310,7 +315,7 @@
             this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel12.Location = new System.Drawing.Point(0, 39);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(567, 1);
+            this.panel12.Size = new System.Drawing.Size(276, 1);
             this.panel12.TabIndex = 19;
             // 
             // _departmentOption
@@ -323,7 +328,7 @@
             this._departmentOption.FormattingEnabled = true;
             this._departmentOption.Location = new System.Drawing.Point(18, 16);
             this._departmentOption.Name = "_departmentOption";
-            this._departmentOption.Size = new System.Drawing.Size(530, 21);
+            this._departmentOption.Size = new System.Drawing.Size(239, 21);
             this._departmentOption.TabIndex = 18;
             this._departmentOption.Tag = "Department";
             this._departmentOption.Validated += new System.EventHandler(this._departmentOption_Validated);
@@ -347,7 +352,7 @@
             this.panel15.Location = new System.Drawing.Point(20, 34);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(325, 156);
-            this.panel15.TabIndex = 7;
+            this.panel15.TabIndex = 9;
             this.panel15.TabStop = true;
             // 
             // removeImageButton
@@ -510,8 +515,8 @@
             this.panel5.Location = new System.Drawing.Point(369, 154);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(567, 35);
-            this.panel5.TabIndex = 4;
+            this.panel5.Size = new System.Drawing.Size(276, 35);
+            this.panel5.TabIndex = 5;
             // 
             // _criticalQty
             // 
@@ -528,7 +533,7 @@
             0,
             0});
             this._criticalQty.Name = "_criticalQty";
-            this._criticalQty.Size = new System.Drawing.Size(530, 21);
+            this._criticalQty.Size = new System.Drawing.Size(239, 21);
             this._criticalQty.TabIndex = 3;
             this._criticalQty.Tag = "Critical Quantity";
             this._criticalQty.ThousandsSeparator = true;
@@ -540,7 +545,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel8.Location = new System.Drawing.Point(0, 34);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(567, 1);
+            this.panel8.Size = new System.Drawing.Size(276, 1);
             this.panel8.TabIndex = 1;
             // 
             // label4
@@ -565,7 +570,7 @@
             this.panel9.Margin = new System.Windows.Forms.Padding(0);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(567, 35);
-            this.panel9.TabIndex = 5;
+            this.panel9.TabIndex = 7;
             // 
             // panel10
             // 
@@ -611,11 +616,11 @@
             this.panel13.Controls.Add(this._details);
             this.panel13.Controls.Add(this.panel14);
             this.panel13.Controls.Add(this.label7);
-            this.panel13.Location = new System.Drawing.Point(369, 271);
+            this.panel13.Location = new System.Drawing.Point(369, 233);
             this.panel13.Margin = new System.Windows.Forms.Padding(0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(567, 237);
-            this.panel13.TabIndex = 6;
+            this.panel13.Size = new System.Drawing.Size(567, 275);
+            this.panel13.TabIndex = 8;
             // 
             // _details
             // 
@@ -628,7 +633,7 @@
             this._details.MaxLength = 300;
             this._details.Multiline = true;
             this._details.Name = "_details";
-            this._details.Size = new System.Drawing.Size(567, 213);
+            this._details.Size = new System.Drawing.Size(567, 251);
             this._details.TabIndex = 2;
             this._details.Tag = "Notes";
             // 
@@ -636,7 +641,7 @@
             // 
             this.panel14.BackColor = System.Drawing.Color.Black;
             this.panel14.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel14.Location = new System.Drawing.Point(0, 236);
+            this.panel14.Location = new System.Drawing.Point(0, 274);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(567, 1);
             this.panel14.TabIndex = 3;
@@ -704,7 +709,7 @@
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(325, 35);
-            this.panel3.TabIndex = 8;
+            this.panel3.TabIndex = 10;
             // 
             // _price
             // 
@@ -756,7 +761,7 @@
             this.panel16.Margin = new System.Windows.Forms.Padding(0);
             this.panel16.Name = "panel16";
             this.panel16.Size = new System.Drawing.Size(325, 275);
-            this.panel16.TabIndex = 9;
+            this.panel16.TabIndex = 11;
             // 
             // panel17
             // 
@@ -793,11 +798,11 @@
             this.panel18.Controls.Add(this._warranty);
             this.panel18.Controls.Add(this.panel19);
             this.panel18.Controls.Add(this.label2);
-            this.panel18.Location = new System.Drawing.Point(369, 233);
+            this.panel18.Location = new System.Drawing.Point(648, 154);
             this.panel18.Margin = new System.Windows.Forms.Padding(0);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(567, 35);
-            this.panel18.TabIndex = 34;
+            this.panel18.Size = new System.Drawing.Size(288, 35);
+            this.panel18.TabIndex = 6;
             // 
             // _warranty
             // 
@@ -814,7 +819,7 @@
             0,
             0});
             this._warranty.Name = "_warranty";
-            this._warranty.Size = new System.Drawing.Size(530, 21);
+            this._warranty.Size = new System.Drawing.Size(251, 21);
             this._warranty.TabIndex = 3;
             this._warranty.Tag = "Warranty";
             this._warranty.ThousandsSeparator = true;
@@ -825,7 +830,7 @@
             this.panel19.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel19.Location = new System.Drawing.Point(0, 34);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(567, 1);
+            this.panel19.Size = new System.Drawing.Size(288, 1);
             this.panel19.TabIndex = 1;
             // 
             // label2
@@ -839,6 +844,58 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Warranty (In Days):";
             // 
+            // panel20
+            // 
+            this.panel20.Controls.Add(this.panel21);
+            this.panel20.Controls.Add(this.comboBox1);
+            this.panel20.Controls.Add(this.label6);
+            this.panel20.Location = new System.Drawing.Point(648, 109);
+            this.panel20.Margin = new System.Windows.Forms.Padding(0);
+            this.panel20.Name = "panel20";
+            this.panel20.Size = new System.Drawing.Size(288, 40);
+            this.panel20.TabIndex = 4;
+            // 
+            // panel21
+            // 
+            this.panel21.BackColor = System.Drawing.Color.Black;
+            this.panel21.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel21.Location = new System.Drawing.Point(0, 39);
+            this.panel21.Name = "panel21";
+            this.panel21.Size = new System.Drawing.Size(288, 1);
+            this.panel21.TabIndex = 19;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Piece/s",
+            "Meter/s",
+            "Feet",
+            "Unit"});
+            this.comboBox1.Location = new System.Drawing.Point(18, 16);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(251, 21);
+            this.comboBox1.TabIndex = 18;
+            this.comboBox1.Tag = "UnitPerQuantity";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label6.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label6.Location = new System.Drawing.Point(0, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Unit Per Qty:";
+            // 
             // ItemBindingSource
             // 
             this.ItemBindingSource.AllowNew = false;
@@ -850,6 +907,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(956, 581);
+            this.Controls.Add(this.panel20);
             this.Controls.Add(this.panel18);
             this.Controls.Add(this.panel16);
             this.Controls.Add(this.panel3);
@@ -901,6 +959,8 @@
             this.panel18.ResumeLayout(false);
             this.panel18.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this._warranty)).EndInit();
+            this.panel20.ResumeLayout(false);
+            this.panel20.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -963,5 +1023,9 @@
         private System.Windows.Forms.NumericUpDown _warranty;
         private System.Windows.Forms.Panel panel19;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel20;
+        private System.Windows.Forms.Panel panel21;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label6;
     }
 }

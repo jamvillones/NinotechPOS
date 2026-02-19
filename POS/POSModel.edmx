@@ -60,6 +60,7 @@
           <Property Name="IsSerialRequired" Type="bit" Nullable="false" />
           <Property Name="Barcode" Type="nvarchar" MaxLength="50" />
           <Property Name="Warranty" Type="int" />
+          <Property Name="UnitPerQuantity" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -556,6 +557,7 @@
           <Property Name="Barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Warranty" Type="Int32" />
           <NavigationProperty Name="Products" Relationship="POSModel.FK_Product_Item" FromRole="Item" ToRole="Product" />
+          <Property Name="UnitPerQuantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Product_Item">
           <End Type="POSModel.Item" Role="Item" Multiplicity="0..1">
@@ -733,6 +735,7 @@
           <EntitySetMapping Name="Items">
             <EntityTypeMapping TypeName="POSModel.Item">
               <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="UnitPerQuantity" ColumnName="UnitPerQuantity" />
                 <ScalarProperty Name="Warranty" ColumnName="Warranty" />
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="IsSerialRequired" ColumnName="IsSerialRequired" />

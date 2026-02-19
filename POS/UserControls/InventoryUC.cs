@@ -245,7 +245,8 @@ namespace POS.UserControls
                                                                         .Select(b => b.Quantity)
                                                                         .DefaultIfEmpty(0)
                                                                         .Sum())
-                                                            .Sum()
+                                                            .Sum(),
+                                            UnitOfMeasurement = i.UnitPerQuantity ?? "Unit/s"
                                         });
 
                     var task_GettingItems = paginatedItems.ToListAsync(token);
@@ -312,7 +313,7 @@ namespace POS.UserControls
                  null,
                  item.Barcode,
                  item.Name,
-                 item.Type == ItemType.Quantifiable.ToString() ? item.Qty : null,
+                 item.Type == ItemType.Quantifiable.ToString() && item.Qty != null ? item.Qty?.ToString("N0") + " " + item.UnitOfMeasurement : null,
                  item.SellingPrice,
                  item.Notes,
                  item.WarrantyDetails,
@@ -334,6 +335,7 @@ namespace POS.UserControls
             public string Name { get; set; }
 
             public int? Qty { get; set; }
+            public string UnitOfMeasurement { get; set; }
             public string Notes { get; set; }
             public int? Warranty { get; set; } = 0;
             public string WarrantyDetails
