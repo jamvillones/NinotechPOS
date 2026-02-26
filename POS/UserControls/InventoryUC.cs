@@ -20,7 +20,10 @@ namespace POS.UserControls
         {
             InitializeComponent();
 
-
+            col_Notes.Visible =
+            warrantyCol.Visible =
+            //col_Type.Visible = 
+            checkBox1.Checked;
         }
 
         ItemFilter currentItemFilter = ItemFilter.All;
@@ -99,7 +102,7 @@ namespace POS.UserControls
             else if (e.ColumnIndex == quantityCol.Index)
             {
                 var dgt = (DataGridView)sender;
-                var qty = dgt[quantityCol.Index, e.RowIndex].Value as int?;
+                var qty = dgt[actualQtyCol.Index, e.RowIndex].Value as int?;
                 var barcode = dgt.Rows[e.RowIndex].Cells[0].Value.ToString();
                 ShowInventoryInfo(barcode, qty);
             }
@@ -114,7 +117,7 @@ namespace POS.UserControls
             }
         }
 
-        void ShowInventoryInfo(string barcode, int? quantity)
+        void ShowInventoryInfo(string barcode,int? quantity)
         {
             if (quantity == 0 || quantity is null) return;
             using (var View = new InventoryItemView(barcode))
@@ -317,7 +320,8 @@ namespace POS.UserControls
                  item.SellingPrice,
                  item.Notes,
                  item.WarrantyDetails,
-                 item.Type
+                 item.Type,
+                 item.Qty
                 );
 
             return row;
@@ -829,9 +833,11 @@ namespace POS.UserControls
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            bool isShown = checkBox1.Checked;
-            col_Notes.Visible = isShown;
-            warrantyCol.Visible = isShown;
+            bool isDetailsVisible = checkBox1.Checked;
+
+            col_Notes.Visible   = 
+            warrantyCol.Visible =
+            isDetailsVisible;
         }
 
         private void button8_Click(object sender, EventArgs e)

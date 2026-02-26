@@ -89,6 +89,7 @@
             this.col_Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.warrantyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actualQtyCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tablePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsTable)).BeginInit();
             this.panel5.SuspendLayout();
@@ -144,7 +145,8 @@
             this.priceCol,
             this.col_Notes,
             this.warrantyCol,
-            this.col_Type});
+            this.col_Type,
+            this.actualQtyCol});
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -851,14 +853,12 @@
             this.col_Notes.HeaderText = "NOTES";
             this.col_Notes.Name = "col_Notes";
             this.col_Notes.ReadOnly = true;
-            this.col_Notes.Visible = false;
             // 
             // warrantyCol
             // 
             this.warrantyCol.HeaderText = "WARRANTY";
             this.warrantyCol.Name = "warrantyCol";
             this.warrantyCol.ReadOnly = true;
-            this.warrantyCol.Visible = false;
             // 
             // col_Type
             // 
@@ -869,6 +869,13 @@
             this.col_Type.Name = "col_Type";
             this.col_Type.ReadOnly = true;
             this.col_Type.Visible = false;
+            // 
+            // actualQtyCol
+            // 
+            this.actualQtyCol.HeaderText = "";
+            this.actualQtyCol.Name = "actualQtyCol";
+            this.actualQtyCol.ReadOnly = true;
+            this.actualQtyCol.Visible = false;
             // 
             // InventoryUC
             // 
@@ -952,5 +959,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Notes;
         private System.Windows.Forms.DataGridViewTextBoxColumn warrantyCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn actualQtyCol;
     }
 }
