@@ -20,6 +20,11 @@ namespace POS.Forms
                 return;
             }
 
+            if (comboBox1.Text.Equals("OTHERS", StringComparison.OrdinalIgnoreCase))
+            {
+
+            }
+
             Tag = new ChargedPayRecord()
             {
                 AmountPayed = paymentNum.Value,

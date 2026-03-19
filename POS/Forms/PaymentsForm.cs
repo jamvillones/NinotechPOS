@@ -2,7 +2,9 @@
 using System;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Windows.Forms;
 
 namespace POS.Forms
@@ -48,6 +50,44 @@ namespace POS.Forms
             record.Details?.ToUpper()
             );
 
+        bool VerifyLogin()
+        {
+
+            var verifyForm = new EnterCredentialsForm();
+
+            if (verifyForm.ShowDialog() == DialogResult.OK)
+            {
+                if (verifyForm.Tag is Login login)
+                {
+                    if (login.CanVoidSale)
+                    {
+                        return true;
+                    }
+
+                    MessageBox.Show(
+                        "You do not have authority to perform this action.",
+                        "",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Stop);
+                }
+            }
+
+            return false;
+        }
+
+        bool AskForAReasonForOthersPayment(out string reason)
+        {
+            var s = new ReasonForReturnForm();
+            if (s.ShowDialog() != DialogResult.OK)
+            {
+                reason = s.Tag as string;
+                return true;
+            }
+            reason = null;
+            return false;
+
+        }
+
         private async void AddPayment_Click(object sender, EventArgs e)
         {
             try
@@ -63,6 +103,14 @@ namespace POS.Forms
                     {
                         /// process the payment
                         var payRecord = (ChargedPayRecord)paymentForm.Tag;
+
+                        if (!VerifyLogin())
+                            return;
+
+                        if (!AskForAReasonForOthersPayment(out string reason))                        
+                            return;                        
+
+                        context.AdditionalDetails = reason;
                         payRecord.Sale = sale;
 
                         sale.AmountRecieved += (decimal)payRecord.AmountPayed;

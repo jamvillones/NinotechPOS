@@ -67,7 +67,8 @@
             "CHEQUE PAYMENT",
             "ONLINE PAYMENT",
             "SALES DISCOUNT",
-            "WITHHOLDING TAX"});
+            "WITHHOLDING TAX",
+            "OTHERS"});
             this.comboBox1.Location = new System.Drawing.Point(23, 77);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(0, 0, 10, 0);
             this.comboBox1.Name = "comboBox1";
