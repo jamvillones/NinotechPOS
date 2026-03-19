@@ -20,6 +20,7 @@ namespace POS
         public Nullable<int> SaleId { get; set; }
         public Nullable<System.DateTime> TransactionTime { get; set; }
         public string Details { get; set; }
+        public string Notes { get; set; }
     
         public virtual Sale Sale { get; set; }
     }

@@ -47,7 +47,8 @@ namespace POS.Forms
             record.TransactionTime.Value,
             record.Username,
             record.AmountPayed,
-            record.Details?.ToUpper()
+            record.Details?.ToUpper(),
+            record.Notes
             );
 
         bool VerifyLogin()
@@ -78,7 +79,7 @@ namespace POS.Forms
         bool AskForAReasonForOthersPayment(out string reason)
         {
             var s = new ReasonForReturnForm();
-            if (s.ShowDialog() != DialogResult.OK)
+            if (s.ShowDialog() == DialogResult.OK)
             {
                 reason = s.Tag as string;
                 return true;
@@ -104,13 +105,18 @@ namespace POS.Forms
                         /// process the payment
                         var payRecord = (ChargedPayRecord)paymentForm.Tag;
 
-                        if (!VerifyLogin())
-                            return;
+                        if (payRecord.Details.Equals("OTHERS", StringComparison.OrdinalIgnoreCase))
+                        {
 
-                        if (!AskForAReasonForOthersPayment(out string reason))                        
-                            return;                        
+                            if (!VerifyLogin())
+                                return;
 
-                        context.AdditionalDetails = reason;
+                            if (!AskForAReasonForOthersPayment(out string reason))
+                                return;
+
+                            payRecord.Notes = reason;
+                        }
+
                         payRecord.Sale = sale;
 
                         sale.AmountRecieved += (decimal)payRecord.AmountPayed;

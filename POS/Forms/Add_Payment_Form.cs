@@ -18,12 +18,7 @@ namespace POS.Forms
             {
                 MessageBox.Show("Must Provide Details and Amount Should be Above 0.00", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-
-            if (comboBox1.Text.Equals("OTHERS", StringComparison.OrdinalIgnoreCase))
-            {
-
-            }
+            }           
 
             Tag = new ChargedPayRecord()
             {
