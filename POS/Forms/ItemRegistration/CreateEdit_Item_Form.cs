@@ -259,9 +259,8 @@ namespace POS.Forms.ItemRegistration
         {
             _departmentOption.AutoCompleteSource = AutoCompleteSource.ListItems;
             _departmentOption.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //_departmentOption.AutoCompleteCustomSource.AddRange(departments);
+
             _departmentOption.DataSource = departments;
-            //_departmentOption.Items.AddRange(departments);
         }
 
         private void costTable_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -269,7 +268,6 @@ namespace POS.Forms.ItemRegistration
 
             var row = costTable.Rows[e.RowIndex];
             var newProduct = (Product)row.DataBoundItem;
-            //Item.Products.Add(newProduct);
 
             int id = newProduct.Id;
 
@@ -277,18 +275,15 @@ namespace POS.Forms.ItemRegistration
             {
                 row.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Maroon;
                 row.DefaultCellStyle.ForeColor = System.Drawing.Color.Maroon;
-
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to remove this image?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
+
             if (_pictureBox.Image != null)
-            {
                 SampleImage = null;
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -437,7 +432,7 @@ namespace POS.Forms.ItemRegistration
             }
         }
 
-        const decimal markUpValue = 1.5m;
+        const decimal markUpValue = 1.6m;
 
         private void _price_KeyDown(object sender, KeyEventArgs e)
         {
